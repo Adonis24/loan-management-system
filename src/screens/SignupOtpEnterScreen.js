@@ -28,7 +28,7 @@ import styles from '../styles/styles'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class SignupOtpScreen extends React.PureComponent {
+class SignupOtpEnterScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
@@ -43,21 +43,21 @@ class SignupOtpScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                            <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>REGISTRATION</Text>
-                            <Image source={require('../assets/images/2.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} />
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>OTP Verification</Text>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/cc.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Country Code'} style={{ marginLeft: 5 }} />
+                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue', fontWeight: 'bold' }]}>Enter OTP code</Text>
+                            <Text style={[styles.textDefault, { margin: 5 }]}>We have sent an OTP code to your number</Text>
+                            <View style={{ alignSelf: 'center', flexDirection: 'row', margin: 5 }}>
+                                <TextInput style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
+                                <TextInput style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
+                                <TextInput style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
+                                <TextInput style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
                             </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
-                                <Image source={require('../assets/images/mobile.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Phone'} style={{ marginLeft: 5 }} />
+                            <View style={{ alignSelf: 'center', flexDirection: 'row', margin: 5, marginBottom: 20 }}>
+                                <Text style={[styles.textDefault, { margin: 5 }]}>Resend OTP code : </Text>
+                                <Text style={[styles.textDefault, { margin: 5, color: 'orange' }]}>2 : 15 </Text>
                             </View>
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpOtpEnter')} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Next</Text>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpSuccess')} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                    <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Verify</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Back</Text>
@@ -84,4 +84,4 @@ function mapDispatchToProps(dispatch) {
 
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SignupOtpScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(SignupOtpEnterScreen)

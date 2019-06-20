@@ -12,11 +12,17 @@ import SettingsScreen from '../screens/SettingsScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SignupPersonalScreen from '../screens/SignupPersonalScreen';
 import SignupOtpScreen from '../screens/SignupOtpScreen';
+import SignupOtpEnterScreen from '../screens/SignupOtpEnterScreen';
+import SignupSuccessScreen from '../screens/SignupSuccessScreen';
+import LoginScreen from '../screens/LoginScreen';
 
 const HomeStack = createStackNavigator({
-  //Welcome: WelcomeScreen,
-  SignUpPersonal:SignupPersonalScreen,
-  SignUpOtp:SignupOtpScreen,
+  Welcome: WelcomeScreen,
+  Login: LoginScreen,
+  SignUpPersonal: SignupPersonalScreen,
+  SignUpOtp: SignupOtpScreen,
+  SignUpOtpEnter: SignupOtpEnterScreen,
+  SignUpSuccess: SignupSuccessScreen,
   Home: HomeScreen,
 });
 
