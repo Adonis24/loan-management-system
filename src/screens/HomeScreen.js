@@ -33,12 +33,10 @@ export default function HomeScreen() {
           <DevelopmentModeNotice />
 
           <Text style={styles.getStartedText}>Syah</Text>
-
           <View
             style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
             <MonoText>screens/HomeScreen.js</MonoText>
           </View>
-
           <Text style={styles.getStartedText}>
             Change this text and your app will automatically reload.
           </Text>

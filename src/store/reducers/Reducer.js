@@ -1,226 +1,326 @@
 import { combineReducers } from "redux";
 
-const loginReducer = (state = [], action) => {
+const settingReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SAVE_DEVICE_INFO':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+const homeReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_INIT_NAV':
+            return { ...state, ...action.payload }      
+
+        default:
+            return state
+    }
+}
+
+const kycReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_KYC':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+const kyc1ScreenReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_KYC_1':
+            return { ...state, ...action.payload }
+        case 'SET_INDICATOR_KYC_1':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+const kyc2ScreenReducer = (state ={mailingAddress:false}, action) => {
+    switch (action.type) {
+        case 'SET_KYC_2':
+            return { ...state, ...action.payload }
+        case 'SET_INDICATOR_KYC_2':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+const phoneVerificationReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_DIGIT':
+            return { ...state, ...action.payload }
+
+        case 'SET_INDICATOR_PHONE_VERIFICATION':
+            return { ...state, ...action.payload }
+
+        case 'SET_BOX':
+            return { ...state, ...action.payload }
+
+        default:
+            return state
+    }
+}
+
+const passcodeCreationReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_PASSCODE_DIGIT':
+            return { ...state, ...action.payload }
+
+        case 'SET_INDICATOR_PASSCODE_CREATION':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+const unlockReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_UNLOCK_DIGIT':
+            return { ...state, ...action.payload }
+
+        case 'SET_INDICATOR_UNLOCK':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+
+const termsReducer = (state = {checked:false,agree:'no'}, action) => {
+    switch (action.type) {
+        case 'SET_TERMS':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+const pdpaReducer = (state = {checked:true,agree:'yes'}, action) => {
+    switch (action.type) {
+        case 'SET_PDPA':
+            return { ...state, ...action.payload }
+
+            case 'GET_DOC':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+const kycVerifyReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_KYC_VERIFY':
+            return { ...state, ...action.payload }
+        case 'SET_INDICATOR_KYC_VERIFY':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+const personalInformationScreenReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_PERSONAL_INFO':
+            return { ...state, ...action.payload }
+    
+        default:
+            return state
+    }
+}
+
+///////////////////////////////////////////////////
+
+const dashboardScreenReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_DASHBOARD':
+            return { ...state, ...action.payload }
+      
+        default:
+            return state
+    }
+}
+
+const notificationScreenReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_NOTIFICATION':
+            return { ...state, ...action.payload }
+      
+        default:
+            return state
+    }
+}
+
+const analyticScreenReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_ANALYTIC':
+            return { ...state, ...action.payload }
+      
+        default:
+            return state
+    }
+}
+
+const depositScreenReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_DEPOSIT':
+            return { ...state, ...action.payload }
+      
+        default:
+            return state
+    }
+}
+
+const withdrawScreenReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_WITHDRAW':
+            return { ...state, ...action.payload }
+      
+        default:
+            return state
+    }
+}
+
+
+const personalInfoReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_INFO':
+            return { ...state, ...action.payload }
+    
+        default:
+            return state
+    }
+}
+
+const transferOutScreenReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_RECIPIENT_LIST':
+            return { ...state, ...action.payload }
+
+            case 'SET_RECIPIENT':
+            return { ...state, ...action.payload }
+
+            case 'RESET_RECIPIENT':
+            return {memberFilter:true}
+      
+        default:
+            return state
+    }
+}
+
+const transferOutScanScreenReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_SCAN':
+            return { ...state, ...action.payload }      
+        default:
+            return state
+    }
+}
+
+const scanBillReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_BILL':
+            return { ...state, ...action.payload }      
+            case 'SET_BILL_DETAIL':
+            return { ...state, ...action.payload } 
+        default:
+            return state
+    }
+}
+
+const requestScreenReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_PAYER_LIST':
+            return { ...state, ...action.payload }
+
+            case 'SET_PAYER':
+            return { ...state, ...action.payload }
+
+            case 'RESET_PAYER':
+            return {memberFilter:true}
+      
+        default:
+            return state
+    }
+}
+
+const fulfillRequestScreenReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_FULFILL_REQUEST':
+            return { ...state, ...action.payload }   
+            case 'RESET_FULFILL_REQUEST':
+            return { success:null }         
+
+        default:
+            return state
+    }
+}
+
+const notificationfulfillRequestScreenReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_NOTIFICATION_FULFILL_REQUEST':
+            return { ...state, ...action.payload }   
+            case 'RESET_NOTIFICATION_FULFILL_REQUEST':
+            return { success:null }         
+
+        default:
+            return state
+    }
+}
+
+const contactListReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_CONTACT_LIST':
+            return { ...state, ...action.payload }      
+
+        default:
+            return state
+    }
+}
+
+const resetPinReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_PIN_DIGIT':
+            return { ...state, ...action.payload }      
+
+        default:
+            return state
+    }
+}
+
+const themeReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'CHANGE_THEME':
+            return { ...state, ...action.payload }      
+
+        default:
+            return state
+    }
+}
+
+const editInfoScreenReducer = (state =[], action) => {
+    switch (action.type) {
+        case 'SET_PASSWORD':
+            return { ...state, ...action.payload }      
+
+        default:
+            return state
+    }
+}
+const loginScreenReducer = (state ={proceed:false}, action) => {
     switch (action.type) {
         case 'SET_LOGIN':
-            return { ...state, ...action.payload }
-        case 'SET_FORGOT':
-            return { ...state, ...action.payload }
-        case 'FORGOT_PASSWORD':
-            return { ...state, ...action.payload }
-        case 'GOOGLE_SIGNIN':
-            return { ...state, ...action.payload }
-        case 'DATA_FROM_GOOGLE':
-            return { ...state, ...action.payload }
-
+            return { ...state, ...action.payload }      
 
         default:
             return state
     }
 }
 
-const userReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'GET_USER':
-            return { ...state, ...action.payload }
-        case 'LOGOUT':
-            return { state: null }
-        default:
-            return state
-    }
-}
-
-const homeScreenReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'GET_HOME_ITEMS':
-            return { ...state, ...action.payload }
-        default:
-            return state
-    }
-}
-
-const productsReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'GET_PRODUCTS':
-            return { ...state, ...action.payload }
-
-        default:
-            return state
-    }
-}
-
-const cartDetailScreenReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'GET_CART_DETAIL':
-            return { ...state, ...action.payload }
-        case 'REMOVE_CART_ITEM':
-            return { ...state, ...action.payload }
-        case 'UPDATE_CART_QTY':
-            return { ...state, ...action.payload }
-        default:
-            return state
-    }
-}
-
-const registerReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'SIGN_UP':
-            return { ...state, ...action.payload }
-        default:
-            return state
-    }
-}
-
-const orderScreenReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'GET_ORDER_DETAIL':
-            return { ...state, ...action.payload }
-
-        default:
-            return state
-    }
-}
-
-const ordersScreenReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'GET_ORDERS':
-            return { ...state, ...action.payload }
-
-        default:
-            return state
-    }
-}
-
-const productDetailScreenReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'GET_PRODUCT_DETAIL':
-            return { ...state, ...action.payload }
-
-        default:
-            return state
-    }
-}
-
-const accountScreenReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'GET_PROFILE':
-            return { ...state, ...action.payload }
-        case 'GET_PROFILE_INFO':
-            return { ...state, ...action.payload }
-        case 'SET_PROFILE_INFO':
-            return { ...state, ...action.payload }
-        case 'UPDATE_PROFILE_INFO':
-            return { ...state, ...action.payload }
-        case 'SET_PASSWORD':
-            return { ...state, ...action.payload }
-        case 'CHANGE_PASSWORD':
-            return { ...state, ...action.payload }
-        default:
-            return state
-    }
-}
-
-const addressScreenReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_ADDRESS':
-            return { ...state, ...action.payload }
-        case 'UPDATE_ADDRESS':
-            return { ...state, ...action.payload }
-        case 'GET_USER_ADDRESS':
-            return { ...state, ...action.payload }
-        case 'DELETE_USER_ADDRESS':
-            return { ...state, ...action.payload }
-        case 'EDIT_ADDRESS':
-            return { ...state, ...action.payload }
-        case 'GET_COUNTRIES':
-            return { ...state, ...action.payload }
-        case 'GET_STATES':
-            return { ...state, ...action.payload }
-        case 'SET_COUNTRY':
-            return { ...state, ...action.payload }
-        case 'SET_STATES':
-            return { ...state, ...action.payload }
-        case 'PRIMARY_ADDRESS':
-            return { ...state, ...action.payload }
-        case 'GET_ADDRESS':
-            return { ...state, ...action.payload }
-        default:
-            return state
-    }
-}
-
-const notificationScreenReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'GET_NOTIFICATIONS':
-            return { ...state, ...action.payload }
-        case 'READ_NOTIFICATIONS':
-            return { ...state, ...action.payload }
-        case 'SET_NOTIFICATIONS':
-            return { ...state, ...action.payload }
-        default:
-            return state
-    }
-}
 
 
-const sidebarReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_SIDEBAR':
-            return { ...state, ...action.payload }
-
-        default:
-            return state
-    }
-}
-
-const searchReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'SEARCH_PRODUCTS':
-            return { ...state, ...action.payload }
-
-        case 'CLEAR_RESULT':
-            return { state: null }
-
-        default:
-            return state
-    }
-}
-
-const favoriteScreenReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'GET_FAVORITE':
-            return { ...state, ...action.payload }
-
-
-
-        default:
-            return state
-    }
-}
-
-const shopDetailScreenReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'GET_SHOP_DETAIL':
-            return { ...state, ...action.payload }
-        case 'GET_PRODUCTS_SHOP': 
-            return { ...state, ...action.payload }
-        case 'GET_SHOP_MESSAGE':
-            return { ...state, ...action.payload }
-        default:
-            return state
-    }
-}
-
-const appReducer = combineReducers({ userReducer, homeScreenReducer, productsReducer, cartDetailScreenReducer, orderScreenReducer, productDetailScreenReducer, ordersScreenReducer, sidebarReducer, searchReducer, accountScreenReducer, notificationScreenReducer, registerReducer, loginReducer, favoriteScreenReducer, addressScreenReducer, shopDetailScreenReducer });
-
-const rootReducer = (state, action) => {
-    switch (action.type) {
-        case 'ROOT_LOG_OUT':
-            return { state: undefined }
-        default:
-            return appReducer(state, action)
-    }
-}
-
-
-export default rootReducer
+export default reducer = combineReducers({settingReducer,homeReducer,kycReducer,kyc1ScreenReducer,kyc2ScreenReducer,phoneVerificationReducer,termsReducer,pdpaReducer,kycVerifyReducer,passcodeCreationReducer,unlockReducer,dashboardScreenReducer,notificationScreenReducer,depositScreenReducer,personalInformationScreenReducer,transferOutScreenReducer,transferOutScanScreenReducer,scanBillReducer,personalInfoReducer,contactListReducer,requestScreenReducer,fulfillRequestScreenReducer,notificationfulfillRequestScreenReducer,withdrawScreenReducer ,analyticScreenReducer,resetPinReducer,themeReducer,editInfoScreenReducer,loginScreenReducer });
