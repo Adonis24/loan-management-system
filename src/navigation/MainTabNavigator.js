@@ -15,17 +15,17 @@ import SignupOtpScreen from '../screens/SignupOtpScreen';
 import SignupOtpEnterScreen from '../screens/SignupOtpEnterScreen';
 import SignupSuccessScreen from '../screens/SignupSuccessScreen';
 import LoginScreen from '../screens/LoginScreen';
-import DashboardScreen from '../screens/DashboardScreen';
+import IntroScreen from '../screens/IntroScreen';
 
 const HomeStack = createStackNavigator({
   Welcome: WelcomeScreen,
+  Intro: IntroScreen,
   Login: LoginScreen,
   SignUpPersonal: SignupPersonalScreen,
   SignUpOtp: SignupOtpScreen,
   SignUpOtpEnter: SignupOtpEnterScreen,
   SignUpSuccess: SignupSuccessScreen,
   Home: HomeScreen,
-  Dashboard:DashboardScreen
 });
 
 HomeStack.navigationOptions = {
