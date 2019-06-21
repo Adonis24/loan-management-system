@@ -10,12 +10,28 @@ import { SecureStore } from 'expo'
 import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, } from './apiRegistration'
 import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail } from './apiDashboard'
 //import {pusherListen} from './pusher'
-
+import {companyInfoAPI} from './api'
 import moment from 'moment'
 
 
 import shortid from 'shortid'
 import _ from 'lodash'
+
+
+export const companyInfo = () => {
+    return (dispatch, getState) => {
+        const companyName = getState().companyInformationReducer.companyName
+        const regNumber = getState().companyInformationReducer.regNumber
+        const compAddress = getState().companyInformationReducer.compAddress
+        const businessActivities = getState().companyInformationReducer.businessActivities
+        const phoneNumber = getState().companyInformationReducer.phoneNumber
+        const emailAddress = getState().companyInformationReducer.emailAddress
+        dispatch(companyInfoAPI(companyName, regNumber, compAddress, businessActivities, phoneNumber, emailAddress))
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 export const getToken = () => {
     return (dispatch, getState) => {

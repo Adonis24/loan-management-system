@@ -1,5 +1,26 @@
 import { combineReducers } from "redux";
 
+const registrationReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_REGISTER':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+const companyInformationReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_COMPANY_INFO':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const settingReducer = (state = [], action) => {
     switch (action.type) {
         case 'SAVE_DEVICE_INFO':
@@ -323,4 +344,4 @@ const loginScreenReducer = (state ={proceed:false}, action) => {
 
 
 
-export default reducer = combineReducers({settingReducer,homeReducer,kycReducer,kyc1ScreenReducer,kyc2ScreenReducer,phoneVerificationReducer,termsReducer,pdpaReducer,kycVerifyReducer,passcodeCreationReducer,unlockReducer,dashboardScreenReducer,notificationScreenReducer,depositScreenReducer,personalInformationScreenReducer,transferOutScreenReducer,transferOutScanScreenReducer,scanBillReducer,personalInfoReducer,contactListReducer,requestScreenReducer,fulfillRequestScreenReducer,notificationfulfillRequestScreenReducer,withdrawScreenReducer ,analyticScreenReducer,resetPinReducer,themeReducer,editInfoScreenReducer,loginScreenReducer });
+export default reducer = combineReducers({settingReducer,homeReducer,kycReducer,kyc1ScreenReducer,kyc2ScreenReducer,phoneVerificationReducer,termsReducer,pdpaReducer,kycVerifyReducer,passcodeCreationReducer,unlockReducer,dashboardScreenReducer,notificationScreenReducer,depositScreenReducer,personalInformationScreenReducer,transferOutScreenReducer,transferOutScanScreenReducer,scanBillReducer,personalInfoReducer,contactListReducer,requestScreenReducer,fulfillRequestScreenReducer,notificationfulfillRequestScreenReducer,withdrawScreenReducer ,analyticScreenReducer,resetPinReducer,themeReducer,editInfoScreenReducer,loginScreenReducer, registrationReducer, companyInformationReducer });
