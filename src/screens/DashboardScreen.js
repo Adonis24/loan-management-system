@@ -28,7 +28,7 @@ import styles from '../styles/styles'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class LoginScreen extends React.PureComponent {
+class DashboardScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
@@ -57,7 +57,7 @@ class LoginScreen extends React.PureComponent {
                                 <Text style={[styles.textDefault, { margin: 5, color: 'dodgerblue' }]}>Click here</Text>
                             </View>
                             <View style={{ flexDirection: 'row', margin: 5 }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Dashboard')} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, backgroundColor: 'limegreen', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, backgroundColor: 'limegreen', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <Text style={[styles.textDefault, { color: '#fff' }]}>Log In</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: 'grey' }}>
@@ -85,4 +85,4 @@ function mapDispatchToProps(dispatch) {
 
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreen)

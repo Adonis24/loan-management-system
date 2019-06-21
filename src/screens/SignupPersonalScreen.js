@@ -44,34 +44,34 @@ class SignupPersonalScreen extends React.PureComponent {
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                            <Text style={[styles.textDefault,{margin:5}]}>Registration</Text>
-                            <Text style={[styles.textDefault,{margin:5}]}>1 2 3</Text>
-                            {/* <TextInput style={{ borderBottomWidth }} /> */}
-                            <View style={{ alignSelf: 'stretch', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row',margin:5 }}>
-                                <Ionicons name={'ios-person'} size={32} color='#4A90E2' />
-                                <TextInput placeholder={'Full Name'} style={{marginLeft:5}} />
+                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>REGISTRATION</Text>
+                            <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} />
+                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Personal Info</Text>
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                                <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <TextInput placeholder={'Full Name'} style={{ marginLeft: 5 }} />
                             </View>
-                            <View style={{ alignSelf: 'stretch', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row',margin:5 }}>
-                                <Ionicons name={'ios-person'} size={32} color='#4A90E2' />
-                                <TextInput placeholder={'E-mail'} style={{marginLeft:5}} />
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <TextInput placeholder={'E-mail'} style={{ marginLeft: 5 }} />
                             </View>
-                            <View style={{ alignSelf: 'stretch', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row',margin:5 }}>
-                                <Ionicons name={'ios-person'} size={32} color='#4A90E2' />
-                                <TextInput placeholder={'Password'} style={{marginLeft:5}} />
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
+                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <TextInput placeholder={'Password'} style={{ marginLeft: 5 }} />
                             </View>
 
-                            <View style={{ alignSelf: 'stretch',flexDirection:'row',justifyContent:'center' }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpOtp')} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15,justifyContent:'center',alignItems:'center',margin:10 }}>
-                                <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Next</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15,justifyContent:'center',alignItems:'center',margin:10 }}>
-                               <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Back</Text>
-                            </TouchableOpacity>
-                           </View>
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpOtp')} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                    <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Next</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                    <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Back</Text>
+                                </TouchableOpacity>
+                            </View>
 
-    
 
-    
+
+
                         </View>
                     </View>
                 </View>
