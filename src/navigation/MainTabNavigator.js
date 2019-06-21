@@ -17,7 +17,7 @@ const HomeStack = createStackNavigator({
   //Welcome: WelcomeScreen,
   SignUpPersonal:SignupPersonalScreen,
   SignUpOtp:SignupOtpScreen,
-  Home: HomeScreen,
+  //Home: HomeScreen,
 });
 
 HomeStack.navigationOptions = {
