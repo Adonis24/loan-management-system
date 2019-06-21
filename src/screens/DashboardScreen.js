@@ -55,10 +55,10 @@ class DashboardScreen extends React.PureComponent {
                                     <Image source={require('../assets/icon/rfq.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'head'}>e-info</Text>
                                 </View>
-                                <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                    <Image source={require('../assets/icon/rfq.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
-                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'head'}>Biz Profile</Text>
-                                </View>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }} >
+                                        <Image source={require('../assets/icon/rfq.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
+                                        <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'head'}>Biz Profile</Text>
+                                </TouchableOpacity>
                                 <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                     <Image source={require('../assets/icon/rfq.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'head'}>Knowledge Hub</Text>
@@ -67,7 +67,7 @@ class DashboardScreen extends React.PureComponent {
                                     <Image source={require('../assets/icon/rfq.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Scoring</Text>
                                 </View>
-  
+
                             </View>
                         </View>
                     </View>
@@ -75,7 +75,7 @@ class DashboardScreen extends React.PureComponent {
                     <View style={{ flex: 4 }}>
                         <ScrollView >
                             {/*Business Hub */}
-                            <View style={{margin:5,borderBottomWidth:1,borderColor:'#000'}}>
+                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: '#000' }}>
                                 <View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Text style={styles.subTitle}>Business Hub</Text>
@@ -83,13 +83,13 @@ class DashboardScreen extends React.PureComponent {
                                     </View>
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                    <View style={{ width: Layout.window.width,  flexDirection: 'row' }}>
+                                    <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                            <Image source={require('../assets/icon/eda.png')} style={{ width: undefined, height: Layout.window.height / 13,  }} resizeMode={'contain'} />
+                                            <Image source={require('../assets/icon/eda.png')} style={{ width: undefined, height: Layout.window.height / 13, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]}>EDA</Text>
                                         </View>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                            <Image source={require('../assets/icon/bizDir.png')} style={{ width: undefined, height: Layout.window.height / 13,  }} resizeMode={'contain'} />
+                                            <Image source={require('../assets/icon/bizDir.png')} style={{ width: undefined, height: Layout.window.height / 13, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]}>Biz Directory</Text>
                                         </View>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
@@ -97,11 +97,11 @@ class DashboardScreen extends React.PureComponent {
                                             <Text style={[styles.caption]}>EDA</Text>
                                         </View>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                            <Image source={require('../assets/icon/rfq.png')} style={{ width: undefined, height: Layout.window.height / 13,  }} resizeMode={'contain'} />
+                                            <Image source={require('../assets/icon/rfq.png')} style={{ width: undefined, height: Layout.window.height / 13, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]}>EDA</Text>
                                         </View>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                            <Image source={require('../assets/icon/rfq.png')} style={{ width: undefined, height: Layout.window.height / 13,  }} resizeMode={'contain'} />
+                                            <Image source={require('../assets/icon/rfq.png')} style={{ width: undefined, height: Layout.window.height / 13, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]}>EDA</Text>
                                         </View>
                                     </View>
@@ -109,7 +109,7 @@ class DashboardScreen extends React.PureComponent {
                             </View>
 
                             {/*Others */}
-                            <View style={{margin:5,borderBottomWidth:1,borderColor:'#000'}}>
+                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: '#000' }}>
                                 <View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle}>Others</Text><Text>More</Text></View></View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
@@ -134,22 +134,22 @@ class DashboardScreen extends React.PureComponent {
                                 </View>
                             </View>
                             {/*Contact Request */}
-                            <View style={{margin:5,borderBottomWidth:1,borderColor:'#000'}}>
+                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: '#000' }}>
                                 <View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle}>Contact Request</Text><Text>More</Text></View></View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                     <View style={{ width: Layout.window.width, height: Layout.window.height / 4, flexDirection: 'row' }}>
-                                        <View style={{ width:Layout.window.width/2.5, padding: 5, justifyContent: 'flex-start' }}>
+                                        <View style={{ width: Layout.window.width / 2.5, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/icon/socialCharity.png')} style={{ width: undefined, height: Layout.window.height / 10, justifyContent: 'flex-start' }} resizeMode={'center'} />
                                             <Text>Social Charity</Text>
-                                            <View style={{flexDirection:'row',}}><Text>Accept</Text><Text>Delete</Text></View>
-                                        </View>   
+                                            <View style={{ flexDirection: 'row', }}><Text>Accept</Text><Text>Delete</Text></View>
+                                        </View>
                                     </View>
                                 </View>
                             </View>
 
                             {/**Newest RFQ */}
-                            <View style={{margin:5,borderBottomWidth:1,borderColor:'#000'}}>
+                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: '#000' }}>
                                 <View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle}>Newest RFQ</Text><Text>More</Text></View></View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
@@ -175,7 +175,7 @@ class DashboardScreen extends React.PureComponent {
                             </View>
 
                             {/**Highlight */}
-                            <View style={{margin:5,borderBottomWidth:1,borderColor:'#000'}}>
+                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: '#000' }}>
                                 <View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle}>Hightlight</Text><Text>More</Text></View></View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
@@ -201,7 +201,7 @@ class DashboardScreen extends React.PureComponent {
                             </View>
 
                             {/**Training */}
-                            <View style={{margin:5,borderBottomWidth:1,borderColor:'#000'}}>
+                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: '#000' }}>
                                 <View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle}>Training</Text><Text>More</Text></View></View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>

@@ -11,7 +11,7 @@ export default StyleSheet.create({
         color: '#000'
     },
     subTitle: {
-        fontSize: 16,
+        fontSize: 14,
         alignSelf: 'center',
         textAlign: 'center',
         fontFamily: 'Montserrat_medium',

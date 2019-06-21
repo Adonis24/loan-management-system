@@ -22,6 +22,9 @@ import DetailsOfConnectedPartiesScreen from '../screens/DetailsOfConnectedPartie
 import DeclarationDigitalSignScreen from '../screens/DeclarationDigitalSignScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import DasboardScreen from '../screens/DashboardScreen'
+import InfoEventScreen from '../screens/InfoEventScreen';
+import InfoNewsScreen from '../screens/InfoNewsScreen';
+import InfoNews2Screen from '../screens/InfoNews2Screen';
 
 const HomeStack = createStackNavigator({
   // Welcome: WelcomeScreen,
@@ -32,12 +35,15 @@ const HomeStack = createStackNavigator({
   // SignUpOtpEnter: SignupOtpEnterScreen,
   // SignUpSuccess: SignupSuccessScreen,
   // Home: HomeScreen,
+  // Dashboard: DasboardScreen,
   // CompanyInformation: CompanyInformationScreen,
   // ContactPerson : ContactPersonScreen,
   // DetailsConnectedParties : DetailsOfConnectedPartiesScreen,
   // DeclarationDigitalSign : DeclarationDigitalSignScreen,
-  Profile: ProfileScreen,
-  Dashboard: DasboardScreen
+  // Profile: ProfileScreen,
+  InfoEvent: InfoEventScreen,
+  // InfoNews: InfoNewsScreen,
+  // InfoNews2: InfoNews2Screen
 });
 
 HomeStack.navigationOptions = {
