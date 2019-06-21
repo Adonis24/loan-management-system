@@ -21,6 +21,7 @@ import ContactPersonScreen from '../screens/ContactPersonScreen';
 import DetailsOfConnectedPartiesScreen from '../screens/DetailsOfConnectedPartiesScreen';
 import DeclarationDigitalSignScreen from '../screens/DeclarationDigitalSignScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import DasboardScreen from '../screens/DashboardScreen'
 
 const HomeStack = createStackNavigator({
   // Welcome: WelcomeScreen,
@@ -35,7 +36,8 @@ const HomeStack = createStackNavigator({
   // ContactPerson : ContactPersonScreen,
   // DetailsConnectedParties : DetailsOfConnectedPartiesScreen,
   // DeclarationDigitalSign : DeclarationDigitalSignScreen,
-  Profile: ProfileScreen
+  Profile: ProfileScreen,
+  Dashboard: DasboardScreen
 });
 
 HomeStack.navigationOptions = {

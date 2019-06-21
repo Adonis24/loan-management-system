@@ -49,6 +49,15 @@ async function loadResourcesAsync() {
 
       require('./src/assets/images/topLeft.png'),
       require('./src/assets/images/bottomRight.png'),
+      require('./src/assets/images/topRight.png'),
+      require('./src/assets/images/bottomLeft.png'),
+
+      require('./src/assets/icon/eda.png'),
+      require('./src/assets/icon/bizDir.png'),
+      require('./src/assets/icon/crm.png'),
+      //require('./src/assets/icon/crm.png'),
+      require('./src/assets/icon/rfq.png'),
+
     ]),
     Font.loadAsync({
       // This is the font that we are using for our tab bar
@@ -57,7 +66,7 @@ async function loadResourcesAsync() {
       // remove this if you are not using it in your app
       'space-mono': require('./src/assets/fonts/SpaceMono-Regular.ttf'),
       'Montserrat_medium': require('./src/assets/fonts/Montserrat/Montserrat-Medium.ttf'),
-        'Montserrat_light': require('./src/assets/fonts/Montserrat/Montserrat-Light.ttf'),
+      'Montserrat_light': require('./src/assets/fonts/Montserrat/Montserrat-Light.ttf'),
     }),
   ]);
 }
