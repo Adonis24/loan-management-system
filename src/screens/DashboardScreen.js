@@ -44,30 +44,12 @@ class DashboardScreen extends React.PureComponent {
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'E-mail'} style={{ marginLeft: 5 }} />
-                            </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
-                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Password'} style={{ marginLeft: 5 }} />
-                            </View>
-                            <View style={{ flexDirection: 'row', marginBottom: 10 }}>
-                                <Text style={[styles.textDefault, { margin: 5 }]}>Forgot password?</Text>
-                                <Text style={[styles.textDefault, { margin: 5, color: 'dodgerblue' }]}>Click here</Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', margin: 5 }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, backgroundColor: 'limegreen', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Log In</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: 'grey' }}>
-                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
-                                </TouchableOpacity>
-                            </View>
+
                         </View>
                     </View>
                 </View>
-            </View >
+            </View>
+
         );
     }
 }

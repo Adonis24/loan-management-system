@@ -17,6 +17,40 @@ import moment from 'moment'
 import shortid from 'shortid'
 import _ from 'lodash'
 
+
+
+
+export const login = () => {
+    return (dispatch, getState) => {
+        const username = getState().loginScreenReducer.email
+        const password = getState().loginScreenReducer.password
+        dispatch(requestPersonalToken('login', username, password))
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////// LUNAPAY /////////////////////////////////////
+
 export const getToken = () => {
     return (dispatch, getState) => {
         dispatch(requestToken())
@@ -245,13 +279,13 @@ export const logout = () => {
     }
 }
 
-export const login = () => {
-    return (dispatch, getState) => {
-        const username = getState().loginScreenReducer.email
-        const password = getState().loginScreenReducer.password
-        dispatch(requestPersonalToken('login', username, password))
-    }
-}
+// export const login = () => {
+//     return (dispatch, getState) => {
+//         const username = getState().loginScreenReducer.email
+//         const password = getState().loginScreenReducer.password
+//         dispatch(requestPersonalToken('login', username, password))
+//     }
+// }
 
 export const resetPin = () => {
     return async (dispatch, getState) => {

@@ -16,6 +16,7 @@ import SignupOtpEnterScreen from '../screens/SignupOtpEnterScreen';
 import SignupSuccessScreen from '../screens/SignupSuccessScreen';
 import LoginScreen from '../screens/LoginScreen';
 import IntroScreen from '../screens/IntroScreen';
+import DashboardScreen from '../screens/DashboardScreen'
 
 const HomeStack = createStackNavigator({
   Welcome: WelcomeScreen,
@@ -26,6 +27,7 @@ const HomeStack = createStackNavigator({
   SignUpOtpEnter: SignupOtpEnterScreen,
   SignUpSuccess: SignupSuccessScreen,
   Home: HomeScreen,
+  Dashboard: DashboardScreen,
 });
 
 HomeStack.navigationOptions = {

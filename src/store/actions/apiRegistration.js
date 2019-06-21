@@ -1,6 +1,9 @@
 import { AsyncStorage, Platform } from 'react-native'
 import { FileSystem, SecureStore, Notifications } from 'expo'
 import moment from 'moment'
+import {
+  Alert
+} from 'react-native';
 
 const apiUrl = 'https://staging.lunawallet.com/'
 
@@ -168,28 +171,42 @@ export const kycBasicInformation = () => {
 export const requestPersonalToken = (screen, username, password) => {
   return (dispatch, getState) => {
 
-    fetch(`${apiUrl}oauth/token`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ client_id: '2', client_secret: 'we5olHlLBzGbxtfrHRw7bP9YOQMfvXm4antkA1Xm', grant_type: 'password', username, password }),
+    Alert.alert(
+      'Api takda',
+      'Afi tak bagi Api lagi ' + username,
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
+      ],
+      { cancelable: false },
+    );
 
-    }).then( (response) =>  response.json())
-      .then( (responseJson) => {
-        const { token_type, access_token } =  responseJson
-   
-        //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
-        const stringifyJson =  JSON.stringify(responseJson)
-     
-        SecureStore.setItemAsync('personalToken', stringifyJson);
+    // fetch(`${apiUrl}oauth/token`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ client_id: '2', client_secret: 'we5olHlLBzGbxtfrHRw7bP9YOQMfvXm4antkA1Xm', grant_type: 'password', username, password }),
 
-        (screen == 'login' && access_token) ?  dispatch({ type: 'SET_LOGIN', payload: { proceed: true } }) :  dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
+    // }).then( (response) =>  response.json())
+    //   .then( (responseJson) => {
+    //     const { token_type, access_token } =  responseJson
 
-      })
-      .catch((error) => {
-        console.error('Error : ' + error);
-      });
+    //     //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
+    //     const stringifyJson =  JSON.stringify(responseJson)
+
+    //     SecureStore.setItemAsync('personalToken', stringifyJson);
+
+    //     (screen == 'login' && access_token) ?  dispatch({ type: 'SET_LOGIN', payload: { proceed: true } }) :  dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
+
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error : ' + error);
+    //   });
   }
 }
 
@@ -214,8 +231,8 @@ export const kycBasicInformation2 = () => {
       console.log(`face picture ialah : ${face_picture}`)
       {
         (Platform.OS === 'android') ?
-        FileSystem.copyAsync({ from: face_picture, to: FileSystem.documentDirectory + 'images/selfie.png' }) :
-        FileSystem.copyAsync({ from: face_picture, to: FileSystem.documentDirectory + 'images/selfie.jpg' })
+          FileSystem.copyAsync({ from: face_picture, to: FileSystem.documentDirectory + 'images/selfie.png' }) :
+          FileSystem.copyAsync({ from: face_picture, to: FileSystem.documentDirectory + 'images/selfie.jpg' })
       }
     } catch (e) {
       console.log(`tak boleh copy lettew : ${e}`);

@@ -9,10 +9,10 @@ const settingReducer = (state = [], action) => {
     }
 }
 
-const homeReducer = (state =[], action) => {
+const homeReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_INIT_NAV':
-            return { ...state, ...action.payload }      
+            return { ...state, ...action.payload }
 
         default:
             return state
@@ -39,7 +39,7 @@ const kyc1ScreenReducer = (state = [], action) => {
     }
 }
 
-const kyc2ScreenReducer = (state ={mailingAddress:false}, action) => {
+const kyc2ScreenReducer = (state = { mailingAddress: false }, action) => {
     switch (action.type) {
         case 'SET_KYC_2':
             return { ...state, ...action.payload }
@@ -91,7 +91,7 @@ const unlockReducer = (state = [], action) => {
 }
 
 
-const termsReducer = (state = {checked:false,agree:'no'}, action) => {
+const termsReducer = (state = { checked: false, agree: 'no' }, action) => {
     switch (action.type) {
         case 'SET_TERMS':
             return { ...state, ...action.payload }
@@ -100,19 +100,19 @@ const termsReducer = (state = {checked:false,agree:'no'}, action) => {
     }
 }
 
-const pdpaReducer = (state = {checked:true,agree:'yes'}, action) => {
+const pdpaReducer = (state = { checked: true, agree: 'yes' }, action) => {
     switch (action.type) {
         case 'SET_PDPA':
             return { ...state, ...action.payload }
 
-            case 'GET_DOC':
+        case 'GET_DOC':
             return { ...state, ...action.payload }
         default:
             return state
     }
 }
 
-const kycVerifyReducer = (state =[], action) => {
+const kycVerifyReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_KYC_VERIFY':
             return { ...state, ...action.payload }
@@ -123,11 +123,11 @@ const kycVerifyReducer = (state =[], action) => {
     }
 }
 
-const personalInformationScreenReducer = (state =[], action) => {
+const personalInformationScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_PERSONAL_INFO':
             return { ...state, ...action.payload }
-    
+
         default:
             return state
     }
@@ -135,187 +135,187 @@ const personalInformationScreenReducer = (state =[], action) => {
 
 ///////////////////////////////////////////////////
 
-const dashboardScreenReducer = (state =[], action) => {
+const dashboardScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_DASHBOARD':
             return { ...state, ...action.payload }
-      
+
         default:
             return state
     }
 }
 
-const notificationScreenReducer = (state =[], action) => {
+const notificationScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_NOTIFICATION':
             return { ...state, ...action.payload }
-      
+
         default:
             return state
     }
 }
 
-const analyticScreenReducer = (state =[], action) => {
+const analyticScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_ANALYTIC':
             return { ...state, ...action.payload }
-      
+
         default:
             return state
     }
 }
 
-const depositScreenReducer = (state =[], action) => {
+const depositScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_DEPOSIT':
             return { ...state, ...action.payload }
-      
+
         default:
             return state
     }
 }
 
-const withdrawScreenReducer = (state =[], action) => {
+const withdrawScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_WITHDRAW':
             return { ...state, ...action.payload }
-      
+
         default:
             return state
     }
 }
 
 
-const personalInfoReducer = (state =[], action) => {
+const personalInfoReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_INFO':
             return { ...state, ...action.payload }
-    
+
         default:
             return state
     }
 }
 
-const transferOutScreenReducer = (state =[], action) => {
+const transferOutScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_RECIPIENT_LIST':
             return { ...state, ...action.payload }
 
-            case 'SET_RECIPIENT':
+        case 'SET_RECIPIENT':
             return { ...state, ...action.payload }
 
-            case 'RESET_RECIPIENT':
-            return {memberFilter:true}
-      
+        case 'RESET_RECIPIENT':
+            return { memberFilter: true }
+
         default:
             return state
     }
 }
 
-const transferOutScanScreenReducer = (state =[], action) => {
+const transferOutScanScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_SCAN':
-            return { ...state, ...action.payload }      
+            return { ...state, ...action.payload }
         default:
             return state
     }
 }
 
-const scanBillReducer = (state =[], action) => {
+const scanBillReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_BILL':
-            return { ...state, ...action.payload }      
-            case 'SET_BILL_DETAIL':
-            return { ...state, ...action.payload } 
+            return { ...state, ...action.payload }
+        case 'SET_BILL_DETAIL':
+            return { ...state, ...action.payload }
         default:
             return state
     }
 }
 
-const requestScreenReducer = (state =[], action) => {
+const requestScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_PAYER_LIST':
             return { ...state, ...action.payload }
 
-            case 'SET_PAYER':
+        case 'SET_PAYER':
             return { ...state, ...action.payload }
 
-            case 'RESET_PAYER':
-            return {memberFilter:true}
-      
+        case 'RESET_PAYER':
+            return { memberFilter: true }
+
         default:
             return state
     }
 }
 
-const fulfillRequestScreenReducer = (state =[], action) => {
+const fulfillRequestScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_FULFILL_REQUEST':
-            return { ...state, ...action.payload }   
-            case 'RESET_FULFILL_REQUEST':
-            return { success:null }         
+            return { ...state, ...action.payload }
+        case 'RESET_FULFILL_REQUEST':
+            return { success: null }
 
         default:
             return state
     }
 }
 
-const notificationfulfillRequestScreenReducer = (state =[], action) => {
+const notificationfulfillRequestScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_NOTIFICATION_FULFILL_REQUEST':
-            return { ...state, ...action.payload }   
-            case 'RESET_NOTIFICATION_FULFILL_REQUEST':
-            return { success:null }         
+            return { ...state, ...action.payload }
+        case 'RESET_NOTIFICATION_FULFILL_REQUEST':
+            return { success: null }
 
         default:
             return state
     }
 }
 
-const contactListReducer = (state =[], action) => {
+const contactListReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_CONTACT_LIST':
-            return { ...state, ...action.payload }      
+            return { ...state, ...action.payload }
 
         default:
             return state
     }
 }
 
-const resetPinReducer = (state =[], action) => {
+const resetPinReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_PIN_DIGIT':
-            return { ...state, ...action.payload }      
+            return { ...state, ...action.payload }
 
         default:
             return state
     }
 }
 
-const themeReducer = (state =[], action) => {
+const themeReducer = (state = [], action) => {
     switch (action.type) {
         case 'CHANGE_THEME':
-            return { ...state, ...action.payload }      
+            return { ...state, ...action.payload }
 
         default:
             return state
     }
 }
 
-const editInfoScreenReducer = (state =[], action) => {
+const editInfoScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_PASSWORD':
-            return { ...state, ...action.payload }      
+            return { ...state, ...action.payload }
 
         default:
             return state
     }
 }
-const loginScreenReducer = (state ={proceed:false}, action) => {
+
+const loginScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_LOGIN':
-            return { ...state, ...action.payload }      
-
+            return { ...state, ...action.payload }
         default:
             return state
     }
@@ -323,4 +323,4 @@ const loginScreenReducer = (state ={proceed:false}, action) => {
 
 
 
-export default reducer = combineReducers({settingReducer,homeReducer,kycReducer,kyc1ScreenReducer,kyc2ScreenReducer,phoneVerificationReducer,termsReducer,pdpaReducer,kycVerifyReducer,passcodeCreationReducer,unlockReducer,dashboardScreenReducer,notificationScreenReducer,depositScreenReducer,personalInformationScreenReducer,transferOutScreenReducer,transferOutScanScreenReducer,scanBillReducer,personalInfoReducer,contactListReducer,requestScreenReducer,fulfillRequestScreenReducer,notificationfulfillRequestScreenReducer,withdrawScreenReducer ,analyticScreenReducer,resetPinReducer,themeReducer,editInfoScreenReducer,loginScreenReducer });
+export default reducer = combineReducers({ settingReducer, homeReducer, kycReducer, kyc1ScreenReducer, kyc2ScreenReducer, phoneVerificationReducer, termsReducer, pdpaReducer, kycVerifyReducer, passcodeCreationReducer, unlockReducer, dashboardScreenReducer, notificationScreenReducer, depositScreenReducer, personalInformationScreenReducer, transferOutScreenReducer, transferOutScanScreenReducer, scanBillReducer, personalInfoReducer, contactListReducer, requestScreenReducer, fulfillRequestScreenReducer, notificationfulfillRequestScreenReducer, withdrawScreenReducer, analyticScreenReducer, resetPinReducer, themeReducer, editInfoScreenReducer, loginScreenReducer });
