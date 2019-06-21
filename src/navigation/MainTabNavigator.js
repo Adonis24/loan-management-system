@@ -18,13 +18,13 @@ import LoginScreen from '../screens/LoginScreen';
 import DashboardScreen from '../screens/DashboardScreen';
 
 const HomeStack = createStackNavigator({
-  Welcome: WelcomeScreen,
-  Login: LoginScreen,
-  SignUpPersonal: SignupPersonalScreen,
-  SignUpOtp: SignupOtpScreen,
-  SignUpOtpEnter: SignupOtpEnterScreen,
-  SignUpSuccess: SignupSuccessScreen,
-  Home: HomeScreen,
+   //Welcome: WelcomeScreen,
+  // Login: LoginScreen,
+  // SignUpPersonal: SignupPersonalScreen,
+  // SignUpOtp: SignupOtpScreen,
+  // SignUpOtpEnter: SignupOtpEnterScreen,
+  // SignUpSuccess: SignupSuccessScreen,
+  // Home: HomeScreen,
   Dashboard:DashboardScreen
 });
 

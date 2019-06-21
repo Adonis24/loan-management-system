@@ -36,36 +36,197 @@ class DashboardScreen extends React.PureComponent {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                    <View style={{ alignItems: 'flex-start' }}><Image source={require('../assets/images/topLeft.png')} style={{ width: 79, height: 120 }} /></View>
-                    <View style={{ alignItems: 'flex-end' }}><Image source={require('../assets/images/bottomRight.png')} style={{ width: 106, height: 92 }} /></View>
-
+                    <View style={{ alignItems: 'flex-end' }}>
+                        <Image source={require('../assets/images/topRight.png')} style={{ width: 80, height: 93 }} />
+                    </View>
+                    <View style={{ alignItems: 'flex-start' }}>
+                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
+                    </View>
                 </View>
-                <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                            <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'E-mail'} style={{ marginLeft: 5 }} />
-                            </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
-                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Password'} style={{ marginLeft: 5 }} />
-                            </View>
-                            <View style={{ flexDirection: 'row', marginBottom: 10 }}>
-                                <Text style={[styles.textDefault, { margin: 5 }]}>Forgot password?</Text>
-                                <Text style={[styles.textDefault, { margin: 5, color: 'dodgerblue' }]}>Click here</Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', margin: 5 }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, backgroundColor: 'limegreen', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Log In</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: 'grey' }}>
-                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
-                                </TouchableOpacity>
+                <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
+                    {/* HEADER */}
+                    <View style={{ flex: 1 }}>
+                        <View style={{ flex: 1, }}>
+                            <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+                        </View>
+                        <View style={{ flex: 1 }}>
+                            <View style={[{ flex: 1, marginLeft: Layout.window.width / 7, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, flexDirection: 'row' }]}>
+                                <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                    <Image source={require('../assets/icon/rfq.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
+                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'head'}>e-info</Text>
+                                </View>
+                                <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                    <Image source={require('../assets/icon/rfq.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
+                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'head'}>Biz Profile</Text>
+                                </View>
+                                <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                    <Image source={require('../assets/icon/rfq.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
+                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'head'}>Knowledge Hub</Text>
+                                </View>
+                                <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                    <Image source={require('../assets/icon/rfq.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
+                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Scoring</Text>
+                                </View>
+  
                             </View>
                         </View>
                     </View>
+                    {/* CONTENT AREA */}
+                    <View style={{ flex: 4 }}>
+                        <ScrollView >
+                            {/*Business Hub */}
+                            <View style={{margin:5,borderBottomWidth:1,borderColor:'#000'}}>
+                                <View>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                        <Text style={styles.subTitle}>Business Hub</Text>
+                                        <Text>More</Text>
+                                    </View>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
+                                    <View style={{ width: Layout.window.width,  flexDirection: 'row' }}>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/eda.png')} style={{ width: undefined, height: Layout.window.height / 13,  }} resizeMode={'contain'} />
+                                            <Text style={[styles.caption]}>EDA</Text>
+                                        </View>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/bizDir.png')} style={{ width: undefined, height: Layout.window.height / 13,  }} resizeMode={'contain'} />
+                                            <Text style={[styles.caption]}>Biz Directory</Text>
+                                        </View>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/crm.png')} style={{ width: undefined, height: Layout.window.height / 13, }} resizeMode={'contain'} />
+                                            <Text style={[styles.caption]}>EDA</Text>
+                                        </View>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/rfq.png')} style={{ width: undefined, height: Layout.window.height / 13,  }} resizeMode={'contain'} />
+                                            <Text style={[styles.caption]}>EDA</Text>
+                                        </View>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/rfq.png')} style={{ width: undefined, height: Layout.window.height / 13,  }} resizeMode={'contain'} />
+                                            <Text style={[styles.caption]}>EDA</Text>
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+
+                            {/*Others */}
+                            <View style={{margin:5,borderBottomWidth:1,borderColor:'#000'}}>
+                                <View>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle}>Others</Text><Text>More</Text></View></View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
+                                    <View style={{ width: Layout.window.width, height: Layout.window.height / 4, flexDirection: 'row' }}>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/socialCharity.png')} style={{ width: undefined, height: Layout.window.height / 10, justifyContent: 'flex-start' }} resizeMode={'center'} />
+                                            <Text style={[styles.caption]}>Social Charity</Text>
+                                        </View>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/event.png')} style={{ width: undefined, height: Layout.window.height / 10, justifyContent: 'flex-start' }} resizeMode={'center'} />
+                                            <Text style={[styles.caption]}>Events</Text>
+                                        </View>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/wallet.png')} style={{ width: undefined, height: Layout.window.height / 10, justifyContent: 'flex-start' }} resizeMode={'center'} />
+                                            <Text style={[styles.caption]}>Wallet</Text>
+                                        </View>
+                                        <View style={{ flex: 2, padding: 5, justifyContent: 'flex-start' }}>
+
+                                        </View>
+
+                                    </View>
+                                </View>
+                            </View>
+                            {/*Contact Request */}
+                            <View style={{margin:5,borderBottomWidth:1,borderColor:'#000'}}>
+                                <View>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle}>Contact Request</Text><Text>More</Text></View></View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
+                                    <View style={{ width: Layout.window.width, height: Layout.window.height / 4, flexDirection: 'row' }}>
+                                        <View style={{ width:Layout.window.width/2.5, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/socialCharity.png')} style={{ width: undefined, height: Layout.window.height / 10, justifyContent: 'flex-start' }} resizeMode={'center'} />
+                                            <Text>Social Charity</Text>
+                                            <View style={{flexDirection:'row',}}><Text>Accept</Text><Text>Delete</Text></View>
+                                        </View>   
+                                    </View>
+                                </View>
+                            </View>
+
+                            {/**Newest RFQ */}
+                            <View style={{margin:5,borderBottomWidth:1,borderColor:'#000'}}>
+                                <View>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle}>Newest RFQ</Text><Text>More</Text></View></View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
+                                    <View style={{ width: Layout.window.width, height: Layout.window.height / 4, flexDirection: 'row' }}>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/socialCharity.png')} style={{ width: undefined, height: Layout.window.height / 10, justifyContent: 'flex-start' }} resizeMode={'center'} />
+                                            <Text style={[styles.caption]}>Social Charity</Text>
+                                        </View>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/event.png')} style={{ width: undefined, height: Layout.window.height / 10, justifyContent: 'flex-start' }} resizeMode={'center'} />
+                                            <Text style={[styles.caption]}>Events</Text>
+                                        </View>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/wallet.png')} style={{ width: undefined, height: Layout.window.height / 10, justifyContent: 'flex-start' }} resizeMode={'center'} />
+                                            <Text style={[styles.caption]}>Wallet</Text>
+                                        </View>
+                                        <View style={{ flex: 2, padding: 5, justifyContent: 'flex-start' }}>
+
+                                        </View>
+
+                                    </View>
+                                </View>
+                            </View>
+
+                            {/**Highlight */}
+                            <View style={{margin:5,borderBottomWidth:1,borderColor:'#000'}}>
+                                <View>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle}>Hightlight</Text><Text>More</Text></View></View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
+                                    <View style={{ width: Layout.window.width, height: Layout.window.height / 4, flexDirection: 'row' }}>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/socialCharity.png')} style={{ width: undefined, height: Layout.window.height / 10, justifyContent: 'flex-start' }} resizeMode={'center'} />
+                                            <Text style={[styles.caption]}>Social Charity</Text>
+                                        </View>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/event.png')} style={{ width: undefined, height: Layout.window.height / 10, justifyContent: 'flex-start' }} resizeMode={'center'} />
+                                            <Text style={[styles.caption]}>Events</Text>
+                                        </View>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/wallet.png')} style={{ width: undefined, height: Layout.window.height / 10, justifyContent: 'flex-start' }} resizeMode={'center'} />
+                                            <Text style={[styles.caption]}>Wallet</Text>
+                                        </View>
+                                        <View style={{ flex: 2, padding: 5, justifyContent: 'flex-start' }}>
+
+                                        </View>
+
+                                    </View>
+                                </View>
+                            </View>
+
+                            {/**Training */}
+                            <View style={{margin:5,borderBottomWidth:1,borderColor:'#000'}}>
+                                <View>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle}>Training</Text><Text>More</Text></View></View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
+                                    <View style={{ width: Layout.window.width, height: Layout.window.height / 4, flexDirection: 'row' }}>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/socialCharity.png')} style={{ width: undefined, height: Layout.window.height / 10, justifyContent: 'flex-start' }} resizeMode={'center'} />
+                                            <Text>Social Charity</Text>
+                                        </View>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/event.png')} style={{ width: undefined, height: Layout.window.height / 10, justifyContent: 'flex-start' }} resizeMode={'center'} />
+                                            <Text>Events</Text>
+                                        </View>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/icon/wallet.png')} style={{ width: undefined, height: Layout.window.height / 10, justifyContent: 'flex-start' }} resizeMode={'center'} />
+                                            <Text>Wallet</Text>
+                                        </View>
+                                        <View style={{ flex: 2, padding: 5, justifyContent: 'flex-start' }}>
+                                        </View>
+
+                                    </View>
+                                </View>
+                            </View>
+                        </ScrollView>
+                    </View>
+
                 </View>
             </View >
         );
