@@ -20,6 +20,7 @@ import CompanyInformationScreen from '../screens/CompanyInformationScreen';
 import ContactPersonScreen from '../screens/ContactPersonScreen';
 import DetailsOfConnectedPartiesScreen from '../screens/DetailsOfConnectedPartiesScreen';
 import DeclarationDigitalSignScreen from '../screens/DeclarationDigitalSignScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const HomeStack = createStackNavigator({
   // Welcome: WelcomeScreen,
@@ -30,10 +31,11 @@ const HomeStack = createStackNavigator({
   // SignUpOtpEnter: SignupOtpEnterScreen,
   // SignUpSuccess: SignupSuccessScreen,
   // Home: HomeScreen,
-  CompanyInformation: CompanyInformationScreen,
+  // CompanyInformation: CompanyInformationScreen,
   // ContactPerson : ContactPersonScreen,
   // DetailsConnectedParties : DetailsOfConnectedPartiesScreen,
   // DeclarationDigitalSign : DeclarationDigitalSignScreen,
+  Profile: ProfileScreen
 });
 
 HomeStack.navigationOptions = {
