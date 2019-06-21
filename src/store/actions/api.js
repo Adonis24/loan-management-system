@@ -35,6 +35,32 @@ import _ from 'lodash'
 
 const apiUrl = 'https://www.mayamall.com/mobile-app-api/'
 
+
+
+export const companyInfoAPI = (companyName, regNumber, compAddress, businessActivities, phoneNumber, emailAddress) => {
+  return async (dispatch, getState) => {
+    Alert(
+      'Company Name ' + companyName,
+      'Register Number' + regNumber,
+      [
+        {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ],
+      {cancelable: false},
+    );
+  }
+}
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+
 export const loginApi = (email, password) => {
 
   return async (dispatch, getState) => {

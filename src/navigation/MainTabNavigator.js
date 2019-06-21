@@ -16,18 +16,24 @@ import SignupOtpEnterScreen from '../screens/SignupOtpEnterScreen';
 import SignupSuccessScreen from '../screens/SignupSuccessScreen';
 import LoginScreen from '../screens/LoginScreen';
 import IntroScreen from '../screens/IntroScreen';
-import DashboardScreen from '../screens/DashboardScreen'
+import CompanyInformationScreen from '../screens/CompanyInformationScreen';
+import ContactPersonScreen from '../screens/ContactPersonScreen';
+import DetailsOfConnectedPartiesScreen from '../screens/DetailsOfConnectedPartiesScreen';
+import DeclarationDigitalSignScreen from '../screens/DeclarationDigitalSignScreen';
 
 const HomeStack = createStackNavigator({
-  Welcome: WelcomeScreen,
-  Intro: IntroScreen,
-  Login: LoginScreen,
-  SignUpPersonal: SignupPersonalScreen,
-  SignUpOtp: SignupOtpScreen,
-  SignUpOtpEnter: SignupOtpEnterScreen,
-  SignUpSuccess: SignupSuccessScreen,
-  Home: HomeScreen,
-  Dashboard: DashboardScreen,
+  // Welcome: WelcomeScreen,
+  // Intro: IntroScreen,
+  // Login: LoginScreen,
+  // SignUpPersonal: SignupPersonalScreen,
+  // SignUpOtp: SignupOtpScreen,
+  // SignUpOtpEnter: SignupOtpEnterScreen,
+  // SignUpSuccess: SignupSuccessScreen,
+  // Home: HomeScreen,
+  CompanyInformation: CompanyInformationScreen,
+  // ContactPerson : ContactPersonScreen,
+  // DetailsConnectedParties : DetailsOfConnectedPartiesScreen,
+  // DeclarationDigitalSign : DeclarationDigitalSignScreen,
 });
 
 HomeStack.navigationOptions = {
