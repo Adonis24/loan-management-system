@@ -116,6 +116,12 @@ export const detailConnectAPI = (capacity, nameCP, icNumber, relationship, email
   }
 }
 
+export const declarationSignAPI = (declareSign, declareName, declarePosition, declareStamp, declareDate) => {
+  return async (dispatch, getState) => {
+
+  }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////// Kat bawah ni yang lama.... Boleh tengok mana yang boleh recycle////////////////////////////
 /////////////////////////////////// NICE AHH ///////////////////////////////////////////////////////

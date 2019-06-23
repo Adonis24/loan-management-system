@@ -23,6 +23,8 @@ const companyInformationReducer = (state = [], action) => {
             return { ...state, ...action.payload }
         case 'SET_DETAIL_CONNECT':
             return { ...state, ...action.payload }
+        case 'SET_DECLARE_SIGN':
+            return { ...state, ...action.payload }
         default:
             return state
     }

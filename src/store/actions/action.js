@@ -7,7 +7,7 @@ import { SecureStore } from 'expo'
 // Amplify.configure(aws_exports);///
 
 
-import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI } from './apiRegistration'
+import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI } from './apiRegistration'
 import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
@@ -77,7 +77,6 @@ export const contactPerson = () => {
 
 export const detailConnect = () => {
     return (dispatch, getState) => {
-
         const capacity = getState().companyInformationReducer.capacity
         const nameCP = getState().companyInformationReducer.mynameCPKad
         const icNumber = getState().companyInformationReducer.icNumber
@@ -87,7 +86,16 @@ export const detailConnect = () => {
     }
 }
 
-
+export const declarationSign = () => {
+    return (dispatch, getState) => {
+        const declareSign = getState().companyInformationReducer.declareSign
+        const declareName = getState().companyInformationReducer.declareName
+        const declarePosition = getState().companyInformationReducer.declarePosition
+        const declareStamp = getState().companyInformationReducer.declareStamp
+        const declareDate = getState().companyInformationReducer.declareDate
+        dispatch(declarationSignAPI(declareSign, declareName, declarePosition, declareStamp, declareDate))
+    }
+}
 
 
 

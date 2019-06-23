@@ -33,8 +33,8 @@ class DeclarationDigitalSignScreen extends React.PureComponent {
         header: null,
     };
 
-    async DetailConnect() {
-        this.props.detailConnect()
+    async DeclarationSign() {
+        this.props.declarationSign()
         this.props.navigation.navigate('DeclarationDigitalSign')
     }
 
@@ -55,23 +55,23 @@ class DeclarationDigitalSignScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Declaration Digital Sign</Text>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Authorized Personnel Digital Sign'} value={this.props.declareSign} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.declareSign} onChangeText={(declareSign) => this.props.setDeclarationSign({ declareSign })} placeholder={'Authorized Personal Digital Sign'} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Name'} value={this.props.declareName} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.declareName} onChangeText={(declareName) => this.props.setDeclarationSign({ declareName })} placeholder={'Name'} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Position'} value={this.props.declarePosition} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.declarePosition} onChangeText={(declarePosition) => this.props.setDeclarationSign({ declarePosition })} placeholder={'Position'} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company Stamp'} value={this.props.declareStamp} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.declareStamp} onChangeText={(declareStamp) => this.props.setDeclarationSign({ declareStamp })} placeholder={'Company Stamp'} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Date'} value={this.props.declareDate} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.declareDate} onChangeText={(declareDate) => this.props.setDeclarationSign({ declareDate })} placeholder={'Date'} style={{ marginLeft: 5 }} />
                             </View>
 
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
@@ -94,15 +94,17 @@ class DeclarationDigitalSignScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-
-
-
+        declareSign: state.companyInformationReducer.declareSign,
+        declareName: state.companyInformationReducer.declareName,
+        declarePosition: state.companyInformationReducer.declarePosition,
+        declareStamp: state.companyInformationReducer.declareStamp,
+        declareDate: state.companyInformationReducer.declareDate
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-        setDetailConnect: (value) => dispatch({ type: 'SET_DETAIL_CONNECT', payload: { ...value } }),
-        detailConnect: () => dispatch(actionCreator.detailConnect())
+        setDeclarationSign: (value) => dispatch({ type: 'SET_DECLARE_SIGN', payload: { ...value } }),
+        declarationSign: () => dispatch(actionCreator.declarationSign())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DeclarationDigitalSignScreen)
