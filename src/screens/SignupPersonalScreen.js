@@ -35,6 +35,7 @@ class SignupPersonalScreen extends React.PureComponent {
 
 
     async register() {
+        
         await this.props.register()
         await this.props.navigation.navigate('SignUpOtp')
     }
