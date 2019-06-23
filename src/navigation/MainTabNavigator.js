@@ -32,8 +32,8 @@ import InsightScreen from '../screens/InsightScreen';
 
 
 const DashboardStack = createStackNavigator({  
-   Dashboard: DasboardScreen,  
-  // Profile: ProfileScreen,
+  Dashboard: DasboardScreen,  
+  Profile: ProfileScreen,
   InfoEvent: InfoEventScreen,
   InfoNews: InfoNewsScreen,
   InfoNews2: InfoNews2Screen
