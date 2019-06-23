@@ -13,7 +13,6 @@ export const requestToken = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-
       },
       body: JSON.stringify({ client_id: '2', client_secret: 'dFX2OFK95Va8PfvyzT6ZnbLJxCXDAfvBCC1fdX4k', grant_type: 'client_credentials' }),
 
@@ -33,10 +32,8 @@ export const requestToken = () => {
   }
 }
 
-export const registerApi = () => {
+export const registerApi = (token_type, access_token, name, email, password, password_confirmation) => {
   return async (dispatch, getState) => {
-    const { token_type, access_token, name,email,password,password_confirmation } = getState().registrationReducer
-   
     fetch(`${apiUrl}api/register`, {
       method: 'POST',
       headers: {
@@ -44,15 +41,11 @@ export const registerApi = () => {
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-
-      body: JSON.stringify({name,email,password,password_confirmation}),
-
+      body: JSON.stringify({ name, email, password, password_confirmation }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
-
         const { status } = await responseJson
         await console.log(`register  ${JSON.stringify(responseJson)}`)
-
       })
       .catch((error) => {
         console.error('Error : ' + error);
@@ -63,6 +56,7 @@ export const registerApi = () => {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////// Kat bawah ni yang lama.... Boleh tengok mana yang boleh recycle////////////////////////////
+/////////////////////////////////// NICE AHH ///////////////////////////////////////////////////////
 
 export const kycMobile = () => {
   return (dispatch, getState) => {
@@ -202,11 +196,11 @@ export const kycBasicInformation = () => {
 export const requestPersonalToken = (screen, username, password) => {
   return async (dispatch, getState) => {
 
-         const access_token =  1
+    const access_token = 1
 
-         await SecureStore.setItemAsync('personalToken', '1');
-         
-         (screen == 'login' && access_token) ?  await dispatch({ type: 'SET_LOGIN', payload: { proceed: true } }) :  await dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
+    await SecureStore.setItemAsync('personalToken', '1');
+
+    (screen == 'login' && access_token) ? await dispatch({ type: 'SET_LOGIN', payload: { proceed: true } }) : await dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
 
 
     // fetch(`${apiUrl}oauth/token`, {

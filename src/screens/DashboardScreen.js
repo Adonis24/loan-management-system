@@ -193,7 +193,7 @@ class DashboardScreen extends React.PureComponent {
 
                             {/**Highlight */}
                             <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
-                            <View style={{marginBottom:10}}>
+                                <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Text style={styles.subTitle}>Hightlight</Text>
                                         <Text style={styles.subTitle}>More ></Text>
@@ -223,7 +223,7 @@ class DashboardScreen extends React.PureComponent {
 
                             {/**Training */}
                             <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
-                            <View style={{marginBottom:10}}>
+                                <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Text style={styles.subTitle}>Training</Text>
                                         <Text style={styles.subTitle}>More ></Text>

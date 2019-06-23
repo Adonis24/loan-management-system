@@ -29,8 +29,6 @@ import InfoNews2Screen from '../screens/InfoNews2Screen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import InsightScreen from '../screens/InsightScreen';
 
-
-
 const DashboardStack = createStackNavigator({  
   Dashboard: DasboardScreen,  
   Profile: ProfileScreen,

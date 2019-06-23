@@ -85,7 +85,6 @@ function mapStateToProps(state) {
         email: state.loginScreenReducer.email,
         password: state.loginScreenReducer.password,
         proceed: state.loginScreenReducer.proceed
-
     }
 }
 function mapDispatchToProps(dispatch) {

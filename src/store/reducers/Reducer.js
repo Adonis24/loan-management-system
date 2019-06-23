@@ -20,6 +20,15 @@ const companyInformationReducer = (state = [], action) => {
     }
 }
 
+const loginScreenReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_LOGIN':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -334,16 +343,6 @@ const editInfoScreenReducer = (state = [], action) => {
             return state
     }
 }
-
-const loginScreenReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_LOGIN':
-            return { ...state, ...action.payload }
-        default:
-            return state
-    }
-}
-
 
 
 export default reducer = combineReducers({ settingReducer, homeReducer, kycReducer, kyc1ScreenReducer, kyc2ScreenReducer, phoneVerificationReducer, termsReducer, pdpaReducer, kycVerifyReducer, passcodeCreationReducer, unlockReducer, dashboardScreenReducer, notificationScreenReducer, depositScreenReducer, personalInformationScreenReducer, transferOutScreenReducer, transferOutScanScreenReducer, scanBillReducer, personalInfoReducer, contactListReducer, requestScreenReducer, fulfillRequestScreenReducer, notificationfulfillRequestScreenReducer, withdrawScreenReducer, analyticScreenReducer, resetPinReducer, themeReducer, editInfoScreenReducer, loginScreenReducer, registrationReducer, companyInformationReducer });

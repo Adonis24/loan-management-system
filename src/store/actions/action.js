@@ -26,9 +26,8 @@ export const getToken = () => {
 
 export const register = () => {
     return async (dispatch, getState) => {
-       
-        await dispatch(registerApi())
-        
+        const { token_type, access_token, name, email, password, password_confirmation } = getState().registrationReducer
+        await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation))
     }
 }
 
@@ -284,7 +283,7 @@ export const logout = () => {
         //await AsyncStorage.removeItem('status')
         //await AsyncStorage.removeItem('personalToken')
         console.log(`nak delete`)
-        await SecureStore.deleteItemAsync('personalToken').then(console.log(`delete berjaya`)).catch(error=>console.log(`tak berjaya : ${error}`))
+        await SecureStore.deleteItemAsync('personalToken').then(console.log(`delete berjaya`)).catch(error => console.log(`tak berjaya : ${error}`))
     }
 }
 

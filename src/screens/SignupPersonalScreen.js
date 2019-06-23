@@ -32,6 +32,14 @@ class SignupPersonalScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
+
+
+    async register() {
+        await this.props.register()
+        await this.props.navigation.navigate('SignUpOtp')
+    }
+
+
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -49,19 +57,22 @@ class SignupPersonalScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Personal Info</Text>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Full Name'} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.name} onChangeText={(name) => this.props.setRegister({ name })} placeholder={'Full Name'} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'E-mail'} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.email} onChangeText={(email) => this.props.setRegister({ email })} placeholder={'E-mail'} style={{ marginLeft: 5 }} />
+                            </View>
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <TextInput value={this.props.password} onChangeText={(password) => this.props.setRegister({ password })} placeholder={'Password'} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Password'} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.password_confirmation} onChangeText={(password_confirmation) => this.props.setRegister({ password_confirmation })} placeholder={'Confirm Password'} style={{ marginLeft: 5 }} />
                             </View>
-
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpOtp')} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                <TouchableOpacity onPress={() => this.register()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Next</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
@@ -79,14 +90,16 @@ class SignupPersonalScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-
-
-
+        name: state.registrationReducer.name,
+        email: state.registrationReducer.email,
+        password: state.registrationReducer.password,
+        password_confirmation: state.registrationReducer.password_confirmation
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
+        setRegister: (value) => dispatch({ type: 'SET_REGISTER', payload: { ...value } }),
+        register: () => dispatch(actionCreator.register())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignupPersonalScreen)

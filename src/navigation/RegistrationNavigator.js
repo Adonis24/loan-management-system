@@ -16,9 +16,7 @@ import DeclarationDigitalSignScreen from '../screens/DeclarationDigitalSignScree
 import CompanyInfoIntroScreen from '../screens/CompanyInfoIntroScreen';
 
 const RegistrationStack = createStackNavigator({
-
     Intro: IntroScreen,
-    SignUpPersonal: SignupPersonalScreen,
     SignUpPersonal: SignupPersonalScreen,
     SignUpOtp: SignupOtpScreen,
     SignUpOtpEnter: SignupOtpEnterScreen,
@@ -28,9 +26,6 @@ const RegistrationStack = createStackNavigator({
     ContactPerson: ContactPersonScreen,
     DetailsConnectedParties: DetailsOfConnectedPartiesScreen,
     DeclarationDigitalSign: DeclarationDigitalSignScreen,
-
-
-
 });
 
 
