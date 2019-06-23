@@ -7,7 +7,7 @@ import { SecureStore } from 'expo'
 // Amplify.configure(aws_exports);///
 
 
-import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI } from './apiRegistration'
+import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI } from './apiRegistration'
 import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
@@ -75,6 +75,17 @@ export const contactPerson = () => {
     }
 }
 
+export const detailConnect = () => {
+    return (dispatch, getState) => {
+
+        const capacity = getState().companyInformationReducer.capacity
+        const nameCP = getState().companyInformationReducer.mynameCPKad
+        const icNumber = getState().companyInformationReducer.icNumber
+        const relationship = getState().companyInformationReducer.relationship
+        const emailSME = getState().companyInformationReducer.emailSME
+        dispatch(detailConnectAPI(capacity, nameCP, icNumber, relationship, emailSME))
+    }
+}
 
 
 

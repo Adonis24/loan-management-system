@@ -21,6 +21,8 @@ const companyInformationReducer = (state = [], action) => {
             return { ...state, ...action.payload }
         case 'SET_CONTACT_PERSON':
             return { ...state, ...action.payload }
+        case 'SET_DETAIL_CONNECT':
+            return { ...state, ...action.payload }
         default:
             return state
     }

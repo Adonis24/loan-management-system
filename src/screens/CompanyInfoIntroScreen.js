@@ -49,7 +49,7 @@ class CompanyInfoIntroScreen extends React.PureComponent {
                             </TouchableOpacity>
                           
                             <TouchableOpacity onPress={() => alert('button pressed')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Back</Text>
+                                <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Skip</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

@@ -110,6 +110,11 @@ export const contactPersonAPI = (fullName, myKad, phoneNum, position) => {
   }
 }
 
+export const detailConnectAPI = (capacity, nameCP, icNumber, relationship, emailSME) => {
+  return async (dispatch, getState) => {
+
+  }
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////// Kat bawah ni yang lama.... Boleh tengok mana yang boleh recycle////////////////////////////
