@@ -7,7 +7,7 @@ import { SecureStore } from 'expo'
 // Amplify.configure(aws_exports);///
 
 
-import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi } from './apiRegistration'
+import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi } from './apiRegistration'
 import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import { companyInfoAPI } from './api'
@@ -30,6 +30,16 @@ export const register = () => {
         await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation))
     }
 }
+
+export const registerOTP = () => {
+    return async (dispatch, getState) => {
+        const { token_type, access_token, countryCode, phone } = getState().registrationReducer
+        await dispatch(registerOTPApi(token_type, access_token, countryCode, phone))
+    }
+}
+
+
+
 
 /////////////////////////////////////////////////////////////
 

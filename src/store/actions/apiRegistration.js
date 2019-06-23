@@ -34,6 +34,11 @@ export const requestToken = () => {
 
 export const registerApi = (token_type, access_token, name, email, password, password_confirmation) => {
   return async (dispatch, getState) => {
+    var formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('password_confirmation', password_confirmation);
     fetch(`${apiUrl}api/register`, {
       method: 'POST',
       headers: {
@@ -41,11 +46,35 @@ export const registerApi = (token_type, access_token, name, email, password, pas
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-      body: JSON.stringify({ name, email, password, password_confirmation }),
+      body: formData,
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
         await console.log(`register  ${JSON.stringify(responseJson)}`)
+      })
+      .catch((error) => {
+        console.error('Error : ' + error);
+      });
+  }
+}
+
+export const registerOTPApi = (token_type, access_token, countryCode, phone) => {
+  return async (dispatch, getState) => {
+    var formData = new FormData();
+    formData.append('country_code', countryCode);
+    formData.append('mobile_no', phone);
+    fetch(`${apiUrl}api/requestOPT`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      },
+      body: formData,
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+        const { status } = await responseJson
+        await console.log(`requestOPT  ${JSON.stringify(responseJson)}`)
       })
       .catch((error) => {
         console.error('Error : ' + error);

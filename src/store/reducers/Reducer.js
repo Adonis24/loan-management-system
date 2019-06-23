@@ -6,6 +6,8 @@ const registrationReducer = (state = [], action) => {
             return { ...state, ...action.payload }
         case 'SET_REGISTER':
             return { ...state, ...action.payload }
+        case 'SET_OTP':
+            return { ...state, ...action.payload }
         default:
             return state
     }

@@ -32,6 +32,13 @@ class SignupOtpScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
+
+    async registerOTP() {
+        await this.props.registerOTP()
+        await this.props.navigation.navigate('SignUpOtpEnter')
+    }
+
+
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -49,14 +56,14 @@ class SignupOtpScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>OTP Verification</Text>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/cc.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Country Code'} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.countryCode} onChangeText={(countryCode) => this.props.setOTP({ countryCode })} placeholder={'Country Code'} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
                                 <Image source={require('../assets/images/mobile.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Phone'} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.phone} onChangeText={(phone) => this.props.setOTP({ phone })} placeholder={'Phone'} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpOtpEnter')} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                <TouchableOpacity onPress={() => this.registerOTP()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Next</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
@@ -74,14 +81,14 @@ class SignupOtpScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-
-
-
+        countryCode: state.registrationReducer.countryCode,
+        phone: state.registrationReducer.phone,
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
+        setOTP: (value) => dispatch({ type: 'SET_OTP', payload: { ...value } }),
+        registerOTP: () => dispatch(actionCreator.registerOTP())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignupOtpScreen)
