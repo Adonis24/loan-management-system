@@ -5,7 +5,7 @@ import {
   Alert
 } from 'react-native';
 
-const apiUrl = 'https://staging.lunawallet.com/'
+const apiUrl = 'https://staging.bizxcess.my/'
 
 export const requestToken = () => {
   return (dispatch, getState) => {
@@ -15,7 +15,7 @@ export const requestToken = () => {
         'Content-Type': 'application/json',
 
       },
-      body: JSON.stringify({ client_id: '1', client_secret: 'Q9l35nIRr7JhblFVSQmT1Fi8ffJRMtpqQTJ4g3ye', grant_type: 'client_credentials' }),
+      body: JSON.stringify({ client_id: '2', client_secret: 'dFX2OFK95Va8PfvyzT6ZnbLJxCXDAfvBCC1fdX4k', grant_type: 'client_credentials' }),
 
     }).then((response) => response.json())
       .then(async (responseJson) => {
@@ -23,7 +23,7 @@ export const requestToken = () => {
         const { token_type, access_token } = await responseJson
         await console.log(`token is ${JSON.stringify(responseJson)}`)
         //this.props.setToken({ token_type, access_token })
-        await dispatch({ type: 'SET_KYC', payload: { ...responseJson } })
+        await dispatch({ type: 'GET_TOKEN', payload: { ...responseJson } })
 
 
       })
@@ -32,6 +32,37 @@ export const requestToken = () => {
       });
   }
 }
+
+export const registerApi = () => {
+  return async (dispatch, getState) => {
+    const { token_type, access_token, name,email,password,password_confirmation } = getState().registrationReducer
+   
+    fetch(`${apiUrl}api/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      },
+
+      body: JSON.stringify({name,email,password,password_confirmation}),
+
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        const { status } = await responseJson
+        await console.log(`register  ${JSON.stringify(responseJson)}`)
+
+      })
+      .catch((error) => {
+        console.error('Error : ' + error);
+      });
+  }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////// Kat bawah ni yang lama.... Boleh tengok mana yang boleh recycle////////////////////////////
 
 export const kycMobile = () => {
   return (dispatch, getState) => {
@@ -169,21 +200,14 @@ export const kycBasicInformation = () => {
 
 
 export const requestPersonalToken = (screen, username, password) => {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
 
-    Alert.alert(
-      'Api takda',
-      'Afi tak bagi Api lagi ' + username,
-      [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        { text: 'OK', onPress: () => console.log('OK Pressed') },
-      ],
-      { cancelable: false },
-    );
+         const access_token =  1
+
+         await SecureStore.setItemAsync('personalToken', '1');
+         
+         (screen == 'login' && access_token) ?  await dispatch({ type: 'SET_LOGIN', payload: { proceed: true } }) :  await dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
+
 
     // fetch(`${apiUrl}oauth/token`, {
     //   method: 'POST',

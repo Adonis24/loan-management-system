@@ -9,6 +9,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SignupPersonalScreen from '../screens/SignupPersonalScreen';
 import SignupOtpScreen from '../screens/SignupOtpScreen';
@@ -25,28 +26,20 @@ import DasboardScreen from '../screens/DashboardScreen'
 import InfoEventScreen from '../screens/InfoEventScreen';
 import InfoNewsScreen from '../screens/InfoNewsScreen';
 import InfoNews2Screen from '../screens/InfoNews2Screen';
+import NotificationsScreen from '../screens/NotificationsScreen';
+import InsightScreen from '../screens/InsightScreen';
 
-const HomeStack = createStackNavigator({
-  // Welcome: WelcomeScreen,
-  // Intro: IntroScreen,
-  // Login: LoginScreen,
-  // SignUpPersonal: SignupPersonalScreen,
-  // SignUpOtp: SignupOtpScreen,
-  // SignUpOtpEnter: SignupOtpEnterScreen,
-  // SignUpSuccess: SignupSuccessScreen,
-  // Home: HomeScreen,
-  // Dashboard: DasboardScreen,
-  // CompanyInformation: CompanyInformationScreen,
-  // ContactPerson : ContactPersonScreen,
-  // DetailsConnectedParties : DetailsOfConnectedPartiesScreen,
-  // DeclarationDigitalSign : DeclarationDigitalSignScreen,
+
+
+const DashboardStack = createStackNavigator({  
+   Dashboard: DasboardScreen,  
   // Profile: ProfileScreen,
   InfoEvent: InfoEventScreen,
-  // InfoNews: InfoNewsScreen,
-  // InfoNews2: InfoNews2Screen
+  InfoNews: InfoNewsScreen,
+  InfoNews2: InfoNews2Screen
 });
 
-HomeStack.navigationOptions = {
+DashboardStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -60,16 +53,30 @@ HomeStack.navigationOptions = {
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const InsightStack = createStackNavigator({
+  Insight:InsightScreen,
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+InsightStack.navigationOptions = {
+  tabBarLabel: 'Insight',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+    />
+  ),
+};
+
+const NotificationStack = createStackNavigator({
+  Notifications: NotificationsScreen,
+});
+
+NotificationStack.navigationOptions = {
+  tabBarLabel: 'Notifications',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-alarm' : 'md-alarm'}
     />
   ),
 };
@@ -89,7 +96,8 @@ SettingsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
+  DashboardStack,
+  InsightStack,
+  NotificationStack,
   SettingsStack,
 });

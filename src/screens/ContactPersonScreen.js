@@ -65,7 +65,7 @@ class ContactPersonScreen extends React.PureComponent {
                             </View>
 
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpOtp')} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('DetailsConnectedParties')} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Next</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>

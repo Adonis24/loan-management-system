@@ -7,7 +7,7 @@ import { SecureStore } from 'expo'
 // Amplify.configure(aws_exports);///
 
 
-import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, } from './apiRegistration'
+import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi } from './apiRegistration'
 import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import { companyInfoAPI } from './api'
@@ -18,7 +18,21 @@ import shortid from 'shortid'
 import _ from 'lodash'
 
 
+export const getToken = () => {
+    return (dispatch, getState) => {
+        dispatch(requestToken())
+    }
+}
 
+export const register = () => {
+    return async (dispatch, getState) => {
+       
+        await dispatch(registerApi())
+        
+    }
+}
+
+/////////////////////////////////////////////////////////////
 
 export const login = () => {
     return (dispatch, getState) => {
@@ -49,11 +63,7 @@ export const companyInfo = () => {
 
 /////////////////////// LUNAPAY /////////////////////////////////////
 
-export const getToken = () => {
-    return (dispatch, getState) => {
-        dispatch(requestToken())
-    }
-}
+
 
 export const getSMS = () => {
     return async (dispatch, getState) => {
@@ -273,7 +283,8 @@ export const logout = () => {
         //await dispatch({type:'SET_PERSONAL_INFO',payload:{status:'none'}})
         //await AsyncStorage.removeItem('status')
         //await AsyncStorage.removeItem('personalToken')
-        await SecureStore.deleteItemAsync('personalToken')
+        console.log(`nak delete`)
+        await SecureStore.deleteItemAsync('personalToken').then(console.log(`delete berjaya`)).catch(error=>console.log(`tak berjaya : ${error}`))
     }
 }
 

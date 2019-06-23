@@ -2,6 +2,8 @@ import { combineReducers } from "redux";
 
 const registrationReducer = (state = [], action) => {
     switch (action.type) {
+        case 'GET_TOKEN':
+            return { ...state, ...action.payload }
         case 'SET_REGISTER':
             return { ...state, ...action.payload }
         default:
