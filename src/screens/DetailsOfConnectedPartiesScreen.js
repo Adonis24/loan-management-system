@@ -77,9 +77,6 @@ class DetailsOfConnectedPartiesScreen extends React.PureComponent {
                                 </TouchableOpacity>
                             </View>
 
-
-
-
                         </View>
                     </View>
                 </View>

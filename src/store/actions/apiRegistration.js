@@ -24,7 +24,6 @@ export const requestToken = () => {
         //this.props.setToken({ token_type, access_token })
         await dispatch({ type: 'GET_TOKEN', payload: { ...responseJson } })
 
-
       })
       .catch((error) => {
         console.error('Error : ' + error);
@@ -34,11 +33,6 @@ export const requestToken = () => {
 
 export const registerApi = (token_type, access_token, name, email, password, password_confirmation) => {
   return async (dispatch, getState) => {
-    var formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('password_confirmation', password_confirmation);
     fetch(`${apiUrl}api/register`, {
       method: 'POST',
       headers: {
@@ -46,10 +40,11 @@ export const registerApi = (token_type, access_token, name, email, password, pas
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-      body: formData,
+      body: JSON.stringify({ name, email, password, password_confirmation }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
+        await dispatch({ type: 'SET_REGISTER', payload: { status } })
         await console.log(`register  ${JSON.stringify(responseJson)}`)
       })
       .catch((error) => {
@@ -60,9 +55,6 @@ export const registerApi = (token_type, access_token, name, email, password, pas
 
 export const registerOTPApi = (token_type, access_token, countryCode, phone) => {
   return async (dispatch, getState) => {
-    var formData = new FormData();
-    formData.append('country_code', countryCode);
-    formData.append('mobile_no', phone);
     fetch(`${apiUrl}api/requestOPT`, {
       method: 'POST',
       headers: {
@@ -70,10 +62,11 @@ export const registerOTPApi = (token_type, access_token, countryCode, phone) => 
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-      body: formData,
+      body: JSON.stringify({ countryCode, phone }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
+        await dispatch({ type: 'SET_OTP', payload: { status } })
         await console.log(`requestOPT  ${JSON.stringify(responseJson)}`)
       })
       .catch((error) => {
@@ -84,11 +77,6 @@ export const registerOTPApi = (token_type, access_token, countryCode, phone) => 
 
 export const verifyPhoneApi = (token_type, access_token, countryCode, phone, code) => {
   return async (dispatch, getState) => {
-    var formData = new FormData();
-    formData.append('country_code', countryCode);
-    formData.append('mobile_no', phone);
-    formData.append('code', code);
-    formData.append('access_credential', 'api');
     fetch(`${apiUrl}api/verifyPhoneData`, {
       method: 'POST',
       headers: {
@@ -96,10 +84,11 @@ export const verifyPhoneApi = (token_type, access_token, countryCode, phone, cod
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-      body: formData,
+      body: JSON.stringify({ countryCode, phone, code, access_credential: 'api' }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
+        await dispatch({ type: 'VERIFY_OTP', payload: { status } })
         await console.log(`verifyPhone  ${JSON.stringify(responseJson)}`)
       })
       .catch((error) => {
@@ -108,6 +97,18 @@ export const verifyPhoneApi = (token_type, access_token, countryCode, phone, cod
   }
 }
 
+
+export const companyInfoAPI = (companyName, regNumber, compAddress, businessActivities, phoneNumber, emailAddress) => {
+  return async (dispatch, getState) => {
+
+  }
+}
+
+export const contactPersonAPI = (fullName, myKad, phoneNum, position) => {
+  return async (dispatch, getState) => {
+
+  }
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////

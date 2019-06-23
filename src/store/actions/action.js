@@ -7,10 +7,9 @@ import { SecureStore } from 'expo'
 // Amplify.configure(aws_exports);///
 
 
-import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi } from './apiRegistration'
+import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI } from './apiRegistration'
 import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail } from './apiDashboard'
 //import {pusherListen} from './pusher'
-import { companyInfoAPI } from './api'
 import moment from 'moment'
 
 
@@ -40,16 +39,11 @@ export const registerOTP = () => {
 
 export const verifyPhone = () => {
     return async (dispatch, getState) => {
-        const { token_type, access_token, countryCode, phone } = getState().registrationReducer
-        const { c1, c2, c3, c4 } = getState().registrationReducer
+        const { token_type, access_token, countryCode, phone, c1, c2, c3, c4 } = getState().registrationReducer
         const code = c1 + '' + c2 + '' + c3 + '' + c4
         await dispatch(verifyPhoneApi(token_type, access_token, countryCode, phone, code))
     }
 }
-
-
-
-/////////////////////////////////////////////////////////////
 
 export const login = () => {
     return (dispatch, getState) => {
@@ -58,7 +52,6 @@ export const login = () => {
         dispatch(requestPersonalToken('login', username, password))
     }
 }
-
 
 export const companyInfo = () => {
     return (dispatch, getState) => {
@@ -71,6 +64,18 @@ export const companyInfo = () => {
         dispatch(companyInfoAPI(companyName, regNumber, compAddress, businessActivities, phoneNumber, emailAddress))
     }
 }
+
+export const contactPerson = () => {
+    return (dispatch, getState) => {
+        const fullName = getState().companyInformationReducer.fullName
+        const myKad = getState().companyInformationReducer.myKad
+        const phoneNum = getState().companyInformationReducer.phoneNum
+        const position = getState().companyInformationReducer.position
+        dispatch(contactPersonAPI(fullName, myKad, phoneNum, position))
+    }
+}
+
+
 
 
 

@@ -33,9 +33,9 @@ class SignupOtpEnterScreen extends React.PureComponent {
         header: null,
     };
 
-    verifyPhone() {
-        this.props.verifyPhone()
-        this.props.navigation.navigate('SignUpSuccess')
+    async verifyPhone() {
+        await this.props.verifyPhone()
+        await this.props.navigation.navigate('SignUpSuccess')
     }
 
     render() {
