@@ -31,13 +31,27 @@ import InsightScreen from '../screens/InsightScreen';
 
 const DashboardStack = createStackNavigator({  
   Dashboard: DasboardScreen,  
-  Profile: ProfileScreen,
-  InfoEvent: InfoEventScreen,
-  InfoNews: InfoNewsScreen,
-  InfoNews2: InfoNews2Screen
+  
 });
 
-DashboardStack.navigationOptions = {
+const DashboardStackWithModal = createStackNavigator(
+  {
+    Main: { screen: DashboardStack, },
+    Profile: { screen: ProfileScreen, },
+    InfoEvent: { screen: InfoEventScreen, },
+    InfoNews: { screen: InfoNewsScreen, },
+    InfoNews2: { screen: InfoNews2Screen, },
+    
+
+    
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+  },
+);
+
+DashboardStackWithModal.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -94,7 +108,7 @@ SettingsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  DashboardStack,
+  DashboardStackWithModal,
   InsightStack,
   NotificationStack,
   SettingsStack,

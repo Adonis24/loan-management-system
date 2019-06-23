@@ -33,7 +33,7 @@ class ProfileScreen extends React.PureComponent {
         header: null,
     };
     render() {
-        return (
+        return (        
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
                     <View style={{ alignItems: 'flex-end' }}>
@@ -43,10 +43,27 @@ class ProfileScreen extends React.PureComponent {
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
                     </View>
                 </View>
-                <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                            <ScrollView>
+                <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
+                    {/* HEADER */}
+                    <View style={{ flex: 1,flexDirection:'row',justifyContent:'space-between' }}>
+                        <View style={{ flex: 1, marginLeft: 5,marginTop:5 }}>
+                            <TouchableOpacity onPress={()=>this.props.navigation.goBack()}>
+                            <Ionicons name='ios-arrow-back' size={32} />
+                            </TouchableOpacity>
+                            </View>
+                        <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
+                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 7, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2,justifyContent:'flex-start' }]}>                                
+                               
+                                    <Image source={require('../assets/icon/rfq.png')} style={{  width: Layout.window.height/15, height: Layout.window.height/15, }} resizeMode={'contain'} />
+                                    <Text style={[styles.default]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
+                             
+
+                            </View>
+                        </View>
+                    </View>
+                    {/* CONTENT AREA */}
+                    <View style={{ flex: 4, margin: 10 }}>
+                       <ScrollView>
                                 <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
                                     <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>FINTECH CAPITAL</Text>
                                     <Text style={[styles.subTitle, { margin: 5 }]}>SSM NO :123456789</Text>
@@ -93,8 +110,9 @@ class ProfileScreen extends React.PureComponent {
                                     <Text style={[styles.caption]}>Excellent : 1 - 15</Text>
                                 </View>
                             </ScrollView>
-                        </View>
+                           
                     </View>
+
                 </View>
             </View>
 
@@ -115,4 +133,5 @@ function mapDispatchToProps(dispatch) {
 
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen)
