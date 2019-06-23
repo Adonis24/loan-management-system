@@ -7,7 +7,7 @@ import { SecureStore } from 'expo'
 // Amplify.configure(aws_exports);///
 
 
-import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi } from './apiRegistration'
+import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi } from './apiRegistration'
 import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import { companyInfoAPI } from './api'
@@ -38,6 +38,14 @@ export const registerOTP = () => {
     }
 }
 
+export const verifyPhone = () => {
+    return async (dispatch, getState) => {
+        const { token_type, access_token, countryCode, phone } = getState().registrationReducer
+        const { c1, c2, c3, c4 } = getState().registrationReducer
+        const code = c1 + '' + c2 + '' + c3 + '' + c4
+        await dispatch(verifyPhoneApi(token_type, access_token, countryCode, phone, code))
+    }
+}
 
 
 
@@ -442,17 +450,17 @@ export const saveSelfie = () => {
     }
 }
 
-export const verifyPhone = () => {
-    return (dispatch, getState) => {
-        dispatch({ type: 'SET_INDICATOR_PHONE_VERIFICATION', payload: { displayIndicator: true } })
-        const { d1, d2, d3, d4 } = getState().phoneVerificationReducer
-        const d = d1 + '' + d2 + '' + d3 + '' + d4
+// export const verifyPhone = () => {
+//     return (dispatch, getState) => {
+//         dispatch({ type: 'SET_INDICATOR_PHONE_VERIFICATION', payload: { displayIndicator: true } })
+//         const { d1, d2, d3, d4 } = getState().phoneVerificationReducer
+//         const d = d1 + '' + d2 + '' + d3 + '' + d4
 
-        dispatch(kycMobileVerify(d))
-        // dispatch({ type: 'SET_INDICATOR_PHONE_VERIFICATION', payload: { displayIndicator: false, proceed: true,actionList:false } })
+//         dispatch(kycMobileVerify(d))
+//         // dispatch({ type: 'SET_INDICATOR_PHONE_VERIFICATION', payload: { displayIndicator: false, proceed: true,actionList:false } })
 
-    }
-}
+//     }
+// }
 
 
 export const verifyPhoneEdit = () => {

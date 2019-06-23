@@ -32,6 +32,12 @@ class SignupOtpEnterScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
+
+    verifyPhone() {
+        this.props.verifyPhone()
+        this.props.navigation.navigate('SignUpSuccess')
+    }
+
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -46,17 +52,17 @@ class SignupOtpEnterScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue', fontWeight: 'bold' }]}>Enter OTP code</Text>
                             <Text style={[styles.textDefault, { margin: 5 }]}>We have sent an OTP code to your number</Text>
                             <View style={{ alignSelf: 'center', flexDirection: 'row', margin: 5 }}>
-                                <TextInput style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
-                                <TextInput style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
-                                <TextInput style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
-                                <TextInput style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
+                                <TextInput value={this.props.c1} onChangeText={(c1) => this.props.verifyOTP({ c1 })} style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
+                                <TextInput value={this.props.c2} onChangeText={(c2) => this.props.verifyOTP({ c2 })} style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
+                                <TextInput value={this.props.c3} onChangeText={(c3) => this.props.verifyOTP({ c3 })} style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
+                                <TextInput value={this.props.c4} onChangeText={(c4) => this.props.verifyOTP({ c4 })} style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', flexDirection: 'row', margin: 5, marginBottom: 20 }}>
                                 <Text style={[styles.textDefault, { margin: 5 }]}>Resend OTP code : </Text>
                                 <Text style={[styles.textDefault, { margin: 5, color: 'orange' }]}>2 : 15 </Text>
                             </View>
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpSuccess')} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                <TouchableOpacity onPress={() => this.verifyPhone()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Verify</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
@@ -74,14 +80,16 @@ class SignupOtpEnterScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-
-
-
+        c1: state.registrationReducer.c1,
+        c2: state.registrationReducer.c2,
+        c3: state.registrationReducer.c3,
+        c4: state.registrationReducer.c4,
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
+        verifyOTP: (value) => dispatch({ type: 'VERIFY_OTP', payload: { ...value } }),
+        verifyPhone: () => dispatch(actionCreator.verifyPhone())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignupOtpEnterScreen)

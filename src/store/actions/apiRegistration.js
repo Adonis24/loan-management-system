@@ -82,6 +82,33 @@ export const registerOTPApi = (token_type, access_token, countryCode, phone) => 
   }
 }
 
+export const verifyPhoneApi = (token_type, access_token, countryCode, phone, code) => {
+  return async (dispatch, getState) => {
+    var formData = new FormData();
+    formData.append('country_code', countryCode);
+    formData.append('mobile_no', phone);
+    formData.append('code', code);
+    formData.append('access_credential', 'api');
+    fetch(`${apiUrl}api/verifyPhoneData`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      },
+      body: formData,
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+        const { status } = await responseJson
+        await console.log(`verifyPhone  ${JSON.stringify(responseJson)}`)
+      })
+      .catch((error) => {
+        console.error('Error : ' + error);
+      });
+  }
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////// Kat bawah ni yang lama.... Boleh tengok mana yang boleh recycle////////////////////////////
