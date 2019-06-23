@@ -32,6 +32,12 @@ class DeclarationDigitalSignScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
+
+    async DetailConnect() {
+        this.props.detailConnect()
+        this.props.navigation.navigate('DeclarationDigitalSign')
+    }
+
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -64,7 +70,7 @@ class DeclarationDigitalSignScreen extends React.PureComponent {
                                 <TextInput placeholder={'Company Stamp'} value={this.props.declareStamp} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/password.png')}  style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <TextInput placeholder={'Date'} value={this.props.declareDate} style={{ marginLeft: 5 }} />
                             </View>
 
@@ -76,7 +82,7 @@ class DeclarationDigitalSignScreen extends React.PureComponent {
                                     <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Back</Text>
                                 </TouchableOpacity>
                             </View>
-                            
+
                         </View>
                     </View>
                 </View>
@@ -95,7 +101,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-
+        setDetailConnect: (value) => dispatch({ type: 'SET_DETAIL_CONNECT', payload: { ...value } }),
+        detailConnect: () => dispatch(actionCreator.detailConnect())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DeclarationDigitalSignScreen)
