@@ -76,7 +76,7 @@ class DashboardScreen extends React.PureComponent {
                         <ScrollView >
                             {/*Business Hub */}
                             <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey' }}>
-                                <View>
+                                <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Text style={styles.subTitle}>Business Hub</Text>
                                         <Text style={styles.subTitle}>More ></Text>
@@ -110,7 +110,7 @@ class DashboardScreen extends React.PureComponent {
 
                             {/*Others */}
                             <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
-                                <View>
+                                <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle}>Others</Text>
                                         <Text style={styles.subTitle}>More ></Text>
                                     </View>
@@ -138,7 +138,7 @@ class DashboardScreen extends React.PureComponent {
                             </View>
                             {/*Contact Request */}
                             <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
-                                <View style={{ border: 1, borderColor: 'lightgrey', shadowColor: "#000", }}>
+                                <View style={{ border: 1, borderColor: 'lightgrey', shadowColor: "#000", marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Text style={styles.subTitle}>Contact Request</Text>
                                         <Text style={styles.subTitle}>More ></Text>
@@ -164,7 +164,7 @@ class DashboardScreen extends React.PureComponent {
 
                             {/**Newest RFQ */}
                             <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
-                                <View style={{ border: 1, borderColor: 'lightgrey', shadowColor: "#000", }}>
+                                <View style={{ border: 1, borderColor: 'lightgrey', shadowColor: "#000", marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Text style={styles.subTitle}>Newest RFQ</Text>
                                         <Text style={styles.subTitle}>More ></Text>
@@ -193,7 +193,7 @@ class DashboardScreen extends React.PureComponent {
 
                             {/**Highlight */}
                             <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
-                                <View>
+                            <View style={{marginBottom:10}}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Text style={styles.subTitle}>Hightlight</Text>
                                         <Text style={styles.subTitle}>More ></Text>
@@ -223,7 +223,7 @@ class DashboardScreen extends React.PureComponent {
 
                             {/**Training */}
                             <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
-                                <View>
+                            <View style={{marginBottom:10}}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Text style={styles.subTitle}>Training</Text>
                                         <Text style={styles.subTitle}>More ></Text>
