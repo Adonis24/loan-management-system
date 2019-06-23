@@ -273,7 +273,8 @@ export const logout = () => {
         //await dispatch({type:'SET_PERSONAL_INFO',payload:{status:'none'}})
         //await AsyncStorage.removeItem('status')
         //await AsyncStorage.removeItem('personalToken')
-        await SecureStore.deleteItemAsync('personalToken')
+        console.log(`nak delete`)
+        await SecureStore.deleteItemAsync('personalToken').then(console.log(`delete berjaya`)).catch(error=>console.log(`tak berjaya : ${error}`))
     }
 }
 

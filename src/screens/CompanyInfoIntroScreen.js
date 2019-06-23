@@ -15,7 +15,7 @@ import {
 
 
 } from 'react-native';
-
+import { LinearGradient } from 'expo'
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 
@@ -28,7 +28,7 @@ import styles from '../styles/styles'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class SignupSuccessScreen extends React.PureComponent {
+class CompanyInfoIntroScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
@@ -43,24 +43,18 @@ class SignupSuccessScreen extends React.PureComponent {
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>REGISTRATION</Text>
-                            <Image source={require('../assets/images/3.png')} style={{ height: 55, width: 200, margin: 5 }} resizeMode={'stretch'} />
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'column', margin: 5 }}>
-                                <Text style={[styles.textDefault, { margin: 5, color: 'darkturquoise' }]}>Congratulation!</Text>
-                                <Text style={[styles.textDefault, { margin: 5, marginBottom: 20 }]}>You have completed registration process. Welcome a board!</Text>
-                            </View>
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('CompanyInfoIntro')} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Next</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Back</Text>
-                                </TouchableOpacity>
-                            </View>
+                            <Text style={[styles.textDefault, { margin: 20 }]}>Ready to enter company info</Text>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('CompanyInformation')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                <Text style={[styles.textDefault,]}>Company Info</Text>
+                            </TouchableOpacity>
+                          
+                            <TouchableOpacity onPress={() => alert('button pressed')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Back</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
-            </View>
+            </View >
         );
     }
 }
@@ -78,4 +72,4 @@ function mapDispatchToProps(dispatch) {
 
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SignupSuccessScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(CompanyInfoIntroScreen)

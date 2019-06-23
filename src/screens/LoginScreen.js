@@ -57,7 +57,7 @@ class LoginScreen extends React.PureComponent {
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.password} onChangeText={(password) => this.props.setLogin({ password })} placeholder={'Password'} style={{ marginLeft: 5 }} />
+                                <TextInput secureTextEntry value={this.props.password} onChangeText={(password) => this.props.setLogin({ password })} placeholder={'Password'} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                                 <Text style={[styles.textDefault, { margin: 5 }]}>Forgot password?</Text>
@@ -82,6 +82,9 @@ class LoginScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
+        email: state.loginScreenReducer.email,
+        password: state.loginScreenReducer.password,
+        proceed: state.loginScreenReducer.proceed
 
     }
 }

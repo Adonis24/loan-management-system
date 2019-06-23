@@ -169,21 +169,14 @@ export const kycBasicInformation = () => {
 
 
 export const requestPersonalToken = (screen, username, password) => {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
 
-    Alert.alert(
-      'Api takda',
-      'Afi tak bagi Api lagi ' + username,
-      [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        { text: 'OK', onPress: () => console.log('OK Pressed') },
-      ],
-      { cancelable: false },
-    );
+         const access_token =  1
+
+         await SecureStore.setItemAsync('personalToken', '1');
+         
+         (screen == 'login' && access_token) ?  await dispatch({ type: 'SET_LOGIN', payload: { proceed: true } }) :  await dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
+
 
     // fetch(`${apiUrl}oauth/token`, {
     //   method: 'POST',

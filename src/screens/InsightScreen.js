@@ -28,14 +28,10 @@ import styles from '../styles/styles'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class SettingsScreen extends React.PureComponent {
+class InsightScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
-    logout(){
-      this.props.logout()
-      this.props.navigation.navigate('Welcome')
-    }
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -79,10 +75,7 @@ class SettingsScreen extends React.PureComponent {
                     <View style={{ flex: 4 }}>
                         <ScrollView >
                             {/*Business Hub */}
-                           <Text>Notifications</Text>
-                           <TouchableOpacity onPress={()=>this.logout()} style={{margin:10,padding:10}}>
-                             <Text>Logout</Text>
-                             </TouchableOpacity>
+                           <Text>Insight</Text>
                         </ScrollView>
                     </View>
 
@@ -103,8 +96,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-      logout: () => dispatch(actionCreator.logout())
 
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(InsightScreen)
