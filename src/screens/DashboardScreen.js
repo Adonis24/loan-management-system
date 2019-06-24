@@ -72,8 +72,8 @@ class DashboardScreen extends React.PureComponent {
                         </View>
                     </View>
                     {/* CONTENT AREA */}
-                    <View style={{ flex: 4, margin: 10 }}>
-                        <ScrollView >
+                    <View style={{ flex: 4 }}>
+                        <ScrollView contentStyle={{padding:10}} >
                             {/*Business Hub */}
                             <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey' }}>
                                 <View style={{ marginBottom: 10 }}>
