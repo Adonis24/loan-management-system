@@ -47,14 +47,14 @@ class WelcomeScreen extends React.PureComponent {
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('Intro')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                 <Text style={[styles.textDefault,]}>Sign Up</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={{ width: Layout.window.width * 0.4,  borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#4A90E2' }}>
-                            <LinearGradient
-          colors={['#4c669f', '#3b5998', '#192f6a']}
-          style={{ paddingTop: 5, paddingBottom: 5, alignItems: 'center', borderRadius: 15,width: Layout.window.width * 0.4, }}>
-          <Text style={[styles.textDefault,{color:'#fff'}]}>
-            Log In
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={{ width: Layout.window.width * 0.4, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#4A90E2' }}>
+                                <LinearGradient
+                                    colors={['#4c669f', '#3b5998', '#192f6a']}
+                                    style={{ paddingTop: 5, paddingBottom: 5, alignItems: 'center', borderRadius: 15, width: Layout.window.width * 0.4, }}>
+                                    <Text style={[styles.textDefault, { color: '#fff' }]}>
+                                        Log In
           </Text>
-        </LinearGradient>
+                                </LinearGradient>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => alert('button pressed')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                 <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Back</Text>

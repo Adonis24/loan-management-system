@@ -11,7 +11,8 @@ import {
     Dimensions,
     TextInput,
     AsyncStorage,
-    ImageBackground
+    ImageBackground,
+    KeyboardAvoidingView
 
 
 } from 'react-native';
@@ -33,10 +34,15 @@ class SignupPersonalScreen extends React.PureComponent {
         header: null,
     };
 
+    async componentDidMount() {
+        await this.props.getToken()
+    }
+
 
     async register() {
-        
+
         await this.props.register()
+        //await this.props.getPersonalToken()
         await this.props.navigation.navigate('SignUpOtp')
     }
 
@@ -50,7 +56,7 @@ class SignupPersonalScreen extends React.PureComponent {
 
                 </View>
                 <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>REGISTRATION</Text>
@@ -66,11 +72,11 @@ class SignupPersonalScreen extends React.PureComponent {
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.password} onChangeText={(password) => this.props.setRegister({ password })} placeholder={'Password'} style={{ marginLeft: 5 }} />
+                                <TextInput secureTextEntry value={this.props.password} onChangeText={(password) => this.props.setRegister({ password })} placeholder={'Password'} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.password_confirmation} onChangeText={(password_confirmation) => this.props.setRegister({ password_confirmation })} placeholder={'Confirm Password'} style={{ marginLeft: 5 }} />
+                                <TextInput secureTextEntry value={this.props.password_confirmation} onChangeText={(password_confirmation) => this.props.setRegister({ password_confirmation })} placeholder={'Confirm Password'} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
                                 <TouchableOpacity onPress={() => this.register()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
@@ -81,7 +87,7 @@ class SignupPersonalScreen extends React.PureComponent {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                    </View>
+                    </KeyboardAvoidingView>
                 </View>
             </View>
         );
@@ -99,8 +105,10 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
+        getToken: () => dispatch(actionCreator.getToken()),
         setRegister: (value) => dispatch({ type: 'SET_REGISTER', payload: { ...value } }),
-        register: () => dispatch(actionCreator.register())
+        register: () => dispatch(actionCreator.register()),
+        getPersonalToken: () => dispatch(actionCreator.getPersonalToken()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignupPersonalScreen)

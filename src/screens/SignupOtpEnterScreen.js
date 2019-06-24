@@ -38,6 +38,78 @@ class SignupOtpEnterScreen extends React.PureComponent {
         await this.props.navigation.navigate('SignUpSuccess')
     }
 
+    getBoxes() {
+        //var d1Focus,d2Focus,d3Focus,d4Focus=false
+
+        if (this.props.c1 && this.props.c2 && this.props.c3) {
+            return (<View style={{ flex: 1, flexDirection: 'row' }}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,alignItems:'center',borderWidth:1,borderRadius:5,margin:5 }}>
+                    <TextInput keyboardType={'number-pad'} value={this.props.c1} style={[styles.textInput, { textAlign: 'center' }]}/>
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <TextInput keyboardType={'number-pad'}  value={this.props.c2} style={[styles.textInput, { textAlign: 'center' }]} />
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <TextInput keyboardType={'number-pad'}  value={this.props.c3} style={[styles.textInput, { textAlign: 'center' }]}/> 
+                    </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <TextInput keyboardType={'number-pad'}  autoFocus={true} maxLength={1} value={this.props.d4} onChangeText={c4 => this.props.verifyOTP({ c4 })} placeholder={''} style={[styles.textInput, { textAlign: 'center' }]}  />
+                </View>
+            </View>)
+
+        } else if (this.props.c1 && this.props.c2) {
+            return (<View style={{ flex: 1, flexDirection: 'row' }}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <TextInput keyboardType={'number-pad'}  value={this.props.c1} style={[styles.textInput, { textAlign: 'center', alignSelf: 'center' }]} />
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <TextInput keyboardType={'number-pad'}   value={this.props.c2} style={[styles.textInput, { textAlign: 'center' }]} />
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <TextInput keyboardType={'number-pad'}  autoFocus={true} maxLength={1} value={this.props.c3} onChangeText={c3 => this.props.verifyOTP({ c3 })} placeholder={''} style={[styles.textInput, { textAlign: 'center' }]}  />
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <Text style={[styles.textInput, { textAlign: 'center' }]}></Text>
+                </View>
+            </View>)
+
+        } else if (this.props.c1) {
+            return (<View style={{ flex: 1, flexDirection: 'row' }}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <TextInput keyboardType={'number-pad'}  value={this.props.c1} style={[styles.textInput, { textAlign: 'center', alignSelf: 'center' }]}/>
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <TextInput keyboardType={'number-pad'}  autoFocus={true} maxLength={1} value={this.props.c2} onChangeText={c2 => this.props.verifyOTP({ c2 })} placeholder={''} style={[styles.textInput, { textAlign: 'center' }]}  />
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <Text  style={[styles.textInput, { textAlign: 'center' }]}></Text>
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <Text style={[styles.textInput, { textAlign: 'center' }]}></Text>
+                </View>
+
+            </View>)
+
+        } else
+
+            return (<View style={{ flex: 1, flexDirection: 'row' }}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <TextInput keyboardType={'number-pad'}  autoFocus={true} maxLength={1} value={this.props.c1} onChangeText={c1 => this.props.verifyOTP({ c1 })} placeholder={''} style={[styles.textInput, { textAlign: 'center' }]}  />
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <Text style={[styles.textInput, { textAlign: 'center' }]}></Text>
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <Text style={[styles.textInput, { textAlign: 'center' }]}></Text>
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10,borderWidth:1,borderRadius:5,margin:5 }}>
+                    <Text style={[styles.textInput, { textAlign: 'center' }]}></Text>
+                </View>
+                <View style={{ position: 'absolute' }}><Text></Text></View>
+            </View>)
+
+    }
+
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -49,14 +121,15 @@ class SignupOtpEnterScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                            <View>
+                           
+                            </View>
+                            
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue', fontWeight: 'bold' }]}>Enter OTP code</Text>
                             <Text style={[styles.textDefault, { margin: 5 }]}>We have sent an OTP code to your number</Text>
                             <View style={{ alignSelf: 'center', flexDirection: 'row', margin: 5 }}>
-                                <TextInput value={this.props.c1} onChangeText={(c1) => this.props.verifyOTP({ c1 })} style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
-                                <TextInput value={this.props.c2} onChangeText={(c2) => this.props.verifyOTP({ c2 })} style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
-                                <TextInput value={this.props.c3} onChangeText={(c3) => this.props.verifyOTP({ c3 })} style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
-                                <TextInput value={this.props.c4} onChangeText={(c4) => this.props.verifyOTP({ c4 })} style={{ width: 50, height: 50, borderWidth: 1, borderRadius: 10, margin: 5 }} />
-                            </View>
+                            {this.getBoxes()}
+                             </View>
                             <View style={{ alignSelf: 'center', flexDirection: 'row', margin: 5, marginBottom: 20 }}>
                                 <Text style={[styles.textDefault, { margin: 5 }]}>Resend OTP code : </Text>
                                 <Text style={[styles.textDefault, { margin: 5, color: 'orange' }]}>2 : 15 </Text>
