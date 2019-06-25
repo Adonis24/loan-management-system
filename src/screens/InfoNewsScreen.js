@@ -39,20 +39,23 @@ class InfoNewsScreen extends React.PureComponent {
                     <View style={{ alignItems: 'flex-end' }}>
                         <Image source={require('../assets/images/topRight.png')} style={{ width: 80, height: 93 }} />
                     </View>
-                    <View style={{ alignItems: 'flex-start' }}>
+                    {/* <View style={{ alignItems: 'flex-start' }}>
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
+                    </View> */}
+                    <View style={{ position: 'absolute', top: -3, left: 0, right: 0, justifyContent: 'flex-start' }}>
+                        <Image source={require('../assets/images/economy.png')} style={{ height: Layout.window.height * 0.3, width: Layout.window.width }} resizeMode={'contain'} />
                     </View>
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     {/* HEADER */}
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 5, marginTop: 5 }}>
                             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                                <Ionicons name='ios-arrow-back' size={32} />
+                                <Ionicons name='ios-arrow-back' size={32} color='white' />
                             </TouchableOpacity>
                         </View>
                         <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
+                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 2.5, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
                                 <Image source={require('../assets/icon/rfq.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
                                 <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>News</Text>
                             </View>
@@ -60,18 +63,15 @@ class InfoNewsScreen extends React.PureComponent {
                     </View>
                     {/* CONTENT AREA */}
                     <View style={{ flex: 4 }}>
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <View style={{ flex: 5 }}>
+                        <View style={{ flex: 1 }}>
+                            <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
+                                <Text style={[styles.subTitle, { margin: 15, alignSelf: 'flex-start' }]}>Creative Economy: A new Business Trend</Text>
                                 <ScrollView>
-                                    <Image source={require('../assets/images/economy.png')} style={{ height: Layout.window.height, width: Layout.window.width }} resizeMode={'contain'} />
-                                    <Text style={[styles.subTitle, { margin: 10 }]}>Creative Economy: A new Business Trend</Text>
                                     <Text style={[styles.textDefault, { margin: 10 }]}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</Text>
                                 </ScrollView>
                             </View>
                         </View>
-
                     </View>
-
                 </View>
             </View>
 
