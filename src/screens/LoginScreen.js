@@ -33,13 +33,41 @@ class LoginScreen extends React.PureComponent {
         header: null,
     };
 
-    login() {
-        this.props.login()
-        this.props.navigation.navigate('Dashboard')
+    async login() {
+        await this.props.login()
+       
+    }
+
+    componentDidMount() {
+
     }
 
 
     render() {
+        this.props.proceed && this.props.navigation.navigate('Dashboard')
+        var emailBorderColor = '#5a83c2'
+        const emailError = this.props.errorColor && this.props.errorColor.find(test => test == "E-mail")
+        if (emailError == "E-mail") {
+            emailBorderColor = '#d94498'
+        }
+
+        var passwordBorderColor = '#5a83c2'
+        const passwordError = this.props.error && this.props.errorColor.find(test => test == "Password")
+        if (passwordError == "Password") {
+            passwordBorderColor = '#d94498'
+        }
+
+        var emailErrorHint = ''
+        var passwordErrorHint = ''
+
+        this.props.error && this.props.error.map(err => {
+            if (err.title == 'email') { emailErrorHint = err.desc }
+            if (err.title == 'password') { passwordErrorHint = err.desc }
+
+        })
+
+
+
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -51,13 +79,13 @@ class LoginScreen extends React.PureComponent {
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: emailBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.email} onChangeText={(email) => this.props.setLogin({ email })} placeholder={'E-mail'} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.email} onChangeText={(email) => this.props.setLogin({ email })} placeholder={'E-mail'} style={{ marginLeft: 5, }} placeholder={(emailErrorHint.length > 0) ? emailErrorHint : 'email@address.com'} placeholderTextColor={(emailErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'email-address'}  />
                             </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: passwordBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput secureTextEntry value={this.props.password} onChangeText={(password) => this.props.setLogin({ password })} placeholder={'Password'} style={{ marginLeft: 5 }} />
+                                <TextInput secureTextEntry value={this.props.password} onChangeText={(password) => this.props.setLogin({ password })} style={{ marginLeft: 5 }} placeholder={(passwordErrorHint.length > 0) ? '******' : '******'} placeholderTextColor={(passwordErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                                 <Text style={[styles.textDefault, { margin: 5 }]}>Forgot password?</Text>
@@ -67,7 +95,7 @@ class LoginScreen extends React.PureComponent {
                                 <TouchableOpacity onPress={() => this.login()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, backgroundColor: 'limegreen', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <Text style={[styles.textDefault, { color: '#fff' }]}>Log In</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: 'grey' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: 'grey' }} >
                                     <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
                                 </TouchableOpacity>
                             </View>
@@ -84,6 +112,11 @@ function mapStateToProps(state) {
     return {
         email: state.loginScreenReducer.email,
         password: state.loginScreenReducer.password,
+        error: state.loginScreenReducer.error,
+        errorColor: state.loginScreenReducer.errorColor,
+
+
+
         proceed: state.loginScreenReducer.proceed
     }
 }

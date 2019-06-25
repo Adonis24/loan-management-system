@@ -62,8 +62,41 @@ export const getPersonalToken = () => {
 export const login = () => {
     return (dispatch, getState) => {
         const username = getState().loginScreenReducer.email
-        const password = getState().loginScreenReducer.password
-        dispatch(requestPersonalToken('login', username, password))
+        //const password = getState().loginScreenReducer.password
+
+        const { email, password } = getState().loginScreenReducer
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const errorArray = []
+        const errorColor = []
+
+        if (email == undefined || email == '') {
+
+            errorArray.push({ title: "email", desc: "No e-mail" })
+            errorColor.push("E-mail")
+        } else if (reg.test(email) === false) {
+            errorArray.push("Not e-mail format")
+            errorColor.push("E-mail")
+        }
+        if (password == undefined || password == '') {
+
+            errorArray.push({ title: "password", desc: "No password" })
+            errorColor.push("Password")
+        } else if (password.length < 6) {
+            errorArray.push({ title: "password", desc: "Wrong password" })
+            errorColor.push("Password")
+        }
+
+        if (errorArray.length > 0) {
+
+            //dispatch({ type: 'SET_INDICATOR', payload: { displayIndicator: false } })
+           
+            dispatch({ type: 'SET_LOGIN', payload: { loggedIn: false,error: errorArray, errorColor } })
+
+        } else {
+            dispatch(requestPersonalToken('login', username, password))
+        }
+
+        
     }
 }
 
@@ -341,6 +374,7 @@ export const logout = () => {
         //await AsyncStorage.removeItem('personalToken')
         console.log(`nak delete`)
         await SecureStore.deleteItemAsync('personalToken').then(console.log(`delete berjaya`)).catch(error => console.log(`tak berjaya : ${error}`))
+    dispatch({type:'SET_LOGIN',payload:{proceed:false}})
     }
 }
 
