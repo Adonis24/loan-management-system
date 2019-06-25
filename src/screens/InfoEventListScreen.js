@@ -62,7 +62,7 @@ class InfoEventListScreen extends React.PureComponent {
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                 <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
                                     <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                        <Text style={[styles.textDefault]}>Latest</Text>
+                                        <Text style={[styles.textDefault, { fontWeight: 'bold' }]}>Latest</Text>
                                     </View>
                                     <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                         <Text style={[styles.textDefault]}>Popular</Text>
@@ -71,7 +71,7 @@ class InfoEventListScreen extends React.PureComponent {
                             </View>
                         </View>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                            <ScrollView>
+                            <ScrollView style={{ marginBottom: 20 }}>
                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoEvent')}>
                                     <Image source={require('../assets/images/news1.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7, margin: 15 }} resizeMode={'contain'} />
                                 </TouchableOpacity>

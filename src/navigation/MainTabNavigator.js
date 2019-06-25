@@ -30,6 +30,7 @@ import InsightScreen from '../screens/InsightScreen';
 import BusinessHubScreen from '../screens/BusinessHubScreen';
 import InfoNewsListScreen from '../screens/InfoNewsListScreen';
 import InfoEventListScreen from '../screens/InfoEventListScreen';
+import PromotionListScreen from '../screens/PromotionListScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -44,7 +45,8 @@ const DashboardStackWithModal = createStackNavigator(
     InfoEventList: { screen: InfoEventListScreen, },
     InfoNews: { screen: InfoNewsScreen, },
     InfoNewsList: { screen: InfoNewsListScreen, },
-    BizHub: { screen: BusinessHubScreen, }
+    BizHub: { screen: BusinessHubScreen, },
+    PromotionList: { screen: PromotionListScreen, }
   },
   {
     mode: 'modal',

@@ -28,7 +28,7 @@ import styles from '../styles/styles'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class InfoNewsListScreen extends React.PureComponent {
+class PromotionListScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
@@ -52,8 +52,8 @@ class InfoNewsListScreen extends React.PureComponent {
                         </View>
                         <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
                             <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
-                                <Image source={require('../assets/icon/rfq.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
-                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>News</Text>
+                                <Image source={require('../assets/icon/wallet.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
+                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Promotion</Text>
                             </View>
                         </View>
                     </View>
@@ -72,15 +72,29 @@ class InfoNewsListScreen extends React.PureComponent {
                         </View>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <ScrollView style={{ marginBottom: 20 }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoNews')}>
-                                    <Image source={require('../assets/images/news1.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7, margin: 15 }} resizeMode={'contain'} />
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoNews')}>
-                                    <Image source={require('../assets/images/news2.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7, margin: 15 }} resizeMode={'contain'} />
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoNews')}>
-                                    <Image source={require('../assets/images/news3.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7, margin: 15 }} resizeMode={'contain'} />
-                                </TouchableOpacity>
+                                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoNews')}>
+                                        <Image source={require('../assets/images/business.png')} style={{ height: Layout.window.height * 0.3, width: Layout.window.width * 0.4, margin: 15 }} resizeMode={'contain'} />
+                                    </TouchableOpacity>
+                                    <View>
+                                        <Text style={[styles.textDefault, { fontWeight: 'bold', alignSelf: 'flex-start' }]}>Business Writing Talk</Text>
+                                        <Text style={[styles.caption, { alignSelf: 'flex-start' }]}>10 Jun 2019</Text>
+                                        <Text style={[styles.caption, { alignSelf: 'flex-start' }]}>Good news to our beloved members. Join our talk with 15% discount</Text>
+                                        <Text style={[styles.caption, { color: 'orange', alignSelf: 'flex-start', margin: 5 }]}>Join now !</Text>
+                                    </View>
+                                </View>
+                                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoNews')}>
+                                        <Image source={require('../assets/images/economy.png')} style={{ height: Layout.window.height * 0.3, width: Layout.window.width * 0.4, margin: 15 }} resizeMode={'contain'} />
+                                    </TouchableOpacity>
+                                    <View>
+                                        <Text style={[styles.textDefault, { fontWeight: 'bold', alignSelf: 'flex-start' }]}>Buy 1 free 1 book!</Text>
+                                        <Text style={[styles.caption, { alignSelf: 'flex-start' }]}>10 Jun 2019</Text>
+                                        <Text style={[styles.caption, { alignSelf: 'flex-start' }]}>Good news to our beloved members. Join our talk with 15% discount</Text>
+                                        <Text style={[styles.caption, { color: 'orange', alignSelf: 'flex-start', margin: 5 }]}>Buy now !</Text>
+                                    </View>
+                                </View>
+
                             </ScrollView>
                         </View>
                     </View>
@@ -104,4 +118,4 @@ function mapDispatchToProps(dispatch) {
 
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(InfoNewsListScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(PromotionListScreen)
