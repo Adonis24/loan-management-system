@@ -28,10 +28,11 @@ import InfoNewsScreen from '../screens/InfoNewsScreen';
 import InfoNews2Screen from '../screens/InfoNews2Screen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import InsightScreen from '../screens/InsightScreen';
+import BusinessHubScreen from '../screens/BusinessHubScreen';
 
-const DashboardStack = createStackNavigator({  
-  Dashboard: DasboardScreen,  
-  
+const DashboardStack = createStackNavigator({
+  Dashboard: DasboardScreen,
+
 });
 
 const DashboardStackWithModal = createStackNavigator(
@@ -41,9 +42,7 @@ const DashboardStackWithModal = createStackNavigator(
     InfoEvent: { screen: InfoEventScreen, },
     InfoNews: { screen: InfoNewsScreen, },
     InfoNews2: { screen: InfoNews2Screen, },
-    
-
-    
+    BizHub: { screen: BusinessHubScreen, }
   },
   {
     mode: 'modal',
@@ -66,7 +65,7 @@ DashboardStackWithModal.navigationOptions = {
 };
 
 const InsightStack = createStackNavigator({
-  Insight:InsightScreen,
+  Insight: InsightScreen,
 });
 
 InsightStack.navigationOptions = {
