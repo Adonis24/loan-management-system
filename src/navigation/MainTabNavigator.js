@@ -29,6 +29,7 @@ import NotificationsScreen from '../screens/NotificationsScreen';
 import InsightScreen from '../screens/InsightScreen';
 import BusinessHubScreen from '../screens/BusinessHubScreen';
 import InfoNewsListScreen from '../screens/InfoNewsListScreen';
+import InfoEventListScreen from '../screens/InfoEventListScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -40,6 +41,7 @@ const DashboardStackWithModal = createStackNavigator(
     Main: { screen: DashboardStack, },
     Profile: { screen: ProfileScreen, },
     InfoEvent: { screen: InfoEventScreen, },
+    InfoEventList: { screen: InfoEventListScreen, },
     InfoNews: { screen: InfoNewsScreen, },
     InfoNewsList: { screen: InfoNewsListScreen, },
     BizHub: { screen: BusinessHubScreen, }

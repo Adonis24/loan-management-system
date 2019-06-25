@@ -132,7 +132,7 @@ class DashboardScreen extends React.PureComponent {
                                             <Image source={require('../assets/icon/wallet.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'center'} />
                                             <Text style={[styles.caption]}>Promotion</Text>
                                         </View>
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoEvent')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoEventList')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/images/event.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'center'} />
                                             <Text style={[styles.caption]}>Event</Text>
                                         </TouchableOpacity>

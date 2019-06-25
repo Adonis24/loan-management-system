@@ -51,15 +51,10 @@ class BusinessHubScreen extends React.PureComponent {
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
-                        <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 7, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
-                                <Image source={require('../assets/icon/rfq.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                <Text style={[styles.default]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
-                            </View>
-                        </View>
                     </View>
                     {/* CONTENT AREA */}
                     <View style={{ flex: 4, margin: 70 }}>
+                        <Text style={[styles.textDefault, { fontWeight: 'bold', alignSelf: 'center', marginBottom: 20, fontSize: 20 }]}>Business Hub</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 }}>
                             <View style={[styles.shadow, { width: Layout.window.height / 10, height: Layout.window.height / 9.5, backgroundColor: '#fff', alignSelf: 'stretch', borderRadius: 10, borderWidth: 1, borderColor: '#ddd' }]}>
                                 <Image source={require('../assets/images/EDA.png')} style={{ width: undefined, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
