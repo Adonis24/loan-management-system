@@ -25,7 +25,8 @@ export const getToken = () => {
 
 export const register = () => {
     return async (dispatch, getState) => {
-        const { token_type, access_token, name, email, password, password_confirmation } = getState().registrationReducer
+        const { token_type, access_token, name, email, password, password_confirmation } = await getState().registrationReducer
+        console.log(`ada ke tak register info : ${JSON.stringify(getState().registrationReducer)}`)
         await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation))
     }
 }
@@ -42,6 +43,19 @@ export const verifyPhone = () => {
         const { token_type, access_token, countryCode, phone, c1, c2, c3, c4 } = getState().registrationReducer
         const code = c1 + '' + c2 + '' + c3 + '' + c4
         await dispatch(verifyPhoneApi(token_type, access_token, countryCode, phone, code))
+    }
+}
+
+export const getPersonalToken = () => {
+    return async (dispatch, getState) => {
+      
+      
+        const username = getState().registrationReducer.email
+        const password = getState().registrationReducer.password
+
+        console.log(`action : ${username} dan ${password}`)
+
+        await dispatch(requestPersonalToken('register', username, password))
     }
 }
 
@@ -96,6 +110,7 @@ export const declarationSign = () => {
         dispatch(declarationSignAPI(declareSign, declareName, declarePosition, declareStamp, declareDate))
     }
 }
+
 
 
 

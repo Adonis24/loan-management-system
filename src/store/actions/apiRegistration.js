@@ -53,8 +53,46 @@ export const registerApi = (token_type, access_token, name, email, password, pas
   }
 }
 
-export const registerOTPApi = (token_type, access_token, countryCode, phone) => {
+
+export const requestPersonalToken = (screen, username, password) => {
+  console.log(`kat api : ${username} dan ${password}`)
   return async (dispatch, getState) => {
+    fetch(`${apiUrl}oauth/token`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ client_id: '2', client_secret: 'dFX2OFK95Va8PfvyzT6ZnbLJxCXDAfvBCC1fdX4k', grant_type: 'password', username, password }),
+
+    }).then( (response) =>  response.json())
+      .then( (responseJson) => {
+
+        console.log(`personal token ialah : ${JSON.stringify(responseJson)}`)
+
+        const { token_type, access_token } =  responseJson
+
+        //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
+        const stringifyJson =  JSON.stringify(responseJson)
+
+        SecureStore.setItemAsync('personalToken', stringifyJson);
+
+        dispatch({type:'SET_REGISTER',payload:{access_token}});
+
+        (screen == 'login' && access_token) ?  dispatch({ type: 'SET_LOGIN', payload: { proceed: true } }) :  dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
+
+      })
+      .catch((error) => {
+        console.error('Error : ' + error);
+      });
+  }
+}
+
+
+export const registerOTPApi = (token_type, access_token, country_code, mobile_no) => {
+  return async (dispatch, getState) => {
+    console.log(`token and type ialah : ${access_token} dan ${token_type}`)
+    console.log(`phone and country ialah : ${country_code} dan ${mobile_no}`)
+
     fetch(`${apiUrl}api/requestOPT`, {
       method: 'POST',
       headers: {
@@ -62,7 +100,7 @@ export const registerOTPApi = (token_type, access_token, countryCode, phone) => 
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-      body: JSON.stringify({ countryCode, phone }),
+      body: JSON.stringify({ country_code, mobile_no }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
@@ -75,7 +113,7 @@ export const registerOTPApi = (token_type, access_token, countryCode, phone) => 
   }
 }
 
-export const verifyPhoneApi = (token_type, access_token, countryCode, phone, code) => {
+export const verifyPhoneApi = (token_type, access_token, country_code, mobile_no, code) => {
   return async (dispatch, getState) => {
     fetch(`${apiUrl}api/verifyPhoneData`, {
       method: 'POST',
@@ -84,7 +122,7 @@ export const verifyPhoneApi = (token_type, access_token, countryCode, phone, cod
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-      body: JSON.stringify({ countryCode, phone, code, access_credential: 'api' }),
+      body: JSON.stringify({ country_code, mobile_no, code, access_credential: 'api' }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
@@ -261,40 +299,6 @@ export const kycBasicInformation = () => {
 }
 
 
-export const requestPersonalToken = (screen, username, password) => {
-  return async (dispatch, getState) => {
-
-    const access_token = 1
-
-    await SecureStore.setItemAsync('personalToken', '1');
-
-    (screen == 'login' && access_token) ? await dispatch({ type: 'SET_LOGIN', payload: { proceed: true } }) : await dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
-
-
-    // fetch(`${apiUrl}oauth/token`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ client_id: '2', client_secret: 'we5olHlLBzGbxtfrHRw7bP9YOQMfvXm4antkA1Xm', grant_type: 'password', username, password }),
-
-    // }).then( (response) =>  response.json())
-    //   .then( (responseJson) => {
-    //     const { token_type, access_token } =  responseJson
-
-    //     //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
-    //     const stringifyJson =  JSON.stringify(responseJson)
-
-    //     SecureStore.setItemAsync('personalToken', stringifyJson);
-
-    //     (screen == 'login' && access_token) ?  dispatch({ type: 'SET_LOGIN', payload: { proceed: true } }) :  dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
-
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error : ' + error);
-    //   });
-  }
-}
 
 export const kycBasicInformation2 = () => {
   return async (dispatch, getState) => {

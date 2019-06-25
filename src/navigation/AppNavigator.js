@@ -13,7 +13,7 @@ import MainTabNavigator from './MainTabNavigator';
 const LoggedIn = createSwitchNavigator({
 
   Authentication: AuthenticationNavigator,
-  //Registration:RegistrationNavigator,
+  Registration:RegistrationNavigator,
   Main: MainTabNavigator,
   // LoggedIn:LoggedInTabNavigator1 ,
   //LoggedIn1:LoggedInTabNavigator1  

@@ -8,11 +8,9 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import IntroScreen from '../screens/IntroScreen';
 
 const AuthenticationStack = createStackNavigator({
-
     Welcome: WelcomeScreen,
     //Intro: IntroScreen,
     Login: LoginScreen,
-
 });
 
 
