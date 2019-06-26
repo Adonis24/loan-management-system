@@ -94,7 +94,6 @@ class PromotionListScreen extends React.PureComponent {
                                         <Text style={[styles.caption, { color: 'orange', alignSelf: 'flex-start', margin: 5 }]}>Buy now !</Text>
                                     </View>
                                 </View>
-
                             </ScrollView>
                         </View>
                     </View>
