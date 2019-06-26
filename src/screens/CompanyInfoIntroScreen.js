@@ -15,7 +15,7 @@ import {
 
 
 } from 'react-native';
-import { LinearGradient } from 'expo'
+import { LinearGradient } from 'expo-linear-gradient'
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 
@@ -48,7 +48,7 @@ class CompanyInfoIntroScreen extends React.PureComponent {
                                 <Text style={[styles.textDefault,]}>Company Info</Text>
                             </TouchableOpacity>
                           
-                            <TouchableOpacity onPress={() => alert('button pressed')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Dashboard')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                 <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Skip</Text>
                             </TouchableOpacity>
                         </View>

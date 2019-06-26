@@ -23,7 +23,7 @@ import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-//import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
+import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab } from 'native-base'
 
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
@@ -32,6 +32,9 @@ class PromotionListScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
+    nav=(screen)=>{
+        this.props.navigation.navigate(screen)
+    }
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -58,43 +61,15 @@ class PromotionListScreen extends React.PureComponent {
                         </View>
                     </View>
                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ margin: 10, borderBottomWidth: 1, borderColor: '#000' }}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                    <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                        <Text style={[styles.textDefault]}>Latest</Text>
-                                    </View>
-                                    <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                        <Text style={[styles.textDefault, { fontWeight: 'bold' }]}>Popular</Text>
-                                    </View>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                            <ScrollView style={{ marginBottom: 20 }}>
-                                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoNews')}>
-                                        <Image source={require('../assets/images/business.png')} style={{ height: Layout.window.height * 0.3, width: Layout.window.width * 0.4, margin: 15 }} resizeMode={'contain'} />
-                                    </TouchableOpacity>
-                                    <View>
-                                        <Text style={[styles.textDefault, { fontWeight: 'bold', alignSelf: 'flex-start' }]}>Business Writing Talk</Text>
-                                        <Text style={[styles.caption, { alignSelf: 'flex-start' }]}>10 Jun 2019</Text>
-                                        <Text style={[styles.caption, { alignSelf: 'flex-start' }]}>Good news to our beloved members. Join our talk with 15% discount</Text>
-                                        <Text style={[styles.caption, { color: 'orange', alignSelf: 'flex-start', margin: 5 }]}>Join now !</Text>
-                                    </View>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoNews')}>
-                                        <Image source={require('../assets/images/economy.png')} style={{ height: Layout.window.height * 0.3, width: Layout.window.width * 0.4, margin: 15 }} resizeMode={'contain'} />
-                                    </TouchableOpacity>
-                                    <View>
-                                        <Text style={[styles.textDefault, { fontWeight: 'bold', alignSelf: 'flex-start' }]}>Buy 1 free 1 book!</Text>
-                                        <Text style={[styles.caption, { alignSelf: 'flex-start' }]}>10 Jun 2019</Text>
-                                        <Text style={[styles.caption, { alignSelf: 'flex-start' }]}>Good news to our beloved members. Join our talk with 15% discount</Text>
-                                        <Text style={[styles.caption, { color: 'orange', alignSelf: 'flex-start', margin: 5 }]}>Buy now !</Text>
-                                    </View>
-                                </View>
-                            </ScrollView>
+                        <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
+                            <Tabs tabBarBackgroundColor={'#fff'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
+                                <Tab heading="Latest">
+                                    <Latest nav={this.nav} />
+                                </Tab>
+                                <Tab heading="Popular">
+                                    <Popular nav={this.nav} />
+                                </Tab>
+                            </Tabs>
                         </View>
                     </View>
                 </View>
@@ -103,6 +78,79 @@ class PromotionListScreen extends React.PureComponent {
         );
     }
 }
+
+class Latest extends React.PureComponent {
+    render() {
+        return (
+            <ScrollView>
+                <TouchableOpacity onPress={() => this.props.nav('InfoNews')} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
+                    <Image source={require('../assets/images/business.png')} style={{ flex: 1, height: Layout.window.height * 0.1, width: undefined, }} resizeMode={'cover'} />
+                    <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
+                        <Text style={[styles.textDefault, { fontWeight: 'bold', textAlign: 'left', alignSelf: 'flex-start' }]}>Business Writing Talk</Text>
+                        <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>10 Jun 2019</Text>
+                        <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>Good news to our beloved members. Join our talk with 15% discount</Text>
+                        <Text style={[styles.caption, { color: 'orange', alignSelf: 'flex-start', margin: 5, textAlign: 'left' }]}>Join now !</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.nav('InfoNews')} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
+                    <Image source={require('../assets/images/business.png')} style={{ flex: 1, height: Layout.window.height * 0.1, width: undefined, }} resizeMode={'cover'} />
+                    <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
+                        <Text style={[styles.textDefault, { fontWeight: 'bold', textAlign: 'left', alignSelf: 'flex-start' }]}>Business Writing Talk</Text>
+                        <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>10 Jun 2019</Text>
+                        <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>Good news to our beloved members. Join our talk with 15% discount</Text>
+                        <Text style={[styles.caption, { color: 'orange', alignSelf: 'flex-start', margin: 5, textAlign: 'left' }]}>Join now !</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.nav('InfoNews')} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
+                    <Image source={require('../assets/images/business.png')} style={{ flex: 1, height: Layout.window.height * 0.1, width: undefined, }} resizeMode={'cover'} />
+                    <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
+                        <Text style={[styles.textDefault, { fontWeight: 'bold', textAlign: 'left', alignSelf: 'flex-start' }]}>Business Writing Talk</Text>
+                        <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>10 Jun 2019</Text>
+                        <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>Good news to our beloved members. Join our talk with 15% discount</Text>
+                        <Text style={[styles.caption, { color: 'orange', alignSelf: 'flex-start', margin: 5, textAlign: 'left' }]}>Join now !</Text>
+                    </View>
+                </TouchableOpacity>
+            </ScrollView>
+        )
+    }
+}
+
+class Popular extends React.PureComponent {
+    render() {
+        return (
+            <ScrollView>
+                <TouchableOpacity onPress={() => this.props.nav('InfoNews')} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
+                    <Image source={require('../assets/images/business.png')} style={{ flex: 1, height: Layout.window.height * 0.1, width: undefined, }} resizeMode={'cover'} />
+                    <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
+                        <Text style={[styles.textDefault, { fontWeight: 'bold', textAlign: 'left', alignSelf: 'flex-start' }]}>Business Writing Talk</Text>
+                        <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>10 Jun 2019</Text>
+                        <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>Good news to our beloved members. Join our talk with 15% discount</Text>
+                        <Text style={[styles.caption, { color: 'orange', alignSelf: 'flex-start', margin: 5, textAlign: 'left' }]}>Join now !</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.nav('InfoNews')} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
+                    <Image source={require('../assets/images/business.png')} style={{ flex: 1, height: Layout.window.height * 0.1, width: undefined, }} resizeMode={'cover'} />
+                    <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
+                        <Text style={[styles.textDefault, { fontWeight: 'bold', textAlign: 'left', alignSelf: 'flex-start' }]}>Business Writing Talk</Text>
+                        <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>10 Jun 2019</Text>
+                        <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>Good news to our beloved members. Join our talk with 15% discount</Text>
+                        <Text style={[styles.caption, { color: 'orange', alignSelf: 'flex-start', margin: 5, textAlign: 'left' }]}>Join now !</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.nav('InfoNews')} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
+                    <Image source={require('../assets/images/business.png')} style={{ flex: 1, height: Layout.window.height * 0.1, width: undefined, }} resizeMode={'cover'} />
+                    <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
+                        <Text style={[styles.textDefault, { fontWeight: 'bold', textAlign: 'left', alignSelf: 'flex-start' }]}>Business Writing Talk</Text>
+                        <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>10 Jun 2019</Text>
+                        <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>Good news to our beloved members. Join our talk with 15% discount</Text>
+                        <Text style={[styles.caption, { color: 'orange', alignSelf: 'flex-start', margin: 5, textAlign: 'left' }]}>Join now !</Text>
+                    </View>
+                </TouchableOpacity>
+            </ScrollView>
+        )
+    }
+}
+
 
 
 function mapStateToProps(state) {

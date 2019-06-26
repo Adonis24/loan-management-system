@@ -31,6 +31,10 @@ import BusinessHubScreen from '../screens/BusinessHubScreen';
 import InfoNewsListScreen from '../screens/InfoNewsListScreen';
 import InfoEventListScreen from '../screens/InfoEventListScreen';
 import PromotionListScreen from '../screens/PromotionListScreen';
+import PopupScoreScreen from '../screens/PopupScoreScreen';
+import InfoScreen from '../screens/InfoScreen';
+import HandbookListScreen from '../screens/HandbookListScreen';
+import HandbookScreen from '../screens/HandbookScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -40,13 +44,17 @@ const DashboardStack = createStackNavigator({
 const DashboardStackWithModal = createStackNavigator(
   {
     Main: { screen: DashboardStack, },
+    PopupScore: { screen: PopupScoreScreen, },
     Profile: { screen: ProfileScreen, },
+    Info: { screen: InfoScreen, },
     InfoEvent: { screen: InfoEventScreen, },
     InfoEventList: { screen: InfoEventListScreen, },
     InfoNews: { screen: InfoNewsScreen, },
     InfoNewsList: { screen: InfoNewsListScreen, },
     BizHub: { screen: BusinessHubScreen, },
-    PromotionList: { screen: PromotionListScreen, }
+    PromotionList: { screen: PromotionListScreen, },
+    HandbookList: { screen: HandbookListScreen, },
+    Handbook: { screen: HandbookScreen, }
   },
   {
     mode: 'modal',

@@ -42,8 +42,8 @@ class InfoNewsScreen extends React.PureComponent {
                     {/* <View style={{ alignItems: 'flex-start' }}>
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
                     </View> */}
-                    <View style={{ position: 'absolute', top: -3, left: 0, right: 0, justifyContent: 'flex-start' }}>
-                        <Image source={require('../assets/images/business.png')} style={{ height: Layout.window.height * 0.3, width: Layout.window.width }} resizeMode={'contain'} />
+                    <View style={{ position: 'absolute', top:0, left: 0, right: 0, justifyContent: 'flex-start' }}>
+                        <Image source={require('../assets/images/business.png')} style={{ height: Layout.window.height * 0.3, width: Layout.window.width }} resizeMode={'cover'} />
                     </View>
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>

@@ -24,6 +24,7 @@ import Layout from '../constants/Layout'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 //import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
+import { Tabs, Tab,ScrollableTab, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab } from 'native-base'
 
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
@@ -32,6 +33,9 @@ class InfoEventListScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
+    nav=(screen)=>{
+        this.props.navigation.navigate(screen)
+    }
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -58,31 +62,14 @@ class InfoEventListScreen extends React.PureComponent {
                         </View>
                     </View>
                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ margin: 10, borderBottomWidth: 1, borderColor: '#000' }}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                    <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                        <Text style={[styles.textDefault, { fontWeight: 'bold' }]}>Latest</Text>
-                                    </View>
-                                    <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                        <Text style={[styles.textDefault]}>Popular</Text>
-                                    </View>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                            <ScrollView style={{ marginBottom: 20 }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoEvent')}>
-                                    <Image source={require('../assets/images/news1.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7, margin: 15 }} resizeMode={'contain'} />
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoEvent')}>
-                                    <Image source={require('../assets/images/news2.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7, margin: 15 }} resizeMode={'contain'} />
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoEvent')}>
-                                    <Image source={require('../assets/images/news3.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7, margin: 15 }} resizeMode={'contain'} />
-                                </TouchableOpacity>
-                            </ScrollView>
-                        </View>
+                        <Tabs tabBarBackgroundColor={'#fff'} tabContainerStyle={{backgroundColor:'#fff'}} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={()=> <ScrollableTab />}>
+                            <Tab heading="Latest">
+                                <Latest nav={this.nav} />
+                            </Tab>
+                            <Tab heading="Popular">
+                                <Popular nav={this.nav} />
+                            </Tab>
+                        </Tabs>
                     </View>
                 </View>
             </View>
@@ -90,6 +77,43 @@ class InfoEventListScreen extends React.PureComponent {
         );
     }
 }
+
+class Latest extends React.PureComponent {
+    render() {
+        return (
+            <ScrollView>                
+                <TouchableOpacity  onPress={() => this.props.nav('InfoEvent')}>
+                    <Image source={require('../assets/images/news1.png')} style={{ width:Layout.window.width-10,height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
+                </TouchableOpacity>
+                <TouchableOpacity  onPress={() => this.props.nav('InfoEvent')}>
+                    <Image source={require('../assets/images/news1.png')} style={{ width:Layout.window.width-10,height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
+                </TouchableOpacity>
+                <TouchableOpacity  onPress={() => this.props.nav('InfoEvent')}>
+                    <Image source={require('../assets/images/news1.png')} style={{ width:Layout.window.width-10,height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
+                </TouchableOpacity>               
+            </ScrollView>
+        )
+    }
+}
+
+class Popular extends React.PureComponent {
+    render() {
+        return (
+            <ScrollView>                
+                <TouchableOpacity  onPress={() => this.props.nav('InfoEvent')}>
+                    <Image source={require('../assets/images/news1.png')} style={{ width:Layout.window.width-10,height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
+                </TouchableOpacity>
+                <TouchableOpacity  onPress={() => this.props.nav('InfoEvent')}>
+                    <Image source={require('../assets/images/news1.png')} style={{ width:Layout.window.width-10,height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
+                </TouchableOpacity>
+                <TouchableOpacity  onPress={() => this.props.nav('InfoEvent')}>
+                    <Image source={require('../assets/images/news1.png')} style={{ width:Layout.window.width-10,height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
+                </TouchableOpacity>               
+            </ScrollView>
+        )
+    }
+}
+
 
 
 function mapStateToProps(state) {
