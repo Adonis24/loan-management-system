@@ -4,6 +4,11 @@
     "slug": "bizxcess",
     "privacy": "public",
     "sdkVersion": "33.0.0",
+    "android": {
+      "package": "com.fintech.bizxcess",
+      "versionCode": 1,
+      "permissions": []
+    },
     "platforms": [
       "ios",
       "android",
