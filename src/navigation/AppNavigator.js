@@ -30,7 +30,7 @@ const Authentication = createSwitchNavigator({
   // LoggedIn:LoggedInTabNavigator1 ,
   //LoggedIn1:LoggedInTabNavigator1  
 }, {
-    initialRouteName: 'Authentication'
+    initialRouteName: 'Main'
     //initialRouteName: checkLogin()=='ada'?'LoggedIn':'Authentication'    
   });
 

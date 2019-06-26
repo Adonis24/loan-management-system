@@ -48,7 +48,7 @@ class PopupScoreScreen extends React.PureComponent {
                     <View style={{ backgroundColor: '#fff', padding: 20, margin: 20, borderRadius: 5 }}>
                         <Text style={[styles.textDefault, { color: '#fff' }]}>Progress bar tu</Text>
                     </View>
-                    <Text style={[styles.textDefault, { color: '#fff' }]}>Your score is currently blah blah blah</Text>
+                    {/* <Text style={[styles.textDefault, { color: '#fff' }]}>Your score is currently blah blah blah</Text> */}
                 </View>
             </View>
         );

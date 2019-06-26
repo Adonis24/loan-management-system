@@ -32,7 +32,7 @@ class PromotionListScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
-    nav=(screen)=>{
+    nav = (screen) => {
         this.props.navigation.navigate(screen)
     }
     render() {
@@ -82,7 +82,7 @@ class PromotionListScreen extends React.PureComponent {
 class Latest extends React.PureComponent {
     render() {
         return (
-            <ScrollView>
+            <ScrollView style={{ padding: 20 }}>
                 <TouchableOpacity onPress={() => this.props.nav('InfoNews')} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
                     <Image source={require('../assets/images/business.png')} style={{ flex: 1, height: Layout.window.height * 0.1, width: undefined, }} resizeMode={'cover'} />
                     <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
@@ -118,7 +118,7 @@ class Latest extends React.PureComponent {
 class Popular extends React.PureComponent {
     render() {
         return (
-            <ScrollView>
+            <ScrollView style={{ padding: 20 }}>
                 <TouchableOpacity onPress={() => this.props.nav('InfoNews')} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
                     <Image source={require('../assets/images/business.png')} style={{ flex: 1, height: Layout.window.height * 0.1, width: undefined, }} resizeMode={'cover'} />
                     <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>

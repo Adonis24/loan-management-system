@@ -67,10 +67,10 @@ class DashboardScreen extends React.PureComponent {
                                     <Image source={require('../assets/images/EDA.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>My Account</Text>
                                 </View>
-                                <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('MyScore')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                     <Image source={require('../assets/images/my-score.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>My Score</Text>
-                                </View>
+                                </TouchableOpacity>
 
                             </View>
                         </View>
