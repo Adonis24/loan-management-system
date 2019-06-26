@@ -63,8 +63,9 @@ export default class App extends React.Component {
   }
 
 
-  componentDidMount() {
-    this.checkLogin()
+  async componentDidMount() {
+    await this.checkUpdate()
+    await this.checkLogin()
     this.registerForPushNotificationsAsync();
     this._notificationSubscription = Notifications.addListener(this._handleNotification);
   }
@@ -73,6 +74,19 @@ export default class App extends React.Component {
     console.log(`test test test ${JSON.stringify(notification)}`)
     this.setState({ notification: notification });
   };
+
+  async checkUpdate() {
+    try {
+      const update = await Expo.Updates.checkForUpdateAsync();
+      if (update.isAvailable) {
+        await Expo.Updates.fetchUpdateAsync();        
+        Expo.Updates.reloadFromCache();
+      }
+    } catch (e) {
+      // handle or log error
+    }
+  }
+
 
   checkLogin = async () => {
     try {
