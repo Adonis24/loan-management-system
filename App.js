@@ -11,6 +11,10 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import reducer from './src/store/reducers/Reducer';
+
+import { StyleProvider } from 'native-base';
+import getTheme from './native-base-theme/components';
+import minimal from './native-base-theme/variables/minimal';
 // import DashboardAsset from './src/components/DashboardAsset';
 
 
@@ -92,7 +96,7 @@ export default class App extends React.Component {
     try {
       //const personalToken = await AsyncStorage.getItem('personalToken');
       const personalToken = await SecureStore.getItemAsync('personalToken')
-      if (personalToken !== null) {
+      if (personalToken !== null&&!personalToken.includes('error')) {
         console.log(`personal token ialah : ${personalToken}`)
         this.setState({ tokenExists: true })
       }
@@ -115,11 +119,13 @@ export default class App extends React.Component {
     } else {
       return (
         <Provider store={store}>
+          <StyleProvider  style={getTheme(minimal)}> 
           <View style={styles.container}>
             {/* <DashboardAsset /> */}
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
             {this.state.tokenExists ? <LoggedInContainer /> : <AuthenticationContainer />}
           </View>
+          </StyleProvider>
         </Provider>
       );
     }

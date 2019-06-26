@@ -32,6 +32,9 @@ class BusinessHubScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
+
+
+
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -53,9 +56,9 @@ class BusinessHubScreen extends React.PureComponent {
                         </View>
                     </View>
                     {/* CONTENT AREA */}
-                    <View style={{ flex: 4, margin: 70 }}>
+                    <View style={{ flex: 4, justifyContent:'flex-start' }}>
                         <Text style={[styles.textDefault, { fontWeight: 'bold', alignSelf: 'center', marginBottom: 20, fontSize: 20 }]}>Business Hub</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20,marginLeft:Layout.window.width/10,marginRight:Layout.window.width/10 }}>
                             <View style={[styles.shadow, { width: Layout.window.height / 10, height: Layout.window.height / 9.5, backgroundColor: '#fff', alignSelf: 'stretch', borderRadius: 10, borderWidth: 1, borderColor: '#ddd' }]}>
                                 <Image source={require('../assets/images/EDA.png')} style={{ width: undefined, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
                                 <Text style={[styles.caption]}>EDA</Text>
@@ -69,7 +72,7 @@ class BusinessHubScreen extends React.PureComponent {
                                 <Text style={[styles.caption]}>CRM</Text>
                             </View>
                         </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20,marginLeft:Layout.window.width/10,marginRight:Layout.window.width/10 }}>
                             <View style={[styles.shadow, { width: Layout.window.height / 10, height: Layout.window.height / 9.5, backgroundColor: '#fff', alignSelf: 'stretch', borderRadius: 10, borderWidth: 1, borderColor: '#ddd' }]}>
                                 <Image source={require('../assets/images/mayamall.png')} style={{ width: undefined, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
                                 <Text style={[styles.caption]}>Marketplace</Text>
@@ -83,7 +86,7 @@ class BusinessHubScreen extends React.PureComponent {
                                 <Text style={[styles.caption]}>Billing</Text>
                             </View>
                         </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between',marginLeft:Layout.window.width/10,marginRight:Layout.window.width/10 }}>
                             <View style={[styles.shadow, { width: Layout.window.height / 10, height: Layout.window.height / 9.5, backgroundColor: '#fff', alignSelf: 'stretch', borderRadius: 10, borderWidth: 1, borderColor: '#ddd' }]}>
                                 <Image source={require('../assets/images/ecommerce.png')} style={{ width: undefined, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
                                 <Text style={[styles.caption]}>Dev hub</Text>
