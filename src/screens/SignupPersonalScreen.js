@@ -43,11 +43,49 @@ class SignupPersonalScreen extends React.PureComponent {
 
         await this.props.register()
         //await this.props.getPersonalToken()
-        await this.props.navigation.navigate('SignUpOtp')
+        // await this.props.navigation.navigate('SignUpOtp')
     }
 
 
     render() {
+        this.props.proceed && this.props.navigation.navigate('SignUpOtp')
+        
+        var emailBorderColor = '#5a83c2'
+        const emailError = this.props.errorColor && this.props.errorColor.find(test => test == "E-mail")
+        if (emailError == "E-mail") {
+            emailBorderColor = '#d94498'
+        }
+
+        var nameBorderColor = '#5a83c2'
+        const nameError = this.props.error && this.props.errorColor.find(test => test == "Name")
+        if (nameError == "E-mail") {
+            nameBorderColor = '#d94498'
+        }
+
+        var passwordBorderColor = '#5a83c2'
+        const passwordError = this.props.error && this.props.errorColor.find(test => test == "Password")
+        if (passwordError == "Password") {
+            passwordBorderColor = '#d94498'
+        }
+
+        var passwordConfirmBorderColor = '#5a83c2'
+        const passwordConfirmError = this.props.error && this.props.errorColor.find(test => test == "Confirm Password")
+        if (passwordConfirmError == "Confirm Password") {
+            passwordConfirmBorderColor = '#d94498'
+        }
+
+        var emailErrorHint = ''
+        var nameErrorHint = ''
+        var passwordErrorHint = ''
+        var passwordConfirmErrorHint = ''
+
+        this.props.error && this.props.error.map(err => {
+            if (err.title == 'email') { emailErrorHint = err.desc }
+            if (err.title == 'name') { nameErrorHint = err.desc }
+            if (err.title == 'password') { passwordErrorHint = err.desc }
+            if (err.title == 'confirm password') { passwordConfirmErrorHint = err.desc }
+
+        })
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -62,21 +100,21 @@ class SignupPersonalScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>REGISTRATION</Text>
                             <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} />
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Personal Info</Text>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: nameBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.name} onChangeText={(name) => this.props.setRegister({ name })} placeholder={'Full Name'} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.name} onChangeText={(name) => this.props.setRegister({ name })} style={{ marginLeft: 5 }} placeholder={(nameErrorHint.length > 0) ? nameErrorHint : 'Full name'} placeholderTextColor={(nameErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: emailBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.email} onChangeText={(email) => this.props.setRegister({ email })} placeholder={'E-mail'} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.email} onChangeText={(email) => this.props.setRegister({ email })} style={{ marginLeft: 5, }} placeholder={(emailErrorHint.length > 0) ? emailErrorHint : 'email@address.com'} placeholderTextColor={(emailErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'email-address'} />
                             </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: passwordBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput secureTextEntry value={this.props.password} onChangeText={(password) => this.props.setRegister({ password })} placeholder={'Password'} style={{ marginLeft: 5 }} />
+                                <TextInput secureTextEntry value={this.props.password} onChangeText={(password) => this.props.setRegister({ password })} style={{ marginLeft: 5 }} placeholder={(passwordErrorHint.length > 0) ? '******' : '******'} placeholderTextColor={(passwordErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: passwordConfirmBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput secureTextEntry value={this.props.password_confirmation} onChangeText={(password_confirmation) => this.props.setRegister({ password_confirmation })} placeholder={'Confirm Password'} style={{ marginLeft: 5 }} />
+                                <TextInput secureTextEntry value={this.props.password_confirmation} onChangeText={(password_confirmation) => this.props.setRegister({ password_confirmation })} style={{ marginLeft: 5 }} placeholder={(passwordConfirmErrorHint.length > 0) ? '******' : '******'} placeholderTextColor={(passwordConfirmErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
                                 <TouchableOpacity onPress={() => this.register()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
@@ -100,7 +138,8 @@ function mapStateToProps(state) {
         name: state.registrationReducer.name,
         email: state.registrationReducer.email,
         password: state.registrationReducer.password,
-        password_confirmation: state.registrationReducer.password_confirmation
+        password_confirmation: state.registrationReducer.password_confirmation,
+        proceed: state.registrationReducer.proceed
     }
 }
 function mapDispatchToProps(dispatch) {

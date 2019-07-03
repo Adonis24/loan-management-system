@@ -44,7 +44,7 @@ export const registerApi = (token_type, access_token, name, email, password, pas
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
-        await dispatch({ type: 'SET_REGISTER', payload: { status } })
+        await dispatch({ type: 'SET_REGISTER', payload: { status, proceed: true } })
         await console.log(`register  ${JSON.stringify(responseJson)}`)
       })
       .catch((error) => {
@@ -64,21 +64,21 @@ export const requestPersonalToken = (screen, username, password) => {
       },
       body: JSON.stringify({ client_id: '2', client_secret: 'dFX2OFK95Va8PfvyzT6ZnbLJxCXDAfvBCC1fdX4k', grant_type: 'password', username, password }),
 
-    }).then( (response) =>  response.json())
-      .then( (responseJson) => {
+    }).then((response) => response.json())
+      .then((responseJson) => {
 
         console.log(`personal token ialah : ${JSON.stringify(responseJson)}`)
 
-        const { token_type, access_token } =  responseJson
+        const { token_type, access_token } = responseJson
 
         //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
-        const stringifyJson =  JSON.stringify(responseJson)
+        const stringifyJson = JSON.stringify(responseJson)
 
         SecureStore.setItemAsync('personalToken', stringifyJson);
 
-        dispatch({type:'SET_REGISTER',payload:{access_token}});
+        dispatch({ type: 'SET_REGISTER', payload: { access_token } });
 
-        (screen == 'login' && access_token) ?  dispatch({ type: 'SET_LOGIN', payload: { proceed: true } }) :  dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
+        (screen == 'login' && access_token) ? dispatch({ type: 'SET_LOGIN', payload: { proceed: true } }) : dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
 
       })
       .catch((error) => {
