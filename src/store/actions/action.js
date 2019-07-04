@@ -8,7 +8,7 @@ import * as SecureStore from 'expo-secure-store'
 
 
 import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI } from './apiRegistration'
-import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail } from './apiDashboard'
+import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -179,8 +179,23 @@ export const declarationSign = () => {
     }
 }
 
+export const initiateDashboardScreen = () => {
+    return async (dispatch, getState) => {
+        // await dispatch(knowledgeHubApi())
+    }
+}
 
+export const initiateNews = () => {
+    return async (dispatch, getState) => {
+        await dispatch(newsApi())
+    }
+}
 
+export const initiateEvent = () => {
+    return async (dispatch, getState) => {
+        await dispatch(eventApi())
+    }
+}
 
 
 
@@ -741,13 +756,13 @@ export const approve = () => {
 //////////////////////////////////////////////////////
 
 
-export const initiateDashboardScreen = () => {
+// export const initiateDashboardScreen = () => {
 
-    return async (dispatch, getState) => {
-        await dispatch(userInfo())
+//     return async (dispatch, getState) => {
+//         await dispatch(userInfo())
 
-    }
-}
+//     }
+// }
 
 export const initiateLatestTransaction = () => {
     return (dispatch, getState) => {

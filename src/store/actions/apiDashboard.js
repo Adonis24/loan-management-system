@@ -10,6 +10,68 @@ import moment from 'moment'
 
 const apiUrl = 'https://staging.lunawallet.com/'
 
+export const newsApi = () => {
+  return async (dispatch, getState) => {
+    // const { token_type, access_token } = JSON.parse(personalToken)
+    // fetch(`${apiUrl}api/news`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'application/json',
+    //     'Authorization': token_type + ' ' + access_token
+    //   },
+    // }).then((response) => response.json())
+    //   .then(async (responseJson) => {
+    // const { responseJson } = responseJson.data
+    // await console.log(`NEWS API  ${JSON.stringify(responseJson)}`)
+    const newsArray = [{ newsType: 'Latest', title: 'Creative Economy: A new business trend', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
+    { newsType: 'Latest', title: 'How to use social media to expand business', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
+    { newsType: 'Latest', title: 'Business Digital Marketing Trends for 2019', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
+    { newsType: 'Popular', title: 'Creative Economy: Anew business trend', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
+    { newsType: 'Popular', title: 'How to use social media to expand business', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
+    { newsType: 'Popular', title: 'Business Digital Marketing Trends for 2019', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' }]
+    await dispatch({ type: 'SET_NEWS', payload: { newsArray } })
+    // })
+    // .catch((error) => {
+    //   console.log('Error News Api : ' + error);
+    // });
+  }
+}
+
+export const eventApi = () => {
+  return async (dispatch, getState) => {
+    // const { token_type, access_token } = JSON.parse(personalToken)
+    // fetch(`${apiUrl}api/news`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'application/json',
+    //     'Authorization': token_type + ' ' + access_token
+    //   },
+    // }).then((response) => response.json())
+    //   .then(async (responseJson) => {
+    // const { responseJson } = responseJson.data
+    // await console.log(`NEWS API  ${JSON.stringify(responseJson)}`)
+    const eventArray = [{ eventType: 'Latest', title: 'Creative Economy: A new business trend', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
+    { eventType: 'Latest', title: 'How to use social media to expand business', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
+    { eventType: 'Latest', title: 'Business Digital Marketing Trends for 2019', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
+    { eventType: 'Popular', title: 'Creative Economy: Anew business trend', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
+    { eventType: 'Popular', title: 'How to use social media to expand business', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
+    { eventType: 'Popular', title: 'Business Digital Marketing Trends for 2019', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' }]
+    await dispatch({ type: 'SET_EVENT', payload: { eventArray } })
+    // })
+    // .catch((error) => {
+    //   console.log('Error News Api : ' + error);
+    // });
+  }
+}
+
+
+
+
+
+//////////////////////////////////LUNAWALLET/////////////////////////////////////////
+
 export const getUrl = (pic) => {
   var kucing = ''
   Storage.get(pic)

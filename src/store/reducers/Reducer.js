@@ -40,6 +40,33 @@ const loginScreenReducer = (state = [], action) => {
 }
 
 
+const dashboardScreenReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_DASHBOARD':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+const newsScreenReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_NEWS':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+const eventScreenReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_EVENT':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const settingReducer = (state = [], action) => {
@@ -177,15 +204,15 @@ const personalInformationScreenReducer = (state = [], action) => {
 
 ///////////////////////////////////////////////////
 
-const dashboardScreenReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_DASHBOARD':
-            return { ...state, ...action.payload }
+// const dashboardScreenReducer = (state = [], action) => {
+//     switch (action.type) {
+//         case 'SET_DASHBOARD':
+//             return { ...state, ...action.payload }
 
-        default:
-            return state
-    }
-}
+//         default:
+//             return state
+//     }
+// }
 
 const notificationScreenReducer = (state = [], action) => {
     switch (action.type) {
@@ -355,4 +382,4 @@ const editInfoScreenReducer = (state = [], action) => {
 }
 
 
-export default reducer = combineReducers({ settingReducer, homeReducer, kycReducer, kyc1ScreenReducer, kyc2ScreenReducer, phoneVerificationReducer, termsReducer, pdpaReducer, kycVerifyReducer, passcodeCreationReducer, unlockReducer, dashboardScreenReducer, notificationScreenReducer, depositScreenReducer, personalInformationScreenReducer, transferOutScreenReducer, transferOutScanScreenReducer, scanBillReducer, personalInfoReducer, contactListReducer, requestScreenReducer, fulfillRequestScreenReducer, notificationfulfillRequestScreenReducer, withdrawScreenReducer, analyticScreenReducer, resetPinReducer, themeReducer, editInfoScreenReducer, loginScreenReducer, registrationReducer, companyInformationReducer });
+export default reducer = combineReducers({ settingReducer, homeReducer, kycReducer, kyc1ScreenReducer, kyc2ScreenReducer, phoneVerificationReducer, termsReducer, pdpaReducer, kycVerifyReducer, passcodeCreationReducer, unlockReducer, dashboardScreenReducer, notificationScreenReducer, depositScreenReducer, personalInformationScreenReducer, transferOutScreenReducer, transferOutScanScreenReducer, scanBillReducer, personalInfoReducer, contactListReducer, requestScreenReducer, fulfillRequestScreenReducer, notificationfulfillRequestScreenReducer, withdrawScreenReducer, analyticScreenReducer, resetPinReducer, themeReducer, editInfoScreenReducer, loginScreenReducer, registrationReducer, companyInformationReducer, newsScreenReducer, eventScreenReducer });

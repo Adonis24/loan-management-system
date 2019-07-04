@@ -42,7 +42,7 @@ class InfoNewsScreen extends React.PureComponent {
                     {/* <View style={{ alignItems: 'flex-start' }}>
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
                     </View> */}
-                    <View style={{ position: 'absolute', top:0,  left: 0, right: 0, justifyContent: 'flex-start' }}>
+                    <View style={{ position: 'absolute', top: 0, left: 0, right: 0, justifyContent: 'flex-start' }}>
                         <Image source={require('../assets/images/economy.png')} style={{ height: Layout.window.height * 0.3, width: Layout.window.width }} resizeMode={'cover'} />
                     </View>
                 </View>
@@ -84,13 +84,10 @@ class InfoNewsScreen extends React.PureComponent {
 function mapStateToProps(state) {
     return {
 
-
-
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(InfoNewsScreen)

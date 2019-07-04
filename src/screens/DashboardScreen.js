@@ -34,6 +34,7 @@ class DashboardScreen extends React.PureComponent {
     };
 
     componentDidMount() {
+        this.props.initiateDashboardScreen()
         this.props.navigation.navigate('PopupScore')
     }
     render() {
@@ -382,7 +383,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-
+        initiateDashboardScreen: () => dispatch(actionCreator.initiateDashboardScreen())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreen)
