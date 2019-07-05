@@ -11,7 +11,8 @@ import {
     Dimensions,
     TextInput,
     AsyncStorage,
-    ImageBackground
+    ImageBackground,
+    FlatList
 
 
 } from 'react-native';
@@ -34,8 +35,8 @@ class InfoNewsListScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
-    nav = (screen) => {
-        this.props.navigation.navigate(screen)
+    nav = (screen,item) => {
+        this.props.navigation.navigate(screen,{item})
     }
 
     async componentDidMount() {
@@ -69,10 +70,10 @@ class InfoNewsListScreen extends React.PureComponent {
                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
                         <Tabs tabBarBackgroundColor={'#fff'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
                             <Tab heading="Latest">
-                                <Latest nav={this.nav} />
+                                <Latest nav={this.nav} newsArray={this.props.newsArray} />
                             </Tab>
                             <Tab heading="Popular">
-                                <Popular nav={this.nav} />
+                                <Popular nav={this.nav} newsArray={this.props.newsArray}  />
                             </Tab>
                         </Tabs>
                     </View>
@@ -92,15 +93,10 @@ class Latest extends React.PureComponent {
                         keyExtractor={(item, index) => index.toString()}
                         numColumns={2}
                         renderItem={({ item }) => (
-                            <TouchableOpacity onPress={() => this.props.nav('InfoNews')}>
-                                <Image source={{ uri: item.imageUrl }} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
+                            <TouchableOpacity onPress={() => this.props.nav('InfoNews',item)}>
+                                <Image source={{ uri: item.picture }} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10 }} resizeMode={'cover'} />
                             </TouchableOpacity>
-                            // <TouchableOpacity onPress={() => this.props.nav('InfoNews')}>
-                            //     <Image source={require('../assets/images/news1.png')} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
-                            // </TouchableOpacity>
-                            // <TouchableOpacity onPress={() => this.props.nav('InfoNews')}>
-                            //     <Image source={require('../assets/images/news1.png')} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
-                            // </TouchableOpacity>
+
                         )} />
                 }
             </ScrollView>
@@ -118,16 +114,10 @@ class Popular extends React.PureComponent {
                         keyExtractor={(item, index) => index.toString()}
                         numColumns={2}
                         renderItem={({ item }) => (
-                            <TouchableOpacity onPress={() => this.props.nav('InfoNews')}>
-                                {item.title}
-                                <Image source={{ uri: item.imageUrl }} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
+                            <TouchableOpacity onPress={() => this.props.nav('InfoNews',item)}>
+                                <Image source={{ uri: item.picture }} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10 }} resizeMode={'cover'} />
                             </TouchableOpacity>
-                            // <TouchableOpacity onPress={() => this.props.nav('InfoNews')}>
-                            //     <Image source={require('../assets/images/news1.png')} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
-                            // </TouchableOpacity>
-                            // <TouchableOpacity onPress={() => this.props.nav('InfoNews')}>
-                            //     <Image source={require('../assets/images/news1.png')} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
-                            // </TouchableOpacity>
+
                         )} />
                 }
             </ScrollView>
