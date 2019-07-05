@@ -11,7 +11,8 @@ import {
     Dimensions,
     TextInput,
     AsyncStorage,
-    ImageBackground
+    ImageBackground,
+    FlatList
 
 
 } from 'react-native';
@@ -32,8 +33,11 @@ class HandbookListScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
-    nav = (screen) => {
-        this.props.navigation.navigate(screen)
+    nav = (screen, item) => {
+        this.props.navigation.navigate(screen, { item })
+    }
+    async componentDidMount() {
+        await this.props.initiateHandbooks()
     }
     render() {
         return (
@@ -64,7 +68,7 @@ class HandbookListScreen extends React.PureComponent {
                         <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
                             <Tabs tabBarBackgroundColor={'#fff'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
                                 <Tab heading="Latest">
-                                    <Latest nav={this.nav} />
+                                    <Latest nav={this.nav} handbooksArray={this.props.handbooksArray} />
                                 </Tab>
                                 <Tab heading="Popular">
                                     <Popular nav={this.nav} />
@@ -83,7 +87,30 @@ class Latest extends React.PureComponent {
     render() {
         return (
             <ScrollView style={{ padding: 20 }}>
-                <TouchableOpacity onPress={() => this.props.nav('Handbook')} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
+                {this.props.handbooksArray &&
+                    <FlatList
+                        data={this.props.handbooksArray}
+                        keyExtractor={(item, index) => index.toString()}
+                        numColumns={2}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity onPress={() => this.props.nav('Handbook', item)} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
+                                <Image source={{ uri: item.picture }} style={{ flex: 1, height: Layout.window.height * 0.25, width: undefined, }} resizeMode={'cover'} />
+                                <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
+                                    <Text style={[styles.textDefault, { fontWeight: 'bold', textAlign: 'left', alignSelf: 'flex-start' }]}>{item.title}</Text>
+                                    <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start', fontWeight: 'bold', fontStyle: 'italic' }]}>{item.author}</Text>
+                                    <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>Good news to our beloved members. Join our talk with 15% discount</Text>
+                                    <View style={{ flexDirection: 'row', }}><Ionicons name='ios-star' color={'yellow'} size={24} /><Ionicons name='ios-star' color={'yellow'} size={24} /><Ionicons name='ios-star' color={'yellow'} size={24} />
+                                        <Text style={[styles.caption, { color: 'blue', alignSelf: 'flex-start', margin: 5, textAlign: 'left' }]}>50 review</Text>
+                                    </View>
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <TouchableOpacity style={{ margin: 5, padding: 5, borderWidth: 1, borderColor: 'blue', borderRadius: 5 }} onPress={() => this.props.nav(Handbook)}><Text>View</Text></TouchableOpacity>
+                                        <TouchableOpacity style={{ margin: 5, padding: 5, borderWidth: 1, borderColor: 'blue', borderRadius: 5 }} onPress={() => this.props.nav(Handbook)}><Text>Buy</Text></TouchableOpacity>
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                        )} />
+                }
+                {/* <TouchableOpacity onPress={() => this.props.nav('Handbook')} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
                     <Image source={require('../assets/images/business.png')} style={{ flex: 1, height: Layout.window.height * 0.25, width: undefined, }} resizeMode={'cover'} />
                     <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
                         <Text style={[styles.textDefault, { fontWeight: 'bold', textAlign: 'left', alignSelf: 'flex-start' }]}>Range : Why Generalists Triumph in a Specialized World</Text>
@@ -127,7 +154,7 @@ class Latest extends React.PureComponent {
                             <TouchableOpacity style={{ margin: 5, padding: 5, borderWidth: 1, borderColor: 'blue', borderRadius: 5 }} onPress={() => this.props.nav(Handbook)}><Text>Buy</Text></TouchableOpacity>
                         </View>
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </ScrollView>
         )
     }
@@ -191,14 +218,12 @@ class Popular extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-
-
-
+        handbooksArray: state.handbookScreenReducer.handbooksArray
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
+        initiateHandbooks: () => dispatch(actionCreator.initiateHandbooks())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HandbookListScreen)

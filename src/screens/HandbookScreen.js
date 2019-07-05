@@ -34,6 +34,7 @@ class HandbookScreen extends React.PureComponent {
     };
 
     render() {
+        const item = this.props.navigation.getParam('item', 'NA')
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -60,10 +61,10 @@ class HandbookScreen extends React.PureComponent {
                     </View>
                     <View style={{ flex: 4, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                         <View onPress={() => this.props.nav('Handbook')} style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
-                            <Image source={require('../assets/images/business.png')} style={{ flex: 1, height: Layout.window.height * 0.25, width: undefined, }} resizeMode={'cover'} />
+                            <Image source={{ uri: item.picture }} style={{ flex: 1, height: Layout.window.height * 0.25, width: undefined, }} resizeMode={'cover'} />
                             <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
-                                <Text style={[styles.textDefault, { fontWeight: 'bold', textAlign: 'left', alignSelf: 'flex-start' }]}>Range : Why Generalists Triumph in a Specialized World</Text>
-                                <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>David Epstein</Text>
+                                <Text style={[styles.textDefault, { fontWeight: 'bold', textAlign: 'left', alignSelf: 'flex-start' }]}>{item.title}</Text>
+                                <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start', fontWeight: 'bold', fontStyle: 'italic' }]}>{item.author}</Text>
                                 <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>Good news to our beloved members. Join our talk with 15% discount</Text>
                                 <View style={{ flexDirection: 'row', }}><Ionicons name='ios-star' color={'yellow'} size={24} /><Ionicons name='ios-star' color={'yellow'} size={24} /><Ionicons name='ios-star' color={'yellow'} size={24} />
                                     <Text style={[styles.caption, { color: 'blue', alignSelf: 'flex-start', margin: 5, textAlign: 'left' }]}>50 review</Text>
@@ -74,8 +75,10 @@ class HandbookScreen extends React.PureComponent {
                                 </View>
                             </View>
                         </View>
-                        <Text style={[styles.textDefault,{alignSelf:'flex-start',textAlign:'left'}]}>Summary</Text>
-                        <Text style={[styles.textDefault,{alignSelf:'flex-start',textAlign:'left'}]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mattis neque nisl, eget varius augue pellentesque sit amet. Morbi volutpat massa pretium turpis luctus, ut feugiat ante finibus. Proin hendrerit tellus nulla, sit amet posuere odio sagittis pharetra. Cras metus massa, mattis id lorem ut, ultricies blandit risus. Nunc placerat nunc enim. Pellentesque justo nisl, rutrum et fringilla blandit, blandit eu quam. Nam dignissim feugiat ipsum vel dignissim. Aliquam ultricies libero nec elit dictum, ac varius arcu faucibus. Duis sagittis lacus in turpis interdum, in sagittis mi fermentum.</Text>
+                        <View style={{ margin: 20 }}>
+                            <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left', marginBottom: 5, fontWeight: 'bold' }]}>Summary</Text>
+                            <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{item.summary}</Text>
+                        </View>
                     </View>
                 </View>
             </View>
