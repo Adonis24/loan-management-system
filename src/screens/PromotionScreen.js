@@ -28,12 +28,16 @@ import styles from '../styles/styles'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class InfoNewsScreen extends React.PureComponent {
+class PromotionScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
+    componentDidMount() {
+
+    }
     render() {
         const item = this.props.navigation.getParam('item', 'NA')
+        console.log(`dapat item : ${JSON.stringify(item)}`)
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -57,8 +61,8 @@ class InfoNewsScreen extends React.PureComponent {
                         </View>
                         <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
                             <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 2.5, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
-                                <Image source={require('../assets/icon/event.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
-                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Event</Text>
+                                <Image source={require('../assets/icon/wallet.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
+                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Promotion</Text>
                             </View>
                         </View>
                     </View>
@@ -69,29 +73,6 @@ class InfoNewsScreen extends React.PureComponent {
                                 <Text style={[styles.subTitle, { margin: 15, alignSelf: 'flex-start' }]}>{item.title}</Text>
                                 <ScrollView>
                                     <Text style={[styles.textDefault, { margin: 10 }]}>{item.content}</Text>
-                                    <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                        <Text style={[styles.textDefault, { margin: 5, }]}>Venue:</Text>
-                                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.venue}</Text>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                        <Text style={[styles.textDefault, { margin: 5, }]}>Date:</Text>
-                                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.date}</Text>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                        <Text style={[styles.textDefault, { margin: 5, }]}>Time:</Text>
-                                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.time}</Text>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                        <Text style={[styles.textDefault, { margin: 5, }]}>Price:</Text>
-                                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>RM{item.price}</Text>
-                                        <Text style={[styles.textDefault, { margin: 5, color: 'lawngreen' }]}>(Member price: RM40.00)</Text>
-                                    </View>
-                                    <TouchableOpacity style={{ width: Layout.window.width * 0.4, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', margin: 10 }}>
-                                        <Text style={[styles.textDefault,]}>Join now</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', margin: 10 }}>
-                                        <Text style={[styles.textDefault,]}>Remind me later</Text>
-                                    </TouchableOpacity>
                                 </ScrollView>
                             </View>
                         </View>
@@ -108,13 +89,10 @@ class InfoNewsScreen extends React.PureComponent {
 function mapStateToProps(state) {
     return {
 
-
-
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(InfoNewsScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(PromotionScreen)

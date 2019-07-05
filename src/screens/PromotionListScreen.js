@@ -93,7 +93,7 @@ class Latest extends React.PureComponent {
                         keyExtractor={(item, index) => index.toString()}
                         numColumns={2}
                         renderItem={({ item }) => (
-                            <TouchableOpacity onPress={() => this.props.nav('InfoNews', item)} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
+                            <TouchableOpacity onPress={() => this.props.nav('Promotion', item)} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
                                 <Image source={{ uri: item.picture }} style={{ flex: 1, height: Layout.window.height * 0.1, width: undefined, }} resizeMode={'cover'} />
                                 <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
                                     <Text style={[styles.textDefault, { fontWeight: 'bold', textAlign: 'left', alignSelf: 'flex-start' }]}>{item.title}</Text>

@@ -85,6 +85,14 @@ const handbookScreenReducer = (state = [], action) => {
     }
 }
 
+const einfosScreenReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_EINFO':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const settingReducer = (state = [], action) => {
@@ -400,4 +408,4 @@ const editInfoScreenReducer = (state = [], action) => {
 }
 
 
-export default reducer = combineReducers({ settingReducer, homeReducer, kycReducer, kyc1ScreenReducer, kyc2ScreenReducer, phoneVerificationReducer, termsReducer, pdpaReducer, kycVerifyReducer, passcodeCreationReducer, unlockReducer, dashboardScreenReducer, notificationScreenReducer, depositScreenReducer, personalInformationScreenReducer, transferOutScreenReducer, transferOutScanScreenReducer, scanBillReducer, personalInfoReducer, contactListReducer, requestScreenReducer, fulfillRequestScreenReducer, notificationfulfillRequestScreenReducer, withdrawScreenReducer, analyticScreenReducer, resetPinReducer, themeReducer, editInfoScreenReducer, loginScreenReducer, registrationReducer, companyInformationReducer, newsScreenReducer, eventScreenReducer, promotionScreenReducer, handbookScreenReducer });
+export default reducer = combineReducers({ settingReducer, homeReducer, kycReducer, kyc1ScreenReducer, kyc2ScreenReducer, phoneVerificationReducer, termsReducer, pdpaReducer, kycVerifyReducer, passcodeCreationReducer, unlockReducer, dashboardScreenReducer, notificationScreenReducer, depositScreenReducer, personalInformationScreenReducer, transferOutScreenReducer, transferOutScanScreenReducer, scanBillReducer, personalInfoReducer, contactListReducer, requestScreenReducer, fulfillRequestScreenReducer, notificationfulfillRequestScreenReducer, withdrawScreenReducer, analyticScreenReducer, resetPinReducer, themeReducer, editInfoScreenReducer, loginScreenReducer, registrationReducer, companyInformationReducer, newsScreenReducer, eventScreenReducer, promotionScreenReducer, handbookScreenReducer, einfosScreenReducer });

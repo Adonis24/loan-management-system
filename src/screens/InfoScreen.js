@@ -38,8 +38,12 @@ class InfoScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
-
-
+    nav = (screen, item) => {
+        this.props.navigation.navigate(screen, { item })
+    }
+    async componentDidMount() {
+        await this.props.intitiateEinfo()
+    }
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -66,8 +70,8 @@ class InfoScreen extends React.PureComponent {
                         </View>
                     </View>
                     {/** Content */}
-                    <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center',padding:10 }}>
-                        <Accordion style={{alignSelf:'stretch'}} dataArray={dataArray} icon="add" expandedIcon="remove" />
+                    <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center', padding: 10 }}>
+                        <Accordion style={{ alignSelf: 'stretch' }} dataArray={this.props.einfosArray} icon="add" expandedIcon="remove" />
                     </View>
                 </View>
             </View>
@@ -78,14 +82,12 @@ class InfoScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-
-
-
+        einfosArray: state.einfosScreenReducer.einfosArray
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
+        intitiateEinfo: () => dispatch(actionCreator.intitiateEinfo())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(InfoScreen)
