@@ -14,7 +14,6 @@ export const newsApi = () => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
-
     const access_credential = 'api'
     fetch(`${apiUrl}api/news/view`, {
       method: 'POST',

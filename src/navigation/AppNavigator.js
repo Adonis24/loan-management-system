@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native'
 import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 
 import AuthenticationNavigator from './AuthenticationNavigator'
- import RegistrationNavigator from './RegistrationNavigator'
+import RegistrationNavigator from './RegistrationNavigator'
 import MainTabNavigator from './MainTabNavigator';
 // import LoggedInTabNavigator from './LoggedInTabNavigator';
 // import LoggedInTabNavigator1 from './LoggedInTabNavigator1';
@@ -13,7 +13,7 @@ import MainTabNavigator from './MainTabNavigator';
 const LoggedIn = createSwitchNavigator({
 
   Authentication: AuthenticationNavigator,
-  Registration:RegistrationNavigator,
+  Registration: RegistrationNavigator,
   Main: MainTabNavigator,
   // LoggedIn:LoggedInTabNavigator1 ,
   //LoggedIn1:LoggedInTabNavigator1  
@@ -25,12 +25,12 @@ const LoggedIn = createSwitchNavigator({
 const Authentication = createSwitchNavigator({
 
   Authentication: AuthenticationNavigator,
-  Registration:RegistrationNavigator,
-  Main: RegistrationNavigator,
+  Registration: RegistrationNavigator,
+  Main: MainTabNavigator,
   // LoggedIn:LoggedInTabNavigator1 ,
   //LoggedIn1:LoggedInTabNavigator1  
 }, {
-    initialRouteName: 'Main'
+    initialRouteName: 'Authentication'
     //initialRouteName: checkLogin()=='ada'?'LoggedIn':'Authentication'    
   });
 

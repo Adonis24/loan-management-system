@@ -16,16 +16,16 @@ import DeclarationDigitalSignScreen from '../screens/DeclarationDigitalSignScree
 import CompanyInfoIntroScreen from '../screens/CompanyInfoIntroScreen';
 
 const RegistrationStack = createStackNavigator({
-    // Intro: IntroScreen,
-    // SignUpPersonal: SignupPersonalScreen,
-    // SignUpOtp: SignupOtpScreen,
-    // SignUpOtpEnter: SignupOtpEnterScreen,
-    // SignUpSuccess: SignupSuccessScreen,
+    Intro: IntroScreen,
+    SignUpPersonal: SignupPersonalScreen,
+    SignUpOtp: SignupOtpScreen,
+    SignUpOtpEnter: SignupOtpEnterScreen,
+    SignUpSuccess: SignupSuccessScreen,
     CompanyInfoIntro:CompanyInfoIntroScreen,
     CompanyInformation: CompanyInformationScreen,
     ContactPerson: ContactPersonScreen,
-    // DetailsConnectedParties: DetailsOfConnectedPartiesScreen,
-    // DeclarationDigitalSign: DeclarationDigitalSignScreen,
+    DetailsConnectedParties: DetailsOfConnectedPartiesScreen,
+    DeclarationDigitalSign: DeclarationDigitalSignScreen,
 });
 
 

@@ -96,7 +96,6 @@ class Latest extends React.PureComponent {
                             <TouchableOpacity onPress={() => this.props.nav('InfoNews',item)}>
                                 <Image source={{ uri: item.picture }} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10 }} resizeMode={'cover'} />
                             </TouchableOpacity>
-
                         )} />
                 }
             </ScrollView>
@@ -117,7 +116,6 @@ class Popular extends React.PureComponent {
                             <TouchableOpacity onPress={() => this.props.nav('InfoNews',item)}>
                                 <Image source={{ uri: item.picture }} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10 }} resizeMode={'cover'} />
                             </TouchableOpacity>
-
                         )} />
                 }
             </ScrollView>
