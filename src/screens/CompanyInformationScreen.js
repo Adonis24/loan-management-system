@@ -50,32 +50,31 @@ class CompanyInformationScreen extends React.PureComponent {
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>REGISTRATION</Text>
-                            <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} />
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Company Information</Text>
+                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY INFORMATION</Text>
+                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company Name'} value={this.props.companyName} onChangeText={(companyName) => this.props.setCompanyInfo({ companyName })} style={{ marginLeft: 5 }} />
+                                <TextInput placeholder={'Company/Firm Name'} value={this.props.companyName} onChangeText={(companyName) => this.props.setCompanyInfo({ companyName })} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Registration Number'} value={this.props.regNumber} onChangeText={(regNumber) => this.props.setCompanyInfo({ regNumber })} style={{ marginLeft: 5 }} />
+                                <TextInput placeholder={'Company/Firm Registration Number'} value={this.props.regNumber} onChangeText={(regNumber) => this.props.setCompanyInfo({ regNumber })} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company Address'} value={this.props.compAddress} onChangeText={(compAddress) => this.props.setCompanyInfo({ compAddress })} style={{ marginLeft: 5 }} />
+                                <TextInput placeholder={'Registration Date'} value={this.props.compAddress} onChangeText={(compAddress) => this.props.setCompanyInfo({ compAddress })} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Business Activities'} value={this.props.businessActivities} onChangeText={(businessActivities) => this.props.setCompanyInfo({ businessActivities })} style={{ marginLeft: 5 }} />
+                                <TextInput placeholder={'Main Business Activities'} value={this.props.businessActivities} onChangeText={(businessActivities) => this.props.setCompanyInfo({ businessActivities })} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Phone Number'} value={this.props.phoneNumber} onChangeText={(phoneNumber) => this.props.setCompanyInfo({ phoneNumber })} style={{ marginLeft: 5 }} />
+                                <TextInput placeholder={'Company/Firm Phone Number'} value={this.props.phoneNumber} onChangeText={(phoneNumber) => this.props.setCompanyInfo({ phoneNumber })} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Email Address'} value={this.props.emailAddress} onChangeText={(emailAddress) => this.props.setCompanyInfo({ emailAddress })} style={{ marginLeft: 5 }} />
+                                <TextInput placeholder={'Company/Firm Email Address'} value={this.props.emailAddress} onChangeText={(emailAddress) => this.props.setCompanyInfo({ emailAddress })} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
                                 <TouchableOpacity onPress={() => this.companyInformation()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>

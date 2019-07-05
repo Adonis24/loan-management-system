@@ -26,7 +26,7 @@ const Authentication = createSwitchNavigator({
 
   Authentication: AuthenticationNavigator,
   Registration:RegistrationNavigator,
-  Main: MainTabNavigator,
+  Main: RegistrationNavigator,
   // LoggedIn:LoggedInTabNavigator1 ,
   //LoggedIn1:LoggedInTabNavigator1  
 }, {
