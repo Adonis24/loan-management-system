@@ -24,7 +24,7 @@ import Layout from '../constants/Layout'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 //import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
-import { Tabs, Tab,ScrollableTab, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab } from 'native-base'
+import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab } from 'native-base'
 
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
@@ -33,9 +33,14 @@ class InfoEventListScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
-    nav=(screen)=>{
+    nav = (screen) => {
         this.props.navigation.navigate(screen)
     }
+
+    async componentDidMount() {
+        await this.props.initiateNews()
+    }
+
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -62,7 +67,7 @@ class InfoEventListScreen extends React.PureComponent {
                         </View>
                     </View>
                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                        <Tabs tabBarBackgroundColor={'#fff'} tabContainerStyle={{backgroundColor:'#fff'}} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={()=> <ScrollableTab />}>
+                        <Tabs tabBarBackgroundColor={'#fff'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
                             <Tab heading="Latest">
                                 <Latest nav={this.nav} />
                             </Tab>
@@ -81,16 +86,24 @@ class InfoEventListScreen extends React.PureComponent {
 class Latest extends React.PureComponent {
     render() {
         return (
-            <ScrollView>                
-                <TouchableOpacity  onPress={() => this.props.nav('InfoEvent')}>
-                    <Image source={require('../assets/images/news1.png')} style={{ width:Layout.window.width-10,height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
-                </TouchableOpacity>
-                <TouchableOpacity  onPress={() => this.props.nav('InfoEvent')}>
-                    <Image source={require('../assets/images/news1.png')} style={{ width:Layout.window.width-10,height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
-                </TouchableOpacity>
-                <TouchableOpacity  onPress={() => this.props.nav('InfoEvent')}>
-                    <Image source={require('../assets/images/news1.png')} style={{ width:Layout.window.width-10,height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
-                </TouchableOpacity>               
+            <ScrollView style={{ padding: 20 }}>
+                {this.props.eventArray &&
+                    <FlatList
+                        data={this.props.eventArray}
+                        keyExtractor={(item, index) => index.toString()}
+                        numColumns={2}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity onPress={() => this.props.nav('InfoEvent')}>
+                                <Image source={require('../assets/images/news1.png')} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
+                            </TouchableOpacity>
+                            // <TouchableOpacity onPress={() => this.props.nav('InfoEvent')}>
+                            //     <Image source={require('../assets/images/news1.png')} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
+                            // </TouchableOpacity>
+                            // <TouchableOpacity onPress={() => this.props.nav('InfoEvent')}>
+                            //     <Image source={require('../assets/images/news1.png')} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
+                            // </TouchableOpacity>
+                        )} />
+                }
             </ScrollView>
         )
     }
@@ -99,16 +112,24 @@ class Latest extends React.PureComponent {
 class Popular extends React.PureComponent {
     render() {
         return (
-            <ScrollView>                
-                <TouchableOpacity  onPress={() => this.props.nav('InfoEvent')}>
-                    <Image source={require('../assets/images/news1.png')} style={{ width:Layout.window.width-10,height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
-                </TouchableOpacity>
-                <TouchableOpacity  onPress={() => this.props.nav('InfoEvent')}>
-                    <Image source={require('../assets/images/news1.png')} style={{ width:Layout.window.width-10,height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
-                </TouchableOpacity>
-                <TouchableOpacity  onPress={() => this.props.nav('InfoEvent')}>
-                    <Image source={require('../assets/images/news1.png')} style={{ width:Layout.window.width-10,height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
-                </TouchableOpacity>               
+            <ScrollView style={{ padding: 20 }}>
+                {this.props.eventArray &&
+                    <FlatList
+                        data={this.props.eventArray}
+                        keyExtractor={(item, index) => index.toString()}
+                        numColumns={2}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity onPress={() => this.props.nav('InfoEvent')}>
+                                <Image source={require('../assets/images/news1.png')} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
+                            </TouchableOpacity>
+                            // <TouchableOpacity onPress={() => this.props.nav('InfoEvent')}>
+                            //     <Image source={require('../assets/images/news1.png')} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
+                            // </TouchableOpacity>
+                            // <TouchableOpacity onPress={() => this.props.nav('InfoEvent')}>
+                            //     <Image source={require('../assets/images/news1.png')} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, width: null, margin: 10 }} resizeMode={'cover'} />
+                            // </TouchableOpacity>
+                        )} />
+                }
             </ScrollView>
         )
     }
@@ -119,13 +140,13 @@ class Popular extends React.PureComponent {
 function mapStateToProps(state) {
     return {
 
-
+        eventArray: state.eventScreenReducer.eventArray
 
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
+        initiateEvent: () => dispatch(actionCreator.initiateEvent())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(InfoEventListScreen)

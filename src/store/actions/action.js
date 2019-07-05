@@ -8,7 +8,7 @@ import * as SecureStore from 'expo-secure-store'
 
 
 import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI } from './apiRegistration'
-import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail } from './apiDashboard'
+import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -27,7 +27,44 @@ export const register = () => {
     return async (dispatch, getState) => {
         const { token_type, access_token, name, email, password, password_confirmation } = await getState().registrationReducer
         console.log(`ada ke tak register info : ${JSON.stringify(getState().registrationReducer)}`)
-        await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation))
+
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const errorArray = []
+        const errorColor = []
+
+        if (name == undefined || name == '') {
+            errorArray.push({ title: "name", desc: "No Name" })
+            errorColor.push("Name")
+        }
+        if (email == undefined || email == '') {
+            errorArray.push({ title: "email", desc: "No e-mail" })
+            errorColor.push("E-mail")
+        } else if (reg.test(email) === false) {
+            errorArray.push("Not e-mail format")
+            errorColor.push("E-mail")
+        }
+        if (password == undefined || password == '') {
+            errorArray.push({ title: "password", desc: "No password" })
+            errorColor.push("Password")
+        } else if (password.length < 6) {
+            errorArray.push({ title: "password", desc: "Wrong password" })
+            errorColor.push("Password")
+        }
+        if (password_confirmation == undefined || password_confirmation == '') {
+            errorArray.push({ title: "confirm password", desc: "No Confirm password" })
+            errorColor.push("Confirm Password")
+        } else if (password_confirmation.length < 6) {
+            errorArray.push({ title: "confirm password", desc: "Wrong password" })
+            errorColor.push("Confirm Password")
+        } else if (password_confirmation.length != password) {
+            errorArray.push({ title: "confirm password", desc: "Password not same" })
+            errorColor.push("Confirm Password")
+        }
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_REGISTER', payload: { error: errorArray, errorColor } })
+        } else {
+            await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation))
+        }
     }
 }
 
@@ -48,8 +85,8 @@ export const verifyPhone = () => {
 
 export const getPersonalToken = () => {
     return async (dispatch, getState) => {
-      
-      
+
+
         const username = getState().registrationReducer.email
         const password = getState().registrationReducer.password
 
@@ -87,16 +124,14 @@ export const login = () => {
         }
 
         if (errorArray.length > 0) {
-
             //dispatch({ type: 'SET_INDICATOR', payload: { displayIndicator: false } })
-           
-            dispatch({ type: 'SET_LOGIN', payload: { loggedIn: false,error: errorArray, errorColor } })
+            dispatch({ type: 'SET_LOGIN', payload: { loggedIn: false, error: errorArray, errorColor } })
 
         } else {
             dispatch(requestPersonalToken('login', username, password))
         }
 
-        
+
     }
 }
 
@@ -144,8 +179,23 @@ export const declarationSign = () => {
     }
 }
 
+export const initiateDashboardScreen = () => {
+    return async (dispatch, getState) => {
+        // await dispatch(knowledgeHubApi())
+    }
+}
 
+export const initiateNews = () => {
+    return async (dispatch, getState) => {
+        await dispatch(newsApi())
+    }
+}
 
+export const initiateEvent = () => {
+    return async (dispatch, getState) => {
+        await dispatch(eventApi())
+    }
+}
 
 
 
@@ -374,7 +424,7 @@ export const logout = () => {
         //await AsyncStorage.removeItem('personalToken')
         console.log(`nak delete`)
         await SecureStore.deleteItemAsync('personalToken').then(console.log(`delete berjaya`)).catch(error => console.log(`tak berjaya : ${error}`))
-    dispatch({type:'SET_LOGIN',payload:{proceed:false}})
+        dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
     }
 }
 
@@ -706,13 +756,13 @@ export const approve = () => {
 //////////////////////////////////////////////////////
 
 
-export const initiateDashboardScreen = () => {
+// export const initiateDashboardScreen = () => {
 
-    return async (dispatch, getState) => {
-        await dispatch(userInfo())
+//     return async (dispatch, getState) => {
+//         await dispatch(userInfo())
 
-    }
-}
+//     }
+// }
 
 export const initiateLatestTransaction = () => {
     return (dispatch, getState) => {
