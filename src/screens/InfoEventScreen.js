@@ -33,6 +33,7 @@ class InfoNewsScreen extends React.PureComponent {
         header: null,
     };
     render() {
+        const item = this.props.navigation.getParam('item', 'NA')
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -42,8 +43,8 @@ class InfoNewsScreen extends React.PureComponent {
                     {/* <View style={{ alignItems: 'flex-start' }}>
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
                     </View> */}
-                    <View style={{ position: 'absolute', top:0, left: 0, right: 0, justifyContent: 'flex-start' }}>
-                        <Image source={require('../assets/images/business.png')} style={{ height: Layout.window.height * 0.3, width: Layout.window.width }} resizeMode={'cover'} />
+                    <View style={{ position: 'absolute', top: 0, left: 0, right: 0, justifyContent: 'flex-start' }}>
+                        <Image source={{ uri: item.picture }} style={{ height: Layout.window.height * 0.3, width: Layout.window.width }} resizeMode={'cover'} />
                     </View>
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>

@@ -39,29 +39,28 @@ export const newsApi = () => {
 
 export const eventApi = () => {
   return async (dispatch, getState) => {
-    // const { token_type, access_token } = JSON.parse(personalToken)
-    // fetch(`${apiUrl}api/news`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Accept': 'application/json',
-    //     'Authorization': token_type + ' ' + access_token
-    //   },
-    // }).then((response) => response.json())
-    //   .then(async (responseJson) => {
-    // const { responseJson } = responseJson.data
-    // await console.log(`NEWS API  ${JSON.stringify(responseJson)}`)
-    const eventArray = [{ eventType: 'Latest', title: 'Creative Economy: A new business trend', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
-    { eventType: 'Latest', title: 'How to use social media to expand business', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
-    { eventType: 'Latest', title: 'Business Digital Marketing Trends for 2019', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
-    { eventType: 'Popular', title: 'Creative Economy: Anew business trend', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
-    { eventType: 'Popular', title: 'How to use social media to expand business', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
-    { eventType: 'Popular', title: 'Business Digital Marketing Trends for 2019', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' }]
-    await dispatch({ type: 'SET_EVENT', payload: { eventArray } })
-    // })
-    // .catch((error) => {
-    //   console.log('Error News Api : ' + error);
-    // });
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/events/view`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const eventArray = await responseJson.data
+        await console.log(`EVENT API  ${JSON.stringify(eventArray)}`)
+
+        await dispatch({ type: 'SET_EVENT', payload: { eventArray } })
+      })
+      .catch((error) => {
+        console.log('Error Event Api : ' + error);
+      });
   }
 }
 
