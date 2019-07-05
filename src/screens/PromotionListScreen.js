@@ -11,8 +11,8 @@ import {
     Dimensions,
     TextInput,
     AsyncStorage,
-    ImageBackground
-
+    ImageBackground,
+    FlatList
 
 } from 'react-native';
 
@@ -32,9 +32,13 @@ class PromotionListScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
-    nav = (screen) => {
-        this.props.navigation.navigate(screen)
+    nav = (screen, item) => {
+        this.props.navigation.navigate(screen, { item })
     }
+    async componentDidMount() {
+        await this.props.initiatePromotion()
+    }
+
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -64,7 +68,7 @@ class PromotionListScreen extends React.PureComponent {
                         <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
                             <Tabs tabBarBackgroundColor={'#fff'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
                                 <Tab heading="Latest">
-                                    <Latest nav={this.nav} />
+                                    <Latest nav={this.nav} promotionArray={this.props.promotionArray} />
                                 </Tab>
                                 <Tab heading="Popular">
                                     <Popular nav={this.nav} />
@@ -83,7 +87,18 @@ class Latest extends React.PureComponent {
     render() {
         return (
             <ScrollView style={{ padding: 20 }}>
-                <TouchableOpacity onPress={() => this.props.nav('InfoNews')} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
+                {this.props.promotionArray &&
+                    <FlatList
+                        data={this.props.promotionArray}
+                        keyExtractor={(item, index) => index.toString()}
+                        numColumns={2}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity onPress={() => this.props.nav('InfoNews', item)}>
+                                <Image source={{ uri: item.picture }} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10 }} resizeMode={'cover'} />
+                            </TouchableOpacity>
+                        )} />
+                }
+                {/* <TouchableOpacity onPress={() => this.props.nav('InfoNews')} style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
                     <Image source={require('../assets/images/business.png')} style={{ flex: 1, height: Layout.window.height * 0.1, width: undefined, }} resizeMode={'cover'} />
                     <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
                         <Text style={[styles.textDefault, { fontWeight: 'bold', textAlign: 'left', alignSelf: 'flex-start' }]}>Business Writing Talk</Text>
@@ -109,7 +124,7 @@ class Latest extends React.PureComponent {
                         <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>Good news to our beloved members. Join our talk with 15% discount</Text>
                         <Text style={[styles.caption, { color: 'orange', alignSelf: 'flex-start', margin: 5, textAlign: 'left' }]}>Join now !</Text>
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </ScrollView>
         )
     }
@@ -155,14 +170,12 @@ class Popular extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-
-
-
+        promotionArray: state.promotionScreenReducer.promotionArray
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
+        initiatePromotion: () => dispatch(actionCreator.initiatePromotion())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(PromotionListScreen)

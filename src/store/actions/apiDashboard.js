@@ -65,6 +65,33 @@ export const eventApi = () => {
 }
 
 
+export const promotionApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/promotions/view`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const promotionArray = await responseJson.data
+        await console.log(`PROMOTION API  ${JSON.stringify(promotionArray)}`)
+
+        await dispatch({ type: 'SET_PROMOTION', payload: { promotionArray } })
+      })
+      .catch((error) => {
+        console.log('Error Promotion Api : ' + error);
+      });
+  }
+}
+
 
 
 
