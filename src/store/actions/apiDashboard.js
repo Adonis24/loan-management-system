@@ -8,33 +8,33 @@ import moment from 'moment'
 // import { sendNotification } from './action';
 // Amplify.configure(aws_exports);///
 
-const apiUrl = 'https://staging.lunawallet.com/'
+const apiUrl = 'https://staging.bizxcess.my/'
 
 export const newsApi = () => {
   return async (dispatch, getState) => {
-    // const { token_type, access_token } = JSON.parse(personalToken)
-    // fetch(`${apiUrl}api/news`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Accept': 'application/json',
-    //     'Authorization': token_type + ' ' + access_token
-    //   },
-    // }).then((response) => response.json())
-    //   .then(async (responseJson) => {
-    // const { responseJson } = responseJson.data
-    // await console.log(`NEWS API  ${JSON.stringify(responseJson)}`)
-    const newsArray = [{ newsType: 'Latest', title: 'Creative Economy: A new business trend', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
-    { newsType: 'Latest', title: 'How to use social media to expand business', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
-    { newsType: 'Latest', title: 'Business Digital Marketing Trends for 2019', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
-    { newsType: 'Popular', title: 'Creative Economy: Anew business trend', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
-    { newsType: 'Popular', title: 'How to use social media to expand business', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' },
-    { newsType: 'Popular', title: 'Business Digital Marketing Trends for 2019', imageUrl: 'https://picsum.photos/200/300', content: 'Lorem ipsum' }]
-    await dispatch({ type: 'SET_NEWS', payload: { newsArray } })
-    // })
-    // .catch((error) => {
-    //   console.log('Error News Api : ' + error);
-    // });
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/news/view`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const newsArray = await responseJson.data
+        await console.log(`NEWS API  ${JSON.stringify(newsArray)}`)
+
+        await dispatch({ type: 'SET_NEWS', payload: { newsArray } })
+      })
+      .catch((error) => {
+        console.log('Error News Api : ' + error);
+      });
   }
 }
 

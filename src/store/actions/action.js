@@ -56,13 +56,14 @@ export const register = () => {
         } else if (password_confirmation.length < 6) {
             errorArray.push({ title: "confirm password", desc: "Wrong password" })
             errorColor.push("Confirm Password")
-        } else if (password_confirmation.length != password) {
+        } else if (password_confirmation != password) {
             errorArray.push({ title: "confirm password", desc: "Password not same" })
             errorColor.push("Confirm Password")
         }
         if (errorArray.length > 0) {
             dispatch({ type: 'SET_REGISTER', payload: { error: errorArray, errorColor } })
         } else {
+            console.log('takde error dalam screen and boleh proceed utk register')
             await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation))
         }
     }
