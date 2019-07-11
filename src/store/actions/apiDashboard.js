@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native'
-import {  Notifications } from 'expo'
+import { Notifications } from 'expo'
 import * as SecureStore from 'expo-secure-store'
 
 // import Amplify, { Auth,Storage } from 'aws-amplify';
@@ -160,28 +160,56 @@ export const applyLoanApi = () => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
     const access_credential = 'api'
+    const { proposal, income_tax, loan_amount, estimate_time, payment_method } = getState().loanApplicationReducer
     fetch(`${apiUrl}api/loan/addInformation`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
-      }, body: JSON.stringify({ access_credential }),
+      }, body: JSON.stringify({ proposal, income_tax, loan_amount, estimate_time, payment_method, access_credential }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
 
         console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
         const einfosArray = await responseJson.data
-        await console.log(`EINFO API  ${JSON.stringify(einfosArray)}`)
+        await console.log(`Loan Application  ${JSON.stringify(einfosArray)}`)
 
-        await dispatch({ type: 'SET_EINFO', payload: { einfosArray } })
+
       })
       .catch((error) => {
-        console.log('Error E-info Api : ' + error);
+        console.log('Error Loan Application : ' + error);
       });
   }
 }
 
+
+export const getUserInfoApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/user`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const eventArray = await responseJson.data
+        await console.log(`USER  ${JSON.stringify(eventArray)}`)
+
+        //await dispatch({ type: 'SET_EVENT', payload: { eventArray } })
+      })
+      .catch((error) => {
+        console.log('Error Event Api : ' + error);
+      });
+  }
+}
 
 
 
