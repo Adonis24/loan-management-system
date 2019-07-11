@@ -1,5 +1,11 @@
 import { AsyncStorage } from 'react-native'
-import { SecureStore, Notifications } from 'expo'
+import {  Notifications } from 'expo'
+import * as SecureStore from 'expo-secure-store'
+
+// import Amplify, { Auth,Storage } from 'aws-amplify';
+// import aws_exports from '../../aws-exports';
+// Amplify.configure(aws_exports);///
+
 import moment from 'moment'
 
 
@@ -8,7 +14,7 @@ import moment from 'moment'
 // import { sendNotification } from './action';
 // Amplify.configure(aws_exports);///
 
-const apiUrl = 'https://staging.bizxcess.my/'
+const apiUrl = 'https://staging.bxcess.my/'
 
 export const newsApi = () => {
   return async (dispatch, getState) => {
@@ -146,6 +152,39 @@ export const einfoApi = () => {
       });
   }
 }
+
+
+
+export const applyLoanApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/loan/addInformation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const einfosArray = await responseJson.data
+        await console.log(`EINFO API  ${JSON.stringify(einfosArray)}`)
+
+        await dispatch({ type: 'SET_EINFO', payload: { einfosArray } })
+      })
+      .catch((error) => {
+        console.log('Error E-info Api : ' + error);
+      });
+  }
+}
+
+
+
+
 
 
 

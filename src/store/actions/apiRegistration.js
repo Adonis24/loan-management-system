@@ -5,7 +5,7 @@ import {
   Alert
 } from 'react-native';
 
-const apiUrl = 'https://staging.bizxcess.my/'
+const apiUrl = 'https://staging.bxcess.my/'
 
 export const requestToken = () => {
   return (dispatch, getState) => {
@@ -113,7 +113,7 @@ export const registerOTPApi = (token_type, access_token, country_code, mobile_no
   }
 }
 
-export const verifyPhoneApi = (token_type, access_token, country_code, mobile_no, code) => {
+export const verifyPhoneApi =  (token_type, access_token, country_code, mobile_no, code) => {
   return async (dispatch, getState) => {
     fetch(`${apiUrl}api/verifyPhoneData`, {
       method: 'POST',
@@ -126,7 +126,7 @@ export const verifyPhoneApi = (token_type, access_token, country_code, mobile_no
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
-        await dispatch({ type: 'VERIFY_OTP', payload: { status } })
+        await dispatch({ type: 'VERIFY_OTP', payload: { phoneVerified:status } })
         await console.log(`verifyPhone  ${JSON.stringify(responseJson)}`)
       })
       .catch((error) => {
@@ -135,10 +135,8 @@ export const verifyPhoneApi = (token_type, access_token, country_code, mobile_no
   }
 }
 
-
 export const companyInfoAPI = (companyName, regNumber, compAddress, businessActivities, phoneNumber, emailAddress) => {
   return async (dispatch, getState) => {
-
   }
 }
 

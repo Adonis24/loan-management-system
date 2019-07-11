@@ -54,11 +54,11 @@ class CompanyInformationScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company/Firm Name'} value={this.props.companyName} onChangeText={(companyName) => this.props.setCompanyInfo({ companyName })} style={{ marginLeft: 5 }} />
+                                <TextInput placeholder={'Company Name'} value={this.props.companyName} onChangeText={(companyName) => this.props.setCompanyInfo({ companyName })} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company/Firm Registration Number'} value={this.props.regNumber} onChangeText={(regNumber) => this.props.setCompanyInfo({ regNumber })} style={{ marginLeft: 5 }} />
+                                <TextInput placeholder={'Company Registration Number'} value={this.props.regNumber} onChangeText={(regNumber) => this.props.setCompanyInfo({ regNumber })} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
@@ -70,11 +70,11 @@ class CompanyInformationScreen extends React.PureComponent {
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company/Firm Phone Number'} value={this.props.phoneNumber} onChangeText={(phoneNumber) => this.props.setCompanyInfo({ phoneNumber })} style={{ marginLeft: 5 }} />
+                                <TextInput placeholder={'Company Phone Number'} value={this.props.phoneNumber} onChangeText={(phoneNumber) => this.props.setCompanyInfo({ phoneNumber })} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company/Firm Email Address'} value={this.props.emailAddress} onChangeText={(emailAddress) => this.props.setCompanyInfo({ emailAddress })} style={{ marginLeft: 5 }} />
+                                <TextInput placeholder={'Company Email Address'} value={this.props.emailAddress} onChangeText={(emailAddress) => this.props.setCompanyInfo({ emailAddress })} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
                                 <TouchableOpacity onPress={() => this.companyInformation()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>

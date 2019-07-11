@@ -14,19 +14,32 @@ import ContactPersonScreen from '../screens/ContactPersonScreen';
 import DetailsOfConnectedPartiesScreen from '../screens/DetailsOfConnectedPartiesScreen';
 import DeclarationDigitalSignScreen from '../screens/DeclarationDigitalSignScreen';
 import CompanyInfoIntroScreen from '../screens/CompanyInfoIntroScreen';
+import DocUploadScreen from '../screens/DocUploadScreen';
 
-const RegistrationStack = createStackNavigator({
+const Registration = createStackNavigator({
     Intro: IntroScreen,
     SignUpPersonal: SignupPersonalScreen,
     SignUpOtp: SignupOtpScreen,
     SignUpOtpEnter: SignupOtpEnterScreen,
     SignUpSuccess: SignupSuccessScreen,
     CompanyInfoIntro:CompanyInfoIntroScreen,
-    CompanyInformation: CompanyInformationScreen,
-    ContactPerson: ContactPersonScreen,
+     CompanyInformation: CompanyInformationScreen,
+     ContactPerson: ContactPersonScreen,
     DetailsConnectedParties: DetailsOfConnectedPartiesScreen,
     DeclarationDigitalSign: DeclarationDigitalSignScreen,
 });
+
+const RegistrationStack = createStackNavigator(
+    {
+      Main: { screen: Registration, },
+      DocUpload: { screen: DocUploadScreen, },
+      
+    },
+    {
+      mode: 'modal',
+      headerMode: 'none',
+    },
+  );
 
 
 export default RegistrationStack

@@ -23,20 +23,35 @@ import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-//import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
+import { Picker } from 'native-base'
 
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 import { Button } from 'native-base';
 
-class ContactPersonScreen extends React.PureComponent {
+class LoanApplicationScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
 
+    constructor(props) {
+        super(props)
+        this.state = { selected: null }
+    }
+
     async ContactPerson() {
         this.props.contactPerson()
         this.props.navigation.navigate('DetailsConnectedParties')
+    }
+
+    applyLoan(){
+        this.props.applyLoan()
+    }
+
+    onValueChange(value) {
+        this.setState({
+            selected: value
+        });
     }
 
     render() {
@@ -51,40 +66,57 @@ class ContactPersonScreen extends React.PureComponent {
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>CONTACT PERSON</Text>
+                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>LOAN APPLICATION</Text>
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.fullName} onChangeText={(fullName) => this.props.setContactPerson({ fullName })} placeholder={'Full Name '} value={this.props.contactFullName} style={{ marginLeft: 5 }} />
-                            </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.myKad} onChangeText={(myKad) => this.props.setContactPerson({ myKad })} placeholder={'MyKad Number'} value={this.props.contactMykadNumber} style={{ marginLeft: 5 }} />
-                            </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.position} onChangeText={(position) => this.props.setContactPerson({ position })} placeholder={'Position'} value={this.props.contactPosition} style={{ marginLeft: 5 }} />
-                            </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
-                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.phoneNum} onChangeText={(phoneNum) => this.props.setContactPerson({ phoneNum })} placeholder={'Phone Number'} value={this.props.contactPhoneNumber} style={{ marginLeft: 5 }} />
-                            </View>
-                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12 }]}>
-                                <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12, fontWeight: 'bold' }]}>Upload documents needed:</Text> Copies of identity cards of the owners or partners / copies of the identity cards of all the shareholders and directors / official registration document, business official documents.
-                            </Text>
+                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12, fontWeight: 'bold' }]}>Upload Business Proposal/Plan:</Text>
+
                             <View style={{ width: Layout.window.width * 0.7, height: Layout.window.height * 0.06, borderWidth: 1, alignSelf: 'center', borderRadius: 15, borderColor: 'darkblue', margin: 10, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
-                                <TouchableOpacity onPress={()=>this.props.navigation.navigate('DocUpload')} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', margin: 10, backgroundColor: 'gainsboro' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('DocUpload')} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', margin: 10, backgroundColor: 'gainsboro' }}>
                                     <Text style={[styles.caption, { color: '#000', fontSize: 10 }]}>Upload documents</Text>
                                 </TouchableOpacity>
                             </View>
-                            <View style={{ flexDirection: 'row' }}>
-                                <CheckBox />
-                                <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12 }]}>
-                                    I have agree on terms and condition
-                                </Text>
+
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                                <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <TextInput value={this.props.taxNo} onChangeText={(taxNo) => this.props.setContactPerson({ taxNo })} placeholder={'Income Tax Number (LHDN)'} style={{ marginLeft: 5 }} />
+                            </View>
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <TextInput value={this.props.loanAmount} onChangeText={(loanAmount) => this.props.setContactPerson({ loanAmount })} placeholder={'Loan Amount Required (RM)'} style={{ marginLeft: 5 }} />
+                            </View>
+                            <View style={{ alignSelf: 'center', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, justifyContent: 'center', alignItems: 'center' }}>
+                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <Text>Estimated time to payback</Text>
+                                <Picker
+                                    note
+                                    mode="dropdown"
+                                    style={{ width: 120 }}
+                                    selectedValue={this.state.selected}
+                                    onValueChange={this.onValueChange.bind(this)}
+                                >
+                                    <Picker.Item label="Select" value="key0" />
+                                    <Picker.Item label="3" value="key1" />
+                                    <Picker.Item label="6" value="key1" />
+                                    <Picker.Item label="9" value="key1" />
+                                    <Picker.Item label="12" value="key1" />
+                                </Picker>
+                            </View>
+                            <View style={{ alignSelf: 'center', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20, justifyContent: 'center', alignItems: 'center' }}>
+                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <Text>Payment method</Text>
+                                <Picker
+                                    note
+                                    mode="dropdown"
+                                    style={{ width: 120 }}
+                                    selectedValue={this.state.selected}
+                                    onValueChange={this.onValueChange.bind(this)}
+                                >
+                                    <Picker.Item label="Select" value="key0" />
+                                    <Picker.Item label="Check" value="key1" />
+                                </Picker>
                             </View>
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.ContactPerson()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                <TouchableOpacity onPress={() => this.applyLoan()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Next</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
@@ -111,7 +143,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         setContactPerson: (value) => dispatch({ type: 'SET_CONTACT_PERSON', payload: { ...value } }),
-        contactPerson: () => dispatch(actionCreator.contactPerson())
+        applyLoan: () => dispatch(actionCreator.applyLoan())
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ContactPersonScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(LoanApplicationScreen)
