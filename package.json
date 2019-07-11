@@ -14,6 +14,7 @@
   "dependencies": {
     "@expo/samples": "~3.0.0",
     "@expo/vector-icons": "^10.0.1",
+    "aws-amplify": "^1.1.30",
     "expo": "^33.0.7",
     "expo-asset": "^5.0.0",
     "expo-constants": "~5.0.1",

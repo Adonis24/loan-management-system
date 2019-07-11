@@ -39,9 +39,9 @@ class ProfileScreen extends React.PureComponent {
                     <View style={{ alignItems: 'flex-end' }}>
                         <Image source={require('../assets/images/topRight.png')} style={{ width: 80, height: 93 }} />
                     </View>
-                    <View style={{ alignItems: 'flex-start' }}>
+                    {/* <View style={{ alignItems: 'flex-start' }}>
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
-                    </View>
+                    </View> */}
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     {/* HEADER */}
@@ -61,29 +61,42 @@ class ProfileScreen extends React.PureComponent {
                     {/* CONTENT AREA */}
                     <View style={{ flex: 4 }}>
                         <ScrollView>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
-                                <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>FINTECH CAPITAL</Text>
-                                <Text style={[styles.subTitle, { margin: 5 }]}>SSM NO :123456789</Text>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { margin: 5, }]}>Business Model</Text>
-                                    <Text style={[styles.textDefault, { margin: 5, }]}>F {'&'} B Industry</Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { margin: 5, }]}>Years doing Business</Text>
-                                    <Text style={[styles.textDefault, { margin: 5, }]}>5 years</Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { margin: 5, }]}>Number of employee</Text>
-                                    <Text style={[styles.textDefault, { margin: 5, }]}>40 people</Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { margin: 5, }]}>Scoring</Text>
-                                    <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-                                        <Text style={[styles.textDefault, { margin: 5, }]}>48</Text>
+                            <View style={[{ backgroundColor: 'transparent', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, paddingTop: 10, marginBottom: 20 }]}>
+                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', flex: 1 }}>
+                                    <View style={{ flexDirection: 'row', flex: 1, margin: 10 }}>
+                                        <Image source={require('../assets/images/profile.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, }} resizeMode={'contain'} />
+                                    </View>
+                                    <View style={{ flex: 3, flexDirection: 'column', alignSelf: 'flex-start' }}>
+                                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', color: '#4A90E2' }]}>FINTECH CAPITAL</Text>
+                                        <Text style={[styles.subTitle, { margin: 5 }]}>SSM NO :123456789</Text>
                                     </View>
                                 </View>
+                                <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
+                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Business Model</Text>
+                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, fontWeight: 'bold', flex: 1, textAlign: 'center' }]}>F {'&'} B Industry</Text>
+                                    <Ionicons name='ios-add' size={26} color='lawngreen' style={{ margin: 5 }} />
+                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Add Info</Text>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
+                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Years doing Business</Text>
+                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, fontWeight: 'bold', flex: 1, textAlign: 'center' }]}>5 years +</Text>
+                                    <Ionicons name='ios-add' size={26} color='lawngreen' style={{ margin: 5 }} />
+                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Add Other Business</Text>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
+                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Number of employee</Text>
+                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, fontWeight: 'bold', flex: 1, textAlign: 'center' }]}>40 people</Text>
+                                    <Ionicons name='ios-add' size={26} color='lawngreen' style={{ margin: 5 }} />
+                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Add Loan Details</Text>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
+                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Scoring</Text>
+                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, fontWeight: 'bold', flex: 1, textAlign: 'center' }]}>48</Text>
+                                    <Ionicons name='ios-close' size={26} color='red' style={{ margin: 5 }} />
+                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Make Report</Text>
+                                </View>
                             </View>
-                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10 }]}>Scoring meter {'&'} chart</Text>
+                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, fontSize: 12, fontWeight: 'bold' }]}>Scoring meter {'&'} chart</Text>
                             <View style={{ flex: 1, flexDirection: 'row', margin: 20, justifyContent: 'center' }}>
                                 <Text style={[styles.textDefault, { margin: 20, }]}>Poor</Text>
                                 <Text style={[styles.textDefault, { margin: 20, }]}>Fair</Text>
@@ -91,7 +104,7 @@ class ProfileScreen extends React.PureComponent {
                             </View>
                             <View style={{ width: Layout.window.width * 0.6, height: Layout.window.height * 0.03, borderWidth: 2, alignSelf: 'center', borderRadius: 15, borderRightColor: 'green', borderLeftColor: 'red' }}>
                             </View>
-                            <View style={{ width: Layout.window.width * 0.5, height: Layout.window.height * 0.03, borderWidth: 2, alignSelf: 'center', borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
+                            {/* <View style={{ width: Layout.window.width * 0.5, height: Layout.window.height * 0.03, borderWidth: 2, alignSelf: 'center', borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
                                 <Text style={[styles.caption]}>Excellent : 71 - 85</Text>
                             </View>
                             <View style={{ width: Layout.window.width * 0.5, height: Layout.window.height * 0.03, borderWidth: 2, alignSelf: 'center', borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
@@ -105,7 +118,7 @@ class ProfileScreen extends React.PureComponent {
                             </View>
                             <View style={{ width: Layout.window.width * 0.5, height: Layout.window.height * 0.03, borderWidth: 2, alignSelf: 'center', borderRadius: 15, borderColor: 'red', margin: 10 }}>
                                 <Text style={[styles.caption]}>Excellent : 1 - 15</Text>
-                            </View>
+                            </View> */}
                         </ScrollView>
 
                     </View>

@@ -55,7 +55,7 @@ class DashboardScreen extends React.PureComponent {
                             <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
                         </View>
                         <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                            <View style={[{ backgroundColor: '#fff', flex: 1, marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2 }]}>
+                            <View style={[{ backgroundColor: '#fff', flex: 1, marginLeft: Layout.window.width / 1.8, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2 }]}>
                                 {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoNews')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                     <Image source={require('../assets/images/e-info.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-info</Text>
@@ -64,10 +64,10 @@ class DashboardScreen extends React.PureComponent {
                                     <Image source={require('../assets/images/profile.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={()=>this.props.navigation.navigate("MyAccount")} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                {/* <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                     <Image source={require('../assets/images/EDA.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>My Account</Text>
-                                </TouchableOpacity>
+                                </View> */}
                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('MyScore')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                     <Image source={require('../assets/images/my-score.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>My Score</Text>
@@ -93,17 +93,9 @@ class DashboardScreen extends React.PureComponent {
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                     <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                            <Image source={require('../assets/images/EDA.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                            <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>My Account</Text>
-                                        </View>
-                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/images/e-scoring.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                            <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Scorring</Text>
+                                            <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Financing</Text>
                                         </View>
-                                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('LoanApplication')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                            <Image source={require('../assets/icon/crm.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                            <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Loan</Text>
-                                        </TouchableOpacity>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/images/grant.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Grant</Text>
@@ -112,6 +104,14 @@ class DashboardScreen extends React.PureComponent {
                                             <Image source={require('../assets/icon/rfq.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Loan Calculator</Text>
                                         </View>
+                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            {/* <Image source={require('../assets/images/EDA.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
+                                            <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>My Account</Text> */}
+                                        </View>
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('LoanApplication')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            {/* <Image source={require('../assets/icon/crm.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
+                                            <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Loan</Text> */}
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                             </View>
@@ -171,6 +171,8 @@ class DashboardScreen extends React.PureComponent {
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Certification</Text>
                                         </View>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                            <Image source={require('../assets/images/ecommerce.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
+                                            <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Quiz</Text>
                                         </View>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                         </View>
