@@ -72,7 +72,6 @@ class DashboardScreen extends React.PureComponent {
                                     <Image source={require('../assets/images/my-score.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>My Score</Text>
                                 </TouchableOpacity>
-
                             </View>
                         </View>
                     </View>
