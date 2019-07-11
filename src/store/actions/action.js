@@ -2,9 +2,9 @@ import { AsyncStorage } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 
 
-// import Amplify, { Auth, Storage } from 'aws-amplify';
-// import aws_exports from '../../aws-exports';
-// Amplify.configure(aws_exports);///
+import Amplify, { Auth, Storage } from 'aws-amplify';
+import aws_exports from '../../aws-exports';
+Amplify.configure(aws_exports);///
 
 
 import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI } from './apiRegistration'
@@ -65,6 +65,7 @@ export const register = () => {
         } else {
             console.log('takde error dalam screen and boleh proceed utk register')
             await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation))
+            await dispatch(getPersonalToken())
         }
     }
 }
@@ -72,7 +73,21 @@ export const register = () => {
 export const registerOTP = () => {
     return async (dispatch, getState) => {
         const { token_type, access_token, countryCode, phone } = getState().registrationReducer
-        await dispatch(registerOTPApi(token_type, access_token, countryCode, phone))
+
+        const errorArray = []
+        const errorColor = []
+
+        if (phone == undefined || phone == '') {
+            errorArray.push({ title: "phone", desc: 'Please enter phone no' })
+            errorColor.push('phone')
+        }
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_REGISTER', payload: { error: errorArray, errorColor,proceed:false } })
+        } else {
+            dispatch({ type: 'SET_REGISTER', payload: { proceed:true } })
+            console.log('takde error dalam screen and boleh proceed utk register')
+            await dispatch(registerOTPApi(token_type, access_token, '+6', phone))
+        }
     }
 }
 
@@ -86,13 +101,9 @@ export const verifyPhone = () => {
 
 export const getPersonalToken = () => {
     return async (dispatch, getState) => {
-
-
         const username = getState().registrationReducer.email
         const password = getState().registrationReducer.password
-
         console.log(`action : ${username} dan ${password}`)
-
         await dispatch(requestPersonalToken('register', username, password))
     }
 }
@@ -515,45 +526,18 @@ export const initiatePersonalInformationScreen = () => {
     }
 }
 
-export const saveDocument = () => {
-
-
+export const saveDocument = (result) => {
+    const { type, uri, name, size } = result
     return async (dispatch, getState) => {
-        const { email } = await getState().kycReducer || 'email'
-        const uri1 = await getState().kycVerifyReducer.doc1.uri
-        const uri2 = await getState().kycVerifyReducer.doc2.uri || uri1
-
-
-        //const docName = await fbs.child(uid+'_doc.jpg');
-        const blob1 = await urlToBlob(uri1)
-        //const uploadTask=docName.put(file)  
-        const fileName1 = 'document/' + email + '1.jpg';
-
-        await Storage.put(fileName1, blob1, {
-            contentType: 'image/jpeg'
+        const blob1 = await urlToBlob(uri)
+        const fileName1 = 'test';
+        await Storage.put(name, blob1, {
+            contentType: 'application/pdf'
         }).then(data => {
-            //this.props.savePicture(data.key,kidId)
-            //dispatch({type:'SET_KYC_VERIFY',payload:{toVerify:{docUri1:data.key},proceed:false}})
             console.log('save')
+            console.log(JSON.stringify(data))
         })
             .catch(err => console.log(err))
-
-
-        //const docName = await fbs.child(uid+'_doc.jpg');
-        const blob2 = await urlToBlob(uri2)
-        //const uploadTask=docName.put(file)  
-        const fileName2 = 'document/' + email + '+2.jpg';
-
-        await Storage.put(fileName2, blob2, {
-            contentType: 'image/jpeg'
-        }).then(data => {
-            //this.props.savePicture(data.key,kidId)
-            dispatch({ type: 'SET_KYC_VERIFY', payload: { toVerify: { docUri1: fileName1, docUri2: fileName2 }, proceed: true } })
-            console.log('save')
-        })
-            .catch(err => console.log(err))
-
-
     }
 }
 
@@ -766,6 +750,9 @@ export const approve = () => {
 
     }
 }
+
+
+
 
 
 

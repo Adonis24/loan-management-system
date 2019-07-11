@@ -49,7 +49,7 @@ class SignupPersonalScreen extends React.PureComponent {
 
     render() {
         this.props.proceed && this.props.navigation.navigate('SignUpOtp')
-        
+
         var emailBorderColor = '#5a83c2'
         const emailError = this.props.errorColor && this.props.errorColor.find(test => test == "E-mail")
         if (emailError == "E-mail") {
@@ -58,7 +58,7 @@ class SignupPersonalScreen extends React.PureComponent {
 
         var nameBorderColor = '#5a83c2'
         const nameError = this.props.error && this.props.errorColor.find(test => test == "Name")
-        if (nameError == "E-mail") {
+        if (nameError == "Name") {
             nameBorderColor = '#d94498'
         }
 
@@ -139,7 +139,11 @@ function mapStateToProps(state) {
         email: state.registrationReducer.email,
         password: state.registrationReducer.password,
         password_confirmation: state.registrationReducer.password_confirmation,
-        proceed: state.registrationReducer.proceed
+       
+        proceed: state.registrationReducer.proceed,
+
+        error: state.registrationReducer.error,
+        errorColor: state.registrationReducer.errorColor,
     }
 }
 function mapDispatchToProps(dispatch) {

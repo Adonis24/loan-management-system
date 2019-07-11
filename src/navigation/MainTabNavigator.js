@@ -37,6 +37,7 @@ import HandbookListScreen from '../screens/HandbookListScreen';
 import HandbookScreen from '../screens/HandbookScreen';
 import MyScoreScreen from '../screens/MyScoreScreen';
 import PromotionScreen from '../screens/PromotionScreen';
+import LoanApplicationScreen from '../screens/LoanApplicationScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -58,7 +59,8 @@ const DashboardStackWithModal = createStackNavigator(
     Promotion: { screen: PromotionScreen },
     HandbookList: { screen: HandbookListScreen, },
     Handbook: { screen: HandbookScreen, },
-    MyScore: { screen: MyScoreScreen, }
+    MyScore: { screen: MyScoreScreen, },
+    LoanApplication: { screen: LoanApplicationScreen, }
   },
   {
     mode: 'modal',

@@ -36,24 +36,41 @@ class SignupOtpScreen extends React.PureComponent {
 
     async registerOTP() {
         await this.props.registerOTP()
-        await this.props.navigation.navigate('SignUpOtpEnter')
+        await this.props.proceed && this.props.navigation.navigate('SignUpOtpEnter')
     }
 
-    componentDidMount(){
-        this.props.getPersonalToken()
+    componentDidMount() {
+        //this.props.getPersonalToken()
     }
 
     render() {
+
+        var phoneBorderColor = '#5a83c2'
+        const phoneError = this.props.error && this.props.errorColor.find(test => test == "phone")
+        if (phoneError == "phone") {
+            phoneBorderColor = '#d94498'
+        }
+
+
+        var phoneErrorHint = ''
+        this.props.error && this.props.error.map(err => {
+            if (err.title == 'phone') { phoneErrorHint = err.desc }
+        })
+
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                    <View style={{ alignItems: 'flex-start' }}><Image source={require('../assets/images/topLeft.png')} style={{ width: 79, height: 120 }} /></View>
-                    <View style={{ alignItems: 'flex-end' }}><Image source={require('../assets/images/bottomRight.png')} style={{ width: 106, height: 92 }} /></View>
+                    <View style={{ alignItems: 'flex-start' }}>
+                        <Image source={require('../assets/images/topLeft.png')} style={{ width: 79, height: 120 }} />
+                    </View>
+                    <View style={{ alignItems: 'flex-end' }}>
+                        <Image source={require('../assets/images/bottomRight.png')} style={{ width: 106, height: 92 }} />
+                    </View>
 
                 </View>
                 <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
-                <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                   
+                    <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>REGISTRATION</Text>
@@ -61,11 +78,11 @@ class SignupOtpScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>OTP Verification</Text>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/cc.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.countryCode} onChangeText={(countryCode) => this.props.setOTP({ countryCode })} placeholder={'Country Code'} style={{ marginLeft: 5 }} />
+                                <TextInput editable={false} value={this.props.countryCode} onChangeText={(countryCode) => this.props.setOTP({ countryCode })} placeholder={'+6'} style={{ marginLeft: 5 }} placeholderTextColor={'#000'} />
                             </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: phoneBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
                                 <Image source={require('../assets/images/mobile.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput keyboardType={'phone-pad'} value={this.props.phone} onChangeText={(phone) => this.props.setOTP({ phone })} placeholder={'Phone'} style={{ marginLeft: 5 }} />
+                                <TextInput keyboardType={'phone-pad'} value={this.props.phone} onChangeText={(phone) => this.props.setOTP({ phone })} placeholder={(phoneErrorHint.length > 0) ? phoneErrorHint : '012 345 6789'} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
                                 <TouchableOpacity onPress={() => this.registerOTP()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
@@ -88,6 +105,11 @@ function mapStateToProps(state) {
     return {
         countryCode: state.registrationReducer.countryCode,
         phone: state.registrationReducer.phone,
+
+        proceed: state.registrationReducer.proceed,
+
+        error: state.registrationReducer.error,
+        errorColor: state.registrationReducer.errorColor,
     }
 }
 function mapDispatchToProps(dispatch) {
@@ -95,7 +117,7 @@ function mapDispatchToProps(dispatch) {
         setOTP: (value) => dispatch({ type: 'SET_OTP', payload: { ...value } }),
         registerOTP: () => dispatch(actionCreator.registerOTP()),
         getPersonalToken: () => dispatch(actionCreator.getPersonalToken()),
-        
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignupOtpScreen)
