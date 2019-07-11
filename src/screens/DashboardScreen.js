@@ -35,7 +35,7 @@ class DashboardScreen extends React.PureComponent {
 
     componentDidMount() {
         this.props.initiateDashboardScreen()
-        this.props.navigation.navigate('PopupScore')
+        //this.props.navigation.navigate('PopupScore')
     }
     render() {
         return (
@@ -56,18 +56,10 @@ class DashboardScreen extends React.PureComponent {
                         </View>
                         <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
                             <View style={[{ backgroundColor: '#fff', flex: 1, marginLeft: Layout.window.width / 1.8, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2 }]}>
-                                {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoNews')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                    <Image source={require('../assets/images/e-info.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
-                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-info</Text>
-                                </TouchableOpacity> */}
                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }} >
                                     <Image source={require('../assets/images/profile.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
                                 </TouchableOpacity>
-                                {/* <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                    <Image source={require('../assets/images/EDA.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
-                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>My Account</Text>
-                                </View> */}
                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('MyScore')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                     <Image source={require('../assets/images/my-score.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>My Score</Text>
