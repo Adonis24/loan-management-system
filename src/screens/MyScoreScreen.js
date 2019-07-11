@@ -84,24 +84,24 @@ class Latest extends React.PureComponent {
         return (
             <ScrollView style={{ padding: 20 }}>
                 <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                        <Text style={[styles.textDefault, { margin: 5, }]}>Training :</Text>
-                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>43 points</Text>
-                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, alignSelf: 'center', borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
+                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
+                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Training                  :</Text>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12 }]}>43 points</Text>
+                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
                             <Text style={[styles.caption]}>Increase points</Text>
                         </View>
                     </View>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                        <Text style={[styles.textDefault, { margin: 5, }]}>Quiz :</Text>
-                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>56 points</Text>
-                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, alignSelf: 'flex-end', borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
+                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
+                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Quiz                         :</Text>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12 }]}>56 points</Text>
+                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
                             <Text style={[styles.caption]}>Increase points</Text>
                         </View>
                     </View>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                        <Text style={[styles.textDefault, { margin: 5, }]}>Aggregate test :</Text>
-                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>38 points</Text>
-                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, alignSelf: 'center', borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
+                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
+                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Aggregate test   :</Text>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12, alignSelf: 'center' }]}>38 points</Text>
+                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
                             <Text style={[styles.caption]}>Increase points</Text>
                         </View>
                     </View>
@@ -116,22 +116,39 @@ class Popular extends React.PureComponent {
         return (
             <ScrollView style={{ padding: 20 }}>
                 <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                        <Text style={[styles.textDefault, { margin: 5, }]}>Business Model</Text>
-                        <Text style={[styles.textDefault, { margin: 5, }]}>F {'&'} B Industry</Text>
+                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
+                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Last year income        :</Text>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12 }]}>43 points</Text>
+                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
+                            <Text style={[styles.caption]}>Increase points</Text>
+                        </View>
                     </View>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                        <Text style={[styles.textDefault, { margin: 5, }]}>Years doing Business</Text>
-                        <Text style={[styles.textDefault, { margin: 5, }]}>5 years</Text>
+                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
+                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Paid up capital            :</Text>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12 }]}>56 points</Text>
+                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
+                            <Text style={[styles.caption]}>Increase points</Text>
+                        </View>
                     </View>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                        <Text style={[styles.textDefault, { margin: 5, }]}>Number of employee</Text>
-                        <Text style={[styles.textDefault, { margin: 5, }]}>40 people</Text>
+                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
+                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Rejected profit/loss  :</Text>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12, alignSelf: 'center' }]}>38 points</Text>
+                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
+                            <Text style={[styles.caption]}>Increase points</Text>
+                        </View>
                     </View>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
-                        <Text style={[styles.textDefault, { margin: 5, }]}>Scoring</Text>
-                        <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-                            <Text style={[styles.textDefault, { margin: 5, }]}>48</Text>
+                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
+                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Collateral                      :</Text>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12, alignSelf: 'center' }]}>50 points</Text>
+                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
+                            <Text style={[styles.caption]}>Increase points</Text>
+                        </View>
+                    </View>
+                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
+                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Deposit/liquids         :</Text>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12, alignSelf: 'center' }]}>46 points</Text>
+                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
+                            <Text style={[styles.caption]}>Increase points</Text>
                         </View>
                     </View>
                 </View>
