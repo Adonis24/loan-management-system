@@ -38,6 +38,10 @@ import HandbookScreen from '../screens/HandbookScreen';
 import MyScoreScreen from '../screens/MyScoreScreen';
 import PromotionScreen from '../screens/PromotionScreen';
 import LoanApplicationScreen from '../screens/LoanApplicationScreen';
+import FinancingScreen from '../screens/FinancingScreen';
+import GrantScreen from '../screens/GrantScreen';
+import QuizScreen from '../screens/QuizScreen';
+import QuizAnswerScreen from '../screens/QuizAnswerScreen';
 import MyAccountScreen from '../screens/MyAccountScreen';
 import EcommerceScreen from '../screens/EcommerceScreen';
 
@@ -63,6 +67,10 @@ const DashboardStackWithModal = createStackNavigator(
     Handbook: { screen: HandbookScreen, },
     MyScore: { screen: MyScoreScreen, },
     LoanApplication: { screen: LoanApplicationScreen, },
+    Financing: { screen: FinancingScreen, },
+    Grant: { screen: GrantScreen, },
+    Quiz: { screen: QuizScreen, },
+    QuizAnswer: { screen: QuizAnswerScreen, },
     MyAccount: { screen: MyAccountScreen, },
     Ecommerce: { screen: EcommerceScreen, }
   },
