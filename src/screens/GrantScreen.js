@@ -61,31 +61,39 @@ class GrantScreen extends React.PureComponent {
                         </View>
                     </View>
                     <ScrollView style={{ padding: 20 }}>
-                        <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
-                            <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                                <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Training                  :</Text>
-                                <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12 }]}>43 points</Text>
-                                <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                                    <Text style={[styles.caption]}>Increase points</Text>
+                        <View style={{ flexDirection: 'row' }}>
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
+                                <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+                                <Text style={[styles.textDefault, { margin: 5 }]}>Soft Loan Schemes for Services Sector</Text>
+                                <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10, alignSelf: 'center' }}>
+                                    <Text style={[styles.caption]}>View</Text>
                                 </View>
                             </View>
-                            <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                                <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Quiz                         :</Text>
-                                <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12 }]}>56 points</Text>
-                                <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                                    <Text style={[styles.caption]}>Increase points</Text>
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
+                                <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+                                <Text style={[styles.textDefault, { margin: 5 }]}>SME Emergency Fund (SMEEF)</Text>
+                                <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10, alignSelf: 'center' }}>
+                                    <Text style={[styles.caption]}>View</Text>
                                 </View>
                             </View>
-                            <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                                <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Aggregate test   :</Text>
-                                <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12, alignSelf: 'center' }]}>38 points</Text>
-                                <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                                    <Text style={[styles.caption]}>Increase points</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row' }}>
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
+                                <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+                                <Text style={[styles.textDefault, { margin: 5 }]}>SME Emergency Fund (SMEEF)</Text>
+                                <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10, alignSelf: 'center' }}>
+                                    <Text style={[styles.caption]}>View</Text>
+                                </View>
+                            </View>
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
+                                <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+                                <Text style={[styles.textDefault, { margin: 5 }]}>Soft Loan Schemes for Services Sector</Text>
+                                <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10, alignSelf: 'center' }}>
+                                    <Text style={[styles.caption]}>View</Text>
                                 </View>
                             </View>
                         </View>
                     </ScrollView>
-
                 </View>
             </View>
 
