@@ -150,7 +150,7 @@ class DashboardScreen extends React.PureComponent {
                             </View>
 
                             {/*Development Hub */}
-                            <View style={{ margin: 5,paddingBottom:5, borderWidth:1, borderColor: 'lightgrey', borderStyle: 'dotted' }}>
+                            <View style={{ margin: 5,paddingBottom:5, borderWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
                                 <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Development Hub</Text>
                                         <Text style={styles.subTitle}>More ></Text>
