@@ -40,6 +40,8 @@ import PromotionScreen from '../screens/PromotionScreen';
 import LoanApplicationScreen from '../screens/LoanApplicationScreen';
 import FinancingScreen from '../screens/FinancingScreen';
 import GrantScreen from '../screens/GrantScreen';
+import QuizScreen from '../screens/QuizScreen';
+import QuizAnswerScreen from '../screens/QuizAnswerScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -65,6 +67,8 @@ const DashboardStackWithModal = createStackNavigator(
     LoanApplication: { screen: LoanApplicationScreen, },
     Financing: { screen: FinancingScreen, },
     Grant: { screen: GrantScreen, },
+    Quiz: { screen: QuizScreen, },
+    QuizAnswer: { screen: QuizAnswerScreen, },
   },
   {
     mode: 'modal',
