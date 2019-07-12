@@ -32,6 +32,10 @@ class ProfileScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
+
+    componentDidMount(){
+        this.props.initiateCompanyInfo()
+    }
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -67,8 +71,8 @@ class ProfileScreen extends React.PureComponent {
                                         <Image source={require('../assets/images/profile.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                     </View>
                                     <View style={{ flex: 3, flexDirection: 'column', alignSelf: 'flex-start' }}>
-                                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', color: '#4A90E2' }]}>FINTECH CAPITAL</Text>
-                                        <Text style={[styles.subTitle, { margin: 5 }]}>SSM NO :123456789</Text>
+                                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', color: '#4A90E2' }]}>{this.props.companyName}</Text>
+                                        <Text style={[styles.subTitle, { margin: 5 }]}>SSM NO :{this.props.companyRegNo}</Text>
                                     </View>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', margin: 10 }}>
@@ -119,6 +123,15 @@ class ProfileScreen extends React.PureComponent {
                             <View style={{ width: Layout.window.width * 0.5, height: Layout.window.height * 0.03, borderWidth: 2, alignSelf: 'center', borderRadius: 15, borderColor: 'red', margin: 10 }}>
                                 <Text style={[styles.caption]}>Excellent : 1 - 15</Text>
                             </View> */}
+                        
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('LoanApplication')} style={{margin:10,padding:10,borderRadius:5,borderWidth:1,borderColor:'blue'}}>
+                            <Text>Apply Loan</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>console.log('Consultation')} style={{margin:10,padding:10,borderRadius:5,borderWidth:1,borderColor:'blue'}}>
+                            <Text>Get Consultation</Text>
+                        </TouchableOpacity>
+
+
                         </ScrollView>
 
                     </View>
@@ -133,14 +146,13 @@ class ProfileScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-
-
-
+        companyName: state.bizInfoReducer.name,
+        companyRegNo: state.bizInfoReducer.reg_no,
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
+        initiateCompanyInfo: () => dispatch(actionCreator.initiateCompanyInfo())
     }
 }
 

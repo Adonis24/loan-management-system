@@ -82,7 +82,6 @@ class DeclarationDigitalSignScreen extends React.PureComponent {
                                     <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Back</Text>
                                 </TouchableOpacity>
                             </View>
-
                         </View>
                     </View>
                 </View>

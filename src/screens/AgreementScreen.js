@@ -29,15 +29,15 @@ import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 import { Button } from 'native-base';
 
-class ContactPersonScreen extends React.PureComponent {
+class AgreementScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
 
     async ContactPerson() {
-        //await this.props.companyInfo()
+        await this.props.companyInfo()
         //this.props.contactPerson()
-        this.props.navigation.navigate('Agreement')
+        //this.props.navigation.navigate('DetailsConnectedParties')
     }
 
     render() {
@@ -52,33 +52,25 @@ class ContactPersonScreen extends React.PureComponent {
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>CONTACT PERSON</Text>
+                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Terms and Agreement</Text>
+                            
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.fullName} onChangeText={(fullName) => this.props.setContactPerson({ fullName })} placeholder={'Full Name '} value={this.props.contactFullName} style={{ marginLeft: 5 }} />
+                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
+                            
+                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
+                            
+                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
+                            
+                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
+                            
+                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
+                            
+                            <View style={{ flexDirection: 'row' }}>
+                                <CheckBox />
+                                <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12 }]}>
+                                    I have agree on terms and condition
+                                </Text>
                             </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.myKad} onChangeText={(myKad) => this.props.setContactPerson({ myKad })} placeholder={'MyKad Number'} value={this.props.contactMykadNumber} style={{ marginLeft: 5 }} />
-                            </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.position} onChangeText={(position) => this.props.setContactPerson({ position })} placeholder={'Position'} value={this.props.contactPosition} style={{ marginLeft: 5 }} />
-                            </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
-                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.phoneNum} onChangeText={(phoneNum) => this.props.setContactPerson({ phoneNum })} placeholder={'Phone Number'} value={this.props.contactPhoneNumber} style={{ marginLeft: 5 }} />
-                            </View>
-                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12 }]}>
-                                <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12, fontWeight: 'bold' }]}>Upload documents needed:</Text> Scanned copy of identity card
-                            </Text>
-                            <View style={{ alignSelf: 'stretch', borderWidth: 1,  borderRadius: 15, borderColor: 'darkblue', margin: 10, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('DocUpload')} style={{ padding:10, borderRadius: 5, justifyContent: 'center', backgroundColor: 'gainsboro',margin:10 }}>
-                                    <Text style={[styles.caption, { color: '#000', fontSize: 10 }]}>Select</Text>
-                                </TouchableOpacity>
-                            </View>
-                          
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
                                 <TouchableOpacity onPress={() => this.ContactPerson()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Next</Text>
@@ -111,4 +103,4 @@ function mapDispatchToProps(dispatch) {
         companyInfo: () => dispatch(actionCreator.companyInfo()),
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ContactPersonScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(AgreementScreen)

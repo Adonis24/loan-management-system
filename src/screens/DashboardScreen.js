@@ -35,7 +35,7 @@ class DashboardScreen extends React.PureComponent {
 
     componentDidMount() {
         this.props.initiateDashboardScreen()
-        this.props.navigation.navigate('PopupScore')
+        //this.props.navigation.navigate('PopupScore')
     }
     render() {
         return (
@@ -54,25 +54,25 @@ class DashboardScreen extends React.PureComponent {
                         <View style={{ flex: 1, marginLeft: 5 }}>
                             <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
                         </View>
-                        <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                            <View style={[{ backgroundColor: '#fff', flex: 1, marginLeft: Layout.window.width / 1.8, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2 }]}>
-                                {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoNews')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                    <Image source={require('../assets/images/e-info.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
-                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-info</Text>
-                                </TouchableOpacity> */}
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }} >
+                        <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
+                            <View style={{ flex: 5, flexDirection: 'row' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('MyAccount')} style={{ paddingLeft: 10 }}>
+                                    <Image source={require('../assets/images/girl.png')} style={{ height: 50, width: 50, borderRadius: 25 }} resizeMode='contain' />
+                                </TouchableOpacity>
+                                <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
+                                    <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>Nama orang</Text>
+                                    <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>Nama company</Text>
+                                </View>
+                            </View>
+                            <View style={[{ backgroundColor: '#fff', flex: 4, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2 }]}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')} style={{ flex: 1, padding: 5, justifyContent: 'center', alignItems: 'center' }} >
                                     <Image source={require('../assets/images/profile.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
                                 </TouchableOpacity>
-                                {/* <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                    <Image source={require('../assets/images/EDA.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
-                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>My Account</Text>
-                                </View> */}
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('MyScore')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('MyScore')} style={{ flex: 1, padding: 5, justifyContent: 'center', alignItems: 'center' }}>
                                     <Image source={require('../assets/images/my-score.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>My Score</Text>
                                 </TouchableOpacity>
-
                             </View>
                         </View>
                     </View>
@@ -81,7 +81,7 @@ class DashboardScreen extends React.PureComponent {
                         <ScrollView contentStyle={{ padding: 10 }} >
 
                             {/*Financial Hub */}
-                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey' }}>
+                            <View style={{ margin: 5,paddingBottom:5, borderBottomWidth: 1, borderColor: 'lightgrey' }}>
                                 <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Financial Hub</Text>
@@ -117,7 +117,7 @@ class DashboardScreen extends React.PureComponent {
                             </View>
 
                             {/*Knowledge Hub */}
-                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
+                            <View style={{ margin: 5,paddingBottom:5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'solid' }}>
                                 <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Knowledge Hub</Text>
                                         <Text style={styles.subTitle}>More ></Text>
@@ -150,7 +150,7 @@ class DashboardScreen extends React.PureComponent {
                             </View>
 
                             {/*Development Hub */}
-                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
+                            <View style={{ margin: 5,paddingBottom:5, borderWidth:1, borderColor: 'lightgrey', borderStyle: 'dotted' }}>
                                 <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Development Hub</Text>
                                         <Text style={styles.subTitle}>More ></Text>
@@ -181,7 +181,7 @@ class DashboardScreen extends React.PureComponent {
                             </View>
 
                             {/*Biz Hub */}
-                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
+                            <View style={{ margin: 5,paddingBottom:5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
                                 <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Biz Hub</Text>
                                         <Text style={styles.subTitle}>More ></Text>
@@ -189,10 +189,10 @@ class DashboardScreen extends React.PureComponent {
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                     <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Ecommerce')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/images/ecommerce.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Commerce</Text>
-                                        </View>
+                                        </TouchableOpacity>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/images/marketplace.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz App Marketplace</Text>
@@ -212,7 +212,7 @@ class DashboardScreen extends React.PureComponent {
                             </View>
 
                             {/*Others */}
-                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
+                            <View style={{ margin: 5,paddingBottom:5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
                                 <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle}>Others</Text>
                                         <Text style={styles.subTitle}>More ></Text>
@@ -240,7 +240,7 @@ class DashboardScreen extends React.PureComponent {
                             </View>
 
                             {/*Contact Request */}
-                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
+                            <View style={{ margin: 5,paddingBottom:5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
                                 <View style={{ border: 1, borderColor: 'lightgrey', shadowColor: "#000", marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Notification</Text>
@@ -309,7 +309,7 @@ class DashboardScreen extends React.PureComponent {
                             </View> */}
 
                             {/**Highlight */}
-                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
+                            <View style={{ margin: 5,paddingBottom:5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
                                 <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Hightlight</Text>
@@ -339,7 +339,7 @@ class DashboardScreen extends React.PureComponent {
                             </View>
 
                             {/**Training */}
-                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
+                            <View style={{ margin: 5,paddingBottom:5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
                                 <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                         <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Training</Text>

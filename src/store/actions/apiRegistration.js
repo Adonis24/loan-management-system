@@ -1,9 +1,8 @@
 import { AsyncStorage, Platform } from 'react-native'
-import { FileSystem, SecureStore, Notifications } from 'expo'
+import { FileSystem, Notifications } from 'expo'
+import * as SecureStore from 'expo-secure-store'
 import moment from 'moment'
-import {
-  Alert
-} from 'react-native';
+
 
 const apiUrl = 'https://staging.bxcess.my/'
 
@@ -135,8 +134,31 @@ export const verifyPhoneApi =  (token_type, access_token, country_code, mobile_n
   }
 }
 
-export const companyInfoAPI = (companyName, regNumber, compAddress, businessActivities, phoneNumber, emailAddress) => {
+export const companyInfoAPI = () => {
   return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    console.log(`Company Registration : ${JSON.stringify(getState().companyInformationReducer)}`)
+    const companyInfo=getState().companyInformationReducer
+    fetch(`${apiUrl}api/registerCompany/basic`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      },
+      body: JSON.stringify({ ...companyInfo, access_credential: 'api' }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+        const { status } = await responseJson
+        //await dispatch({ type: 'Company Info', payload: { phoneVerified:status } })
+        await console.log(`companyInfo  ${JSON.stringify(responseJson)}`)
+      })
+      .catch((error) => {
+        console.error('Error : ' + error);
+      });
+
   }
 }
 

@@ -40,7 +40,8 @@ class DocUploadScreen extends React.PureComponent {
         DocumentPicker.getDocumentAsync({ type: '*/*', copyToCacheDirectory: false })
             .then(result => {
                 console.log(JSON.stringify(result))
-                this.props.saveDocument(result)
+                //this.props.saveDocument(result)
+                this.props.saveDocumentDO(result)
             })
     }
 
@@ -92,7 +93,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
 
-        saveDocument: (result) => dispatch(actionCreator.saveDocument(result))
+        saveDocument: (result) => dispatch(actionCreator.saveDocument(result)),
+        saveDocumentDO: (result) => dispatch(actionCreator.saveDocumentDO(result))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DocUploadScreen)
