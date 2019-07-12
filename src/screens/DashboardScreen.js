@@ -92,14 +92,14 @@ class DashboardScreen extends React.PureComponent {
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                     <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Financing')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/images/e-scoring.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Financing</Text>
-                                        </View>
-                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Grant')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/images/grant.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Grant</Text>
-                                        </View>
+                                        </TouchableOpacity>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/icon/rfq.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Loan Calculator</Text>
