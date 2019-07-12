@@ -38,15 +38,12 @@ import HandbookScreen from '../screens/HandbookScreen';
 import MyScoreScreen from '../screens/MyScoreScreen';
 import PromotionScreen from '../screens/PromotionScreen';
 import LoanApplicationScreen from '../screens/LoanApplicationScreen';
-<<<<<<< HEAD
 import FinancingScreen from '../screens/FinancingScreen';
 import GrantScreen from '../screens/GrantScreen';
 import QuizScreen from '../screens/QuizScreen';
 import QuizAnswerScreen from '../screens/QuizAnswerScreen';
-=======
 import MyAccountScreen from '../screens/MyAccountScreen';
 import EcommerceScreen from '../screens/EcommerceScreen';
->>>>>>> origin/adlanSyahBiz
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
