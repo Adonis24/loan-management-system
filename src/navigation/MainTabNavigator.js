@@ -39,6 +39,7 @@ import MyScoreScreen from '../screens/MyScoreScreen';
 import PromotionScreen from '../screens/PromotionScreen';
 import LoanApplicationScreen from '../screens/LoanApplicationScreen';
 import MyAccountScreen from '../screens/MyAccountScreen';
+import EcommerceScreen from '../screens/EcommerceScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -62,7 +63,8 @@ const DashboardStackWithModal = createStackNavigator(
     Handbook: { screen: HandbookScreen, },
     MyScore: { screen: MyScoreScreen, },
     LoanApplication: { screen: LoanApplicationScreen, },
-    MyAccount: { screen: MyAccountScreen, }
+    MyAccount: { screen: MyAccountScreen, },
+    Ecommerce: { screen: EcommerceScreen, }
   },
   {
     mode: 'modal',

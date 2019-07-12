@@ -24,30 +24,20 @@ import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import { DatePicker } from 'native-base'
-import moment from 'moment'
+//import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
+
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class CompanyInformationScreen extends React.PureComponent {
+class CompanyContactInformationScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
 
     async companyInformation() {
         //await this.props.companyInfo()
-        await this.props.navigation.navigate('CompanyContactInformation')
+        await this.props.navigation.navigate('ContactPerson')
     }
-
-    constructor(props) {
-        super(props);
-        this.state = { chosenDate: new Date() };
-        this.setDate = this.setDate.bind(this);
-      }
-      setDate(newDate) {
-        this.setState({ chosenDate: newDate });
-        this.props.setCompanyInfo({ comp_regdate:moment(newDate).format() })
-      }
 
     render() {
         return (
@@ -61,42 +51,30 @@ class CompanyInformationScreen extends React.PureComponent {
                     <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY INFORMATION</Text>
+                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY CONTACT INFORMATION</Text>
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company Name'} value={this.props.comp_name} onChangeText={(comp_name) => this.props.setCompanyInfo({ comp_name })} style={{ marginLeft: 5 }} />
-                            </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company Registration Number'} value={this.props.comp_regno} onChangeText={(comp_regno) => this.props.setCompanyInfo({ comp_regno })} style={{ marginLeft: 5 }} />
-                            </View>
-
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5,marginRight:3 }} resizeMode={'contain'} />
-                               
-                                <DatePicker
-                                 defaultDate={new Date()}
-                                // minimumDate={new Date(2018, 1, 1)}
-                                // maximumDate={new Date(2018, 12, 31)}
-                                locale={"en"}
-                                timeZoneOffsetInMinutes={undefined}
-                                modalTransparent={false}
-                                animationType={"fade"}
-                                androidMode={"default"}
-                                placeHolderText="Company Registration Date"
-                                textStyle={{ color: "#000" }}
-                                placeHolderTextStyle={{ fontFamily:'Roboto-regular',color:'lightgrey' }}
-                                onDateChange={(newDate) => this.setDate(newDate)}
-                                disabled={false}
-                            />
-                            </View>
 
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Main Business Activities'} value={this.props.comp_main_biz_act} onChangeText={(comp_main_biz_act) => this.props.setCompanyInfo({ comp_main_biz_act })} style={{ marginLeft: 5 }} />
-                            </View>                         
- 
+                                <TextInput placeholder={'Company Phone Number'} value={this.props.comp_phone} onChangeText={(comp_phone) => this.props.setCompanyInfo({ comp_phone })} style={{ marginLeft: 5 }} />
+                            </View>
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <TextInput placeholder={'Company Email Address'} value={this.props.comp_email} onChangeText={(comp_email) => this.props.setCompanyInfo({ comp_email })} style={{ marginLeft: 5 }} />
+                            </View>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('CompanyContactAddressInformation')} style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                {!this.props.comp_state ? <TextInput editable={false} placeholder={'Company Address'} value={this.props.comp_addr} onChangeText={(comp_addr) => this.props.setCompanyInfo({ comp_addr })} style={{ marginLeft: 5 }} />
+                                    : <View style={{ marginRight: 3, paddingBottom: 5 }}>
+                                        <Text>{this.props.comp_addr}</Text>
+                                        {this.props.comp_addr_2 && <Text>{this.props.comp_addr_2}</Text>}
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <Text>{this.props.comp_postcode}</Text>
+                                            <Text>{this.props.comp_city}</Text>
+                                        </View>
+                                        <Text>{this.props.comp_state}</Text>
+                                    </View>}
+                            </TouchableOpacity>
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
                                 <TouchableOpacity onPress={() => this.companyInformation()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Next</Text>
@@ -116,11 +94,13 @@ class CompanyInformationScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-        comp_name: state.companyInformationReducer.companyName,
-        comp_regno: state.companyInformationReducer.regNumber,
-        comp_regdate: state.companyInformationReducer.compAddress,
-        comp_main_biz_act: state.companyInformationReducer.businessActivities,
-
+        comp_phone: state.companyInformationReducer.comp_phone,
+        comp_email: state.companyInformationReducer.comp_email,
+        comp_addr: state.companyInformationReducer.comp_addr,
+        comp_addr_2: state.companyInformationReducer.comp_addr_2,
+        comp_city: state.companyInformationReducer.comp_city,
+        comp_state: state.companyInformationReducer.comp_state,
+        comp_postcode: state.companyInformationReducer.comp_postcode,
     }
 }
 function mapDispatchToProps(dispatch) {
@@ -129,4 +109,4 @@ function mapDispatchToProps(dispatch) {
         companyInfo: () => dispatch(actionCreator.companyInfo())
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(CompanyInformationScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(CompanyContactInformationScreen)

@@ -6,9 +6,12 @@ import Amplify, { Auth, Storage } from 'aws-amplify';
 import aws_exports from '../../aws-exports';
 Amplify.configure(aws_exports);///
 
+import s3 from '../../do/DigitalOcean'
+import config from '../../do/config'
+
 
 import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI } from './apiRegistration'
-import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi,applyLoanApi,getUserInfoApi } from './apiDashboard'
+import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi,getCompanyInfoApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -82,9 +85,9 @@ export const registerOTP = () => {
             errorColor.push('phone')
         }
         if (errorArray.length > 0) {
-            dispatch({ type: 'SET_REGISTER', payload: { error: errorArray, errorColor,proceed:false } })
+            dispatch({ type: 'SET_REGISTER', payload: { error: errorArray, errorColor, proceed: false } })
         } else {
-            dispatch({ type: 'SET_REGISTER', payload: { proceed:true } })
+            dispatch({ type: 'SET_REGISTER', payload: { proceed: true } })
             console.log('takde error dalam screen and boleh proceed utk register')
             await dispatch(registerOTPApi(token_type, access_token, '+6', phone))
         }
@@ -142,20 +145,12 @@ export const login = () => {
         } else {
             dispatch(requestPersonalToken('login', username, password))
         }
-
-
     }
 }
 
 export const companyInfo = () => {
-    return (dispatch, getState) => {
-        const companyName = getState().companyInformationReducer.companyName
-        const regNumber = getState().companyInformationReducer.regNumber
-        const compAddress = getState().companyInformationReducer.compAddress
-        const businessActivities = getState().companyInformationReducer.businessActivities
-        const phoneNumber = getState().companyInformationReducer.phoneNumber
-        const emailAddress = getState().companyInformationReducer.emailAddress
-        dispatch(companyInfoAPI(companyName, regNumber, compAddress, businessActivities, phoneNumber, emailAddress))
+    return (dispatch, getState) => {      
+        dispatch(companyInfoAPI())
     }
 }
 
@@ -237,7 +232,14 @@ export const applyLoan = () => {
 export const initiateMyAccount = () => {
     return async (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         await dispatch(getUserInfoApi())
+        await dispatch(getUserInfoApi())
+    }
+}
+
+export const initiateCompanyInfo = () => {
+    return async (dispatch, getState) => {
+        // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        await dispatch(getCompanyInfoApi())
     }
 }
 
@@ -554,6 +556,40 @@ export const saveDocument = (result) => {
             console.log(JSON.stringify(data))
         })
             .catch(err => console.log(err))
+    }
+}
+
+export const saveDocumentDO = (result) => {
+    const { type, uri, name, size } = result
+    return async (dispatch, getState) => {
+        const blob = await urlToBlob(uri)
+        const {data}=blob
+
+        console.log(`blob ialah ${JSON.stringify(blob)}`)
+        const fileName=Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+
+        const params = {
+            Body: blob,
+            Bucket: `${config.bucketName}`,
+            Key: fileName
+        };
+        // Sending the file to the Spaces
+        s3.putObject(params)
+            .on('build', request => {
+                request.httpRequest.headers.Host = `${config.digitalOceanSpaces}`;
+                request.httpRequest.headers['Content-Length'] = data.size;
+                request.httpRequest.headers['Content-Type'] = data.type;
+                request.httpRequest.headers['x-amz-acl'] = 'public-read';
+            })
+            .send((err) => {
+                if (err) console.log(err);
+                else {
+                    // If there is no error updating the editor with the imageUrl
+                    const imageUrl = `${config.digitalOceanSpaces}/` + fileName
+                    console.log(imageUrl, name);
+                }
+            });
+
     }
 }
 

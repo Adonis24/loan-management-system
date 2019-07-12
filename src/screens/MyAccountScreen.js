@@ -55,7 +55,7 @@ class MyAccountScreen extends React.PureComponent {
                             colors={['#4c669f', '#3b5998', '#192f6a']}
                             style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between' }}>
                             <View style={{ alignItems: 'center', padding: 5 }}>
-                                <Image source={require('../assets/images/logo.png')} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff' }]} resizeMode={'cover'} />
+                                <Image source={require('../assets/images/girl.png')} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff' }]} resizeMode={'cover'} />
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Nama</Text>
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Nama Company</Text>
                             </View>

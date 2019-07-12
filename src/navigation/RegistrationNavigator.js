@@ -15,31 +15,37 @@ import DetailsOfConnectedPartiesScreen from '../screens/DetailsOfConnectedPartie
 import DeclarationDigitalSignScreen from '../screens/DeclarationDigitalSignScreen';
 import CompanyInfoIntroScreen from '../screens/CompanyInfoIntroScreen';
 import DocUploadScreen from '../screens/DocUploadScreen';
+import CompanyContactInformationScreen from '../screens/CompanyContactInformationScreen';
+import CompanyContactAddressInformationScreen from '../screens/CompanyContactAddressInformationScreen';
+import AgreementScreen from '../screens/AgreementScreen';
 
 const Registration = createStackNavigator({
-    Intro: IntroScreen,
-    SignUpPersonal: SignupPersonalScreen,
-    SignUpOtp: SignupOtpScreen,
-    SignUpOtpEnter: SignupOtpEnterScreen,
-    SignUpSuccess: SignupSuccessScreen,
-    CompanyInfoIntro:CompanyInfoIntroScreen,
-     CompanyInformation: CompanyInformationScreen,
-     ContactPerson: ContactPersonScreen,
-    DetailsConnectedParties: DetailsOfConnectedPartiesScreen,
-    DeclarationDigitalSign: DeclarationDigitalSignScreen,
+  Intro: IntroScreen,
+  SignUpPersonal: SignupPersonalScreen,
+  SignUpOtp: SignupOtpScreen,
+  SignUpOtpEnter: SignupOtpEnterScreen,
+  SignUpSuccess: SignupSuccessScreen,
+  CompanyInfoIntro: CompanyInfoIntroScreen,
+  CompanyInformation: CompanyInformationScreen,
+  CompanyContactInformation: CompanyContactInformationScreen,
+  CompanyContactAddressInformation: CompanyContactAddressInformationScreen,
+  ContactPerson: ContactPersonScreen,
+  Agreement: AgreementScreen,
+  DetailsConnectedParties: DetailsOfConnectedPartiesScreen,
+  DeclarationDigitalSign: DeclarationDigitalSignScreen,
 });
 
 const RegistrationStack = createStackNavigator(
-    {
-      Main: { screen: Registration, },
-      DocUpload: { screen: DocUploadScreen, },
-      
-    },
-    {
-      mode: 'modal',
-      headerMode: 'none',
-    },
-  );
+  {
+    Main: { screen: Registration, },
+    DocUpload: { screen: DocUploadScreen, },
+
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+  },
+);
 
 
 export default RegistrationStack

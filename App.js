@@ -6,7 +6,7 @@ import * as Permissions from 'expo-permissions'
 import * as SecureStore from 'expo-secure-store'
 import { AppLoading } from 'expo';
 import { LoggedInContainer, AuthenticationContainer } from './src/navigation/AppNavigator';
-import {  Notifications } from 'expo';
+import { Notifications } from 'expo';
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
@@ -83,7 +83,7 @@ export default class App extends React.Component {
     try {
       const update = await Expo.Updates.checkForUpdateAsync();
       if (update.isAvailable) {
-        await Expo.Updates.fetchUpdateAsync();        
+        await Expo.Updates.fetchUpdateAsync();
         Expo.Updates.reloadFromCache();
       }
     } catch (e) {
@@ -96,7 +96,7 @@ export default class App extends React.Component {
     try {
       //const personalToken = await AsyncStorage.getItem('personalToken');
       const personalToken = await SecureStore.getItemAsync('personalToken')
-      if (personalToken !== null&&!personalToken.includes('error')) {
+      if (personalToken !== null && !personalToken.includes('error')) {
         console.log(`personal token ialah : ${personalToken}`)
         this.setState({ tokenExists: true })
       }
@@ -119,12 +119,12 @@ export default class App extends React.Component {
     } else {
       return (
         <Provider store={store}>
-          <StyleProvider  style={getTheme(minimal)}> 
-          <View style={styles.container}>
-            {/* <DashboardAsset /> */}
-            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            {this.state.tokenExists ? <LoggedInContainer /> : <AuthenticationContainer />}
-          </View>
+          <StyleProvider style={getTheme(minimal)}>
+            <View style={styles.container}>
+              {/* <DashboardAsset /> */}
+              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+              {this.state.tokenExists ? <LoggedInContainer /> : <AuthenticationContainer />}
+            </View>
           </StyleProvider>
         </Provider>
       );
@@ -136,24 +136,28 @@ export default class App extends React.Component {
       Asset.loadAsync([
         require('./src/assets/images/robot-dev.png'),
         require('./src/assets/images/robot-prod.png'),
-  
+
         require('./src/assets/images/logo.png'),
-  
+
         require('./src/assets/images/topLeft.png'),
         require('./src/assets/images/bottomRight.png'),
         require('./src/assets/images/topRight.png'),
         require('./src/assets/images/bottomLeft.png'),
-  
+
+        require('./src/assets/images/girl.png'),
+
         require('./src/assets/icon/eda.png'),
         require('./src/assets/icon/bizDir.png'),
         require('./src/assets/icon/crm.png'),
         //require('./src/assets/icon/crm.png'),
         require('./src/assets/icon/rfq.png'),
-  
+
       ]),
       Font.loadAsync({
         'Montserrat_medium': require('./src/assets/fonts/Montserrat/Montserrat-Medium.ttf'),
         'Montserrat_light': require('./src/assets/fonts/Montserrat/Montserrat-Light.ttf'),
+        'Roboto-regular': require('./src/assets/fonts/Roboto/Roboto-Regular.ttf'),
+
       }),
     ]);
   };
