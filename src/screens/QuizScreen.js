@@ -72,25 +72,25 @@ class QuizScreen extends React.PureComponent {
                             <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
                                 <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
                                 <Text style={[styles.textDefault, { margin: 5 }]}>Online Business Training Quiz</Text>
-                                <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10, alignSelf: 'center' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10, alignSelf: 'center' }}>
                                     <Text style={[styles.caption]}>Start</Text>
-                                </View>
+                                </TouchableOpacity>
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row' }}>
                             <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
                                 <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
                                 <Text style={[styles.textDefault, { margin: 5 }]}>Brand Awareness Training</Text>
-                                <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10, alignSelf: 'center' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10, alignSelf: 'center' }}>
                                     <Text style={[styles.caption]}>Start</Text>
-                                </View>
+                                </TouchableOpacity>
                             </View>
                             <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
                                 <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
                                 <Text style={[styles.textDefault, { margin: 5 }]}>Marketing Strategy Training Quiz</Text>
-                                <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10, alignSelf: 'center' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10, alignSelf: 'center' }}>
                                     <Text style={[styles.caption]}>Start</Text>
-                                </View>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </ScrollView>

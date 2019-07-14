@@ -23,7 +23,7 @@ import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab } from 'native-base'
+import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab, Radio, ListItem } from 'native-base'
 
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
@@ -68,41 +68,33 @@ class QuizAnswerScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, fontSize: 12, textAlign: 'justify' }]}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</Text>
                         </View>
                         <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
-                            <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                                <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Tekun Nasional</Text>
-                                <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                                    <Text style={[styles.caption]}>View</Text>
-                                </View>
-                                <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                                    <Text style={[styles.caption]}>Calculate</Text>
-                                </View>
-                            </View>
-                            <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                                <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>KoFintech</Text>
-                                <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                                    <Text style={[styles.caption]}>View</Text>
-                                </View>
-                                <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                                    <Text style={[styles.caption]}>Calculate</Text>
-                                </View>
-                            </View>
-                            <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                                <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>BSN</Text>
-                                <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                                    <Text style={[styles.caption]}>View</Text>
-                                </View>
-                                <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                                    <Text style={[styles.caption]}>Calculate</Text>
-                                </View>
-                            </View>
-                            <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                                <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>MIDF</Text>
-                                <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                                    <Text style={[styles.caption]}>View</Text>
-                                </View>
-                                <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                                    <Text style={[styles.caption]}>Calculate</Text>
-                                </View>
+                            <View style={{ flex: 1, flexDirection: 'column', margin: 10 }}>
+                                <Text style={[styles.textDefault, { margin: 5, textAlign: 'left', color: 'darkblue', alignSelf: 'flex-start' }]}>Question 1</Text>
+                                <Text style={[styles.textDefault, { margin: 10, textAlign: 'left', fontSize: 13, alignSelf: 'flex-start', fontWeight: 'bold' }]}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </Text>
+                                <ListItem>
+                                    <Left style={{ flex: 1 }}>
+                                        <Radio selected={false} />
+                                    </Left>
+                                    <Right style={{ flex: 4 }}>
+                                        <Text>Lorem Ipsum is simply dummy text</Text>
+                                    </Right>
+                                </ListItem>
+                                <ListItem>
+                                    <Left style={{ flex: 1 }}>
+                                        <Radio selected={true} />
+                                    </Left>
+                                    <Right style={{ flex: 4 }}>
+                                        <Text>Lorem Ipsum is simply dummy text</Text>
+                                    </Right>
+                                </ListItem>
+                                <ListItem>
+                                    <Left style={{ flex: 1 }}>
+                                        <Radio selected={false} />
+                                    </Left>
+                                    <Right style={{ flex: 4 }}>
+                                        <Text>Lorem Ipsum is simply dummy text</Text>
+                                    </Right>
+                                </ListItem>
                             </View>
                         </View>
                     </ScrollView>
