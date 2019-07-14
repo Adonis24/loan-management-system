@@ -44,6 +44,7 @@ import QuizScreen from '../screens/QuizScreen';
 import QuizAnswerScreen from '../screens/QuizAnswerScreen';
 import MyAccountScreen from '../screens/MyAccountScreen';
 import EcommerceScreen from '../screens/EcommerceScreen';
+import BizAppScreen from '../screens/BizAppScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -72,7 +73,8 @@ const DashboardStackWithModal = createStackNavigator(
     Quiz: { screen: QuizScreen, },
     QuizAnswer: { screen: QuizAnswerScreen, },
     MyAccount: { screen: MyAccountScreen, },
-    Ecommerce: { screen: EcommerceScreen, }
+    Ecommerce: { screen: EcommerceScreen, },
+    BizApp: { screen: BizAppScreen, }
   },
   {
     mode: 'modal',
