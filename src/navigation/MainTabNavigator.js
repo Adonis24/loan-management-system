@@ -52,6 +52,7 @@ import CertificationScreen from '../screens/CertificationScreen';
 import ElearningScreen from '../screens/ElearningScreen';
 import ContactPersonSuccessScreen from '../screens/ContactPersonSuccessScreen';
 import ScanQRScreen from '../screens/ScanQRScreen';
+import TrainingScreen from '../screens/TrainingScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -91,7 +92,8 @@ const DashboardStackWithModal = createStackNavigator(
     AddCompany: { screen: CompanyInformationScreen, },
     ContactPerson: { screen: ContactPersonScreen, },
     ContactPersonSuccess: { screen: ContactPersonSuccessScreen, },
-    ScanQR: { screen: ScanQRScreen, }
+    ScanQR: { screen: ScanQRScreen, },
+    Training: { screen: TrainingScreen, }
   },
   {
     mode: 'modal',

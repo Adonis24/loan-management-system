@@ -151,7 +151,7 @@ class DashboardScreen extends React.PureComponent {
                 </Modal>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
                     <View style={{ alignItems: 'flex-end' }}>
-                        <Image source={require('../assets/images/topRight.png')} style={{ width: 80, height: 93 }} />
+                        <Image source={require('../assets/images/topRight.png')} style={{ width: 120, height: 133 }} />
                     </View>
                     {/* <View style={{ alignItems: 'flex-start' }}>
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
@@ -271,10 +271,10 @@ class DashboardScreen extends React.PureComponent {
                                             <Image source={require('../assets/images/e-learning.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Learning</Text>
                                         </TouchableOpacity>
-                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Training')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/images/training.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Training</Text>
-                                        </View>
+                                        </TouchableOpacity>
                                         <TouchableOpacity onPress={() => this.props.navigation.navigate('Certification')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/images/certification.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Certification</Text>
@@ -504,9 +504,9 @@ class DashboardScreen extends React.PureComponent {
                 </View>
                 {/* <PopupScoreScreen /> */}
 
-                <View style={{position:'absolute',top:Constants.statusBarHeight,right:0}}>
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('ScanQR')}>
-                        <Text>QR Code</Text>
+                <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('ScanQR')}>
+                        <Image source={require('../assets/images/qr.png')} style={{ width: 63, height: 63 }} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -523,7 +523,7 @@ function mapStateToProps(state) {
         email: state.myAccountReducer.email,
         phone_no: state.myAccountReducer.phone_no,
         profile_pic: state.myAccountReducer.profile_pic,
-        email_verified_at: state.myAccountReducer.email_verified_at,  
+        email_verified_at: state.myAccountReducer.email_verified_at,
     }
 }
 function mapDispatchToProps(dispatch) {
