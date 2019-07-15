@@ -65,23 +65,29 @@ class BizDirectoryScreen extends React.PureComponent {
                         <ScrollView style={{ padding: 20 }}>
                             <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
                                 <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                    <Text style={[styles.textDefault, { margin: 5 }]}>Business Strategy Training Quiz</Text>
+                                    <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
+                                        <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: 40, width: 40, alignSelf: 'center' }} resizeMode='contain' />
+                                    </View>
+                                    <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Puteri Nursyahirah</Text>
+                                    <Text style={[styles.textDefault, { margin: 5, }]}>60 Connection</Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                                         <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
                                             <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                                <Text style={[styles.caption, { color: '#fff' }]}>Start</Text>
+                                                <Text style={[styles.caption, { color: '#fff' }]}>Add to connection</Text>
                                             </LinearGradient>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
                                 <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                    <Text style={[styles.textDefault, { margin: 5 }]}>Online Business Training Quiz</Text>
+                                    <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
+                                        <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: 40, width: 40, alignSelf: 'center' }} resizeMode='contain' />
+                                    </View>
+                                    <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Shery Nazmi</Text>
+                                    <Text style={[styles.textDefault, { margin: 5, }]}>50 Connection</Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                                         <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
                                             <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                                <Text style={[styles.caption, { color: '#fff' }]}>Start</Text>
+                                                <Text style={[styles.caption, { color: '#fff' }]}>Add to connection</Text>
                                             </LinearGradient>
                                         </TouchableOpacity>
                                     </View>
@@ -89,23 +95,29 @@ class BizDirectoryScreen extends React.PureComponent {
                             </View>
                             <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
                                 <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                    <Text style={[styles.textDefault, { margin: 5 }]}>Brand Awareness Training</Text>
+                                    <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
+                                        <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: 40, width: 40, alignSelf: 'center' }} resizeMode='contain' />
+                                    </View>
+                                    <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>M. Nazmi</Text>
+                                    <Text style={[styles.textDefault, { margin: 5, }]}>20 Connection</Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                                         <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
                                             <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                                <Text style={[styles.caption, { color: '#fff' }]}>Start</Text>
+                                                <Text style={[styles.caption, { color: '#fff' }]}>Add to connection</Text>
                                             </LinearGradient>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
                                 <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                    <Text style={[styles.textDefault, { margin: 5 }]}>Marketing Strategy Training Quiz</Text>
+                                    <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
+                                        <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: 40, width: 40, alignSelf: 'center' }} resizeMode='contain' />
+                                    </View>
+                                    <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Afiudin Thambi</Text>
+                                    <Text style={[styles.textDefault, { margin: 5, }]}>No Connection</Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                                         <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
                                             <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                                <Text style={[styles.caption, { color: '#fff' }]}>Start</Text>
+                                                <Text style={[styles.caption, { color: '#fff' }]}>Add to connection</Text>
                                             </LinearGradient>
                                         </TouchableOpacity>
                                     </View>
@@ -115,7 +127,7 @@ class BizDirectoryScreen extends React.PureComponent {
                     </View>
                     {/* END CONTENT */}
                 </View>
-            </View>
+            </View >
 
         );
     }

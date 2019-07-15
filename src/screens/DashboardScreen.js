@@ -306,10 +306,10 @@ class DashboardScreen extends React.PureComponent {
                                             <Image source={require('../assets/images/marketplace.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz App Marketplace</Text>
                                         </TouchableOpacity>
-                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('BizLicensing')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/images/licensing.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Licensing</Text>
-                                        </View>
+                                        </TouchableOpacity>
                                         <TouchableOpacity onPress={() => this.props.navigation.navigate('BizDirectory')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/images/directory.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Directory</Text>
