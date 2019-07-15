@@ -11,7 +11,7 @@ import config from '../../do/config'
 
 
 import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI } from './apiRegistration'
-import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi,getCompanyInfoApi } from './apiDashboard'
+import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi,getListWorkersApi,doneForNowApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -149,18 +149,14 @@ export const login = () => {
 }
 
 export const companyInfo = () => {
-    return (dispatch, getState) => {      
+    return (dispatch, getState) => {
         dispatch(companyInfoAPI())
     }
 }
 
 export const contactPerson = () => {
     return (dispatch, getState) => {
-        const fullName = getState().companyInformationReducer.fullName
-        const myKad = getState().companyInformationReducer.myKad
-        const phoneNum = getState().companyInformationReducer.phoneNum
-        const position = getState().companyInformationReducer.position
-        dispatch(contactPersonAPI(fullName, myKad, phoneNum, position))
+        dispatch(contactPersonAPI())
     }
 }
 
@@ -243,6 +239,20 @@ export const initiateCompanyInfo = () => {
     }
 }
 
+
+export const initiateListWorkers = () => {
+    return async (dispatch, getState) => {
+        // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        await dispatch(getListWorkersApi())
+    }
+}
+
+export const doneForNow = () => {
+    return async (dispatch, getState) => {
+        // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        await dispatch(doneForNowApi())
+    }
+}
 
 
 
@@ -563,10 +573,10 @@ export const saveDocumentDO = (result) => {
     const { type, uri, name, size } = result
     return async (dispatch, getState) => {
         const blob = await urlToBlob(uri)
-        const {data}=blob
+        const { data } = blob
 
         console.log(`blob ialah ${JSON.stringify(blob)}`)
-        const fileName=Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+        const fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 
         const params = {
             Body: blob,
@@ -587,6 +597,7 @@ export const saveDocumentDO = (result) => {
                     // If there is no error updating the editor with the imageUrl
                     const imageUrl = `${config.digitalOceanSpaces}/` + fileName
                     console.log(imageUrl, name);
+                    dispatch({ type: 'SET_CONTACT_PERSON', payload: { ic_image: imageUrl } })
                 }
             });
 

@@ -46,10 +46,14 @@ import MyAccountScreen from '../screens/MyAccountScreen';
 import EcommerceScreen from '../screens/EcommerceScreen';
 import BizAppScreen from '../screens/BizAppScreen';
 import MyAccountEditScreen from '../screens/MyAccountEditScreen';
+<<<<<<< HEAD
 import BizDirectoryScreen from '../screens/BizDirectoryScreen';
 import BizLicensingScreen from '../screens/BizLicensingScreen';
 import CertificationScreen from '../screens/CertificationScreen';
 import ElearningScreen from '../screens/ElearningScreen';
+=======
+import ContactPersonSuccessScreen from '../screens/ContactPersonSuccessScreen';
+>>>>>>> origin/adlanSyahBiz
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -85,6 +89,10 @@ const DashboardStackWithModal = createStackNavigator(
     BizLicensing: { screen: BizLicensingScreen, },
     Certification: { screen: CertificationScreen, },
     Elearning: { screen: ElearningScreen, },
+    Ecommerce: { screen: EcommerceScreen, },
+    AddCompany: { screen: CompanyInformationScreen, },
+    ContactPerson: { screen: ContactPersonScreen, },
+    ContactPersonSuccess: { screen: ContactPersonSuccessScreen, }
   },
   {
     mode: 'modal',

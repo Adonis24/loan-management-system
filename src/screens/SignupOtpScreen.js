@@ -40,7 +40,7 @@ class SignupOtpScreen extends React.PureComponent {
     }
 
     componentDidMount() {
-        //this.props.getPersonalToken()
+        this.props.getPersonalToken()
     }
 
     render() {
