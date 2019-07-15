@@ -16,6 +16,8 @@ import {
 
 } from 'react-native';
 
+import QRCode from 'react-native-qrcode'
+
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -81,9 +83,9 @@ class MyAccountScreen extends React.PureComponent {
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                     <View><Text>Kotak 1</Text></View>
+                                    <QRCode value={this.props.member_id} size={Layout.window.width - 30} bgColor='black' fgColor='white' />
                                 </View>
                             </View>
-
                         </ScrollView>
                     </View>
                 </View>
@@ -95,6 +97,12 @@ class MyAccountScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
+        member_id: state.myAccountReducer.member_id,
+        name: state.myAccountReducer.name,
+        email: state.myAccountReducer.email,
+        phone_no: state.myAccountReducer.phone_no,
+        profile_pic: state.myAccountReducer.profile_pic,
+        email_verified_at: state.myAccountReducer.email_verified_at,
 
     }
 }

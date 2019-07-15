@@ -111,7 +111,7 @@ class DashboardScreen extends React.PureComponent {
         this.props.initiateMyAccount()
 
         await this.animate()
-        setTimeout(() => this.setState({ popUp: !this.state.popUp }), 5000);
+        setTimeout(() => this.setState({ popUp: !this.state.popUp }), 3000);
 
         //this.props.navigation.navigate('PopupScore')
     }
@@ -146,7 +146,7 @@ class DashboardScreen extends React.PureComponent {
                     onRequestClose={() => {
                         Alert.alert('Modal has been closed.');
                     }}>
-                    <PopupScoreScreen toggleShow={this.toggleShow} />
+                    <PopupScoreScreen name={this.props.name} toggleShow={this.toggleShow} />
 
                 </Modal>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -169,7 +169,7 @@ class DashboardScreen extends React.PureComponent {
                                     <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: undefined, width: undefined, }} resizeMode='contain' />
                                 </TouchableOpacity>
                                 <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
-                                    <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>Nama orang</Text>
+                                    <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>{this.props.name}</Text>
                                     <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>Nama company</Text>
                                 </View>
                             </Animated.View>
@@ -503,6 +503,12 @@ class DashboardScreen extends React.PureComponent {
                     </View>
                 </View>
                 {/* <PopupScoreScreen /> */}
+
+                <View style={{position:'absolute',top:Constants.statusBarHeight,right:0}}>
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('ScanQR')}>
+                        <Text>QR Code</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
 
         );
@@ -512,9 +518,12 @@ class DashboardScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-
-
-
+        member_id: state.myAccountReducer.member_id,
+        name: state.myAccountReducer.name,
+        email: state.myAccountReducer.email,
+        phone_no: state.myAccountReducer.phone_no,
+        profile_pic: state.myAccountReducer.profile_pic,
+        email_verified_at: state.myAccountReducer.email_verified_at,  
     }
 }
 function mapDispatchToProps(dispatch) {
