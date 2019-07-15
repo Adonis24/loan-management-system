@@ -44,7 +44,7 @@ class SignupOtpEnterScreen extends React.PureComponent {
     }
 
     componentDidMount() {
-       this.state.duration>0? this.timeLapsed():null;
+        this.state.duration > 0 ? this.timeLapsed() : null;
     }
 
     async verifyPhone() {
@@ -60,7 +60,7 @@ class SignupOtpEnterScreen extends React.PureComponent {
         }, 1000);
     }
 
-    reset(){
+    reset() {
         this.props.reset()
     }
 
@@ -156,14 +156,14 @@ class SignupOtpEnterScreen extends React.PureComponent {
                             <View style={{ alignSelf: 'center', flexDirection: 'row', margin: 5 }}>
                                 {this.getBoxes()}
                             </View>
-                            {this.props.c1&&<TouchableOpacity onPress={()=>this.reset()} style={{ alignSelf: 'center', flexDirection: 'row', margin: 5, marginBottom: 20 }}>
+                            {this.props.c1 && <TouchableOpacity onPress={() => this.reset()} style={{ alignSelf: 'center', flexDirection: 'row', margin: 5, marginBottom: 20 }}>
                                 <Text style={[styles.caption, { margin: 5 }]}>Reset</Text>
                             </TouchableOpacity>}
                             <View style={{ alignSelf: 'center', flexDirection: 'row', margin: 5, marginBottom: 20 }}>
                                 <Text style={[styles.textDefault, { margin: 5 }]}>Resend OTP code : </Text>
-                                {this.state.duration>0?
-                                <Text style={[styles.textDefault, { margin: 5, color: 'orange' }]}>{this.state.duration} s</Text>:
-                                <TouchableOpacity onPress={()=>this.props.registerOTP()} style={{justifyContent:'center',alignItems:'center', borderWidth:1,borderColor:'orange', borderRadius:5,padding:5}}><Text style={styles.caption}>Resend</Text></TouchableOpacity>}
+                                {this.state.duration > 0 ?
+                                    <Text style={[styles.textDefault, { margin: 5, color: 'orange' }]}>{this.state.duration} s</Text> :
+                                    <TouchableOpacity onPress={() => this.props.registerOTP()} style={{ justifyContent: 'center', alignItems: 'center', borderWidth: 1, borderColor: 'orange', borderRadius: 5, padding: 5 }}><Text style={styles.caption}>Resend</Text></TouchableOpacity>}
                             </View>
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
                                 <TouchableOpacity onPress={() => this.verifyPhone()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
@@ -188,7 +188,7 @@ function mapStateToProps(state) {
         c2: state.registrationReducer.c2,
         c3: state.registrationReducer.c3,
         c4: state.registrationReducer.c4,
-        phoneVerified:state.registrationReducer.phoneVerified
+        phoneVerified: state.registrationReducer.phoneVerified
     }
 }
 function mapDispatchToProps(dispatch) {
@@ -196,7 +196,7 @@ function mapDispatchToProps(dispatch) {
         verifyOTP: (value) => dispatch({ type: 'VERIFY_OTP', payload: { ...value } }),
         verifyPhone: () => dispatch(actionCreator.verifyPhone()),
         registerOTP: () => dispatch(actionCreator.registerOTP()),
-        reset:()=>dispatch({type:'RESET_OTP',})
+        reset: () => dispatch({ type: 'RESET_OTP', })
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignupOtpEnterScreen)

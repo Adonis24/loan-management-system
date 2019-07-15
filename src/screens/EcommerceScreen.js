@@ -42,10 +42,15 @@ class EcommerceScreen extends React.PureComponent {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <WebView source={{ uri: 'https://www.mayamall.com/supplier' }} style={{ flex: 1 }} />
-                <View style={{ position: 'absolute', top: 0, bottom: Layout.window.height * 0.2, padding: 20,margin:20 }}>
-                    <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                        <Ionicons name='ios-arrow-round-back' size={34} color={'#fff'} />
-                    </TouchableOpacity>
+                <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
+                        <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+                            <Ionicons name='ios-arrow-back' size={32} color={'#000'} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
+                        <View style={[{ backgroundColor: 'transparent', marginLeft: Layout.window.width / 7, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderRightWidth: 0, flexDirection: 'row', elevation: 2, justifyContent: 'flex-start', alignItems: 'center', padding: 5, height: Layout.window.height / 15 }]} />
+                    </View>
                 </View>
             </View>
         );
