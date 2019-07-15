@@ -209,7 +209,7 @@ class DashboardScreen extends React.PureComponent {
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Grant</Text>
                                         </TouchableOpacity>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                            <Image source={require('../assets/icon/rfq.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
+                                            <Image source={require('../assets/images/loan.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Loan Calculator</Text>
                                         </View>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
@@ -239,11 +239,11 @@ class DashboardScreen extends React.PureComponent {
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-info</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoNewsList')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                            <Image source={require('../assets/images/RFQ.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
+                                            <Image source={require('../assets/images/news.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>News</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity onPress={() => this.props.navigation.navigate('PromotionList')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                            <Image source={require('../assets/icon/wallet.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
+                                            <Image source={require('../assets/images/promotion.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Promotion</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoEventList')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
@@ -280,7 +280,7 @@ class DashboardScreen extends React.PureComponent {
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Certification</Text>
                                         </View>
                                         <TouchableOpacity onPress={() => this.props.navigation.navigate('Quiz')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                            <Image source={require('../assets/images/ecommerce.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
+                                            <Image source={require('../assets/images/quiz.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Quiz</Text>
                                         </TouchableOpacity>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>

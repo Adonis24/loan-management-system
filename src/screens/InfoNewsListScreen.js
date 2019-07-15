@@ -35,8 +35,8 @@ class InfoNewsListScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
-    nav = (screen,item) => {
-        this.props.navigation.navigate(screen,{item})
+    nav = (screen, item) => {
+        this.props.navigation.navigate(screen, { item })
     }
 
     async componentDidMount() {
@@ -62,7 +62,7 @@ class InfoNewsListScreen extends React.PureComponent {
                         </View>
                         <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
                             <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
-                                <Image source={require('../assets/icon/rfq.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
+                                <Image source={require('../assets/images/news.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
                                 <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>News</Text>
                             </View>
                         </View>
@@ -73,7 +73,7 @@ class InfoNewsListScreen extends React.PureComponent {
                                 <Latest nav={this.nav} newsArray={this.props.newsArray} />
                             </Tab>
                             <Tab heading="Popular">
-                                <Popular nav={this.nav} newsArray={this.props.newsArray}  />
+                                <Popular nav={this.nav} newsArray={this.props.newsArray} />
                             </Tab>
                         </Tabs>
                     </View>
@@ -93,7 +93,7 @@ class Latest extends React.PureComponent {
                         keyExtractor={(item, index) => index.toString()}
                         numColumns={2}
                         renderItem={({ item }) => (
-                            <TouchableOpacity onPress={() => this.props.nav('InfoNews',item)}>
+                            <TouchableOpacity onPress={() => this.props.nav('InfoNews', item)}>
                                 <Image source={{ uri: item.picture }} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10 }} resizeMode={'cover'} />
                             </TouchableOpacity>
                         )} />
@@ -113,7 +113,7 @@ class Popular extends React.PureComponent {
                         keyExtractor={(item, index) => index.toString()}
                         numColumns={2}
                         renderItem={({ item }) => (
-                            <TouchableOpacity onPress={() => this.props.nav('InfoNews',item)}>
+                            <TouchableOpacity onPress={() => this.props.nav('InfoNews', item)}>
                                 <Image source={{ uri: item.picture }} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10 }} resizeMode={'cover'} />
                             </TouchableOpacity>
                         )} />
