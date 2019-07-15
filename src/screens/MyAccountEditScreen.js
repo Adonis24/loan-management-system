@@ -28,7 +28,7 @@ import styles from '../styles/styles'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class MyAccountScreen extends React.PureComponent {
+class MyAccountEditScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
@@ -58,7 +58,6 @@ class MyAccountScreen extends React.PureComponent {
                                 <Image source={require('../assets/images/girl.png')} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff' }]} resizeMode={'cover'} />
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Nama</Text>
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Nama Company</Text>
-                                <TouchableOpacity style={{padding:10,margin:10,borderRadius:3,backgroundColor:'#fff'}} onPress={()=>this.props.navigation.navigate('MyAccountEdit')} ><Text style={styles.textDefault}>Edit</Text></TouchableOpacity>
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignSelf: 'stretch', padding: 5 }}>
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>43 Connections</Text>
@@ -69,14 +68,31 @@ class MyAccountScreen extends React.PureComponent {
                     {/* CONTENT AREA */}
                     <View style={{ flex: 5 }}>
                         <ScrollView contentStyle={{ padding: 10 }} >
-                        <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.2)', borderStyle: 'solid' }}>
-                                <View style={{ marginBottom: 10 }}>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Recent Activities</Text>
-                                        <Text style={styles.subTitle}>More ></Text>
-                                    </View>
+
+                            <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+                                <Text style={styles.subTitle}>Profile</Text>
+                                <Ionicons name="md-checkmark-circle" size={24} color="lightgrey" />
+                            </View>
+                            <View style={{ width: Layout.window.width, }}>
+                                <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {}]}>Name :</Text></View>
+                                    <View style={{ flex: 3 }}><Text style={styles.textDefault}>Mardhiah</Text></View>
                                 </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                    <View><Text>Kotak 1</Text></View>
+                                <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {}]}>Gender :</Text></View>
+                                    <View style={{ flex: 3 }}><Text style={styles.textDefault}>Female</Text></View>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {}]}>Address :</Text></View>
+                                    <View style={{ flex: 3 }}><Text style={styles.textDefault}>69-4, Taman Equine</Text></View>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {}]}>Postcode :</Text></View>
+                                    <View style={{ flex: 3 }}><Text style={styles.textDefault}>43300</Text></View>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {}]}>Country :</Text></View>
+                                    <View style={{ flex: 3 }}><Text style={styles.textDefault}>Malaysia</Text></View>
                                 </View>
                             </View>
                             
@@ -99,4 +115,4 @@ function mapDispatchToProps(dispatch) {
         initiateMyAccount: () => dispatch(actionCreator.initiateMyAccount())
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(MyAccountScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(MyAccountEditScreen)

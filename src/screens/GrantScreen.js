@@ -11,13 +11,13 @@ import {
     Dimensions,
     TextInput,
     AsyncStorage,
-    ImageBackground
+    ImageBackground,
 
 
 } from 'react-native';
 
 import Constants from 'expo-constants'
-//import { Constants, LinearGradient, FileSystem } from 'expo'
+import { LinearGradient } from 'expo'
 
 import Layout from '../constants/Layout'
 
@@ -48,7 +48,7 @@ class GrantScreen extends React.PureComponent {
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 1, marginLeft: 5, marginTop: 5 }}>
+                        <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
                             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
@@ -60,40 +60,59 @@ class GrantScreen extends React.PureComponent {
                             </View>
                         </View>
                     </View>
-                    <ScrollView style={{ padding: 20 }}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+                    <View style={{ flex: 7 }}>
+                        <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14 }]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pulvinar interdum urna eget dignissim. </Text>
+
+                        <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
                                 <Text style={[styles.textDefault, { margin: 5 }]}>Soft Loan Schemes for Services Sector</Text>
-                                <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10, alignSelf: 'center' }}>
-                                    <Text style={[styles.caption]}>View</Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                    <TouchableOpacity style={{ margin: 10, }}>
+                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                            <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
+                                        </LinearGradient>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
                                 <Text style={[styles.textDefault, { margin: 5 }]}>SME Emergency Fund (SMEEF)</Text>
-                                <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10, alignSelf: 'center' }}>
-                                    <Text style={[styles.caption]}>View</Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                    <TouchableOpacity style={{ margin: 10, }}>
+                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                            <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
+                                        </LinearGradient>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+
+                        </View>
+                        <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
+                                <Text style={[styles.textDefault, { margin: 5 }]}>Soft Loan Schemes for Services Sector</Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                    <TouchableOpacity style={{ margin: 10, }}>
+                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                            <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
+                                        </LinearGradient>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
+                                <Text style={[styles.textDefault, { margin: 5 }]}>SME Emergency Fund (SMEEF)</Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                    <TouchableOpacity style={{ margin: 10, }}>
+                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                            <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
+                                        </LinearGradient>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
                         </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
-                                <Text style={[styles.textDefault, { margin: 5 }]}>SME Emergency Fund (SMEEF)</Text>
-                                <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10, alignSelf: 'center' }}>
-                                    <Text style={[styles.caption]}>View</Text>
-                                </View>
-                            </View>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
-                                <Text style={[styles.textDefault, { margin: 5 }]}>Soft Loan Schemes for Services Sector</Text>
-                                <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10, alignSelf: 'center' }}>
-                                    <Text style={[styles.caption]}>View</Text>
-                                </View>
-                            </View>
-                        </View>
-                    </ScrollView>
+                    </View>
                 </View>
             </View>
 

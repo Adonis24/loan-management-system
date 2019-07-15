@@ -48,7 +48,7 @@ class FinancingScreen extends React.PureComponent {
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 1, marginLeft: 5, marginTop: 5 }}>
+                        <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
                             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
@@ -60,20 +60,20 @@ class FinancingScreen extends React.PureComponent {
                             </View>
                         </View>
                     </View>
-                    <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                            <Tabs tabBarBackgroundColor={'#fff'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
-                                <Tab heading="Micro">
-                                    <Micro nav={this.nav} />
-                                </Tab>
-                                <Tab heading="SME">
-                                    <SME nav={this.nav} />
-                                </Tab>
-                                <Tab heading="Large Ent">
-                                    <LargeEnt nav={this.nav} />
-                                </Tab>
-                            </Tabs>
-                        </View>
+                    <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
+
+                        <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
+                            <Tab heading="Micro">
+                                <Micro nav={this.nav} />
+                            </Tab>
+                            <Tab heading="SME">
+                                <SME nav={this.nav} />
+                            </Tab>
+                            <Tab heading="Large Ent">
+                                <LargeEnt nav={this.nav} />
+                            </Tab>
+                        </Tabs>
+
                     </View>
                 </View>
             </View>

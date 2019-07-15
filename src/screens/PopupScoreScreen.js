@@ -34,11 +34,11 @@ class PopupScoreScreen extends React.PureComponent {
     };
     render() {
         return (
-            <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, backgroundColor: 'black', elevation: 3 }}>
+            <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.5)', elevation: 3, paddingTop: Layout.window.height / 5 }}>
                 <View style={{ flex: 1, }}>
                     <View style={{ flex: 1 }} />
-                    <View style={{ flex: 3, flexDirection: 'row', backgroundColor: '#2b488b', borderTopLeftRadius: Layout.window.width / 2, borderTopRightRadius: Layout.window.width / 2, justifyContent: 'flex-end' }}>
-                        <TouchableOpacity onPress={() => this.props.navigation.goBack()}><Ionicons name='ios-close' color='#fff' size={32} style={{ margin: 7 }} /></TouchableOpacity>
+                    <View style={{ flex: 3, flexDirection: 'row', backgroundColor: '#2b488b', borderTopLeftRadius: Layout.window.width / 1.5, borderTopRightRadius: Layout.window.width / 1.5, justifyContent: 'flex-end' }}>
+                        <TouchableOpacity onPress={() => this.props.toggleShow()}><Ionicons name='ios-close' color='#fff' size={32} style={{ margin: 7 }} /></TouchableOpacity>
                     </View>
                 </View>
                 <View style={{ flex: 5, backgroundColor: '#2b488b', justifyContent: 'space-evenly' }}>
@@ -58,14 +58,10 @@ class PopupScoreScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-
-
-
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(PopupScoreScreen)
