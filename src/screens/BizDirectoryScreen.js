@@ -28,7 +28,7 @@ import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, L
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class QuizScreen extends React.PureComponent {
+class BizDirectoryScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
@@ -55,15 +55,14 @@ class QuizScreen extends React.PureComponent {
                         </View>
                         <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
                             <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
-                                <Image source={require('../assets/images/quiz.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
-                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Quiz</Text>
+                                <Image source={require('../assets/images/directory.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
+                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Directory</Text>
                             </View>
                         </View>
                     </View>
                     {/* START CONTENT */}
                     <View style={{ flex: 7 }}>
                         <ScrollView style={{ padding: 20 }}>
-                            <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14 }]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pulvinar interdum urna eget dignissim. </Text>
                             <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
                                 <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
                                     <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
@@ -135,4 +134,4 @@ function mapDispatchToProps(dispatch) {
 
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(QuizScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(BizDirectoryScreen)

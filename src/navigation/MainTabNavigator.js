@@ -46,6 +46,7 @@ import MyAccountScreen from '../screens/MyAccountScreen';
 import EcommerceScreen from '../screens/EcommerceScreen';
 import BizAppScreen from '../screens/BizAppScreen';
 import MyAccountEditScreen from '../screens/MyAccountEditScreen';
+import BizDirectoryScreen from '../screens/BizDirectoryScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -77,6 +78,7 @@ const DashboardStackWithModal = createStackNavigator(
     Ecommerce: { screen: EcommerceScreen, },
     BizApp: { screen: BizAppScreen, },
     MyAccountEdit: { screen: MyAccountEditScreen, },
+    BizDirectory: { screen: BizDirectoryScreen, },
   },
   {
     mode: 'modal',
