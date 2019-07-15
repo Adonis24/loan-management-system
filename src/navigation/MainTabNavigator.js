@@ -49,6 +49,7 @@ import MyAccountEditScreen from '../screens/MyAccountEditScreen';
 import BizDirectoryScreen from '../screens/BizDirectoryScreen';
 import BizLicensingScreen from '../screens/BizLicensingScreen';
 import CertificationScreen from '../screens/CertificationScreen';
+import ElearningScreen from '../screens/ElearningScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -83,6 +84,7 @@ const DashboardStackWithModal = createStackNavigator(
     BizDirectory: { screen: BizDirectoryScreen, },
     BizLicensing: { screen: BizLicensingScreen, },
     Certification: { screen: CertificationScreen, },
+    Elearning: { screen: ElearningScreen, },
   },
   {
     mode: 'modal',
