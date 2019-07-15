@@ -70,8 +70,8 @@ export default class App extends React.Component {
   async componentDidMount() {
     await this.checkUpdate()
     await this.checkLogin()
-    this.registerForPushNotificationsAsync();
-    this._notificationSubscription = Notifications.addListener(this._handleNotification);
+    // this.registerForPushNotificationsAsync();
+    // this._notificationSubscription = Notifications.addListener(this._handleNotification);
   }
 
   _handleNotification = (notification) => {

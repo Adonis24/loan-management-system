@@ -42,7 +42,7 @@ class PopupScoreScreen extends React.PureComponent {
                     </View>
                 </View>
                 <View style={{ flex: 5, backgroundColor: '#2b488b', justifyContent: 'space-evenly' }}>
-                    <Text style={[styles.textDefault, { color: '#fff' }]}>Hello Syahirah</Text>
+                    <Text style={[styles.textDefault, { color: '#fff' }]}>Hello {this.props.name}</Text>
                     <Text style={[styles.textDefault, { color: '#fff' }]}>Your current score is</Text>
                     <Text style={[styles.textDefault, { color: '#fff', fontSize: 48 }]}>48</Text>
                     <View style={{ backgroundColor: '#fff', padding: 20, margin: 20, borderRadius: 5 }}>

@@ -233,10 +233,10 @@ export const getUserInfoApi = () => {
       .then(async (responseJson) => {
 
         console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
-        const eventArray = await responseJson.data
-        await console.log(`USER  ${JSON.stringify(eventArray)}`)
+        const userProfile = await responseJson
+        await console.log(`USER  ${JSON.stringify(userProfile)}`)
 
-        //await dispatch({ type: 'SET_EVENT', payload: { eventArray } })
+        await dispatch({ type: 'SET_USER_PROFILE', payload: { ...userProfile } })
       })
       .catch((error) => {
         console.log('Error Event Api : ' + error);
