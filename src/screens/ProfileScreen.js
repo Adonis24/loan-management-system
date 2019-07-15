@@ -50,7 +50,7 @@ class ProfileScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     {/* HEADER */}
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 1,marginLeft:10, justifyContent:'center',border:1,borderColor:'#000' }}>
+                        <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
                             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
@@ -58,7 +58,7 @@ class ProfileScreen extends React.PureComponent {
                         <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
                             <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 7, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start', alignItems: 'center', padding: 5 }]}>
                                 <Image source={require('../assets/icon/rfq.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]}  numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
+                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
                             </View>
                         </View>
                     </View>
@@ -74,7 +74,9 @@ class ProfileScreen extends React.PureComponent {
                                     <Text style={[styles.subTitle, { margin: 5 }]}>SSM NO :{this.props.companyRegNo || '123456789'}</Text>
                                 </View>
                             </View>
-
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('ContactPerson')}>
+                                <Text>Add Worker</Text>
+                            </TouchableOpacity>
                             <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
                                 <View style={{ flexDirection: 'row', flex: 2 }}>
                                     <Text style={[styles.textDefault, { margin: 5, fontSize: 12, textAlign: 'left' }]}>Business Model :</Text>
@@ -82,7 +84,7 @@ class ProfileScreen extends React.PureComponent {
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row' }}>
                                     <Ionicons name='ios-add' size={26} color='lawngreen' style={{ margin: 5 }} />
-                                    <Text style={[styles.caption, { margin: 5,  textAlign: 'left' }]}>Add Info</Text>
+                                    <Text style={[styles.caption, { margin: 5, textAlign: 'left' }]}>Add Info</Text>
                                 </View>
                             </View>
 
@@ -93,7 +95,7 @@ class ProfileScreen extends React.PureComponent {
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row' }}>
                                     <Ionicons name='ios-add' size={26} color='lawngreen' style={{ margin: 5 }} />
-                                    <Text style={[styles.caption, { margin: 5,  textAlign: 'left' }]}>Add Other Business</Text>
+                                    <Text style={[styles.caption, { margin: 5, textAlign: 'left' }]}>Add Other Business</Text>
                                 </View>
                             </View>
                             <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
@@ -103,7 +105,7 @@ class ProfileScreen extends React.PureComponent {
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row' }}>
                                     <Ionicons name='ios-add' size={26} color='lawngreen' style={{ margin: 5 }} />
-                                    <Text style={[styles.caption, { margin: 5,  flex: 2, textAlign: 'left' }]}>Add Loan Details</Text>
+                                    <Text style={[styles.caption, { margin: 5, flex: 2, textAlign: 'left' }]}>Add Loan Details</Text>
                                 </View>
                             </View>
 
@@ -114,12 +116,12 @@ class ProfileScreen extends React.PureComponent {
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row' }}>
                                     <Ionicons name='ios-close' size={26} color='red' style={{ margin: 5 }} />
-                                    <Text style={[styles.caption, { margin: 5,  textAlign: 'left' }]}>Make Report</Text>
+                                    <Text style={[styles.caption, { margin: 5, textAlign: 'left' }]}>Make Report</Text>
                                 </View>
                             </View>
 
                             <View style={{ flex: 1, margin: 5, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                                <Text style={[styles.textDefault, {flex:1, alignSelf:'flex-start', margin: 5, fontSize: 12, textAlign: 'left' }]}>Scoring meter {'&'} chart</Text>
+                                <Text style={[styles.textDefault, { flex: 1, alignSelf: 'flex-start', margin: 5, fontSize: 12, textAlign: 'left' }]}>Scoring meter {'&'} chart</Text>
                                 <View style={{ flex: 1, marginLeft: 20, marginLeft: 5, justifyContent: 'center', alignSelf: 'stretch' }}>
                                     <View style={{ flex: 1, flexDirection: 'row' }}>
                                         <Text style={[styles.caption, { flex: 1, }]}>Poor</Text>
@@ -129,14 +131,14 @@ class ProfileScreen extends React.PureComponent {
                                     <View style={{ padding: 10, flex: 1, borderRadius: 10, borderWidth: 1, borderColor: '#000' }} />
                                 </View>
                             </View>
-                            <View style={{ flex: 1, flexDirection: 'row', margin: 5,justifyContent:'space-evenly' }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('LoanApplication')} style={{ margin: 10, padding: 10, borderRadius: 5, borderWidth: 1, borderColor: 'blue' }}>
-                                <Text>Apply Loan</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => console.log('Consultation')} style={{ margin: 10, padding: 10, borderRadius: 5, borderWidth: 1, borderColor: 'blue' }}>
-                                <Text>Get Consultation</Text>
-                            </TouchableOpacity>
-                            </View>   
+                            <View style={{ flex: 1, flexDirection: 'row', margin: 5, justifyContent: 'space-evenly' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('LoanApplication')} style={{ margin: 10, padding: 10, borderRadius: 5, borderWidth: 1, borderColor: 'blue' }}>
+                                    <Text>Apply Loan</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => console.log('Consultation')} style={{ margin: 10, padding: 10, borderRadius: 5, borderWidth: 1, borderColor: 'blue' }}>
+                                    <Text>Get Consultation</Text>
+                                </TouchableOpacity>
+                            </View>
                         </ScrollView>
 
                     </View>

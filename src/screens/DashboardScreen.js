@@ -19,7 +19,7 @@ import {
 } from 'react-native';
 
 import Constants from 'expo-constants'
-//import { Constants, LinearGradient, FileSystem } from 'expo'
+import { LinearGradient } from 'expo-linear-gradient'
 
 import * as Animatable from 'react-native-animatable';
 
@@ -111,7 +111,7 @@ class DashboardScreen extends React.PureComponent {
         this.props.initiateMyAccount()
 
         await this.animate()
-        setTimeout(() => this.setState({ popUp: !this.state.popUp }), 1000);
+        setTimeout(() => this.setState({ popUp: !this.state.popUp }), 5000);
 
         //this.props.navigation.navigate('PopupScore')
     }
@@ -362,11 +362,13 @@ class DashboardScreen extends React.PureComponent {
                                             <Image source={require('../assets/icon/socialCharity.png')} style={{ borderColor: 'lightgrey', borderWidth: 1, width: Layout.window.height / 13, height: Layout.window.height / 13, borderRadius: Layout.window.height / 26, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Social Charity</Text>
                                             <View style={{ flexDirection: 'row', }}>
-                                                <TouchableOpacity onPress={() => { }} style={{ padding: 5, margin: 5, borderRadius: 5, backgroundColor: 'lightgrey' }}>
-                                                    <Text style={[styles.caption]}>Accept</Text>
+                                                <TouchableOpacity style={{ margin: 10, marginTop: 0, marginBottom: 0 }}>
+                                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 5, padding: 5, margin: 5 }}>
+                                                        <Text style={[styles.caption, { color: '#fff' }]}>Accept</Text>
+                                                    </LinearGradient>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => { }} style={{ padding: 5, margin: 5, borderRadius: 5, backgroundColor: 'lightgrey' }}>
-                                                    <Text style={[styles.caption]}>Decline</Text>
+                                                <TouchableOpacity onPress={() => { }} style={{ padding: 5, margin: 5, borderRadius: 5, backgroundColor: '#5A647F' }}>
+                                                    <Text style={[styles.caption, { color: '#fff' }]}>Decline</Text>
                                                 </TouchableOpacity>
                                             </View>
                                         </View>
@@ -376,11 +378,13 @@ class DashboardScreen extends React.PureComponent {
                                             <Image source={require('../assets/icon/socialCharity.png')} style={{ borderColor: 'lightgrey', borderWidth: 1, width: Layout.window.height / 13, height: Layout.window.height / 13, borderRadius: Layout.window.height / 26, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Little Adli</Text>
                                             <View style={{ flexDirection: 'row', }}>
-                                                <TouchableOpacity onPress={() => { }} style={{ padding: 5, margin: 5, borderRadius: 5, backgroundColor: 'lightgrey' }}>
-                                                    <Text style={[styles.caption]}>Accept</Text>
+                                                <TouchableOpacity style={{ margin: 10, marginTop: 0, marginBottom: 0 }}>
+                                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 5, padding: 5, margin: 5 }}>
+                                                        <Text style={[styles.caption, { color: '#fff' }]}>Accept</Text>
+                                                    </LinearGradient>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => { }} style={{ padding: 5, margin: 5, borderRadius: 5, backgroundColor: 'lightgrey' }}>
-                                                    <Text style={[styles.caption]}>Decline</Text>
+                                                <TouchableOpacity onPress={() => { }} style={{ padding: 5, margin: 5, borderRadius: 5, backgroundColor: '#5A647F' }}>
+                                                    <Text style={[styles.caption, { color: '#fff' }]}>Decline</Text>
                                                 </TouchableOpacity>
                                             </View>
                                         </View>
@@ -426,15 +430,20 @@ class DashboardScreen extends React.PureComponent {
                                     </View>
                                 </View>
                                 <View style={{ justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                    <View style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', marginBottom: 5 }} >
-                                        <Image source={{ uri: 'https://picsum.photos/600' }} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 }} />
-                                    </View>
-                                    <View style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', marginBottom: 5 }} >
-                                        <Image source={{ uri: 'https://picsum.photos/600' }} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 }} />
-                                    </View>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('UnderConstruction')} style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', margin: 10, marginBottom: 5, borderRadius: 10 }} >
+                                        <Image source={{ uri: 'https://picsum.photos/600' }} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 10, }} />
+                                        <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, paddingTop: 10, paddingLeft: 10 }}>
+                                            <Text style={[styles.textDefault, { color: '#fff', alignSelf: 'flex-start', textAlign: 'left' }]}>Find Out More ></Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('UnderConstruction')} style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', margin: 10, marginBottom: 5, borderRadius: 10 }} >
+                                        <Image source={{ uri: 'https://picsum.photos/600' }} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 10, }} />
+                                        <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, paddingTop: 10, paddingLeft: 10 }}>
+                                            <Text style={[styles.textDefault, { color: '#fff', alignSelf: 'flex-start', textAlign: 'left' }]}>Find Out More ></Text>
+                                        </View>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
-
                             {/**Training */}
                             <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                 <View style={{ marginBottom: 10 }}>
@@ -443,12 +452,50 @@ class DashboardScreen extends React.PureComponent {
                                         <Text style={styles.caption}>More ></Text>
                                     </View>
                                 </View>
-                                <View style={{ justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                    <View style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', marginBottom: 5 }} >
-                                        <Image source={{ uri: 'https://picsum.photos/600' }} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 }} />
+                                <View style={[{ padding: 5, margin: 5, alignSelf: 'stretch', borderWidth: 1, borderColor: 'lightgrey', borderRadius: 10 }]}>
+                                    <View style={{ justifyContent: 'flex-start', alignSelf: 'stretch' }}>
+                                        <View style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', marginBottom: 0, flexDirection: 'row' }} >
+                                            <Image source={{ uri: 'https://picsum.photos/600' }} style={{ flex: 1, margin: 5 }} />
+                                            <View style={{ flex: 3, padding: 5 }} >
+                                                <Text>Online Business Training</Text>
+                                                <Text numberOfLines={4} ellipsizeMode={'tail'} style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start', }]} >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vulputate volutpat mi. Etiam malesuada aliquam neque a cursus. Curabitur sed fringilla tortor, condimentum gravida est.</Text>
+                                                <View style={{ alignSelf: 'stretch', flexDirection: 'row' }}>
+                                                    <View style={{ flex: 1, padding: 2, backgroundColor: '#4364B0', }} />
+                                                    <View style={{ flex: 1 }} />
+                                                </View>
+                                                <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>7 participants</Text>
+                                            </View>
+                                        </View>
                                     </View>
-                                    <View style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', marginBottom: 5 }} >
-                                        <Image source={{ uri: 'https://picsum.photos/600' }} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 }} />
+                                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                                        <TouchableOpacity style={{ margin: 10, marginTop: 0, marginBottom: 0 }}>
+                                            <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                                <Text style={[styles.caption, { color: '#fff' }]}>Join</Text>
+                                            </LinearGradient>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                                <View style={[{ padding: 5, margin: 5, alignSelf: 'stretch', borderWidth: 1, borderColor: 'lightgrey', borderRadius: 10 }]}>
+                                    <View style={{ justifyContent: 'flex-start', alignSelf: 'stretch' }}>
+                                        <View style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', marginBottom: 0, flexDirection: 'row' }} >
+                                            <Image source={{ uri: 'https://picsum.photos/600' }} style={{ flex: 1, margin: 5 }} />
+                                            <View style={{ flex: 3, padding: 5 }} >
+                                                <Text>Online Business Training</Text>
+                                                <Text numberOfLines={4} ellipsizeMode={'tail'} style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start', }]} >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vulputate volutpat mi. Etiam malesuada aliquam neque a cursus. Curabitur sed fringilla tortor, condimentum gravida est.</Text>
+                                                <View style={{ alignSelf: 'stretch', flexDirection: 'row' }}>
+                                                    <View style={{ flex: 1, padding: 2, backgroundColor: '#4364B0', }} />
+                                                    <View style={{ flex: 1 }} />
+                                                </View>
+                                                <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>7 participants</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                                        <TouchableOpacity style={{ margin: 10, marginTop: 0, marginBottom: 0 }}>
+                                            <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                                <Text style={[styles.caption, { color: '#fff' }]}>Join</Text>
+                                            </LinearGradient>
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                             </View>

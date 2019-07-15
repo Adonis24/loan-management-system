@@ -32,9 +32,9 @@ class SettingsScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
-    logout(){
-      this.props.logout()
-      this.props.navigation.navigate('Welcome')
+    logout() {
+        this.props.logout()
+        this.props.navigation.navigate('Welcome')
     }
     render() {
         return (
@@ -54,7 +54,7 @@ class SettingsScreen extends React.PureComponent {
                             <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
                         </View>
                         <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                            <View style={[{ backgroundColor:'#fff', flex: 1, marginLeft: Layout.window.width / 7, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth:0,borderColor:'lightgrey', flexDirection: 'row',elevation:2 }]}>
+                            <View style={[{ backgroundColor: '#fff', flex: 1, marginLeft: Layout.window.width / 7, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2 }]}>
                                 <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                     <Image source={require('../assets/icon/rfq.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-info</Text>
@@ -71,7 +71,6 @@ class SettingsScreen extends React.PureComponent {
                                     <Image source={require('../assets/icon/rfq.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Scoring</Text>
                                 </View>
-
                             </View>
                         </View>
                     </View>
@@ -79,16 +78,14 @@ class SettingsScreen extends React.PureComponent {
                     <View style={{ flex: 4 }}>
                         <ScrollView >
                             {/*Business Hub */}
-                           <Text>Notifications</Text>
-                           <TouchableOpacity onPress={()=>this.logout()} style={{margin:10,padding:10}}>
-                             <Text>Logout</Text>
-                             </TouchableOpacity>
+                            <Text>Settings</Text>
+                            <TouchableOpacity onPress={() => this.logout()} style={{ margin: 10, padding: 10 }}>
+                                <Text>Logout</Text>
+                            </TouchableOpacity>
                         </ScrollView>
                     </View>
-
                 </View>
             </View>
-
         );
     }
 }
@@ -97,14 +94,11 @@ class SettingsScreen extends React.PureComponent {
 function mapStateToProps(state) {
     return {
 
-
-
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-      logout: () => dispatch(actionCreator.logout())
-
+        logout: () => dispatch(actionCreator.logout())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen)

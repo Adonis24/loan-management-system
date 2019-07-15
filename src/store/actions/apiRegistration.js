@@ -112,7 +112,7 @@ export const registerOTPApi = (token_type, access_token, country_code, mobile_no
   }
 }
 
-export const verifyPhoneApi =  (token_type, access_token, country_code, mobile_no, code) => {
+export const verifyPhoneApi = (token_type, access_token, country_code, mobile_no, code) => {
   return async (dispatch, getState) => {
     fetch(`${apiUrl}api/verifyPhoneData`, {
       method: 'POST',
@@ -125,7 +125,7 @@ export const verifyPhoneApi =  (token_type, access_token, country_code, mobile_n
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
-        await dispatch({ type: 'VERIFY_OTP', payload: { phoneVerified:status } })
+        await dispatch({ type: 'VERIFY_OTP', payload: { phoneVerified: status } })
         await console.log(`verifyPhone  ${JSON.stringify(responseJson)}`)
       })
       .catch((error) => {
@@ -140,7 +140,8 @@ export const companyInfoAPI = () => {
     const { token_type, access_token } = JSON.parse(personalToken)
     const access_credential = 'api'
     console.log(`Company Registration : ${JSON.stringify(getState().companyInformationReducer)}`)
-    const companyInfo=getState().companyInformationReducer
+    const companyInfo = getState().companyInformationReducer
+    const comp_regdate=moment(companyInfo.comp_regdate).format("YYYY-MM-DD HH:mm:ss")
     fetch(`${apiUrl}api/registerCompany/basic`, {
       method: 'POST',
       headers: {
@@ -148,7 +149,7 @@ export const companyInfoAPI = () => {
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-      body: JSON.stringify({ ...companyInfo, access_credential: 'api' }),
+      body: JSON.stringify({ ...companyInfo,comp_regdate, access_credential: 'api' }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
@@ -162,8 +163,31 @@ export const companyInfoAPI = () => {
   }
 }
 
-export const contactPersonAPI = (fullName, myKad, phoneNum, position) => {
+export const contactPersonAPI = () => {
   return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    console.log(`Company Registration : ${JSON.stringify(getState().companyInformationReducer)}`)
+    const {full_name, ic_no, phone,ic_image, position} = getState().companyInformationReducer
+    //const comp_regdate=moment(companyInfo.comp_regdate).format("YYYY-MM-DD HH:mm:ss")
+    fetch(`${apiUrl}api/company/addWorker`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      },
+      body: JSON.stringify({ full_name, ic_no, phone,ic_image, position, access_credential: 'api' }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+        const { status } = await responseJson
+        //await dispatch({ type: 'Company Info', payload: { phoneVerified:status } })
+        await console.log(`companyInfo  ${JSON.stringify(responseJson)}`)
+      })
+      .catch((error) => {
+        console.error('Error : ' + error);
+      });
 
   }
 }

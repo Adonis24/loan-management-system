@@ -18,7 +18,7 @@ import {
 
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
-import * as DocumentPicker from 'expo-document-picker';
+
 import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
@@ -29,24 +29,20 @@ import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 import { Button } from 'native-base';
 
-class ContactPersonScreen extends React.PureComponent {
+class ContactPersonSuccessScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
 
-    pickDoc() {
-        DocumentPicker.getDocumentAsync({ type: '*/*', copyToCacheDirectory: false })
-            .then(result => {
-                console.log(JSON.stringify(result))
-                //this.props.saveDocument(result)
-                this.props.saveDocumentDO(result)
-            })
+    async done() {
+        //await this.props.companyInfo()
+        //this.props.contactPerson()
+        this.props.doneForNow()
+        this.props.navigation.navigate('Agreement')
     }
 
-    async ContactPerson() {
-        //await this.props.companyInfo()
-        this.props.contactPerson()
-        this.props.navigation.navigate('ContactPersonSuccess')
+    componentDidMount() {
+        this.props.initiateListWorkers()
     }
 
     render() {
@@ -61,6 +57,10 @@ class ContactPersonScreen extends React.PureComponent {
                     </View>
                 </View>
                 <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
+                    {this.props.listWorkers && this.props.listWorkers.map(
+                        lw => <Text>{lw.full_name}</Text>
+                    )}
+
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
@@ -86,12 +86,12 @@ class ContactPersonScreen extends React.PureComponent {
                                 <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12, fontWeight: 'bold' }]}>Upload documents needed:</Text> Scanned copy of identity card
                             </Text>
                             <View style={{ alignSelf: 'stretch', borderWidth: 1, borderRadius: 15, borderColor: 'darkblue', margin: 10, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
-                                <TouchableOpacity onPress={() => this.pickDoc()} style={{ padding: 10, borderRadius: 5, justifyContent: 'center', backgroundColor: 'gainsboro', margin: 10 }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('DocUpload')} style={{ padding: 10, borderRadius: 5, justifyContent: 'center', backgroundColor: 'gainsboro', margin: 10 }}>
                                     <Text style={[styles.caption, { color: '#000', fontSize: 10 }]}>Select</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.ContactPerson()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                <TouchableOpacity onPress={() => this.done()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Next</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
@@ -109,20 +109,17 @@ class ContactPersonScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-        full_name: state.companyInformationReducer.full_name,
-        ic_no: state.companyInformationReducer.ic_no,
-        phone: state.companyInformationReducer.phone,
-        position: state.companyInformationReducer.position,
-        ic_image: state.companyInformationReducer.ic_image
+        listWorkers: state.listWorkersReducer.listWorkers,
+
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-        setContactPerson: (value) => dispatch({ type: 'SET_CONTACT_PERSON', payload: { ...value } }),
-        contactPerson: () => dispatch(actionCreator.contactPerson()),
-        companyInfo: () => dispatch(actionCreator.companyInfo()),
-        saveDocument: (result) => dispatch(actionCreator.saveDocument(result)),
-        saveDocumentDO: (result) => dispatch(actionCreator.saveDocumentDO(result))
+
+        initiateListWorkers: () => dispatch(actionCreator.initiateListWorkers()),
+        doneForNow: () => dispatch(actionCreator.doneForNow()),
+
+
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ContactPersonScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(ContactPersonSuccessScreen)

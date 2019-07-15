@@ -45,11 +45,11 @@ class EcommerceScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
                         <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                            <Ionicons name='ios-arrow-back' size={32} color={'#000'} />
+                            <Ionicons name='ios-arrow-back' size={32} color={'#fff'} />
                         </TouchableOpacity>
                     </View>
                     <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                        <View style={[{ backgroundColor: 'transparent', marginLeft: Layout.window.width / 7, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderRightWidth: 0, flexDirection: 'row', elevation: 2, justifyContent: 'flex-start', alignItems: 'center', padding: 5, height: Layout.window.height / 15 }]} />
+                        <View style={[{ backgroundColor: 'transparent', marginLeft: Layout.window.width / 7, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', padding: 5, height: Layout.window.height / 15 }]} />
                     </View>
                 </View>
             </View>

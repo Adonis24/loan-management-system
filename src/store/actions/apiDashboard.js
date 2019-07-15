@@ -192,15 +192,15 @@ export const uploadDocApi = (blob) => {
     const { proposal, income_tax, loan_amount, estimate_time, payment_method } = getState().loanApplicationReducer
     // const {document,document_name,}
 
-    const document=blob
-    const document_name='testing'
+    const document = blob
+    const document_name = 'testing'
     fetch(`${apiUrl}api/uploadDocument`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
-      }, body: JSON.stringify({ document,document_name,access_credential}),
+      }, body: JSON.stringify({ document, document_name, access_credential }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
 
@@ -263,7 +263,7 @@ export const getCompanyInfoApi = () => {
 
         console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
         const bizInfo = await responseJson.data
-       // await console.log(`Company Info  ${JSON.stringify(eventArray)}`)
+        // await console.log(`Company Info  ${JSON.stringify(eventArray)}`)
 
         await dispatch({ type: 'GET_BIZ_INFO', payload: { ...bizInfo } })
       })
@@ -273,6 +273,58 @@ export const getCompanyInfoApi = () => {
   }
 }
 
+
+
+export const getListWorkersApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/company/listWorkers`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const listWorkers = await responseJson.data
+        // await console.log(`Company Info  ${JSON.stringify(eventArray)}`)
+
+        await dispatch({ type: 'GET_LIST_WORKERS', payload: { listWorkers } })
+      })
+      .catch((error) => {
+        console.log('Error WORKER Api : ' + error);
+      });
+  }
+}
+
+export const doneForNowApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/registerCompany/additional`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const done = await responseJson.data
+        await console.log(`Company Info  ${JSON.stringify(done)}`)
+        //await dispatch({ type: 'GET_LIST_WORKERS', payload: { ...listWorkers } })
+      })
+      .catch((error) => {
+        console.log('Error WORKER Api : ' + error);
+      });
+  }
+}
 
 //////////////////////////////////LUNAWALLET/////////////////////////////////////////
 
