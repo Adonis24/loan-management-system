@@ -167,7 +167,7 @@ class DashboardScreen extends React.PureComponent {
                         <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
                             <Animated.View style={{ opacity: profilePicOpac, flex: 5, flexDirection: 'row' }}>
                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('MyAccount')} style={[{ marginLeft: 10 }]}>
-                                    <Image source={{uri:this.props.profile_pic}} style={{  height: 50, width: 50,borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' />
+                                    <Image source={{ uri: this.props.profile_pic }} style={{ height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' />
                                 </TouchableOpacity>
                                 <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
                                     <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>{this.props.name}</Text>
@@ -209,10 +209,10 @@ class DashboardScreen extends React.PureComponent {
                                             <Image source={require('../assets/images/grant.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Grant</Text>
                                         </TouchableOpacity>
-                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Loan')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/images/loan.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Loan Calculator</Text>
-                                        </View>
+                                        </TouchableOpacity>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             {/* <Image source={require('../assets/images/EDA.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>My Account</Text> */}
@@ -330,10 +330,10 @@ class DashboardScreen extends React.PureComponent {
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                     <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Edonation')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/images/social.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Donation</Text>
-                                        </View>
+                                        </TouchableOpacity>
                                         <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
 
                                         </View>
@@ -524,8 +524,8 @@ function mapStateToProps(state) {
         email: state.myAccountReducer.email,
         phone_no: state.myAccountReducer.phone_no,
         profile_pic: state.myAccountReducer.profile_pic,
-        email_verified_at: state.myAccountReducer.email_verified_at, 
-        
+        email_verified_at: state.myAccountReducer.email_verified_at,
+
         companyName: state.bizInfoReducer.name,
     }
 }
