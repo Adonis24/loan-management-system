@@ -112,7 +112,7 @@ class DashboardScreen extends React.PureComponent {
         this.props.initiateCompanyInfo()
 
         await this.animate()
-        setTimeout(() => this.setState({ popUp: !this.state.popUp }), 3000);
+        //setTimeout(() => this.setState({ popUp: !this.state.popUp }), 3000);
 
         //this.props.navigation.navigate('PopupScore')
     }
@@ -163,6 +163,7 @@ class DashboardScreen extends React.PureComponent {
                     <View style={{ flex: 1 }}>
                         <Animated.View style={{ opacity: logoOpac, flex: 1, marginLeft: 5 }}>
                             <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+                        
                         </Animated.View>
                         <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
                             <Animated.View style={{ opacity: profilePicOpac, flex: 5, flexDirection: 'row' }}>
@@ -507,7 +508,7 @@ class DashboardScreen extends React.PureComponent {
 
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('ScanQR')}>
-                        <Image source={require('../assets/images/qr.png')} style={{ width: 63, height: 63 }} />
+                        <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
                     </TouchableOpacity>
                 </View>
             </View>

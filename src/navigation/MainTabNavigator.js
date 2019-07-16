@@ -56,6 +56,7 @@ import CompanyContactInformationScreen from '../screens/CompanyContactInformatio
 import CompanyContactAddressInformationScreen from '../screens/CompanyContactAddressInformationScreen';
 import CompanyInfoSuccessScreen from '../screens/CompanyInfoSuccessScreen';
 import TrainingScreen from '../screens/TrainingScreen';
+import UserAccountScreen from '../screens/UserAccountScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -92,7 +93,7 @@ const DashboardStackWithModal = createStackNavigator(
     Certification: { screen: CertificationScreen, },
     Elearning: { screen: ElearningScreen, },
     Ecommerce: { screen: EcommerceScreen, },
-    
+
     AddCompany: { screen: CompanyInformationScreen, },
     CompanyContactInformation: CompanyContactInformationScreen,
     CompanyContactAddressInformation: CompanyContactAddressInformationScreen,
@@ -102,6 +103,8 @@ const DashboardStackWithModal = createStackNavigator(
     ContactPerson: { screen: ContactPersonScreen, },
     ContactPersonSuccess: { screen: ContactPersonSuccessScreen, },
     ScanQR: { screen: ScanQRScreen, },
+    UserAccount: { screen: UserAccountScreen },
+
     Training: { screen: TrainingScreen, }
   },
   {
@@ -110,19 +113,27 @@ const DashboardStackWithModal = createStackNavigator(
   },
 );
 
-DashboardStackWithModal.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
+DashboardStackWithModal.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let routeName = navigation.state.routes[navigation.state.index].routeName
+  if (routeName !== 'Main') {
+    tabBarVisible = false
+  }
+  return {
+    tabBarVisible,
+    tabBarLabel: 'Home',
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={
+          Platform.OS === 'ios'
+            ? `ios-information-circle${focused ? '' : '-outline'}`
+            : 'md-information-circle'
+        }
+      />
+    ),
+  };
+}
 
 const InsightStack = createStackNavigator({
   Insight: InsightScreen,

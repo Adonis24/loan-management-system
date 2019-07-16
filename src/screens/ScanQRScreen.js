@@ -50,29 +50,11 @@ class ScanQRScreen extends React.PureComponent {
 
     handleBarCodeScanned = ({ type, data }) => {
         this.setState({ scanned: true });
-        alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+        console.log(`data ialah : ${JSON.stringify(data)}`)
+        this.props.navigation.navigate('UserAccount',{member_id:data})
     };
 
-    getBillDetail = (val) => {
-        const { billId, access_token, token_type } = val
-
-        fetch(`http://uat.lunapay.co/api/QrScanInfo/${billId}`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': token_type + ' ' + access_token
-            },
-        }).then((response) => response.json())
-            .then((responseJson) => {
-                //console.log(`responseJson : ${responseJson}`)
-                this.props.setBill(responseJson.data)
-                //dispatch({type:'SET_BILL',payload:{...val}})
-            })
-            .catch((error) => {
-                console.error('Error : ' + error);
-            });
-    }
+    
     render() {
         const { hasCameraPermission, scanned } = this.state;
 

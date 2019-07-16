@@ -110,7 +110,6 @@ class ProfileScreen extends React.PureComponent {
                                     <Text style={[styles.caption, { margin: 5, flex: 2, textAlign: 'left' }]}>Add Loan Details</Text>
                                 </View>
                             </View>
-
                             <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
                                 <View style={{ flexDirection: 'row', flex: 2 }}>
                                     <Text style={[styles.textDefault, { margin: 5, fontSize: 12, textAlign: 'left' }]}>Scoring : </Text>
@@ -121,7 +120,6 @@ class ProfileScreen extends React.PureComponent {
                                     <Text style={[styles.caption, { margin: 5, textAlign: 'left' }]}>Make Report</Text>
                                 </View>
                             </View>
-
                             <View style={{ flex: 1, margin: 5, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                                 <Text style={[styles.textDefault, { flex: 1, alignSelf: 'flex-start', margin: 5, fontSize: 12, textAlign: 'left' }]}>Scoring meter {'&'} chart</Text>
                                 <View style={{ flex: 1, marginLeft: 20, marginLeft: 5, justifyContent: 'center', alignSelf: 'stretch' }}>
@@ -149,7 +147,6 @@ class ProfileScreen extends React.PureComponent {
                     </View>
                 </View>
             </View>
-
         );
     }
 }
@@ -174,6 +171,8 @@ function mapStateToProps(state) {
         logo: state.bizInfoReducer.logo,
 
         listWorkers: state.listWorkersReducer.listWorkers,
+
+    
 
     }
 }
