@@ -322,7 +322,8 @@ class DashboardScreen extends React.PureComponent {
                                 </View>
                             </View>
 
-                            {/*Others */}
+                            {/* Others
+                            
                             <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                 <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle}>Others</Text>
@@ -348,7 +349,7 @@ class DashboardScreen extends React.PureComponent {
                                         </View>
                                     </View>
                                 </View>
-                            </View>
+                            </View> */}
 
                             {/*Contact Request */}
                             <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
