@@ -56,6 +56,7 @@ import CompanyContactInformationScreen from '../screens/CompanyContactInformatio
 import CompanyContactAddressInformationScreen from '../screens/CompanyContactAddressInformationScreen';
 import CompanyInfoSuccessScreen from '../screens/CompanyInfoSuccessScreen';
 import TrainingScreen from '../screens/TrainingScreen';
+import CertificationViewScreen from '../screens/CertificationViewScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -90,9 +91,10 @@ const DashboardStackWithModal = createStackNavigator(
     BizDirectory: { screen: BizDirectoryScreen, },
     BizLicensing: { screen: BizLicensingScreen, },
     Certification: { screen: CertificationScreen, },
+    CertificationView: { screen: CertificationViewScreen, },
     Elearning: { screen: ElearningScreen, },
     Ecommerce: { screen: EcommerceScreen, },
-    
+
     AddCompany: { screen: CompanyInformationScreen, },
     CompanyContactInformation: CompanyContactInformationScreen,
     CompanyContactAddressInformation: CompanyContactAddressInformationScreen,
