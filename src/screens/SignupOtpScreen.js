@@ -19,7 +19,7 @@ import {
 
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
-
+import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
@@ -51,7 +51,6 @@ class SignupOtpScreen extends React.PureComponent {
             phoneBorderColor = '#d94498'
         }
 
-
         var phoneErrorHint = ''
         this.props.error && this.props.error.map(err => {
             if (err.title == 'phone') { phoneErrorHint = err.desc }
@@ -73,7 +72,7 @@ class SignupOtpScreen extends React.PureComponent {
 
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>REGISTRATION</Text>
+                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PHONE VERIFICATION</Text>
                             <Image source={require('../assets/images/2.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} />
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>OTP Verification</Text>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
@@ -84,12 +83,14 @@ class SignupOtpScreen extends React.PureComponent {
                                 <Image source={require('../assets/images/mobile.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <TextInput keyboardType={'phone-pad'} value={this.props.phone} onChangeText={(phone) => this.props.setOTP({ phone })} placeholder={(phoneErrorHint.length > 0) ? phoneErrorHint : '012 345 6789'} style={{ marginLeft: 5 }} />
                             </View>
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.registerOTP()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Next</Text>
+                            <View style={{ flexDirection: 'row', margin: 5 }}>
+                                <TouchableOpacity onPress={() => this.registerOTP()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+                                        <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
+                                    </LinearGradient>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Back</Text>
+                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
+                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>

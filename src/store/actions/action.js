@@ -68,7 +68,7 @@ export const register = () => {
         } else {
             console.log('takde error dalam screen and boleh proceed utk register')
             await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation))
-            await dispatch(getPersonalToken())
+            //await dispatch(getPersonalToken())
         }
     }
 }

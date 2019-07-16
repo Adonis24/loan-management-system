@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 
 import { BarCodeScanner } from 'expo-barcode-scanner'
+import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions'
 
 import Constants from 'expo-constants'
@@ -38,7 +39,7 @@ class ScanQRScreen extends React.PureComponent {
 
     constructor(props) {
         super(props)
-        this.state = { hasCameraPermission: null }
+        this.state = { hasCameraPermission: null, scanned: false }
     }
 
     async componentDidMount() {
@@ -47,28 +48,10 @@ class ScanQRScreen extends React.PureComponent {
         //this.props.resetFulfillRequest()
     }
 
-    handleBarCodeScanned = async ({ type, data }) => {
-
-        const requestQR = data.includes('REQUEST')
-
-        if (requestQR) {
-
-            const transfer_id = await data.replace('REQUEST', '')
-            console.log(`transfer_id ialah ${transfer_id}`)
-            await this.props.setFulfillRequest({ transfer_id })
-            //await this.getBillDetail({ billId, token_type: this.props.token_type, access_token: this.props.access_token })
-            await this.props.navigation.navigate('FulfillRequest')
-
-        } else {
-            const billId = await data.replace('http://staging.lunapay.co/pay/option/', '')
-            console.log(`billId ialah ${billId}`)
-            //alert(`Bar code with type ${type} and data ${data} has been scanned!`)
-            await this.props.setBill({ billId })
-            await this.getBillDetail({ billId, token_type: this.props.token_type, access_token: this.props.access_token })
-            await this.props.navigation.navigate('ScanBillSuccess')
-        }
-
-    }
+    handleBarCodeScanned = ({ type, data }) => {
+        this.setState({ scanned: true });
+        alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    };
 
     getBillDetail = (val) => {
         const { billId, access_token, token_type } = val
@@ -91,7 +74,7 @@ class ScanQRScreen extends React.PureComponent {
             });
     }
     render() {
-        const { hasCameraPermission } = this.state;
+        const { hasCameraPermission, scanned } = this.state;
 
         if (hasCameraPermission === null) {
             return <Text>Requesting for camera permission</Text>;
@@ -100,10 +83,33 @@ class ScanQRScreen extends React.PureComponent {
             return <Text>No access to camera</Text>;
         }
         return (
-            <BarCodeScanner style={[StyleSheet.absoluteFill,{  flex: 1 }]}
-                onBarCodeScanned={this.handleBarCodeScanned}
-            >
-            </BarCodeScanner>
+            <View style={{ flex: 1 }}>
+                <Camera onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned} style={{ flex: 1 }} type={this.state.type}>
+                    <View
+                        style={{
+                            flex: 1,
+                            backgroundColor: 'transparent',
+                            flexDirection: 'row',
+                        }}>
+                        <TouchableOpacity
+                            style={{
+                                flex: 0.1,
+                                alignSelf: 'flex-end',
+                                alignItems: 'center',
+                            }}
+                            onPress={() => {
+                                this.setState({
+                                    type:
+                                        this.state.type === Camera.Constants.Type.back
+                                            ? Camera.Constants.Type.front
+                                            : Camera.Constants.Type.back,
+                                });
+                            }}>
+                            <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
+                        </TouchableOpacity>
+                    </View>
+                </Camera>
+            </View>
         );
     }
 }

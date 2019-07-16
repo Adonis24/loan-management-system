@@ -19,7 +19,7 @@ import {
 
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
-
+import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
@@ -35,7 +35,7 @@ class CompanyInformationScreen extends React.PureComponent {
     };
 
     async companyInformation() {
-        //await this.props.companyInfo()
+        await this.props.companyInfo()
         await this.props.navigation.navigate('CompanyContactInformation')
     }
 
@@ -43,11 +43,11 @@ class CompanyInformationScreen extends React.PureComponent {
         super(props);
         this.state = { chosenDate: new Date() };
         this.setDate = this.setDate.bind(this);
-      }
-      setDate(newDate) {
+    }
+    setDate(newDate) {
         this.setState({ chosenDate: newDate });
-        this.props.setCompanyInfo({ comp_regdate:moment(newDate).format() })
-      }
+        this.props.setCompanyInfo({ comp_regdate: moment(newDate).format() })
+    }
 
     render() {
         return (
@@ -73,36 +73,38 @@ class CompanyInformationScreen extends React.PureComponent {
                             </View>
 
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5,marginRight:3 }} resizeMode={'contain'} />
-                               
+                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5, marginRight: 3 }} resizeMode={'contain'} />
+
                                 <DatePicker
-                                 defaultDate={new Date()}
-                                // minimumDate={new Date(2018, 1, 1)}
-                                // maximumDate={new Date(2018, 12, 31)}
-                                locale={"en"}
-                                timeZoneOffsetInMinutes={undefined}
-                                modalTransparent={false}
-                                animationType={"fade"}
-                                androidMode={"default"}
-                                placeHolderText="Company Registration Date"
-                                textStyle={{ color: "#000" }}
-                                placeHolderTextStyle={{ fontFamily:'Roboto-regular',color:'lightgrey' }}
-                                onDateChange={(newDate) => this.setDate(newDate)}
-                                disabled={false}
-                            />
+                                    defaultDate={new Date()}
+                                    // minimumDate={new Date(2018, 1, 1)}
+                                    // maximumDate={new Date(2018, 12, 31)}
+                                    locale={"en"}
+                                    timeZoneOffsetInMinutes={undefined}
+                                    modalTransparent={false}
+                                    animationType={"fade"}
+                                    androidMode={"default"}
+                                    placeHolderText="Company Registration Date"
+                                    textStyle={{ color: "#000" }}
+                                    placeHolderTextStyle={{ fontFamily: 'Roboto-regular', color: 'lightgrey' }}
+                                    onDateChange={(newDate) => this.setDate(newDate)}
+                                    disabled={false}
+                                />
                             </View>
 
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <TextInput placeholder={'Main Business Activities'} value={this.props.comp_main_biz_act} onChangeText={(comp_main_biz_act) => this.props.setCompanyInfo({ comp_main_biz_act })} style={{ marginLeft: 5 }} />
-                            </View>                         
- 
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.companyInformation()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Next</Text>
+                            </View>
+
+                            <View style={{ flexDirection: 'row', margin: 5 }}>
+                                <TouchableOpacity onPress={() => this.companyInformation()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+                                        <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
+                                    </LinearGradient>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Back</Text>
+                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
+                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>

@@ -25,7 +25,7 @@ import Layout from '../constants/Layout'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 //import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
-
+import { LinearGradient } from 'expo-linear-gradient'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
@@ -35,8 +35,8 @@ class CompanyContactAddressInformationScreen extends React.PureComponent {
     };
 
     async companyInformation() {
-        //await this.props.companyInfo()
-        await this.props.navigation.navigate('ContactPerson')
+        await this.props.companyInfo()
+        await this.props.navigation.navigate('CompanyInfoSuccess')
     }
 
     render() {
@@ -75,9 +75,9 @@ class CompanyContactAddressInformationScreen extends React.PureComponent {
                                 <TextInput placeholder={'Postcode'} value={this.props.comp_postcode} onChangeText={(comp_postcode) => this.props.setCompanyInfo({ comp_postcode })} style={{ marginLeft: 5 }} />
                             </View>
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'flex-end' }}>
-                             
-                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { color: '#4A90E2' }]}>DONE</Text>
+
+                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
+                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>

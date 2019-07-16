@@ -18,10 +18,15 @@ import DocUploadScreen from '../screens/DocUploadScreen';
 import CompanyContactInformationScreen from '../screens/CompanyContactInformationScreen';
 import CompanyContactAddressInformationScreen from '../screens/CompanyContactAddressInformationScreen';
 import AgreementScreen from '../screens/AgreementScreen';
+import CompanyInfoSuccessScreen from '../screens/CompanyInfoSuccessScreen';
+import SignupPersonalSuccessScreen from '../screens/SignupPersonalSuccessScreen';
+import ContactPersonSuccessScreen from '../screens/ContactPersonSuccessScreen';
 
 const Registration = createStackNavigator({
   Intro: IntroScreen,
+  Agreement: AgreementScreen,
   SignUpPersonal: SignupPersonalScreen,
+  SignUpPersonalSuccess: SignupPersonalSuccessScreen,
   SignUpOtp: SignupOtpScreen,
   SignUpOtpEnter: SignupOtpEnterScreen,
   SignUpSuccess: SignupSuccessScreen,
@@ -29,8 +34,9 @@ const Registration = createStackNavigator({
   CompanyInformation: CompanyInformationScreen,
   CompanyContactInformation: CompanyContactInformationScreen,
   CompanyContactAddressInformation: CompanyContactAddressInformationScreen,
+  CompanyInfoSuccess: CompanyInfoSuccessScreen,
   ContactPerson: ContactPersonScreen,
-  Agreement: AgreementScreen,
+  ContactPersonSuccess: ContactPersonSuccessScreen,
   DetailsConnectedParties: DetailsOfConnectedPartiesScreen,
   DeclarationDigitalSign: DeclarationDigitalSignScreen,
 });

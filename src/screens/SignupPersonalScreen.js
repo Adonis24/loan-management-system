@@ -19,7 +19,7 @@ import {
 
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
-
+import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
@@ -41,14 +41,14 @@ class SignupPersonalScreen extends React.PureComponent {
 
     async register() {
 
-        await this.props.register()
-        //await this.props.getPersonalToken()
-        // await this.props.navigation.navigate('SignUpOtp')
+        await this.props.register();
+        //await this.props.getPersonalToken();
+        await this.props.navigation.navigate('SignUpPersonalSuccess')
     }
 
 
     render() {
-        this.props.proceed && this.props.navigation.navigate('SignUpOtp')
+        this.props.proceed && this.props.navigation.navigate('SignupPersonalSuccess')
 
         var emailBorderColor = '#5a83c2'
         const emailError = this.props.errorColor && this.props.errorColor.find(test => test == "E-mail")
@@ -116,12 +116,14 @@ class SignupPersonalScreen extends React.PureComponent {
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <TextInput secureTextEntry value={this.props.password_confirmation} onChangeText={(password_confirmation) => this.props.setRegister({ password_confirmation })} style={{ marginLeft: 5 }} placeholder={(passwordConfirmErrorHint.length > 0) ? '******' : '******'} placeholderTextColor={(passwordConfirmErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.register()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Next</Text>
+                            <View style={{ flexDirection: 'row', margin: 5 }}>
+                                <TouchableOpacity onPress={() => this.register()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+                                        <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
+                                    </LinearGradient>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Back</Text>
+                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
+                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -132,14 +134,13 @@ class SignupPersonalScreen extends React.PureComponent {
     }
 }
 
-
 function mapStateToProps(state) {
     return {
         name: state.registrationReducer.name,
         email: state.registrationReducer.email,
         password: state.registrationReducer.password,
         password_confirmation: state.registrationReducer.password_confirmation,
-       
+
         proceed: state.registrationReducer.proceed,
 
         error: state.registrationReducer.error,

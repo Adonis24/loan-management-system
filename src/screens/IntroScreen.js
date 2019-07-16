@@ -79,7 +79,7 @@ class IntroScreen extends React.PureComponent {
                             </View>
                         )}
                     />
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpPersonal')} style={{ flex: 1, justifyContent: 'center' }}><Text style={{ color: 'darkblue', textAlign: 'center' }}>Next</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Agreement')} style={{ flex: 1, justifyContent: 'center' }}><Text style={{ color: 'darkblue', textAlign: 'center' }}>Next</Text></TouchableOpacity>
                 </View>
             </View >
         );

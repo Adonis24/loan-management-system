@@ -109,6 +109,7 @@ class DashboardScreen extends React.PureComponent {
     async componentDidMount() {
         this.props.initiateDashboardScreen()
         this.props.initiateMyAccount()
+        this.props.initiateCompanyInfo()
 
         await this.animate()
         setTimeout(() => this.setState({ popUp: !this.state.popUp }), 3000);
@@ -165,12 +166,12 @@ class DashboardScreen extends React.PureComponent {
                         </Animated.View>
                         <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
                             <Animated.View style={{ opacity: profilePicOpac, flex: 5, flexDirection: 'row' }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('MyAccount')} style={[{ marginLeft: 10, padding: 2, height: undefined, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey' }]}>
-                                    <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: undefined, width: undefined, }} resizeMode='contain' />
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('MyAccount')} style={[{ marginLeft: 10 }]}>
+                                    <Image source={{uri:this.props.profile_pic}} style={{  height: 50, width: 50,borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' />
                                 </TouchableOpacity>
                                 <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
                                     <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>{this.props.name}</Text>
-                                    <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>Nama company</Text>
+                                    <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>{this.props.companyName}</Text>
                                 </View>
                             </Animated.View>
                             <Animated.View style={[{ opacity: topBarOpac, backgroundColor: '#fff', flex: 4, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2 }]}>
@@ -523,13 +524,16 @@ function mapStateToProps(state) {
         email: state.myAccountReducer.email,
         phone_no: state.myAccountReducer.phone_no,
         profile_pic: state.myAccountReducer.profile_pic,
-        email_verified_at: state.myAccountReducer.email_verified_at,  
+        email_verified_at: state.myAccountReducer.email_verified_at, 
+        
+        companyName: state.bizInfoReducer.name,
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
         initiateDashboardScreen: () => dispatch(actionCreator.initiateDashboardScreen()),
         initiateMyAccount: () => dispatch(actionCreator.initiateMyAccount()),
+        initiateCompanyInfo: () => dispatch(actionCreator.initiateCompanyInfo())
 
     }
 }

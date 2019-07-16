@@ -34,9 +34,12 @@ class ProfileScreen extends React.PureComponent {
     };
 
     componentDidMount() {
-        this.props.initiateCompanyInfo()
+        //this.props.initiateCompanyInfo()
+        this.props.initiateListWorkers()
     }
     render() {
+
+        //console.log(`all biz : ${Jthis.props.all}`)
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -67,7 +70,7 @@ class ProfileScreen extends React.PureComponent {
                         <ScrollView>
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-start', flex: 1 }}>
                                 <View style={{ flexDirection: 'row', margin: 10 }}>
-                                    <Image source={require('../assets/images/profile.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, }} resizeMode={'contain'} />
+                                    <Image source={{uri:this.props.logo}} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                 </View>
                                 <View style={{ flexDirection: 'column', alignSelf: 'flex-start', alignItems: 'flex-start' }}>
                                     <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', color: '#4A90E2' }]}>{this.props.companyName || 'John Doe Sdn Bhd'}</Text>
@@ -87,7 +90,6 @@ class ProfileScreen extends React.PureComponent {
                                     <Text style={[styles.caption, { margin: 5, textAlign: 'left' }]}>Add Info</Text>
                                 </View>
                             </View>
-
                             <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
                                 <View style={{ flexDirection: 'row', flex: 2 }}>
                                     <Text style={[styles.textDefault, { margin: 5, fontSize: 12, textAlign: 'left' }]}>Years doing Business : </Text>
@@ -139,10 +141,12 @@ class ProfileScreen extends React.PureComponent {
                                     <Text>Get Consultation</Text>
                                 </TouchableOpacity>
                             </View>
+                            {this.props.listWorkers && this.props.listWorkers.map(
+                                (lw, i) => <View key={i} style={{ flexDirection: 'row', }}>
+                                    <Text >{i}</Text><Text>{lw.full_name}</Text></View>
+                            )}
                         </ScrollView>
-
                     </View>
-
                 </View>
             </View>
 
@@ -153,13 +157,30 @@ class ProfileScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
+        all: state.bizInfoReducer,
         companyName: state.bizInfoReducer.name,
         companyRegNo: state.bizInfoReducer.reg_no,
+        reg_date: state.bizInfoReducer.reg_date,
+        addr: state.bizInfoReducer.addr,
+        addr_2: state.bizInfoReducer.addr_2,
+        city: state.bizInfoReducer.city,
+        state: state.bizInfoReducer.state,
+        postcode: state.bizInfoReducer.postcode,
+        main_biz_act: state.bizInfoReducer.main_biz_act,
+        phone: state.bizInfoReducer.phone,
+        email: state.bizInfoReducer.email,
+        basic_status: state.bizInfoReducer.basic_status,
+        additional_status: state.bizInfoReducer.additional_status,
+        logo: state.bizInfoReducer.logo,
+
+        listWorkers: state.listWorkersReducer.listWorkers,
+
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-        initiateCompanyInfo: () => dispatch(actionCreator.initiateCompanyInfo())
+        initiateCompanyInfo: () => dispatch(actionCreator.initiateCompanyInfo()),
+        initiateListWorkers: () => dispatch(actionCreator.initiateListWorkers()),
     }
 }
 
