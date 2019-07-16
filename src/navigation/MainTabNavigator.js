@@ -60,6 +60,7 @@ import CertificationViewScreen from '../screens/CertificationViewScreen';
 import EdonationScreen from '../screens/EdonationScreen';
 import LoanCalculatorScreen from '../screens/LoanCalculatorScreen';
 import ElearningPlayScreen from '../screens/ElearningPlayScreen';
+import UserAccountScreen from '../screens/UserAccountScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -109,6 +110,8 @@ const DashboardStackWithModal = createStackNavigator(
     ContactPerson: { screen: ContactPersonScreen, },
     ContactPersonSuccess: { screen: ContactPersonSuccessScreen, },
     ScanQR: { screen: ScanQRScreen, },
+    UserAccount: { screen: UserAccountScreen },
+
     Training: { screen: TrainingScreen, }
   },
   {
@@ -117,30 +120,43 @@ const DashboardStackWithModal = createStackNavigator(
   },
 );
 
-DashboardStackWithModal.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
+DashboardStackWithModal.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let routeName = navigation.state.routes[navigation.state.index].routeName
+  if (routeName !== 'Main') {
+    tabBarVisible = false
+  }
+  return {
+    tabBarVisible,
+    tabBarLabel: 'Home',
+    tabBarOptions: {
+      activeTintColor: '#4967AE',
+      inactiveTintColor: '#7896DC',
+    },
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+      />
+    ),
+  };
+}
 
 const InsightStack = createStackNavigator({
   Insight: InsightScreen,
 });
 
 InsightStack.navigationOptions = {
-  tabBarLabel: 'Insight',
+  tabBarLabel: 'Contacts',
+ 
+    tabBarOptions: {
+      activeTintColor: '#4967AE',
+      inactiveTintColor: '#7896DC',
+    },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name={Platform.OS === 'ios' ? 'ios-contacts' : 'md-contacts'}
     />
   ),
 };
@@ -151,10 +167,15 @@ const NotificationStack = createStackNavigator({
 
 NotificationStack.navigationOptions = {
   tabBarLabel: 'Notifications',
+  
+    tabBarOptions: {
+      activeTintColor: '#4967AE',
+      inactiveTintColor: '#7896DC',
+    },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-alarm' : 'md-alarm'}
+      name={Platform.OS === 'ios' ? 'ios-notifications' : 'md-notifications'}
     />
   ),
 };
@@ -165,6 +186,11 @@ const SettingsStack = createStackNavigator({
 
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
+
+    tabBarOptions: {
+      activeTintColor: '#4967AE',
+      inactiveTintColor: '#7896DC',
+    },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

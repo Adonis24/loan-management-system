@@ -31,7 +31,7 @@ import styles from '../styles/styles'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class MyAccountScreen extends React.PureComponent {
+class UserAccountScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
@@ -49,6 +49,9 @@ class MyAccountScreen extends React.PureComponent {
         //this.props.navigation.navigate('PopupScore')
     }
     render() {
+
+        const member_id=this.props.navigation.getParam('member_id','no_id')
+
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <Modal
@@ -57,7 +60,6 @@ class MyAccountScreen extends React.PureComponent {
                     visible={this.state.popUp}
                     onRequestClose={() => this.toggleShow()}
                 >
-
                     <QRCode value={this.props.member_id} size={Layout.window.width / 2} bgColor='black' fgColor='white' />
 
                 </Modal>
@@ -78,6 +80,7 @@ class MyAccountScreen extends React.PureComponent {
                             <View style={{ alignItems: 'center', padding: 5 }}>
                                 <Image source={{ uri: this.props.profile_pic }} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff' }]} resizeMode={'cover'} />
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>{this.props.name}</Text>
+                                <Text style={[styles.textDefault, { color: '#fff' }]}>{member_id}</Text>
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>{this.props.companyName}</Text>
 
                                 <View style={{ flexDirection: 'row', padding: 5, margin: 10, borderRadius: 3, backgroundColor: '#fff' }}>
@@ -173,4 +176,4 @@ function mapDispatchToProps(dispatch) {
         initiateMyAccount: () => dispatch(actionCreator.initiateMyAccount())
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(MyAccountScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(UserAccountScreen)

@@ -50,7 +50,7 @@ class MyAccountEditScreen extends React.PureComponent {
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     {/* HEADER */}
-                    <View style={{ flex: 2, backgroundColor: 'blue' }}>
+                    <View style={{ flex: 6, backgroundColor: 'blue' }}>
                         <LinearGradient
                             colors={['#4c669f', '#3b5998', '#192f6a']}
                             style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between' }}>
@@ -66,33 +66,32 @@ class MyAccountEditScreen extends React.PureComponent {
                         </LinearGradient>
                     </View>
                     {/* CONTENT AREA */}
-                    <View style={{ flex: 5 }}>
+                    <View style={{ flex: 9 }}>
                         <ScrollView contentStyle={{ padding: 10 }} >
-
                             <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                                 <Text style={styles.subTitle}>Profile</Text>
-                                <Ionicons name="md-checkmark-circle" size={24} color="lightgrey" />
+                                <Ionicons name="ios-create" size={24} color="lightgrey" />
                             </View>
-                            <View style={{ width: Layout.window.width, }}>
+                            <View style={{ width: Layout.window.width, paddingLeft:5 }}>
                                 <View style={{ flex: 1, flexDirection: 'row' }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {}]}>Name :</Text></View>
-                                    <View style={{ flex: 3 }}><Text style={styles.textDefault}>Mardhiah</Text></View>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {alignSelf:'flex-start',textAlign:'left'}]}>Name :</Text></View>
+                                    <View style={{ flex: 3 }}><Text style={[styles.textDefault, {alignSelf:'flex-start',textAlign:'left'}]}>Mardhiah</Text></View>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row' }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {}]}>Gender :</Text></View>
-                                    <View style={{ flex: 3 }}><Text style={styles.textDefault}>Female</Text></View>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {alignSelf:'flex-start',textAlign:'left'}]}>Gender :</Text></View>
+                                    <View style={{ flex: 3 }}><Text style={[styles.textDefault, {alignSelf:'flex-start',textAlign:'left'}]}>Female</Text></View>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row' }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {}]}>Address :</Text></View>
-                                    <View style={{ flex: 3 }}><Text style={styles.textDefault}>69-4, Taman Equine</Text></View>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {alignSelf:'flex-start',textAlign:'left'}]}>Address :</Text></View>
+                                    <View style={{ flex: 3 }}><Text style={[styles.textDefault, {alignSelf:'flex-start',textAlign:'left'}]}>69-4, Taman Equine</Text></View>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row' }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {}]}>Postcode :</Text></View>
-                                    <View style={{ flex: 3 }}><Text style={styles.textDefault}>43300</Text></View>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {alignSelf:'flex-start',textAlign:'left'}]}>Postcode :</Text></View>
+                                    <View style={{ flex: 3 }}><Text style={[styles.textDefault, {alignSelf:'flex-start',textAlign:'left'}]}>43300</Text></View>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row' }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {}]}>Country :</Text></View>
-                                    <View style={{ flex: 3 }}><Text style={styles.textDefault}>Malaysia</Text></View>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, {alignSelf:'flex-start',textAlign:'left'}]}>Country :</Text></View>
+                                    <View style={{ flex: 3 }}><Text style={[styles.textDefault, {alignSelf:'flex-start',textAlign:'left'}]}>Malaysia</Text></View>
                                 </View>
                             </View>
                             
