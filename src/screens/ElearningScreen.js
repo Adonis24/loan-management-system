@@ -75,7 +75,7 @@ class ElearningScreen extends React.PureComponent {
                                     </View>
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ margin: 10, }}>
+                                    <TouchableOpacity style={{ margin: 10, }} onPress={() => this.props.navigation.navigate('ElearningPlay')}>
                                         <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
                                             <Text style={[styles.caption, { color: '#fff' }]}>Play</Text>
                                         </LinearGradient>

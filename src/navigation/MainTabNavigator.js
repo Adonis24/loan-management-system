@@ -59,6 +59,7 @@ import TrainingScreen from '../screens/TrainingScreen';
 import CertificationViewScreen from '../screens/CertificationViewScreen';
 import EdonationScreen from '../screens/EdonationScreen';
 import LoanCalculatorScreen from '../screens/LoanCalculatorScreen';
+import ElearningPlayScreen from '../screens/ElearningPlayScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -97,6 +98,7 @@ const DashboardStackWithModal = createStackNavigator(
     Ecommerce: { screen: EcommerceScreen, },
     Edonation: { screen: EdonationScreen, },
     Loan: { screen: LoanCalculatorScreen, },
+    ElearningPlay: { screen: ElearningPlayScreen, },
 
     AddCompany: { screen: CompanyInformationScreen, },
     CompanyContactInformation: CompanyContactInformationScreen,
