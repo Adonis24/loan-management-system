@@ -163,7 +163,6 @@ class DashboardScreen extends React.PureComponent {
                     <View style={{ flex: 1 }}>
                         <Animated.View style={{ opacity: logoOpac, flex: 1, marginLeft: 5 }}>
                             <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
-                        
                         </Animated.View>
                         <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
                             <Animated.View style={{ opacity: profilePicOpac, flex: 5, flexDirection: 'row' }}>

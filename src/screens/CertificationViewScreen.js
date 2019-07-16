@@ -53,8 +53,8 @@ class CertificationViewScreen extends React.PureComponent {
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     {/* HEADER */}
-                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 1, marginLeft: 10, marginTop: 10 }}>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
                             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
@@ -67,7 +67,9 @@ class CertificationViewScreen extends React.PureComponent {
                         </View>
                     </View>
                     {/* CONTENT AREA */}
-                    <View style={{ flex: 4 }}>
+                    <View style={{ flex: 2 }}>
+                    </View>
+                    <View style={{ flex: 7 }}>
                         <View style={{ flex: 1 }}>
                             <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
                                 <Text style={[styles.subTitle, { margin: 15, alignSelf: 'flex-start' }]}>Business Strategy Training</Text>

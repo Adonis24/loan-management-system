@@ -75,11 +75,17 @@ class MyAccountScreen extends React.PureComponent {
                         <LinearGradient
                             colors={['#4c669f', '#3b5998', '#192f6a']}
                             style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between' }}>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+                                        <Ionicons name='ios-arrow-back' size={32} />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
                             <View style={{ alignItems: 'center', padding: 5 }}>
                                 <Image source={{ uri: this.props.profile_pic }} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff' }]} resizeMode={'cover'} />
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>{this.props.name}</Text>
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>{this.props.companyName}</Text>
-
                                 <View style={{ flexDirection: 'row', padding: 5, margin: 10, borderRadius: 3, backgroundColor: '#fff' }}>
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('MyAccountEdit')} style={{ padding: 5 }}>
                                         <Ionicons name='ios-cube' color={'#2FD9FE'} />
@@ -149,7 +155,7 @@ class MyAccountScreen extends React.PureComponent {
                         </ScrollView>
                     </View>
                 </View>
-            </View>
+            </View >
         );
     }
 }
