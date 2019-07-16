@@ -122,14 +122,14 @@ DashboardStackWithModal.navigationOptions = ({ navigation }) => {
   return {
     tabBarVisible,
     tabBarLabel: 'Home',
+    tabBarOptions: {
+      activeTintColor: '#4967AE',
+      inactiveTintColor: '#7896DC',
+    },
     tabBarIcon: ({ focused }) => (
       <TabBarIcon
         focused={focused}
-        name={
-          Platform.OS === 'ios'
-            ? `ios-information-circle${focused ? '' : '-outline'}`
-            : 'md-information-circle'
-        }
+        name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
       />
     ),
   };
@@ -140,11 +140,16 @@ const InsightStack = createStackNavigator({
 });
 
 InsightStack.navigationOptions = {
-  tabBarLabel: 'Insight',
+  tabBarLabel: 'Contacts',
+ 
+    tabBarOptions: {
+      activeTintColor: '#4967AE',
+      inactiveTintColor: '#7896DC',
+    },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name={Platform.OS === 'ios' ? 'ios-contacts' : 'md-contacts'}
     />
   ),
 };
@@ -155,10 +160,15 @@ const NotificationStack = createStackNavigator({
 
 NotificationStack.navigationOptions = {
   tabBarLabel: 'Notifications',
+  
+    tabBarOptions: {
+      activeTintColor: '#4967AE',
+      inactiveTintColor: '#7896DC',
+    },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-alarm' : 'md-alarm'}
+      name={Platform.OS === 'ios' ? 'ios-notifications' : 'md-notifications'}
     />
   ),
 };
@@ -169,6 +179,11 @@ const SettingsStack = createStackNavigator({
 
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
+
+    tabBarOptions: {
+      activeTintColor: '#4967AE',
+      inactiveTintColor: '#7896DC',
+    },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
