@@ -35,7 +35,7 @@ class CompanyContactAddressInformationScreen extends React.PureComponent {
     };
 
     async Save() {
-        await this.props.contactPersonInfo()
+        await this.props.companyContactAddress()
     }
 
     render() {
@@ -145,7 +145,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         setCompanyInfo: (value) => dispatch({ type: 'SET_COMPANY_INFO', payload: { ...value } }),
-        contactPersonInfo: () => dispatch(actionCreator.contactPersonInfo())
+        companyContactAddress: () => dispatch(actionCreator.companyContactAddress())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CompanyContactAddressInformationScreen)

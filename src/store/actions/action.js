@@ -180,7 +180,7 @@ export const companyInfo = () => {
     }
 }
 
-export const contactPerson = () => {
+export const companyContactInfo = () => {
     return (dispatch, getState) => {
         const { comp_phone, comp_email, comp_addr } = getState().companyInformationReducer
         const errorArray = []
@@ -207,7 +207,7 @@ export const contactPerson = () => {
     }
 }
 
-export const contactPersonInfo = () => {
+export const companyContactAddress = () => {
     return (dispatch, getState) => {
         const { comp_addr, comp_city, comp_state, comp_postcode } = getState().companyInformationReducer
         const errorArray = []
@@ -234,6 +234,37 @@ export const contactPersonInfo = () => {
         } else {
             // dispatch(companyInfoAPI())
             dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedContact: true } })
+        }
+    }
+}
+
+export const contactPerson = () => {
+    return (dispatch, getState) => {
+        const { full_name, ic_no, phone, position, ic_image } = getState().companyInformationReducer
+        const errorArray = []
+        const errorColor = []
+
+        if (full_name == undefined || full_name == '') {
+            errorArray.push({ title: "name", desc: "No Name" })
+            errorColor.push("Name")
+        }
+        if (ic_no == undefined || ic_no == '') {
+            errorArray.push({ title: "mykad", desc: "No MyKad" })
+            errorColor.push("MyKad")
+        }
+        if (position == undefined || position == '') {
+            errorArray.push({ title: "position", desc: "No Address" })
+            errorColor.push("Position")
+        }
+        if (phone == undefined || phone == '') {
+            errorArray.push({ title: "phone", desc: "No Phone Number" })
+            errorColor.push("Phone")
+        }
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
+        } else {
+            dispatch(contactPersonAPI())
+            // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
         }
     }
 }
