@@ -51,10 +51,10 @@ class ScanQRScreen extends React.PureComponent {
     handleBarCodeScanned = ({ type, data }) => {
         this.setState({ scanned: true });
         console.log(`data ialah : ${JSON.stringify(data)}`)
-        this.props.navigation.navigate('UserAccount',{member_id:data})
+        this.props.navigation.navigate('UserAccount', { member_id: data })
     };
 
-    
+
     render() {
         const { hasCameraPermission, scanned } = this.state;
 
@@ -67,9 +67,16 @@ class ScanQRScreen extends React.PureComponent {
         return (
             <View style={{ flex: 1 }}>
                 <Camera onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned} style={{ flex: 1 }} type={this.state.type}>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+                                <Ionicons name='ios-arrow-back' size={32} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
                     <View
                         style={{
-                            flex: 1,
+                            flex: 7,
                             backgroundColor: 'transparent',
                             flexDirection: 'row',
                         }}>

@@ -49,14 +49,14 @@ class BusinessHubScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     {/* HEADER */}
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 1, marginLeft: 5, marginTop: 5 }}>
+                        <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
                             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
                     </View>
                     {/* CONTENT AREA */}
-                    <View style={{ flex: 4, justifyContent:'flex-start' }}>
+                    <View style={{ flex: 7, justifyContent:'flex-start' }}>
                         <Text style={[styles.textDefault, { fontWeight: 'bold', alignSelf: 'center', marginBottom: 20, fontSize: 20 }]}>Business Hub</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20,marginLeft:Layout.window.width/10,marginRight:Layout.window.width/10 }}>
                             <View style={[styles.shadow, { width: Layout.window.height / 10, height: Layout.window.height / 9.5, backgroundColor: '#fff', alignSelf: 'stretch', borderRadius: 10, borderWidth: 1, borderColor: '#ddd' }]}>

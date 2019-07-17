@@ -56,6 +56,10 @@ import CompanyContactInformationScreen from '../screens/CompanyContactInformatio
 import CompanyContactAddressInformationScreen from '../screens/CompanyContactAddressInformationScreen';
 import CompanyInfoSuccessScreen from '../screens/CompanyInfoSuccessScreen';
 import TrainingScreen from '../screens/TrainingScreen';
+import CertificationViewScreen from '../screens/CertificationViewScreen';
+import EdonationScreen from '../screens/EdonationScreen';
+import LoanCalculatorScreen from '../screens/LoanCalculatorScreen';
+import ElearningPlayScreen from '../screens/ElearningPlayScreen';
 import UserAccountScreen from '../screens/UserAccountScreen';
 
 const DashboardStack = createStackNavigator({
@@ -85,14 +89,17 @@ const DashboardStackWithModal = createStackNavigator(
     Quiz: { screen: QuizScreen, },
     QuizAnswer: { screen: QuizAnswerScreen, },
     MyAccount: { screen: MyAccountScreen, },
-    Ecommerce: { screen: EcommerceScreen, },
     BizApp: { screen: BizAppScreen, },
     MyAccountEdit: { screen: MyAccountEditScreen, },
     BizDirectory: { screen: BizDirectoryScreen, },
     BizLicensing: { screen: BizLicensingScreen, },
     Certification: { screen: CertificationScreen, },
+    CertificationView: { screen: CertificationViewScreen, },
     Elearning: { screen: ElearningScreen, },
     Ecommerce: { screen: EcommerceScreen, },
+    Edonation: { screen: EdonationScreen, },
+    Loan: { screen: LoanCalculatorScreen, },
+    ElearningPlay: { screen: ElearningPlayScreen, },
 
     AddCompany: { screen: CompanyInformationScreen, },
     CompanyContactInformation: CompanyContactInformationScreen,
