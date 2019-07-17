@@ -84,8 +84,6 @@ class InsightScreen extends React.PureComponent {
                                     </View>
                                 </View>
                             </View>
-
-
                             <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
                                 <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
                                     <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: 40, width: 40, alignSelf: 'center' }} resizeMode='contain' />
