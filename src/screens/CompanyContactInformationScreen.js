@@ -41,7 +41,7 @@ class CompanyContactInformationScreen extends React.PureComponent {
     }
 
     render() {
-        this.props.proceed2 && this.props.navigation.navigate('CompanyInfoSuccess')
+        this.props.proceedCompany && this.props.navigation.navigate('CompanyInfoSuccess')
 
         var phoneBorderColor = '#5a83c2'
         const phoneError = this.props.errorColor && this.props.errorColor.find(test => test == "Phone")
@@ -134,7 +134,7 @@ function mapStateToProps(state) {
         comp_state: state.companyInformationReducer.comp_state,
         comp_postcode: state.companyInformationReducer.comp_postcode,
 
-        proceed2: state.companyInformationReducer.proceed2,
+        proceedCompany: state.companyInformationReducer.proceedCompany,
         error: state.companyInformationReducer.error,
         errorColor: state.companyInformationReducer.errorColor,
     }

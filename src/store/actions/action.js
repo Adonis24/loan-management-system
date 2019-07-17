@@ -182,7 +182,7 @@ export const companyInfo = () => {
 
 export const contactPerson = () => {
     return (dispatch, getState) => {
-        const { comp_phone, comp_email, comp_addr, comp_addr_2, comp_city, comp_state, comp_postcode } = getState().companyInformationReducer
+        const { comp_phone, comp_email, comp_addr } = getState().companyInformationReducer
         const errorArray = []
         const errorColor = []
 
@@ -198,23 +198,42 @@ export const contactPerson = () => {
             errorArray.push({ title: "address", desc: "No Address" })
             errorColor.push("Address")
         }
-        if (comp_city == undefined || comp_city == '') {
-            errorArray.push({ title: "address", desc: "No City" })
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
+        } else {
+            dispatch(companyInfoAPI())
+            // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
+        }
+    }
+}
+
+export const contactPersonInfo = () => {
+    return (dispatch, getState) => {
+        const { comp_addr, comp_city, comp_state, comp_postcode } = getState().companyInformationReducer
+        const errorArray = []
+        const errorColor = []
+
+        if (comp_addr == undefined || comp_addr == '') {
+            errorArray.push({ title: "address", desc: "No Address" })
             errorColor.push("Address")
+        }
+        if (comp_city == undefined || comp_city == '') {
+            errorArray.push({ title: "city", desc: "No City" })
+            errorColor.push("City")
         }
         if (comp_state == undefined || comp_state == '') {
-            errorArray.push({ title: "address", desc: "No State" })
-            errorColor.push("Address")
+            errorArray.push({ title: "state", desc: "No State" })
+            errorColor.push("State")
         }
         if (comp_postcode == undefined || comp_postcode == '') {
-            errorArray.push({ title: "address", desc: "No PostCode" })
-            errorColor.push("Address")
+            errorArray.push({ title: "postcode", desc: "No PostCode" })
+            errorColor.push("Postcode")
         }
         if (errorArray.length > 0) {
             dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
         } else {
             // dispatch(companyInfoAPI())
-            dispatch({ type: 'SET_COMPANY_INFO', payload: { proceed2: true } })
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedContact: true } })
         }
     }
 }
