@@ -36,11 +36,40 @@ class CompanyContactInformationScreen extends React.PureComponent {
     };
 
     async companyInformation() {
-        //await this.props.companyInfo()
-        await this.props.navigation.navigate('CompanyInfoSuccess')
+        await this.props.contactPerson()
+        // await this.props.navigation.navigate('CompanyInfoSuccess')
     }
 
     render() {
+        this.props.proceed2 && this.props.navigation.navigate('CompanyInfoSuccess')
+
+        var phoneBorderColor = '#5a83c2'
+        const phoneError = this.props.errorColor && this.props.errorColor.find(test => test == "Phone")
+        if (phoneError == "Phone") {
+            phoneBorderColor = '#d94498'
+        }
+
+        var emailBorderColor = '#5a83c2'
+        const emailError = this.props.error && this.props.errorColor.find(test => test == "Email")
+        if (emailError == "Email") {
+            emailBorderColor = '#d94498'
+        }
+
+        var addressBorderColor = '#5a83c2'
+        const addressError = this.props.error && this.props.errorColor.find(test => test == "Address")
+        if (addressError == "Address") {
+            addressBorderColor = '#d94498'
+        }
+
+        var phoneErrorHint = ''
+        var emailErrorHint = ''
+        var addressErrorHint = ''
+
+        this.props.error && this.props.error.map(err => {
+            if (err.title == 'phone') { phoneErrorHint = err.desc }
+            if (err.title == 'email') { emailErrorHint = err.desc }
+            if (err.title == 'address') { addressErrorHint = err.desc }
+        })
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -57,15 +86,15 @@ class CompanyContactInformationScreen extends React.PureComponent {
 
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company Phone Number'} value={this.props.comp_phone} onChangeText={(comp_phone) => this.props.setCompanyInfo({ comp_phone })} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.comp_phone} onChangeText={(comp_phone) => this.props.setCompanyInfo({ comp_phone })} style={{ marginLeft: 5 }} placeholder={(phoneErrorHint.length > 0) ? phoneErrorHint : 'Company Phone Number'} placeholderTextColor={(phoneErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company Email Address'} value={this.props.comp_email} onChangeText={(comp_email) => this.props.setCompanyInfo({ comp_email })} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.comp_email} onChangeText={(comp_email) => this.props.setCompanyInfo({ comp_email })} style={{ marginLeft: 5 }} placeholder={(emailErrorHint.length > 0) ? emailErrorHint : 'Company Email Address'} placeholderTextColor={(emailErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('CompanyContactAddressInformation')} style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                {!this.props.comp_state ? <TextInput editable={false} placeholder={'Company Address'} value={this.props.comp_addr} onChangeText={(comp_addr) => this.props.setCompanyInfo({ comp_addr })} style={{ marginLeft: 5 }} />
+                                {!this.props.comp_state ? <TextInput editable={false} value={this.props.comp_addr} onChangeText={(comp_addr) => this.props.setCompanyInfo({ comp_addr })} style={{ marginLeft: 5 }} placeholder={(addressErrorHint.length > 0) ? addressErrorHint : 'Company Address'} placeholderTextColor={(addressErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                                     : <View style={{ marginRight: 3, paddingBottom: 5 }}>
                                         <Text>{this.props.comp_addr}</Text>
                                         {this.props.comp_addr_2 && <Text>{this.props.comp_addr_2}</Text>}
@@ -104,12 +133,16 @@ function mapStateToProps(state) {
         comp_city: state.companyInformationReducer.comp_city,
         comp_state: state.companyInformationReducer.comp_state,
         comp_postcode: state.companyInformationReducer.comp_postcode,
+
+        proceed2: state.companyInformationReducer.proceed2,
+        error: state.companyInformationReducer.error,
+        errorColor: state.companyInformationReducer.errorColor,
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
         setCompanyInfo: (value) => dispatch({ type: 'SET_COMPANY_INFO', payload: { ...value } }),
-        companyInfo: () => dispatch(actionCreator.companyInfo())
+        contactPerson: () => dispatch(actionCreator.contactPerson())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CompanyContactInformationScreen)

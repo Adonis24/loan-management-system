@@ -174,14 +174,40 @@ export const companyInfo = () => {
         if (errorArray.length > 0) {
             dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
         } else {
-            dispatch(companyInfoAPI())
+            // dispatch(companyInfoAPI())
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { proceed: true } })
         }
     }
 }
 
 export const contactPerson = () => {
     return (dispatch, getState) => {
-        dispatch(contactPersonAPI())
+        const { comp_phone, comp_email, comp_addr, comp_addr_2 } = getState().companyInformationReducer
+        const errorArray = []
+        const errorColor = []
+
+        if (comp_phone == undefined || comp_phone == '') {
+            errorArray.push({ title: "phone", desc: "No Phone Number" })
+            errorColor.push("Phone")
+        }
+        if (comp_email == undefined || comp_email == '') {
+            errorArray.push({ title: "email", desc: "No Email" })
+            errorColor.push("Email")
+        }
+        if (comp_addr == undefined || comp_addr == '') {
+            errorArray.push({ title: "address", desc: "No Address" })
+            errorColor.push("Address")
+        }
+        if (comp_addr_2 == undefined || comp_addr_2 == '') {
+            errorArray.push({ title: "address", desc: "No Address" })
+            errorColor.push("Address")
+        }
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
+        } else {
+            // dispatch(companyInfoAPI())
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { proceed2: true } })
+        }
     }
 }
 

@@ -141,7 +141,7 @@ export const companyInfoAPI = () => {
     const access_credential = 'api'
     console.log(`Company Registration : ${JSON.stringify(getState().companyInformationReducer)}`)
     const companyInfo = getState().companyInformationReducer
-    const comp_regdate=moment(companyInfo.comp_regdate).format("YYYY-MM-DD HH:mm:ss")
+    const comp_regdate = moment(companyInfo.comp_regdate).format("YYYY-MM-DD HH:mm:ss")
     fetch(`${apiUrl}api/registerCompany/basic`, {
       method: 'POST',
       headers: {
@@ -149,11 +149,11 @@ export const companyInfoAPI = () => {
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-      body: JSON.stringify({ ...companyInfo,comp_regdate, access_credential: 'api' }),
+      body: JSON.stringify({ ...companyInfo, comp_regdate, access_credential: 'api' }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
-        //await dispatch({ type: 'Company Info', payload: { phoneVerified:status } })
+        await dispatch({ type: 'SET_COMPANY_INFO', payload: { status, proceed: true } })
         await console.log(`companyInfo  ${JSON.stringify(responseJson)}`)
       })
       .catch((error) => {
@@ -169,7 +169,7 @@ export const contactPersonAPI = () => {
     const { token_type, access_token } = JSON.parse(personalToken)
     const access_credential = 'api'
     console.log(`Company Registration : ${JSON.stringify(getState().companyInformationReducer)}`)
-    const {full_name, ic_no, phone,ic_image, position} = getState().companyInformationReducer
+    const { full_name, ic_no, phone, ic_image, position } = getState().companyInformationReducer
     //const comp_regdate=moment(companyInfo.comp_regdate).format("YYYY-MM-DD HH:mm:ss")
     fetch(`${apiUrl}api/company/addWorker`, {
       method: 'POST',
@@ -178,7 +178,7 @@ export const contactPersonAPI = () => {
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-      body: JSON.stringify({ full_name, ic_no, phone,ic_image, position, access_credential: 'api' }),
+      body: JSON.stringify({ full_name, ic_no, phone, ic_image, position, access_credential: 'api' }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
