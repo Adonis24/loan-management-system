@@ -182,7 +182,7 @@ export const companyInfo = () => {
 
 export const contactPerson = () => {
     return (dispatch, getState) => {
-        const { comp_phone, comp_email, comp_addr, comp_addr_2 } = getState().companyInformationReducer
+        const { comp_phone, comp_email, comp_addr, comp_addr_2, comp_city, comp_state, comp_postcode } = getState().companyInformationReducer
         const errorArray = []
         const errorColor = []
 
@@ -198,8 +198,16 @@ export const contactPerson = () => {
             errorArray.push({ title: "address", desc: "No Address" })
             errorColor.push("Address")
         }
-        if (comp_addr_2 == undefined || comp_addr_2 == '') {
-            errorArray.push({ title: "address", desc: "No Address" })
+        if (comp_city == undefined || comp_city == '') {
+            errorArray.push({ title: "address", desc: "No City" })
+            errorColor.push("Address")
+        }
+        if (comp_state == undefined || comp_state == '') {
+            errorArray.push({ title: "address", desc: "No State" })
+            errorColor.push("Address")
+        }
+        if (comp_postcode == undefined || comp_postcode == '') {
+            errorArray.push({ title: "address", desc: "No PostCode" })
             errorColor.push("Address")
         }
         if (errorArray.length > 0) {
