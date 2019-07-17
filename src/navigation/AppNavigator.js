@@ -15,7 +15,7 @@ const LoggedIn = createSwitchNavigator({
   // LoggedIn:LoggedInTabNavigator1 ,
   //LoggedIn1:LoggedInTabNavigator1  
 }, {
-    initialRouteName: 'Main'
+    initialRouteName: 'Registration'
     //initialRouteName: checkLogin()=='ada'?'LoggedIn':'Authentication'    
   });
 
@@ -26,7 +26,7 @@ const Authentication = createSwitchNavigator({
   // LoggedIn:LoggedInTabNavigator1 ,
   //LoggedIn1:LoggedInTabNavigator1  
 }, {
-    initialRouteName: 'Authentication'
+    initialRouteName: 'Registration'
     //initialRouteName: checkLogin()=='ada'?'LoggedIn':'Authentication'    
   });
 

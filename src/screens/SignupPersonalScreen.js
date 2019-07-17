@@ -43,7 +43,7 @@ class SignupPersonalScreen extends React.PureComponent {
 
         await this.props.register();
         //await this.props.getPersonalToken();
-        await this.props.navigation.navigate('SignUpPersonalSuccess')
+        // await this.props.navigation.navigate('SignUpPersonalSuccess')
     }
 
 
@@ -78,13 +78,12 @@ class SignupPersonalScreen extends React.PureComponent {
         var nameErrorHint = ''
         var passwordErrorHint = ''
         var passwordConfirmErrorHint = ''
-
+ 
         this.props.error && this.props.error.map(err => {
             if (err.title == 'email') { emailErrorHint = err.desc }
             if (err.title == 'name') { nameErrorHint = err.desc }
             if (err.title == 'password') { passwordErrorHint = err.desc }
             if (err.title == 'confirm password') { passwordConfirmErrorHint = err.desc }
-
         })
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -140,9 +139,7 @@ function mapStateToProps(state) {
         email: state.registrationReducer.email,
         password: state.registrationReducer.password,
         password_confirmation: state.registrationReducer.password_confirmation,
-
         proceed: state.registrationReducer.proceed,
-
         error: state.registrationReducer.error,
         errorColor: state.registrationReducer.errorColor,
     }

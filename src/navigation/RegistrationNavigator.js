@@ -23,13 +23,13 @@ import SignupPersonalSuccessScreen from '../screens/SignupPersonalSuccessScreen'
 import ContactPersonSuccessScreen from '../screens/ContactPersonSuccessScreen';
 
 const Registration = createStackNavigator({
-  Intro: IntroScreen,
-  Agreement: AgreementScreen,
-  SignUpPersonal: SignupPersonalScreen,
-  SignUpPersonalSuccess: SignupPersonalSuccessScreen,
-  SignUpOtp: SignupOtpScreen,
-  SignUpOtpEnter: SignupOtpEnterScreen,
-  SignUpSuccess: SignupSuccessScreen,
+  // Intro: IntroScreen,
+  // Agreement: AgreementScreen,
+  // SignUpPersonal: SignupPersonalScreen,
+  // SignUpPersonalSuccess: SignupPersonalSuccessScreen,
+  // SignUpOtp: SignupOtpScreen,
+  // SignUpOtpEnter: SignupOtpEnterScreen,
+  // SignUpSuccess: SignupSuccessScreen,
   CompanyInfoIntro: CompanyInfoIntroScreen,
   CompanyInformation: CompanyInformationScreen,
   CompanyContactInformation: CompanyContactInformationScreen,

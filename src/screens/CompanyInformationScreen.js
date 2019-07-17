@@ -36,7 +36,6 @@ class CompanyInformationScreen extends React.PureComponent {
 
     async companyInformation() {
         await this.props.companyInfo()
-        await this.props.navigation.navigate('CompanyContactInformation')
     }
 
     constructor(props) {
@@ -50,6 +49,43 @@ class CompanyInformationScreen extends React.PureComponent {
     }
 
     render() {
+        this.props.proceed && this.props.navigation.navigate('CompanyContactInformation')
+
+        var nameBorderColor = '#5a83c2'
+        const nameError = this.props.errorColor && this.props.errorColor.find(test => test == "Name")
+        if (nameError == "Name") {
+            nameBorderColor = '#d94498'
+        }
+
+        var regBorderColor = '#5a83c2'
+        const regError = this.props.error && this.props.errorColor.find(test => test == "Reg Number")
+        if (regError == "Reg Number") {
+            regBorderColor = '#d94498'
+        }
+
+        var dateBorderColor = '#5a83c2'
+        const dateError = this.props.error && this.props.errorColor.find(test => test == "Date")
+        if (dateError == "Date") {
+            dateBorderColor = '#d94498'
+        }
+
+        var businessBorderColor = '#5a83c2'
+        const businessError = this.props.error && this.props.errorColor.find(test => test == "Business")
+        if (businessError == "Business") {
+            businessBorderColor = '#d94498'
+        }
+
+        var nameErrorHint = ''
+        var regErrorHint = ''
+        var dateErrorHint = ''
+        var businessErrorHint = ''
+
+        this.props.error && this.props.error.map(err => {
+            if (err.title == 'name') { nameErrorHint = err.desc }
+            if (err.title == 'reg number') { regErrorHint = err.desc }
+            if (err.title == 'date') { dateErrorHint = err.desc }
+            if (err.title == 'business') { businessErrorHint = err.desc }
+        })
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -65,16 +101,14 @@ class CompanyInformationScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company Name'} value={this.props.comp_name} onChangeText={(comp_name) => this.props.setCompanyInfo({ comp_name })} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.comp_name} onChangeText={(comp_name) => this.props.setCompanyInfo({ comp_name })} style={{ marginLeft: 5 }} placeholder={(nameErrorHint.length > 0) ? nameErrorHint : 'Company Name'} placeholderTextColor={(nameErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company Registration Number'} value={this.props.comp_regno} onChangeText={(comp_regno) => this.props.setCompanyInfo({ comp_regno })} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.comp_regno} onChangeText={(comp_regno) => this.props.setCompanyInfo({ comp_regno })} style={{ marginLeft: 5 }} placeholder={(regErrorHint.length > 0) ? regErrorHint : 'Company Registration Number'} placeholderTextColor={(regErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
-
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5, marginRight: 3 }} resizeMode={'contain'} />
-
                                 <DatePicker
                                     defaultDate={new Date()}
                                     // minimumDate={new Date(2018, 1, 1)}
@@ -84,19 +118,19 @@ class CompanyInformationScreen extends React.PureComponent {
                                     modalTransparent={false}
                                     animationType={"fade"}
                                     androidMode={"default"}
-                                    placeHolderText="Company Registration Date"
+                                    // placeHolderText="Company Registration Date"
+                                    placeHolderText={(dateErrorHint.length > 0) ? dateErrorHint : 'Company Registration Date'}
+                                    placeHolderTextColor={(dateErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'}
                                     textStyle={{ color: "#000" }}
                                     placeHolderTextStyle={{ fontFamily: 'Roboto-regular', color: 'lightgrey' }}
                                     onDateChange={(newDate) => this.setDate(newDate)}
                                     disabled={false}
                                 />
                             </View>
-
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Main Business Activities'} value={this.props.comp_main_biz_act} onChangeText={(comp_main_biz_act) => this.props.setCompanyInfo({ comp_main_biz_act })} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.comp_main_biz_act} onChangeText={(comp_main_biz_act) => this.props.setCompanyInfo({ comp_main_biz_act })} style={{ marginLeft: 5 }} placeholder={(businessErrorHint.length > 0) ? businessErrorHint : 'Main Business Activities'} placeholderTextColor={(businessErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
-
                             <View style={{ flexDirection: 'row', margin: 5 }}>
                                 <TouchableOpacity onPress={() => this.companyInformation()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
@@ -123,6 +157,9 @@ function mapStateToProps(state) {
         comp_regdate: state.companyInformationReducer.compAddress,
         comp_main_biz_act: state.companyInformationReducer.businessActivities,
 
+        proceed: state.companyInformationReducer.proceed,
+        error: state.companyInformationReducer.error,
+        errorColor: state.companyInformationReducer.errorColor,
     }
 }
 function mapDispatchToProps(dispatch) {

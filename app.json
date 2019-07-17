@@ -6,8 +6,17 @@
     "sdkVersion": "33.0.0",
     "android": {
       "package": "com.fintech.bxcess",
-      "versionCode": 2,
-      "permissions": []
+      "versionCode": 3,
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "AUDIO_RECORDING",
+        "NOTIFICATIONS",
+        "CAMERA_ROLL",
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE",
+        "INTERNET"
+      ]
     },
     "platforms": [
       "ios",

@@ -11,7 +11,7 @@ import config from '../../do/config'
 
 
 import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI } from './apiRegistration'
-import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi,getListWorkersApi,doneForNowApi } from './apiDashboard'
+import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -150,7 +150,32 @@ export const login = () => {
 
 export const companyInfo = () => {
     return (dispatch, getState) => {
-        dispatch(companyInfoAPI())
+        const { comp_name, comp_regno, comp_regdate, comp_main_biz_act } = getState().companyInformationReducer
+
+        const errorArray = []
+        const errorColor = []
+
+        if (comp_name == undefined || comp_name == '') {
+            errorArray.push({ title: "name", desc: "No Company Name" })
+            errorColor.push("Name")
+        }
+        if (comp_regno == undefined || comp_regno == '') {
+            errorArray.push({ title: "reg number", desc: "No Registration Number" })
+            errorColor.push("Reg Number")
+        }
+        if (comp_regdate == undefined || comp_regdate == '') {
+            errorArray.push({ title: "date", desc: "Please Select Date" })
+            errorColor.push("Date")
+        }
+        if (comp_main_biz_act == undefined || comp_main_biz_act == '') {
+            errorArray.push({ title: "business", desc: "No Registration Number" })
+            errorColor.push("Business")
+        }
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
+        } else {
+            dispatch(companyInfoAPI())
+        }
     }
 }
 
