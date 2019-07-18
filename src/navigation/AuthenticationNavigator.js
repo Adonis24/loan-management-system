@@ -11,7 +11,7 @@ import UnderConstructionScreen from '../screens/UnderConstructionScreen';
 const AuthenticationStack = createStackNavigator({
     Welcome: WelcomeScreen,
     UnderConstruction:UnderConstructionScreen,
-    //Intro: IntroScreen,
+    Intro: IntroScreen,
     Login: LoginScreen,
 });
 

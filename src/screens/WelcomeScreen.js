@@ -37,8 +37,8 @@ class WelcomeScreen extends React.PureComponent {
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                            <Text style={[styles.textDefault, { margin: 20 }]}>Welcome to Bizxcess! Sign up now to join us or login to your account</Text>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpPersonal')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                            <Text style={[styles.textDefault, { margin: 20 }]}>Welcome to Bxcess! Sign up now to join us or login to your account</Text>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Intro')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                 <Text style={[styles.textDefault,]}>Sign Up</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={{ width: Layout.window.width * 0.4, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#4A90E2' }}>
