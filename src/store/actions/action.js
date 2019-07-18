@@ -75,6 +75,9 @@ export const register = () => {
 
 export const registerOTP = () => {
     return async (dispatch, getState) => {
+
+        
+
         const { token_type, access_token, countryCode, phone } = getState().registrationReducer
 
         const errorArray = []
@@ -96,9 +99,9 @@ export const registerOTP = () => {
 
 export const verifyPhone = () => {
     return async (dispatch, getState) => {
-        const { token_type, access_token, countryCode, phone, c1, c2, c3, c4 } = getState().registrationReducer
+        const { token_type, access_token, country_code, phone, c1, c2, c3, c4 } = getState().registrationReducer
         const code = c1 + '' + c2 + '' + c3 + '' + c4
-        await dispatch(verifyPhoneApi(token_type, access_token, countryCode, phone, code))
+        await dispatch(verifyPhoneApi(token_type, access_token, '+6', phone, code))
     }
 }
 
@@ -597,7 +600,7 @@ export const saveDocumentDO = (result) => {
                     // If there is no error updating the editor with the imageUrl
                     const imageUrl = `${config.digitalOceanSpaces}/` + fileName
                     console.log(imageUrl, name);
-                    dispatch({ type: 'SET_CONTACT_PERSON', payload: { ic_image: imageUrl } })
+                    dispatch({ type: 'SET_CONTACT_PERSON', payload: { ic_image: imageUrl,fileName:name } })
                 }
             });
 

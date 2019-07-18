@@ -69,24 +69,26 @@ class ContactPersonScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput onChangeText={(full_name) => this.props.setContactPerson({ full_name })} placeholder={'Full Name '} value={this.props.full_name} style={{ marginLeft: 5 }} />
+                                <TextInput onChangeText={(full_name) => this.props.setContactPerson({ full_name })} placeholder={'Full Name '} value={this.props.full_name} style={{ marginLeft: 5, flex: 1 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput onChangeText={(ic_no) => this.props.setContactPerson({ ic_no })} placeholder={'MyKad Number'} value={this.props.ic_no} style={{ marginLeft: 5 }} />
+                                <TextInput keyboardType='number-pad' onChangeText={(ic_no) => this.props.setContactPerson({ ic_no })} placeholder={'MyKad Number'} value={this.props.ic_no} style={{ marginLeft: 5, flex: 1 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.position} onChangeText={(position) => this.props.setContactPerson({ position })} placeholder={'Position'} value={this.props.contactPosition} style={{ marginLeft: 5 }} />
+                                <TextInput value={this.props.position} onChangeText={(position) => this.props.setContactPerson({ position })} placeholder={'Position'} value={this.props.contactPosition} style={{ marginLeft: 5, flex: 1 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput onChangeText={(phone) => this.props.setContactPerson({ phone })} placeholder={'Phone Number'} value={this.props.phone} style={{ marginLeft: 5 }} />
+                                <TextInput keyboardType='number-pad' onChangeText={(phone) => this.props.setContactPerson({ phone })} placeholder={'Phone Number'} value={this.props.phone} style={{ marginLeft: 5 }} />
                             </View>
-                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12 }]}>
+                            {/* <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12 }]}>
                                 <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12, fontWeight: 'bold' }]}>Upload documents needed:</Text> Scanned copy of identity card
-                            </Text>
-                            <View style={{ alignSelf: 'stretch', borderWidth: 1, borderRadius: 15, borderColor: 'darkblue', margin: 10, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
+                            </Text> */}
+                            <View style={{ alignSelf: 'stretch', borderWidth: 1, borderRadius: 15, borderColor: 'darkblue', margin: 10, justifyContent: 'space-between', alignItems: 'flex-end', flexDirection: 'row' }}>
+                                {!this.props.fileName?<Text style={[styles.caption,{alignSelf:'flex-start',textAlign:'left',margin:10,padding:10}]}>MyKad Scanned Copy</Text>:
+                                <Text style={[styles.textDefault,{alignSelf:'flex-start',textAlign:'left',margin:10,padding:10}]}>{this.props.fileName}</Text>}
                                 <TouchableOpacity onPress={() => this.pickDoc()} style={{ padding: 10, borderRadius: 5, justifyContent: 'center', backgroundColor: 'gainsboro', margin: 10 }}>
                                     <Text style={[styles.caption, { color: '#000', fontSize: 10 }]}>Select</Text>
                                 </TouchableOpacity>
@@ -116,7 +118,8 @@ function mapStateToProps(state) {
         ic_no: state.companyInformationReducer.ic_no,
         phone: state.companyInformationReducer.phone,
         position: state.companyInformationReducer.position,
-        ic_image: state.companyInformationReducer.ic_image
+        ic_image: state.companyInformationReducer.ic_image,
+        fileName: state.companyInformationReducer.fileName,
     }
 }
 function mapDispatchToProps(dispatch) {

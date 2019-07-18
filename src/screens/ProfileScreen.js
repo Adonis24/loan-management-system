@@ -18,9 +18,10 @@ import {
 
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
+import { LinearGradient } from 'expo-linear-gradient'
 
 import Layout from '../constants/Layout'
-
+import _ from 'lodash'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 //import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
@@ -39,115 +40,179 @@ class ProfileScreen extends React.PureComponent {
     }
     render() {
 
-        //console.log(`all biz : ${Jthis.props.all}`)
-        return (
-            <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                    <View style={{ alignItems: 'flex-end' }}>
-                        <Image source={require('../assets/images/topRight.png')} style={{ width: 80, height: 93 }} />
-                    </View>
-                    {/* <View style={{ alignItems: 'flex-start' }}>
-                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
-                    </View> */}
-                </View>
-                <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
-                    {/* HEADER */}
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                                <Ionicons name='ios-arrow-back' size={32} />
-                            </TouchableOpacity>
+        const score = this.props.score
+
+        const scoreColor = score > 66 ? 'green' : score > 33 ? 'yellow' : 'red'
+
+        console.log(`logo gempak : ${this.props.logo}`)
+
+        if (this.props.companyName) {
+            return (
+                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+                    <View style={{ flex: 1, justifyContent: 'space-between' }}>
+                        <View style={{ alignItems: 'flex-end' }}>
+                            <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
                         </View>
-                        <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 7, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start', alignItems: 'center', padding: 5 }]}>
-                                <Image source={require('../assets/icon/rfq.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
+                        {/* <View style={{ alignItems: 'flex-start' }}>
+                            <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
+                        </View> */}
+                    </View>
+                    <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
+                        {/* HEADER */}
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+                                    <Ionicons name='ios-arrow-back' size={32} />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
+                                <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 7, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start', alignItems: 'center', padding: 5 }]}>
+                                    <Image source={require('../assets/icon/rfq.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, }} resizeMode={'contain'} />
+                                    <Text style={[styles.textBold, { alignSelf: 'center', }]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
+                                </View>
                             </View>
                         </View>
-                    </View>
-                    {/* CONTENT AREA */}
-                    <View style={{ flex: 7 }}>
-                        <ScrollView>
-                            <View style={{ flexDirection: 'row', justifyContent: 'flex-start', flex: 1 }}>
-                                <View style={{ flexDirection: 'row', margin: 10 }}>
-                                    <Image source={{uri:this.props.logo}} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                </View>
-                                <View style={{ flexDirection: 'column', alignSelf: 'flex-start', alignItems: 'flex-start' }}>
-                                    <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', color: '#4A90E2' }]}>{this.props.companyName || 'John Doe Sdn Bhd'}</Text>
-                                    <Text style={[styles.subTitle, { margin: 5 }]}>SSM NO :{this.props.companyRegNo || '123456789'}</Text>
-                                </View>
-                            </View>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('ContactPerson')}>
-                                <Text>Add Worker</Text>
-                            </TouchableOpacity>
-                            <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                <View style={{ flexDirection: 'row', flex: 2 }}>
-                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, textAlign: 'left' }]}>Business Model :</Text>
-                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, fontWeight: 'bold', textAlign: 'left' }]}>F {'&'} B Industry</Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row' }}>
-                                    <Ionicons name='ios-add' size={26} color='lawngreen' style={{ margin: 5 }} />
-                                    <Text style={[styles.caption, { margin: 5, textAlign: 'left' }]}>Add Info</Text>
-                                </View>
-                            </View>
-                            <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                <View style={{ flexDirection: 'row', flex: 2 }}>
-                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, textAlign: 'left' }]}>Years doing Business : </Text>
-                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, fontWeight: 'bold', textAlign: 'left' }]}>5 </Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row' }}>
-                                    <Ionicons name='ios-add' size={26} color='lawngreen' style={{ margin: 5 }} />
-                                    <Text style={[styles.caption, { margin: 5, textAlign: 'left' }]}>Add Other Business</Text>
-                                </View>
-                            </View>
-                            <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                <View style={{ flexDirection: 'row', flex: 2 }}>
-                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, textAlign: 'left' }]}>Number of employee : </Text>
-                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, fontWeight: 'bold', textAlign: 'left' }]}>40 people</Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row' }}>
-                                    <Ionicons name='ios-add' size={26} color='lawngreen' style={{ margin: 5 }} />
-                                    <Text style={[styles.caption, { margin: 5, flex: 2, textAlign: 'left' }]}>Add Loan Details</Text>
-                                </View>
-                            </View>
-                            <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                <View style={{ flexDirection: 'row', flex: 2 }}>
-                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, textAlign: 'left' }]}>Scoring : </Text>
-                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, fontWeight: 'bold', textAlign: 'center' }]}>48</Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row' }}>
-                                    <Ionicons name='ios-close' size={26} color='red' style={{ margin: 5 }} />
-                                    <Text style={[styles.caption, { margin: 5, textAlign: 'left' }]}>Make Report</Text>
-                                </View>
-                            </View>
-                            <View style={{ flex: 1, margin: 5, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                                <Text style={[styles.textDefault, { flex: 1, alignSelf: 'flex-start', margin: 5, fontSize: 12, textAlign: 'left' }]}>Scoring meter {'&'} chart</Text>
-                                <View style={{ flex: 1, marginLeft: 20, marginLeft: 5, justifyContent: 'center', alignSelf: 'stretch' }}>
-                                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                                        <Text style={[styles.caption, { flex: 1, }]}>Poor</Text>
-                                        <Text style={[styles.caption, { flex: 1, }]}>Fair</Text>
-                                        <Text style={[styles.caption, { flex: 1, }]}>Excellent</Text>
+                        {/* CONTENT AREA */}
+                        <View style={{ flex: 7 }}>
+                            <ScrollView>
+                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: 5 }}>
+                                    <View style={{ flexDirection: 'row', }}>
+                                        <Image source={{ uri: this.props.logo }} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode={'cover'} />
                                     </View>
-                                    <View style={{ padding: 10, flex: 1, borderRadius: 10, borderWidth: 1, borderColor: '#000' }} />
+                                    <View style={{ flexDirection: 'column', alignSelf: 'flex-start', alignItems: 'flex-start', paddingLeft: 2 }}>
+                                        <Text style={[styles.subTitle, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.companyName || 'John Doe Sdn Bhd'}</Text>
+                                        <Text style={[styles.subTitle, { alignSelf: 'flex-start', textAlign: 'left' }]}>SSM NO : {this.props.companyRegNo || '123456789'}</Text>
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={{ flex: 1, flexDirection: 'row', margin: 5, justifyContent: 'space-evenly' }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('LoanApplication')} style={{ margin: 10, padding: 10, borderRadius: 5, borderWidth: 1, borderColor: 'blue' }}>
-                                    <Text>Apply Loan</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => console.log('Consultation')} style={{ margin: 10, padding: 10, borderRadius: 5, borderWidth: 1, borderColor: 'blue' }}>
-                                    <Text>Get Consultation</Text>
-                                </TouchableOpacity>
-                            </View>
-                            {this.props.listWorkers && this.props.listWorkers.map(
-                                (lw, i) => <View key={i} style={{ flexDirection: 'row', }}>
-                                    <Text >{i}</Text><Text>{lw.full_name}</Text></View>
-                            )}
-                        </ScrollView>
+                                <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }} />
+
+                                <View style={{ margin: 5, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                                    <Text style={[styles.textDefault, { flex: 1, margin: 5, alignSelf: 'center', fontSize: 24, textAlign: 'center' }]}>{score}</Text>
+                                    <View style={{ flex: 1, marginLeft: 20, marginLeft: 5, justifyContent: 'center', alignSelf: 'stretch' }}>
+                                        <View style={{ flex: 1, flexDirection: 'row' }}>
+                                            <Text style={[styles.caption, { flex: 1, }]}>Poor</Text>
+                                            <Text style={[styles.caption, { flex: 1, }]}>Fair</Text>
+                                            <Text style={[styles.caption, { flex: 1, }]}>Excellent</Text>
+                                        </View>
+                                        <View style={{ flex: 1, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey', flexDirection: 'row' }}>
+                                            <LinearGradient start={[0.0, 0.5]} end={[1.0, 0.5]} locations={[0.0, 1.0]} colors={[scoreColor, '#fff',]} style={{ flex: score, padding: 10, borderRadius: 10, }} />
+                                            <View style={{ flex: 100 - score, borderRadius: 10, backgroundColor: '#fff', padding: 10, }} />
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style={{ flexDirection: 'row', margin: 5, justifyContent: 'space-evenly' }}>
+                                    <TouchableOpacity onPress={() => console.log('Consultation')} style={{ margin: 10, padding: 10, borderRadius: 5, borderWidth: 1, borderColor: 'blue' }}>
+                                        <Text style={styles.caption}>Generate Report</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => console.log('Consultation')} style={{ margin: 10, padding: 10, borderRadius: 5, borderWidth: 1, borderColor: 'blue' }}>
+                                        <Text style={styles.caption}>Get Consultation</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('LoanApplication')} style={{ margin: 10, padding: 10, borderRadius: 5, borderWidth: 1, borderColor: 'blue' }}>
+                                        <Text style={styles.caption}>Apply Loan</Text>
+                                    </TouchableOpacity>
+                                </View>
+
+                                <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+                                    <Text style={styles.subTitle}>Basic Info</Text>
+                                    <Ionicons name="ios-create" size={24} color="lightgrey" />
+                                </View>
+                                <View style={{ width: Layout.window.width, paddingLeft: 5 }}>
+                                    <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                        <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Main Business :</Text></View>
+                                        <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.main_biz_act}</Text></View>
+                                    </View>
+                                    <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                        <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Years in Business :</Text></View>
+                                        <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.reg_date}</Text></View>
+                                    </View>
+                                    <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                        <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Employee :</Text></View>
+                                        <View style={{ flex: 2, flexDirection: 'row', alignItems: 'flex-start' }}>
+                                            <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{_.size(this.props.listWorkers)}</Text>
+                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('ContactPerson')} style={{ flexDirection: 'row', marginLeft: 10, justifyContent: 'flex-start' }}>
+                                                <Text style={[styles.caption, { textAlign: 'left', paddingLeft: 5, paddingTop: 0, textAlignVertical: 'top' }]}>Add Worker</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+                                    <Text style={styles.subTitle}>Address</Text>
+                                    <Ionicons name="ios-create" size={24} color="lightgrey" />
+                                </View>
+                                <View style={{ width: Layout.window.width, paddingLeft: 5 }}>
+                                    <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                        <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Email :</Text></View>
+                                        <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.email}</Text></View>
+                                    </View>
+                                    <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                        <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Phone :</Text></View>
+                                        <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.phone}</Text></View>
+                                    </View>
+                                    <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                        <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Address :</Text></View>
+                                        <View style={{ flex: 2 }}>
+                                            <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.addr}</Text>
+                                            {this.props.addr_2 && <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.addr_2}</Text>}
+                                            <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.postcode} {this.props.city}</Text>
+                                            <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.state}</Text>
+                                        </View>
+                                    </View>
+                                </View>
+                            </ScrollView>
+                        </View>
                     </View>
                 </View>
-            </View>
-        );
+            );
+        } else {
+            return (
+                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+                    <View style={{ flex: 1, justifyContent: 'space-between' }}>
+                        <View style={{ alignItems: 'flex-end' }}>
+                            <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
+                        </View>
+                        {/* <View style={{ alignItems: 'flex-start' }}>
+                            <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
+                        </View> */}
+                    </View>
+                    <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
+                        {/* HEADER */}
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+                                    <Ionicons name='ios-arrow-back' size={32} />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
+                                <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 7, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start', alignItems: 'center', padding: 5 }]}>
+                                    <Image source={require('../assets/icon/rfq.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, }} resizeMode={'contain'} />
+                                    <Text style={[styles.textBold, { alignSelf: 'center', }]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
+                                </View>
+                            </View>
+                        </View>
+                        {/* CONTENT AREA */}
+                        <View style={{ flex: 7 }}>
+                            <ScrollView>
+                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: 5, height: Layout.window.height / 15, }} />
+
+                                <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+                                    <Text style={styles.subTitle}>Score</Text>
+                                    <Ionicons name="ios-create" size={24} color="lightgrey" />
+                                </View>
+                                <Text style={[styles.textDefault, {textAlign:'left',alignSelf:'flex-start', marginLeft: 5 }]}>You have not registered a company yet.</Text>
+                                <View style={{ flexDirection: 'row', margin: 10 }}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('AddCompany')}>
+                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, justifyContent: 'center' }}>
+                                            <Text style={[styles.textDefault, { color: '#fff', margin: 10 }]}>Register Company</Text>
+                                        </LinearGradient>
+                                    </TouchableOpacity>
+                                </View>
+                            </ScrollView>
+                        </View>
+                    </View>
+                </View>
+            );
+        }
+
     }
 }
 
@@ -172,7 +237,11 @@ function mapStateToProps(state) {
 
         listWorkers: state.listWorkersReducer.listWorkers,
 
-    
+        profile_pic: state.myAccountReducer.profile_pic,
+
+        score: 25
+
+
 
     }
 }

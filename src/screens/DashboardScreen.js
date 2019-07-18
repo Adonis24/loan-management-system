@@ -80,25 +80,25 @@ class DashboardScreen extends React.PureComponent {
 
         // ]).start();
 
-        Animated.stagger(500, [
+        Animated.stagger(1000, [
             Animated.timing(this.logo, {
                 toValue: 1,
-                duration: 1000,
+                duration: 2000,
                 easing: Easing.linear
             }),
             Animated.timing(this.profilePic, {
                 toValue: 1,
-                duration: 1000,
+                duration: 2000,
                 easing: Easing.linear
             }),
             Animated.timing(this.topBar, {
                 toValue: 1,
-                duration: 1000,
+                duration: 2000,
                 easing: Easing.linear
             }),
             Animated.timing(this.scrollBar, {
                 toValue: 1,
-                duration: 1000,
+                duration: 2000,
                 easing: Easing.linear
             }),
 
@@ -152,7 +152,7 @@ class DashboardScreen extends React.PureComponent {
                 </Modal>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
                     <View style={{ alignItems: 'flex-end' }}>
-                        <Image source={require('../assets/images/topRight.png')} style={{ width: 120, height: 133 }} />
+                        <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
                     </View>
                     {/* <View style={{ alignItems: 'flex-start' }}>
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
@@ -166,13 +166,15 @@ class DashboardScreen extends React.PureComponent {
                         </Animated.View>
                         <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
                             <Animated.View style={{ opacity: profilePicOpac, flex: 5, flexDirection: 'row' }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('MyAccount')} style={[{ marginLeft: 10 }]}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('MyAccount')} style={[{ marginLeft: 10, flexDirection: 'row' }]}>
                                     <Image source={{ uri: this.props.profile_pic }} style={{ height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' />
+
+                                    <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
+                                        <Text style={[styles.textDefault, { textAlign: 'left', alignSelf: 'flex-start',color:'#2C4690' }]}>{this.props.name}</Text>
+                                        <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>{this.props.member_id}</Text>
+                                        <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>{this.props.companyName}</Text>
+                                    </View>
                                 </TouchableOpacity>
-                                <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
-                                    <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>{this.props.name}</Text>
-                                    <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>{this.props.companyName}</Text>
-                                </View>
                             </Animated.View>
                             <Animated.View style={[{ opacity: topBarOpac, backgroundColor: '#fff', flex: 4, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2 }]}>
                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')} style={{ flex: 1, padding: 5, justifyContent: 'center', alignItems: 'center' }} >

@@ -42,22 +42,39 @@ class MyAccountEditScreen extends React.PureComponent {
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
                     <View style={{ alignItems: 'flex-end' }}>
-                        <Image source={require('../assets/images/topRight.png')} style={{ width: 80, height: 93 }} />
+                        <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
                     </View>
                     {/* <View style={{ alignItems: 'flex-start' }}>
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
                     </View> */}
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
-                    {/* HEADER */}
-                    <View style={{ flex: 6, backgroundColor: 'blue' }}>
+                <View style={{ flex: 6, backgroundColor: 'blue' }}>
                         <LinearGradient
                             colors={['#4c669f', '#3b5998', '#192f6a']}
                             style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between' }}>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+                                        <Ionicons name={Platform.OS === 'ios' ? 'ios-arrow-down' : 'ios-arrow-back'} size={32} color={'#fff'} />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
                             <View style={{ alignItems: 'center', padding: 5 }}>
-                                <Image source={require('../assets/images/girl.png')} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff' }]} resizeMode={'cover'} />
-                                <Text style={[styles.textDefault, { color: '#fff' }]}>Nama</Text>
-                                <Text style={[styles.textDefault, { color: '#fff' }]}>Nama Company</Text>
+                                <Image source={{ uri: this.props.profile_pic }} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff' }]} resizeMode={'cover'} />
+                                <Text style={[styles.textDefault, { color: '#fff' }]}>{this.props.name}</Text>
+                                <Text style={[styles.textDefault, { color: '#fff' }]}>{this.props.companyName}</Text>
+                                <View style={{ flexDirection: 'row', padding: 5, margin: 10, borderRadius: 5, backgroundColor: '#fff' }}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('MyAccountEdit')} style={{ padding: 5 }}>
+                                        <Ionicons name='ios-cube' color={'#2FD9FE'} size={20} />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.toggleShow()} style={{ padding: 5,paddingLeft:10,paddingRight:10 }}>
+                                        <Ionicons name='ios-qr-scanner' color={'#2FD9FE'} size={20} />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('MyAccountEdit')} style={{ padding: 5 }}>
+                                        <Ionicons name='ios-chatboxes' color={'#2FD9FE'} size={20} />
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignSelf: 'stretch', padding: 5 }}>
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>43 Connections</Text>
@@ -106,6 +123,14 @@ class MyAccountEditScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
+        member_id: state.myAccountReducer.member_id,
+        name: state.myAccountReducer.name,
+        email: state.myAccountReducer.email,
+        phone_no: state.myAccountReducer.phone_no,
+        profile_pic: state.myAccountReducer.profile_pic,
+        email_verified_at: state.myAccountReducer.email_verified_at,
+
+        companyName: state.bizInfoReducer.name,
 
     }
 }

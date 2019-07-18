@@ -106,6 +106,10 @@ const DashboardStackWithModal = createStackNavigator(
     CompanyContactAddressInformation: CompanyContactAddressInformationScreen,
     CompanyInfoSuccess: CompanyInfoSuccessScreen,
 
+    SignUpOtp: SignupOtpScreen,
+    SignUpOtpEnter: SignupOtpEnterScreen,
+    SignUpSuccess: SignupSuccessScreen,
+
 
     ContactPerson: { screen: ContactPersonScreen, },
     ContactPersonSuccess: { screen: ContactPersonSuccessScreen, },
@@ -148,11 +152,11 @@ const InsightStack = createStackNavigator({
 
 InsightStack.navigationOptions = {
   tabBarLabel: 'Contacts',
- 
-    tabBarOptions: {
-      activeTintColor: '#4967AE',
-      inactiveTintColor: '#7896DC',
-    },
+
+  tabBarOptions: {
+    activeTintColor: '#4967AE',
+    inactiveTintColor: '#7896DC',
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -167,11 +171,11 @@ const NotificationStack = createStackNavigator({
 
 NotificationStack.navigationOptions = {
   tabBarLabel: 'Notifications',
-  
-    tabBarOptions: {
-      activeTintColor: '#4967AE',
-      inactiveTintColor: '#7896DC',
-    },
+
+  tabBarOptions: {
+    activeTintColor: '#4967AE',
+    inactiveTintColor: '#7896DC',
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -187,10 +191,10 @@ const SettingsStack = createStackNavigator({
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
 
-    tabBarOptions: {
-      activeTintColor: '#4967AE',
-      inactiveTintColor: '#7896DC',
-    },
+  tabBarOptions: {
+    activeTintColor: '#4967AE',
+    inactiveTintColor: '#7896DC',
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

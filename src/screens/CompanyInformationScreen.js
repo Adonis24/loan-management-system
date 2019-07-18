@@ -65,11 +65,11 @@ class CompanyInformationScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company Name'} value={this.props.comp_name} onChangeText={(comp_name) => this.props.setCompanyInfo({ comp_name })} style={{ marginLeft: 5 }} />
+                                <TextInput placeholder={'Company Name'} value={this.props.comp_name} onChangeText={(comp_name) => this.props.setCompanyInfo({ comp_name })} style={{ marginLeft: 5,flex:1 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company Registration Number'} value={this.props.comp_regno} onChangeText={(comp_regno) => this.props.setCompanyInfo({ comp_regno })} style={{ marginLeft: 5 }} />
+                                <TextInput placeholder={'Registration Number'} value={this.props.comp_regno} onChangeText={(comp_regno) => this.props.setCompanyInfo({ comp_regno })} style={{ marginLeft: 5,flex:1 }} />
                             </View>
 
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
@@ -84,7 +84,7 @@ class CompanyInformationScreen extends React.PureComponent {
                                     modalTransparent={false}
                                     animationType={"fade"}
                                     androidMode={"default"}
-                                    placeHolderText="Company Registration Date"
+                                    placeHolderText="Registration Date"
                                     textStyle={{ color: "#000" }}
                                     placeHolderTextStyle={{ fontFamily: 'Roboto-regular', color: 'lightgrey' }}
                                     onDateChange={(newDate) => this.setDate(newDate)}
@@ -94,7 +94,7 @@ class CompanyInformationScreen extends React.PureComponent {
 
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Main Business Activities'} value={this.props.comp_main_biz_act} onChangeText={(comp_main_biz_act) => this.props.setCompanyInfo({ comp_main_biz_act })} style={{ marginLeft: 5 }} />
+                                <TextInput placeholder={'Main Business Activities'} value={this.props.comp_main_biz_act} onChangeText={(comp_main_biz_act) => this.props.setCompanyInfo({ comp_main_biz_act })} style={{ marginLeft: 5,flex:1 }} />
                             </View>
 
                             <View style={{ flexDirection: 'row', margin: 5 }}>

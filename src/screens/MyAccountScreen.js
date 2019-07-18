@@ -17,7 +17,7 @@ import {
 
 } from 'react-native';
 
-import QRCode from 'react-native-qrcode'
+import QRCode from 'react-native-qrcode-svg'
 
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
@@ -57,13 +57,13 @@ class MyAccountScreen extends React.PureComponent {
                     visible={this.state.popUp}
                     onRequestClose={() => this.toggleShow()}
                 >
-
-                    <QRCode value={this.props.member_id} size={Layout.window.width / 2} bgColor='black' fgColor='white' />
-
+                    <TouchableOpacity onPress={() => this.toggleShow()} style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.8)' }}>
+                        <QRCode value={'test'} size={Layout.window.width / 1.5} backgroundColor='#fff' color='#000' />
+                    </TouchableOpacity>
                 </Modal>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
                     <View style={{ alignItems: 'flex-end' }}>
-                        <Image source={require('../assets/images/topRight.png')} style={{ width: 80, height: 93 }} />
+                        <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
                     </View>
                     {/* <View style={{ alignItems: 'flex-start' }}>
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
@@ -77,24 +77,24 @@ class MyAccountScreen extends React.PureComponent {
                             style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between' }}>
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                                    <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                                        <Ionicons name='ios-arrow-back' size={32} />
+                                    <TouchableOpacity onPress={() => this.props.navigation.goBack()} >
+                                        <Ionicons name={Platform.OS === 'ios' ? 'ios-arrow-down' : 'ios-arrow-back'} size={32} color={'#fff'} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
                             <View style={{ alignItems: 'center', padding: 5 }}>
-                                <Image source={{ uri: this.props.profile_pic }} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff' }]} resizeMode={'cover'} />
+                                <Image source={{ uri: this.props.profile_pic }} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff',marginBottom:5 }]} resizeMode={'cover'} />
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>{this.props.name}</Text>
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>{this.props.companyName}</Text>
-                                <View style={{ flexDirection: 'row', padding: 5, margin: 10, borderRadius: 3, backgroundColor: '#fff' }}>
+                                <View style={{ flexDirection: 'row', padding: 5, margin: 10, borderRadius: 5, backgroundColor: '#fff' }}>
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('MyAccountEdit')} style={{ padding: 5 }}>
-                                        <Ionicons name='ios-cube' color={'#2FD9FE'} />
+                                        <Ionicons name='ios-cube' color={'#2FD9FE'} size={20} />
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.toggleShow()} style={{ padding: 5 }}>
-                                        <Ionicons name='ios-qr-scanner' color={'#2FD9FE'} />
+                                    <TouchableOpacity onPress={() => this.toggleShow()} style={{ padding: 5, paddingLeft: 10, paddingRight: 10 }}>
+                                        <QRCode value={'test'} size={20} backgroundColor='#fff' color='#2FD9FE' />
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('MyAccountEdit')} style={{ padding: 5 }}>
-                                        <Ionicons name='ios-chatboxes' color={'#2FD9FE'} />
+                                        <Ionicons name='ios-chatboxes' color={'#2FD9FE'} size={20} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -108,25 +108,15 @@ class MyAccountScreen extends React.PureComponent {
                     <View style={{ flex: 9 }}>
                         <ScrollView contentStyle={{ padding: 10 }} >
                             {/** Recent Activities */}
-                            <View style={{ margin: 5, paddingBottom: 5, }}>
-                                <View style={{ marginBottom: 10 }}>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Recent Activities</Text>
-                                        <Text style={styles.caption}>More ></Text>
-                                    </View>
-                                </View>
-                                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <Text style={[styles.caption, { alignSelf: 'flex-end' }]}>20/2/2019</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch', padding: 5 }}>
-                                        <Image source={require('../assets/images/e-info.png')} style={{ flex: 1, width: undefined, height: Layout.window.height / 20, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                        <Text style={[styles.caption, { flex: 3, alignItems: 'flex-start', textAlign: 'left' }]} numberOfLines={1} ellipsizeMode={'tail'}>e-info</Text>
-                                    </View>
-                                </View>
-                                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <Text style={[styles.caption, { alignSelf: 'flex-end' }]}>20/2/2019</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch', padding: 5 }}>
-                                        <Image source={require('../assets/images/e-info.png')} style={{ flex: 1, width: undefined, height: Layout.window.height / 20, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                        <Text style={[styles.caption, { flex: 3, alignItems: 'flex-start', textAlign: 'left' }]} numberOfLines={1} ellipsizeMode={'tail'}>e-info</Text>
-                                    </View>
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                                {/* <View style={[{ flex: 1, marginLeft: 10, padding: 2, alignSelf: 'stretch' }]}>
+                                    <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: Layout.window.height / 10, width: undefined, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' />
+                                </View> */}
+                                <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-end', textAlign: 'right' }]}>20/12/2019</Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: Layout.window.height / 10, width: undefined, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' />
+                                    <Text numberOfLines={2} ellipsizeMode={'tail'} style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ullamcorper luctus porttitor. Sed a venenatis ipsum, eget suscipit sapien. Aliquam ornare sagittis felis et tempor. </Text>
+
                                 </View>
                             </View>
 

@@ -57,11 +57,11 @@ class CompanyContactInformationScreen extends React.PureComponent {
 
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company Phone Number'} value={this.props.comp_phone} onChangeText={(comp_phone) => this.props.setCompanyInfo({ comp_phone })} style={{ marginLeft: 5 }} />
+                                <TextInput keyboardType='numeric' placeholder={'Company Phone Number'} value={this.props.comp_phone} onChangeText={(comp_phone) => this.props.setCompanyInfo({ comp_phone })} style={{ marginLeft: 5,flex:1 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Company Email Address'} value={this.props.comp_email} onChangeText={(comp_email) => this.props.setCompanyInfo({ comp_email })} style={{ marginLeft: 5 }} />
+                                <TextInput keyboardType='email-address' placeholder={'Company Email Address'} value={this.props.comp_email} onChangeText={(comp_email) => this.props.setCompanyInfo({ comp_email })} style={{ marginLeft: 5,flex:1 }} />
                             </View>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('CompanyContactAddressInformation')} style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />

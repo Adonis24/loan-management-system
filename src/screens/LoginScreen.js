@@ -66,14 +66,11 @@ class LoginScreen extends React.PureComponent {
 
         })
 
-
-
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
                     <View style={{ alignItems: 'flex-start' }}><Image source={require('../assets/images/topLeft.png')} style={{ width: 79, height: 120 }} /></View>
                     <View style={{ alignItems: 'flex-end' }}><Image source={require('../assets/images/bottomRight.png')} style={{ width: 106, height: 92 }} /></View>
-
                 </View>
                 <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -81,11 +78,11 @@ class LoginScreen extends React.PureComponent {
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: emailBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.email} onChangeText={(email) => this.props.setLogin({ email })} placeholder={'E-mail'} style={{ marginLeft: 5, }} placeholder={(emailErrorHint.length > 0) ? emailErrorHint : 'email@address.com'} placeholderTextColor={(emailErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'email-address'} />
+                                <TextInput value={this.props.email} onChangeText={(email) => this.props.setLogin({ email })} placeholder={'E-mail'} style={{ marginLeft: 5,flex:1 }} placeholder={(emailErrorHint.length > 0) ? emailErrorHint : 'email@address.com'} placeholderTextColor={(emailErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'email-address'} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: passwordBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput secureTextEntry value={this.props.password} onChangeText={(password) => this.props.setLogin({ password })} style={{ marginLeft: 5 }} placeholder={(passwordErrorHint.length > 0) ? '******' : '******'} placeholderTextColor={(passwordErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                <TextInput secureTextEntry value={this.props.password} onChangeText={(password) => this.props.setLogin({ password })} style={{ marginLeft: 5,flex:1 }} placeholder={(passwordErrorHint.length > 0) ? '******' : '******'} placeholderTextColor={(passwordErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                                 <Text style={[styles.textDefault, { margin: 5 }]}>Forgot password?</Text>
@@ -96,7 +93,6 @@ class LoginScreen extends React.PureComponent {
                                     <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position:'absolute',top:0,right:0,bottom:0,left:0,borderRadius: 15, justifyContent:'center' }}>
                                         <Text style={[styles.textDefault, { color: '#fff' }]}>Log In</Text>
                                     </LinearGradient>
-
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
                                     <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
