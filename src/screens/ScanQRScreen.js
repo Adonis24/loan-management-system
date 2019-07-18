@@ -66,37 +66,8 @@ class ScanQRScreen extends React.PureComponent {
         }
         return (
             <View style={{ flex: 1 }}>
-                <Camera onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned} style={{ flex: 1 }} type={this.state.type}>
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                                <Ionicons name='ios-arrow-back' size={32} />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View
-                        style={{
-                            flex: 7,
-                            backgroundColor: 'transparent',
-                            flexDirection: 'row',
-                        }}>
-                        <TouchableOpacity
-                            style={{
-                                flex: 0.1,
-                                alignSelf: 'flex-end',
-                                alignItems: 'center',
-                            }}
-                            onPress={() => {
-                                this.setState({
-                                    type:
-                                        this.state.type === Camera.Constants.Type.back
-                                            ? Camera.Constants.Type.front
-                                            : Camera.Constants.Type.back,
-                                });
-                            }}>
-                            <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
-                        </TouchableOpacity>
-                    </View>
+                <Camera  ratio={'16:9'} onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned} style={[StyleSheet.absoluteFill,{ flex: 1 }]} type={this.state.type}>
+                    
                 </Camera>
             </View>
         );

@@ -61,6 +61,7 @@ import EdonationScreen from '../screens/EdonationScreen';
 import LoanCalculatorScreen from '../screens/LoanCalculatorScreen';
 import ElearningPlayScreen from '../screens/ElearningPlayScreen';
 import UserAccountScreen from '../screens/UserAccountScreen';
+import ContactPersonMainScreen from '../screens/ContactPersonMainScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -106,8 +107,12 @@ const DashboardStackWithModal = createStackNavigator(
     CompanyContactAddressInformation: CompanyContactAddressInformationScreen,
     CompanyInfoSuccess: CompanyInfoSuccessScreen,
 
+    SignUpOtp: SignupOtpScreen,
+    SignUpOtpEnter: SignupOtpEnterScreen,
+    SignUpSuccess: SignupSuccessScreen,
 
-    ContactPerson: { screen: ContactPersonScreen, },
+
+    ContactPersonMain: { screen: ContactPersonMainScreen, },
     ContactPersonSuccess: { screen: ContactPersonSuccessScreen, },
     ScanQR: { screen: ScanQRScreen, },
     UserAccount: { screen: UserAccountScreen },
@@ -148,11 +153,11 @@ const InsightStack = createStackNavigator({
 
 InsightStack.navigationOptions = {
   tabBarLabel: 'Contacts',
- 
-    tabBarOptions: {
-      activeTintColor: '#4967AE',
-      inactiveTintColor: '#7896DC',
-    },
+
+  tabBarOptions: {
+    activeTintColor: '#4967AE',
+    inactiveTintColor: '#7896DC',
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -167,11 +172,11 @@ const NotificationStack = createStackNavigator({
 
 NotificationStack.navigationOptions = {
   tabBarLabel: 'Notifications',
-  
-    tabBarOptions: {
-      activeTintColor: '#4967AE',
-      inactiveTintColor: '#7896DC',
-    },
+
+  tabBarOptions: {
+    activeTintColor: '#4967AE',
+    inactiveTintColor: '#7896DC',
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -187,10 +192,10 @@ const SettingsStack = createStackNavigator({
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
 
-    tabBarOptions: {
-      activeTintColor: '#4967AE',
-      inactiveTintColor: '#7896DC',
-    },
+  tabBarOptions: {
+    activeTintColor: '#4967AE',
+    inactiveTintColor: '#7896DC',
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

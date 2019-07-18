@@ -30,6 +30,7 @@ import * as actionCreator from '../store/actions/action'
 
 import moment from 'moment'
 
+
 class SignupOtpEnterScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
@@ -50,7 +51,16 @@ class SignupOtpEnterScreen extends React.PureComponent {
 
     async verifyPhone() {
         await this.props.verifyPhone()
-        await this.props.proceedOTP && this.props.navigation.navigate('CompanyInfoIntro')
+
+    }
+
+    async verifyOTPSubmit(c) {
+
+        await this.props.verifyOTP(c)
+        this.verifyPhone()
+
+        console.log(this.props.c1, this.props.c2, this.props.c3, this.props.c4)
+
     }
 
     timeLapsed() {
@@ -80,7 +90,7 @@ class SignupOtpEnterScreen extends React.PureComponent {
                     <TextInput keyboardType={'number-pad'} value={this.props.c3} style={[styles.textInput, { textAlign: 'center' }]} />
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10, borderWidth: 1, borderRadius: 5, margin: 5 }}>
-                    <TextInput keyboardType={'number-pad'} autoFocus={true} maxLength={1} value={this.props.d4} onChangeText={c4 => this.props.verifyOTP({ c4 })} placeholder={''} style={[styles.textInput, { textAlign: 'center' }]} onChange={() => this.setState({ button: !this.state.button })} />
+                    <TextInput keyboardType={'number-pad'} onChange={() => this.setState({ button: !this.state.button })} onSubmitEditing={() => this.verifyPhone()} autoFocus={true} maxLength={1} value={this.props.c4} onChangeText={c4 => this.verifyOTPSubmit({ c4 })} placeholder={''} style={[styles.textInput, { textAlign: 'center' }]} />
                 </View>
             </View>)
 
@@ -138,6 +148,7 @@ class SignupOtpEnterScreen extends React.PureComponent {
     }
 
     render() {
+        this.props.proceedOTP && this.props.navigation.navigate('CompanyInfoIntro')
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>

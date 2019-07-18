@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 
 import Constants from 'expo-constants'
+import * as SecureStore from 'expo-secure-store'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
@@ -39,8 +40,17 @@ class SignupOtpScreen extends React.PureComponent {
         await this.props.proceed && this.props.navigation.navigate('SignUpOtpEnter')
     }
 
-    componentDidMount() {
-        this.props.getPersonalToken()
+    async componentDidMount() {
+
+
+        const screen = this.props.navigation.getParam('screen', 'NA')
+        
+
+        if (screen != 'setting') { this.props.getPersonalToken() } else {
+            const personalToken = await SecureStore.getItemAsync('personalToken')
+            const { token_type, access_token } = JSON.parse(personalToken)
+            this.props.setRegister({ token_type, access_token })
+        }
     }
 
     render() {
@@ -80,7 +90,7 @@ class SignupOtpScreen extends React.PureComponent {
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: phoneBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
                                 <Image source={require('../assets/images/mobile.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput keyboardType={'phone-pad'} value={this.props.phone} onChangeText={(phone) => this.props.setOTP({ phone })} placeholder={(phoneErrorHint.length > 0) ? phoneErrorHint : '012 345 6789'} style={{ marginLeft: 5 }} />
+                                <TextInput keyboardType={'phone-pad'} value={this.props.phone} onChangeText={(phone) => this.props.setOTP({ phone })} placeholder={(phoneErrorHint.length > 0) ? phoneErrorHint : '012 345 6789'} style={{ marginLeft: 5, flex: 1 }} />
                             </View>
                             <View style={{ flexDirection: 'row', margin: 5 }}>
                                 <TouchableOpacity onPress={() => this.registerOTP()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
@@ -117,6 +127,7 @@ function mapDispatchToProps(dispatch) {
         setOTP: (value) => dispatch({ type: 'SET_OTP', payload: { ...value } }),
         registerOTP: () => dispatch(actionCreator.registerOTP()),
         getPersonalToken: () => dispatch(actionCreator.getPersonalToken()),
+        setRegister: (value) => dispatch({ type: 'SET_REGISTER', payload: { ...value } }),
 
     }
 }

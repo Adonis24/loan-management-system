@@ -30,7 +30,7 @@ import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 import { Button } from 'native-base';
 
-class ContactPersonScreen extends React.PureComponent {
+class ContactPersonMainScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
@@ -46,12 +46,12 @@ class ContactPersonScreen extends React.PureComponent {
 
     async ContactPerson() {
         //await this.props.companyInfo()
-        this.props.contactPerson()
+        this.props.contactPersonMain()
         // this.props.navigation.navigate('ContactPersonSuccess')
     }
 
     render() {
-        this.props.proceedSubmit && this.props.navigation.navigate('CompanyInfoSuccess')
+        this.props.proceedMain && this.props.navigation.navigate('ContactPersonSuccess')
 
         var nameBorderColor = '#5a83c2'
         const nameError = this.props.errorColor && this.props.errorColor.find(test => test == "Name")
@@ -158,7 +158,7 @@ function mapStateToProps(state) {
         position: state.companyInformationReducer.position,
         ic_image: state.companyInformationReducer.ic_image,
 
-        proceedSubmit: state.companyInformationReducer.proceedSubmit,
+        proceedMain: state.companyInformationReducer.proceedMain,
         error: state.companyInformationReducer.error,
         errorColor: state.companyInformationReducer.errorColor,
         fileName: state.companyInformationReducer.fileName,
@@ -167,9 +167,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         setContactPerson: (value) => dispatch({ type: 'SET_CONTACT_PERSON', payload: { ...value } }),
-        contactPerson: () => dispatch(actionCreator.contactPerson()),
+        contactPersonMain: () => dispatch(actionCreator.contactPersonMain()),
         saveDocument: (result) => dispatch(actionCreator.saveDocument(result)),
         saveDocumentDO: (result) => dispatch(actionCreator.saveDocumentDO(result))
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ContactPersonScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(ContactPersonMainScreen)

@@ -106,7 +106,6 @@ export default class App extends React.Component {
     }
   }
 
-
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
@@ -146,6 +145,8 @@ export default class App extends React.Component {
 
         require('./src/assets/images/girl.png'),
 
+        require('./src/assets/images/cardborder.png'),
+
         require('./src/assets/icon/eda.png'),
         require('./src/assets/icon/bizDir.png'),
         require('./src/assets/icon/crm.png'),
@@ -156,6 +157,7 @@ export default class App extends React.Component {
       Font.loadAsync({
         'Montserrat_medium': require('./src/assets/fonts/Montserrat/Montserrat-Medium.ttf'),
         'Montserrat_light': require('./src/assets/fonts/Montserrat/Montserrat-Light.ttf'),
+        'Montserrat_bold': require('./src/assets/fonts/Montserrat/Montserrat-Bold.ttf'),
         'Roboto-regular': require('./src/assets/fonts/Roboto/Roboto-Regular.ttf'),
 
       }),

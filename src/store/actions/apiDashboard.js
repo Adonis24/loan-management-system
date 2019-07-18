@@ -263,7 +263,7 @@ export const getCompanyInfoApi = () => {
 
         console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
         const bizInfo = await responseJson.data
-        // await console.log(`Company Info  ${JSON.stringify(eventArray)}`)
+         await console.log(`Company Info  ${JSON.stringify(bizInfo)}`)
 
         await dispatch({ type: 'GET_BIZ_INFO', payload: { ...bizInfo } })
       })

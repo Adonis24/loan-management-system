@@ -75,6 +75,9 @@ export const register = () => {
 
 export const registerOTP = () => {
     return async (dispatch, getState) => {
+
+        
+
         const { token_type, access_token, countryCode, phone } = getState().registrationReducer
 
         const errorArray = []
@@ -96,9 +99,9 @@ export const registerOTP = () => {
 
 export const verifyPhone = () => {
     return async (dispatch, getState) => {
-        const { token_type, access_token, countryCode, phone, c1, c2, c3, c4 } = getState().registrationReducer
+        const { token_type, access_token, country_code, phone, c1, c2, c3, c4 } = getState().registrationReducer
         const code = c1 + '' + c2 + '' + c3 + '' + c4
-        await dispatch(verifyPhoneApi(token_type, access_token, countryCode, phone, code))
+        await dispatch(verifyPhoneApi(token_type, access_token, '+6', phone, code))
     }
 }
 
@@ -265,6 +268,38 @@ export const contactPerson = () => {
         } else {
             // dispatch(contactPersonAPI())
             dispatch(companyInfoAPI())
+            // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
+        }
+    }
+}
+
+export const contactPersonMain = () => {
+    return (dispatch, getState) => {
+        const { full_name, ic_no, phone, position, ic_image } = getState().companyInformationReducer
+        const errorArray = []
+        const errorColor = []
+
+        if (full_name == undefined || full_name == '') {
+            errorArray.push({ title: "name", desc: "No Name" })
+            errorColor.push("Name")
+        }
+        if (ic_no == undefined || ic_no == '') {
+            errorArray.push({ title: "mykad", desc: "No MyKad" })
+            errorColor.push("MyKad")
+        }
+        if (position == undefined || position == '') {
+            errorArray.push({ title: "position", desc: "No Address" })
+            errorColor.push("Position")
+        }
+        if (phone == undefined || phone == '') {
+            errorArray.push({ title: "phone", desc: "No Phone Number" })
+            errorColor.push("Phone")
+        }
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
+        } else {
+            dispatch(contactPersonAPI())
+            // dispatch(companyInfoAPI())
             // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
         }
     }
@@ -707,7 +742,7 @@ export const saveDocumentDO = (result) => {
                     // If there is no error updating the editor with the imageUrl
                     const imageUrl = `${config.digitalOceanSpaces}/` + fileName
                     console.log(imageUrl, name);
-                    dispatch({ type: 'SET_CONTACT_PERSON', payload: { ic_image: imageUrl } })
+                    dispatch({ type: 'SET_CONTACT_PERSON', payload: { ic_image: imageUrl,fileName:name } })
                 }
             });
 

@@ -41,6 +41,12 @@ class CompanyInfoSuccessScreen extends React.PureComponent {
         this.props.navigation.navigate('Agreement')
     }
 
+    skip() {
+        this.props.initiateCompanyInfo()
+        this.props.navigation.navigate('Dashboard')
+
+    }
+
     componentDidMount() {
         this.props.initiateListWorkers()
     }
@@ -69,7 +75,7 @@ class CompanyInfoSuccessScreen extends React.PureComponent {
                                 </LinearGradient>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Dashboard')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                            <TouchableOpacity onPress={() => this.skip()} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                 <Text style={[styles.textDefault,]}>Skip</Text>
                             </TouchableOpacity>
                         </View>
@@ -92,6 +98,7 @@ function mapDispatchToProps(dispatch) {
 
         initiateListWorkers: () => dispatch(actionCreator.initiateListWorkers()),
         doneForNow: () => dispatch(actionCreator.doneForNow()),
+        initiateCompanyInfo: () => dispatch(actionCreator.initiateCompanyInfo())
 
 
     }

@@ -10,6 +10,12 @@ export default StyleSheet.create({
         fontFamily: 'Montserrat_medium',
         color: '#000'
     },
+    textBold: {
+        fontSize: 17,
+        
+        fontFamily: 'Montserrat_bold',
+        color: '#000'
+    },
     subTitle: {
         fontSize: 14,
         alignSelf: 'center',

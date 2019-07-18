@@ -182,7 +182,7 @@ export const contactPersonAPI = () => {
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
-        //await dispatch({ type: 'Company Info', payload: { phoneVerified:status } })
+        await dispatch({ type: 'SET_COMPANY_INFO', payload: { status, proceedMain: true } })
         await console.log(`companyInfo  ${JSON.stringify(responseJson)}`)
       })
       .catch((error) => {
