@@ -201,8 +201,8 @@ export const companyContactInfo = () => {
         if (errorArray.length > 0) {
             dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
         } else {
-            dispatch(companyInfoAPI())
-            // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
+            // dispatch(companyInfoAPI())
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
         }
     }
 }
@@ -263,7 +263,8 @@ export const contactPerson = () => {
         if (errorArray.length > 0) {
             dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
         } else {
-            dispatch(contactPersonAPI())
+            // dispatch(contactPersonAPI())
+            dispatch(companyInfoAPI())
             // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
         }
     }

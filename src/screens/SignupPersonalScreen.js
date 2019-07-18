@@ -48,7 +48,7 @@ class SignupPersonalScreen extends React.PureComponent {
 
 
     render() {
-        this.props.proceed && this.props.navigation.navigate('SignupPersonalSuccess')
+        this.props.proceed && this.props.navigation.navigate('SignUpPersonalSuccess')
 
         var emailBorderColor = '#5a83c2'
         const emailError = this.props.errorColor && this.props.errorColor.find(test => test == "E-mail")
@@ -78,7 +78,7 @@ class SignupPersonalScreen extends React.PureComponent {
         var nameErrorHint = ''
         var passwordErrorHint = ''
         var passwordConfirmErrorHint = ''
- 
+
         this.props.error && this.props.error.map(err => {
             if (err.title == 'email') { emailErrorHint = err.desc }
             if (err.title == 'name') { nameErrorHint = err.desc }
@@ -109,11 +109,11 @@ class SignupPersonalScreen extends React.PureComponent {
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: passwordBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput secureTextEntry value={this.props.password} onChangeText={(password) => this.props.setRegister({ password })} style={{ marginLeft: 5 }} placeholder={(passwordErrorHint.length > 0) ? '******' : '******'} placeholderTextColor={(passwordErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                <TextInput secureTextEntry value={this.props.password} onChangeText={(password) => this.props.setRegister({ password })} style={{ marginLeft: 5 }} placeholder={(passwordErrorHint.length > 0) ? '******' : 'Password'} placeholderTextColor={(passwordErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: passwordConfirmBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput secureTextEntry value={this.props.password_confirmation} onChangeText={(password_confirmation) => this.props.setRegister({ password_confirmation })} style={{ marginLeft: 5 }} placeholder={(passwordConfirmErrorHint.length > 0) ? '******' : '******'} placeholderTextColor={(passwordConfirmErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                <TextInput secureTextEntry value={this.props.password_confirmation} onChangeText={(password_confirmation) => this.props.setRegister({ password_confirmation })} style={{ marginLeft: 5 }} placeholder={(passwordConfirmErrorHint.length > 0) ? '******' : 'Confirm Password'} placeholderTextColor={(passwordConfirmErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ flexDirection: 'row', margin: 5 }}>
                                 <TouchableOpacity onPress={() => this.register()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>

@@ -51,7 +51,7 @@ class ContactPersonScreen extends React.PureComponent {
     }
 
     render() {
-        this.props.proceedPerson && this.props.navigation.navigate('ContactPersonSuccess')
+        this.props.proceedSubmit && this.props.navigation.navigate('CompanyInfoSuccess')
 
         var nameBorderColor = '#5a83c2'
         const nameError = this.props.errorColor && this.props.errorColor.find(test => test == "Name")
@@ -110,15 +110,15 @@ class ContactPersonScreen extends React.PureComponent {
                                 <TextInput onChangeText={(full_name) => this.props.setContactPerson({ full_name })} value={this.props.full_name} style={{ marginLeft: 5 }} placeholder={(nameErrorHint.length > 0) ? nameErrorHint : 'Full Name'} placeholderTextColor={(nameErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <TextInput onChangeText={(ic_no) => this.props.setContactPerson({ ic_no })} value={this.props.ic_no} style={{ marginLeft: 5 }} placeholder={(mykadErrorHint.length > 0) ? mykadErrorHint : 'MyKad Number'} placeholderTextColor={(mykadErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <Image source={require('../assets/images/position.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <TextInput value={this.props.position} onChangeText={(position) => this.props.setContactPerson({ position })} value={this.props.contactPosition} style={{ marginLeft: 5 }} placeholder={(positionErrorHint.length > 0) ? positionErrorHint : 'Position'} placeholderTextColor={(positionErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
-                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <Image source={require('../assets/images/phoneNum.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <TextInput onChangeText={(phone) => this.props.setContactPerson({ phone })} value={this.props.phone} style={{ marginLeft: 5 }} placeholder={(phoneErrorHint.length > 0) ? phoneErrorHint : 'Phone Number'} placeholderTextColor={(phoneErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12 }]}>
@@ -132,7 +132,7 @@ class ContactPersonScreen extends React.PureComponent {
                             <View style={{ flexDirection: 'row', margin: 5 }}>
                                 <TouchableOpacity onPress={() => this.ContactPerson()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
-                                        <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
+                                        <Text style={[styles.textDefault, { color: '#fff' }]}>Submit</Text>
                                     </LinearGradient>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
@@ -156,7 +156,7 @@ function mapStateToProps(state) {
         position: state.companyInformationReducer.position,
         ic_image: state.companyInformationReducer.ic_image,
 
-        proceedPerson: state.companyInformationReducer.proceedPerson,
+        proceedSubmit: state.companyInformationReducer.proceedSubmit,
         error: state.companyInformationReducer.error,
         errorColor: state.companyInformationReducer.errorColor,
     }
@@ -165,7 +165,6 @@ function mapDispatchToProps(dispatch) {
     return {
         setContactPerson: (value) => dispatch({ type: 'SET_CONTACT_PERSON', payload: { ...value } }),
         contactPerson: () => dispatch(actionCreator.contactPerson()),
-        companyInfo: () => dispatch(actionCreator.companyInfo()),
         saveDocument: (result) => dispatch(actionCreator.saveDocument(result)),
         saveDocumentDO: (result) => dispatch(actionCreator.saveDocumentDO(result))
     }

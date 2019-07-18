@@ -41,7 +41,7 @@ class CompanyContactInformationScreen extends React.PureComponent {
     }
 
     render() {
-        this.props.proceedCompany && this.props.navigation.navigate('CompanyInfoSuccess')
+        this.props.proceedCompany && this.props.navigation.navigate('ContactPerson')
 
         var phoneBorderColor = '#5a83c2'
         const phoneError = this.props.errorColor && this.props.errorColor.find(test => test == "Phone")
@@ -85,7 +85,7 @@ class CompanyContactInformationScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
 
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <Image source={require('../assets/images/phoneNum.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <TextInput value={this.props.comp_phone} onChangeText={(comp_phone) => this.props.setCompanyInfo({ comp_phone })} style={{ marginLeft: 5 }} placeholder={(phoneErrorHint.length > 0) ? phoneErrorHint : 'Company Phone Number'} placeholderTextColor={(phoneErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
@@ -93,7 +93,7 @@ class CompanyContactInformationScreen extends React.PureComponent {
                                 <TextInput value={this.props.comp_email} onChangeText={(comp_email) => this.props.setCompanyInfo({ comp_email })} style={{ marginLeft: 5 }} placeholder={(emailErrorHint.length > 0) ? emailErrorHint : 'Company Email Address'} placeholderTextColor={(emailErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('CompanyContactAddressInformation')} style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <Image source={require('../assets/images/company.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 {!this.props.comp_state ? <TextInput editable={false} value={this.props.comp_addr} onChangeText={(comp_addr) => this.props.setCompanyInfo({ comp_addr })} style={{ marginLeft: 5 }} placeholder={(addressErrorHint.length > 0) ? addressErrorHint : 'Company Address'} placeholderTextColor={(addressErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                                     : <View style={{ marginRight: 3, paddingBottom: 5 }}>
                                         <Text>{this.props.comp_addr}</Text>
