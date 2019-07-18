@@ -23,20 +23,20 @@ import SignupPersonalSuccessScreen from '../screens/SignupPersonalSuccessScreen'
 import ContactPersonSuccessScreen from '../screens/ContactPersonSuccessScreen';
 
 const Registration = createStackNavigator({
-  Intro: IntroScreen,
-  Agreement: AgreementScreen,
-  SignUpPersonal: SignupPersonalScreen,
-  SignUpPersonalSuccess: SignupPersonalSuccessScreen,
-  SignUpOtp: SignupOtpScreen,
+  // Intro: IntroScreen,
+  // Agreement: AgreementScreen,
+  // SignUpPersonal: SignupPersonalScreen,
+  // SignUpPersonalSuccess: SignupPersonalSuccessScreen,
+  // SignUpOtp: SignupOtpScreen,
   SignUpOtpEnter: SignupOtpEnterScreen,
-  SignUpSuccess: SignupSuccessScreen,
+  // SignUpSuccess: SignupSuccessScreen,//
   CompanyInfoIntro: CompanyInfoIntroScreen,
-  CompanyInformation: CompanyInformationScreen,
-  CompanyContactInformation: CompanyContactInformationScreen,
-  CompanyContactAddressInformation: CompanyContactAddressInformationScreen,
-  ContactPerson: ContactPersonScreen,
-  CompanyInfoSuccess: CompanyInfoSuccessScreen,
-  // ContactPersonSuccess: ContactPersonSuccessScreen,
+  // CompanyInformation: CompanyInformationScreen,
+  // CompanyContactInformation: CompanyContactInformationScreen,
+  // CompanyContactAddressInformation: CompanyContactAddressInformationScreen,
+  // ContactPerson: ContactPersonScreen,
+  // CompanyInfoSuccess: CompanyInfoSuccessScreen,
+  // ContactPersonSuccess: ContactPersonSuccessScreen,//
   DetailsConnectedParties: DetailsOfConnectedPartiesScreen,
   DeclarationDigitalSign: DeclarationDigitalSignScreen,
 });

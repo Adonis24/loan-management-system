@@ -44,7 +44,6 @@ class SignupOtpScreen extends React.PureComponent {
     }
 
     render() {
-
         var phoneBorderColor = '#5a83c2'
         const phoneError = this.props.error && this.props.errorColor.find(test => test == "phone")
         if (phoneError == "phone") {

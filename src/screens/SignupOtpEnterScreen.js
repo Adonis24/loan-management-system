@@ -39,7 +39,8 @@ class SignupOtpEnterScreen extends React.PureComponent {
         super(props)
         this.state = {
             duration: 180,
-            durationFormat: null
+            durationFormat: null,
+            button: true,
         }
     }
 
@@ -49,7 +50,7 @@ class SignupOtpEnterScreen extends React.PureComponent {
 
     async verifyPhone() {
         await this.props.verifyPhone()
-        await this.props.navigation.navigate('CompanyInfoIntro')
+        await this.props.proceedOTP && this.props.navigation.navigate('CompanyInfoIntro')
     }
 
     timeLapsed() {
@@ -79,7 +80,7 @@ class SignupOtpEnterScreen extends React.PureComponent {
                     <TextInput keyboardType={'number-pad'} value={this.props.c3} style={[styles.textInput, { textAlign: 'center' }]} />
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10, borderWidth: 1, borderRadius: 5, margin: 5 }}>
-                    <TextInput keyboardType={'number-pad'} autoFocus={true} maxLength={1} value={this.props.d4} onChangeText={c4 => this.props.verifyOTP({ c4 })} placeholder={''} style={[styles.textInput, { textAlign: 'center' }]} />
+                    <TextInput keyboardType={'number-pad'} autoFocus={true} maxLength={1} value={this.props.d4} onChangeText={c4 => this.props.verifyOTP({ c4 })} placeholder={''} style={[styles.textInput, { textAlign: 'center' }]} onChange={() => this.setState({ button: !this.state.button })} />
                 </View>
             </View>)
 
@@ -166,7 +167,7 @@ class SignupOtpEnterScreen extends React.PureComponent {
                                     <TouchableOpacity onPress={() => this.props.registerOTP()} style={{ justifyContent: 'center', alignItems: 'center', borderWidth: 1, borderColor: 'orange', borderRadius: 5, padding: 5 }}><Text style={styles.caption}>Resend</Text></TouchableOpacity>}
                             </View>
                             <View style={{ flexDirection: 'row', margin: 5 }}>
-                                <TouchableOpacity onPress={() => this.verifyPhone()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                <TouchableOpacity disabled={this.state.button} onPress={() => this.verifyPhone()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
                                         <Text style={[styles.textDefault, { color: '#fff' }]}>Verify</Text>
                                     </LinearGradient>
@@ -190,7 +191,8 @@ function mapStateToProps(state) {
         c2: state.registrationReducer.c2,
         c3: state.registrationReducer.c3,
         c4: state.registrationReducer.c4,
-        phoneVerified: state.registrationReducer.phoneVerified
+        phoneVerified: state.registrationReducer.phoneVerified,
+        proceedOTP: state.registrationReducer.proceedOTP
     }
 }
 function mapDispatchToProps(dispatch) {

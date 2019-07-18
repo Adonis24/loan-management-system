@@ -34,6 +34,12 @@ class AgreementScreen extends React.PureComponent {
         header: null,
     };
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            aggrement: false,
+        }
+    }
     async ContactPerson() {
         await this.props.companyInfo()
         //this.props.contactPerson()
@@ -53,30 +59,29 @@ class AgreementScreen extends React.PureComponent {
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Terms and Agreement</Text>
-                            
+
                             <Text style={[styles.caption, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
                             <Text style={[styles.caption, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
-                            
+
                             <Text style={[styles.caption, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
-                            
+
                             <Text style={[styles.caption, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
-                            
+
                             <Text style={[styles.caption, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
-                            
+
                             <Text style={[styles.caption, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
-                            
+
                             <View style={{ flexDirection: 'row' }}>
-                                <CheckBox />
+                                <CheckBox value={this.state.aggrement} onValueChange={() => this.setState({ aggrement: !this.state.aggrement })} />
                                 <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12 }]}>
                                     I have agree on terms and condition
                                 </Text>
                             </View>
                             <View style={{ flexDirection: 'row', margin: 5 }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpPersonal')} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5,  borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position:'absolute',top:0,right:0,bottom:0,left:0,borderRadius: 15, justifyContent:'center' }}>
+                                <TouchableOpacity disabled={!this.state.aggrement} onPress={() => this.props.navigation.navigate('SignUpPersonal')} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
                                         <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
                                     </LinearGradient>
-
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
                                     <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
