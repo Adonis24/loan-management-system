@@ -125,7 +125,7 @@ export const verifyPhoneApi = (token_type, access_token, country_code, mobile_no
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
-        await dispatch({ type: 'VERIFY_OTP', payload: { phoneVerified: status, proceedOTP: true } })
+        await dispatch({ type: 'VERIFY_OTP', payload: { phoneVerified: status, proceedOTP: true, status } })
         await console.log(`verifyPhone  ${JSON.stringify(responseJson)}`)
       })
       .catch((error) => {

@@ -51,7 +51,7 @@ class SignupOtpEnterScreen extends React.PureComponent {
 
     async verifyPhone() {
         await this.props.verifyPhone()
-
+        await this.props.phoneVerified == true ? this.props.navigation.navigate('CompanyInfoIntro') : null
     }
 
     async verifyOTPSubmit(c) {
@@ -90,7 +90,7 @@ class SignupOtpEnterScreen extends React.PureComponent {
                     <TextInput keyboardType={'number-pad'} value={this.props.c3} style={[styles.textInput, { textAlign: 'center' }]} />
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10, borderWidth: 1, borderRadius: 5, margin: 5 }}>
-                    <TextInput keyboardType={'number-pad'} onChange={() => this.setState({ button: !this.state.button })} onSubmitEditing={() => this.verifyPhone()} autoFocus={true} maxLength={1} value={this.props.c4} onChangeText={c4 => this.verifyOTPSubmit({ c4 })} placeholder={''} style={[styles.textInput, { textAlign: 'center' }]} />
+                    <TextInput keyboardType={'number-pad'} onChange={() => this.setState({ button: !this.state.button })} autoFocus={true} maxLength={1} value={this.props.c4} onChangeText={c4 => this.verifyOTPSubmit({ c4 })} placeholder={''} style={[styles.textInput, { textAlign: 'center' }]} />
                 </View>
             </View>)
 
@@ -148,7 +148,6 @@ class SignupOtpEnterScreen extends React.PureComponent {
     }
 
     render() {
-        this.props.proceedOTP && this.props.navigation.navigate('CompanyInfoIntro')
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -179,7 +178,7 @@ class SignupOtpEnterScreen extends React.PureComponent {
                             </View>
                             <View style={{ flexDirection: 'row', margin: 5 }}>
                                 <TouchableOpacity disabled={this.state.button} onPress={() => this.verifyPhone()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <LinearGradient colors={this.state.button ? ['#4c669f', '#3b5998', '#192f6a'] : ['#4DCB3E', '#269B1D']} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+                                    <LinearGradient colors={!this.state.button ? ['#4DCB3E', '#269B1D'] : ['rgba(77, 203, 62, 0.5)', 'rgba(38, 155, 29, 0.5)']} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
                                         <Text style={[styles.textDefault, { color: '#fff' }]}>Verify</Text>
                                     </LinearGradient>
                                 </TouchableOpacity>
@@ -203,7 +202,8 @@ function mapStateToProps(state) {
         c3: state.registrationReducer.c3,
         c4: state.registrationReducer.c4,
         phoneVerified: state.registrationReducer.phoneVerified,
-        proceedOTP: state.registrationReducer.proceedOTP
+        proceedOTP: state.registrationReducer.proceedOTP,
+        status: state.registrationReducer.status,
     }
 }
 function mapDispatchToProps(dispatch) {

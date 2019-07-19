@@ -76,8 +76,6 @@ export const register = () => {
 export const registerOTP = () => {
     return async (dispatch, getState) => {
 
-        
-
         const { token_type, access_token, countryCode, phone } = getState().registrationReducer
 
         const errorArray = []
@@ -129,7 +127,7 @@ export const login = () => {
             errorArray.push({ title: "email", desc: "No e-mail" })
             errorColor.push("E-mail")
         } else if (reg.test(email) === false) {
-            errorArray.push("Not e-mail format")
+            errorArray.push("Wrong e-mail format")
             errorColor.push("E-mail")
         }
         if (password == undefined || password == '') {
@@ -742,7 +740,7 @@ export const saveDocumentDO = (result) => {
                     // If there is no error updating the editor with the imageUrl
                     const imageUrl = `${config.digitalOceanSpaces}/` + fileName
                     console.log(imageUrl, name);
-                    dispatch({ type: 'SET_CONTACT_PERSON', payload: { ic_image: imageUrl,fileName:name } })
+                    dispatch({ type: 'SET_CONTACT_PERSON', payload: { ic_image: imageUrl, fileName: name } })
                 }
             });
 
