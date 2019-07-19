@@ -13,7 +13,6 @@ import {
     AsyncStorage,
     ImageBackground
 
-
 } from 'react-native';
 
 import Constants from 'expo-constants'
@@ -60,15 +59,17 @@ class ProfileScreen extends React.PureComponent {
                     <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                         {/* HEADER */}
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                                    <Ionicons name='ios-arrow-back' size={32} />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                                <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 7, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start', alignItems: 'center', padding: 5 }]}>
-                                    <Image source={require('../assets/icon/rfq.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                    <Text style={[styles.textBold, { alignSelf: 'center', }]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
+                                   <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                                        <Ionicons name='ios-arrow-back' size={32} />
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
+                                    <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
+                                        <Image source={require('../assets/icon/rfq.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
+                                        <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
+                                    </View>
                                 </View>
                             </View>
                         </View>
@@ -107,7 +108,7 @@ class ProfileScreen extends React.PureComponent {
                                     <TouchableOpacity onPress={() => console.log('Consultation')} style={{ margin: 10, padding: 10, borderRadius: 5, borderWidth: 1, borderColor: 'blue' }}>
                                         <Text style={styles.caption}>Get Consultation</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('LoanApplication')} style={{ margin: 10, padding: 10, borderRadius: 5, borderWidth: 1, borderColor: 'blue' }}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Financing')} style={{ margin: 10, padding: 10, borderRadius: 5, borderWidth: 1, borderColor: 'blue' }}>
                                         <Text style={styles.caption}>Apply Loan</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -177,15 +178,17 @@ class ProfileScreen extends React.PureComponent {
                     <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                         {/* HEADER */}
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                                    <Ionicons name='ios-arrow-back' size={32} />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                                <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 7, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start', alignItems: 'center', padding: 5 }]}>
-                                    <Image source={require('../assets/icon/rfq.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                    <Text style={[styles.textBold, { alignSelf: 'center', }]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
+                                   <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                                        <Ionicons name='ios-arrow-back' size={32} />
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
+                                    <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
+                                        <Image source={require('../assets/icon/rfq.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
+                                        <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
+                                    </View>
                                 </View>
                             </View>
                         </View>
@@ -198,7 +201,7 @@ class ProfileScreen extends React.PureComponent {
                                     <Text style={styles.subTitle}>Score</Text>
                                     <Ionicons name="ios-create" size={24} color="lightgrey" />
                                 </View>
-                                <Text style={[styles.textDefault, {textAlign:'left',alignSelf:'flex-start', marginLeft: 5 }]}>You have not registered a company yet.</Text>
+                                <Text style={[styles.textDefault, { textAlign: 'left', alignSelf: 'flex-start', marginLeft: 5 }]}>You have not registered a company yet.</Text>
                                 <View style={{ flexDirection: 'row', margin: 10 }}>
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('AddCompany')}>
                                         <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, justifyContent: 'center' }}>

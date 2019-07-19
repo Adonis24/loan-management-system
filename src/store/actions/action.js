@@ -28,7 +28,7 @@ export const getToken = () => {
 
 export const register = () => {
     return async (dispatch, getState) => {
-        const { token_type, access_token, name, email, password, password_confirmation } = await getState().registrationReducer
+        const { token_type, access_token, name, email, password, password_confirmation,expo_token } = await getState().registrationReducer
         console.log(`ada ke tak register info : ${JSON.stringify(getState().registrationReducer)}`)
 
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -67,7 +67,7 @@ export const register = () => {
             dispatch({ type: 'SET_REGISTER', payload: { error: errorArray, errorColor } })
         } else {
             console.log('takde error dalam screen and boleh proceed utk register')
-            await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation))
+            await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation,expo_token))
             //await dispatch(getPersonalToken())
         }
     }

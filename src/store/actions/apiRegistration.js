@@ -30,7 +30,7 @@ export const requestToken = () => {
   }
 }
 
-export const registerApi = (token_type, access_token, name, email, password, password_confirmation) => {
+export const registerApi = (token_type, access_token, name, email, password, password_confirmation,expo_token) => {
   return async (dispatch, getState) => {
     fetch(`${apiUrl}api/register`, {
       method: 'POST',
@@ -39,7 +39,7 @@ export const registerApi = (token_type, access_token, name, email, password, pas
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-      body: JSON.stringify({ name, email, password, password_confirmation }),
+      body: JSON.stringify({ name, email, password, password_confirmation,expo_token }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson

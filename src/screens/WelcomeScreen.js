@@ -94,6 +94,7 @@ class WelcomeScreen extends React.PureComponent {
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Animated.Image source={require('../assets/images/logo.png')} style={{ opacity: logoOpac, height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
                             <Animated.Text style={[styles.textDefault, { margin: 20, opacity: introOpac }]}>Welcome to Bxcess! Sign up now to join us or login to your account</Animated.Text>
+
                             <Animated.View style={{ opacity: buttonsOpac }}>
                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Intro')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <Text style={[styles.textDefault,]}>Sign Up</Text>
@@ -106,9 +107,6 @@ class WelcomeScreen extends React.PureComponent {
                                     </LinearGradient>
                                 </TouchableOpacity>
                             </Animated.View>
-                            {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('UnderConstruction')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Back</Text>
-                            </TouchableOpacity> */}
                         </View>
                     </View>
                 </View>

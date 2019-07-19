@@ -51,14 +51,14 @@ class InfoScreen extends React.PureComponent {
                     <View style={{ alignItems: 'flex-end' }}>
                         <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
                     </View>
-                    <View style={{ alignItems: 'flex-start' }}>
+                    {/* <View style={{ alignItems: 'flex-start' }}>
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
-                    </View>
+                    </View> */}
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -70,15 +70,19 @@ class InfoScreen extends React.PureComponent {
                         </View>
                     </View>
                     {/** Content */}
-                    <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center', padding: 10 }}>
-                        <Accordion style={{ alignSelf: 'stretch' }} dataArray={this.props.einfosArray} icon="add" expandedIcon="remove" />
-                    </View>
+                    <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center', padding: 10, backgroundColor: 'transparent' }}>
+                        {this.props.einfosArray && this.props.einfosArray.length > 0 ? <Accordion style={{ alignSelf: 'stretch', backgroundColor: 'transparent' }} dataArray={this.props.einfosArray} icon="add" expandedIcon="remove" />
+                            : <View style={{justifyContent:'flex-start',alignItems:'flex-start'}}>
+                                <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14,color:'lightgrey' }]}>Please check back for latest info soon</Text>
+{/*                             
+                                <Image source={require('../assets/images/bizlicensing.png')} style={{ flex:1,width: undefined, height: Layout.window.height / 1.5, alignSelf: 'center',opacity:0.3, borderWidth:1,borderColor:'#000' }} resizeMode={'contain'} /> */}
+
+                            </View>}</View>
                 </View>
             </View>
         );
     }
 }
-
 
 function mapStateToProps(state) {
     return {
