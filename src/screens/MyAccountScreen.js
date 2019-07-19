@@ -58,7 +58,9 @@ class MyAccountScreen extends React.PureComponent {
                     onRequestClose={() => this.toggleShow()}
                 >
                     <TouchableOpacity onPress={() => this.toggleShow()} style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.8)' }}>
-                        <QRCode value={'test'} size={Layout.window.width / 1.5} backgroundColor='#fff' color='#000' />
+                        <View style={{ color: '#fff', borderRadius: 10, elevation: 3, padding: 10 }}>
+                            <QRCode value={'test'} size={Layout.window.width / 1.5} backgroundColor='#fff' color='#000' />
+                        </View>
                     </TouchableOpacity>
                 </Modal>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -66,7 +68,7 @@ class MyAccountScreen extends React.PureComponent {
                         <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
                     </View>
                     {/* <View style={{ alignItems: 'flex-start' }}>
-                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
+                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
                     </View> */}
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
@@ -83,7 +85,7 @@ class MyAccountScreen extends React.PureComponent {
                                 </View>
                             </View>
                             <View style={{ alignItems: 'center', padding: 5 }}>
-                                <Image source={{ uri: this.props.profile_pic }} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff',marginBottom:5 }]} resizeMode={'cover'} />
+                                <Image source={{ uri: this.props.profile_pic }} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff', marginBottom: 5 }]} resizeMode={'cover'} />
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>{this.props.name}</Text>
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>{this.props.companyName}</Text>
                                 <View style={{ flexDirection: 'row', padding: 5, margin: 10, borderRadius: 5, backgroundColor: '#fff' }}>
@@ -99,26 +101,15 @@ class MyAccountScreen extends React.PureComponent {
                                 </View>
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignSelf: 'stretch', padding: 5 }}>
-                                <Text style={[styles.textDefault, { color: '#fff' }]}>43 Connections</Text>
-                                <Text style={[styles.textDefault, { color: '#fff' }]}>5 Projects</Text>
+                                <Text style={[styles.textDefault, { color: '#fff' }]}>0 Connections</Text>
+                                <Text style={[styles.textDefault, { color: '#fff' }]}>0 Projects</Text>
                             </View>
                         </LinearGradient>
                     </View>
                     {/* CONTENT AREA */}
                     <View style={{ flex: 9 }}>
                         <ScrollView contentStyle={{ padding: 10 }} >
-                            {/** Recent Activities */}
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                {/* <View style={[{ flex: 1, marginLeft: 10, padding: 2, alignSelf: 'stretch' }]}>
-                                    <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: Layout.window.height / 10, width: undefined, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' />
-                                </View> */}
-                                <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-end', textAlign: 'right' }]}>20/12/2019</Text>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: Layout.window.height / 10, width: undefined, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' />
-                                    <Text numberOfLines={2} ellipsizeMode={'tail'} style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ullamcorper luctus porttitor. Sed a venenatis ipsum, eget suscipit sapien. Aliquam ornare sagittis felis et tempor. </Text>
-
-                                </View>
-                            </View>
+                            
 
                             {/**Projects */}
                             <View style={{ margin: 5, paddingBottom: 5, }}>
@@ -128,20 +119,19 @@ class MyAccountScreen extends React.PureComponent {
                                     </View>
                                 </View>
                                 <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <Text style={[styles.caption, { alignSelf: 'flex-end' }]}>20/2/2019</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch', padding: 5 }}>
-                                        <Image source={require('../assets/images/e-info.png')} style={{ flex: 1, width: undefined, height: Layout.window.height / 20, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                        <Text style={[styles.caption, { flex: 3, alignItems: 'flex-start', textAlign: 'left' }]} numberOfLines={1} ellipsizeMode={'tail'}>e-info</Text>
-                                    </View>
-                                </View>
-                                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <Text style={[styles.caption, { alignSelf: 'flex-end' }]}>20/2/2019</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch', padding: 5 }}>
-                                        <Image source={require('../assets/images/e-info.png')} style={{ flex: 1, width: undefined, height: Layout.window.height / 20, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                        <Text style={[styles.caption, { flex: 3, alignItems: 'flex-start', textAlign: 'left' }]} numberOfLines={1} ellipsizeMode={'tail'}>e-info</Text>
+                                    {/* <View style={[{ flex: 1, marginLeft: 10, padding: 2, alignSelf: 'stretch' }]}>
+                                    <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: Layout.window.height / 10, width: undefined, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' />
+                                </View> */}
+                                    {/* <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-end', textAlign: 'right' }]}>20/12/2019</Text> */}
+                                    <View style={{ flexDirection: 'row' }}>
+                                        {/* <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: Layout.window.height / 10, width: undefined, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' /> */}
+                                        <Text numberOfLines={2} ellipsizeMode={'tail'} style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#000' }]}>No active projects at the moment</Text>
+
                                     </View>
                                 </View>
                             </View>
+
+                           
                         </ScrollView>
                     </View>
                 </View>

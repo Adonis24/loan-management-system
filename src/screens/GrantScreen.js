@@ -43,7 +43,7 @@ class GrantScreen extends React.PureComponent {
                         <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
                     </View>
                     <View style={{ alignItems: 'flex-start' }}>
-                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
+                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
                     </View>
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
@@ -61,9 +61,26 @@ class GrantScreen extends React.PureComponent {
                         </View>
                     </View>
                     <View style={{ flex: 7 }}>
-                        <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14 }]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pulvinar interdum urna eget dignissim. </Text>
+                        <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14 }]}>List of available grants that are up for grabs. </Text>
 
                         <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                            <Text style={[styles.caption, { margin: 5, color: 'lightgrey', }]}>List of grants to be published soon </Text>
+                            </View>
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between',opacity:0 }]}>
+                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
+                                <Text style={[styles.textDefault, { margin: 5 }]}>SME Emergency Fund (SMEEF)</Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                    <TouchableOpacity style={{ margin: 10, }}>
+                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                            <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
+                                        </LinearGradient>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+
+                        </View>
+                        {/* <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
                             <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
                                 <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
                                 <Text style={[styles.textDefault, { margin: 5 }]}>Soft Loan Schemes for Services Sector</Text>
@@ -86,32 +103,7 @@ class GrantScreen extends React.PureComponent {
                                     </TouchableOpacity>
                                 </View>
                             </View>
-
-                        </View>
-                        <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                <Text style={[styles.textDefault, { margin: 5 }]}>Soft Loan Schemes for Services Sector</Text>
-                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ margin: 10, }}>
-                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                            <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
-                                        </LinearGradient>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                <Text style={[styles.textDefault, { margin: 5 }]}>SME Emergency Fund (SMEEF)</Text>
-                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ margin: 10, }}>
-                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                            <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
-                                        </LinearGradient>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
+                        </View> */}
                     </View>
                 </View>
             </View>

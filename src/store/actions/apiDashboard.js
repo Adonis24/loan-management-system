@@ -263,7 +263,7 @@ export const getCompanyInfoApi = () => {
 
         console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
         const bizInfo = await responseJson.data
-         await console.log(`Company Info  ${JSON.stringify(bizInfo)}`)
+        await console.log(`Company Info  ${JSON.stringify(bizInfo)}`)
 
         await dispatch({ type: 'GET_BIZ_INFO', payload: { ...bizInfo } })
       })
@@ -300,6 +300,35 @@ export const getListWorkersApi = () => {
       });
   }
 }
+
+export const sendNotificationApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    fetch(`https://exp.host/--/api/v2/push/send`, {
+      method: 'POST',
+      headers: {
+        'host': 'exp.host',
+        'accept': 'application/json',
+        'accept-encoding': 'gzip,deflate',
+        'content-type': 'application/json',
+      }, body: JSON.stringify({ to: 'ExponentPushToken[X4qIkPK_1FdXUuqrqr6Aaz]', title: 'hello', body: 'world' }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+        console.log(`inilah response JSON sendNotification : ${JSON.stringify(responseJson)}`)
+        //const listWorkers = await responseJson.data
+        // await console.log(`Company Info  ${JSON.stringify(eventArray)}`)
+
+        //await dispatch({ type: 'GET_LIST_WORKERS', payload: { listWorkers } })
+      })
+      .catch((error) => {
+        console.log('Error sendNotification : ' + error);
+      });
+  }
+}
+
+
 
 export const doneForNowApi = () => {
   return async (dispatch, getState) => {

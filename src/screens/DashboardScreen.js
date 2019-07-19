@@ -157,7 +157,7 @@ class DashboardScreen extends React.PureComponent {
                         <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
                     </View>
                     {/* <View style={{ alignItems: 'flex-start' }}>
-                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
+                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
                     </View> */}
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
@@ -193,6 +193,9 @@ class DashboardScreen extends React.PureComponent {
                     {/* CONTENT AREA */}
                     <View style={{ flex: 4 }}>
                         <Animated.ScrollView style={{ opacity: scrollBarOpac, }} contentStyle={{ padding: 10 }} >
+                            {/* <TouchableOpacity onPress={()=>this.props.sendNotification()}>
+                                <Text>Tekan</Text>
+                            </TouchableOpacity> */}
                             {/**Highlight */}
                             <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                 <View style={{ marginBottom: 10 }}>
@@ -536,7 +539,8 @@ function mapDispatchToProps(dispatch) {
     return {
         initiateDashboardScreen: () => dispatch(actionCreator.initiateDashboardScreen()),
         initiateMyAccount: () => dispatch(actionCreator.initiateMyAccount()),
-        initiateCompanyInfo: () => dispatch(actionCreator.initiateCompanyInfo())
+        initiateCompanyInfo: () => dispatch(actionCreator.initiateCompanyInfo()),
+        
 
     }
 }

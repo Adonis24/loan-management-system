@@ -51,6 +51,7 @@ class ScanQRScreen extends React.PureComponent {
     handleBarCodeScanned = ({ type, data }) => {
         this.setState({ scanned: true });
         console.log(`data ialah : ${JSON.stringify(data)}`)
+        this.props.sendNotification()
         this.props.navigation.navigate('UserAccount', { member_id: data })
     };
 
@@ -66,8 +67,8 @@ class ScanQRScreen extends React.PureComponent {
         }
         return (
             <View style={{ flex: 1 }}>
-                <Camera  ratio={'16:9'} onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned} style={[StyleSheet.absoluteFill,{ flex: 1 }]} type={this.state.type}>
-                    
+                <Camera ratio={'16:9'} onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned} style={[StyleSheet.absoluteFill, { flex: 1 }]} type={this.state.type}>
+
                 </Camera>
             </View>
         );
@@ -88,7 +89,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        initiateMyAccount: () => dispatch(actionCreator.initiateMyAccount())
+        initiateMyAccount: () => dispatch(actionCreator.initiateMyAccount()),
+        sendNotification: () => dispatch(actionCreator.sendNotification())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ScanQRScreen)
