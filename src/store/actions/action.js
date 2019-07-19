@@ -11,7 +11,7 @@ import config from '../../do/config'
 
 
 import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI } from './apiRegistration'
-import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi } from './apiDashboard'
+import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi,sendNotificationApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -399,6 +399,14 @@ export const doneForNow = () => {
     }
 }
 
+
+
+export const sendNotification = () => {
+    return async (dispatch, getState) => {
+        // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        await dispatch(sendNotificationApi())
+    }
+}
 
 
 /////////////////////// LUNAPAY /////////////////////////////////////
@@ -1376,11 +1384,11 @@ export const getTheme = () => {
     }
 }
 
-export const sendNotification = () => {
-    return async (dispatch, getState) => {
-        dispatch(pushNotification())
-    }
-}
+// export const sendNotification = () => {
+//     return async (dispatch, getState) => {
+//         dispatch(pushNotification())
+//     }
+// }
 
 export const editInfo = () => {
     return async (dispatch, getState) => {

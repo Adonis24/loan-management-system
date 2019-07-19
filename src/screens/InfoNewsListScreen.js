@@ -50,7 +50,7 @@ class InfoNewsListScreen extends React.PureComponent {
                         <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
                     </View>
                     <View style={{ alignItems: 'flex-start' }}>
-                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
+                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
                     </View>
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
@@ -68,14 +68,20 @@ class InfoNewsListScreen extends React.PureComponent {
                         </View>
                     </View>
                     <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
-                        <Tabs tabBarBackgroundColor={'#fff'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
+                       {this.props.newsArray&&this.props.newsArray.length>0? <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: 'transparent' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
                             <Tab heading="Latest">
                                 <Latest nav={this.nav} newsArray={this.props.newsArray} />
                             </Tab>
                             <Tab heading="Popular">
                                 <Popular nav={this.nav} newsArray={this.props.newsArray} />
                             </Tab>
-                        </Tabs>
+                        </Tabs>: <View style={{justifyContent:'flex-start',alignItems:'flex-start'}}>
+                                <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14,color:'lightgrey' }]}>Please check back for latest info soon</Text>
+{/*                             
+                                <Image source={require('../assets/images/bizlicensing.png')} style={{ flex:1,width: undefined, height: Layout.window.height / 1.5, alignSelf: 'center',opacity:0.3, borderWidth:1,borderColor:'#000' }} resizeMode={'contain'} /> */}
+
+                            </View>
+                    }
                     </View>
                 </View>
             </View>
