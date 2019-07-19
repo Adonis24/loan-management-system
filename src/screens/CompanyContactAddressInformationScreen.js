@@ -90,23 +90,23 @@ class CompanyContactAddressInformationScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY ADDRESS</Text>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/address.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.comp_addr} onChangeText={(comp_addr) => this.props.setCompanyInfo({ comp_addr })} style={{ marginLeft: 5, flex: 1  }} placeholder={(addressErrorHint.length > 0) ? addressErrorHint : 'Address Line 1'} placeholderTextColor={(addressErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                <TextInput value={this.props.comp_addr} onChangeText={(comp_addr) => this.props.setCompanyInfo({ comp_addr })} style={{ marginLeft: 5, flex: 1 }} placeholder={(addressErrorHint.length > 0) ? addressErrorHint : 'Address Line 1'} placeholderTextColor={(addressErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/address.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput placeholder={'Address Line 2'} value={this.props.comp_addr_2} onChangeText={(comp_addr_2) => this.props.setCompanyInfo({ comp_addr_2 })} style={{ marginLeft: 5, flex: 1  }} />
+                                <TextInput placeholder={'Address Line 2'} value={this.props.comp_addr_2} onChangeText={(comp_addr_2) => this.props.setCompanyInfo({ comp_addr_2 })} style={{ marginLeft: 5, flex: 1 }} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/city.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.comp_city} onChangeText={(comp_city) => this.props.setCompanyInfo({ comp_city })} style={{ marginLeft: 5, flex: 1  }} placeholder={(cityErrorHint.length > 0) ? cityErrorHint : 'City'} placeholderTextColor={(cityErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                <TextInput value={this.props.comp_city} onChangeText={(comp_city) => this.props.setCompanyInfo({ comp_city })} style={{ marginLeft: 5, flex: 1 }} placeholder={(cityErrorHint.length > 0) ? cityErrorHint : 'City'} placeholderTextColor={(cityErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/state.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.comp_state} onChangeText={(comp_state) => this.props.setCompanyInfo({ comp_state })} style={{ marginLeft: 5, flex: 1  }} placeholder={(stateErrorHint.length > 0) ? stateErrorHint : 'State'} placeholderTextColor={(stateErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                <TextInput value={this.props.comp_state} onChangeText={(comp_state) => this.props.setCompanyInfo({ comp_state })} style={{ marginLeft: 5, flex: 1 }} placeholder={(stateErrorHint.length > 0) ? stateErrorHint : 'State'} placeholderTextColor={(stateErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/compRegNum.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.comp_postcode} onChangeText={(comp_postcode) => this.props.setCompanyInfo({ comp_postcode })} style={{ marginLeft: 5, flex: 1  }} placeholder={(postcodeErrorHint.length > 0) ? postcodeErrorHint : 'Post code'} placeholderTextColor={(postcodeErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                <TextInput keyboardType={'phone-pad'} value={this.props.comp_postcode} onChangeText={(comp_postcode) => this.props.setCompanyInfo({ comp_postcode })} style={{ marginLeft: 5, flex: 1 }} placeholder={(postcodeErrorHint.length > 0) ? postcodeErrorHint : 'Post code'} placeholderTextColor={(postcodeErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ flexDirection: 'row', margin: 5 }}>
                                 <TouchableOpacity onPress={() => this.Save()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>

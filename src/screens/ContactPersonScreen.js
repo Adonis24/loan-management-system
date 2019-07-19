@@ -111,7 +111,7 @@ class ContactPersonScreen extends React.PureComponent {
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput onChangeText={(ic_no) => this.props.setContactPerson({ ic_no })} value={this.props.ic_no} style={{ marginLeft: 5, flex: 1 }} placeholder={(mykadErrorHint.length > 0) ? mykadErrorHint : 'MyKad Number'} placeholderTextColor={(mykadErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                <TextInput onChangeText={(ic_no) => this.props.setContactPerson({ ic_no })} value={this.props.ic_no} style={{ marginLeft: 5, flex: 1 }} placeholder={(mykadErrorHint.length > 0) ? mykadErrorHint : 'MyKad Number'} placeholderTextColor={(mykadErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'phone-pad'}/>
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/position.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
@@ -119,7 +119,7 @@ class ContactPersonScreen extends React.PureComponent {
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
                                 <Image source={require('../assets/images/phoneNum.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput onChangeText={(phone) => this.props.setContactPerson({ phone })} value={this.props.phone} style={{ marginLeft: 5, flex: 1 }} placeholder={(phoneErrorHint.length > 0) ? phoneErrorHint : 'Phone Number'} placeholderTextColor={(phoneErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                <TextInput onChangeText={(phone) => this.props.setContactPerson({ phone })} value={this.props.phone} style={{ marginLeft: 5, flex: 1 }} placeholder={(phoneErrorHint.length > 0) ? phoneErrorHint : 'Phone Number'} placeholderTextColor={(phoneErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'phone-pad'}/>
                             </View>
                             {/* <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12 }]}>
                                 <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12, fontWeight: 'bold' }]}>Upload documents needed:</Text> Scanned copy of identity card

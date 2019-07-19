@@ -44,7 +44,6 @@ class CompanyInfoSuccessScreen extends React.PureComponent {
     skip() {
         this.props.initiateCompanyInfo()
         this.props.navigation.navigate('Dashboard')
-
     }
 
     componentDidMount() {
@@ -67,7 +66,7 @@ class CompanyInfoSuccessScreen extends React.PureComponent {
                                 <Text style={[styles.textDefault, { margin: 5, color: 'darkturquoise' }]}>Congratulation!</Text>
                                 <Text style={[styles.textDefault, { margin: 5, marginBottom: 20 }]}>You have entered your company information</Text>
                             </View>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('DetailsConnectedParties')} style={{ width: Layout.window.width * 0.4, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#4A90E2' }}>
+                            <TouchableOpacity onPress={() => this.skip()} style={{ width: Layout.window.width * 0.4, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#4A90E2' }}>
                                 <LinearGradient
                                     colors={['#4c669f', '#3b5998', '#192f6a']}
                                     style={{ paddingTop: 5, paddingBottom: 5, alignItems: 'center', borderRadius: 15, width: Layout.window.width * 0.4, }}>

@@ -11,7 +11,8 @@ import {
     Dimensions,
     TextInput,
     AsyncStorage,
-    ImageBackground
+    ImageBackground,
+    ActivityIndicator
 
 
 } from 'react-native';
@@ -78,19 +79,19 @@ class LoginScreen extends React.PureComponent {
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: emailBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.email} onChangeText={(email) => this.props.setLogin({ email })} placeholder={'E-mail'} style={{ marginLeft: 5,flex:1 }} placeholder={(emailErrorHint.length > 0) ? emailErrorHint : 'email@address.com'} placeholderTextColor={(emailErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'email-address'} />
+                                <TextInput value={this.props.email} onChangeText={(email) => this.props.setLogin({ email })} placeholder={'E-mail'} style={{ marginLeft: 5, flex: 1 }} placeholder={(emailErrorHint.length > 0) ? emailErrorHint : 'email@address.com'} placeholderTextColor={(emailErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'email-address'} />
                             </View>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: passwordBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20 }}>
                                 <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput secureTextEntry value={this.props.password} onChangeText={(password) => this.props.setLogin({ password })} style={{ marginLeft: 5,flex:1 }} placeholder={(passwordErrorHint.length > 0) ? '******' : '******'} placeholderTextColor={(passwordErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                <TextInput secureTextEntry value={this.props.password} onChangeText={(password) => this.props.setLogin({ password })} style={{ marginLeft: 5, flex: 1 }} placeholder={(passwordErrorHint.length > 0) ? '******' : '******'} placeholderTextColor={(passwordErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                             </View>
                             <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                                 <Text style={[styles.textDefault, { margin: 5 }]}>Forgot password?</Text>
                                 <Text style={[styles.textDefault, { margin: 5, color: 'dodgerblue' }]}>Click here</Text>
                             </View>
                             <View style={{ flexDirection: 'row', margin: 5 }}>
-                                <TouchableOpacity onPress={() => this.login()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5,  borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position:'absolute',top:0,right:0,bottom:0,left:0,borderRadius: 15, justifyContent:'center' }}>
+                                <TouchableOpacity onPress={() => this.login()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
                                         <Text style={[styles.textDefault, { color: '#fff' }]}>Log In</Text>
                                     </LinearGradient>
                                 </TouchableOpacity>
@@ -98,6 +99,7 @@ class LoginScreen extends React.PureComponent {
                                     <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
                                 </TouchableOpacity>
                             </View>
+                            {this.props.indicator && <ActivityIndicator color={'#34c6f4'} style={{ marginLeft: 5 }} />}
                         </View>
                     </View>
                 </View>
@@ -113,7 +115,7 @@ function mapStateToProps(state) {
         password: state.loginScreenReducer.password,
         error: state.loginScreenReducer.error,
         errorColor: state.loginScreenReducer.errorColor,
-
+        indicator: state.loginScreenReducer.indicator,
 
 
         proceed: state.loginScreenReducer.proceed

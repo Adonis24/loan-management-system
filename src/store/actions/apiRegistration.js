@@ -43,7 +43,7 @@ export const registerApi = (token_type, access_token, name, email, password, pas
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
-        await dispatch({ type: 'SET_REGISTER', payload: { status, proceed: true } })
+        await dispatch({ type: 'SET_REGISTER', payload: { status, proceed: true, indicator: false } })
         await console.log(`register  ${JSON.stringify(responseJson)}`)
       })
       .catch((error) => {
@@ -77,7 +77,7 @@ export const requestPersonalToken = (screen, username, password) => {
 
         dispatch({ type: 'SET_REGISTER', payload: { access_token } });
 
-        (screen == 'login' && access_token) ? dispatch({ type: 'SET_LOGIN', payload: { proceed: true } }) : dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
+        (screen == 'login' && access_token) ? dispatch({ type: 'SET_LOGIN', payload: { proceed: true, indicator: false } }) : dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false } })
 
       })
       .catch((error) => {

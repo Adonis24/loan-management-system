@@ -53,36 +53,32 @@ class SettingsScreen extends React.PureComponent {
                     <View style={{ flex: 1 }}>
                         <View style={{ flex: 1, marginLeft: 5 }}>
                             <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
-
                         </View>
                         <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
                             <View style={{ flex: 5, flexDirection: 'row' }}>
-
                             </View>
                             <View style={[{ backgroundColor: '#fff', flex: 4, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', paddingLeft: 5, flexDirection: 'row', elevation: 2 }]}>
-
                                 <Image source={require('../assets/images/profile.png')} style={{ width: Layout.window.width / 10, height: undefined, }} resizeMode={'contain'} />
                                 <Text style={[styles.textDefault, { fontSize: 18, fontWeight: "bold", paddingLeft: 5, }]} numberOfLines={1} ellipsizeMode={'tail'}>Settings</Text>
-
                             </View>
                         </View>
                     </View>
                     {/* CONTENT AREA */}
                     <View style={{ flex: 4 }}>
                         <ScrollView contentStyle={{ padding: 10 }} >
-
                             <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
-                                <Text style={styles.subTitle}>Profile Picture</Text>
-                                <Ionicons name="ios-create" size={24} color="lightgrey" />
+                                <Text style={[styles.subTitle, { margin: 5 }]}>Profile Picture</Text>
+                                <Ionicons name="ios-create" size={24} color="#2C4690" style={{ margin: 5 }}/>
                             </View>
-                            <View style={{ width: Layout.window.width, paddingLeft: 5 }}>
-                                <Image source={{ uri: this.props.profile_pic }} style={{ width: Layout.window.width / 3, height: Layout.window.height / 6 }} />
+                            <View style={{ width: Layout.window.width, paddingLeft: 5, alignItems: 'center' }}>
+                                <Image source={{ uri: this.props.profile_pic }} style={{ width: Layout.window.width / 3, height: Layout.window.height / 6, borderRadius: 80 }} />
                             </View>
                             <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
-                                <Text style={styles.subTitle}>Profile</Text>
-                                <Ionicons name="ios-create" size={24} color="lightgrey" />
+                                <Text style={[styles.subTitle, { margin: 5 }]}>Profile</Text>
+                                <Ionicons name="ios-create" size={24} color="#2C4690" style={{ margin: 5 }} />
                             </View>
-                            <View style={{ width: Layout.window.width, paddingLeft: 5 }}>
+                            {/* <View style={{ width: Layout.window.width, paddingLeft: 5 }}> */}
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 10, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
                                 <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
                                     <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Name :</Text></View>
                                     <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.name}</Text></View>
@@ -95,7 +91,7 @@ class SettingsScreen extends React.PureComponent {
                                     <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Phone :</Text></View>
                                     <View style={{ flex: 2 }}>
                                         {this.props.phone_no ? <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.phone_no}</Text> :
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpOtp',{screen:'setting'})} style={{ borderRadius: 5 }}>
+                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpOtp', { screen: 'setting' })} style={{ borderRadius: 5 }}>
                                                 <Text style={[styles.caption, { alignSelf: 'flex-start', textAlign: 'left', padding: 5 }]}>Add Phone</Text>
                                             </TouchableOpacity>}
                                     </View>
@@ -109,9 +105,9 @@ class SettingsScreen extends React.PureComponent {
                                     <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.member_id}</Text></View>
                                 </View>
                             </View>
-                            <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5, marginTop: 5 }}>
-                                <TouchableOpacity onPress={() => this.logout()} style={{ marginLeft: 5, backgroundColor: 'orange', borderRadius: 5 }}>
-                                    <Text style={[styles.textDefault, { margin: 10 }]}>Logout</Text>
+                            <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5, marginTop: 5, alignSelf: 'center' }}>
+                                <TouchableOpacity onPress={() => this.logout()} style={{ marginLeft: 5, backgroundColor: 'crimson', borderRadius: 5 }}>
+                                    <Text style={[styles.textDefault, { margin: 10, color: '#fff' }]}>Logout</Text>
                                 </TouchableOpacity>
                             </View>
                         </ScrollView>

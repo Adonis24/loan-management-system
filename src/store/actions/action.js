@@ -28,6 +28,7 @@ export const getToken = () => {
 
 export const register = () => {
     return async (dispatch, getState) => {
+        dispatch({ type: 'SET_REGISTER', payload: { indicator: true } })
         const { token_type, access_token, name, email, password, password_confirmation } = await getState().registrationReducer
         console.log(`ada ke tak register info : ${JSON.stringify(getState().registrationReducer)}`)
 
@@ -50,21 +51,21 @@ export const register = () => {
             errorArray.push({ title: "password", desc: "No password" })
             errorColor.push("Password")
         } else if (password.length < 6) {
-            errorArray.push({ title: "password", desc: "Wrong password" })
+            errorArray.push({ title: "password", desc: "Password need 6 character" })
             errorColor.push("Password")
         }
         if (password_confirmation == undefined || password_confirmation == '') {
             errorArray.push({ title: "confirm password", desc: "No Confirm password" })
             errorColor.push("Confirm Password")
         } else if (password_confirmation.length < 6) {
-            errorArray.push({ title: "confirm password", desc: "Wrong password" })
+            errorArray.push({ title: "confirm password", desc: "Password need 6 character" })
             errorColor.push("Confirm Password")
         } else if (password_confirmation != password) {
             errorArray.push({ title: "confirm password", desc: "Password not same" })
             errorColor.push("Confirm Password")
         }
         if (errorArray.length > 0) {
-            dispatch({ type: 'SET_REGISTER', payload: { error: errorArray, errorColor } })
+            dispatch({ type: 'SET_REGISTER', payload: { error: errorArray, errorColor, indicator: false } })
         } else {
             console.log('takde error dalam screen and boleh proceed utk register')
             await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation))
@@ -114,6 +115,7 @@ export const getPersonalToken = () => {
 
 export const login = () => {
     return (dispatch, getState) => {
+        dispatch({ type: 'SET_LOGIN', payload: { indicator: true } })
         const username = getState().loginScreenReducer.email
         //const password = getState().loginScreenReducer.password
 
@@ -140,8 +142,7 @@ export const login = () => {
         }
 
         if (errorArray.length > 0) {
-            //dispatch({ type: 'SET_INDICATOR', payload: { displayIndicator: false } })
-            dispatch({ type: 'SET_LOGIN', payload: { loggedIn: false, error: errorArray, errorColor } })
+            dispatch({ type: 'SET_LOGIN', payload: { loggedIn: false, error: errorArray, errorColor, indicator: false } })
 
         } else {
             dispatch(requestPersonalToken('login', username, password))
