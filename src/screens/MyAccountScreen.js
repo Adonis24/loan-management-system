@@ -13,8 +13,6 @@ import {
     AsyncStorage,
     ImageBackground,
     Modal
-
-
 } from 'react-native';
 
 import QRCode from 'react-native-qrcode-svg'
@@ -48,6 +46,9 @@ class MyAccountScreen extends React.PureComponent {
         //this.props.initiateMyAccount()
         //this.props.navigation.navigate('PopupScore')
     }
+
+    capitalizeString = (text = 'NA') => text.length > 0 && `${text[0].toUpperCase()}${text.slice(1)}`
+
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -86,7 +87,7 @@ class MyAccountScreen extends React.PureComponent {
                             </View>
                             <View style={{ alignItems: 'center', padding: 5 }}>
                                 <Image source={{ uri: this.props.profile_pic }} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff', marginBottom: 5 }]} resizeMode={'cover'} />
-                                <Text style={[styles.textDefault, { color: '#fff' }]}>{this.props.name}</Text>
+                                <Text style={[styles.textDefault, { color: '#fff' }]}>{this.capitalizeString(this.props.name)}</Text>
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>{this.props.companyName}</Text>
                                 <View style={{ flexDirection: 'row', padding: 5, margin: 10, borderRadius: 5, backgroundColor: '#fff' }}>
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('MyAccountEdit')} style={{ padding: 5 }}>

@@ -200,7 +200,7 @@ class DashboardScreen extends React.PureComponent {
                             <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                 <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Hightlight</Text>
+                                        <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Highlight</Text>
                                         <Text style={styles.caption}>More ></Text>
                                     </View>
                                 </View>
@@ -251,8 +251,6 @@ class DashboardScreen extends React.PureComponent {
                                     </View>
                                 </View>
                             </View>
-
-
                             {/*Knowledge Hub */}
                             <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                 <View style={{ marginBottom: 10 }}>
@@ -316,7 +314,6 @@ class DashboardScreen extends React.PureComponent {
                                     </View>
                                 </View>
                             </View>
-
                             {/*Biz Hub */}
                             <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                 <View style={{ marginBottom: 10 }}>
@@ -346,178 +343,17 @@ class DashboardScreen extends React.PureComponent {
                                         </View>
                                     </View>
                                 </View>
-                            </View>
-
-                            {/* Others
-                            
-                            <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                                <View style={{ marginBottom: 10 }}>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle}>Others</Text>
-                                        <Text style={styles.caption}>More ></Text>
-                                    </View>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                    <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Edonation')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                            <Image source={require('../assets/images/social.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                            <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Donation</Text>
-                                        </TouchableOpacity>
-                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-
-                                        </View>
-                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-
-                                        </View>
-                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-
-                                        </View>
-                                        <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                        </View>
-                                    </View>
-                                </View>
-                            </View> */}
-
-                            {/* Contact Request
-                            <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                                <View style={{ border: 1, borderColor: 'lightgrey', shadowColor: "#000", marginBottom: 10 }}>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Notification</Text>
-                                        <Text style={styles.caption}>More ></Text>
-                                    </View>
-                                </View>
-                                <View style={{ flexDirection: 'row', padding: 5, justifyContent: 'space-between', alignSelf: 'stretch' }}>
-                                    <View style={{ flexDirection: 'row' }}>
-                                        <View style={{ borderColor: 'lightgrey', borderWidth: 1, width: Layout.window.width / 2.5, padding: 5, justifyContent: 'flex-start', alignItems: 'center', elevation: 2 }}>
-                                            <Image source={require('../assets/icon/socialCharity.png')} style={{ borderColor: 'lightgrey', borderWidth: 1, width: Layout.window.height / 13, height: Layout.window.height / 13, borderRadius: Layout.window.height / 26, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                            <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Social Charity</Text>
-                                            <View style={{ flexDirection: 'row', }}>
-                                                <TouchableOpacity style={{ margin: 10, marginTop: 0, marginBottom: 0 }}>
-                                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 5, padding: 5, margin: 5 }}>
-                                                        <Text style={[styles.caption, { color: '#fff' }]}>Accept</Text>
-                                                    </LinearGradient>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => { }} style={{ padding: 5, margin: 5, borderRadius: 5, backgroundColor: '#5A647F' }}>
-                                                    <Text style={[styles.caption, { color: '#fff' }]}>Decline</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                    </View>
-                                    <View style={{ flexDirection: 'row' }}>
-                                        <View style={{ borderColor: 'lightgrey', borderWidth: 1, width: Layout.window.width / 2.5, padding: 5, justifyContent: 'flex-start', alignItems: 'center', elevation: 2 }}>
-                                            <Image source={require('../assets/icon/socialCharity.png')} style={{ borderColor: 'lightgrey', borderWidth: 1, width: Layout.window.height / 13, height: Layout.window.height / 13, borderRadius: Layout.window.height / 26, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                            <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Little Adli</Text>
-                                            <View style={{ flexDirection: 'row', }}>
-                                                <TouchableOpacity style={{ margin: 10, marginTop: 0, marginBottom: 0 }}>
-                                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 5, padding: 5, margin: 5 }}>
-                                                        <Text style={[styles.caption, { color: '#fff' }]}>Accept</Text>
-                                                    </LinearGradient>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => { }} style={{ padding: 5, margin: 5, borderRadius: 5, backgroundColor: '#5A647F' }}>
-                                                    <Text style={[styles.caption, { color: '#fff' }]}>Decline</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                    </View>
-                                </View>
-                            </View> */}
-
-                            {/* *Newest RFQ
-                            <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
-                                <View style={{ border: 1, borderColor: 'lightgrey', shadowColor: "#000", marginBottom: 10 }}>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Text style={styles.subTitle}>Newest RFQ</Text>
-                                        <Text style={styles.caption}>More ></Text>
-                                    </View>
-                                </View>
-                                <View style={{ flexDirection: 'row', padding: 5, justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                    <View style={{ flexDirection: 'row' }}>
-                                        <View style={{ borderColor: 'lightgrey', borderWidth: 1, width: Layout.window.width / 2.5, padding: 5, justifyContent: 'flex-start', alignItems: 'center', elevation: 2 }}>
-                                            <View style={{ flexDirection: 'row' }}>
-                                                <Image source={require('../assets/icon/socialCharity.png')} style={{ borderColor: 'lightgrey', borderWidth: 1, width: Layout.window.height / 13, height: Layout.window.height / 13, borderRadius: Layout.window.height / 26, justifyContent: 'flex-start' }} resizeMode={'center'} />
-                                                <Text style={[styles.caption]}>Social Charity</Text>
-                                            </View>
-
-                                            <View style={{ flexDirection: 'row', }}>
-                                                <TouchableOpacity onPress={() => { }} style={{ padding: 5, margin: 5, borderRadius: 5, backgroundColor: 'lightgrey' }}>
-                                                    <Text style={[styles.caption]}>Accept</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => { }} style={{ padding: 5, margin: 5, borderRadius: 5, backgroundColor: 'lightgrey' }}>
-                                                    <Text style={[styles.caption]}>Decline</Text>
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                    </View>
-                                </View>
-                            </View> */}
-
-
-                            {/* *Training
-                            <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                                <View style={{ marginBottom: 10 }}>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Training</Text>
-                                        <Text style={styles.caption}>More ></Text>
-                                    </View>
-                                </View>
-                                <View style={[{ padding: 5, margin: 5, alignSelf: 'stretch', borderWidth: 1, borderColor: 'lightgrey', borderRadius: 10 }]}>
-                                    <View style={{ justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                        <View style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', marginBottom: 0, flexDirection: 'row' }} >
-                                            <Image source={{ uri: 'https://picsum.photos/600' }} style={{ flex: 1, margin: 5 }} />
-                                            <View style={{ flex: 3, padding: 5 }} >
-                                                <Text>Online Business Training</Text>
-                                                <Text numberOfLines={4} ellipsizeMode={'tail'} style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start', }]} >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vulputate volutpat mi. Etiam malesuada aliquam neque a cursus. Curabitur sed fringilla tortor, condimentum gravida est.</Text>
-                                                <View style={{ alignSelf: 'stretch', flexDirection: 'row' }}>
-                                                    <View style={{ flex: 1, padding: 2, backgroundColor: '#4364B0', }} />
-                                                    <View style={{ flex: 1 }} />
-                                                </View>
-                                                <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>7 participants</Text>
-                                            </View>
-                                        </View>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                                        <TouchableOpacity style={{ margin: 10, marginTop: 0, marginBottom: 0 }}>
-                                            <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                                <Text style={[styles.caption, { color: '#fff' }]}>Join</Text>
-                                            </LinearGradient>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                                <View style={[{ padding: 5, margin: 5, alignSelf: 'stretch', borderWidth: 1, borderColor: 'lightgrey', borderRadius: 10 }]}>
-                                    <View style={{ justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                        <View style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', marginBottom: 0, flexDirection: 'row' }} >
-                                            <Image source={{ uri: 'https://picsum.photos/600' }} style={{ flex: 1, margin: 5 }} />
-                                            <View style={{ flex: 3, padding: 5 }} >
-                                                <Text>Online Business Training</Text>
-                                                <Text numberOfLines={4} ellipsizeMode={'tail'} style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start', }]} >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vulputate volutpat mi. Etiam malesuada aliquam neque a cursus. Curabitur sed fringilla tortor, condimentum gravida est.</Text>
-                                                <View style={{ alignSelf: 'stretch', flexDirection: 'row' }}>
-                                                    <View style={{ flex: 1, padding: 2, backgroundColor: '#4364B0', }} />
-                                                    <View style={{ flex: 1 }} />
-                                                </View>
-                                                <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>7 participants</Text>
-                                            </View>
-                                        </View>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                                        <TouchableOpacity style={{ margin: 10, marginTop: 0, marginBottom: 0 }}>
-                                            <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                                <Text style={[styles.caption, { color: '#fff' }]}>Join</Text>
-                                            </LinearGradient>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            </View> */}
+                            </View>                            
                         </Animated.ScrollView>
                     </View>
                 </View>
                 {/* <PopupScoreScreen /> */}
-
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('ScanQR')}>
                         <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
                     </TouchableOpacity>
                 </View>
             </View>
-
         );
     }
 }

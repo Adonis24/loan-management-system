@@ -69,8 +69,8 @@ class EcommerceDetailScreen extends React.PureComponent {
                                 <Image source={require('../assets/images/mayamall.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
                                 <Text style={[styles.textDefault, { margin: 5 }]}>MayaMall</Text>
                                 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ margin: 10, }}>
-                                        <LinearGradient onPress={() => this.props.navigation.navigate('Ecommerce')} colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Ecommerce')}  style={{ margin: 10, }}>
+                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
                                             <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
                                         </LinearGradient>
                                     </TouchableOpacity>

@@ -71,7 +71,7 @@ class SettingsScreen extends React.PureComponent {
                                 <Ionicons name="ios-create" size={24} color="#2C4690" style={{ margin: 5 }}/>
                             </View>
                             <View style={{ width: Layout.window.width, paddingLeft: 5, alignItems: 'center' }}>
-                                <Image source={{ uri: this.props.profile_pic }} style={{ width: Layout.window.width / 3, height: Layout.window.height / 6, borderRadius: 80 }} />
+                                <Image source={{ uri: this.props.profile_pic }} style={{ width: Layout.window.width / 3, height: Layout.window.width / 3, borderRadius: Layout.window.width / 6 }} />
                             </View>
                             <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                                 <Text style={[styles.subTitle, { margin: 5 }]}>Profile</Text>
