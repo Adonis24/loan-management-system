@@ -62,6 +62,8 @@ import LoanCalculatorScreen from '../screens/LoanCalculatorScreen';
 import ElearningPlayScreen from '../screens/ElearningPlayScreen';
 import UserAccountScreen from '../screens/UserAccountScreen';
 import ContactPersonMainScreen from '../screens/ContactPersonMainScreen';
+import EcommerceDetailScreen from '../screens/EcommerceDetailScreen';
+import InfoEventEdtScreen from '../screens/InfoEventEdtScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -97,6 +99,7 @@ const DashboardStackWithModal = createStackNavigator(
     Certification: { screen: CertificationScreen, },
     CertificationView: { screen: CertificationViewScreen, },
     Elearning: { screen: ElearningScreen, },
+    EcommerceDetail: { screen: EcommerceDetailScreen, },
     Ecommerce: { screen: EcommerceScreen, },
     Edonation: { screen: EdonationScreen, },
     Loan: { screen: LoanCalculatorScreen, },
@@ -117,7 +120,9 @@ const DashboardStackWithModal = createStackNavigator(
     ScanQR: { screen: ScanQRScreen, },
     UserAccount: { screen: UserAccountScreen },
 
-    Training: { screen: TrainingScreen, }
+    Training: { screen: TrainingScreen, },
+
+    InfoEventEdt: { screen: InfoEventEdtScreen, }
   },
   {
     mode: 'modal',

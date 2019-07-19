@@ -106,6 +106,9 @@ class DashboardScreen extends React.PureComponent {
 
     }
 
+    capitalizeString = (text = 'NA') => text.length > 0 && `${text[0].toUpperCase()}${text.slice(1)}`
+
+
     async componentDidMount() {
         this.props.initiateDashboardScreen()
         this.props.initiateMyAccount()
@@ -148,7 +151,6 @@ class DashboardScreen extends React.PureComponent {
                         Alert.alert('Modal has been closed.');
                     }}>
                     <PopupScoreScreen name={this.props.name} toggleShow={this.toggleShow} />
-
                 </Modal>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
                     <View style={{ alignItems: 'flex-end' }}>
@@ -170,7 +172,7 @@ class DashboardScreen extends React.PureComponent {
                                     <Image source={{ uri: this.props.profile_pic }} style={{ height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' />
 
                                     <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
-                                        <Text style={[styles.textDefault, { textAlign: 'left', alignSelf: 'flex-start',color:'#2C4690' }]}>{this.props.name}</Text>
+                                        <Text style={[styles.textDefault, { textAlign: 'left', alignSelf: 'flex-start', color: '#2C4690' }]}>{this.capitalizeString(this.props.name)}</Text>
                                         <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>{this.props.member_id}</Text>
                                         <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>{this.props.companyName}</Text>
                                     </View>
@@ -191,6 +193,26 @@ class DashboardScreen extends React.PureComponent {
                     {/* CONTENT AREA */}
                     <View style={{ flex: 4 }}>
                         <Animated.ScrollView style={{ opacity: scrollBarOpac, }} contentStyle={{ padding: 10 }} >
+                            {/**Highlight */}
+                            <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
+                                <View style={{ marginBottom: 10 }}>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                        <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Hightlight</Text>
+                                        <Text style={styles.caption}>More ></Text>
+                                    </View>
+                                </View>
+                               
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoEventEdt')}  >
+                                        <Image source={require('../assets/images/edt.png')} style={{ width: Layout.window.width-10, height: Layout.window.height / 6,borderRadius:10,borderWidth:1,borderColor:'lightgrey' }} resizeMode={'cover'} />
+                                      </TouchableOpacity>
+                                    {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('UnderConstruction')} style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', margin: 10, marginBottom: 5, borderRadius: 10 }} >
+                                        <Image source={{ uri: 'https://picsum.photos/600' }} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 10, }} />
+                                        <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, paddingTop: 10, paddingLeft: 10 }}>
+                                            <Text style={[styles.textDefault, { color: '#fff', alignSelf: 'flex-start', textAlign: 'left' }]}>Find Out More ></Text>
+                                        </View>
+                                    </TouchableOpacity> */}
+                              
+                            </View>
                             {/*Financial Hub */}
                             <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)' }}>
                                 <View style={{ marginBottom: 10 }}>
@@ -211,7 +233,7 @@ class DashboardScreen extends React.PureComponent {
                                             <Image source={require('../assets/images/grant.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Grant</Text>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Loan')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Loan')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start',opacity:0.3 }}>
                                             <Image source={require('../assets/images/loan.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Loan Calculator</Text>
                                         </TouchableOpacity>
@@ -245,7 +267,7 @@ class DashboardScreen extends React.PureComponent {
                                             <Image source={require('../assets/images/news.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>News</Text>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('PromotionList')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('PromotionList')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start',opacity:0.3 }}>
                                             <Image source={require('../assets/images/promotion.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Promotion</Text>
                                         </TouchableOpacity>
@@ -262,7 +284,7 @@ class DashboardScreen extends React.PureComponent {
                             </View>
 
                             {/*Development Hub */}
-                            <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
+                            <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid',opacity:0.3 }}>
                                 <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Development Hub</Text>
                                         <Text style={styles.caption}>More ></Text>
@@ -301,7 +323,7 @@ class DashboardScreen extends React.PureComponent {
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                     <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Ecommerce')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('EcommerceDetail')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                             <Image source={require('../assets/images/ecommerce.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Commerce</Text>
                                         </TouchableOpacity>
@@ -309,7 +331,7 @@ class DashboardScreen extends React.PureComponent {
                                             <Image source={require('../assets/images/marketplace.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz App Marketplace</Text>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('BizLicensing')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('BizLicensing')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start',opacity:0.3 }}>
                                             <Image source={require('../assets/images/licensing.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Licensing</Text>
                                         </TouchableOpacity>
@@ -352,7 +374,7 @@ class DashboardScreen extends React.PureComponent {
                                 </View>
                             </View> */}
 
-                            {/*Contact Request */}
+                            {/* Contact Request
                             <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                 <View style={{ border: 1, borderColor: 'lightgrey', shadowColor: "#000", marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -394,7 +416,7 @@ class DashboardScreen extends React.PureComponent {
                                         </View>
                                     </View>
                                 </View>
-                            </View>
+                            </View> */}
 
                             {/* *Newest RFQ
                             <View style={{ margin: 5, borderBottomWidth: 1, borderColor: 'lightgrey', borderStyle: 'dashed' }}>
@@ -425,30 +447,8 @@ class DashboardScreen extends React.PureComponent {
                                 </View>
                             </View> */}
 
-                            {/**Highlight */}
-                            <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                                <View style={{ marginBottom: 10 }}>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Hightlight</Text>
-                                        <Text style={styles.caption}>More ></Text>
-                                    </View>
-                                </View>
-                                <View style={{ justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('UnderConstruction')} style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', margin: 10, marginBottom: 5, borderRadius: 10 }} >
-                                        <Image source={{ uri: 'https://picsum.photos/600' }} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 10, }} />
-                                        <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, paddingTop: 10, paddingLeft: 10 }}>
-                                            <Text style={[styles.textDefault, { color: '#fff', alignSelf: 'flex-start', textAlign: 'left' }]}>Find Out More ></Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('UnderConstruction')} style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', margin: 10, marginBottom: 5, borderRadius: 10 }} >
-                                        <Image source={{ uri: 'https://picsum.photos/600' }} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 10, }} />
-                                        <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, paddingTop: 10, paddingLeft: 10 }}>
-                                            <Text style={[styles.textDefault, { color: '#fff', alignSelf: 'flex-start', textAlign: 'left' }]}>Find Out More ></Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            {/**Training */}
+
+                            {/* *Training
                             <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                 <View style={{ marginBottom: 10 }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -502,7 +502,7 @@ class DashboardScreen extends React.PureComponent {
                                         </TouchableOpacity>
                                     </View>
                                 </View>
-                            </View>
+                            </View> */}
                         </Animated.ScrollView>
                     </View>
                 </View>

@@ -55,7 +55,7 @@ class MyAccountEditScreen extends React.PureComponent {
                             style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between' }}>
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                                    <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+                                   <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                         <Ionicons name={Platform.OS === 'ios' ? 'ios-arrow-down' : 'ios-arrow-back'} size={32} color={'#fff'} />
                                     </TouchableOpacity>
                                 </View>

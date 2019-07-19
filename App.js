@@ -54,16 +54,11 @@ export default class App extends React.Component {
     // Get the token that uniquely identifies this device
     let token = await Notifications.getExpoPushTokenAsync();
     console.log(`expo token ialah ${token}`)
+    store.dispatch({ type: 'SET_REGISTER', payload: { expo_token:token} })
+    //setRegister: (value) => dispatch({ type: 'SET_REGISTER', payload: { ...value } }),
     console.log(JSON.stringify({
-      token: {
-        value: token,
-      },
-      user: {
-        username: 'Brent',
-      },
+      token: {        value: token,      },      user: {        username: 'Brent',      },
     }))
-
-
   }
 
 
@@ -91,7 +86,6 @@ export default class App extends React.Component {
     }
   }
 
-
   checkLogin = async () => {
     try {
       //const personalToken = await AsyncStorage.getItem('personalToken');
@@ -114,7 +108,7 @@ export default class App extends React.Component {
           onError={this._handleLoadingError}
           onFinish={this._handleFinishLoading}
         />
-      );
+      );                                                                          
     } else {
       return (
         <Provider store={store}>
@@ -152,6 +146,11 @@ export default class App extends React.Component {
         require('./src/assets/icon/crm.png'),
         //require('./src/assets/icon/crm.png'),
         require('./src/assets/icon/rfq.png'),
+        
+        require('./src/assets/images/edt.png'),
+        require('./src/assets/images/edt2.jpg'),
+
+        require('./src/assets/images/mayamall.png'),
 
       ]),
       Font.loadAsync({
