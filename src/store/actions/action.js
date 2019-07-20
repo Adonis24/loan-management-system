@@ -11,7 +11,7 @@ import config from '../../do/config'
 
 
 import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI } from './apiRegistration'
-import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi,sendNotificationApi } from './apiDashboard'
+import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -384,6 +384,21 @@ export const initiateCompanyInfo = () => {
 }
 
 
+export const initiateAssociateDir = () => {
+    return async (dispatch, getState) => {
+        // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        await dispatch(getAssociateApi())
+    }
+}
+
+export const initiatePendingDir = () => {
+    return async (dispatch, getState) => {
+        // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        await dispatch(getPendingApi())
+    }
+}
+
+
 export const initiateListWorkers = () => {
     return async (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
@@ -404,6 +419,36 @@ export const sendNotification = () => {
     return async (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
         await dispatch(sendNotificationApi())
+    }
+}
+
+export const initiateBizDir = () => {
+    return async (dispatch, getState) => {
+        await dispatch(bizDirApi())
+    }
+}
+
+export const initiateListAgency = () => {
+    return async (dispatch, getState) => {
+        await dispatch(listAgencyApi())
+    }
+}
+
+export const initiateLoanInfo = (page) => {
+    return async (dispatch, getState) => {
+        await dispatch(loanInfoApi(page))
+    }
+}
+
+export const enableNotification = () => {
+    return async (dispatch, getState) => {
+        await dispatch(addExpoTokenApi())
+    }
+}
+
+export const getConnectionStatus = () => {
+    return async (dispatch, getState) => {
+        await dispatch(connectionStatusApi())
     }
 }
 

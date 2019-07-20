@@ -153,6 +153,201 @@ export const einfoApi = () => {
   }
 }
 
+export const bizDirApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/business_directory/listAllDirectory`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const bizDirArray = await responseJson.data
+        await console.log(`BIZDIR API  ${JSON.stringify(bizDirArray)}`)
+
+        await dispatch({ type: 'SET_BIZ_DIR', payload: { bizDirArray } })
+      })
+      .catch((error) => {
+        console.log('Error Biz Dir Api : ' + error);
+      });
+  }
+}
+
+export const getAssociateApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/business_directory/listAssociateDirectory`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const assoDirArray = await responseJson.data
+        await console.log(`assoc API  ${JSON.stringify(assoDirArray)}`)
+
+        await dispatch({ type: 'SET_ASSO_DIR', payload: { assoDirArray } })
+      })
+      .catch((error) => {
+        console.log('Error Asso Dir Api : ' + error);
+      });
+  }
+}
+
+
+export const getPendingApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/business_directory/listRequestDirectory`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const pendingDirArray = await responseJson.data
+        await console.log(`assoc API  ${JSON.stringify(pendingDirArray)}`)
+
+        await dispatch({ type: 'SET_PENDING_DIR', payload: { pendingDirArray } })
+      })
+      .catch((error) => {
+        console.log('Error Pending Dir Api : ' + error);
+      });
+  }
+}
+
+
+export const listAgencyApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/agency/listAgencies`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const agencyArray = await responseJson.data
+        await console.log(`agency list API  ${JSON.stringify(agencyArray)}`)
+
+        await dispatch({ type: 'SET_AGENCY_LIST', payload: { agencyArray } })
+      })
+      .catch((error) => {
+        console.log('Error Agency List Api : ' + error);
+      });
+  }
+}
+
+export const loanInfoApi = (page) => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/loan/viewLoanInformation?page=${page}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const loanInfo = await responseJson.data
+        await console.log(`loan info API  ${JSON.stringify(loanInfo)}`)
+
+        await dispatch({ type: 'SET_LOAN_INFO', payload: { ...loanInfo } })
+      })
+      .catch((error) => {
+        console.log('Error loanInfo Api : ' + error);
+      });
+  }
+}
+
+export const addExpoTokenApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const { expo_token } = getState().registrationReducer
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/user/expo_token`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential, expo_token }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const agencyArray = await responseJson.data
+        await console.log(`expo token API  ${JSON.stringify(agencyArray)}`)
+
+        //await dispatch({ type: 'SET_AGENCY_LIST', payload: { agencyArray } })
+      })
+      .catch((error) => {
+        console.log('Error expo token Api : ' + error);
+      });
+  }
+}
+
+export const connectionStatusApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const { expo_token } = getState().registrationReducer
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/business_directory/analyticBusinessDirectory`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential, expo_token }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const connectionStatus = await responseJson.data
+        await console.log(`connectionstatus API  ${JSON.stringify(connectionStatus)}`)
+
+        //await dispatch({ type: 'SET_AGENCY_LIST', payload: { agencyArray } })
+        await dispatch({ type: 'SET_USER_PROFILE', payload: { ...connectionStatus } })
+      })
+      .catch((error) => {
+        console.log('Error expo token Api : ' + error);
+      });
+  }
+}
+
+
 
 
 export const applyLoanApi = () => {
@@ -222,18 +417,18 @@ export const getUserInfoApi = () => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
     const access_credential = 'api'
-    fetch(`${apiUrl}api/user`, {
-      method: 'GET',
+    fetch(`${apiUrl}api/user/information`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
-      }
+      },body: JSON.stringify({ access_credential }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
 
         console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
-        const userProfile = await responseJson
+        const userProfile = await responseJson.data
         await console.log(`USER  ${JSON.stringify(userProfile)}`)
 
         await dispatch({ type: 'SET_USER_PROFILE', payload: { ...userProfile } })

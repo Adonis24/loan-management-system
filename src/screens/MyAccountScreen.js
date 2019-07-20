@@ -45,6 +45,7 @@ class MyAccountScreen extends React.PureComponent {
     componentDidMount() {
         //this.props.initiateMyAccount()
         //this.props.navigation.navigate('PopupScore')
+        this.props.getConnectionStatus()
     }
 
     capitalizeString = (text = 'NA') => text.length > 0 && `${text[0].toUpperCase()}${text.slice(1)}`
@@ -102,8 +103,9 @@ class MyAccountScreen extends React.PureComponent {
                                 </View>
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignSelf: 'stretch', padding: 5 }}>
-                                <Text style={[styles.textDefault, { color: '#fff' }]}>0 Connections</Text>
-                                <Text style={[styles.textDefault, { color: '#fff' }]}>0 Projects</Text>
+                                <Text style={[styles.textDefault, { color: '#fff' }]}>Connections</Text>
+                                <TouchableOpacity onPress={()=>this.props.navigation.navigate('AssociateDir')}><Text style={[styles.caption, { color: '#fff' }]}>{this.props.associateConnection} connected</Text></TouchableOpacity>
+                                <TouchableOpacity onPress={()=>this.props.navigation.navigate('PendingDir')}><Text style={[styles.caption, { color: '#fff' }]}>{this.props.requestConnection} pending</Text></TouchableOpacity>
                             </View>
                         </LinearGradient>
                     </View>
@@ -151,13 +153,18 @@ function mapStateToProps(state) {
         profile_pic: state.myAccountReducer.profile_pic,
         email_verified_at: state.myAccountReducer.email_verified_at,
 
+        associateConnection: state.myAccountReducer.associateConnection,
+        requestConnection: state.myAccountReducer.requestConnection,
+        allConnection: state.myAccountReducer.allConnection,
+
         companyName: state.bizInfoReducer.name,
 
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-        initiateMyAccount: () => dispatch(actionCreator.initiateMyAccount())
+        initiateMyAccount: () => dispatch(actionCreator.initiateMyAccount()),
+        getConnectionStatus: () => dispatch(actionCreator.getConnectionStatus())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(MyAccountScreen)

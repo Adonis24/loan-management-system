@@ -64,6 +64,9 @@ import UserAccountScreen from '../screens/UserAccountScreen';
 import ContactPersonMainScreen from '../screens/ContactPersonMainScreen';
 import EcommerceDetailScreen from '../screens/EcommerceDetailScreen';
 import InfoEventEdtScreen from '../screens/InfoEventEdtScreen';
+import PendingDirScreen from '../screens/PendingDirScreen';
+import AssociateDirScreen from '../screens/AssociateDirScreen';
+import BizAppDetailScreen from '../screens/BizAppDetailScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -93,6 +96,7 @@ const DashboardStackWithModal = createStackNavigator(
     QuizAnswer: { screen: QuizAnswerScreen, },
     MyAccount: { screen: MyAccountScreen, },
     BizApp: { screen: BizAppScreen, },
+    BizAppDetail: { screen: BizAppDetailScreen, },
     MyAccountEdit: { screen: MyAccountEditScreen, },
     BizDirectory: { screen: BizDirectoryScreen, },
     BizLicensing: { screen: BizLicensingScreen, },
@@ -115,6 +119,9 @@ const DashboardStackWithModal = createStackNavigator(
     SignUpSuccess: SignupSuccessScreen,
 
 
+    PendingDir: { screen: PendingDirScreen, },
+    AssociateDir: { screen: AssociateDirScreen, },
+
     ContactPersonMain: { screen: ContactPersonMainScreen, },
     ContactPersonSuccess: { screen: ContactPersonSuccessScreen, },
     ScanQR: { screen: ScanQRScreen, },
@@ -123,6 +130,8 @@ const DashboardStackWithModal = createStackNavigator(
     Training: { screen: TrainingScreen, },
 
     InfoEventEdt: { screen: InfoEventEdtScreen, }
+
+
   },
   {
     mode: 'modal',

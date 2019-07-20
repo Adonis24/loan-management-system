@@ -48,7 +48,7 @@ class BizAppScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                           <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -67,32 +67,30 @@ class BizAppScreen extends React.PureComponent {
                             <View style={[{ backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, paddingTop: 10, marginBottom: 20 }]}>
                                 <Text style={[styles.textDefault, { margin: 5, fontSize: 12, textAlign: 'justify' }]}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</Text>
                             </View>
-                            <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
-                                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                    <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Urus Niaga</Text>
-                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
-                                            <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                                <Text style={[styles.caption, { color: '#fff' }]}>Subscribe</Text>
-                                            </LinearGradient>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                    <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Simpan Kira</Text>
-                                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
-                                            <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                                <Text style={[styles.caption, { color: '#fff' }]}>Subscribe</Text>
-                                            </LinearGradient>
-                                        </TouchableOpacity>
-                                    </View>
+
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                                <Image source={require('../assets/images/urusniaga.png')} style={{ width: undefined, height: Layout.window.height /10, }} resizeMode='contain' />
+                                <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Urus Niaga</Text>
+                                <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('BizAppDetail', { uri: 'https://urusniaga.my/' })} style={{ margin: 10, }}>
+                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                            <Text style={[styles.caption, { color: '#fff' }]}>Detail</Text>
+                                        </LinearGradient>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('BizAppDetail', { uri: 'https://register.urusniaga.my/' })} style={{ margin: 10, }}>
+                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                            <Text style={[styles.caption, { color: '#fff' }]}>Subscribe</Text>
+                                        </LinearGradient>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('BizAppDetail', { uri: 'https://demo.urusniaga.my/' })} style={{ margin: 10, }}>
+                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                            <Text style={[styles.caption, { color: '#fff' }]}>Demo</Text>
+                                        </LinearGradient>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
+
                         </ScrollView>
                     </View>
                 </View>

@@ -12,13 +12,15 @@ import {
     TextInput,
     AsyncStorage,
     ImageBackground,
-    ActivityIndicator
+    ActivityIndicator,
+    KeyboardAvoidingView
 
 
 } from 'react-native';
 
 import Constants from 'expo-constants'
 import { LinearGradient } from 'expo-linear-gradient'
+import * as WebBrowser from 'expo-web-browser';
 
 import Layout from '../constants/Layout'
 
@@ -33,6 +35,12 @@ class LoginScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
+
+    async forgotPassword() {
+        let result = await WebBrowser.openBrowserAsync('https://staging.bxcess.my/password/reset');
+        //this.setState({ result });
+    };
+
 
     async login() {
         await this.props.login()
@@ -74,7 +82,7 @@ class LoginScreen extends React.PureComponent {
                     <View style={{ alignItems: 'flex-end' }}><Image source={require('../assets/images/bottomRight.png')} style={{ width: 106, height: 92 }} /></View>
                 </View>
                 <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: emailBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
@@ -87,7 +95,9 @@ class LoginScreen extends React.PureComponent {
                             </View>
                             <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                                 <Text style={[styles.textDefault, { margin: 5 }]}>Forgot password?</Text>
-                                <Text style={[styles.textDefault, { margin: 5, color: 'dodgerblue' }]}>Click here</Text>
+                                <TouchableOpacity onPress={() => this.forgotPassword()}>
+                                    <Text style={[styles.textDefault, { margin: 5, color: 'dodgerblue' }]}>Click here</Text>
+                                </TouchableOpacity>
                             </View>
                             <View style={{ flexDirection: 'row', margin: 5 }}>
                                 <TouchableOpacity onPress={() => this.login()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
@@ -101,7 +111,7 @@ class LoginScreen extends React.PureComponent {
                             </View>
                             {this.props.indicator && <ActivityIndicator color={'#34c6f4'} style={{ marginLeft: 5 }} />}
                         </View>
-                    </View>
+                    </KeyboardAvoidingView>
                 </View>
             </View >
         );

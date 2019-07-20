@@ -106,6 +106,11 @@ class SettingsScreen extends React.PureComponent {
                                 </View>
                             </View>
                             <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5, marginTop: 5, alignSelf: 'center' }}>
+                                <TouchableOpacity onPress={() => this.props.enableNotification()} style={{ marginLeft: 5, backgroundColor: 'crimson', borderRadius: 5 }}>
+                                    <Text style={[styles.textDefault, { margin: 10, color: '#fff' }]}>Enable Notification</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5, marginTop: 5, alignSelf: 'center' }}>
                                 <TouchableOpacity onPress={() => this.logout()} style={{ marginLeft: 5, backgroundColor: 'crimson', borderRadius: 5 }}>
                                     <Text style={[styles.textDefault, { margin: 10, color: '#fff' }]}>Logout</Text>
                                 </TouchableOpacity>
@@ -141,7 +146,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        logout: () => dispatch(actionCreator.logout())
+        logout: () => dispatch(actionCreator.logout()),
+        enableNotification: () => dispatch(actionCreator.enableNotification())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen)

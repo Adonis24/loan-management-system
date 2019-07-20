@@ -11,7 +11,8 @@ import {
     Dimensions,
     TextInput,
     AsyncStorage,
-    ImageBackground
+    ImageBackground,
+    FlatList
 
 
 } from 'react-native';
@@ -27,6 +28,8 @@ import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, L
 
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
+import moment from 'moment'
+
 
 class BizDirectoryScreen extends React.PureComponent {
     static navigationOptions = {
@@ -35,7 +38,17 @@ class BizDirectoryScreen extends React.PureComponent {
     nav = (screen) => {
         this.props.navigation.navigate(screen)
     }
+
+    connect(){
+        console.log('conect button pressed')
+    }
+
+    componentDidMount() {
+        this.props.initiateBizDir()
+    }
+
     render() {
+        this.props.bizDirArray && console.log(JSON.stringify(this.props.bizDirArray))
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -49,7 +62,7 @@ class BizDirectoryScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                           <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -63,72 +76,33 @@ class BizDirectoryScreen extends React.PureComponent {
                     {/* START CONTENT */}
                     <View style={{ flex: 7 }}>
                         <ScrollView style={{ padding: 20 }}>
-                            <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
-                                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
-                                        <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: 40, width: 40, alignSelf: 'center' }} resizeMode='contain' />
+                            <FlatList
+                                data={this.props.bizDirArray}
+                                keyExtractor={(item, index) => index.toString()}
+                                numColumns={2}
+                                renderItem={({ item }) => (
+                                    <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                                        <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
+                                            <Image source={{uri:item.profile_pic}} style={{ height: 40, width: 40, alignSelf: 'center',borderRadius:20 }} resizeMode='cover' />
+                                        </View>
+                                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.name}</Text>
+                                        <Text style={[styles.caption, { margin: 5, }]}>Member since : {moment(item.created_at).format('LL')}</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                            <TouchableOpacity onPress={() => this.connect()} style={{ margin: 10, }}>
+                                                <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                                    <Text style={[styles.caption, { color: '#fff' }]}>Connect</Text>
+                                                </LinearGradient>
+                                            </TouchableOpacity>
+                                        </View>
                                     </View>
-                                    <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Puteri Nursyahirah</Text>
-                                    <Text style={[styles.textDefault, { margin: 5, }]}>60 Connection</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
-                                            <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                                <Text style={[styles.caption, { color: '#fff' }]}>Add to connection</Text>
-                                            </LinearGradient>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
-                                        <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: 40, width: 40, alignSelf: 'center' }} resizeMode='contain' />
-                                    </View>
-                                    <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Shery Nazmi</Text>
-                                    <Text style={[styles.textDefault, { margin: 5, }]}>50 Connection</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
-                                            <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                                <Text style={[styles.caption, { color: '#fff' }]}>Add to connection</Text>
-                                            </LinearGradient>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
-                                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
-                                        <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: 40, width: 40, alignSelf: 'center' }} resizeMode='contain' />
-                                    </View>
-                                    <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>M. Nazmi</Text>
-                                    <Text style={[styles.textDefault, { margin: 5, }]}>20 Connection</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
-                                            <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                                <Text style={[styles.caption, { color: '#fff' }]}>Add to connection</Text>
-                                            </LinearGradient>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
-                                        <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: 40, width: 40, alignSelf: 'center' }} resizeMode='contain' />
-                                    </View>
-                                    <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Afiudin Thambi</Text>
-                                    <Text style={[styles.textDefault, { margin: 5, }]}>No Connection</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
-                                            <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                                <Text style={[styles.caption, { color: '#fff' }]}>Add to connection</Text>
-                                            </LinearGradient>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            </View>
+                                )}
+                            />
+                            
                         </ScrollView>
                     </View>
                     {/* END CONTENT */}
                 </View>
             </View >
-
         );
     }
 }
@@ -136,14 +110,13 @@ class BizDirectoryScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-
-
+        bizDirArray: state.bizDirReducer.bizDirArray
 
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
+        initiateBizDir: () => dispatch(actionCreator.initiateBizDir()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BizDirectoryScreen)
