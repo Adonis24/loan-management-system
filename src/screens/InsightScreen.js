@@ -24,7 +24,7 @@ import Layout from '../constants/Layout'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 //import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
-
+import { Thumbnail } from 'native-base'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
@@ -41,7 +41,7 @@ class InsightScreen extends React.PureComponent {
                         <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
                     </View>
                     {/* <View style={{ alignItems: 'flex-start' }}>
-                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
+                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
                     </View> */}
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
@@ -65,10 +65,10 @@ class InsightScreen extends React.PureComponent {
                     </View>
                     {/* CONTENT AREA */}
                     <View style={{ flex: 4 }}>
-                        <ScrollView contentStyle={{ padding: 10 }} >                           
+                        <ScrollView contentStyle={{ padding: 10 }} >
 
                             <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, paddingBottom: 10, marginBottom: 20 }]}>
-                                <View style={{flexDirection: 'row',marginBottom:10}}>
+                                {/* <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                                     <View style={[{ marginLeft: 10, padding: 2 }]}>
                                         <Image source={require('../assets/images/girl.png')} style={{ height: Layout.window.height / 10, width: Layout.window.height / 10, borderWidth: 1, borderColor: 'lightgrey', borderRadius: Layout.window.height / 20 }} resizeMode='cover' />
                                     </View>
@@ -91,82 +91,27 @@ class InsightScreen extends React.PureComponent {
                                             </TouchableOpacity>
                                         </View>
                                     </View>
-                                </View>
+                                </View> */}
+                                {this.props.friendList && this.props.friendList.length > 0 ?
+                                    <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
+                                        <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
+                                            <Thumbnail source={require('../assets/images/girl.png')} circle small style={{ borderWidth: 1, borderColor: 'lightgrey' }} />
+                                            <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>Puteri Nursyahirah</Text>
+                                        </View>
+                                        <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: 5 }}>
+                                            <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
+                                                <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#fff' }]}>Friend</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                    :
+                                    <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
+                                        <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
+                                            <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: 'lightgrey' }]}>No members yet</Text>
+                                        </View>
 
-                                <View style={{flexDirection: 'row',marginBottom:10}}>
-                                    <View style={[{ marginLeft: 10, padding: 2 }]}>
-                                        <Image source={require('../assets/images/girl.png')} style={{ height: Layout.window.height / 10, width: Layout.window.height / 10, borderWidth: 1, borderColor: 'lightgrey', borderRadius: Layout.window.height / 20 }} resizeMode='cover' />
                                     </View>
-                                    <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>Puteri Nursyahirah</Text>
-                                            <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
-                                                <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#fff' }]}>Friend</Text>
-                                            </View>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'center', }}>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UserAccount')} style={{ margin: 5 }}>
-                                                <Ionicons name='md-chatbubbles' size={20} color='#2FD9FE' />
-                                            </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UserAccount')} style={{ margin: 5 }}>
-                                                <Ionicons name='md-share' size={20} color='#2FD9FE' />
-                                            </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UserAccount')} style={{ margin: 5 }}>
-                                                <Ionicons name='ios-more' size={20} color='#2FD9FE' />
-                                            </TouchableOpacity>
-                                        </View>
-                                    </View>
-                                </View>
-
-                                <View style={{flexDirection: 'row',marginBottom:10}}>
-                                    <View style={[{ marginLeft: 10, padding: 2 }]}>
-                                        <Image source={require('../assets/images/girl.png')} style={{ height: Layout.window.height / 10, width: Layout.window.height / 10, borderWidth: 1, borderColor: 'lightgrey', borderRadius: Layout.window.height / 20 }} resizeMode='cover' />
-                                    </View>
-                                    <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>Puteri Nursyahirah</Text>
-                                            <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
-                                                <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#fff' }]}>Friend</Text>
-                                            </View>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'center', }}>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UserAccount')} style={{ margin: 5 }}>
-                                                <Ionicons name='md-chatbubbles' size={20} color='#2FD9FE' />
-                                            </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UserAccount')} style={{ margin: 5 }}>
-                                                <Ionicons name='md-share' size={20} color='#2FD9FE' />
-                                            </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UserAccount')} style={{ margin: 5 }}>
-                                                <Ionicons name='ios-more' size={20} color='#2FD9FE' />
-                                            </TouchableOpacity>
-                                        </View>
-                                    </View>
-                                </View>
-
-                                <View style={{flexDirection: 'row',marginBottom:10}}>
-                                    <View style={[{ marginLeft: 10, padding: 2 }]}>
-                                        <Image source={require('../assets/images/girl.png')} style={{ height: Layout.window.height / 10, width: Layout.window.height / 10, borderWidth: 1, borderColor: 'lightgrey', borderRadius: Layout.window.height / 20 }} resizeMode='cover' />
-                                    </View>
-                                    <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>Puteri Nursyahirah</Text>
-                                            <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
-                                                <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#fff' }]}>Friend</Text>
-                                            </View>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'center', }}>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UserAccount')} style={{ margin: 5 }}>
-                                                <Ionicons name='md-chatbubbles' size={20} color='#2FD9FE' />
-                                            </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UserAccount')} style={{ margin: 5 }}>
-                                                <Ionicons name='md-share' size={20} color='#2FD9FE' />
-                                            </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UserAccount')} style={{ margin: 5 }}>
-                                                <Ionicons name='ios-more' size={20} color='#2FD9FE' />
-                                            </TouchableOpacity>
-                                        </View>
-                                    </View>
-                                </View>                                
+                                }
                             </View>
                         </ScrollView>
                     </View>
@@ -187,7 +132,7 @@ class InsightScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-
+        friendList: []
 
 
     }
