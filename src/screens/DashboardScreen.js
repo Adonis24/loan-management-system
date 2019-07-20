@@ -375,9 +375,7 @@ function mapDispatchToProps(dispatch) {
     return {
         initiateDashboardScreen: () => dispatch(actionCreator.initiateDashboardScreen()),
         initiateMyAccount: () => dispatch(actionCreator.initiateMyAccount()),
-        initiateCompanyInfo: () => dispatch(actionCreator.initiateCompanyInfo()),
-        
-
+        initiateCompanyInfo: () => dispatch(actionCreator.initiateCompanyInfo()),       
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreen)

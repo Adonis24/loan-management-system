@@ -15,6 +15,7 @@ import moment from 'moment'
 // Amplify.configure(aws_exports);///
 
 const apiUrl = 'https://staging.bxcess.my/'
+const lmsApiUrl = 'https://lms.bxcess.my/'
 
 export const newsApi = () => {
   return async (dispatch, getState) => {
@@ -423,7 +424,7 @@ export const getUserInfoApi = () => {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
-      },body: JSON.stringify({ access_credential }),
+      }, body: JSON.stringify({ access_credential }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
 
@@ -549,6 +550,38 @@ export const doneForNowApi = () => {
       });
   }
 }
+
+
+
+
+export const getCoursesApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('lmsPersonalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    // const token_type='Bearer'
+    // const access_token='eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjU3ZmMwNzdkNmU4ODQ0MGNiNmYxMWFkMzRkNWE5MDQxOGFmZmVmYWQwMmQ4YWRiZjc0ZTAxZDQwMGU1MTRkMDAyNDc5NzUxODc5ZTdiOGUwIn0.eyJhdWQiOiIyIiwianRpIjoiNTdmYzA3N2Q2ZTg4NDQwY2I2ZjExYWQzNGQ1YTkwNDE4YWZmZWZhZDAyZDhhZGJmNzRlMDFkNDAwZTUxNGQwMDI0Nzk3NTE4NzllN2I4ZTAiLCJpYXQiOjE1NjM2NTg1ODIsIm5iZiI6MTU2MzY1ODU4MiwiZXhwIjoxNTk1MjgwOTgyLCJzdWIiOiIxMiIsInNjb3BlcyI6W119.mGYw6ngyvIYDGaSMdevxMD0yx4pzj3PjcRyjmDxY5zB_CJOfxd0MS0M2wkfvG-BvLB31d9DPr3dj52ETfK_eOdCeFeHliECF450QC6aZElvrHskDgb09DOcU0gTyYCToiCybF-RpDaOMPYpzq_hqCfBM_V1JfovoPZWDS-iqt0V7lCvUODWya0bIzb0B4J2kHI9vt7h7-OFKOnzYoF-4jpeJAq_T2U6VQlEIwLKWL3LUW_g_Y5IwK3q4VCm7a2Nw5oleEbhEqqmpdmTmsTpvQ_e_rtOaIloMYEvzmw4lsLP9fLDO9KaEx9UY3drq4xL2f2hV2XIzhnSERKJT2HRe3cJdBuHHjqvFQuyf2oXfkHoeeOh1h1k5CN_pCGqibzkk-SXALPBMH2aqeSlyKKjPJLkLcVIUZE-2Rh0moVsrkmaVT6TWwOCdIU0-tk9xe1QWKQlTU5i8Fxp5o3uucT0p5o7qQ6NF6xCMm6cv_XqbHz_OQ9fjXZIKL_-zmLmkZh3fBOSCtqa36-c2-OMYCL3CrV1bVP_glPJzn3rUXX2rqb5lvU8GSzILiwxzOyvhd1l44bhgFvOU94nl8EMb7fZLiZjbq4u7c1k4jg8ll0JtYIkrhafbKKZmERJqkMREsEwia5LJD-O8BkgRYSK00q9yDPrL-szRNpecPPhb5TpMzAE'
+    // const access_credential = 'api'
+    fetch(`${lmsApiUrl}api/courses`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+        console.log(`inilah response JSON  training: ${JSON.stringify(responseJson)}`)
+        const trainingArray = await responseJson.data
+         await console.log(`Training Info  ${JSON.stringify(trainingArray)}`)
+
+        await dispatch({ type: 'GET_COURSES', payload: { trainingArray } })
+      })
+      .catch((error) => {
+        console.log('Error TRAINING Api : ' + error);
+      });
+  }
+}
+
 
 //////////////////////////////////LUNAWALLET/////////////////////////////////////////
 

@@ -44,6 +44,7 @@ class LoginScreen extends React.PureComponent {
 
     async login() {
         await this.props.login()
+        await this.props.loginLMS()
 
     }
 
@@ -127,14 +128,14 @@ function mapStateToProps(state) {
         errorColor: state.loginScreenReducer.errorColor,
         indicator: state.loginScreenReducer.indicator,
 
-
         proceed: state.loginScreenReducer.proceed
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
         setLogin: (value) => dispatch({ type: 'SET_LOGIN', payload: { ...value } }),
-        login: () => dispatch(actionCreator.login())
+        login: () => dispatch(actionCreator.login()),
+        loginLMS: () => dispatch(actionCreator.loginLMS())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

@@ -35,7 +35,15 @@ class TrainingScreen extends React.PureComponent {
     nav = (screen) => {
         this.props.navigation.navigate(screen)
     }
+
+    componentDidMount(){
+        this.props.initiateTraining()
+    }
+    
     render() {
+
+        this.props.trainingArray&&console.log(`dari training array : ${this.props.trainingArray}`)
+
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -174,14 +182,14 @@ class TrainingScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-
+trainingArray:state.trainingReducer.trainingArray
 
 
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
+        initiateTraining: () => dispatch(actionCreator.initiateTraining()),       
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TrainingScreen)

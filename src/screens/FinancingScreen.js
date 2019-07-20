@@ -96,27 +96,29 @@ class FinancingScreen extends React.PureComponent {
 class Micro extends React.PureComponent {
     render() {
         return (
-            <FlatList
-                data={this.props.agencyArray}
-                keyExtractor={(item, index) => index.toString()}
-                numColumns={2}
-                renderItem={({ item }) => (
-                    <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                        <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
-                            <Image source={{ uri: item.logo }} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
+            <View style={{ flex: 1, paddingTop: 10 }}>
+                <FlatList
+                    data={this.props.agencyArray}
+                    keyExtractor={(item, index) => index.toString()}
+                    numColumns={2}
+                    renderItem={({ item }) => (
+                        <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                            <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
+                                <Image source={{ uri: item.logo }} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
+                            </View>
+                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.title}</Text>
+                            <Text numberOfLines={3} ellipsizeMode={'tail'} style={[styles.caption, { margin: 5, }]}>{item.desc}</Text>
+                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
+                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                        <Text style={[styles.caption, { color: '#fff' }]}>Apply</Text>
+                                    </LinearGradient>
+                                </TouchableOpacity>
+                            </View>
                         </View>
-                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.title}</Text>
-                        <Text numberOfLines={3} ellipsizeMode={'tail'} style={[styles.caption, { margin: 5, }]}>{item.desc}</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
-                                <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                    <Text style={[styles.caption, { color: '#fff' }]}>Apply</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                )}
-            />
+                    )}
+                />
+            </View>
         )
     }
 }
@@ -124,13 +126,13 @@ class Micro extends React.PureComponent {
 class SME extends React.PureComponent {
     render() {
         return (
-            <View>
+            <View style={{ flex: 1, paddingTop: 10 }}>
                 <Text>Current Page :{this.props.current_page} </Text>
                 <Text>Total Page :{this.props.last_page} </Text>
-                <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity onPress={() => this.props.changePage(this.props.current_page - 1)}><Text>Prev :  {this.props.current_page - 1}</Text></TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.props.changePage(this.props.current_page + 1)}><Text>Next :  {this.props.current_page + 1}</Text></TouchableOpacity>
-                </View>
+                {this.props.last_page > 1 && <View style={{ flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'space-between', margin: 10 }}>
+                    {this.props.current_page > 1 && <TouchableOpacity onPress={() => this.props.changePage(this.props.current_page - 1)}><Text>Prev :  {this.props.current_page - 1}</Text></TouchableOpacity>}
+                    {this.props.current_page < this.props.last_page && <TouchableOpacity onPress={() => this.props.changePage(this.props.current_page + 1)}><Text>Next :  {this.props.current_page + 1}</Text></TouchableOpacity>}
+                </View>}
 
                 <FlatList
                     data={this.props.loanStatusArray}

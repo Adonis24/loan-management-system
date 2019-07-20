@@ -10,8 +10,8 @@ import s3 from '../../do/DigitalOcean'
 import config from '../../do/config'
 
 
-import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI } from './apiRegistration'
-import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi } from './apiDashboard'
+import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI, requestTokenLMS, registerLMSApi, requestPersonalTokenLMS } from './apiRegistration'
+import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi,getCoursesApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -23,6 +23,12 @@ import _ from 'lodash'
 export const getToken = () => {
     return (dispatch, getState) => {
         dispatch(requestToken())
+    }
+}
+
+export const getTokenLMS = () => {
+    return (dispatch, getState) => {
+        dispatch(requestTokenLMS())
     }
 }
 
@@ -74,6 +80,17 @@ export const register = () => {
     }
 }
 
+
+export const registerLMS = () => {
+    return async (dispatch, getState) => {
+
+        const { name, email, password, password_confirmation, lms } = await getState().registrationReducer
+        const { token_type, access_token, } = lms
+        console.log(`token lms :${JSON.stringify(lms)}`)
+        await dispatch(registerLMSApi(token_type, access_token, name, email, password, password_confirmation))
+    }
+}
+
 export const registerOTP = () => {
     return async (dispatch, getState) => {
 
@@ -96,6 +113,8 @@ export const registerOTP = () => {
     }
 }
 
+
+
 export const verifyPhone = () => {
     return async (dispatch, getState) => {
         const { token_type, access_token, country_code, phone, c1, c2, c3, c4 } = getState().registrationReducer
@@ -110,6 +129,15 @@ export const getPersonalToken = () => {
         const password = getState().registrationReducer.password
         console.log(`action : ${username} dan ${password}`)
         await dispatch(requestPersonalToken('register', username, password))
+    }
+}
+
+export const getPersonalTokenLMS = () => {
+    return async (dispatch, getState) => {
+        const username = getState().registrationReducer.email
+        const password = getState().registrationReducer.password
+        console.log(`action : ${username} dan ${password}`)
+        await dispatch(requestPersonalTokenLMS('register', username, password))
     }
 }
 
@@ -147,6 +175,18 @@ export const login = () => {
         } else {
             dispatch(requestPersonalToken('login', username, password))
         }
+    }
+}
+
+export const loginLMS = () => {
+    return (dispatch, getState) => {
+        dispatch({ type: 'SET_LOGIN', payload: { indicator: true } })
+        const username = getState().loginScreenReducer.email
+        //const password = getState().loginScreenReducer.password
+
+        const { email, password } = getState().loginScreenReducer
+
+        dispatch(requestPersonalTokenAPI('login', username, password))
     }
 }
 
@@ -449,6 +489,13 @@ export const enableNotification = () => {
 export const getConnectionStatus = () => {
     return async (dispatch, getState) => {
         await dispatch(connectionStatusApi())
+    }
+}
+
+
+export const initiateTraining = () => {
+    return async (dispatch, getState) => {
+        await dispatch(getCoursesApi())
     }
 }
 
