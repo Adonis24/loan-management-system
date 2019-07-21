@@ -186,7 +186,7 @@ export const loginLMS = () => {
 
         const { email, password } = getState().loginScreenReducer
 
-        dispatch(requestPersonalTokenAPI('login', username, password))
+        dispatch(requestPersonalTokenLMS('login', username, password))
     }
 }
 
@@ -724,11 +724,14 @@ export const logout = () => {
         //await AsyncStorage.removeItem('personalToken')
         console.log(`nak delete`)
         await SecureStore.deleteItemAsync('personalToken').then(console.log(`delete berjaya`)).catch(error => console.log(`tak berjaya : ${error}`))
+        await SecureStore.deleteItemAsync('lmsPersonalToken').then(console.log(`delete berjaya`)).catch(error => console.log(`tak berjaya : ${error}`))
 
         dispatch({ type: 'REGISTRATION_RESET' })
         dispatch({ type: 'LOGIN_RESET' })
         dispatch({ type: 'COMPANY_INFO_RESET' })
         dispatch({ type: 'USER_PROFILE_RESET' })
+        dispatch({ type: 'BIZ_INFO_RESET' })
+        
         //dispatch({ type: 'ROOT_LOG_OUT' })
         //dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
     }

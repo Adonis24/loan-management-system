@@ -67,6 +67,7 @@ import InfoEventEdtScreen from '../screens/InfoEventEdtScreen';
 import PendingDirScreen from '../screens/PendingDirScreen';
 import AssociateDirScreen from '../screens/AssociateDirScreen';
 import BizAppDetailScreen from '../screens/BizAppDetailScreen';
+import NoCompanyScreen from '../screens/NoCompanyScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -129,7 +130,9 @@ const DashboardStackWithModal = createStackNavigator(
 
     Training: { screen: TrainingScreen, },
 
-    InfoEventEdt: { screen: InfoEventEdtScreen, }
+    InfoEventEdt: { screen: InfoEventEdtScreen, },
+
+    NoCompany: { screen: NoCompanyScreen, },
 
 
   },

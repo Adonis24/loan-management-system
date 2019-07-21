@@ -85,12 +85,18 @@ class SettingsScreen extends React.PureComponent {
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
                                     <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Email :</Text></View>
-                                    <View style={{ flex: 2,flexDirection:'row' }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.email}</Text><TouchableOpacity ><Text style={[styles.caption,{padding:3,margin:3,}]}>Verify</Text></TouchableOpacity></View>
+                                    <View style={{ flex: 2,flexDirection:'row' }}>
+                                        <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.email}</Text><TouchableOpacity >
+                                            {this.props.email_verified_at?<Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{marginLeft:3}} />:<Text style={[styles.caption,{padding:3,margin:3,}]}>Verify</Text>}
+                                            </TouchableOpacity></View>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
                                     <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Phone :</Text></View>
                                     <View style={{ flex: 2 }}>
-                                        {this.props.phone_no ? <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.phone_no}</Text> :
+                                        {this.props.phone_no ? <View style={{flexDirection:'row'}}>
+                                            <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.phone_no}</Text>
+                                            <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{marginLeft:3}} />
+                                            </View> :
                                             <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpOtp', { screen: 'setting' })} style={{ borderRadius: 5 }}>
                                                 <Text style={[styles.caption, { alignSelf: 'flex-start', textAlign: 'left', padding: 5 }]}>Add Phone</Text>
                                             </TouchableOpacity>}
