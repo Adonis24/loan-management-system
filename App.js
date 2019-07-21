@@ -10,7 +10,7 @@ import { Notifications } from 'expo';
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
-import reducer from './src/store/reducers/Reducer';
+import rootReducer from './src/store/reducers/Reducer';
 
 import { StyleProvider } from 'native-base';
 import getTheme from './native-base-theme/components';
@@ -21,7 +21,7 @@ import minimal from './native-base-theme/variables/minimal';
 // This refers to the function defined earlier in this guide
 //import {registerForPushNotificationsAsync} from './src/registerForPushNotificationsAsync';
 
-const store = createStore(reducer, applyMiddleware(thunk))
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 
 export default class App extends React.Component {

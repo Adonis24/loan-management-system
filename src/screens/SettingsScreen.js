@@ -85,7 +85,7 @@ class SettingsScreen extends React.PureComponent {
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
                                     <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Email :</Text></View>
-                                    <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.email}</Text></View>
+                                    <View style={{ flex: 2,flexDirection:'row' }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.email}</Text><TouchableOpacity ><Text style={[styles.caption,{padding:3,margin:3,}]}>Verify</Text></TouchableOpacity></View>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
                                     <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Phone :</Text></View>
