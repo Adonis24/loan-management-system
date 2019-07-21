@@ -52,9 +52,9 @@ class InfoEventListScreen extends React.PureComponent {
                     </View>
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                           <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -66,20 +66,20 @@ class InfoEventListScreen extends React.PureComponent {
                         </View>
                     </View>
                     <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
-                    {this.props.eventArray&&this.props.eventArray.length>0?<Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: 'transparent' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
+                        {this.props.eventArray && this.props.eventArray.length > 0 ? <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: 'transparent' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
                             <Tab heading="Latest">
                                 <Latest nav={this.nav} eventArray={this.props.eventArray} />
                             </Tab>
                             <Tab heading="Popular">
                                 <Popular nav={this.nav} eventArray={this.props.eventArray} />
                             </Tab>
-                        </Tabs>: <View style={{justifyContent:'flex-start',alignItems:'flex-start'}}>
-                                <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14,color:'lightgrey' }]}>Please check back for latest info soon</Text>
-{/*                             
+                        </Tabs> : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                                <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14, color: 'lightgrey' }]}>Please check back for latest info soon</Text>
+                                {/*                             
                                 <Image source={require('../assets/images/bizlicensing.png')} style={{ flex:1,width: undefined, height: Layout.window.height / 1.5, alignSelf: 'center',opacity:0.3, borderWidth:1,borderColor:'#000' }} resizeMode={'contain'} /> */}
 
                             </View>
-                    }
+                        }
                     </View>
                 </View>
             </View>
@@ -98,9 +98,11 @@ class Latest extends React.PureComponent {
                         keyExtractor={(item, index) => index.toString()}
                         numColumns={2}
                         renderItem={({ item }) => (
-                            <TouchableOpacity onPress={() => this.props.nav('InfoEvent', item)}>
-                                <Image source={{ uri: item.picture }} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10 }} resizeMode={'cover'} />
-                            </TouchableOpacity>
+                            <View style={{ flex: 1, alignItems: 'center' }}>
+                                <TouchableOpacity onPress={() => this.props.nav('InfoEvent', item)}>
+                                    <Image source={{ uri: item.picture }} style={{ flex: 1, width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10, borderRadius: 10 }} resizeMode={'contain'} />
+                                </TouchableOpacity>
+                            </View>
                         )} />
                 }
             </ScrollView>
@@ -118,9 +120,11 @@ class Popular extends React.PureComponent {
                         keyExtractor={(item, index) => index.toString()}
                         numColumns={2}
                         renderItem={({ item }) => (
-                            <TouchableOpacity onPress={() => this.props.nav('InfoEvent', item)}>
-                                <Image source={{ uri: item.picture }} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10 }} resizeMode={'cover'} />
-                            </TouchableOpacity>
+                            <View style={{ flex: 1, alignItems: 'center' }}>
+                                <TouchableOpacity onPress={() => this.props.nav('InfoEvent', item)}>
+                                    <Image source={{ uri: item.picture }} style={{ flex: 1, width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10, borderRadius: 10 }} resizeMode={'contain'} />
+                                </TouchableOpacity>
+                            </View>
                         )} />
                 }
             </ScrollView>
