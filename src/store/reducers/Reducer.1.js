@@ -12,8 +12,6 @@ const registrationReducer = (state = [], action) => {
             return { ...state, c1: undefined, c2: undefined, c3: undefined, c4: undefined, }
         case 'VERIFY_OTP':
             return { ...state, ...action.payload }
-        case 'REGISTRATION_RESET':
-            return state = []
         default:
             return state
     }
@@ -29,8 +27,6 @@ const companyInformationReducer = (state = [], action) => {
             return { ...state, ...action.payload }
         case 'SET_DECLARE_SIGN':
             return { ...state, ...action.payload }
-        case 'COMPANY_INFO_RESET':
-            return state = []
         default:
             return state
     }
@@ -40,8 +36,6 @@ const loginScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_LOGIN':
             return { ...state, ...action.payload }
-        case 'LOGIN_RESET':
-            return state = []
         default:
             return state
     }
@@ -52,8 +46,6 @@ const dashboardScreenReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_DASHBOARD':
             return { ...state, ...action.payload }
-        case 'DASHBOARD_RESET':
-            return state = []
         default:
             return state
     }
@@ -108,8 +100,6 @@ const bizDirReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_BIZ_DIR':
             return { ...state, ...action.payload }
-        case 'BIZ_DIR_RESET':
-            return state = []
         default:
             return state
     }
@@ -119,8 +109,6 @@ const assoDirReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_ASSO_DIR':
             return { ...state, ...action.payload }
-        case 'ASSO_DIR_RESET':
-            return state = []
         default:
             return state
     }
@@ -149,8 +137,6 @@ const myAccountReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_USER_PROFILE':
             return { ...state, ...action.payload }
-        case 'USER_PROFILE_RESET':
-            return state = []
         default:
             return state
     }
@@ -506,7 +492,7 @@ const listWorkersReducer = (state = [], action) => {
     }
 }
 
-const appReducer = combineReducers({ settingReducer, homeReducer, kycReducer, kyc1ScreenReducer, kyc2ScreenReducer, phoneVerificationReducer, termsReducer, pdpaReducer, kycVerifyReducer, passcodeCreationReducer, unlockReducer, dashboardScreenReducer, notificationScreenReducer, depositScreenReducer, personalInformationScreenReducer, transferOutScreenReducer, transferOutScanScreenReducer, scanBillReducer, personalInfoReducer, contactListReducer, requestScreenReducer, fulfillRequestScreenReducer, notificationfulfillRequestScreenReducer, withdrawScreenReducer, analyticScreenReducer, resetPinReducer, themeReducer, editInfoScreenReducer, loginScreenReducer, registrationReducer, companyInformationReducer, newsScreenReducer, eventScreenReducer, promotionScreenReducer, handbookScreenReducer, einfosScreenReducer, loanApplicationReducer, bizInfoReducer, listWorkersReducer, myAccountReducer, bizDirReducer, agencyListReducer, assoDirReducer, pendingDirReducer, trainingReducer });
+const  appReducer = combineReducers({ settingReducer, homeReducer, kycReducer, kyc1ScreenReducer, kyc2ScreenReducer, phoneVerificationReducer, termsReducer, pdpaReducer, kycVerifyReducer, passcodeCreationReducer, unlockReducer, dashboardScreenReducer, notificationScreenReducer, depositScreenReducer, personalInformationScreenReducer, transferOutScreenReducer, transferOutScanScreenReducer, scanBillReducer, personalInfoReducer, contactListReducer, requestScreenReducer, fulfillRequestScreenReducer, notificationfulfillRequestScreenReducer, withdrawScreenReducer, analyticScreenReducer, resetPinReducer, themeReducer, editInfoScreenReducer, loginScreenReducer, registrationReducer, companyInformationReducer, newsScreenReducer, eventScreenReducer, promotionScreenReducer, handbookScreenReducer, einfosScreenReducer,loanApplicationReducer,bizInfoReducer,listWorkersReducer,myAccountReducer,bizDirReducer,agencyListReducer,assoDirReducer,pendingDirReducer,trainingReducer });
 
 const rootReducer = (state, action) => {
     switch (action.type) {
