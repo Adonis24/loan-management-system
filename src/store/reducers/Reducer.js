@@ -483,6 +483,8 @@ const bizInfoReducer = (state = [], action) => {
     switch (action.type) {
         case 'GET_BIZ_INFO':
             return { ...state, ...action.payload }
+            case 'BIZ_INFO_RESET':
+            return state = []
         default:
             return state
     }
