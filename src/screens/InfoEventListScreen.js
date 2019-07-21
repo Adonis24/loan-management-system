@@ -98,9 +98,11 @@ class Latest extends React.PureComponent {
                         keyExtractor={(item, index) => index.toString()}
                         numColumns={2}
                         renderItem={({ item }) => (
+                            <View style={{ flex: 1, alignItems: 'center' }}>
                             <TouchableOpacity onPress={() => this.props.nav('InfoEvent', item)}>
-                                <Image source={{ uri: item.picture }} style={{ width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10 }} resizeMode={'cover'} />
+                                <Image source={{ uri: item.picture }} style={{ flex:1,width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10, borderRadius:10 }} resizeMode={'contain'} />
                             </TouchableOpacity>
+                            </View>
                         )} />
                 }
             </ScrollView>
