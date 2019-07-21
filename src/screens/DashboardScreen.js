@@ -398,8 +398,8 @@ class DashboardScreen extends React.PureComponent {
                                     </View>
 
 
-                                    <View style={{ width: Layout.window.width - 10, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey', padding: 10,justifyContent:'center',alignItems:'center' }}>
-                                        <Text>Thank you for registering with us. To ensure that you get the best of what BXcess offers, please have your phone number and/or email address verified</Text>
+                                    <View style={{ width: Layout.window.width - 10, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey', padding: 10,justifyContent:'center',alignItems:'center', backgroundColor:'rgba(128, 128, 128, 0.2)' }}>
+                                        <Text>Thank you for registering with us. To ensure that you get the best of what BXcess offers, please have your phone number and/or email address verified !</Text>
                                         <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} style={{ width: Layout.window.width * 0.3, padding:5, borderRadius: 5, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
                                             <Text style={[styles.caption, { color: '#fff' }]}>Go To Settings</Text>
                                         </TouchableOpacity>
