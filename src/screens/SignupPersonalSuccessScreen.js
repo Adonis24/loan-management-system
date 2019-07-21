@@ -45,6 +45,7 @@ class SignupPersonalSuccessScreen extends React.PureComponent {
 
     async componentDidMount() {
         await this.props.getPersonalToken();
+        await this.props.getPersonalTokenLMS();
     }
 
     render() {
@@ -93,6 +94,7 @@ function mapDispatchToProps(dispatch) {
     return {
 
         getPersonalToken: () => dispatch(actionCreator.getPersonalToken()),
+        getPersonalTokenLMS: () => dispatch(actionCreator.getPersonalTokenLMS()),
         doneForNow: () => dispatch(actionCreator.doneForNow()),
 
 

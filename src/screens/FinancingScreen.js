@@ -11,7 +11,8 @@ import {
     Dimensions,
     TextInput,
     AsyncStorage,
-    ImageBackground
+    ImageBackground,
+    FlatList
 
 
 } from 'react-native';
@@ -24,18 +25,31 @@ import Layout from '../constants/Layout'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab } from 'native-base'
-
+import { LinearGradient } from 'expo-linear-gradient'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
+
 
 class FinancingScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
+
+    componentDidMount() {
+        this.props.initiateListAgency()
+        this.props.initiateLoanInfo()
+    }
+
     nav = (screen) => {
         this.props.navigation.navigate(screen)
     }
+
+    changePage = (page = 1) => {
+        this.props.initiateLoanInfo(page)
+    }
+
     render() {
+        this.props.all && console.log(`inilah loan info : ${JSON.stringify(this.props.all)}`)
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -49,7 +63,7 @@ class FinancingScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                           <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -61,18 +75,15 @@ class FinancingScreen extends React.PureComponent {
                         </View>
                     </View>
                     <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
-
-                        <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
-                            <Tab heading="Micro">
-                                <Micro nav={this.nav} />
-                            </Tab>
-                            <Tab heading="SME">
-                                <SME nav={this.nav} />
-                            </Tab>
-                            <Tab heading="Large Ent">
-                                <LargeEnt nav={this.nav} />
-                            </Tab>
-                        </Tabs>
+                        {this.props.agencyArray && this.props.agencyArray.length > 0 &&
+                            <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
+                                <Tab heading="Providers">
+                                    <Micro nav={this.nav} agencyArray={this.props.agencyArray} />
+                                </Tab>
+                                <Tab heading="SME">
+                                    <SME nav={this.nav} loanStatusArray={this.props.loanStatusArray} current_page={this.props.current_page} last_page={this.props.last_page} changePage={this.changePage} />
+                                </Tab>
+                            </Tabs>}
 
                     </View>
                 </View>
@@ -85,49 +96,29 @@ class FinancingScreen extends React.PureComponent {
 class Micro extends React.PureComponent {
     render() {
         return (
-            <ScrollView style={{ padding: 20 }}>
-                <View style={[{ backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, paddingTop: 10, marginBottom: 20 }]}>
-                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, textAlign: 'justify' }]}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</Text>
-                </View>
-                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Tekun Nasional</Text>
-                        <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                            <Text style={[styles.caption]}>View</Text>
+            <View style={{ flex: 1, paddingTop: 10 }}>
+                <FlatList
+                    data={this.props.agencyArray}
+                    keyExtractor={(item, index) => index.toString()}
+                    numColumns={2}
+                    renderItem={({ item }) => (
+                        <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                            <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
+                                <Image source={{ uri: item.logo }} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
+                            </View>
+                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.title}</Text>
+                            <Text numberOfLines={3} ellipsizeMode={'tail'} style={[styles.caption, { margin: 5, }]}>{item.desc}</Text>
+                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
+                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                        <Text style={[styles.caption, { color: '#fff' }]}>Apply</Text>
+                                    </LinearGradient>
+                                </TouchableOpacity>
+                            </View>
                         </View>
-                        <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Calculate</Text>
-                        </View>
-                    </View>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>KoFintech</Text>
-                        <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                            <Text style={[styles.caption]}>View</Text>
-                        </View>
-                        <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Calculate</Text>
-                        </View>
-                    </View>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>BSN</Text>
-                        <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                            <Text style={[styles.caption]}>View</Text>
-                        </View>
-                        <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Calculate</Text>
-                        </View>
-                    </View>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>MIDF</Text>
-                        <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                            <Text style={[styles.caption]}>View</Text>
-                        </View>
-                        <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Calculate</Text>
-                        </View>
-                    </View>
-                </View>
-            </ScrollView>
+                    )}
+                />
+            </View>
         )
     }
 }
@@ -135,99 +126,36 @@ class Micro extends React.PureComponent {
 class SME extends React.PureComponent {
     render() {
         return (
-            <ScrollView style={{ padding: 20 }}>
-                <View style={[{ backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, paddingTop: 10, marginBottom: 20 }]}>
-                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, textAlign: 'justify' }]}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</Text>
-                </View>
-                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Tekun Nasional</Text>
-                        <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                            <Text style={[styles.caption]}>View</Text>
-                        </View>
-                        <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Calculate</Text>
-                        </View>
-                    </View>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>SME Bank</Text>
-                        <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                            <Text style={[styles.caption]}>View</Text>
-                        </View>
-                        <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Calculate</Text>
-                        </View>
-                    </View>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Hong leong Bank</Text>
-                        <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                            <Text style={[styles.caption]}>View</Text>
-                        </View>
-                        <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Calculate</Text>
-                        </View>
-                    </View>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Maybank</Text>
-                        <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                            <Text style={[styles.caption]}>View</Text>
-                        </View>
-                        <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Calculate</Text>
-                        </View>
-                    </View>
-                </View>
-            </ScrollView>
-        )
-    }
-}
+            <View style={{ flex: 1, paddingTop: 10 }}>
+                <Text>Current Page :{this.props.current_page} </Text>
+                <Text>Total Page :{this.props.last_page} </Text>
+                {this.props.last_page > 1 && <View style={{ flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'space-between', margin: 10 }}>
+                    {this.props.current_page > 1 && <TouchableOpacity onPress={() => this.props.changePage(this.props.current_page - 1)}><Text>Prev :  {this.props.current_page - 1}</Text></TouchableOpacity>}
+                    {this.props.current_page < this.props.last_page && <TouchableOpacity onPress={() => this.props.changePage(this.props.current_page + 1)}><Text>Next :  {this.props.current_page + 1}</Text></TouchableOpacity>}
+                </View>}
 
-class LargeEnt extends React.PureComponent {
-    render() {
-        return (
-            <ScrollView style={{ padding: 20 }}>
-                <View style={[{ backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, paddingTop: 10, marginBottom: 20 }]}>
-                    <Text style={[styles.textDefault, { margin: 5, fontSize: 12, textAlign: 'justify' }]}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</Text>
-                </View>
-                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Tekun Nasional</Text>
-                        <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                            <Text style={[styles.caption]}>View</Text>
+                <FlatList
+                    data={this.props.loanStatusArray}
+                    keyExtractor={(item, index) => index.toString()}
+
+                    renderItem={({ item }) => (
+                        <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                            <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
+                                <Image source={{ uri: item.logo }} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
+                            </View>
+                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.title}</Text>
+                            <Text numberOfLines={3} ellipsizeMode={'tail'} style={[styles.caption, { margin: 5, }]}>{item.company_id}</Text>
+                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
+                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                        <Text style={[styles.caption, { color: '#fff' }]}>Apply</Text>
+                                    </LinearGradient>
+                                </TouchableOpacity>
+                            </View>
                         </View>
-                        <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Calculate</Text>
-                        </View>
-                    </View>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>SME Bank</Text>
-                        <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                            <Text style={[styles.caption]}>View</Text>
-                        </View>
-                        <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Calculate</Text>
-                        </View>
-                    </View>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>BSN</Text>
-                        <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                            <Text style={[styles.caption]}>View</Text>
-                        </View>
-                        <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Calculate</Text>
-                        </View>
-                    </View>
-                    <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
-                        <Text style={[styles.textDefault, { margin: 5, fontSize: 12, flex: 2, textAlign: 'left' }]}>Maybank</Text>
-                        <View style={{ flex: 1, width: Layout.window.width * 0.15, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'darkblue', margin: 10 }}>
-                            <Text style={[styles.caption]}>View</Text>
-                        </View>
-                        <View style={{ flex: 2, width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Calculate</Text>
-                        </View>
-                    </View>
-                </View>
-            </ScrollView>
+                    )}
+                />
+            </View>
         )
     }
 }
@@ -237,13 +165,18 @@ class LargeEnt extends React.PureComponent {
 function mapStateToProps(state) {
     return {
 
+        agencyArray: state.agencyListReducer.agencyArray,
 
-
+        all: state.loanApplicationReducer,
+        loanStatusArray: state.loanApplicationReducer.data,
+        current_page: state.loanApplicationReducer.current_page,
+        last_page: state.loanApplicationReducer.last_page,
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
+        initiateListAgency: () => dispatch(actionCreator.initiateListAgency()),
+        initiateLoanInfo: (page) => dispatch(actionCreator.initiateLoanInfo(page)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(FinancingScreen)

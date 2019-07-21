@@ -29,14 +29,15 @@ import { Thumbnail } from 'native-base'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class InsightScreen extends React.PureComponent {
+class PendingDirScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
 
     componentDidMount(){
-        this.props.initiateBizDir()
+        this.props.initiatePendingDir()
     }
+
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -63,7 +64,7 @@ class InsightScreen extends React.PureComponent {
                             <View style={[{ backgroundColor: '#fff', flex: 4, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', paddingLeft: 5, flexDirection: 'row', elevation: 2 }]}>
 
                                 <Image source={require('../assets/images/profile.png')} style={{ width: Layout.window.width / 10, height: undefined, }} resizeMode={'contain'} />
-                                <Text style={[styles.textDefault, { fontSize: 18, fontWeight: "bold", paddingLeft: 5, }]} numberOfLines={1} ellipsizeMode={'tail'}>Contact</Text>
+                                <Text style={[styles.textDefault, { fontSize: 18, fontWeight: "bold", paddingLeft: 5, }]} numberOfLines={1} ellipsizeMode={'tail'}>Pending</Text>
 
                             </View>
                         </View>
@@ -97,27 +98,27 @@ class InsightScreen extends React.PureComponent {
                                         </View>
                                     </View>
                                 </View> */}
-                                {this.props.bizDirArray && this.props.bizDirArray.length > 0 ?
-                                    <FlatList
-                                        data={this.props.bizDirArray}
-                                        keyExtractor={(item, index) => index.toString()}
-
-                                        renderItem={({ item }) => (
-                                            <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
-                                                <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
-                                                    <Thumbnail source={{ uri: item.profile_pic }} circle small style={{ borderWidth: 1, borderColor: 'lightgrey' }} />
-                                                    <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.name}</Text>
-                                                </View>
-                                                <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: 5 }}>
-                                                    <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
-                                                        <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#fff' }]}>Friend</Text>
-                                                    </View>
-                                                </View>
+                                {this.props.pendingDirArray && this.props.pendingDirArray.length > 0 ?
+                                <FlatList
+                                data={this.props.pendingDirArray}
+                                keyExtractor={(item, index) => index.toString()}
+                               
+                                renderItem={({ item }) => (
+                                    <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
+                                        <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
+                                            <Thumbnail source={{uri:item.profile_pic}} circle small style={{ borderWidth: 1, borderColor: 'lightgrey' }} />
+                                            <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.name}</Text>
+                                        </View>
+                                        <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: 5 }}>
+                                            <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
+                                                <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#fff' }]}>Friend</Text>
                                             </View>
-                                        )}
-                                    />
+                                        </View>
+                                    </View>
+                                )}
+                            />
+                                    
                                     :
-
                                     <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
                                         <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
                                             <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: 'lightgrey' }]}>No members yet</Text>
@@ -145,14 +146,15 @@ class InsightScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-        bizDirArray: state.bizDirReducer.bizDirArray
+        pendingDirArray: state.pendingDirReducer.pendingDirArray
 
 
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-        initiateBizDir: () => dispatch(actionCreator.initiateBizDir()),
+        
+        initiatePendingDir: () => dispatch(actionCreator.initiatePendingDir()),
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(InsightScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(PendingDirScreen)

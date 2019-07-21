@@ -5,6 +5,7 @@ import moment from 'moment'
 
 
 const apiUrl = 'https://staging.bxcess.my/'
+const lmsApiUrl = 'https://lms.bxcess.my/'
 
 export const requestToken = () => {
   return (dispatch, getState) => {
@@ -22,6 +23,30 @@ export const requestToken = () => {
         await console.log(`token is ${JSON.stringify(responseJson)}`)
         //this.props.setToken({ token_type, access_token })
         await dispatch({ type: 'GET_TOKEN', payload: { ...responseJson } })
+
+      })
+      .catch((error) => {
+        console.error('Error : ' + error);
+      });
+  }
+}
+
+export const requestTokenLMS = () => {
+  return (dispatch, getState) => {
+    fetch(`${lmsApiUrl}oauth/token`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ client_id: '1', client_secret: 'Hri7puJsjOSMp3SxH4Gds6XtMxSJJwe8jUay80TC', grant_type: 'client_credentials' }),
+
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        const { token_type, access_token } = await responseJson
+        await console.log(`LMS token is ${JSON.stringify(responseJson)}`)
+        //this.props.setToken({ token_type, access_token })
+        await dispatch({ type: 'GET_TOKEN', payload: { lms:{...responseJson} } })
 
       })
       .catch((error) => {
@@ -52,6 +77,30 @@ export const registerApi = (token_type, access_token, name, email, password, pas
   }
 }
 
+export const registerLMSApi = (token_type, access_token, name, email, password, password_confirmation) => {
+  return async (dispatch, getState) => {
+    const first_name=name
+    const last_name=name
+    fetch(`${lmsApiUrl}api/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      },
+      body: JSON.stringify({ first_name, last_name,email, password, password_confirmation }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+        const { status } = await responseJson
+        //await dispatch({ type: 'SET_REGISTER', payload: { status, proceed: true, indicator: false } })
+        await console.log(`register LMS  ${JSON.stringify(responseJson)}`)
+      })
+      .catch((error) => {
+        console.error('Error : ' + error);
+      });
+  }
+}
+
 
 export const requestPersonalToken = (screen, username, password) => {
   console.log(`kat api : ${username} dan ${password}`)
@@ -74,6 +123,39 @@ export const requestPersonalToken = (screen, username, password) => {
         const stringifyJson = JSON.stringify(responseJson)
 
         SecureStore.setItemAsync('personalToken', stringifyJson);
+
+        dispatch({ type: 'SET_REGISTER', payload: { access_token } });
+
+        (screen == 'login' && access_token) ? dispatch({ type: 'SET_LOGIN', payload: { proceed: true, indicator: false } }) : dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false } })
+
+      })
+      .catch((error) => {
+        console.error('Error : ' + error);
+      });
+  }
+}
+
+export const requestPersonalTokenLMS = (screen, username, password) => {
+  console.log(`kat api : ${username} dan ${password}`)
+  return async (dispatch, getState) => {
+    fetch(`${lmsApiUrl}oauth/token`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ client_id: '2', client_secret: 'b21IuZWBmOiyKjLNgFA4jvgGHDM5HSFKXx5A5ZB0', grant_type: 'password', username, password }),
+
+    }).then((response) => response.json())
+      .then((responseJson) => {
+
+        console.log(`personal token lms ialah : ${JSON.stringify(responseJson)}`)
+
+        const { token_type, access_token } = responseJson
+
+        //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
+        const stringifyJson = JSON.stringify(responseJson)
+
+        SecureStore.setItemAsync('lmsPersonalToken', stringifyJson);
 
         dispatch({ type: 'SET_REGISTER', payload: { access_token } });
 

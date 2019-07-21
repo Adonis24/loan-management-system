@@ -96,6 +96,33 @@ const einfosScreenReducer = (state = [], action) => {
     }
 }
 
+const bizDirReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_BIZ_DIR':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+const assoDirReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_ASSO_DIR':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+const pendingDirReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_PENDING_DIR':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
 
 const loanApplicationReducer = (state = [], action) => {
     switch (action.type) {
@@ -115,6 +142,15 @@ const myAccountReducer = (state = [], action) => {
     }
 }
 
+
+const trainingReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'GET_COURSES':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const settingReducer = (state = [], action) => {
@@ -438,6 +474,15 @@ const bizInfoReducer = (state = [], action) => {
     }
 }
 
+const agencyListReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_AGENCY_LIST':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
 const listWorkersReducer = (state = [], action) => {
     switch (action.type) {
         case 'GET_LIST_WORKERS':
@@ -447,4 +492,4 @@ const listWorkersReducer = (state = [], action) => {
     }
 }
 
-export default reducer = combineReducers({ settingReducer, homeReducer, kycReducer, kyc1ScreenReducer, kyc2ScreenReducer, phoneVerificationReducer, termsReducer, pdpaReducer, kycVerifyReducer, passcodeCreationReducer, unlockReducer, dashboardScreenReducer, notificationScreenReducer, depositScreenReducer, personalInformationScreenReducer, transferOutScreenReducer, transferOutScanScreenReducer, scanBillReducer, personalInfoReducer, contactListReducer, requestScreenReducer, fulfillRequestScreenReducer, notificationfulfillRequestScreenReducer, withdrawScreenReducer, analyticScreenReducer, resetPinReducer, themeReducer, editInfoScreenReducer, loginScreenReducer, registrationReducer, companyInformationReducer, newsScreenReducer, eventScreenReducer, promotionScreenReducer, handbookScreenReducer, einfosScreenReducer,loanApplicationReducer,bizInfoReducer,listWorkersReducer,myAccountReducer });
+export default reducer = combineReducers({ settingReducer, homeReducer, kycReducer, kyc1ScreenReducer, kyc2ScreenReducer, phoneVerificationReducer, termsReducer, pdpaReducer, kycVerifyReducer, passcodeCreationReducer, unlockReducer, dashboardScreenReducer, notificationScreenReducer, depositScreenReducer, personalInformationScreenReducer, transferOutScreenReducer, transferOutScanScreenReducer, scanBillReducer, personalInfoReducer, contactListReducer, requestScreenReducer, fulfillRequestScreenReducer, notificationfulfillRequestScreenReducer, withdrawScreenReducer, analyticScreenReducer, resetPinReducer, themeReducer, editInfoScreenReducer, loginScreenReducer, registrationReducer, companyInformationReducer, newsScreenReducer, eventScreenReducer, promotionScreenReducer, handbookScreenReducer, einfosScreenReducer,loanApplicationReducer,bizInfoReducer,listWorkersReducer,myAccountReducer,bizDirReducer,agencyListReducer,assoDirReducer,pendingDirReducer,trainingReducer });

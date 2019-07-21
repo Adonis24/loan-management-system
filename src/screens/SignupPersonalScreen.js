@@ -36,12 +36,14 @@ class SignupPersonalScreen extends React.PureComponent {
 
     async componentDidMount() {
         await this.props.getToken()
+        await this.props.getTokenLMS()
     }
 
 
     async register() {
 
         await this.props.register();
+        await this.props.registerLMS()
         //await this.props.getPersonalToken();
         // await this.props.navigation.navigate('SignUpPersonalSuccess')
     }
@@ -150,8 +152,11 @@ function mapDispatchToProps(dispatch) {
     return {
         getToken: () => dispatch(actionCreator.getToken()),
         setRegister: (value) => dispatch({ type: 'SET_REGISTER', payload: { ...value } }),
-        register: () => dispatch(actionCreator.register()),
+        register: () => dispatch(actionCreator.register()),        
         getPersonalToken: () => dispatch(actionCreator.getPersonalToken()),
+
+        getTokenLMS: () => dispatch(actionCreator.getTokenLMS()),
+        registerLMS: () => dispatch(actionCreator.registerLMS()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignupPersonalScreen)
