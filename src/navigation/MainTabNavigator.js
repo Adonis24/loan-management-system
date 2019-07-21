@@ -68,6 +68,8 @@ import PendingDirScreen from '../screens/PendingDirScreen';
 import AssociateDirScreen from '../screens/AssociateDirScreen';
 import BizAppDetailScreen from '../screens/BizAppDetailScreen';
 import NoCompanyScreen from '../screens/NoCompanyScreen';
+import CameraSelfieScreen from '../screens/CameraSelfieScreen';
+import GrantApplicationScreen from '../screens/GrantApplicationScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -133,6 +135,8 @@ const DashboardStackWithModal = createStackNavigator(
     InfoEventEdt: { screen: InfoEventEdtScreen, },
 
     NoCompany: { screen: NoCompanyScreen, },
+
+    GrantApplication: { screen: GrantApplicationScreen, },
 
 
   },
@@ -206,24 +210,45 @@ const SettingsStack = createStackNavigator({
   Settings: SettingsScreen,
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-
-  tabBarOptions: {
-    activeTintColor: '#4967AE',
-    inactiveTintColor: '#7896DC',
+const SettingStackWithModal = createStackNavigator(
+  {
+    Settings: { screen: SettingsStack, },
+    CameraSelfie: { screen: CameraSelfieScreen, },
   },
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
-};
+  {
+    mode: 'modal',
+    headerMode: 'none',
+  },
+);
+
+
+
+
+SettingStackWithModal.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let routeName = navigation.state.routes[navigation.state.index].routeName
+  if (routeName == 'CameraSelfie') {
+    tabBarVisible = false
+  }
+  return {
+    tabBarVisible,
+    tabBarLabel: 'Settings',
+    tabBarOptions: {
+      activeTintColor: '#4967AE',
+      inactiveTintColor: '#7896DC',
+    },
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      />
+    ),
+  };
+}
 
 export default createBottomTabNavigator({
   DashboardStackWithModal,
   InsightStack,
   NotificationStack,
-  SettingsStack,
+  SettingStackWithModal,
 });

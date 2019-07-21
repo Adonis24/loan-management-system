@@ -39,26 +39,30 @@ class EcommerceScreen extends React.PureComponent {
         //this.props.navigation.navigate('PopupScore')
     }
     render() {
+        const { jwt } = this.props
+        console.log(`jwt ialah ${jwt}`)
+        const uri = `https://www.mayamall.com/guest-user/bxcess?bx-token=${jwt}`
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                <WebView source={{ uri: 'https://www.mayamall.com/supplier' }} style={{ flex: 1 }} />
-                <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                       <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
-                            <Ionicons name='ios-arrow-back' size={32} color={'#fff'} />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                        <View style={[{ backgroundColor: 'transparent', marginLeft: Layout.window.width / 7, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', padding: 5, height: Layout.window.height / 15 }]} />
-                    </View>
+            <WebView source={{ uri }} style={{ flex: 1,backgroundColor:'transparent' }} />
+           
+            <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0,right:0, flex: 1, flexDirection: 'row', justifyContent: 'center',alignItems:'center' }}>
+                <View style={{ flex: 1,alignSelf:'stretch', justifyContent: 'center', border: 1, borderColor: '#000',alignItems:'center' }}>
+                    <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                       <View style={{borderWidth:3,borderColor:'#fff',width:Layout.window.width/5}} />
+                    </TouchableOpacity>
                 </View>
+              
             </View>
+        </View>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return {}
+    return {
+        jwt: state.myAccountReducer.jwt
+    }
 }
 function mapDispatchToProps(dispatch) {
     return {

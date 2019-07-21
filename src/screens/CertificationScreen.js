@@ -11,7 +11,7 @@ import {
     Dimensions,
     TextInput,
     AsyncStorage,
-    ImageBackground,
+    ImageBackground, WebView
 
 
 } from 'react-native';
@@ -36,115 +36,21 @@ class CertificationScreen extends React.PureComponent {
         this.props.navigation.navigate(screen)
     }
     render() {
+        const { jwt } = this.props
+        console.log(`jwt ialah ${jwt}`)
+        const uri = ` https://lms.bxcess.my/user/certificates/?bx-token=${jwt}`
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                    <View style={{ alignItems: 'flex-end' }}>
-                        <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
-                    </View>
-                    <View style={{ alignItems: 'flex-start' }}>
-                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
-                    </View>
+                <WebView source={{ uri }} style={{ flex: 1, backgroundColor: 'transparent' }} />
+                
+            <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0,right:0, flex: 1, flexDirection: 'row', justifyContent: 'center',alignItems:'center' }}>
+                <View style={{ flex: 1,alignSelf:'stretch', justifyContent: 'center', border: 1, borderColor: '#000',alignItems:'center' }}>
+                    <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                       <View style={{borderWidth:3,borderColor:'#fff',width:Layout.window.width/5}} />
+                    </TouchableOpacity>
                 </View>
-                <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                           <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
-                                <Ionicons name='ios-arrow-back' size={32} />
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
-                                <Image source={require('../assets/images/certification.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
-                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Certification</Text>
-                            </View>
-                        </View>
-                    </View>
-                    <View style={{ flex: 7 }}>
-                        <Text style={[styles.caption, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 16, fontWeight: 'bold' }]}>My Certification</Text>
-                        <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                <Text style={[styles.textDefault, { margin: 5 }]}>Business Stratergy Training</Text>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Venue:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>PWTC, Kuala Lumpur</Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Date:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>10 Jun 2019</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ margin: 10, }} onPress={() => this.props.navigation.navigate('CertificationView')}>
-                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                            <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
-                                        </LinearGradient>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                <Text style={[styles.textDefault, { margin: 5 }]}>Online Business Training</Text>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Venue:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>PWTC, Kuala Lumpur</Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Date:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>10 Jun 2019</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ margin: 10, }} onPress={() => this.props.navigation.navigate('CertificationView')}>
-                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                            <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
-                                        </LinearGradient>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-
-                        </View>
-                        <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                <Text style={[styles.textDefault, { margin: 5 }]}>Brand Awareness Training</Text>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Venue:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>PWTC, Kuala Lumpur</Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Date:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>10 Jun 2019</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ margin: 10, }} onPress={() => this.props.navigation.navigate('CertificationView')}>
-                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                            <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
-                                        </LinearGradient>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                <Text style={[styles.textDefault, { margin: 5 }]}>Marketing Stratergy Training</Text>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Venue:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>PWTC, Kuala Lumpur</Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Date:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>10 Jun 2019</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ margin: 10, }} onPress={() => this.props.navigation.navigate('CertificationView')}>
-                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                            <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
-                                        </LinearGradient>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-                </View>
+              
+            </View>
             </View>
 
         );
@@ -156,7 +62,7 @@ function mapStateToProps(state) {
     return {
 
 
-
+        jwt: state.myAccountReducer.jwt
     }
 }
 function mapDispatchToProps(dispatch) {

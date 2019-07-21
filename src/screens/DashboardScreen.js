@@ -89,6 +89,7 @@ class DashboardScreen extends React.PureComponent {
         this.props.initiateDashboardScreen()
         this.props.initiateMyAccount()
         this.props.initiateCompanyInfo()
+        this.props.generateJWT()
 
         await this.animate()
         //setTimeout(() => this.setState({ popUp: !this.state.popUp }), 3000);
@@ -179,7 +180,7 @@ class DashboardScreen extends React.PureComponent {
                                         <View style={{ marginBottom: 10 }}>
                                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                                 <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Highlight</Text>
-                                                <Ionicons name={'md-more'} size={24} />
+                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                             </View>
                                         </View>
 
@@ -200,7 +201,7 @@ class DashboardScreen extends React.PureComponent {
                                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                                 <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Financial Hub</Text>
                                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('BizHub')}>
-                                                    <Ionicons name={'md-more'} size={24} />
+                                                    <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                                 </TouchableOpacity>
                                             </View>
                                         </View>
@@ -210,10 +211,7 @@ class DashboardScreen extends React.PureComponent {
                                                     <Image source={require('../assets/images/e-scoring.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Financing</Text>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Grant')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/grant.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Grant</Text>
-                                                </TouchableOpacity>
+
                                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Loan')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
                                                     <Image source={require('../assets/images/loan.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Loan Calculator</Text>
@@ -233,31 +231,27 @@ class DashboardScreen extends React.PureComponent {
                                     <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                         <View style={{ marginBottom: 10 }}>
                                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Knowledge Hub</Text>
-                                                <Ionicons name={'md-more'} size={24} />
+                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                             </View>
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                             <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Info')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/e-info.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-info</Text>
-                                                </TouchableOpacity>
+
                                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoNewsList')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                                     <Image source={require('../assets/images/news.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>News</Text>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('PromotionList')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
-                                                    <Image source={require('../assets/images/promotion.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Promotion</Text>
-                                                </TouchableOpacity>
+
                                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoEventList')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                                     <Image source={require('../assets/images/event.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Event</Text>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('HandbookList')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('HandbookList')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
                                                     <Image source={require('../assets/images/handbook.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Handbook</Text>
                                                 </TouchableOpacity>
+                                                <TouchableOpacity style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }} />
+
                                             </View>
                                         </View>
                                     </View>
@@ -266,12 +260,12 @@ class DashboardScreen extends React.PureComponent {
                                     <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                         <View style={{ marginBottom: 10 }}>
                                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Development Hub</Text>
-                                                <Ionicons name={'md-more'} size={24} />
+                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                             </View>
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                             <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Elearning')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
+                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Elearning')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start'}}>
                                                     <Image source={require('../assets/images/e-learning.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Learning</Text>
                                                 </TouchableOpacity>
@@ -279,16 +273,12 @@ class DashboardScreen extends React.PureComponent {
                                                     <Image source={require('../assets/images/training.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Training</Text>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Certification')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
+                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Certification')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                                     <Image source={require('../assets/images/certification.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Certification</Text>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Quiz')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
-                                                    <Image source={require('../assets/images/quiz.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Quiz</Text>
-                                                </TouchableOpacity>
-                                                <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                </View>
+                                                <TouchableOpacity style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }} />
+
                                             </View>
                                         </View>
                                     </View>
@@ -296,7 +286,7 @@ class DashboardScreen extends React.PureComponent {
                                     <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                         <View style={{ marginBottom: 10 }}>
                                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Biz Hub</Text>
-                                                <Ionicons name={'md-more'} size={24} />
+                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                             </View>
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
@@ -317,8 +307,7 @@ class DashboardScreen extends React.PureComponent {
                                                     <Image source={require('../assets/images/directory.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Directory</Text>
                                                 </TouchableOpacity>
-                                                <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                </View>
+                                              
                                             </View>
                                         </View>
                                     </View>
@@ -368,7 +357,7 @@ class DashboardScreen extends React.PureComponent {
                                                 <Text style={[styles.textDefault, { textAlign: 'left', alignSelf: 'flex-start', color: '#2C4690' }]}>{this.capitalizeString(this.props.name)}</Text>
                                                 <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>{this.props.member_id}</Text>
                                                 <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>{this.props.companyName}</Text>
-                                                
+
                                             </View>
                                         </TouchableOpacity>
                                     </Animated.View>
@@ -395,7 +384,7 @@ class DashboardScreen extends React.PureComponent {
                                         <View style={{ marginBottom: 10 }}>
                                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                                 <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Highlight</Text>
-                                                <Ionicons name={'md-more'} size={24} />
+                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                             </View>
                                         </View>
 
@@ -416,7 +405,7 @@ class DashboardScreen extends React.PureComponent {
                                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                                 <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Financial Hub</Text>
                                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('BizHub')}>
-                                                    <Ionicons name={'md-more'} size={24} />
+                                                    <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                                 </TouchableOpacity>
                                             </View>
                                         </View>
@@ -426,10 +415,7 @@ class DashboardScreen extends React.PureComponent {
                                                     <Image source={require('../assets/images/e-scoring.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Financing</Text>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/grant.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Grant</Text>
-                                                </TouchableOpacity>
+
                                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
                                                     <Image source={require('../assets/images/loan.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Loan Calculator</Text>
@@ -449,31 +435,26 @@ class DashboardScreen extends React.PureComponent {
                                     <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                         <View style={{ marginBottom: 10 }}>
                                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Knowledge Hub</Text>
-                                                <Ionicons name={'md-more'} size={24} />
+                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                             </View>
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                             <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/e-info.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-info</Text>
-                                                </TouchableOpacity>
+
                                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                                     <Image source={require('../assets/images/news.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>News</Text>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
-                                                    <Image source={require('../assets/images/promotion.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Promotion</Text>
-                                                </TouchableOpacity>
+
                                                 <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                                     <Image source={require('../assets/images/event.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Event</Text>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
+                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
                                                     <Image source={require('../assets/images/handbook.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Handbook</Text>
                                                 </TouchableOpacity>
+                                                <TouchableOpacity style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }} />
                                             </View>
                                         </View>
                                     </View>
@@ -482,12 +463,12 @@ class DashboardScreen extends React.PureComponent {
                                     <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                         <View style={{ marginBottom: 10 }}>
                                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Development Hub</Text>
-                                                <Ionicons name={'md-more'} size={24} />
+                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                             </View>
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                             <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
+                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                                     <Image source={require('../assets/images/e-learning.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Learning</Text>
                                                 </TouchableOpacity>
@@ -495,16 +476,12 @@ class DashboardScreen extends React.PureComponent {
                                                     <Image source={require('../assets/images/training.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Training</Text>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
+                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                                     <Image source={require('../assets/images/certification.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Certification</Text>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
-                                                    <Image source={require('../assets/images/quiz.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Quiz</Text>
-                                                </TouchableOpacity>
-                                                <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                </View>
+                                                <TouchableOpacity style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }} />
+
                                             </View>
                                         </View>
                                     </View>
@@ -512,7 +489,7 @@ class DashboardScreen extends React.PureComponent {
                                     <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                         <View style={{ marginBottom: 10 }}>
                                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Biz Hub</Text>
-                                                <Ionicons name={'md-more'} size={24} />
+                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                             </View>
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
@@ -611,7 +588,7 @@ class DashboardScreen extends React.PureComponent {
                                     <View style={{ marginBottom: 10 }}>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                             <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Highlight</Text>
-                                            <Ionicons name={'md-more'} size={24} />
+                                            <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                         </View>
                                     </View>
 
@@ -637,7 +614,7 @@ class DashboardScreen extends React.PureComponent {
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                             <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Financial Hub</Text>
                                             <TouchableOpacity onPress={() => this.props.navigation.navigate('BizHub')}>
-                                                <Ionicons name={'md-more'} size={24} />
+                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                             </TouchableOpacity>
                                         </View>
                                     </View>
@@ -647,7 +624,7 @@ class DashboardScreen extends React.PureComponent {
                                 <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                     <View style={{ marginBottom: 10 }}>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Knowledge Hub</Text>
-                                            <Ionicons name={'md-more'} size={24} />
+                                            <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                         </View>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
@@ -659,7 +636,7 @@ class DashboardScreen extends React.PureComponent {
                                 <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                     <View style={{ marginBottom: 10 }}>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Development Hub</Text>
-                                            <Ionicons name={'md-more'} size={24} />
+                                            <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                         </View>
                                     </View>
 
@@ -668,7 +645,7 @@ class DashboardScreen extends React.PureComponent {
                                 <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                     <View style={{ marginBottom: 10 }}>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Biz Hub</Text>
-                                            <Ionicons name={'md-more'} size={24} />
+                                            <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                         </View>
                                     </View>
 
@@ -709,6 +686,8 @@ function mapDispatchToProps(dispatch) {
         initiateDashboardScreen: () => dispatch(actionCreator.initiateDashboardScreen()),
         initiateMyAccount: () => dispatch(actionCreator.initiateMyAccount()),
         initiateCompanyInfo: () => dispatch(actionCreator.initiateCompanyInfo()),
+        generateJWT: () => dispatch(actionCreator.generateJWT()),
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreen)

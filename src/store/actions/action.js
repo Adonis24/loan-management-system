@@ -11,7 +11,7 @@ import config from '../../do/config'
 
 
 import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI, requestTokenLMS, registerLMSApi, requestPersonalTokenLMS } from './apiRegistration'
-import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi } from './apiDashboard'
+import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -29,6 +29,12 @@ export const getToken = () => {
 export const getTokenLMS = () => {
     return (dispatch, getState) => {
         dispatch(requestTokenLMS())
+    }
+}
+
+export const generateJWT = () => {
+    return (dispatch, getState) => {
+        dispatch(generateJWTApi())
     }
 }
 
@@ -409,6 +415,13 @@ export const applyLoan = () => {
     }
 }
 
+export const applyGrant = () => {
+    return async (dispatch, getState) => {
+        console.log(`kat action : ${JSON.stringify(getState().grantApplicationReducer)}`)
+        await dispatch(applyGrantApi())
+    }
+}
+
 export const initiateMyAccount = () => {
     return async (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
@@ -480,6 +493,13 @@ export const initiateLoanInfo = (page) => {
     }
 }
 
+export const initiateGrantInfo = (page) => {
+    return async (dispatch, getState) => {
+        console.log(`grant kat action`)
+        await dispatch(grantInfoApi(page))
+    }
+}
+
 export const enableNotification = () => {
     return async (dispatch, getState) => {
         await dispatch(addExpoTokenApi())
@@ -498,6 +518,19 @@ export const initiateTraining = () => {
         await dispatch(getCoursesApi())
     }
 }
+
+export const editUser = () => {
+    return async (dispatch, getState) => {
+        await dispatch(editUserApi())
+    }
+}
+
+export const requestConnect = (val) => {
+    return async (dispatch, getState) => {
+        await dispatch(requestConnectApi(val))
+    }
+}
+
 
 
 /////////////////////// LUNAPAY /////////////////////////////////////
@@ -731,7 +764,7 @@ export const logout = () => {
         dispatch({ type: 'COMPANY_INFO_RESET' })
         dispatch({ type: 'USER_PROFILE_RESET' })
         dispatch({ type: 'BIZ_INFO_RESET' })
-        
+
         //dispatch({ type: 'ROOT_LOG_OUT' })
         //dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
     }
@@ -857,38 +890,73 @@ export const saveDocumentDO = (result) => {
     }
 }
 
-export const saveSelfie = () => {
-
-
+export const saveSelfie = (result) => {
+    const { uri } = result
     return async (dispatch, getState) => {
-        const { email } = await getState().kycReducer
-        const { uri } = await getState().kycVerifyReducer.selfie
-        const { idNo } = await getState().kycVerifyReducer.selfie
-        const { toVerify } = await getState().kycVerifyReducer
-
-
-
         const blob = await urlToBlob(uri)
+        const { data } = blob
 
-        const fileName = 'selfie/' + 'email' + '.jpg';
+        const fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 
-        await Storage.put(fileName, blob, {
-            contentType: 'image/jpeg'
-        }).then(async data => {
-            //this.props.savePicture(data.key,kidId)
-            await console.log(`data gambar ialah ${JSON.stringify(data)}`)
-            await dispatch({ type: 'SET_KYC_VERIFY', payload: { toVerify: { ...toVerify, selfieUri: data.key }, proceed: true } })
-            await dispatch(kycBasicInformation2())
-            await dispatch({ type: 'SET_PERSONAL_INFO', payload: { status: 'to verify' } })
-            await AsyncStorage.setItem('status', 'to verify')
-            console.log('save')
-
-        })
-            .catch(err => console.log(err))
-
+        const params = {
+            Body: blob,
+            Bucket: `${config.bucketName}`,
+            Key: fileName
+        };
+        // Sending the file to the Spaces
+        s3.putObject(params)
+            .on('build', request => {
+                request.httpRequest.headers.Host = `${config.digitalOceanSpaces}`;
+                request.httpRequest.headers['Content-Length'] = data.size;
+                request.httpRequest.headers['Content-Type'] = data.type;
+                request.httpRequest.headers['x-amz-acl'] = 'public-read';
+            })
+            .send((err) => {
+                if (err) console.log(err);
+                else {
+                    // If there is no error updating the editor with the imageUrl
+                    const imageUrl = `${config.digitalOceanSpaces}/` + fileName
+                    console.log(imageUrl);
+                    dispatch({ type: 'SET_USER_PROFILE', payload: { profile_pic: imageUrl } })
+                    dispatch(editUserApi())
+                }
+            });
 
     }
 }
+
+// export const saveSelfie = () => {
+
+
+//     return async (dispatch, getState) => {
+//         const { email } = await getState().kycReducer
+//         const { uri } = await getState().kycVerifyReducer.selfie
+//         const { idNo } = await getState().kycVerifyReducer.selfie
+//         const { toVerify } = await getState().kycVerifyReducer
+
+
+
+//         const blob = await urlToBlob(uri)
+
+//         const fileName = 'selfie/' + 'email' + '.jpg';
+
+//         await Storage.put(fileName, blob, {
+//             contentType: 'image/jpeg'
+//         }).then(async data => {
+//             //this.props.savePicture(data.key,kidId)
+//             await console.log(`data gambar ialah ${JSON.stringify(data)}`)
+//             await dispatch({ type: 'SET_KYC_VERIFY', payload: { toVerify: { ...toVerify, selfieUri: data.key }, proceed: true } })
+//             await dispatch(kycBasicInformation2())
+//             await dispatch({ type: 'SET_PERSONAL_INFO', payload: { status: 'to verify' } })
+//             await AsyncStorage.setItem('status', 'to verify')
+//             console.log('save')
+
+//         })
+//             .catch(err => console.log(err))
+
+
+//     }
+// }
 
 // export const verifyPhone = () => {
 //     return (dispatch, getState) => {

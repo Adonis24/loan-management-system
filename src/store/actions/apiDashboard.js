@@ -291,6 +291,33 @@ export const loanInfoApi = (page) => {
   }
 }
 
+export const grantInfoApi = (page) => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/grant/listGrantInformation?page=${page}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const grantInfo = await responseJson.data
+        await console.log(`grant info list API  ${JSON.stringify(grantInfo)}`)
+
+        await dispatch({ type: 'SET_GRANT_INFO', payload: { ...grantInfo } })
+      })
+      .catch((error) => {
+        console.log('Error grantInfo Api : ' + error);
+      });
+  }
+}
+
 export const addExpoTokenApi = () => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
@@ -318,6 +345,37 @@ export const addExpoTokenApi = () => {
       });
   }
 }
+
+export const requestConnectApi = (connect_id) => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const { expo_token } = getState().registrationReducer
+    const access_credential = 'api'
+
+    console.log(`connect id ialah : ${connect_id}`)
+    fetch(`${apiUrl}api/business_directory/request_connection`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential, connect_id }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah request connect : ${JSON.stringify(responseJson)}`)
+        //const agencyArray = await responseJson.data
+        //await console.log(`expo token API  ${JSON.stringify(agencyArray)}`)
+
+        //await dispatch({ type: 'SET_AGENCY_LIST', payload: { agencyArray } })
+      })
+      .catch((error) => {
+        console.log('Error expo token Api : ' + error);
+      });
+  }
+}
+
 
 export const connectionStatusApi = () => {
   return async (dispatch, getState) => {
@@ -368,6 +426,36 @@ export const applyLoanApi = () => {
       .then(async (responseJson) => {
 
         console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const einfosArray = await responseJson.data
+        await console.log(`Loan Application  ${JSON.stringify(einfosArray)}`)
+
+
+      })
+      .catch((error) => {
+        console.log('Error Loan Application : ' + error);
+      });
+  }
+}
+
+
+export const applyGrantApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    const { proposal, income_tax, agency_id } = getState().grantApplicationReducer
+    console.log(`inilah apply grant : ${JSON.stringify(getState().grantApplicationReducer)}`)
+    fetch(`${apiUrl}api/grant/addGrantInformation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ proposal, income_tax, agency_id, access_credential }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah grant: ${JSON.stringify(responseJson)}`)
         const einfosArray = await responseJson.data
         await console.log(`Loan Application  ${JSON.stringify(einfosArray)}`)
 
@@ -440,6 +528,61 @@ export const getUserInfoApi = () => {
   }
 }
 
+export const editUserApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    const { name, full_name, profile_pic } = getState().myAccountReducer
+    fetch(`${apiUrl}api/user/edit`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ name, full_name, profile_pic, access_credential }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+        const userProfile = await responseJson.data
+
+        await console.log(`USER  ${JSON.stringify(userProfile)}`)
+
+        //await dispatch({ type: 'EDIT_USER_PROFILE', payload: { ...userProfile } })
+      })
+      .catch((error) => {
+        console.log('Error Event Api : ' + error);
+      });
+  }
+}
+
+export const generateJWTApi = () => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const access_credential = 'api'
+    fetch(`${apiUrl}api/jwt/generate`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah JWT : ${JSON.stringify(responseJson)}`)
+        const jwt = await responseJson.data
+        // await console.log(`Company Info  ${JSON.stringify(bizInfo)}`)
+
+        await dispatch({ type: 'SET_USER_PROFILE', payload: { jwt } })
+      })
+      .catch((error) => {
+        console.log('Error JWT Api : ' + error);
+      });
+  }
+}
 
 
 export const getCompanyInfoApi = () => {
@@ -572,7 +715,7 @@ export const getCoursesApi = () => {
       .then(async (responseJson) => {
         console.log(`inilah response JSON  training: ${JSON.stringify(responseJson)}`)
         const trainingArray = await responseJson.data
-         await console.log(`Training Info  ${JSON.stringify(trainingArray)}`)
+        await console.log(`Training Info  ${JSON.stringify(trainingArray)}`)
 
         await dispatch({ type: 'GET_COURSES', payload: { trainingArray } })
       })

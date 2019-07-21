@@ -72,6 +72,7 @@ class SettingsScreen extends React.PureComponent {
                             </View>
                             <View style={{ width: Layout.window.width, paddingLeft: 5, alignItems: 'center' }}>
                                 <Image source={{ uri: this.props.profile_pic }} style={{ width: Layout.window.width / 3, height: Layout.window.width / 3, borderRadius: Layout.window.width / 6 }} />
+                            <TouchableOpacity onPress={()=>this.props.navigation.navigate('CameraSelfie')}><Text>Add/Change</Text></TouchableOpacity>
                             </View>
                             <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                                 <Text style={[styles.subTitle, { margin: 5 }]}>Profile</Text>

@@ -17,6 +17,8 @@ import {
 
 } from 'react-native';
 
+import moment from 'moment'
+
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 
@@ -37,15 +39,19 @@ class FinancingScreen extends React.PureComponent {
 
     componentDidMount() {
         this.props.initiateListAgency()
-        this.props.initiateLoanInfo()
+        this.props.initiateGrantInfo()
     }
 
     nav = (screen) => {
         this.props.navigation.navigate(screen)
     }
 
+    applyFinance = (agency_id) => {
+        this.props.navigation.navigate('GrantApplication', { agency_id })
+    }
+
     changePage = (page = 1) => {
-        this.props.initiateLoanInfo(page)
+        this.props.initiateGrantInfo(page)
     }
 
     render() {
@@ -68,9 +74,9 @@ class FinancingScreen extends React.PureComponent {
                             </TouchableOpacity>
                         </View>
                         <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
+                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 8, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
                                 <Image source={require('../assets/images/e-scoring.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
-                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Financing</Text>
+                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Financing & Grant</Text>
                             </View>
                         </View>
                     </View>
@@ -78,10 +84,10 @@ class FinancingScreen extends React.PureComponent {
                         {this.props.agencyArray && this.props.agencyArray.length > 0 &&
                             <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
                                 <Tab heading="Providers">
-                                    <Micro nav={this.nav} agencyArray={this.props.agencyArray} />
+                                    <Micro nav={this.nav} agencyArray={this.props.agencyArray} applyFinance={this.applyFinance} />
                                 </Tab>
-                                <Tab heading="SME">
-                                    <SME nav={this.nav} loanStatusArray={this.props.loanStatusArray} current_page={this.props.current_page} last_page={this.props.last_page} changePage={this.changePage} />
+                                <Tab heading="Status">
+                                    <SME nav={this.nav} grantStatusArray={this.props.grantStatusArray} current_page={this.props.current_page} last_page={this.props.last_page} changePage={this.changePage} />
                                 </Tab>
                             </Tabs>}
 
@@ -109,7 +115,7 @@ class Micro extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.title}</Text>
                             <Text numberOfLines={3} ellipsizeMode={'tail'} style={[styles.caption, { margin: 5, }]}>{item.desc}</Text>
                             <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
+                                <TouchableOpacity onPress={() => this.props.applyFinance(item.id)} style={{ margin: 10, }}>
                                     <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
                                         <Text style={[styles.caption, { color: '#fff' }]}>Apply</Text>
                                     </LinearGradient>
@@ -127,31 +133,32 @@ class SME extends React.PureComponent {
     render() {
         return (
             <View style={{ flex: 1, paddingTop: 10 }}>
-                <Text>Current Page :{this.props.current_page} </Text>
-                <Text>Total Page :{this.props.last_page} </Text>
+
                 {this.props.last_page > 1 && <View style={{ flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'space-between', margin: 10 }}>
                     {this.props.current_page > 1 && <TouchableOpacity onPress={() => this.props.changePage(this.props.current_page - 1)}><Text>Prev :  {this.props.current_page - 1}</Text></TouchableOpacity>}
                     {this.props.current_page < this.props.last_page && <TouchableOpacity onPress={() => this.props.changePage(this.props.current_page + 1)}><Text>Next :  {this.props.current_page + 1}</Text></TouchableOpacity>}
                 </View>}
 
                 <FlatList
-                    data={this.props.loanStatusArray}
+                    data={this.props.grantStatusArray}
                     keyExtractor={(item, index) => index.toString()}
 
                     renderItem={({ item }) => (
-                        <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                            <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
-                                <Image source={{ uri: item.logo }} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
+                        <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'flex-start', flexDirection: 'row' }]}>
+                            <View style={{ flex: 1, alignSelf: 'stretch', margin: 5 }}>
+                                <View style={{ flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'space-between' }}>
+                                    <Text style={[styles.textDefault, { margin: 5, marginTop: 0, marginBottom: 0, alignSelf: 'flex-start', textAlign: 'left' }]}>View Proposal</Text>
+
+                                    <View style={{ backgroundColor: 'orange', alignSelf: 'flex-end', borderRadius: 5 }}>
+                                        <Text style={[styles.caption, { margin: 5, }]}>{item.status}</Text>
+                                    </View>
+                                </View>
+
+                                <Text style={[styles.textDefault, { margin: 5, marginTop: 0, marginBottom: 0, alignSelf: 'flex-start', textAlign: 'left' }]}>Date : {moment(item.created_at).format('LL')}</Text>
+                                <Text style={[styles.textDefault, { margin: 5, marginTop: 0, marginBottom: 0, alignSelf: 'flex-start', textAlign: 'left' }]}>Type : {item.type}</Text>
+                                <Text style={[styles.textDefault, { margin: 5, marginTop: 0, marginBottom: 0, alignSelf: 'flex-start', textAlign: 'left' }]}>Provider : {item.title}</Text>
                             </View>
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.title}</Text>
-                            <Text numberOfLines={3} ellipsizeMode={'tail'} style={[styles.caption, { margin: 5, }]}>{item.company_id}</Text>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('QuizAnswer')} style={{ margin: 10, }}>
-                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                        <Text style={[styles.caption, { color: '#fff' }]}>Apply</Text>
-                                    </LinearGradient>
-                                </TouchableOpacity>
-                            </View>
+
                         </View>
                     )}
                 />
@@ -168,15 +175,15 @@ function mapStateToProps(state) {
         agencyArray: state.agencyListReducer.agencyArray,
 
         all: state.loanApplicationReducer,
-        loanStatusArray: state.loanApplicationReducer.data,
-        current_page: state.loanApplicationReducer.current_page,
-        last_page: state.loanApplicationReducer.last_page,
+        grantStatusArray: state.grantApplicationReducer.data,
+        current_page: state.grantApplicationReducer.current_page,
+        last_page: state.grantApplicationReducer.last_page,
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
         initiateListAgency: () => dispatch(actionCreator.initiateListAgency()),
-        initiateLoanInfo: (page) => dispatch(actionCreator.initiateLoanInfo(page)),
+        initiateGrantInfo: (page) => dispatch(actionCreator.initiateGrantInfo(page)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(FinancingScreen)

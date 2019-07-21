@@ -154,6 +154,8 @@ export default class App extends React.Component {
 
         require('./src/assets/images/urusniaga.png'),
 
+        require('./src/assets/images/faceborder.png'),
+
       ]),
       Font.loadAsync({
         'Montserrat_medium': require('./src/assets/fonts/Montserrat/Montserrat-Medium.ttf'),
