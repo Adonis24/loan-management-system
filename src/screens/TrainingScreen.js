@@ -12,6 +12,7 @@ import {
     TextInput,
     AsyncStorage,
     ImageBackground,
+    FlatList
 
 
 } from 'react-native';
@@ -36,13 +37,13 @@ class TrainingScreen extends React.PureComponent {
         this.props.navigation.navigate(screen)
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.initiateTraining()
     }
-    
+
     render() {
 
-        this.props.trainingArray&&console.log(`dari training array : ${this.props.trainingArray}`)
+        this.props.trainingArray && console.log(`dari training array : ${JSON.stringify(this.props.trainingArray)}`)
 
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -57,7 +58,7 @@ class TrainingScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                           <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -69,108 +70,37 @@ class TrainingScreen extends React.PureComponent {
                         </View>
                     </View>
                     <View style={{ flex: 7 }}>
-                        <Text style={[styles.caption, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 16, fontWeight: 'bold' }]}>Latest Training</Text>
-                        <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                <Text style={[styles.textDefault, { margin: 5 }]}>Business Stratergy Training</Text>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Venue:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>PWTC, Kuala Lumpur</Text>
+                        {this.props.trainingArray && this.props.trainingArray.length > 0 && <FlatList
+                            data={this.props.trainingArray}
+                            keyExtractor={(item, index) => index.toString()}
+                            numColumns={2}
+                            renderItem={({ item }) => (
+                                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                                    <Image source={{ uri: `https://lms.bxcess.my/storage/uploads/${item.course_image}` }} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
+                                    <Text style={[styles.textDefault, { margin: 5 }]}>{item.title}</Text>
+                                    <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
+                                        <Text style={[styles.caption, { margin: 5, }]}>Venue:</Text>
+                                        <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>PWTC, Kuala Lumpur</Text>
+                                    </View>
+                                    <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
+                                        <Text style={[styles.caption, { margin: 5, }]}>Date:</Text>
+                                        <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>10 Jun 2019</Text>
+                                    </View>
+                                    <View style={{ alignSelf: 'stretch', flexDirection: 'row', margin: 5 }}>
+                                        <View style={{ flex: 1, padding: 2, backgroundColor: '#4364B0' }} />
+                                        <View style={{ flex: 1 }} />
+                                    </View>
+                                    <Text style={[styles.caption, { marginBottom: 5 }]}>10 participants</Text>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                        <TouchableOpacity style={{ margin: 10, }}>
+                                            <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                                <Text style={[styles.caption, { color: '#fff' }]}>Join</Text>
+                                            </LinearGradient>
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Date:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>10 Jun 2019</Text>
-                                </View>
-                                <View style={{ alignSelf: 'stretch', flexDirection: 'row', margin: 5 }}>
-                                    <View style={{ flex: 1, padding: 2, backgroundColor: '#4364B0' }} />
-                                    <View style={{ flex: 1 }} />
-                                </View>
-                                <Text style={[styles.caption, { marginBottom: 5 }]}>10 participants</Text>
-                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ margin: 10, }}>
-                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                            <Text style={[styles.caption, { color: '#fff' }]}>Join</Text>
-                                        </LinearGradient>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                <Text style={[styles.textDefault, { margin: 5 }]}>Online Business Training</Text>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Venue:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>PWTC, Kuala Lumpur</Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Date:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>10 Jun 2019</Text>
-                                </View>
-                                <View style={{ alignSelf: 'stretch', flexDirection: 'row', margin: 5 }}>
-                                    <View style={{ flex: 1, padding: 2, backgroundColor: '#4364B0' }} />
-                                    <View style={{ flex: 1 }} />
-                                </View>
-                                <Text style={[styles.caption, { marginBottom: 5 }]}>7 participants</Text>
-                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ margin: 10, }}>
-                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                            <Text style={[styles.caption, { color: '#fff' }]}>Join</Text>
-                                        </LinearGradient>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                        <Text style={[styles.caption, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 16, fontWeight: 'bold' }]}>Popular Training</Text>
-                        <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                <Text style={[styles.textDefault, { margin: 5 }]}>Brand Awareness Training</Text>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Venue:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>PWTC, Kuala Lumpur</Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Date:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>10 Jun 2019</Text>
-                                </View>
-                                <View style={{ alignSelf: 'stretch', flexDirection: 'row', margin: 5 }}>
-                                    <View style={{ flex: 1, padding: 2, backgroundColor: '#4364B0' }} />
-                                    <View style={{ flex: 1 }} />
-                                </View>
-                                <Text style={[styles.caption, { marginBottom: 5 }]}>20 participants</Text>
-                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ margin: 10, }}>
-                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                            <Text style={[styles.caption, { color: '#fff' }]}>Join</Text>
-                                        </LinearGradient>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: undefined, height: Layout.window.height / 8, }} resizeMode='contain' />
-                                <Text style={[styles.textDefault, { margin: 5 }]}>Marketing Stratergy Training</Text>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Venue:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>PWTC, Kuala Lumpur</Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', margin: 5 }}>
-                                    <Text style={[styles.caption, { margin: 5, }]}>Date:</Text>
-                                    <Text style={[styles.caption, { margin: 5, fontWeight: 'bold' }]}>10 Jun 2019</Text>
-                                </View>
-                                <View style={{ alignSelf: 'stretch', flexDirection: 'row', margin: 5 }}>
-                                    <View style={{ flex: 1, padding: 2, backgroundColor: '#4364B0' }} />
-                                    <View style={{ flex: 1 }} />
-                                </View>
-                                <Text style={[styles.caption, { marginBottom: 5 }]}>15 participants</Text>
-                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ margin: 10, }}>
-                                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                            <Text style={[styles.caption, { color: '#fff' }]}>Join</Text>
-                                        </LinearGradient>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
+                            )}
+                        />}
                     </View>
                 </View>
             </View>
@@ -182,14 +112,14 @@ class TrainingScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-trainingArray:state.trainingReducer.trainingArray
+        trainingArray: state.trainingReducer.trainingArray
 
 
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-        initiateTraining: () => dispatch(actionCreator.initiateTraining()),       
+        initiateTraining: () => dispatch(actionCreator.initiateTraining()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TrainingScreen)
