@@ -71,9 +71,7 @@ class InfoNewsScreen extends React.PureComponent {
                         <View style={{ flex: 1 }}>
                             <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
                                 <Text style={[styles.subTitle, { margin: 15, alignSelf: 'flex-start' }]}>{item.content}</Text>
-                                <ScrollView>
-                                    <Text style={[styles.textDefault, { margin: 10 }]}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</Text>
-                                </ScrollView>
+                                
                             </View>
                         </View>
                     </View>

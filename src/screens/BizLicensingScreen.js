@@ -54,20 +54,18 @@ class BizLicensingScreen extends React.PureComponent {
                             </TouchableOpacity>
                         </View>
                         <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
+                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 5, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
                                 <Image source={require('../assets/images/licensing.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
                                 <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Licensing</Text>
                             </View>
                         </View>
                     </View>
                     {/* START CONTENT */}
-                    <View style={{ flex: 7 }}>
-                        <ScrollView style={{ padding: 20 }}>
-                            <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
-                                <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14 }]}>Oops! This page is under construction. Our team work hard to give you best content soon !</Text>
-                            </View>
-                            <Image source={require('../assets/images/bizlicensing.png')} style={{ width: Layout.window.width / 1.5, height: Layout.window.height / 1.5, alignSelf: 'center' }} resizeMode={'contain'} />
-                        </ScrollView>
+                    <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={{ alignSelf: 'stretch', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14, color: 'lightgrey' }]}>This feature is currently undergoing enhancement and will be ready soon. In the meantime, feel free to use other amazing features available only on Bxcess </Text>
+                            <Image source={require('../assets/images/bizlicensing.png')} style={{ width: Layout.window.width / 1.5, height: Layout.window.width / 1.5, opacity: 0.3 }} resizeMode={'contain'} />
+                        </View>
                     </View>
                     {/* END CONTENT */}
                 </View>

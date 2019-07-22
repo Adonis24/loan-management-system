@@ -87,7 +87,7 @@ class MyAccountEditScreen extends React.PureComponent {
                         <ScrollView contentStyle={{ padding: 10 }} >
                             <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                                 <Text style={styles.subTitle}>Profile</Text>
-                                <Ionicons name="ios-create" size={24} color="lightgrey" />
+                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                             </View>
                             <View style={{ width: Layout.window.width, paddingLeft:5 }}>
                                 <View style={{ flex: 1, flexDirection: 'row' }}>

@@ -68,7 +68,7 @@ class SettingsScreen extends React.PureComponent {
                         <ScrollView contentStyle={{ padding: 10 }} >
                             <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                                 <Text style={[styles.subTitle, { margin: 5 }]}>Profile Picture</Text>
-                                <Ionicons name="ios-create" size={24} color="#2C4690" style={{ margin: 5 }} />
+                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                             </View>
                             <View style={{ width: Layout.window.width, paddingLeft: 5, alignItems: 'center' }}>
                                 <Image source={{ uri: this.props.profile_pic }} style={{ width: Layout.window.width / 3, height: Layout.window.width / 3, borderRadius: Layout.window.width / 6 }} />
@@ -76,7 +76,7 @@ class SettingsScreen extends React.PureComponent {
                             </View>
                             <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                                 <Text style={[styles.subTitle, { margin: 5 }]}>Profile</Text>
-                                <Ionicons name="ios-create" size={24} color="#2C4690" style={{ margin: 5 }} />
+                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                             </View>
                             {/* <View style={{ width: Layout.window.width, paddingLeft: 5 }}> */}
                             <View style={{ margin: 5, paddingBottom: 5, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>

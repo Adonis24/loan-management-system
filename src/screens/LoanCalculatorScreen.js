@@ -49,7 +49,7 @@ class LoanCalculatorScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                           <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -62,12 +62,12 @@ class LoanCalculatorScreen extends React.PureComponent {
                     </View>
                     {/* START CONTENT */}
                     <View style={{ flex: 7 }}>
-                        <ScrollView style={{ padding: 20 }}>
-                            <View style={{ flexDirection: 'row', alignSelf: 'stretch' }}>
-                                <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14 }]}>Oops! This page is under construction. Our team work hard to give you best content soon !</Text>
-                            </View>
-                            <Image source={require('../assets/images/bizlicensing.png')} style={{ width: Layout.window.width / 1.5, height: Layout.window.height / 1.5, alignSelf: 'center' }} resizeMode={'contain'} />
-                        </ScrollView>
+                    <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
+                            <View style={{  alignSelf: 'stretch',justifyContent:'center',alignItems:'center' }}>
+                                <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14,color:'lightgrey' }]}>This feature is currently undergoing enhancement and will be ready soon. In the meantime, feel free to use other amazing features available only on Bxcess </Text>
+                                <Image source={require('../assets/images/bizlicensing.png')} style={{ width: Layout.window.width / 1.5, height: Layout.window.width / 1.5, opacity:0.3  }} resizeMode={'contain'} />
+                            </View>                            
+                       </View>
                     </View>
                     {/* END CONTENT */}
                 </View>

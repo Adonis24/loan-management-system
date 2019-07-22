@@ -265,7 +265,7 @@ class DashboardScreen extends React.PureComponent {
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                             <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Elearning')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start'}}>
+                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Elearning')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
                                                     <Image source={require('../assets/images/e-learning.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Learning</Text>
                                                 </TouchableOpacity>
@@ -307,7 +307,7 @@ class DashboardScreen extends React.PureComponent {
                                                     <Image source={require('../assets/images/directory.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                     <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Directory</Text>
                                                 </TouchableOpacity>
-                                              
+
                                             </View>
                                         </View>
                                     </View>
@@ -488,7 +488,8 @@ class DashboardScreen extends React.PureComponent {
                                     {/*Biz Hub */}
                                     <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                         <View style={{ marginBottom: 10 }}>
-                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Biz Hub</Text>
+                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Biz Hub</Text>
                                                 <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                             </View>
                                         </View>
@@ -593,9 +594,9 @@ class DashboardScreen extends React.PureComponent {
                                     </View>
 
 
-                                    <View style={{ width: Layout.window.width - 10, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey', padding: 10,justifyContent:'center',alignItems:'center', backgroundColor:'rgba(128, 128, 128, 0.2)' }}>
+                                    <View style={{ width: Layout.window.width - 10, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey', padding: 10, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(128, 128, 128, 0.2)' }}>
                                         <Text>Thank you for registering with us. To ensure that you get the best of what BXcess offers, please have your phone number and your email address verified !</Text>
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} style={{ width: Layout.window.width * 0.3, padding:5, borderRadius: 5, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} style={{ width: Layout.window.width * 0.3, padding: 5, borderRadius: 5, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
                                             <Text style={[styles.caption, { color: '#fff' }]}>Go To Settings</Text>
                                         </TouchableOpacity>
                                     </View>

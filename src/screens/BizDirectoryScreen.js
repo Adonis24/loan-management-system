@@ -29,7 +29,7 @@ import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, L
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 import moment from 'moment'
-
+import _ from 'lodash'
 
 class BizDirectoryScreen extends React.PureComponent {
     static navigationOptions = {
@@ -79,7 +79,7 @@ class BizDirectoryScreen extends React.PureComponent {
                     {/* START CONTENT */}
                     <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
 
-                        <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
+                        <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarA tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
                             <Tab heading={`Associate (${this.props.associateConnection})`}>
                                 <Associate connect={this.connect} assoDirArray={this.props.assoDirArray} />
                             </Tab>
@@ -101,28 +101,39 @@ class BizDirectoryScreen extends React.PureComponent {
 
 class Associate extends React.PureComponent {
     render() {
+        const { assoDirArray } = this.props
+        const assoSize = _.size(assoDirArray)
+
+        if (assoSize % 2 > 0) { assoDirArray.push({ name: '' }) }
+
+
         return (
             <View style={{ flex: 1, paddingTop: 10 }}>
                 <FlatList
-                    data={this.props.assoDirArray}
+                    data={assoDirArray}
                     keyExtractor={(item, index) => index.toString()}
                     numColumns={2}
-                    renderItem={({ item }) => (
-                        <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                            <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
-                                <Image source={{ uri: item.profile_pic }} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
-                            </View>
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.name}</Text>
-                            <Text style={[styles.caption, { margin: 5, }]}>Member since : {moment(item.created_at).format('LL')}</Text>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.connect()} style={{ margin: 10, }}>
-                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                        <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
-                                    </LinearGradient>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    )}
+                    renderItem={({ item }) => {
+                        if (item.name != '') {
+                            return (
+                                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 5, marginRight: 5, borderWidth: 1, borderColor: '#ddd', padding:10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                                    <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
+                                        <Image source={{ uri: item.profile_pic }} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
+                                    </View>
+                                    <Text style={[styles.textDefault, { fontWeight: 'bold' }]}>{item.name}</Text>
+                                    <Text numberOfLines={1} ellipsizeMode={'tail'} style={[styles.caption, {}]}># :{item.member_id}</Text>
+                                    <Text numberOfLines={1} ellipsizeMode={'tail'}  style={[styles.caption, {}]}>P :{item.phone_no}</Text>
+                                    <Text numberOfLines={1} ellipsizeMode={'tail'}  style={[styles.caption, {}]}>E :{item.email}</Text>
+                                    <View  style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                    </View>
+                                </View>
+                            )
+                        } else {
+                            return (<View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+
+                            </View>)
+                        }
+                    }}
                 />
             </View>
         )

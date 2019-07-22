@@ -111,7 +111,7 @@ class ProfileScreen extends React.PureComponent {
 
                                 <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                                     <Text style={styles.subTitle}>Basic Info</Text>
-                                    <Ionicons name="ios-create" size={24} color="lightgrey" />
+                                    <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                 </View>
                                 <View style={{ width: Layout.window.width, paddingLeft: 5 }}>
                                     <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
@@ -134,7 +134,7 @@ class ProfileScreen extends React.PureComponent {
                                 </View>
                                 <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                                     <Text style={styles.subTitle}>Address</Text>
-                                    <Ionicons name="ios-create" size={24} color="lightgrey" />
+                                    <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                 </View>
                                 <View style={{ width: Layout.window.width, paddingLeft: 5 }}>
                                     <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
@@ -195,7 +195,7 @@ class ProfileScreen extends React.PureComponent {
 
                                 <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                                     <Text style={styles.subTitle}>Score</Text>
-                                    <Ionicons name="ios-create" size={24} color="lightgrey" />
+                                    <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                 </View>
                                 <Text style={[styles.textDefault, { textAlign: 'left', alignSelf: 'flex-start', marginLeft: 5 }]}>You have not registered a company yet.</Text>
                                 <View style={{ flexDirection: 'row', margin: 10 }}>
