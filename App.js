@@ -17,7 +17,6 @@ import getTheme from './native-base-theme/components';
 import minimal from './native-base-theme/variables/minimal';
 // import DashboardAsset from './src/components/DashboardAsset';
 
-
 // This refers to the function defined earlier in this guide
 //import {registerForPushNotificationsAsync} from './src/registerForPushNotificationsAsync';
 
@@ -61,17 +60,21 @@ export default class App extends React.Component {
     }))
   }
 
-
   async componentDidMount() {
     await this.checkUpdate()
+
+    await this.registerForPushNotificationsAsync();
+    this._notificationSubscription = await Notifications.addListener(this._handleNotification);
+
     await this.checkLogin()
-    this.registerForPushNotificationsAsync();
-    this._notificationSubscription = Notifications.addListener(this._handleNotification);
+   
   }
 
   _handleNotification = (notification) => {
-    console.log(`test test test ${JSON.stringify(notification)}`)
-    this.setState({ notification: notification });
+    console.log(`notification ${JSON.stringify(notification)}`)
+    const { data } = notification
+
+    store.dispatch({ type: 'SET_NOTIFICATION', payload: { ...data } })
   };
 
   async checkUpdate() {

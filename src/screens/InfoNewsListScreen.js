@@ -92,18 +92,18 @@ class InfoNewsListScreen extends React.PureComponent {
 class Latest extends React.PureComponent {
     render() {
         return (
-            <ScrollView style={{ padding: 20 }}>
+            <ScrollView contentContainerStyle={{ width: Layout.window.width }} style={{ width: Layout.window.width, padding: 20 }}>
                 {this.props.newsArray &&
                     <FlatList
                         data={this.props.newsArray}
                         keyExtractor={(item, index) => index.toString()}
-                        numColumns={2}
+
                         renderItem={({ item }) => (
-                            <View style={{ flex: 1, alignItems: 'center' }}>
-                                <TouchableOpacity onPress={() => this.props.nav('InfoNews', item)}>
-                                    <Image source={{ uri: item.picture }} style={{ flex: 1, width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10, borderRadius: 10 }} resizeMode={'contain'} />
-                                </TouchableOpacity>
-                            </View>
+
+                            <TouchableOpacity onPress={() => this.props.nav('InfoNews', item)}>
+                                <Image source={{ uri: item.picture }} style={{ flex: 1, width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 5, borderRadius: 10 }} resizeMode={'cover'} />
+                            </TouchableOpacity>
+
                         )} />
                 }
             </ScrollView>
@@ -119,11 +119,11 @@ class Popular extends React.PureComponent {
                     <FlatList
                         data={this.props.newsArray}
                         keyExtractor={(item, index) => index.toString()}
-                        numColumns={2}
+
                         renderItem={({ item }) => (
                             <View style={{ flex: 1, alignItems: 'center' }}>
                                 <TouchableOpacity onPress={() => this.props.nav('InfoNews', item)}>
-                                    <Image source={{ uri: item.picture }} style={{ flex: 1, width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10, borderRadius: 10 }} resizeMode={'contain'} />
+                                    <Image source={{ uri: item.picture }} style={{ flex: 1, width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10, borderRadius: 10 }} resizeMode={'cover'} />
                                 </TouchableOpacity>
                             </View>
                         )} />

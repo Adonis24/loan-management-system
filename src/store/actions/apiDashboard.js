@@ -323,6 +323,7 @@ export const addExpoTokenApi = () => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
     const { expo_token } = getState().registrationReducer
+    console.log(`expo registrationReducer ${expo_token}`)
     const access_credential = 'api'
     fetch(`${apiUrl}api/user/expo_token`, {
       method: 'POST',
@@ -375,6 +376,37 @@ export const requestConnectApi = (connect_id) => {
       });
   }
 }
+
+export const acceptApi = (connect_id) => {
+  return async (dispatch, getState) => {
+    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const { token_type, access_token } = JSON.parse(personalToken)
+    const { expo_token } = getState().registrationReducer
+    const access_credential = 'api'
+
+    console.log(`connect id ialah : ${connect_id}`)
+    fetch(`${apiUrl}api/business_directory/acceptConnection`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token_type + ' ' + access_token
+      }, body: JSON.stringify({ access_credential, connect_id }),
+    }).then((response) => response.json())
+      .then(async (responseJson) => {
+
+        console.log(`inilah request connect : ${JSON.stringify(responseJson)}`)
+        //const agencyArray = await responseJson.data
+        //await console.log(`expo token API  ${JSON.stringify(agencyArray)}`)
+
+        //await dispatch({ type: 'SET_AGENCY_LIST', payload: { agencyArray } })
+      })
+      .catch((error) => {
+        console.log('Error expo token Api : ' + error);
+      });
+  }
+}
+
 
 
 export const connectionStatusApi = () => {
@@ -640,11 +672,9 @@ export const getListWorkersApi = () => {
   }
 }
 
-export const sendNotificationApi = () => {
+export const sendNotificationApi = (expo_token, id) => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
-    const access_credential = 'api'
+    
     fetch(`https://exp.host/--/api/v2/push/send`, {
       method: 'POST',
       headers: {
@@ -652,14 +682,10 @@ export const sendNotificationApi = () => {
         'accept': 'application/json',
         'accept-encoding': 'gzip,deflate',
         'content-type': 'application/json',
-      }, body: JSON.stringify({ to: 'ExponentPushToken[X4qIkPK_1FdXUuqrqr6Aaz]', title: 'hello', body: 'world' }),
+      }, body: JSON.stringify({ to: expo_token, title: 'BXcess Notification', body: 'None', data: { id } }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
         console.log(`inilah response JSON sendNotification : ${JSON.stringify(responseJson)}`)
-        //const listWorkers = await responseJson.data
-        // await console.log(`Company Info  ${JSON.stringify(eventArray)}`)
-
-        //await dispatch({ type: 'GET_LIST_WORKERS', payload: { listWorkers } })
       })
       .catch((error) => {
         console.log('Error sendNotification : ' + error);

@@ -79,13 +79,12 @@ class DashboardScreen extends React.PureComponent {
             }),
 
         ]).start();
-
     }
 
     capitalizeString = (text = 'NA') => text.length > 0 && `${text[0].toUpperCase()}${text.slice(1)}`
 
-
     async componentDidMount() {
+        await this.props.addExpoToken()
         this.props.initiateDashboardScreen()
         this.props.initiateMyAccount()
         this.props.initiateCompanyInfo()
@@ -93,7 +92,6 @@ class DashboardScreen extends React.PureComponent {
 
         await this.animate()
         //setTimeout(() => this.setState({ popUp: !this.state.popUp }), 3000);
-
         //this.props.navigation.navigate('PopupScore')
     }
     render() {
@@ -118,7 +116,7 @@ class DashboardScreen extends React.PureComponent {
             outputRange: [0, 1,]
         })
 
-        if (!(this.props.email_verified_at == null || this.props.phone_no == null)) {
+        if (!(this.props.phone_no == null)) {
             if (this.props.companyName) {
                 return (
                     <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -316,7 +314,7 @@ class DashboardScreen extends React.PureComponent {
                         </View>
                         {/* <PopupScoreScreen /> */}
                         <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('ScanQR')}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('QR')}>
                                 <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
                             </TouchableOpacity>
                         </View>
@@ -521,7 +519,7 @@ class DashboardScreen extends React.PureComponent {
                         </View>
                         {/* <PopupScoreScreen /> */}
                         <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('ScanQR')}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('QR')}>
                                 <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
                             </TouchableOpacity>
                         </View>
@@ -592,22 +590,12 @@ class DashboardScreen extends React.PureComponent {
                                             <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                         </View>
                                     </View>
-
-
-                                    <View style={{ width: Layout.window.width - 10, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey', padding: 10, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(128, 128, 128, 0.2)' }}>
+                                    <View style={{ borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey', padding: 10, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(128, 128, 128, 0.2)' }}>
                                         <Text>Thank you for registering with us. To ensure that you get the best of what BXcess offers, please have your phone number and your email address verified !</Text>
                                         <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} style={{ width: Layout.window.width * 0.3, padding: 5, borderRadius: 5, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
                                             <Text style={[styles.caption, { color: '#fff' }]}>Go To Settings</Text>
                                         </TouchableOpacity>
                                     </View>
-
-                                    {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('UnderConstruction')} style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', margin: 10, marginBottom: 5, borderRadius: 10 }} >
-                                            <Image source={{ uri: 'https://picsum.photos/600' }} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 10, }} />
-                                            <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, paddingTop: 10, paddingLeft: 10 }}>
-                                                <Text style={[styles.textDefault, { color: '#fff', alignSelf: 'flex-start', textAlign: 'left' }]}>Find Out More ></Text>
-                                            </View>
-                                        </TouchableOpacity> */}
-
                                 </View>
                                 {/*Financial Hub */}
                                 <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)' }}>
@@ -656,7 +644,7 @@ class DashboardScreen extends React.PureComponent {
                     </View>
                     {/* <PopupScoreScreen /> */}
                     <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('ScanQR')}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('QR')}>
                             <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
                         </TouchableOpacity>
                     </View>
@@ -688,6 +676,7 @@ function mapDispatchToProps(dispatch) {
         initiateMyAccount: () => dispatch(actionCreator.initiateMyAccount()),
         initiateCompanyInfo: () => dispatch(actionCreator.initiateCompanyInfo()),
         generateJWT: () => dispatch(actionCreator.generateJWT()),
+        addExpoToken: () => dispatch(actionCreator.addExpoToken()),
 
     }
 }

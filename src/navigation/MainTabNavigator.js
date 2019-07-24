@@ -70,6 +70,7 @@ import BizAppDetailScreen from '../screens/BizAppDetailScreen';
 import NoCompanyScreen from '../screens/NoCompanyScreen';
 import CameraSelfieScreen from '../screens/CameraSelfieScreen';
 import GrantApplicationScreen from '../screens/GrantApplicationScreen';
+import QRScreen from '../screens/QRScreen';
 
 const DashboardStack = createStackNavigator({
   Dashboard: DasboardScreen,
@@ -128,6 +129,7 @@ const DashboardStackWithModal = createStackNavigator(
     ContactPersonMain: { screen: ContactPersonMainScreen, },
     ContactPersonSuccess: { screen: ContactPersonSuccessScreen, },
     ScanQR: { screen: ScanQRScreen, },
+    QR: { screen: QRScreen, },
     UserAccount: { screen: UserAccountScreen },
 
     Training: { screen: TrainingScreen, },

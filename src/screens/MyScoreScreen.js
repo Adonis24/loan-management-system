@@ -50,7 +50,7 @@ class MyScoreScreen extends React.PureComponent {
                     <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                             <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                               <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                     <Ionicons name='ios-arrow-back' size={32} />
                                 </TouchableOpacity>
                             </View>
@@ -92,7 +92,7 @@ class MyScoreScreen extends React.PureComponent {
                         {/* HEADER */}
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                             <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                               <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                     <Ionicons name='ios-arrow-back' size={32} />
                                 </TouchableOpacity>
                             </View>
@@ -112,7 +112,7 @@ class MyScoreScreen extends React.PureComponent {
                                     <Text style={styles.subTitle}>Score</Text>
                                     <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                 </View>
-                                <Text style={[styles.textDefault, {textAlign:'left',alignSelf:'flex-start', marginLeft: 5 }]}>You have not registered a company yet.</Text>
+                                <Text style={[styles.textDefault, { textAlign: 'left', alignSelf: 'flex-start', marginLeft: 5 }]}>You have not registered a company yet.</Text>
                                 <View style={{ flexDirection: 'row', margin: 10 }}>
                                     <TouchableOpacity onPress={() => this.props.navigation.navigate('AddCompany')}>
                                         <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, justifyContent: 'center' }}>
@@ -139,7 +139,7 @@ class MyScoreScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                           <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -176,24 +176,18 @@ class Latest extends React.PureComponent {
                 <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
                     <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
                         <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Training                  :</Text>
-                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12 }]}>43 points</Text>
-                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Increase points</Text>
-                        </View>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12 }]}>0 points</Text>
+                        
                     </View>
                     <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
                         <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Quiz                         :</Text>
-                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12 }]}>56 points</Text>
-                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Increase points</Text>
-                        </View>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12 }]}>0 points</Text>
+                        
                     </View>
                     <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
                         <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Aggregate test   :</Text>
-                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12, alignSelf: 'center' }]}>38 points</Text>
-                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Increase points</Text>
-                        </View>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12, alignSelf: 'center' }]}>0 points</Text>
+                        
                     </View>
                 </View>
             </ScrollView>
@@ -208,38 +202,28 @@ class Popular extends React.PureComponent {
                 <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20 }]}>
                     <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
                         <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Last year income        :</Text>
-                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12 }]}>43 points</Text>
-                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Increase points</Text>
-                        </View>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12 }]}>0 points</Text>
+                        
                     </View>
                     <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
                         <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Paid up capital            :</Text>
-                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12 }]}>56 points</Text>
-                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Increase points</Text>
-                        </View>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12 }]}>0 points</Text>
+                        
                     </View>
                     <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
                         <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Rejected profit/loss  :</Text>
-                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12, alignSelf: 'center' }]}>38 points</Text>
-                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Increase points</Text>
-                        </View>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12, alignSelf: 'center' }]}>0 points</Text>
+                        
                     </View>
                     <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
                         <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Collateral                      :</Text>
-                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12, alignSelf: 'center' }]}>50 points</Text>
-                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Increase points</Text>
-                        </View>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12, alignSelf: 'center' }]}>0 points</Text>
+                       
                     </View>
                     <View style={{ flex: 1, flexDirection: 'row', margin: 10, justifyContent: 'space-between' }}>
                         <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Deposit/liquids         :</Text>
-                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12, alignSelf: 'center' }]}>46 points</Text>
-                        <View style={{ width: Layout.window.width * 0.3, height: Layout.window.height * 0.03, borderWidth: 2, borderRadius: 15, borderColor: 'lawngreen', margin: 10 }}>
-                            <Text style={[styles.caption]}>Increase points</Text>
-                        </View>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold', fontSize: 12, alignSelf: 'center' }]}>0 points</Text>
+                        
                     </View>
                 </View>
             </ScrollView>

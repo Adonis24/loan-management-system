@@ -72,59 +72,78 @@ class SettingsScreen extends React.PureComponent {
                             </View>
                             <View style={{ width: Layout.window.width, paddingLeft: 5, alignItems: 'center' }}>
                                 <Image source={{ uri: this.props.profile_pic }} style={{ width: Layout.window.width / 3, height: Layout.window.width / 3, borderRadius: Layout.window.width / 6 }} />
-                            <TouchableOpacity onPress={()=>this.props.navigation.navigate('CameraSelfie')}><Text>Add/Change</Text></TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('CameraSelfie')}><Text>Add/Change</Text></TouchableOpacity>
                             </View>
                             <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                                 <Text style={[styles.subTitle, { margin: 5 }]}>Profile</Text>
                                 <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                             </View>
                             {/* <View style={{ width: Layout.window.width, paddingLeft: 5 }}> */}
-                            <View style={{ margin: 5, paddingBottom: 5, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                                <View style={{ width: Layout.window.width - 10, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey', padding: 10, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(128, 128, 128, 0.2)' }}>
-                                    <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                        <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Name :</Text></View>
-                                        <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.name}</Text></View>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                        <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Email :</Text></View>
-                                        <View style={{ flex: 2, flexDirection: 'row' }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.email}</Text><TouchableOpacity ><Text style={[styles.caption, { padding: 3, margin: 3, }]}>Verify</Text></TouchableOpacity></View>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                        <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Phone :</Text></View>
-                                        <View style={{ flex: 2 }}>
-                                            {this.props.phone_no ? <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.phone_no}</Text> :
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpOtp', { screen: 'setting' })} style={{ borderRadius: 5 }}>
-                                                    <Text style={[styles.caption, { alignSelf: 'flex-start', textAlign: 'left', padding: 5 }]}>Add Phone</Text>
-                                                </TouchableOpacity>}
-                                        </View>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                        <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>IC :</Text></View>
-                                        <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.ic_no}</Text></View>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                        <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Membership:</Text></View>
-                                        <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.member_id}</Text></View>
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 10, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Name :</Text></View>
+                                    <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.name}</Text></View>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Email :</Text></View>
+                                    <View style={{ flex: 2, flexDirection: 'row' }}>
+                                        <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.email}</Text><TouchableOpacity >
+                                            {this.props.email_verified_at ? <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} /> : <Text style={[styles.caption, { padding: 3, margin: 3, }]}>Verify</Text>}
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Phone :</Text></View>
+                                    <View style={{ flex: 2 }}>
+                                        {this.props.phone_no ? <View style={{ flexDirection: 'row' }}>
+                                            <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.phone_no}</Text>
+                                            <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} />
+                                        </View> :
+                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpOtp', { screen: 'setting' })} style={{ borderRadius: 5 }}>
+                                                <Text style={[styles.caption, { alignSelf: 'flex-start', textAlign: 'left', padding: 5 }]}>Add Phone</Text>
+                                            </TouchableOpacity>}
+                                    </View>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>IC :</Text></View>
+                                    <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.ic_no}</Text></View>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Membership:</Text></View>
+                                    <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.member_id}</Text></View>
+                                </View>
                             </View>
-                            <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5, marginTop: 5, alignSelf: 'center' }}>
-                                <TouchableOpacity onPress={() => this.props.enableNotification()} style={{ marginLeft: 5, backgroundColor: 'cornflowerblue', borderRadius: 5 }}>
+
+                            <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
+                                <Text style={[styles.subTitle, { margin: 5 }]}>Tools</Text>
+                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
+                            </View>
+                            {/* <View style={{ width: Layout.window.width, paddingLeft: 5 }}> */}
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 10, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Clicking the button will log you out from the application. Username and password are required to log back in. :</Text></View>
+
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5, marginTop: 5, alignSelf: 'flex-start' }}>
+                                    <TouchableOpacity onPress={() => this.logout()} style={{ marginLeft: 0, backgroundColor: 'orange', borderRadius: 5 }}>
+                                        <Text style={[styles.textDefault, { margin: 10, color: '#fff' }]}>Logout</Text>
+                                    </TouchableOpacity>
+                                </View>
+
+                            </View>
+                            {/* <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5, marginTop: 5, alignSelf: 'center' }}>
+                                <TouchableOpacity onPress={() => this.props.enableNotification()} style={{ marginLeft: 5, backgroundColor: 'crimson', borderRadius: 5 }}>
                                     <Text style={[styles.textDefault, { margin: 10, color: '#fff' }]}>Enable Notification</Text>
                                 </TouchableOpacity>
-                            </View>
-                            <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5, marginTop: 5, alignSelf: 'center' }}>
-                                <TouchableOpacity onPress={() => this.logout()} style={{ marginLeft: 5, backgroundColor: 'crimson', borderRadius: 5 }}>
-                                    <Text style={[styles.textDefault, { margin: 10, color: '#fff' }]}>Logout</Text>
-                                </TouchableOpacity>
-                            </View>
+                            </View> */}
+
                         </ScrollView>
                     </View>
                 </View>
                 {/* <PopupScoreScreen /> */}
 
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('ScanQR')}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('QR')}>
                         <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
                     </TouchableOpacity>
                 </View>

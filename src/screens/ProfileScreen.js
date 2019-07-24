@@ -61,7 +61,7 @@ class ProfileScreen extends React.PureComponent {
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                                   <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                         <Ionicons name='ios-arrow-back' size={32} />
                                     </TouchableOpacity>
                                 </View>
@@ -102,13 +102,10 @@ class ProfileScreen extends React.PureComponent {
                                     </View>
                                 </View>
                                 <View style={{ flexDirection: 'row', margin: 5, justifyContent: 'space-evenly' }}>
-                                    
-                                    
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Financing')} style={{ margin: 10, padding: 10, borderRadius: 5, borderWidth: 1, borderColor: 'blue' }}>
-                                        <Text style={styles.caption}>Seek Financial Assistance</Text>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Financing')} style={{ width: Layout.window.width * 0.3, padding: 5, borderRadius: 5, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
+                                        <Text style={[styles.caption, { color: '#fff' }]}>Go To Settings</Text>
                                     </TouchableOpacity>
                                 </View>
-
                                 <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                                     <Text style={styles.subTitle}>Basic Info</Text>
                                     <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
@@ -176,7 +173,7 @@ class ProfileScreen extends React.PureComponent {
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                                   <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                                    <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                         <Ionicons name='ios-arrow-back' size={32} />
                                     </TouchableOpacity>
                                 </View>
@@ -238,7 +235,7 @@ function mapStateToProps(state) {
 
         profile_pic: state.myAccountReducer.profile_pic,
 
-        score: 25
+        score: 0
 
 
 

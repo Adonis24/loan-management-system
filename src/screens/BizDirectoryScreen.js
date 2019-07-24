@@ -37,6 +37,18 @@ class BizDirectoryScreen extends React.PureComponent {
     };
     connect = (val) => {
         this.props.requestConnect(val)
+        this.props.getConnectionStatus()
+        this.props.initiateBizDir()
+        this.props.initiateAssociateDir()
+        this.props.initiatePendingDir()
+    }
+
+    accept = (val) => {
+        this.props.accept(val)
+        this.props.getConnectionStatus()
+        this.props.initiateBizDir()
+        this.props.initiateAssociateDir()
+        this.props.initiatePendingDir()
     }
 
 
@@ -84,7 +96,7 @@ class BizDirectoryScreen extends React.PureComponent {
                                 <Associate connect={this.connect} assoDirArray={this.props.assoDirArray} />
                             </Tab>
                             <Tab heading={`Request (${this.props.requestConnection})`}>
-                                <Pending connect={this.connect} pendingDirArray={this.props.pendingDirArray} />
+                                <Pending connect={this.connect} accept={this.accept} pendingDirArray={this.props.pendingDirArray} />
                             </Tab>
                             <Tab heading={`All (${this.props.allConnection})`}>
                                 <All connect={this.connect} bizDirArray={this.props.bizDirArray} />
@@ -122,8 +134,7 @@ class Associate extends React.PureComponent {
                                     </View>
                                     <Text style={[styles.textDefault, { fontWeight: 'bold' }]}>{item.name}</Text>
                                     <Text numberOfLines={1} ellipsizeMode={'tail'} style={[styles.caption, {}]}># :{item.member_id}</Text>
-                                    <Text numberOfLines={1} ellipsizeMode={'tail'}  style={[styles.caption, {}]}>P :{item.phone_no}</Text>
-                                    <Text numberOfLines={1} ellipsizeMode={'tail'}  style={[styles.caption, {}]}>E :{item.email}</Text>
+                                    
                                     <View  style={{ flexDirection: 'row', justifyContent: 'center' }}>
                                     </View>
                                 </View>
@@ -156,7 +167,7 @@ class Pending extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.name}</Text>
                             <Text style={[styles.caption, { margin: 5, }]}>Member since : {moment(item.created_at).format('LL')}</Text>
                             <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.props.connect(item.id)} style={{ margin: 10, }}>
+                                <TouchableOpacity onPress={() => this.props.accept(item.id)} style={{ margin: 10, }}>
                                     <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
                                         <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
                                     </LinearGradient>
@@ -221,6 +232,7 @@ function mapDispatchToProps(dispatch) {
 
         getConnectionStatus: () => dispatch(actionCreator.getConnectionStatus()),
         requestConnect: (val) => dispatch(actionCreator.requestConnect(val)),
+        accept: (val) => dispatch(actionCreator.accept(val)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BizDirectoryScreen)

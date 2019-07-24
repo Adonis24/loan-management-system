@@ -54,8 +54,8 @@ class InfoNewsScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     {/* HEADER */}
                     <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <View style={{ flex: 1, marginLeft: 10, marginTop: 10 }}>
-                           <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                        <View style={{ flex: 1, marginLeft: 10, marginTop: 10 }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -68,12 +68,12 @@ class InfoNewsScreen extends React.PureComponent {
                     </View>
                     {/* CONTENT AREA */}
                     <View style={{ flex: 4 }}>
-                        <View style={{ flex: 1 }}>
+                        <ScrollView style={{ flex: 1 }}>
                             <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
                                 <Text style={[styles.subTitle, { margin: 15, alignSelf: 'flex-start' }]}>{item.content}</Text>
-                                
+
                             </View>
-                        </View>
+                        </ScrollView>
                     </View>
                 </View>
             </View>

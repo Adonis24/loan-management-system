@@ -86,7 +86,7 @@ class NotificationsScreen extends React.PureComponent {
                 {/* <PopupScoreScreen /> */}
 
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('ScanQR')}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('QR')}>
                         <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
                     </TouchableOpacity>
                 </View>

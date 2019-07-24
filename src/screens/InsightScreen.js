@@ -29,15 +29,18 @@ import { Thumbnail } from 'native-base'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
+
 class InsightScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
 
-    componentDidMount(){
-        this.props.initiateBizDir()
+    componentDidMount() {
+        this.props.initiateAssociateDir()
     }
     render() {
+        console.log(`ini kat screen contact sudah : ${JSON.stringify(this.props.assoDirArray)}`)
+
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
 
@@ -73,40 +76,21 @@ class InsightScreen extends React.PureComponent {
                         <ScrollView contentStyle={{ padding: 10 }} >
 
                             <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, paddingBottom: 10, marginBottom: 20 }]}>
-                                {/* <View style={{ flexDirection: 'row', marginBottom: 10 }}>
-                                    <View style={[{ marginLeft: 10, padding: 2 }]}>
-                                        <Image source={require('../assets/images/girl.png')} style={{ height: Layout.window.height / 10, width: Layout.window.height / 10, borderWidth: 1, borderColor: 'lightgrey', borderRadius: Layout.window.height / 20 }} resizeMode='cover' />
-                                    </View>
-                                    <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>Puteri Nursyahirah</Text>
-                                            <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
-                                                <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#fff' }]}>Friend</Text>
-                                            </View>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'center', }}>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UserAccount')} style={{ margin: 5 }}>
-                                                <Ionicons name='md-chatbubbles' size={20} color='#2FD9FE' />
-                                            </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UserAccount')} style={{ margin: 5 }}>
-                                                <Ionicons name='md-share' size={20} color='#2FD9FE' />
-                                            </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('UserAccount')} style={{ margin: 5 }}>
-                                                <Ionicons name='ios-more' size={20} color='#2FD9FE' />
-                                            </TouchableOpacity>
-                                        </View>
-                                    </View>
-                                </View> */}
-                                {this.props.bizDirArray && this.props.bizDirArray.length > 0 ?
+
+                                {this.props.assoDirArray && this.props.assoDirArray.length > 0 ?
                                     <FlatList
-                                        data={this.props.bizDirArray}
+                                        data={this.props.assoDirArray}
                                         keyExtractor={(item, index) => index.toString()}
 
                                         renderItem={({ item }) => (
                                             <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
                                                 <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
                                                     <Thumbnail source={{ uri: item.profile_pic }} circle small style={{ borderWidth: 1, borderColor: 'lightgrey' }} />
+                                                    <View>
                                                     <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.name}</Text>
+                                                    <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.phone_no}</Text>
+                                                    <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.email}</Text>
+                                                    </View>
                                                 </View>
                                                 <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: 5 }}>
                                                     <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
@@ -132,7 +116,7 @@ class InsightScreen extends React.PureComponent {
                 {/* <PopupScoreScreen /> */}
 
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('ScanQR')}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('QR')}>
                         <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
                     </TouchableOpacity>
                 </View>
@@ -145,14 +129,14 @@ class InsightScreen extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-        bizDirArray: state.bizDirReducer.bizDirArray
+        assoDirArray: state.assoDirReducer.assoDirArray,
 
 
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-        initiateBizDir: () => dispatch(actionCreator.initiateBizDir()),
+        initiateAssociateDir: () => dispatch(actionCreator.initiateAssociateDir()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(InsightScreen)

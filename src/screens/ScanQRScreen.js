@@ -48,11 +48,16 @@ class ScanQRScreen extends React.PureComponent {
         //this.props.resetFulfillRequest()
     }
 
-    handleBarCodeScanned = ({ type, data }) => {
+    handleBarCodeScanned = async ({ type, data }) => {
         this.setState({ scanned: true });
         console.log(`data ialah : ${JSON.stringify(data)}`)
-        this.props.sendNotification()
-        this.props.navigation.navigate('UserAccount', { member_id: data })
+        
+        await this.props.requestConnect(data)
+        this.props.initiateBizDir()
+        this.props.initiateAssociateDir()
+        this.props.initiatePendingDir()
+        this.props.sendNotification(this.props.expo_token,this.props.id)
+        this.props.navigation.navigate('BizDirectory')
     };
 
 
@@ -68,16 +73,15 @@ class ScanQRScreen extends React.PureComponent {
         return (
             <View style={{ flex: 1 }}>
                 <Camera ratio={'16:9'} onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned} style={[StyleSheet.absoluteFill, { flex: 1 }]} type={this.state.type}>
-
                 </Camera>
             </View>
         );
     }
 }
 
-
 function mapStateToProps(state) {
     return {
+        id: state.myAccountReducer.id,
         member_id: state.myAccountReducer.member_id,
         name: state.myAccountReducer.name,
         email: state.myAccountReducer.email,
@@ -85,12 +89,18 @@ function mapStateToProps(state) {
         profile_pic: state.myAccountReducer.profile_pic,
         email_verified_at: state.myAccountReducer.email_verified_at,
 
+        expo_token: state.myAccountReducer.expo_token,
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
         initiateMyAccount: () => dispatch(actionCreator.initiateMyAccount()),
-        sendNotification: () => dispatch(actionCreator.sendNotification())
+        sendNotification: (expo_token,id) => dispatch(actionCreator.sendNotification(expo_token,id)),
+        requestConnect: (val) => dispatch(actionCreator.requestConnect(val)),
+
+        initiateBizDir: () => dispatch(actionCreator.initiateBizDir()),
+        initiatePendingDir: () => dispatch(actionCreator.initiatePendingDir()),
+        initiateAssociateDir: () => dispatch(actionCreator.initiateAssociateDir()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ScanQRScreen)

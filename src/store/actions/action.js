@@ -1,7 +1,6 @@
 import { AsyncStorage } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 
-
 import Amplify, { Auth, Storage } from 'aws-amplify';
 import aws_exports from '../../aws-exports';
 Amplify.configure(aws_exports);///
@@ -9,16 +8,13 @@ Amplify.configure(aws_exports);///
 import s3 from '../../do/DigitalOcean'
 import config from '../../do/config'
 
-
 import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI, requestTokenLMS, registerLMSApi, requestPersonalTokenLMS } from './apiRegistration'
-import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi } from './apiDashboard'
+import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi,acceptApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
-
 import shortid from 'shortid'
 import _ from 'lodash'
-
 
 export const getToken = () => {
     return (dispatch, getState) => {
@@ -86,7 +82,6 @@ export const register = () => {
     }
 }
 
-
 export const registerLMS = () => {
     return async (dispatch, getState) => {
 
@@ -118,8 +113,6 @@ export const registerOTP = () => {
         }
     }
 }
-
-
 
 export const verifyPhone = () => {
     return async (dispatch, getState) => {
@@ -436,7 +429,6 @@ export const initiateCompanyInfo = () => {
     }
 }
 
-
 export const initiateAssociateDir = () => {
     return async (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
@@ -450,7 +442,6 @@ export const initiatePendingDir = () => {
         await dispatch(getPendingApi())
     }
 }
-
 
 export const initiateListWorkers = () => {
     return async (dispatch, getState) => {
@@ -466,12 +457,10 @@ export const doneForNow = () => {
     }
 }
 
-
-
-export const sendNotification = () => {
+export const sendNotification = (expo_token,id) => {
     return async (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-        await dispatch(sendNotificationApi())
+        await dispatch(sendNotificationApi(expo_token,id))
     }
 }
 
@@ -506,6 +495,12 @@ export const enableNotification = () => {
     }
 }
 
+export const addExpoToken = () => {
+    return async (dispatch, getState) => {
+        await dispatch(addExpoTokenApi())
+    }
+}
+
 export const getConnectionStatus = () => {
     return async (dispatch, getState) => {
         await dispatch(connectionStatusApi())
@@ -528,6 +523,12 @@ export const editUser = () => {
 export const requestConnect = (val) => {
     return async (dispatch, getState) => {
         await dispatch(requestConnectApi(val))
+    }
+}
+
+export const accept = (val) => {
+    return async (dispatch, getState) => {
+        await dispatch(acceptApi(val))
     }
 }
 
