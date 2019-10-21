@@ -4,10 +4,16 @@ import { Constants } from 'expo'
 export default StyleSheet.create({
 
     textDefault: {
-        fontSize: 16,
+        fontSize: 14,
         alignSelf: 'center',
         textAlign: 'center',
         fontFamily: 'Montserrat_medium',
+        color: '#000'
+    },
+    textBold: {
+        fontSize: 17,
+        
+        fontFamily: 'Montserrat_bold',
         color: '#000'
     },
     subTitle: {
@@ -15,14 +21,14 @@ export default StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'center',
         fontFamily: 'Montserrat_medium',
-        color: '#4A90E2'
+        color: '#2C4690'
     },
     caption: {
         fontSize: 10,
         alignSelf: 'center',
         textAlign: 'center',
         fontFamily: 'Montserrat_medium',
-        color: '#000'
+        color: '#2C4690'
     },
     shadow: {
         shadowColor: "#000",

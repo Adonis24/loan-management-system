@@ -1,30 +1,45 @@
 {
   "expo": {
-    "name": "bizxcess",
-    "slug": "bizxcess",
+    "name": "Bxcess",
+    "slug": "Bxcess",
     "privacy": "public",
     "sdkVersion": "33.0.0",
+    "android": {
+      "package": "com.fintech.bxcess",
+      "versionCode": 3,
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "AUDIO_RECORDING",
+        "NOTIFICATIONS",
+        "CAMERA_ROLL",
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE",
+        "INTERNET"
+      ]
+    },
     "platforms": [
       "ios",
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
-    "icon": "./src/assets/images/icon.png",
+    "icon": "./src/assets/images/icon4.png",
     "splash": {
       "image": "./src/assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 300000
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.fintech.bxcess"
     }
   }
 }

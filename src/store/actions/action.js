@@ -1,21 +1,20 @@
 import { AsyncStorage } from 'react-native'
-import { SecureStore } from 'expo'
+import * as SecureStore from 'expo-secure-store'
 
+import Amplify, { Auth, Storage } from 'aws-amplify';
+import aws_exports from '../../aws-exports';
+Amplify.configure(aws_exports);///
 
-// import Amplify, { Auth, Storage } from 'aws-amplify';
-// import aws_exports from '../../aws-exports';
-// Amplify.configure(aws_exports);///
+import s3 from '../../do/DigitalOcean'
+import config from '../../do/config'
 
-
-import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI } from './apiRegistration'
-import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail } from './apiDashboard'
+import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI, requestTokenLMS, registerLMSApi, requestPersonalTokenLMS } from './apiRegistration'
+import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi,acceptApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
-
 import shortid from 'shortid'
 import _ from 'lodash'
-
 
 export const getToken = () => {
     return (dispatch, getState) => {
@@ -23,69 +22,324 @@ export const getToken = () => {
     }
 }
 
+export const getTokenLMS = () => {
+    return (dispatch, getState) => {
+        dispatch(requestTokenLMS())
+    }
+}
+
+export const generateJWT = () => {
+    return (dispatch, getState) => {
+        dispatch(generateJWTApi())
+    }
+}
+
 export const register = () => {
     return async (dispatch, getState) => {
-        const { token_type, access_token, name, email, password, password_confirmation } = await getState().registrationReducer
+        dispatch({ type: 'SET_REGISTER', payload: { indicator: true } })
+        const { token_type, access_token, name, email, password, password_confirmation, expo_token } = await getState().registrationReducer
         console.log(`ada ke tak register info : ${JSON.stringify(getState().registrationReducer)}`)
-        await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation))
+
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const errorArray = []
+        const errorColor = []
+
+        if (name == undefined || name == '') {
+            errorArray.push({ title: "name", desc: "No Name" })
+            errorColor.push("Name")
+        }
+        if (email == undefined || email == '') {
+            errorArray.push({ title: "email", desc: "No e-mail" })
+            errorColor.push("E-mail")
+        } else if (reg.test(email) === false) {
+            errorArray.push("Not e-mail format")
+            errorColor.push("E-mail")
+        }
+        if (password == undefined || password == '') {
+            errorArray.push({ title: "password", desc: "No password" })
+            errorColor.push("Password")
+        } else if (password.length < 6) {
+            errorArray.push({ title: "password", desc: "Password need 6 character" })
+            errorColor.push("Password")
+        }
+        if (password_confirmation == undefined || password_confirmation == '') {
+            errorArray.push({ title: "confirm password", desc: "No Confirm password" })
+            errorColor.push("Confirm Password")
+        } else if (password_confirmation.length < 6) {
+            errorArray.push({ title: "confirm password", desc: "Password need 6 character" })
+            errorColor.push("Confirm Password")
+        } else if (password_confirmation != password) {
+            errorArray.push({ title: "confirm password", desc: "Password not same" })
+            errorColor.push("Confirm Password")
+        }
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_REGISTER', payload: { error: errorArray, errorColor, indicator: false } })
+        } else {
+            console.log('takde error dalam screen and boleh proceed utk register')
+            await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation, expo_token))
+            //await dispatch(getPersonalToken())
+        }
+    }
+}
+
+export const registerLMS = () => {
+    return async (dispatch, getState) => {
+
+        const { name, email, password, password_confirmation, lms } = await getState().registrationReducer
+        const { token_type, access_token, } = lms
+        console.log(`token lms :${JSON.stringify(lms)}`)
+        await dispatch(registerLMSApi(token_type, access_token, name, email, password, password_confirmation))
     }
 }
 
 export const registerOTP = () => {
     return async (dispatch, getState) => {
+
         const { token_type, access_token, countryCode, phone } = getState().registrationReducer
-        await dispatch(registerOTPApi(token_type, access_token, countryCode, phone))
+
+        const errorArray = []
+        const errorColor = []
+
+        if (phone == undefined || phone == '') {
+            errorArray.push({ title: "phone", desc: 'Please enter phone no' })
+            errorColor.push('phone')
+        }
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_REGISTER', payload: { error: errorArray, errorColor, proceed: false } })
+        } else {
+            dispatch({ type: 'SET_REGISTER', payload: { proceed: true } })
+            console.log('takde error dalam screen and boleh proceed utk register')
+            await dispatch(registerOTPApi(token_type, access_token, '+6', phone))
+        }
     }
 }
 
 export const verifyPhone = () => {
     return async (dispatch, getState) => {
-        const { token_type, access_token, countryCode, phone, c1, c2, c3, c4 } = getState().registrationReducer
+        const { token_type, access_token, country_code, phone, c1, c2, c3, c4 } = getState().registrationReducer
         const code = c1 + '' + c2 + '' + c3 + '' + c4
-        await dispatch(verifyPhoneApi(token_type, access_token, countryCode, phone, code))
+        await dispatch(verifyPhoneApi(token_type, access_token, '+6', phone, code))
     }
 }
 
 export const getPersonalToken = () => {
     return async (dispatch, getState) => {
-      
-      
         const username = getState().registrationReducer.email
         const password = getState().registrationReducer.password
-
         console.log(`action : ${username} dan ${password}`)
-
         await dispatch(requestPersonalToken('register', username, password))
+    }
+}
+
+export const getPersonalTokenLMS = () => {
+    return async (dispatch, getState) => {
+        const username = getState().registrationReducer.email
+        const password = getState().registrationReducer.password
+        console.log(`action : ${username} dan ${password}`)
+        await dispatch(requestPersonalTokenLMS('register', username, password))
     }
 }
 
 export const login = () => {
     return (dispatch, getState) => {
+        dispatch({ type: 'SET_LOGIN', payload: { indicator: true } })
         const username = getState().loginScreenReducer.email
-        const password = getState().loginScreenReducer.password
-        dispatch(requestPersonalToken('login', username, password))
+        //const password = getState().loginScreenReducer.password
+
+        const { email, password } = getState().loginScreenReducer
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const errorArray = []
+        const errorColor = []
+
+        if (email == undefined || email == '') {
+
+            errorArray.push({ title: "email", desc: "No e-mail" })
+            errorColor.push("E-mail")
+        } else if (reg.test(email) === false) {
+            errorArray.push("Wrong e-mail format")
+            errorColor.push("E-mail")
+        }
+        if (password == undefined || password == '') {
+
+            errorArray.push({ title: "password", desc: "No password" })
+            errorColor.push("Password")
+        } else if (password.length < 6) {
+            errorArray.push({ title: "password", desc: "Wrong password" })
+            errorColor.push("Password")
+        }
+
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_LOGIN', payload: { loggedIn: false, error: errorArray, errorColor, indicator: false } })
+
+        } else {
+            dispatch(requestPersonalToken('login', username, password))
+        }
+    }
+}
+
+export const loginLMS = () => {
+    return (dispatch, getState) => {
+        dispatch({ type: 'SET_LOGIN', payload: { indicator: true } })
+        const username = getState().loginScreenReducer.email
+        //const password = getState().loginScreenReducer.password
+
+        const { email, password } = getState().loginScreenReducer
+
+        dispatch(requestPersonalTokenLMS('login', username, password))
     }
 }
 
 export const companyInfo = () => {
     return (dispatch, getState) => {
-        const companyName = getState().companyInformationReducer.companyName
-        const regNumber = getState().companyInformationReducer.regNumber
-        const compAddress = getState().companyInformationReducer.compAddress
-        const businessActivities = getState().companyInformationReducer.businessActivities
-        const phoneNumber = getState().companyInformationReducer.phoneNumber
-        const emailAddress = getState().companyInformationReducer.emailAddress
-        dispatch(companyInfoAPI(companyName, regNumber, compAddress, businessActivities, phoneNumber, emailAddress))
+        const { comp_name, comp_regno, comp_regdate, comp_main_biz_act } = getState().companyInformationReducer
+
+        const errorArray = []
+        const errorColor = []
+
+        if (comp_name == undefined || comp_name == '') {
+            errorArray.push({ title: "name", desc: "No Company Name" })
+            errorColor.push("Name")
+        }
+        if (comp_regno == undefined || comp_regno == '') {
+            errorArray.push({ title: "reg number", desc: "No Registration Number" })
+            errorColor.push("Reg Number")
+        }
+        if (comp_regdate == undefined || comp_regdate == '') {
+            errorArray.push({ title: "date", desc: "Please Select Date" })
+            errorColor.push("Date")
+        }
+        if (comp_main_biz_act == undefined || comp_main_biz_act == '') {
+            errorArray.push({ title: "business", desc: "No Registration Number" })
+            errorColor.push("Business")
+        }
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
+        } else {
+            // dispatch(companyInfoAPI())
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { proceed: true } })
+        }
+    }
+}
+
+export const companyContactInfo = () => {
+    return (dispatch, getState) => {
+        const { comp_phone, comp_email, comp_addr } = getState().companyInformationReducer
+        const errorArray = []
+        const errorColor = []
+
+        if (comp_phone == undefined || comp_phone == '') {
+            errorArray.push({ title: "phone", desc: "No Phone Number" })
+            errorColor.push("Phone")
+        }
+        if (comp_email == undefined || comp_email == '') {
+            errorArray.push({ title: "email", desc: "No Email" })
+            errorColor.push("Email")
+        }
+        if (comp_addr == undefined || comp_addr == '') {
+            errorArray.push({ title: "address", desc: "No Address" })
+            errorColor.push("Address")
+        }
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
+        } else {
+            // dispatch(companyInfoAPI())
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
+        }
+    }
+}
+
+export const companyContactAddress = () => {
+    return (dispatch, getState) => {
+        const { comp_addr, comp_city, comp_state, comp_postcode } = getState().companyInformationReducer
+        const errorArray = []
+        const errorColor = []
+
+        if (comp_addr == undefined || comp_addr == '') {
+            errorArray.push({ title: "address", desc: "No Address" })
+            errorColor.push("Address")
+        }
+        if (comp_city == undefined || comp_city == '') {
+            errorArray.push({ title: "city", desc: "No City" })
+            errorColor.push("City")
+        }
+        if (comp_state == undefined || comp_state == '') {
+            errorArray.push({ title: "state", desc: "No State" })
+            errorColor.push("State")
+        }
+        if (comp_postcode == undefined || comp_postcode == '') {
+            errorArray.push({ title: "postcode", desc: "No PostCode" })
+            errorColor.push("Postcode")
+        }
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
+        } else {
+            // dispatch(companyInfoAPI())
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedContact: true } })
+        }
     }
 }
 
 export const contactPerson = () => {
     return (dispatch, getState) => {
-        const fullName = getState().companyInformationReducer.fullName
-        const myKad = getState().companyInformationReducer.myKad
-        const phoneNum = getState().companyInformationReducer.phoneNum
-        const position = getState().companyInformationReducer.position
-        dispatch(contactPersonAPI(fullName, myKad, phoneNum, position))
+        const { full_name, ic_no, phone, position, ic_image } = getState().companyInformationReducer
+        const errorArray = []
+        const errorColor = []
+
+        if (full_name == undefined || full_name == '') {
+            errorArray.push({ title: "name", desc: "No Name" })
+            errorColor.push("Name")
+        }
+        if (ic_no == undefined || ic_no == '') {
+            errorArray.push({ title: "mykad", desc: "No MyKad" })
+            errorColor.push("MyKad")
+        }
+        if (position == undefined || position == '') {
+            errorArray.push({ title: "position", desc: "No Address" })
+            errorColor.push("Position")
+        }
+        if (phone == undefined || phone == '') {
+            errorArray.push({ title: "phone", desc: "No Phone Number" })
+            errorColor.push("Phone")
+        }
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
+        } else {
+            // dispatch(contactPersonAPI())
+            dispatch(companyInfoAPI())
+            // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
+        }
+    }
+}
+
+export const contactPersonMain = () => {
+    return (dispatch, getState) => {
+        const { full_name, ic_no, phone, position, ic_image } = getState().companyInformationReducer
+        const errorArray = []
+        const errorColor = []
+
+        if (full_name == undefined || full_name == '') {
+            errorArray.push({ title: "name", desc: "No Name" })
+            errorColor.push("Name")
+        }
+        if (ic_no == undefined || ic_no == '') {
+            errorArray.push({ title: "mykad", desc: "No MyKad" })
+            errorColor.push("MyKad")
+        }
+        if (position == undefined || position == '') {
+            errorArray.push({ title: "position", desc: "No Address" })
+            errorColor.push("Position")
+        }
+        if (phone == undefined || phone == '') {
+            errorArray.push({ title: "phone", desc: "No Phone Number" })
+            errorColor.push("Phone")
+        }
+        if (errorArray.length > 0) {
+            dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
+        } else {
+            dispatch(contactPersonAPI())
+            // dispatch(companyInfoAPI())
+            // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
+        }
     }
 }
 
@@ -111,9 +365,172 @@ export const declarationSign = () => {
     }
 }
 
+export const initiateDashboardScreen = () => {
+    return async (dispatch, getState) => {
+        // await dispatch(knowledgeHubApi())
+    }
+}
+
+export const initiateNews = () => {
+    return async (dispatch, getState) => {
+        await dispatch(newsApi())
+    }
+}
+
+export const initiateEvent = () => {
+    return async (dispatch, getState) => {
+        await dispatch(eventApi())
+    }
+}
+
+export const initiatePromotion = () => {
+    return async (dispatch, getState) => {
+        await dispatch(promotionApi())
+    }
+}
+
+export const initiateHandbooks = () => {
+    return async (dispatch, getState) => {
+        await dispatch(handbooksApi())
+    }
+}
+
+export const intitiateEinfo = () => {
+    return async (dispatch, getState) => {
+        await dispatch(einfoApi())
+    }
+}
+
+export const applyLoan = () => {
+    return async (dispatch, getState) => {
+        console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        await dispatch(applyLoanApi())
+    }
+}
+
+export const applyGrant = () => {
+    return async (dispatch, getState) => {
+        console.log(`kat action : ${JSON.stringify(getState().grantApplicationReducer)}`)
+        await dispatch(applyGrantApi())
+    }
+}
+
+export const initiateMyAccount = () => {
+    return async (dispatch, getState) => {
+        // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        await dispatch(getUserInfoApi())
+    }
+}
+
+export const initiateCompanyInfo = () => {
+    return async (dispatch, getState) => {
+        // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        await dispatch(getCompanyInfoApi())
+    }
+}
+
+export const initiateAssociateDir = () => {
+    return async (dispatch, getState) => {
+        // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        await dispatch(getAssociateApi())
+    }
+}
+
+export const initiatePendingDir = () => {
+    return async (dispatch, getState) => {
+        // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        await dispatch(getPendingApi())
+    }
+}
+
+export const initiateListWorkers = () => {
+    return async (dispatch, getState) => {
+        // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        await dispatch(getListWorkersApi())
+    }
+}
+
+export const doneForNow = () => {
+    return async (dispatch, getState) => {
+        // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        await dispatch(doneForNowApi())
+    }
+}
+
+export const sendNotification = (expo_token,id) => {
+    return async (dispatch, getState) => {
+        // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        await dispatch(sendNotificationApi(expo_token,id))
+    }
+}
+
+export const initiateBizDir = () => {
+    return async (dispatch, getState) => {
+        await dispatch(bizDirApi())
+    }
+}
+
+export const initiateListAgency = () => {
+    return async (dispatch, getState) => {
+        await dispatch(listAgencyApi())
+    }
+}
+
+export const initiateLoanInfo = (page) => {
+    return async (dispatch, getState) => {
+        await dispatch(loanInfoApi(page))
+    }
+}
+
+export const initiateGrantInfo = (page) => {
+    return async (dispatch, getState) => {
+        console.log(`grant kat action`)
+        await dispatch(grantInfoApi(page))
+    }
+}
+
+export const enableNotification = () => {
+    return async (dispatch, getState) => {
+        await dispatch(addExpoTokenApi())
+    }
+}
+
+export const addExpoToken = () => {
+    return async (dispatch, getState) => {
+        await dispatch(addExpoTokenApi())
+    }
+}
+
+export const getConnectionStatus = () => {
+    return async (dispatch, getState) => {
+        await dispatch(connectionStatusApi())
+    }
+}
 
 
+export const initiateTraining = () => {
+    return async (dispatch, getState) => {
+        await dispatch(getCoursesApi())
+    }
+}
 
+export const editUser = () => {
+    return async (dispatch, getState) => {
+        await dispatch(editUserApi())
+    }
+}
+
+export const requestConnect = (val) => {
+    return async (dispatch, getState) => {
+        await dispatch(requestConnectApi(val))
+    }
+}
+
+export const accept = (val) => {
+    return async (dispatch, getState) => {
+        await dispatch(acceptApi(val))
+    }
+}
 
 
 
@@ -341,6 +758,16 @@ export const logout = () => {
         //await AsyncStorage.removeItem('personalToken')
         console.log(`nak delete`)
         await SecureStore.deleteItemAsync('personalToken').then(console.log(`delete berjaya`)).catch(error => console.log(`tak berjaya : ${error}`))
+        await SecureStore.deleteItemAsync('lmsPersonalToken').then(console.log(`delete berjaya`)).catch(error => console.log(`tak berjaya : ${error}`))
+
+        dispatch({ type: 'REGISTRATION_RESET' })
+        dispatch({ type: 'LOGIN_RESET' })
+        dispatch({ type: 'COMPANY_INFO_RESET' })
+        dispatch({ type: 'USER_PROFILE_RESET' })
+        dispatch({ type: 'BIZ_INFO_RESET' })
+
+        //dispatch({ type: 'ROOT_LOG_OUT' })
+        //dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
     }
 }
 
@@ -414,80 +841,123 @@ export const initiatePersonalInformationScreen = () => {
     }
 }
 
-export const saveDocument = () => {
-
-
+export const saveDocument = (result) => {
+    const { type, uri, name, size } = result
     return async (dispatch, getState) => {
-        const { email } = await getState().kycReducer || 'email'
-        const uri1 = await getState().kycVerifyReducer.doc1.uri
-        const uri2 = await getState().kycVerifyReducer.doc2.uri || uri1
-
-
-        //const docName = await fbs.child(uid+'_doc.jpg');
-        const blob1 = await urlToBlob(uri1)
-        //const uploadTask=docName.put(file)  
-        const fileName1 = 'document/' + email + '1.jpg';
-
-        await Storage.put(fileName1, blob1, {
-            contentType: 'image/jpeg'
+        const blob1 = await urlToBlob(uri)
+        const fileName1 = 'test';
+        await Storage.put(name, blob1, {
+            contentType: 'application/pdf'
         }).then(data => {
-            //this.props.savePicture(data.key,kidId)
-            //dispatch({type:'SET_KYC_VERIFY',payload:{toVerify:{docUri1:data.key},proceed:false}})
             console.log('save')
+            console.log(JSON.stringify(data))
         })
             .catch(err => console.log(err))
-
-
-        //const docName = await fbs.child(uid+'_doc.jpg');
-        const blob2 = await urlToBlob(uri2)
-        //const uploadTask=docName.put(file)  
-        const fileName2 = 'document/' + email + '+2.jpg';
-
-        await Storage.put(fileName2, blob2, {
-            contentType: 'image/jpeg'
-        }).then(data => {
-            //this.props.savePicture(data.key,kidId)
-            dispatch({ type: 'SET_KYC_VERIFY', payload: { toVerify: { docUri1: fileName1, docUri2: fileName2 }, proceed: true } })
-            console.log('save')
-        })
-            .catch(err => console.log(err))
-
-
     }
 }
 
-export const saveSelfie = () => {
-
-
+export const saveDocumentDO = (result) => {
+    const { type, uri, name, size } = result
     return async (dispatch, getState) => {
-        const { email } = await getState().kycReducer
-        const { uri } = await getState().kycVerifyReducer.selfie
-        const { idNo } = await getState().kycVerifyReducer.selfie
-        const { toVerify } = await getState().kycVerifyReducer
-
-
-
         const blob = await urlToBlob(uri)
+        const { data } = blob
 
-        const fileName = 'selfie/' + 'email' + '.jpg';
+        console.log(`blob ialah ${JSON.stringify(blob)}`)
+        const fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 
-        await Storage.put(fileName, blob, {
-            contentType: 'image/jpeg'
-        }).then(async data => {
-            //this.props.savePicture(data.key,kidId)
-            await console.log(`data gambar ialah ${JSON.stringify(data)}`)
-            await dispatch({ type: 'SET_KYC_VERIFY', payload: { toVerify: { ...toVerify, selfieUri: data.key }, proceed: true } })
-            await dispatch(kycBasicInformation2())
-            await dispatch({ type: 'SET_PERSONAL_INFO', payload: { status: 'to verify' } })
-            await AsyncStorage.setItem('status', 'to verify')
-            console.log('save')
-
-        })
-            .catch(err => console.log(err))
-
+        const params = {
+            Body: blob,
+            Bucket: `${config.bucketName}`,
+            Key: fileName
+        };
+        // Sending the file to the Spaces
+        s3.putObject(params)
+            .on('build', request => {
+                request.httpRequest.headers.Host = `${config.digitalOceanSpaces}`;
+                request.httpRequest.headers['Content-Length'] = data.size;
+                request.httpRequest.headers['Content-Type'] = data.type;
+                request.httpRequest.headers['x-amz-acl'] = 'public-read';
+            })
+            .send((err) => {
+                if (err) console.log(err);
+                else {
+                    // If there is no error updating the editor with the imageUrl
+                    const imageUrl = `${config.digitalOceanSpaces}/` + fileName
+                    console.log(imageUrl, name);
+                    dispatch({ type: 'SET_CONTACT_PERSON', payload: { ic_image: imageUrl, fileName: name } })
+                }
+            });
 
     }
 }
+
+export const saveSelfie = (result) => {
+    const { uri } = result
+    return async (dispatch, getState) => {
+        const blob = await urlToBlob(uri)
+        const { data } = blob
+
+        const fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+
+        const params = {
+            Body: blob,
+            Bucket: `${config.bucketName}`,
+            Key: fileName
+        };
+        // Sending the file to the Spaces
+        s3.putObject(params)
+            .on('build', request => {
+                request.httpRequest.headers.Host = `${config.digitalOceanSpaces}`;
+                request.httpRequest.headers['Content-Length'] = data.size;
+                request.httpRequest.headers['Content-Type'] = data.type;
+                request.httpRequest.headers['x-amz-acl'] = 'public-read';
+            })
+            .send((err) => {
+                if (err) console.log(err);
+                else {
+                    // If there is no error updating the editor with the imageUrl
+                    const imageUrl = `${config.digitalOceanSpaces}/` + fileName
+                    console.log(imageUrl);
+                    dispatch({ type: 'SET_USER_PROFILE', payload: { profile_pic: imageUrl } })
+                    dispatch(editUserApi())
+                }
+            });
+
+    }
+}
+
+// export const saveSelfie = () => {
+
+
+//     return async (dispatch, getState) => {
+//         const { email } = await getState().kycReducer
+//         const { uri } = await getState().kycVerifyReducer.selfie
+//         const { idNo } = await getState().kycVerifyReducer.selfie
+//         const { toVerify } = await getState().kycVerifyReducer
+
+
+
+//         const blob = await urlToBlob(uri)
+
+//         const fileName = 'selfie/' + 'email' + '.jpg';
+
+//         await Storage.put(fileName, blob, {
+//             contentType: 'image/jpeg'
+//         }).then(async data => {
+//             //this.props.savePicture(data.key,kidId)
+//             await console.log(`data gambar ialah ${JSON.stringify(data)}`)
+//             await dispatch({ type: 'SET_KYC_VERIFY', payload: { toVerify: { ...toVerify, selfieUri: data.key }, proceed: true } })
+//             await dispatch(kycBasicInformation2())
+//             await dispatch({ type: 'SET_PERSONAL_INFO', payload: { status: 'to verify' } })
+//             await AsyncStorage.setItem('status', 'to verify')
+//             console.log('save')
+
+//         })
+//             .catch(err => console.log(err))
+
+
+//     }
+// }
 
 // export const verifyPhone = () => {
 //     return (dispatch, getState) => {
@@ -668,17 +1138,20 @@ export const approve = () => {
 
 
 
+
+
+
 ///////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 
 
-export const initiateDashboardScreen = () => {
+// export const initiateDashboardScreen = () => {
 
-    return async (dispatch, getState) => {
-        await dispatch(userInfo())
+//     return async (dispatch, getState) => {
+//         await dispatch(userInfo())
 
-    }
-}
+//     }
+// }
 
 export const initiateLatestTransaction = () => {
     return (dispatch, getState) => {
@@ -1080,11 +1553,11 @@ export const getTheme = () => {
     }
 }
 
-export const sendNotification = () => {
-    return async (dispatch, getState) => {
-        dispatch(pushNotification())
-    }
-}
+// export const sendNotification = () => {
+//     return async (dispatch, getState) => {
+//         dispatch(pushNotification())
+//     }
+// }
 
 export const editInfo = () => {
     return async (dispatch, getState) => {

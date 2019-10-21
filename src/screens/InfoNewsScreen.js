@@ -32,74 +32,52 @@ class InfoNewsScreen extends React.PureComponent {
     static navigationOptions = {
         header: null,
     };
+    componentDidMount() {
+
+    }
     render() {
+        const item = this.props.navigation.getParam('item', 'NA')
+        console.log(`dapat item : ${JSON.stringify(item)}`)
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
                     <View style={{ alignItems: 'flex-end' }}>
-                        <Image source={require('../assets/images/topRight.png')} style={{ width: 80, height: 93 }} />
+                        <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
                     </View>
-                    <View style={{ alignItems: 'flex-start' }}>
-                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
+                    {/* <View style={{ alignItems: 'flex-start' }}>
+                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
+                    </View> */}
+                    <View style={{ position: 'absolute', top: 0, left: 0, right: 0, justifyContent: 'flex-start' }}>
+                        <Image source={{ uri: item.picture }} style={{ height: Layout.window.height * 0.3, width: Layout.window.width }} resizeMode={'cover'} />
                     </View>
                 </View>
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     {/* HEADER */}
-                    <View style={{ flex: 1,flexDirection:'row',justifyContent:'space-between' }}>
-                        <View style={{ flex: 1, marginLeft: 5,marginTop:5 }}>
-                            <TouchableOpacity onPress={()=>this.props.navigation.goBack()}>
-                            <Ionicons name='ios-arrow-back' size={32} />
+                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <View style={{ flex: 1, marginLeft: 10, marginTop: 10 }}>
+                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                                <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
-                            </View>
+                        </View>
                         <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 7, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2,justifyContent:'flex-start' }]}>                                
-                               
-                                    <Image source={require('../assets/icon/rfq.png')} style={{  width: Layout.window.height/15, height: Layout.window.height/15, }} resizeMode={'contain'} />
-                                    <Text style={[styles.default]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
-                             
-
+                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
+                                <Image source={require('../assets/images/news.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
+                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>News</Text>
                             </View>
                         </View>
                     </View>
                     {/* CONTENT AREA */}
-                    <View style={{ flex: 4, }}>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center',borderWidth:1 }}>
-                        <View style={{ margin: 10, borderBottomWidth: 1, borderColor: '#000' }}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                    <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                        <Image source={require('../assets/icon/eda.png')} style={{ width: undefined, height: Layout.window.height / 13, }} resizeMode={'contain'} />
-                                        <Text style={[styles.caption]}>News</Text>
-                                    </View>
-                                    <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                        <Image source={require('../assets/icon/bizDir.png')} style={{ width: undefined, height: Layout.window.height / 13, }} resizeMode={'contain'} />
-                                        <Text style={[styles.caption]}>Promotions</Text>
-                                    </View>
-                                    <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                        <Image source={require('../assets/icon/crm.png')} style={{ width: undefined, height: Layout.window.height / 13, }} resizeMode={'contain'} />
-                                        <Text style={[styles.caption]}>Event</Text>
-                                    </View>
-                                    <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                        <Image source={require('../assets/icon/rfq.png')} style={{ width: undefined, height: Layout.window.height / 13, }} resizeMode={'contain'} />
-                                        <Text style={[styles.caption]}>Guide Book</Text>
-                                    </View>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{ flex:5}}>
-                            <ScrollView>
-                                <Image source={require('../assets/images/economy.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7, margin: 15 }} resizeMode={'contain'} />
-                                <Text style={[styles.subTitle, { margin: 10 }]}>Creative Economy: A new Business Trend</Text>
-                                <Text style={[styles.textDefault, { margin: 10 }]}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</Text>
-                            </ScrollView>
-                        </View>
-                    </View>
-                           
-                    </View>
+                    <View style={{ flex: 4 }}>
+                        <ScrollView style={{ flex: 1 }}>
+                            <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
+                                <Text style={[styles.subTitle, { margin: 15, alignSelf: 'flex-start' }]}>{item.content}</Text>
 
+                            </View>
+                        </ScrollView>
+                    </View>
                 </View>
             </View>
-            
+
 
         );
     }
@@ -109,13 +87,10 @@ class InfoNewsScreen extends React.PureComponent {
 function mapStateToProps(state) {
     return {
 
-
-
     }
 }
 function mapDispatchToProps(dispatch) {
     return {
-
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(InfoNewsScreen)
