@@ -5,7 +5,7 @@
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "android": {
-      "package": "com.fintech.bxcess",
+      "package": "com.fcgb.bxcess",
       "versionCode": 3,
       "permissions": [
         "CAMERA",
@@ -39,7 +39,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.fintech.bxcess"
+      "bundleIdentifier": "com.fcgb.bxcess"
     }
   }
 }
