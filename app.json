@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "Bxcess",
-    "slug": "Bxcess",
+    "name": "tekun",
+    "slug": "tekun",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "android": {
       "package": "com.fcgb.bxcess",
-      "versionCode": 3,
+      "versionCode": 1,
       "permissions": [
         "CAMERA",
         "RECORD_AUDIO",
@@ -39,7 +39,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.fcgb.bxcess"
+      "bundleIdentifier": "com.fcgb.tekun"
     }
   }
 }
