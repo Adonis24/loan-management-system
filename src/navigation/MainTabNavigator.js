@@ -158,8 +158,8 @@ DashboardStackWithModal.navigationOptions = ({ navigation }) => {
     tabBarVisible,
     tabBarLabel: 'Home',
     tabBarOptions: {
-      activeTintColor: '#4967AE',
-      inactiveTintColor: '#7896DC',
+      activeTintColor: '#F52011',
+      inactiveTintColor: 'rgba(255,0,0,0.4)',
     },
     tabBarIcon: ({ focused }) => (
       <TabBarIcon
@@ -178,8 +178,8 @@ InsightStack.navigationOptions = {
   tabBarLabel: 'Contacts',
 
   tabBarOptions: {
-    activeTintColor: '#4967AE',
-    inactiveTintColor: '#7896DC',
+    activeTintColor: '#F52011',
+    inactiveTintColor: 'rgba(255,0,0,0.4)',
   },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -197,8 +197,8 @@ NotificationStack.navigationOptions = {
   tabBarLabel: 'Notifications',
 
   tabBarOptions: {
-    activeTintColor: '#4967AE',
-    inactiveTintColor: '#7896DC',
+    activeTintColor: '#F52011',
+    inactiveTintColor: 'rgba(255,0,0,0.4)',
   },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -236,8 +236,8 @@ SettingStackWithModal.navigationOptions = ({ navigation }) => {
     tabBarVisible,
     tabBarLabel: 'Settings',
     tabBarOptions: {
-      activeTintColor: '#4967AE',
-      inactiveTintColor: '#7896DC',
+      activeTintColor: '#F52011',
+      inactiveTintColor: 'rgba(255,0,0,0.4)',
     },
     tabBarIcon: ({ focused }) => (
       <TabBarIcon
