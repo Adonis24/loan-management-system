@@ -51,7 +51,7 @@ class SettingsScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     {/* HEADER */}
                     <View style={{ flex: 1 }}>
-                        <View style={{ flex: 1, marginLeft: 5 }}>
+                        <View style={{ flex: 1, marginLeft: -10 }}>
                             <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
                         </View>
                         <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
@@ -142,11 +142,11 @@ class SettingsScreen extends React.PureComponent {
                 </View>
                 {/* <PopupScoreScreen /> */}
 
-                <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
+                {/* <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('QR')}>
                         <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </View>
         );
     }

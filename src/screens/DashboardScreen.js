@@ -129,10 +129,10 @@ class DashboardScreen extends React.PureComponent {
                             }}>
                             <PopupScoreScreen name={this.props.name} toggleShow={this.toggleShow} />
                         </Modal>
-                        <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                            <View style={{ alignItems: 'flex-end' }}>
-                                <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
-                            </View>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+
+                            <Image source={require('../assets/images/tekunB.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
+
                             {/* <View style={{ alignItems: 'flex-start' }}>
                                 <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
                             </View> */}
@@ -140,8 +140,8 @@ class DashboardScreen extends React.PureComponent {
                         <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                             {/* HEADER */}
                             <View style={{ flex: 1 }}>
-                                <Animated.View style={{ opacity: logoOpac, flex: 1, marginLeft: 5 }}>
-                                    <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+                                <Animated.View style={{ opacity: logoOpac, flex: 1, marginLeft: -10 }}>
+                                    <Image source={require('../assets/images/logo-white.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
                                 </Animated.View>
                                 <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
                                     <Animated.View style={{ opacity: profilePicOpac, flex: 5, flexDirection: 'row' }}>
@@ -149,13 +149,13 @@ class DashboardScreen extends React.PureComponent {
                                             <Image source={{ uri: this.props.profile_pic }} style={{ height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' />
 
                                             <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
-                                                <Text style={[styles.textDefault, { textAlign: 'left', alignSelf: 'flex-start', color: '#2C4690' }]}>{this.capitalizeString(this.props.name)}</Text>
-                                                <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>{this.props.member_id}</Text>
-                                                <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start' }]}>{this.props.companyName}</Text>
+                                                <Text style={[styles.textDefault, { textAlign: 'left', alignSelf: 'flex-start', color: '#fff' }]}>{this.capitalizeString(this.props.name)}</Text>
+                                                <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start', color: '#fff' }]}>{this.props.member_id}</Text>
+                                                <Text style={[styles.caption, { textAlign: 'left', alignSelf: 'flex-start', color: '#fff' }]}>{this.props.companyName}</Text>
                                             </View>
                                         </TouchableOpacity>
                                     </Animated.View>
-                                    <Animated.View style={[{ opacity: topBarOpac, backgroundColor: '#fff', flex: 4, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2 }]}>
+                                    <Animated.View style={[{ opacity: topBarOpac, backgroundColor: '#fff', flex: 4, flexDirection: 'row', borderBottomLeftRadius: 20, borderTopLeftRadius: 20, }, styles.shadowNew]}>
                                         <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')} style={{ flex: 1, padding: 5, justifyContent: 'center', alignItems: 'center' }} >
                                             <Image source={require('../assets/images/profile.png')} style={{ flex: 1, width: Layout.window.width / 8, height: undefined, }} resizeMode={'contain'} />
                                             <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
@@ -168,11 +168,64 @@ class DashboardScreen extends React.PureComponent {
                                 </View>
                             </View>
                             {/* CONTENT AREA */}
-                            <View style={{ flex: 4 }}>
+                            <View style={{ flex: 4, backgroundColor: 'transparent' }}>
                                 <Animated.ScrollView style={{ opacity: scrollBarOpac, }} contentStyle={{ padding: 10 }} >
                                     {/* <TouchableOpacity onPress={()=>this.props.sendNotification()}>
                                         <Text>Tekan</Text>
                                     </TouchableOpacity> */}
+                                    {/**Icon */}
+                                    <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
+                                        <View style={{ marginBottom: 10 }}>
+                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Icons</Text>
+                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
+                                            </View>
+                                        </View>
+
+                                        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
+                                            <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
+                                                <TouchableOpacity style={{ flex: 1, }} />
+                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Wallet')} style={[{ flex: 2, padding: 5, marginRight: 15, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
+                                                    <Image source={require('../assets/icon/wallet.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
+                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>E-Wallet</Text>
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoNewsList')} style={[{ flex: 2, padding: 5, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
+                                                    <Image source={require('../assets/icon/news.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
+                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>E-News</Text>
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('EcommerceDetail')} style={[{ flex: 2, padding: 5, marginLeft: 15, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
+                                                    <Image source={require('../assets/images/ecommerce.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
+                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>E-Commerce</Text>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity style={{ flex: 1, }} />
+                                            </View>
+                                        </View>
+                                        <View style={{ margin: 10 }} />
+                                        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
+                                            <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
+                                                <TouchableOpacity style={{ flex: 1, }} />
+                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('UnderConstruction')} style={[{ flex: 2, padding: 5, marginRight: 15, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
+                                                    <Image source={require('../assets/icon/e-learning.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
+                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>E-Learning</Text>
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Bill')} style={[{ flex: 2, padding: 5, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
+                                                    <Image source={require('../assets/icon/bill.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
+                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>E-Billing</Text>
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Delivery')} style={[{ flex: 2, padding: 5, marginLeft: 15, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
+                                                    <Image source={require('../assets/icon/delivery-truck.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
+                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Delivery</Text>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity style={{ flex: 1, }} />
+                                            </View>
+                                        </View>
+                                        <View style={{ margin: 10 }} />
+
+                                    </View>
                                     {/**Highlight */}
                                     <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                         <View style={{ marginBottom: 10 }}>
@@ -182,129 +235,26 @@ class DashboardScreen extends React.PureComponent {
                                             </View>
                                         </View>
 
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoEventEdt')}  >
-                                            <Image source={require('../assets/images/edt.png')} style={{ width: Layout.window.width - 10, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode={'cover'} />
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('None')} style={{ margin: 10 }}  >
+                                            <Image source={require('../assets/images/banner1.png')} style={{ width: Layout.window.width - 20, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode={'cover'} />
                                         </TouchableOpacity>
-                                        {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('UnderConstruction')} style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', margin: 10, marginBottom: 5, borderRadius: 10 }} >
-                                                <Image source={{ uri: 'https://picsum.photos/600' }} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 10, }} />
-                                                <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, paddingTop: 10, paddingLeft: 10 }}>
-                                                    <Text style={[styles.textDefault, { color: '#fff', alignSelf: 'flex-start', textAlign: 'left' }]}>Find Out More ></Text>
-                                                </View>
-                                            </TouchableOpacity> */}
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('None')} style={{ margin: 10 }}  >
+                                            <Image source={require('../assets/images/banner2.png')} style={{ width: Layout.window.width - 20, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode={'cover'} />
+                                        </TouchableOpacity>
+
 
                                     </View>
-                                    {/*Financial Hub */}
-                                    <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)' }}>
-                                        <View style={{ marginBottom: 10 }}>
-                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Financial Hub</Text>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('BizHub')}>
-                                                    <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                            <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Financing')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/e-scoring.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Financing</Text>
-                                                </TouchableOpacity>
 
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Loan')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
-                                                    <Image source={require('../assets/images/loan.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Loan Calculator</Text>
-                                                </TouchableOpacity>
-                                                <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    {/* <Image source={require('../assets/images/EDA.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>My Account</Text> */}
-                                                </View>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('LoanApplication')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    {/* <Image source={require('../assets/icon/crm.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Loan</Text> */}
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                    </View>
-                                    {/*Knowledge Hub */}
+                                    {/*Notification */}
                                     <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                         <View style={{ marginBottom: 10 }}>
-                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Knowledge Hub</Text>
+                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Notifications</Text>
                                                 <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                             </View>
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                             <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoNewsList')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/news.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>News</Text>
-                                                </TouchableOpacity>
-
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoEventList')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/event.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Event</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('HandbookList')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
-                                                    <Image source={require('../assets/images/handbook.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Handbook</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }} />
-
-                                            </View>
-                                        </View>
-                                    </View>
-
-                                    {/*Development Hub */}
-                                    <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                                        <View style={{ marginBottom: 10 }}>
-                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Development Hub</Text>
-                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
-                                            </View>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                            <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Elearning')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/e-learning.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Learning</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Training')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/training.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Training</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Certification')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/certification.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Certification</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }} />
-
-                                            </View>
-                                        </View>
-                                    </View>
-                                    {/*Biz Hub */}
-                                    <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                                        <View style={{ marginBottom: 10 }}>
-                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Biz Hub</Text>
-                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
-                                            </View>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                            <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('EcommerceDetail')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/ecommerce.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Commerce</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('BizApp')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/marketplace.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz App Marketplace</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('BizLicensing')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
-                                                    <Image source={require('../assets/images/licensing.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Licensing</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('BizDirectory')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/directory.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Directory</Text>
-                                                </TouchableOpacity>
+                                                <Text style={styles.caption}>No notifications yet...</Text>
 
                                             </View>
                                         </View>
@@ -313,9 +263,9 @@ class DashboardScreen extends React.PureComponent {
                             </View>
                         </View>
                         {/* <PopupScoreScreen /> */}
-                        <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
+                        <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0, padding: 10 }}>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('QR')}>
-                                <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
+                                <Image source={require('../assets/images/qr.png')} style={{ width: 40, height: 40 }} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -333,19 +283,19 @@ class DashboardScreen extends React.PureComponent {
                             }}>
                             <PopupScoreScreen name={this.props.name} toggleShow={this.toggleShow} />
                         </Modal>
-                        <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                            <View style={{ alignItems: 'flex-end' }}>
-                                <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
-                            </View>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+
+                            <Image source={require('../assets/images/tekunB.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
+
                             {/* <View style={{ alignItems: 'flex-start' }}>
-                                <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
-                            </View> */}
+    <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
+</View> */}
                         </View>
                         <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                             {/* HEADER */}
                             <View style={{ flex: 1 }}>
-                                <Animated.View style={{ opacity: logoOpac, flex: 1, marginLeft: 5 }}>
-                                    <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+                                <Animated.View style={{ opacity: logoOpac, flex: 1, marginLeft: -10 }}>
+                                    <Image source={require('../assets/images/logo-white.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
                                 </Animated.View>
                                 <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
                                     <Animated.View style={{ opacity: profilePicOpac, flex: 5, flexDirection: 'row' }}>
@@ -386,141 +336,37 @@ class DashboardScreen extends React.PureComponent {
                                             </View>
                                         </View>
 
-                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('InfoEventEdt')}  >
-                                            <Image source={require('../assets/images/edt.png')} style={{ width: Layout.window.width - 10, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode={'cover'} />
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('None')} style={{ margin: 10 }}  >
+                                            <Image source={require('../assets/images/banner1.png')} style={{ width: Layout.window.width - 20, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode={'cover'} />
                                         </TouchableOpacity>
-                                        {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('UnderConstruction')} style={{ width: undefined, height: Layout.window.height / 8, justifyContent: 'flex-start', margin: 10, marginBottom: 5, borderRadius: 10 }} >
-                                                <Image source={{ uri: 'https://picsum.photos/600' }} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 10, }} />
-                                                <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, paddingTop: 10, paddingLeft: 10 }}>
-                                                    <Text style={[styles.textDefault, { color: '#fff', alignSelf: 'flex-start', textAlign: 'left' }]}>Find Out More ></Text>
-                                                </View>
-                                            </TouchableOpacity> */}
+                                        <TouchableOpacity onPress={() => this.props.navigation.navigate('None')} style={{ margin: 10 }}  >
+                                            <Image source={require('../assets/images/banner2.png')} style={{ width: Layout.window.width - 20, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode={'cover'} />
+                                        </TouchableOpacity>
+
 
                                     </View>
-                                    {/*Financial Hub */}
-                                    <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)' }}>
-                                        <View style={{ marginBottom: 10 }}>
-                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Financial Hub</Text>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('BizHub')}>
-                                                    <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                            <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/e-scoring.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Financing</Text>
-                                                </TouchableOpacity>
-
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
-                                                    <Image source={require('../assets/images/loan.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Loan Calculator</Text>
-                                                </TouchableOpacity>
-                                                <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    {/* <Image source={require('../assets/images/EDA.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>My Account</Text> */}
-                                                </View>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    {/* <Image source={require('../assets/icon/crm.png')} style={{ width: undefined, height: Layout.window.height / 15, }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Loan</Text> */}
-                                                </TouchableOpacity>
-                                            </View>
-                                        </View>
-                                    </View>
-                                    {/*Knowledge Hub */}
+                                    {/*Notification */}
                                     <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                         <View style={{ marginBottom: 10 }}>
-                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Knowledge Hub</Text>
+                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Notifications</Text>
                                                 <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                             </View>
                                         </View>
                                         <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                             <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/news.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>News</Text>
-                                                </TouchableOpacity>
-
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/event.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Event</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
-                                                    <Image source={require('../assets/images/handbook.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Handbook</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }} />
-                                            </View>
-                                        </View>
-                                    </View>
-
-                                    {/*Development Hub */}
-                                    <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                                        <View style={{ marginBottom: 10 }}>
-                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Development Hub</Text>
-                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
-                                            </View>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                            <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/e-learning.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Learning</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/training.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Training</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/certification.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Certification</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }} />
+                                                <Text style={styles.caption}>No notifications yet...</Text>
 
                                             </View>
                                         </View>
                                     </View>
-                                    {/*Biz Hub */}
-                                    <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                                        <View style={{ marginBottom: 10 }}>
-                                            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Biz Hub</Text>
-                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
-                                            </View>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                            <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/ecommerce.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>e-Commerce</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/marketplace.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz App Marketplace</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', opacity: 0.3 }}>
-                                                    <Image source={require('../assets/images/licensing.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Licensing</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                    <Image source={require('../assets/images/directory.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                    <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Directory</Text>
-                                                </TouchableOpacity>
-                                                <View style={{ flex: 1, padding: 5, justifyContent: 'flex-start' }}>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    </View>
+
                                 </Animated.ScrollView>
                             </View>
                         </View>
                         {/* <PopupScoreScreen /> */}
-                        <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
+                        <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0, padding: 10 }}>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('QR')}>
-                                <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
+                                <Image source={require('../assets/images/qr.png')} style={{ width: 40, height: 40 }} />
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -538,19 +384,19 @@ class DashboardScreen extends React.PureComponent {
                         }}>
                         <PopupScoreScreen name={this.props.name} toggleShow={this.toggleShow} />
                     </Modal>
-                    <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                        <View style={{ alignItems: 'flex-end' }}>
-                            <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
-                        </View>
+                    <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+
+                        <Image source={require('../assets/images/tekunB.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
+
                         {/* <View style={{ alignItems: 'flex-start' }}>
-                            <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
-                        </View> */}
+    <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
+</View> */}
                     </View>
                     <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                         {/* HEADER */}
                         <View style={{ flex: 1 }}>
-                            <Animated.View style={{ opacity: logoOpac, flex: 1, marginLeft: 5 }}>
-                                <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+                            <Animated.View style={{ opacity: logoOpac, flex: 1, marginLeft: -10 }}>
+                                <Image source={require('../assets/images/logo-white.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
                             </Animated.View>
                             <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
                                 <Animated.View style={{ opacity: profilePicOpac, flex: 5, flexDirection: 'row' }}>
@@ -591,61 +437,34 @@ class DashboardScreen extends React.PureComponent {
                                         </View>
                                     </View>
                                     <View style={{ borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey', padding: 10, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(128, 128, 128, 0.2)' }}>
-                                        <Text>Thank you for registering with us. To ensure that you get the best of what BXcess offers, please have your phone number and your email address verified !</Text>
+                                        <Text>Thank you for registering with us. To ensure that you get the best of what Tent offers, please have your phone number and your email address verified !</Text>
                                         <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} style={{ width: Layout.window.width * 0.3, padding: 5, borderRadius: 5, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
                                             <Text style={[styles.caption, { color: '#fff' }]}>Go To Settings</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
-                                {/*Financial Hub */}
-                                <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)' }}>
-                                    <View style={{ marginBottom: 10 }}>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                            <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Financial Hub</Text>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('BizHub')}>
-                                                <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
-                                            </TouchableOpacity>
-                                        </View>
-                                    </View>
-
-                                </View>
-                                {/*Knowledge Hub */}
+                              
+                                {/*Notification */}
                                 <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                     <View style={{ marginBottom: 10 }}>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Knowledge Hub</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Notifications</Text>
                                             <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                         </View>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
+                                        <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
+                                            <Text style={styles.caption}>No notifications yet...</Text>
 
-                                    </View>
-                                </View>
-
-                                {/*Development Hub */}
-                                <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                                    <View style={{ marginBottom: 10 }}>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Development Hub</Text>
-                                            <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                         </View>
                                     </View>
-
-                                </View>
-                                {/*Biz Hub */}
-                                <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                                    <View style={{ marginBottom: 10 }}>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Biz Hub</Text>
-                                            <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
-                                        </View>
-                                    </View>
-
                                 </View>
                             </Animated.ScrollView>
                         </View>
                     </View>
                     {/* <PopupScoreScreen /> */}
-                    <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
+                    <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0, padding: 10 }}>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('QR')}>
-                            <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
+                            <Image source={require('../assets/images/qr.png')} style={{ width: 40, height: 40 }} />
                         </TouchableOpacity>
                     </View>
                 </View>

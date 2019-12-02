@@ -49,10 +49,8 @@ class AgreementScreen extends React.PureComponent {
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                    <View style={{ alignItems: 'flex-start' }}><Image source={require('../assets/images/topLeft.png')} style={{ width: 79, height: 120 }} /></View>
-                    <View style={{ alignItems: 'flex-end' }}><Image source={require('../assets/images/bottomRight.png')} style={{ width: 106, height: 92 }} /></View>
-
+                 <View style={{ flex: 1, justifyContent: 'flex-start' }}>
+                    <Image source={require('../assets/images/tekunA.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
                 </View>
                 <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -61,8 +59,8 @@ class AgreementScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12 }]}>Terms and Conditions</Text>
 
 
-                            <Text style={[styles.caption, { alignSelf: 'flex-start', textAlign: 'left' }]}>Pursuant to the Personal Data Protection Act 2010 (“PDPA”), BXcess (“BXcess”) is mindful and committed to the protection of your personal information and your privacy.
-This Personal Data Protection Notice (“Notice”) describes how BXcess and its respective subsidiaries and associate companies ("FCGB") use your Personal Data.
+                            <Text style={[styles.caption, { alignSelf: 'flex-start', textAlign: 'left' }]}>Pursuant to the Personal Data Protection Act 2010 (“PDPA”),   Tent (“  Tent”) is mindful and committed to the protection of your personal information and your privacy.
+This Personal Data Protection Notice (“Notice”) describes how   Tent and its respective subsidiaries and associate companies ("FCGB") use your Personal Data.
 FCGB is referred to as “we”, “us”, “our” or “ours”. Any person using and accessing this Site, the Content or the Services is referred to as the “User”, “you” or “yours”.</Text>
 
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12 }]}>Acknowledgement and Consent</Text>

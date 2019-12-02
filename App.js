@@ -139,6 +139,8 @@ export default class App extends React.Component {
         require('./src/assets/images/bottomRight.png'),
         require('./src/assets/images/topRight.png'),
         require('./src/assets/images/bottomLeft.png'),
+        require('./src/assets/images/tekunA.png'),
+        require('./src/assets/images/tekunB.png'),
 
         require('./src/assets/images/girl.png'),
 
@@ -158,6 +160,17 @@ export default class App extends React.Component {
         require('./src/assets/images/urusniaga.png'),
 
         require('./src/assets/images/faceborder.png'),
+
+        require('./src/assets/icon/wallet.png'),
+        require('./src/assets/icon/news.png'),
+        require('./src/assets/icon/ecommerce.png'),
+        require('./src/assets/icon/e-learning.png'),
+        require('./src/assets/icon/delivery-truck.png'),
+        require('./src/assets/icon/bill.png'),
+
+        require('./src/assets/images/banner1.png'),
+        require('./src/assets/images/banner2.png'),
+        require('./src/assets/images/logo-white.png'),
 
       ]),
       Font.loadAsync({

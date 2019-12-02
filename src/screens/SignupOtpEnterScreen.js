@@ -150,10 +150,8 @@ class SignupOtpEnterScreen extends React.PureComponent {
     render() {
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                    <View style={{ alignItems: 'flex-start' }}><Image source={require('../assets/images/topLeft.png')} style={{ width: 79, height: 120 }} /></View>
-                    <View style={{ alignItems: 'flex-end' }}><Image source={require('../assets/images/bottomRight.png')} style={{ width: 106, height: 92 }} /></View>
-
+                <View style={{ flex: 1, justifyContent: 'flex-start' }}>
+                    <Image source={require('../assets/images/tekunA.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
                 </View>
                 <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

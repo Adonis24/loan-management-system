@@ -1,6 +1,17 @@
 import { StyleSheet } from 'react-native'
 import Layout from '../constants/Layout'
 import { Constants } from 'expo'
+
+const elevationShadowStyle=(elevation)=>{
+    return{
+        elevation,
+        shadowColor:'black',
+        shadowOffset:{width:0,height:0.5*elevation},
+        shadowOpacity:0.3,
+        shadowRadius:0.8*elevation
+    }
+}
+
 export default StyleSheet.create({
 
     textDefault: {
@@ -40,6 +51,11 @@ export default StyleSheet.create({
         shadowRadius: 6.27,
         elevation: 10,
     },
+    shadowNew:{
+        ...elevationShadowStyle(5),
+        backgroundColor:'white'
+
+    }
     
 
 });
