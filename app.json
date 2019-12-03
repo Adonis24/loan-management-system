@@ -5,7 +5,7 @@
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "android": {
-      "package": "com.fcgb.bxcess",
+      "package": "com.fcgb.tekun",
       "versionCode": 1,
       "permissions": [
         "CAMERA",
