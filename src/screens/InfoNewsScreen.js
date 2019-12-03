@@ -15,6 +15,8 @@ import {
 
 
 } from 'react-native';
+import {WebView} from 'react-native-webview'
+import HTML from 'react-native-render-html'
 
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
@@ -69,9 +71,10 @@ class InfoNewsScreen extends React.PureComponent {
                     {/* CONTENT AREA */}
                     <View style={{ flex: 4 }}>
                         <ScrollView style={{ flex: 1 }}>
-                            <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={[styles.subTitle, { margin: 15, alignSelf: 'flex-start' }]}>{item.content}</Text>
-
+                            <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' ,pading:20}}>
+            
+                            <HTML html={item.content} imagesMaxWidth={Layout.window.width} style={{margin:10}} containerStyle={{padding:10,margin:10}} />
+                                
                             </View>
                         </ScrollView>
                     </View>

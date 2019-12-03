@@ -102,7 +102,7 @@ class ProfileScreen extends React.PureComponent {
                                     </View>
                                 </View>
                                 <View style={{ flexDirection: 'row', margin: 5, justifyContent: 'space-evenly' }}>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Financing')} style={{ width: Layout.window.width * 0.3, padding: 5, borderRadius: 5, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Settings')} style={{ width: Layout.window.width * 0.3, padding: 5, borderRadius: 5, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
                                         <Text style={[styles.caption, { color: '#fff' }]}>Go To Settings</Text>
                                     </TouchableOpacity>
                                 </View>

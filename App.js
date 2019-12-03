@@ -141,8 +141,10 @@ export default class App extends React.Component {
         require('./src/assets/images/bottomLeft.png'),
         require('./src/assets/images/tekunA.png'),
         require('./src/assets/images/tekunB.png'),
+        require('./src/assets/images/tekunC.png'),
 
         require('./src/assets/images/girl.png'),
+        require('./src/assets/images/intro2.png'),
 
         require('./src/assets/images/cardborder.png'),
 

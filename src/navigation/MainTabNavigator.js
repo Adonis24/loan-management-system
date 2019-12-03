@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform,View } from 'react-native';
 import {
   createStackNavigator,
   createBottomTabNavigator,
@@ -161,7 +161,7 @@ DashboardStackWithModal.navigationOptions = ({ navigation }) => {
   }
   return {
     tabBarVisible,
-    tabBarLabel: 'Home',
+    tabBarLabel: <View />,
     tabBarOptions: {
       activeTintColor: '#4967AE',
       inactiveTintColor: '#7896dc',
@@ -180,7 +180,7 @@ const InsightStack = createStackNavigator({
 });
 
 InsightStack.navigationOptions = {
-  tabBarLabel: 'Contacts',
+  tabBarLabel: <View />,
 
   tabBarOptions: {
     activeTintColor: '#4967AE',
@@ -199,7 +199,7 @@ const NotificationStack = createStackNavigator({
 });
 
 NotificationStack.navigationOptions = {
-  tabBarLabel: 'Notifications',
+  tabBarLabel: <View />,
 
   tabBarOptions: {
     activeTintColor: '#4967AE',
@@ -239,7 +239,7 @@ SettingStackWithModal.navigationOptions = ({ navigation }) => {
   }
   return {
     tabBarVisible,
-    tabBarLabel: 'Settings',
+    tabBarLabel: <View />,
     tabBarOptions: {
       activeTintColor: '#4967AE',
       inactiveTintColor: '#7896dc',

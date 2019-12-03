@@ -35,7 +35,7 @@ class IntroScreen extends React.PureComponent {
     };
     render() {
         const images = [
-            { id: 1, title: 'Welcome to   Tent! Sign up now to join us or login to your account', screenshotUri: require('../assets/images/intro.png') },
+            { id: 1, title: 'Welcome to   Tent! Sign up now to join us or login to your account', screenshotUri: require('../assets/images/intro2.png') },
         ]
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
