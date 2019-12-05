@@ -34,51 +34,12 @@ export const generateJWT = () => {
     }
 }
 
-export const register = () => {
+export const register = (values) => {
     return async (dispatch, getState) => {
-        dispatch({ type: 'SET_REGISTER', payload: { indicator: true } })
-        const { token_type, access_token, name, email, password, password_confirmation, expo_token } = await getState().registrationReducer
-        console.log(`ada ke tak register info : ${JSON.stringify(getState().registrationReducer)}`)
-
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        const errorArray = []
-        const errorColor = []
-
-        if (name == undefined || name == '') {
-            errorArray.push({ title: "name", desc: "No Name" })
-            errorColor.push("Name")
-        }
-        if (email == undefined || email == '') {
-            errorArray.push({ title: "email", desc: "No e-mail" })
-            errorColor.push("E-mail")
-        } else if (reg.test(email) === false) {
-            errorArray.push("Not e-mail format")
-            errorColor.push("E-mail")
-        }
-        if (password == undefined || password == '') {
-            errorArray.push({ title: "password", desc: "No password" })
-            errorColor.push("Password")
-        } else if (password.length < 6) {
-            errorArray.push({ title: "password", desc: "Password need 6 character" })
-            errorColor.push("Password")
-        }
-        if (password_confirmation == undefined || password_confirmation == '') {
-            errorArray.push({ title: "confirm password", desc: "No Confirm password" })
-            errorColor.push("Confirm Password")
-        } else if (password_confirmation.length < 6) {
-            errorArray.push({ title: "confirm password", desc: "Password need 6 character" })
-            errorColor.push("Confirm Password")
-        } else if (password_confirmation != password) {
-            errorArray.push({ title: "confirm password", desc: "Password not same" })
-            errorColor.push("Confirm Password")
-        }
-        if (errorArray.length > 0) {
-            dispatch({ type: 'SET_REGISTER', payload: { error: errorArray, errorColor, indicator: false } })
-        } else {
-            console.log('takde error dalam screen and boleh proceed utk register')
-            await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation, expo_token))
-            //await dispatch(getPersonalToken())
-        }
+        const { name, email, password, password_confirmation } = values
+        const { token_type, access_token, expo_token } = await getState().registrationReducer
+        await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation, expo_token))
+        //await dispatch(getPersonalToken())
     }
 }
 
@@ -140,40 +101,10 @@ export const getPersonalTokenLMS = () => {
     }
 }
 
-export const login = () => {
+export const login = (values) => {
     return (dispatch, getState) => {
-        dispatch({ type: 'SET_LOGIN', payload: { indicator: true } })
-        const username = getState().loginScreenReducer.email
-        //const password = getState().loginScreenReducer.password
-
-        const { email, password } = getState().loginScreenReducer
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        const errorArray = []
-        const errorColor = []
-
-        if (email == undefined || email == '') {
-
-            errorArray.push({ title: "email", desc: "No e-mail" })
-            errorColor.push("E-mail")
-        } else if (reg.test(email) === false) {
-            errorArray.push("Wrong e-mail format")
-            errorColor.push("E-mail")
-        }
-        if (password == undefined || password == '') {
-
-            errorArray.push({ title: "password", desc: "No password" })
-            errorColor.push("Password")
-        } else if (password.length < 6) {
-            errorArray.push({ title: "password", desc: "Wrong password" })
-            errorColor.push("Password")
-        }
-
-        if (errorArray.length > 0) {
-            dispatch({ type: 'SET_LOGIN', payload: { loggedIn: false, error: errorArray, errorColor, indicator: false } })
-
-        } else {
-            dispatch(requestPersonalToken('login', username, password))
-        }
+        const { email, password } = values
+        dispatch(requestPersonalToken('login', email, password))
     }
 }
 
@@ -182,9 +113,7 @@ export const loginLMS = () => {
         dispatch({ type: 'SET_LOGIN', payload: { indicator: true } })
         const username = getState().loginScreenReducer.email
         //const password = getState().loginScreenReducer.password
-
         const { email, password } = getState().loginScreenReducer
-
         dispatch(requestPersonalTokenLMS('login', username, password))
     }
 }
