@@ -73,7 +73,7 @@ class InsightScreen extends React.PureComponent {
                     </View>
                     {/* CONTENT AREA */}
                     <View style={{ flex: 4 }}>
-                        <ScrollView contentStyle={{ padding: 10 }} >
+                  
 
                             <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, paddingBottom: 10, marginBottom: 20 }]}>
 
@@ -84,7 +84,7 @@ class InsightScreen extends React.PureComponent {
 
                                         renderItem={({ item }) => (
                                             <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
-                                                <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
+                                                <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row',flex:4 }]}>
                                                     <Thumbnail source={{ uri: item.profile_pic }} circle small style={{ borderWidth: 1, borderColor: 'lightgrey' }} />
                                                     <View>
                                                     <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.name}</Text>
@@ -92,7 +92,7 @@ class InsightScreen extends React.PureComponent {
                                                     <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.email}</Text>
                                                     </View>
                                                 </View>
-                                                <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: 5 }}>
+                                                <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: 5,flex:1 }}>
                                                     <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
                                                         <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#fff' }]}>Friend</Text>
                                                     </View>
@@ -110,7 +110,7 @@ class InsightScreen extends React.PureComponent {
                                     </View>
                                 }
                             </View>
-                        </ScrollView>
+                  
                     </View>
                 </View>
                 {/* <PopupScoreScreen /> */}
