@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Platform, StatusBar, StyleSheet, View, AsyncStorage } from 'react-native';
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
@@ -22,15 +22,13 @@ import minimal from './native-base-theme/variables/minimal';
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
+const App = (props) => {
 
-export default class App extends React.Component {
-  state = {
-    isLoadingComplete: false,
-    notification: {},
-    tokenExists: false
-  };
+  const [isLoadingComplete, setIsLoadingComplete] = useState(false)
+  const [notification, setNotification] = useState({})
+  const [tokenExists, setTokenExists] = useState(false)
 
-  registerForPushNotificationsAsync = async () => {
+  const registerForPushNotificationsAsync = async () => {
     const { status: existingStatus } = await Permissions.getAsync(
       Permissions.NOTIFICATIONS
     );
@@ -60,24 +58,25 @@ export default class App extends React.Component {
     }))
   }
 
-  async componentDidMount() {
-    await this.checkUpdate()
 
-    await this.registerForPushNotificationsAsync();
-    this._notificationSubscription = await Notifications.addListener(this._handleNotification);
+  useEffect(() => {
+    checkUpdate()
 
-    await this.checkLogin()
-   
-  }
+    registerForPushNotificationsAsync();
+    const _notificationSubscription = Notifications.addListener(_handleNotification);
 
-  _handleNotification = (notification) => {
+    checkLogin()
+
+  }, [])
+
+  const _handleNotification = (notification) => {
     console.log(`notification ${JSON.stringify(notification)}`)
     const { data } = notification
 
     store.dispatch({ type: 'SET_NOTIFICATION', payload: { ...data } })
   };
 
-  async checkUpdate() {
+  const checkUpdate = async () => {
     try {
       const update = await Expo.Updates.checkForUpdateAsync();
       if (update.isAvailable) {
@@ -89,13 +88,14 @@ export default class App extends React.Component {
     }
   }
 
-  checkLogin = async () => {
+  const checkLogin = async () => {
     try {
       //const personalToken = await AsyncStorage.getItem('personalToken');
       const personalToken = await SecureStore.getItemAsync('personalToken')
       if (personalToken !== null && !personalToken.includes('error')) {
         console.log(`personal token ialah : ${personalToken}`)
-        this.setState({ tokenExists: true })
+        //this.setState({ tokenExists: true })
+        setTokenExists(true)
       }
     } catch (error) {
       console.log(`personalToken error ${error}`)
@@ -103,98 +103,101 @@ export default class App extends React.Component {
     }
   }
 
-  render() {
-    if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
-      return (
-        <AppLoading
-          startAsync={this._loadResourcesAsync}
-          onError={this._handleLoadingError}
-          onFinish={this._handleFinishLoading}
-        />
-      );
-    } else {
-      return (
-        <Provider store={store}>
-          <StyleProvider style={getTheme(minimal)}>
-            <View style={styles.container}>
-              {/* <DashboardAsset /> */}
-              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-              {this.state.tokenExists ? <LoggedInContainer /> : <AuthenticationContainer />}
-            </View>
-          </StyleProvider>
-        </Provider>
-      );
-    }
-  }
-
-  _loadResourcesAsync = async () => {
-    return Promise.all([
-      Asset.loadAsync([
-        require('./src/assets/images/robot-dev.png'),
-        require('./src/assets/images/robot-prod.png'),
-
-        require('./src/assets/images/logo.png'),
-
-        require('./src/assets/images/topLeft.png'),
-        require('./src/assets/images/bottomRight.png'),
-        require('./src/assets/images/topRight.png'),
-        require('./src/assets/images/bottomLeft.png'),
-        require('./src/assets/images/tekunA.png'),
-        require('./src/assets/images/tekunB.png'),
-        require('./src/assets/images/tekunC.png'),
-
-        require('./src/assets/images/girl.png'),
-        require('./src/assets/images/intro2.png'),
-
-        require('./src/assets/images/cardborder.png'),
-
-        require('./src/assets/icon/eda.png'),
-        require('./src/assets/icon/bizDir.png'),
-        require('./src/assets/icon/crm.png'),
-        //require('./src/assets/icon/crm.png'),
-        require('./src/assets/icon/rfq.png'),
-
-        require('./src/assets/images/edt.png'),
-        require('./src/assets/images/edt2.jpg'),
-
-        require('./src/assets/images/mayamall.png'),
-
-        require('./src/assets/images/urusniaga.png'),
-
-        require('./src/assets/images/faceborder.png'),
-
-        require('./src/assets/icon/wallet.png'),
-        require('./src/assets/icon/news.png'),
-        require('./src/assets/icon/ecommerce.png'),
-        require('./src/assets/icon/e-learning.png'),
-        require('./src/assets/icon/delivery-truck.png'),
-        require('./src/assets/icon/bill.png'),
-
-        require('./src/assets/images/banner1.png'),
-        require('./src/assets/images/banner2.png'),
-        require('./src/assets/images/logo-white.png'),
-
-      ]),
-      Font.loadAsync({
-        'Montserrat_medium': require('./src/assets/fonts/Montserrat/Montserrat-Medium.ttf'),
-        'Montserrat_light': require('./src/assets/fonts/Montserrat/Montserrat-Light.ttf'),
-        'Montserrat_bold': require('./src/assets/fonts/Montserrat/Montserrat-Bold.ttf'),
-        'Roboto-regular': require('./src/assets/fonts/Roboto/Roboto-Regular.ttf'),
-
-      }),
-    ]);
-  };
-
-  _handleLoadingError = error => {
+  const _handleLoadingError = error => {
     // In this case, you might want to report the error to your error
     // reporting service, for example Sentry
     console.warn(error);
   };
-
-  _handleFinishLoading = () => {
-    this.setState({ isLoadingComplete: true });
+  
+  const _handleFinishLoading = () => {
+    //this.setState({ isLoadingComplete: true });
+    setIsLoadingComplete(true)
   };
+
+  if (!isLoadingComplete && !props.skipLoadingScreen) {
+    return (
+      <AppLoading
+        startAsync={_loadResourcesAsync}
+        onError={_handleLoadingError}
+        onFinish={_handleFinishLoading}
+      />
+    );
+  } else {
+    return (
+      <Provider store={store}>
+        <StyleProvider style={getTheme(minimal)}>
+          <View style={styles.container}>
+            {/* <DashboardAsset /> */}
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            {tokenExists ? <LoggedInContainer /> : <AuthenticationContainer />}
+          </View>
+        </StyleProvider>
+      </Provider>
+    );
+  }
 }
+
+
+const _loadResourcesAsync = async () => {
+  return Promise.all([
+    Asset.loadAsync([
+      require('./src/assets/images/robot-dev.png'),
+      require('./src/assets/images/robot-prod.png'),
+
+      require('./src/assets/images/logo.png'),
+
+      require('./src/assets/images/topLeft.png'),
+      require('./src/assets/images/bottomRight.png'),
+      require('./src/assets/images/topRight.png'),
+      require('./src/assets/images/bottomLeft.png'),
+      require('./src/assets/images/tekunA.png'),
+      require('./src/assets/images/tekunB.png'),
+      require('./src/assets/images/tekunC.png'),
+
+      require('./src/assets/images/girl.png'),
+      require('./src/assets/images/intro2.png'),
+
+      require('./src/assets/images/cardborder.png'),
+
+      require('./src/assets/icon/eda.png'),
+      require('./src/assets/icon/bizDir.png'),
+      require('./src/assets/icon/crm.png'),
+      //require('./src/assets/icon/crm.png'),
+      require('./src/assets/icon/rfq.png'),
+
+      require('./src/assets/images/edt.png'),
+      require('./src/assets/images/edt2.jpg'),
+
+      require('./src/assets/images/mayamall.png'),
+
+      require('./src/assets/images/urusniaga.png'),
+
+      require('./src/assets/images/faceborder.png'),
+
+      require('./src/assets/icon/wallet.png'),
+      require('./src/assets/icon/news.png'),
+      require('./src/assets/icon/ecommerce.png'),
+      require('./src/assets/icon/e-learning.png'),
+      require('./src/assets/icon/delivery-truck.png'),
+      require('./src/assets/icon/bill.png'),
+
+      require('./src/assets/images/banner1.png'),
+      require('./src/assets/images/banner2.png'),
+      require('./src/assets/images/logo-white.png'),
+
+    ]),
+    Font.loadAsync({
+      'Montserrat_medium': require('./src/assets/fonts/Montserrat/Montserrat-Medium.ttf'),
+      'Montserrat_light': require('./src/assets/fonts/Montserrat/Montserrat-Light.ttf'),
+      'Montserrat_bold': require('./src/assets/fonts/Montserrat/Montserrat-Bold.ttf'),
+      'Roboto-regular': require('./src/assets/fonts/Roboto/Roboto-Regular.ttf'),
+
+    }),
+  ]);
+};
+
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -202,3 +205,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+export default App;
