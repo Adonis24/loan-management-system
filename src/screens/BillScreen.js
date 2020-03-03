@@ -27,14 +27,12 @@ import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, L
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class BillScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
-    nav = (screen) => {
-        this.props.navigation.navigate(screen)
+ const BillScreen = (props) => { 
+
+    const nav = (screen) => {
+        props.navigation.navigate(screen)
     }
-    render() {
+    
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -48,7 +46,7 @@ class BillScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                            <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -109,20 +107,9 @@ class BillScreen extends React.PureComponent {
             </View>
 
         );
-    }
+    
 }
 
 
-function mapStateToProps(state) {
-    return {
 
-
-
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(BillScreen)
+export default BillScreen
