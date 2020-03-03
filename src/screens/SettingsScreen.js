@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React from 'react';
+import React,{useEffect} from 'react';
 import {
     Image,
     Platform,
@@ -15,7 +15,7 @@ import {
 
 
 } from 'react-native';
-
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 
@@ -28,15 +28,19 @@ import styles from '../styles/styles'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class SettingsScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
-    logout() {
-        this.props.logout()
-        this.props.navigation.navigate('Welcome')
+const SettingScreen = (props) => {
+
+    const logout = async () => {
+        await dispatch(actionCreator.logout())
+        await props.navigation.navigate('Welcome')
     }
-    render() {
+    const dispatch = useDispatch()
+    const {name,email, phone_no,profile_pic,email_verified_at,ic_no,member_id } = useSelector(state => state.myAccountReducer, shallowEqual)
+
+    useEffect(() => {
+        dispatch(actionCreator.enableNotification())
+    }, []); // empty-array means don't watch for any updates
+
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
 
@@ -71,8 +75,8 @@ class SettingsScreen extends React.PureComponent {
                                 <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                             </View>
                             <View style={{ width: Layout.window.width, paddingLeft: 5, alignItems: 'center' }}>
-                                <Image source={{ uri: this.props.profile_pic }} style={{ width: Layout.window.width / 3, height: Layout.window.width / 3, borderRadius: Layout.window.width / 6 }} />
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('CameraSelfie')}><Text>Add/Change</Text></TouchableOpacity>
+                                <Image source={{ uri: profile_pic }} style={{ width: Layout.window.width / 3, height: Layout.window.width / 3, borderRadius: Layout.window.width / 6 }} />
+                                <TouchableOpacity onPress={() => props.navigation.navigate('CameraSelfie')}><Text>Add/Change</Text></TouchableOpacity>
                             </View>
                             <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                                 <Text style={[styles.subTitle, { margin: 5 }]}>Profile</Text>
@@ -82,35 +86,35 @@ class SettingsScreen extends React.PureComponent {
                             <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 10, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
                                 <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
                                     <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Name :</Text></View>
-                                    <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.name}</Text></View>
+                                    <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{name}</Text></View>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
                                     <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Email :</Text></View>
                                     <View style={{ flex: 2, flexDirection: 'row' }}>
-                                        <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.email}</Text><TouchableOpacity >
-                                            {this.props.email_verified_at ? <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} /> : <Text style={[styles.caption, { padding: 3, margin: 3, }]}>Verify</Text>}
+                                        <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{email}</Text><TouchableOpacity >
+                                            {email_verified_at ? <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} /> : <Text style={[styles.caption, { padding: 3, margin: 3, }]}>Verify</Text>}
                                         </TouchableOpacity>
                                     </View>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
                                     <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Phone :</Text></View>
                                     <View style={{ flex: 2 }}>
-                                        {this.props.phone_no ? <View style={{ flexDirection: 'row' }}>
-                                            <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.phone_no}</Text>
+                                        {phone_no ? <View style={{ flexDirection: 'row' }}>
+                                            <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{phone_no}</Text>
                                             <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} />
                                         </View> :
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUpOtp', { screen: 'setting' })} style={{ borderRadius: 5 }}>
+                                            <TouchableOpacity onPress={() => props.navigation.navigate('SignUpOtp', { screen: 'setting' })} style={{ borderRadius: 5 }}>
                                                 <Text style={[styles.caption, { alignSelf: 'flex-start', textAlign: 'left', padding: 5 }]}>Add Phone</Text>
                                             </TouchableOpacity>}
                                     </View>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
                                     <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>IC :</Text></View>
-                                    <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.ic_no}</Text></View>
+                                    <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{ic_no}</Text></View>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
                                     <View style={{ flex: 1 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>Membership:</Text></View>
-                                    <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{this.props.member_id}</Text></View>
+                                    <View style={{ flex: 2 }}><Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left' }]}>{member_id}</Text></View>
                                 </View>
                             </View>
 
@@ -125,7 +129,7 @@ class SettingsScreen extends React.PureComponent {
 
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5, marginTop: 5, alignSelf: 'flex-start' }}>
-                                    <TouchableOpacity onPress={() => this.logout()} style={{ marginLeft: 0, backgroundColor: 'orange', borderRadius: 5 }}>
+                                    <TouchableOpacity onPress={() => logout()} style={{ marginLeft: 0, backgroundColor: 'orange', borderRadius: 5 }}>
                                         <Text style={[styles.textDefault, { margin: 10, color: '#fff' }]}>Logout</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -149,27 +153,12 @@ class SettingsScreen extends React.PureComponent {
                 </View> */}
             </View>
         );
-    }
+    
 }
 
+SettingScreen.navigationOptions = {
+    header: null,
+};
 
-function mapStateToProps(state) {
-    return {
-        member_id: state.myAccountReducer.member_id,
-        name: state.myAccountReducer.name,
-        email: state.myAccountReducer.email,
-        phone_no: state.myAccountReducer.phone_no,
-        profile_pic: state.myAccountReducer.profile_pic,
-        email_verified_at: state.myAccountReducer.email_verified_at,
-        ic_no: state.myAccountReducer.ic_no,
-        member_id: state.myAccountReducer.member_id,
 
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-        logout: () => dispatch(actionCreator.logout()),
-        enableNotification: () => dispatch(actionCreator.enableNotification())
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen)
+export default SettingScreen
