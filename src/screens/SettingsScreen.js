@@ -32,7 +32,7 @@ const SettingScreen = (props) => {
 
     const logout = async () => {
         await dispatch(actionCreator.logout())
-        await props.navigation.navigate('Welcome')
+        await props.navigation.navigate('Authentication')
     }
     const dispatch = useDispatch()
     const {name,email, phone_no,profile_pic,email_verified_at,ic_no,member_id } = useSelector(state => state.myAccountReducer, shallowEqual)
