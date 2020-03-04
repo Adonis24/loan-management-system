@@ -15,6 +15,7 @@ import rootReducer from './src/store/reducers/Reducer';
 import { StyleProvider } from 'native-base';
 import getTheme from './native-base-theme/components';
 import minimal from './native-base-theme/variables/minimal';
+import Nav from './src/navigation/Nav';
 // import DashboardAsset from './src/components/DashboardAsset';
 
 // This refers to the function defined earlier in this guide
@@ -129,7 +130,7 @@ const App = (props) => {
           <View style={styles.container}>
             {/* <DashboardAsset /> */}
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            {tokenExists ? <LoggedInContainer /> : <AuthenticationContainer />}
+            <Nav />
           </View>
         </StyleProvider>
       </Provider>
