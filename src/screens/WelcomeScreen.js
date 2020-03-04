@@ -95,10 +95,10 @@ class WelcomeScreen extends React.PureComponent {
                             <Animated.Text style={[styles.textDefault, { margin: 20, opacity: introOpac }]}>Welcome to Tent! Sign up now to join us or login to your account</Animated.Text>
 
                             <Animated.View style={{ opacity: buttonsOpac }}>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Intro')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Registration')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                     <Text style={[styles.textDefault, { color: '#4A90E2' }]}>Sign Up</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={{ width: Layout.window.width * 0.4, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#4A90E2' }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.navigate('Login',{})} style={{ width: Layout.window.width * 0.4, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#4A90E2' }}>
                                     <LinearGradient
                                         colors={['#4DCB3E', '#269B1D']}
                                         style={{ paddingTop: 5, paddingBottom: 5, alignItems: 'center', borderRadius: 15, width: Layout.window.width * 0.4, }}>
