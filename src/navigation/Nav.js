@@ -16,40 +16,41 @@ const Stack = createStackNavigator();
 
 
 const Nav = (props) => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-    //const { token } = useSelector(state => state.apiReducer, shallowEqual)
+  //const { token } = useSelector(state => state.apiReducer, shallowEqual)
 
-    const [tokenExists, setTokenExists] = useState(false)
+  const [tokenExists, setTokenExists] = useState(false)
 
-    const checkLogin = async () => {
-        try {
-          //const personalToken = await AsyncStorage.getItem('personalToken');
-          const personalToken = await SecureStore.getItemAsync('personalToken')
-          if (personalToken !== null && !personalToken.includes('error')) {
-            console.log(`personal token ialah : ${personalToken}`)
-            //this.setState({ tokenExists: true })
-            setTokenExists(true)
-          }
-        } catch (error) {
-          console.log(`personalToken error ${error}`)
-          return 'takde'
-        }
+  const checkLogin = async () => {
+    try {
+      //const personalToken = await AsyncStorage.getItem('personalToken');
+      const personalToken = await SecureStore.getItemAsync('personalToken')
+      if (personalToken !== null && !personalToken.includes('error')) {
+        console.log(`personal token ialah : ${personalToken}`)
+        //this.setState({ tokenExists: true })
+        setTokenExists(true)
       }
+    } catch (error) {
+      console.log(`personalToken error ${error}`)
+      return 'takde'
+    }
+  }
 
-    useEffect(() => {
-        checkLogin()
-    }, [])
+  useEffect(() => {
+    checkLogin()
+  }, [])
 
-    return (
-        <NavigationContainer>
-            <Stack.Navigator>
-            <Stack.Screen name="Main" component={MainTabNav} options={{ headerShown: false }} /> 
-            <Stack.Screen name="Welcome" component={AuthenticationStack} options={{ headerShown: false }} /> 
-            <Stack.Screen name="Registration" component={RegistrationStack} options={{ headerShown: false }} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    )
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        {tokenExists ?
+          <Stack.Screen name="Main" component={MainTabNav} options={{ headerShown: false }} /> :
+          <Stack.Screen name="Welcome" component={AuthenticationStack} options={{ headerShown: false }} />}
+        <Stack.Screen name="Registration" component={RegistrationStack} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
 
 
