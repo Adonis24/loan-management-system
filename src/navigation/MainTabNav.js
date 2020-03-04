@@ -74,6 +74,7 @@ import QRScreen from '../screens/QRScreen';
 import WalletScreen from '../screens/WalletScreen';
 import BillScreen from '../screens/BillScreen';
 import DeliveryScreen from '../screens/DeliveryScreen';
+import UnderConstructionScreen from '../screens/UnderConstructionScreen';
 
 
 
@@ -87,92 +88,65 @@ const DashboardStack = () => {
 
 const DashboardStackWithModal = () => {
     return (
-        <Stack.Navigator initialRouteName="Dashboard" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="Main" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Main" component={DashboardStack} />
-
+            <Stack.Screen name="UnderConstruction" component={UnderConstructionScreen} />
             <Stack.Screen name="PopupScore" component={PopupScoreScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="Info" component={InfoScreen} />
             <Stack.Screen name="InfoEvent" component={InfoEventScreen} />
             <Stack.Screen name="InfoEventList" component={InfoEventListScreen} />
-
+            <Stack.Screen name="InfoNews" component={InfoNewsScreen} />
+            <Stack.Screen name="InfoNewsList" component={InfoNewsListScreen} />
+            <Stack.Screen name="BizHub" component={BusinessHubScreen} />
+            <Stack.Screen name="PromotionList" component={PromotionListScreen} />
+            <Stack.Screen name="Promotion" component={PromotionScreen } />
+            <Stack.Screen name="HandbookList" component={HandbookListScreen} />
+            <Stack.Screen name="Handbook" component={HandbookScreen} />
+            <Stack.Screen name="MyScore" component={MyScoreScreen} />
+            <Stack.Screen name="LoanApplication" component={LoanApplicationScreen} />
+            <Stack.Screen name="Financing" component={FinancingScreen} />
+            <Stack.Screen name="Grant" component={GrantScreen} />
+            <Stack.Screen name="Quiz" component={QuizScreen} />
+            <Stack.Screen name="QuizAnswer" component={QuizAnswerScreen} />
+            <Stack.Screen name="MyAccount" component={MyAccountScreen} />
+            <Stack.Screen name="BizApp" component={BizAppScreen} />
+            <Stack.Screen name="BizAppDetail" component={BizAppDetailScreen} />
+            <Stack.Screen name="MyAccountEdit" component={MyAccountEditScreen} />
+            <Stack.Screen name="BizDirectory" component={BizDirectoryScreen} />
+            <Stack.Screen name="BizLicensing" component={BizLicensingScreen} />
+            <Stack.Screen name="Certification" component={CertificationScreen} />
+            <Stack.Screen name="CertificationView" component={CertificationViewScreen} />
+            <Stack.Screen name="Elearning" component={ElearningScreen} />
+            <Stack.Screen name="EcommerceDetail" component={EcommerceDetailScreen} />
+            <Stack.Screen name="Ecommerce" component={EcommerceScreen} />
+            <Stack.Screen name="Edonation" component={EdonationScreen} />
+            <Stack.Screen name="Loan" component={LoanCalculatorScreen} />
+            <Stack.Screen name="ElearningPlay" component={ElearningPlayScreen} />
+            <Stack.Screen name="AddCompany" component={CompanyInformationScreen} />
+            <Stack.Screen name="CompanyContactInformation" component={CompanyContactInformationScreen} />
+            <Stack.Screen name="CompanyContactAddressInformation" component={CompanyContactAddressInformationScreen} />
+            <Stack.Screen name="CompanyInfoSuccess" component={CompanyInfoSuccessScreen} />
+            <Stack.Screen name="SignUpOtp" component={SignupOtpScreen} />
+            <Stack.Screen name="SignUpOtpEnter" component={SignupOtpEnterScreen} />
+            <Stack.Screen name="SignUpSuccess" component={SignupSuccessScreen} />
+            <Stack.Screen name="PendingDir" component={PendingDirScreen} />
+            <Stack.Screen name="AssociateDir" component={AssociateDirScreen} />
+            <Stack.Screen name="ContactPersonMain" component={ContactPersonMainScreen} />
+            <Stack.Screen name="ContactPersonSuccess" component={ContactPersonSuccessScreen} />
+            <Stack.Screen name="ScanQR" component={ScanQRScreen} />
+            <Stack.Screen name="QR" component={QRScreen} />
+            <Stack.Screen name="UserAccount" component={UserAccountScreen} />
+            <Stack.Screen name="Training" component={TrainingScreen} />
+            <Stack.Screen name="InfoEventEdt" component={InfoEventEdtScreen} />
+            <Stack.Screen name="NoCompany" component={NoCompanyScreen} />
+            <Stack.Screen name="GrantApplication" component={GrantApplicationScreen} />
+            <Stack.Screen name="Wallet" component={WalletScreen} />
+            <Stack.Screen name="Bill" component={BillScreen} />
+            <Stack.Screen name="Delivery" component={DeliveryScreen} />
         </Stack.Navigator>
     )
 }
-
-// const DashboardStackWithModal = createStackNavigator(
-//   {
-//     Main: { screen: DashboardStack, },
-//     PopupScore: { screen: PopupScoreScreen, },
-//     Profile: { screen: ProfileScreen, },
-//     Info: { screen: InfoScreen, },
-//     InfoEvent: { screen: InfoEventScreen, },
-//     InfoEventList: { screen: InfoEventListScreen, },
-//     InfoNews: { screen: InfoNewsScreen, },
-//     InfoNewsList: { screen: InfoNewsListScreen, },
-//     BizHub: { screen: BusinessHubScreen, },
-//     PromotionList: { screen: PromotionListScreen, },
-//     Promotion: { screen: PromotionScreen },
-//     HandbookList: { screen: HandbookListScreen, },
-//     Handbook: { screen: HandbookScreen, },
-//     MyScore: { screen: MyScoreScreen, },
-//     LoanApplication: { screen: LoanApplicationScreen, },
-//     Financing: { screen: FinancingScreen, },
-//     Grant: { screen: GrantScreen, },
-//     Quiz: { screen: QuizScreen, },
-//     QuizAnswer: { screen: QuizAnswerScreen, },
-//     MyAccount: { screen: MyAccountScreen, },
-//     BizApp: { screen: BizAppScreen, },
-//     BizAppDetail: { screen: BizAppDetailScreen, },
-//     MyAccountEdit: { screen: MyAccountEditScreen, },
-//     BizDirectory: { screen: BizDirectoryScreen, },
-//     BizLicensing: { screen: BizLicensingScreen, },
-//     Certification: { screen: CertificationScreen, },
-//     CertificationView: { screen: CertificationViewScreen, },
-//     Elearning: { screen: ElearningScreen, },
-//     EcommerceDetail: { screen: EcommerceDetailScreen, },
-//     Ecommerce: { screen: EcommerceScreen, },
-//     Edonation: { screen: EdonationScreen, },
-//     Loan: { screen: LoanCalculatorScreen, },
-//     ElearningPlay: { screen: ElearningPlayScreen, },
-
-//     AddCompany: { screen: CompanyInformationScreen, },
-//     CompanyContactInformation: CompanyContactInformationScreen,
-//     CompanyContactAddressInformation: CompanyContactAddressInformationScreen,
-//     CompanyInfoSuccess: CompanyInfoSuccessScreen,
-
-//     SignUpOtp: SignupOtpScreen,
-//     SignUpOtpEnter: SignupOtpEnterScreen,
-//     SignUpSuccess: SignupSuccessScreen,
-
-
-//     PendingDir: { screen: PendingDirScreen, },
-//     AssociateDir: { screen: AssociateDirScreen, },
-
-//     ContactPersonMain: { screen: ContactPersonMainScreen, },
-//     ContactPersonSuccess: { screen: ContactPersonSuccessScreen, },
-//     ScanQR: { screen: ScanQRScreen, },
-//     QR: { screen: QRScreen, },
-//     UserAccount: { screen: UserAccountScreen },
-
-//     Training: { screen: TrainingScreen, },
-
-//     InfoEventEdt: { screen: InfoEventEdtScreen, },
-
-//     NoCompany: { screen: NoCompanyScreen, },
-
-//     GrantApplication: { screen: GrantApplicationScreen, },
-//     Wallet: { screen: WalletScreen, },
-//     Bill: { screen: BillScreen, },
-//     Delivery: { screen: DeliveryScreen, },
-
-//   },
-//   {
-//     mode: 'modal',
-//     headerMode: 'none',
-//   },
-// );
-
 
 const InsightStack = () => {
     return (
