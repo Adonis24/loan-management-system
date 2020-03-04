@@ -14,7 +14,8 @@ import {
     ImageBackground,
     Animated,
     Easing,
-    Modal
+    Modal,
+    FlatList
 
 } from 'react-native';
 
@@ -33,6 +34,53 @@ import styles from '../styles/styles'
 import PopupScoreScreen from './PopupScoreScreen';
 
 const DashboardScreen = (props) => {
+
+    //delete later
+
+    const [pageTotal, setPageTotal] = useState(5)
+    const [page, setPage] = useState([{ p: 1, selected: true }, { p: 2 }, { p: 3 }, { p: 4 }, { p: '...' }, { p: pageTotal }])
+    const resetPage = () => {
+        const pageTemp = [{ p: 1, selected: true }, { p: 2 }, { p: 3 }, { p: 4 }, { p: '...' }, { p: pageTotal }]
+        setPage([...pageTemp])
+    }
+    const ubahPage = (p, i) => {
+
+        const pageTemp = page
+
+        if (i == 3) {
+            if (pageTotal - p < 5) {
+                const newPageTemp = [{ p: pageTotal - 5 }, { p: pageTotal - 4 }, { p: pageTotal - 3 }, { p: pageTotal - 2 }, { p: pageTotal - 1 }, { p: pageTotal }]
+                const selectedIndex = newPageTemp.findIndex(np => np.p === p)
+                console.log(`p ialah : ${p}`)
+                console.log(`selected index ialah : ${selectedIndex}`)
+                newPageTemp[selectedIndex] = { ...newPageTemp[selectedIndex], selected: true }
+                setPage([...newPageTemp])
+            } else {
+                const newPageTemp = [{ p, selected: true }, { p: p + 1 }, { p: p + 2 }, { p: p + 3 }, { p: '...' }, { p: pageTotal }]
+
+                setPage([...newPageTemp])
+            }
+
+        } else {
+            const selectedIndex = pageTemp.findIndex(p => p.selected)
+            pageTemp[selectedIndex] = { ...pageTemp[selectedIndex], selected: false }
+            pageTemp[i] = { ...pageTemp[i], selected: true }
+            console.log(`array baru : ${JSON.stringify(pageTemp)}`)
+            setPage([...pageTemp])
+        }
+
+
+
+    }
+
+    useEffect(() => {
+
+
+    }, []); // empty-array means don't watch for any updates
+
+
+
+    //end delete later
 
     const dispatch = useDispatch()
     const { member_id, name, email, phone_no, profile_pic, email_verified_at } = useSelector(state => state.myAccountReducer, shallowEqual)
@@ -90,8 +138,6 @@ const DashboardScreen = (props) => {
         animate()
 
     }, []); // empty-array means don't watch for any updates
-
-
 
 
     const profilePicOpac = profilePic.interpolate({
@@ -225,6 +271,22 @@ const DashboardScreen = (props) => {
 
                                 </View>
                                 {/**Highlight */}
+
+                                {/**INI CERITA LAIN*/}
+                                <View style={{ flexDirection: 'row' }}>
+                                    <TouchableOpacity onPress={() => resetPage()} style={[{ borderWidth: 1, margin: 5, padding: 5, }]}>
+                                        <Text>Back</Text>
+                                    </TouchableOpacity>
+                                    <FlatList horizontal data={page}
+                                        renderItem={({ item, index, separators }) => (
+                                            <TouchableOpacity onPress={() => ubahPage(item.p, index)} style={[{ borderWidth: 1, margin: 5, padding: 5, }, item.selected && { backgroundColor: 'yellow' }]}>
+                                                <Text>{item.p}</Text>
+                                            </TouchableOpacity>
+                                        )}
+                                    />
+
+                                </View>
+                                {/**END INI CERITA LAIN*/}
                                 <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                     <View style={{ marginBottom: 10 }}>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
