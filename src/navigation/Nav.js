@@ -21,7 +21,7 @@ const Nav = (props) => {
   //const { token } = useSelector(state => state.apiReducer, shallowEqual)
 
   const [tokenExists, setTokenExists] = useState(false)
-
+  const { token } = useSelector(state => state.apiReducer, shallowEqual)
   const checkLogin = async () => {
     try {
       //const personalToken = await AsyncStorage.getItem('personalToken');
@@ -30,6 +30,8 @@ const Nav = (props) => {
         console.log(`personal token ialah : ${personalToken}`)
         //this.setState({ tokenExists: true })
         setTokenExists(true)
+        const { token_type, access_token } = JSON.parse(personalToken)
+        dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
       }
     } catch (error) {
       console.log(`personalToken error ${error}`)
@@ -44,9 +46,9 @@ const Nav = (props) => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {tokenExists ?
-          <Stack.Screen name="Main" component={MainTabNav} options={{ headerShown: false }} /> :
-          <Stack.Screen name="Welcome" component={AuthenticationStack} options={{ headerShown: false }} />}
+        {token ?
+          <Stack.Screen name="MainTabNav" component={MainTabNav} options={{ headerShown: false }} /> :
+          <Stack.Screen name="Authentication" component={AuthenticationStack} options={{ headerShown: false }} />}
         <Stack.Screen name="Registration" component={RegistrationStack} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>

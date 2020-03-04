@@ -50,8 +50,8 @@ const Registration = () => {
 
 const RegistrationStack = () => {
   return (
-    <Stack.Navigator initialRouteName="Main" mode="modal" screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Main" component={Registration} />
+    <Stack.Navigator initialRouteName="Registration" mode="modal" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Registration" component={Registration} />
       <Stack.Screen name="DocUpload" component={DocUploadScreen} />
     </Stack.Navigator>
   )

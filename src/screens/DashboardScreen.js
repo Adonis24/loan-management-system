@@ -273,7 +273,7 @@ const DashboardScreen = (props) => {
                                 {/**Highlight */}
 
                                 {/**INI CERITA LAIN*/}
-                                <View style={{ flexDirection: 'row' }}>
+                                {/* <View style={{ flexDirection: 'row' }}>
                                     <TouchableOpacity onPress={() => resetPage()} style={[{ borderWidth: 1, margin: 5, padding: 5, }]}>
                                         <Text>Back</Text>
                                     </TouchableOpacity>
@@ -285,7 +285,7 @@ const DashboardScreen = (props) => {
                                         )}
                                     />
 
-                                </View>
+                                </View> */}
                                 {/**END INI CERITA LAIN*/}
                                 <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                     <View style={{ marginBottom: 10 }}>
