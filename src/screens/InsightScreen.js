@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React from 'react';
+import React,{useEffect} from 'react';
 import {
     Image,
     Platform,
@@ -21,6 +21,7 @@ import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
@@ -30,16 +31,22 @@ import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
 
-class InsightScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
 
-    componentDidMount() {
-        this.props.initiateAssociateDir()
-    }
-    render() {
-        console.log(`ini kat screen contact sudah : ${JSON.stringify(this.props.assoDirArray)}`)
+const InsightScreen = (props) => {
+
+  
+    const {assoDirArray} = useSelector(state => state.assoDirReducer, shallowEqual)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+
+        dispatch(actionCreator.initiateAssociateDir())
+         console.log(`ini kat screen contact sudah : ${JSON.stringify(props.assoDirArray)}`)
+    }, []); // empty-array means don't watch for any updates
+
+
+        
 
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -73,44 +80,43 @@ class InsightScreen extends React.PureComponent {
                     </View>
                     {/* CONTENT AREA */}
                     <View style={{ flex: 4 }}>
-                  
 
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, paddingBottom: 10, marginBottom: 20 }]}>
 
-                                {this.props.assoDirArray && this.props.assoDirArray.length > 0 ?
-                                    <FlatList
-                                        data={this.props.assoDirArray}
-                                        keyExtractor={(item, index) => index.toString()}
+                        <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, paddingBottom: 10, marginBottom: 20 }]}>
 
-                                        renderItem={({ item }) => (
-                                            <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
-                                                <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row',flex:4 }]}>
-                                                    <Thumbnail source={{ uri: item.profile_pic }} circle small style={{ borderWidth: 1, borderColor: 'lightgrey' }} />
-                                                    <View>
+                            {assoDirArray && assoDirArray.length > 0 ?
+                                <FlatList
+                                    data={assoDirArray}
+                                    keyExtractor={(item, index) => index.toString()}
+                                    renderItem={({ item }) => (
+                                        <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
+                                            <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row', flex: 4 }]}>
+                                                <Thumbnail source={{ uri: item.profile_pic }} circle small style={{ borderWidth: 1, borderColor: 'lightgrey' }} />
+                                                <View>
                                                     <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.name}</Text>
                                                     <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.phone_no}</Text>
                                                     <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.email}</Text>
-                                                    </View>
-                                                </View>
-                                                <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: 5,flex:1 }}>
-                                                    <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
-                                                        <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#fff' }]}>Friend</Text>
-                                                    </View>
                                                 </View>
                                             </View>
-                                        )}
-                                    />
-                                    :
-
-                                    <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
-                                        <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
-                                            <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: 'lightgrey' }]}>No members yet</Text>
+                                            <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: 5, flex: 1 }}>
+                                                <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
+                                                    <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#fff' }]}>Friend</Text>
+                                                </View>
+                                            </View>
                                         </View>
+                                    )}
+                                />
+                                :
 
+                                <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
+                                    <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
+                                        <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: 'lightgrey' }]}>No members yet</Text>
                                     </View>
-                                }
-                            </View>
-                  
+
+                                </View>
+                            }
+                        </View>
+
                     </View>
                 </View>
                 {/* <PopupScoreScreen /> */}
@@ -124,19 +130,8 @@ class InsightScreen extends React.PureComponent {
 
         );
     }
-}
 
 
-function mapStateToProps(state) {
-    return {
-        assoDirArray: state.assoDirReducer.assoDirArray,
 
 
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-        initiateAssociateDir: () => dispatch(actionCreator.initiateAssociateDir()),
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(InsightScreen)
+export default InsightScreen
