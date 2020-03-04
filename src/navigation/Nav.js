@@ -5,11 +5,10 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 //import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
 import WelcomeScreen from '../screens/WelcomeScreen'
 
-import AuthenticationNavigator from './AuthenticationNavigator'
-import RegistrationNavigator from './RegistrationNavigator'
+import AuthenticationStack from './AuthenticationNavigator'
+import RegistrationStack from './RegistrationNavigator'
 import MainTabNav from './MainTabNav';
 
 const Stack = createStackNavigator();
@@ -46,6 +45,8 @@ const Nav = (props) => {
         <NavigationContainer>
             <Stack.Navigator>
             <Stack.Screen name="Main" component={MainTabNav} options={{ headerShown: false }} /> 
+            <Stack.Screen name="Welcome" component={AuthenticationStack} options={{ headerShown: false }} /> 
+            <Stack.Screen name="Registration" component={RegistrationStack} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     )

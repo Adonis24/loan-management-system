@@ -143,7 +143,7 @@ const DashboardScreen = (props) => {
                             </Animated.View>
                             <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
                                 <Animated.View style={{ opacity: profilePicOpac, flex: 5, flexDirection: 'row' }}>
-                                    <TouchableOpacity onPress={() => navigation.navigate('MyAccount')} style={[{ marginLeft: 10, flexDirection: 'row' }]}>
+                                    <TouchableOpacity onPress={() => props.navigation.navigate('MyAccount')} style={[{ marginLeft: 10, flexDirection: 'row' }]}>
                                         <Image source={{ uri: profile_pic }} style={{ height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' />
 
                                         <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
@@ -233,10 +233,10 @@ const DashboardScreen = (props) => {
                                         </View>
                                     </View>
 
-                                    <TouchableOpacity onPress={() => props.navigation.navigate('None')} style={{ margin: 10 }}  >
+                                    <TouchableOpacity onPress={() => console.log(`navigate('None')`)} style={{ margin: 10 }}  >
                                         <Image source={require('../assets/images/banner1.png')} style={{ width: Layout.window.width - 20, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode={'cover'} />
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => props.navigation.navigate('None')} style={{ margin: 10 }}  >
+                                    <TouchableOpacity onPress={() =>  console.log(`navigate('None')`)} style={{ margin: 10 }}  >
                                         <Image source={require('../assets/images/banner2.png')} style={{ width: Layout.window.width - 20, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode={'cover'} />
                                     </TouchableOpacity>
 

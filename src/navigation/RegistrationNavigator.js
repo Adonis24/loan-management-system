@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
+import {createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
 import IntroScreen from '../screens/IntroScreen';
@@ -22,36 +22,39 @@ import CompanyInfoSuccessScreen from '../screens/CompanyInfoSuccessScreen';
 import SignupPersonalSuccessScreen from '../screens/SignupPersonalSuccessScreen';
 import ContactPersonSuccessScreen from '../screens/ContactPersonSuccessScreen';
 
-const Registration = createStackNavigator({
-  Intro: IntroScreen,
-  Agreement: AgreementScreen,
-  SignUpPersonal: SignupPersonalScreen,
-  SignUpPersonalSuccess: SignupPersonalSuccessScreen,
-  SignUpOtp: SignupOtpScreen,
-  SignUpOtpEnter: SignupOtpEnterScreen,
-  // SignUpSuccess: SignupSuccessScreen,//
-  CompanyInfoIntro: CompanyInfoIntroScreen,
-  CompanyInformation: CompanyInformationScreen,
-  CompanyContactInformation: CompanyContactInformationScreen,
-  CompanyContactAddressInformation: CompanyContactAddressInformationScreen,
-  ContactPerson: ContactPersonScreen,
-  CompanyInfoSuccess: CompanyInfoSuccessScreen,
-  // ContactPersonSuccess: ContactPersonSuccessScreen,//
-  DetailsConnectedParties: DetailsOfConnectedPartiesScreen,
-  DeclarationDigitalSign: DeclarationDigitalSignScreen,
-});
 
-const RegistrationStack = createStackNavigator(
-  {
-    Main: { screen: Registration, },
-    DocUpload: { screen: DocUploadScreen, },
+const Stack = createStackNavigator();
 
-  },
-  {
-    mode: 'modal',
-    headerMode: 'none',
-  },
-);
+const Registration = () => {
+  return (
+    <Stack.Navigator initialRouteName="Intro" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Intro" component={IntroScreen} />
+      <Stack.Screen name="Agreement" component={AgreementScreen} />
+      <Stack.Screen name="SignUpPersonal" component={SignupPersonalScreen} />
+      <Stack.Screen name="SignUpPersonalSuccess" component={SignupPersonalSuccessScreen} />
+      <Stack.Screen name="SignUpOtp" component={SignupOtpScreen} />
+      <Stack.Screen name="SignUpOtpEnter" component={SignupOtpEnterScreen} />
+     {/* <Stack.Screen name="SignUpSuccess" component={SignupSuccessScreen} /> */}
+      <Stack.Screen name="CompanyInfoIntro" component={CompanyInfoIntroScreen} />
+      <Stack.Screen name="CompanyInformation" component={CompanyInformationScreen} />
+      <Stack.Screen name="CompanyContactInformation" component={CompanyContactInformationScreen} />
+      <Stack.Screen name="CompanyContactAddressInformation" component={CompanyContactAddressInformationScreen} />
+      <Stack.Screen name="ContactPerson" component={ContactPersonScreen} />
+      <Stack.Screen name="CompanyInfoSuccess" component={CompanyInfoSuccessScreen} />
+     {/* <Stack.Screen name="ContactPersonSuccess" component={ContactPersonSuccessScreen} /> */}
+      <Stack.Screen name="DetailsConnectedParties" component={DetailsOfConnectedPartiesScreen} />
+      <Stack.Screen name="DeclarationDigitalSign" component={DeclarationDigitalSignScreen} />
+    </Stack.Navigator>
+  )
+}
 
+const RegistrationStack = () => {
+  return (
+    <Stack.Navigator initialRouteName="Main" mode="modal" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Main" component={Registration} />
+      <Stack.Screen name="DocUpload" component={DocUploadScreen} />
+    </Stack.Navigator>
+  )
+}
 
 export default RegistrationStack
