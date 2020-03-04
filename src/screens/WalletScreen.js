@@ -27,14 +27,11 @@ import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, L
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class WalletScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
-    nav = (screen) => {
-        this.props.navigation.navigate(screen)
-    }
-    render() {
+
+    const WalletScreen = (props) => {
+   
+  
+    
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -48,7 +45,7 @@ class WalletScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                            <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -108,20 +105,9 @@ class WalletScreen extends React.PureComponent {
             </View>
 
         );
-    }
+    
 }
 
 
-function mapStateToProps(state) {
-    return {
 
-
-
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(WalletScreen)
+export default WalletScreen
