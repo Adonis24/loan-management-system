@@ -766,8 +766,10 @@ export const logout = () => {
         dispatch({ type: 'USER_PROFILE_RESET' })
         dispatch({ type: 'BIZ_INFO_RESET' })
 
+        await dispatch({ type: 'API_RESET' })
+
         //dispatch({ type: 'ROOT_LOG_OUT' })
-        //dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
+        dispatch({ type: 'SET_LOGIN', payload: { proceed: false } })
     }
 }
 

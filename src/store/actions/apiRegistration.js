@@ -46,7 +46,7 @@ export const requestTokenLMS = () => {
         const { token_type, access_token } = await responseJson
         await console.log(`LMS token is ${JSON.stringify(responseJson)}`)
         //this.props.setToken({ token_type, access_token })
-        await dispatch({ type: 'GET_TOKEN', payload: { lms:{...responseJson} } })
+        await dispatch({ type: 'GET_TOKEN', payload: { lms: { ...responseJson } } })
 
       })
       .catch((error) => {
@@ -55,7 +55,7 @@ export const requestTokenLMS = () => {
   }
 }
 
-export const registerApi = (token_type, access_token, name, email, password, password_confirmation,expo_token) => {
+export const registerApi = (token_type, access_token, name, email, password, password_confirmation, expo_token) => {
   return async (dispatch, getState) => {
     fetch(`${apiUrl}api/register`, {
       method: 'POST',
@@ -64,7 +64,7 @@ export const registerApi = (token_type, access_token, name, email, password, pas
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-      body: JSON.stringify({ name, email, password, password_confirmation,expo_token }),
+      body: JSON.stringify({ name, email, password, password_confirmation, expo_token }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
@@ -79,8 +79,8 @@ export const registerApi = (token_type, access_token, name, email, password, pas
 
 export const registerLMSApi = (token_type, access_token, name, email, password, password_confirmation) => {
   return async (dispatch, getState) => {
-    const first_name=name
-    const last_name=name
+    const first_name = name
+    const last_name = name
     fetch(`${lmsApiUrl}api/register`, {
       method: 'POST',
       headers: {
@@ -88,7 +88,7 @@ export const registerLMSApi = (token_type, access_token, name, email, password, 
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-      body: JSON.stringify({ first_name, last_name,email, password, password_confirmation }),
+      body: JSON.stringify({ first_name, last_name, email, password, password_confirmation }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
@@ -125,8 +125,16 @@ export const requestPersonalToken = (screen, username, password) => {
         SecureStore.setItemAsync('personalToken', stringifyJson);
 
         dispatch({ type: 'SET_REGISTER', payload: { access_token } });
+        dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
 
-        (screen == 'login' && access_token) ? dispatch({ type: 'SET_LOGIN', payload: { proceed: true, indicator: false } }) : dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false } })
+        if (screen == 'login' && access_token) {
+          dispatch({ type: 'SET_LOGIN', payload: { proceed: true, indicator: false } })
+          dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
+        } else {
+          
+          dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false } })
+        }
+       
 
       })
       .catch((error) => {
