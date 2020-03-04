@@ -28,16 +28,11 @@ import styles from '../styles/styles'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class PromotionScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
-    componentDidMount() {
+  const PromotionScreen = (props) => {
 
-    }
-    render() {
-        const item = this.props.navigation.getParam('item', 'NA')
+        const item = props.route.param?.item ?? 'NA'
         console.log(`dapat item : ${JSON.stringify(item)}`)
+
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -55,7 +50,7 @@ class PromotionScreen extends React.PureComponent {
                     {/* HEADER */}
                     <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, marginTop: 10 }}>
-                           <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                           <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -82,17 +77,8 @@ class PromotionScreen extends React.PureComponent {
 
 
         );
-    }
+    
 }
 
 
-function mapStateToProps(state) {
-    return {
-
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(PromotionScreen)
+export default PromotionScreen
