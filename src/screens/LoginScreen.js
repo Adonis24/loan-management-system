@@ -54,7 +54,7 @@ class LoginScreen extends React.PureComponent {
 
 
     render() {
-        this.props.proceed && this.props.navigation.navigate('Dashboard')
+        this.props.proceed && this.props.navigation.navigate('Main')
         var emailBorderColor = '#5a83c2'
         const emailError = this.props.errorColor && this.props.errorColor.find(test => test == "E-mail")
         if (emailError == "E-mail") {

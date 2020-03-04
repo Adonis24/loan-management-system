@@ -88,7 +88,7 @@ const DashboardStack = () => {
 
 const DashboardStackWithModal = () => {
     return (
-        <Stack.Navigator initialRouteName="Dashboard" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="Main" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Main" component={DashboardStack} />
             <Stack.Screen name="UnderConstruction" component={UnderConstructionScreen} />
             <Stack.Screen name="PopupScore" component={PopupScoreScreen} />
@@ -103,7 +103,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="Promotion" component={PromotionScreen } />
             <Stack.Screen name="HandbookList" component={HandbookListScreen} />
             <Stack.Screen name="Handbook" component={HandbookScreen} />
-            <Stack.Screen name=" MyScore" component={MyScoreScreen} />
+            <Stack.Screen name="MyScore" component={MyScoreScreen} />
             <Stack.Screen name="LoanApplication" component={LoanApplicationScreen} />
             <Stack.Screen name="Financing" component={FinancingScreen} />
             <Stack.Screen name="Grant" component={GrantScreen} />
@@ -126,7 +126,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="AddCompany" component={CompanyInformationScreen} />
             <Stack.Screen name="CompanyContactInformation" component={CompanyContactInformationScreen} />
             <Stack.Screen name="CompanyContactAddressInformation" component={CompanyContactAddressInformationScreen} />
-            <Stack.Screen name=" CompanyInfoSuccess" component={CompanyInfoSuccessScreen} />
+            <Stack.Screen name="CompanyInfoSuccess" component={CompanyInfoSuccessScreen} />
             <Stack.Screen name="SignUpOtp" component={SignupOtpScreen} />
             <Stack.Screen name="SignUpOtpEnter" component={SignupOtpEnterScreen} />
             <Stack.Screen name="SignUpSuccess" component={SignupSuccessScreen} />
