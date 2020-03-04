@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React from 'react';
+import React,{useEffect} from 'react';
 import {
     Image,
     Platform,
@@ -21,6 +21,7 @@ import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
@@ -29,52 +30,54 @@ import { Thumbnail } from 'native-base'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class PendingDirScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
+const PendingDirScreen = (props) => {
 
-    componentDidMount(){
-        this.props.initiatePendingDir()
-    }
+    const dispatch = useDispatch()
 
-    render() {
-        return (
-            <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+    const {pendingDirArray} = useSelector(state => state.pendingDirReducer, shallowEqual)
 
-                <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                    <View style={{ alignItems: 'flex-end' }}>
-                        <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
-                    </View>
-                    {/* <View style={{ alignItems: 'flex-start' }}>
+    useEffect(() => {
+
+        dispatch(actionCreator.initiatePendingDir())
+        
+    }, []); // empty-array means don't watch for any updates
+
+    return (
+        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+
+            <View style={{ flex: 1, justifyContent: 'space-between' }}>
+                <View style={{ alignItems: 'flex-end' }}>
+                    <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
+                </View>
+                {/* <View style={{ alignItems: 'flex-start' }}>
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
                     </View> */}
-                </View>
-                <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
-                    {/* HEADER */}
-                    <View style={{ flex: 1 }}>
-                        <View style={{ flex: 1, marginLeft: 5 }}>
-                            <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+            </View>
+            <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
+                {/* HEADER */}
+                <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1, marginLeft: 5 }}>
+                        <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+
+                    </View>
+                    <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
+                        <View style={{ flex: 5, flexDirection: 'row' }}>
 
                         </View>
-                        <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
-                            <View style={{ flex: 5, flexDirection: 'row' }}>
+                        <View style={[{ backgroundColor: '#fff', flex: 4, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', paddingLeft: 5, flexDirection: 'row', elevation: 2 }]}>
 
-                            </View>
-                            <View style={[{ backgroundColor: '#fff', flex: 4, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', paddingLeft: 5, flexDirection: 'row', elevation: 2 }]}>
+                            <Image source={require('../assets/images/profile.png')} style={{ width: Layout.window.width / 10, height: undefined, }} resizeMode={'contain'} />
+                            <Text style={[styles.textDefault, { fontSize: 18, fontWeight: "bold", paddingLeft: 5, }]} numberOfLines={1} ellipsizeMode={'tail'}>Pending</Text>
 
-                                <Image source={require('../assets/images/profile.png')} style={{ width: Layout.window.width / 10, height: undefined, }} resizeMode={'contain'} />
-                                <Text style={[styles.textDefault, { fontSize: 18, fontWeight: "bold", paddingLeft: 5, }]} numberOfLines={1} ellipsizeMode={'tail'}>Pending</Text>
-
-                            </View>
                         </View>
                     </View>
-                    {/* CONTENT AREA */}
-                    <View style={{ flex: 4 }}>
-                        <ScrollView contentStyle={{ padding: 10 }} >
+                </View>
+                {/* CONTENT AREA */}
+                <View style={{ flex: 4 }}>
+                    <ScrollView contentStyle={{ padding: 10 }} >
 
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, paddingBottom: 10, marginBottom: 20 }]}>
-                                {/* <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                        <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, paddingBottom: 10, marginBottom: 20 }]}>
+                            {/* <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                                     <View style={[{ marginLeft: 10, padding: 2 }]}>
                                         <Image source={require('../assets/images/girl.png')} style={{ height: Layout.window.height / 10, width: Layout.window.height / 10, borderWidth: 1, borderColor: 'lightgrey', borderRadius: Layout.window.height / 20 }} resizeMode='cover' />
                                     </View>
@@ -98,63 +101,52 @@ class PendingDirScreen extends React.PureComponent {
                                         </View>
                                     </View>
                                 </View> */}
-                                {this.props.pendingDirArray && this.props.pendingDirArray.length > 0 ?
+                            {pendingDirArray && pendingDirArray.length > 0 ?
                                 <FlatList
-                                data={this.props.pendingDirArray}
-                                keyExtractor={(item, index) => index.toString()}
-                               
-                                renderItem={({ item }) => (
-                                    <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
-                                        <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
-                                            <Thumbnail source={{uri:item.profile_pic}} circle small style={{ borderWidth: 1, borderColor: 'lightgrey' }} />
-                                            <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.name}</Text>
-                                        </View>
-                                        <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: 5 }}>
-                                            <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
-                                                <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#fff' }]}>Friend</Text>
+                                    data={pendingDirArray}
+                                    keyExtractor={(item, index) => index.toString()}
+
+                                    renderItem={({ item }) => (
+                                        <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
+                                            <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
+                                                <Thumbnail source={{ uri: item.profile_pic }} circle small style={{ borderWidth: 1, borderColor: 'lightgrey' }} />
+                                                <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.name}</Text>
+                                            </View>
+                                            <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: 5 }}>
+                                                <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
+                                                    <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#fff' }]}>Friend</Text>
+                                                </View>
                                             </View>
                                         </View>
-                                    </View>
-                                )}
-                            />
-                                    
-                                    :
-                                    <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
-                                        <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
-                                            <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: 'lightgrey' }]}>No members yet</Text>
-                                        </View>
+                                    )}
+                                />
 
+                                :
+                                <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
+                                    <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
+                                        <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: 'lightgrey' }]}>No members yet</Text>
                                     </View>
-                                }
-                            </View>
-                        </ScrollView>
-                    </View>
-                </View>
-                {/* <PopupScoreScreen /> */}
 
-                <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('QR')}>
-                        <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
-                    </TouchableOpacity>
+                                </View>
+                            }
+                        </View>
+                    </ScrollView>
                 </View>
             </View>
+            {/* <PopupScoreScreen /> */}
 
-        );
-    }
+            <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
+                <TouchableOpacity onPress={() => props.navigation.navigate('QR')}>
+                    <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
+                </TouchableOpacity>
+            </View>
+        </View>
+
+    );
+
 }
 
 
-function mapStateToProps(state) {
-    return {
-        pendingDirArray: state.pendingDirReducer.pendingDirArray
 
 
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-        
-        initiatePendingDir: () => dispatch(actionCreator.initiatePendingDir()),
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(PendingDirScreen)
+export default PendingDirScreen

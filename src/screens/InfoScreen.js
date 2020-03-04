@@ -34,64 +34,61 @@ const dataArray = [
     { title: "Third Element", content: "Lorem ipsum dolor sit amet" }
 ];
 
-class InfoScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
-    nav = (screen, item) => {
-        this.props.navigation.navigate(screen, { item })
+
+const InfoScreen = (props) => {
+
+   const nav = (screen, item) => {
+        props.navigation.navigate(screen, { item })
     }
-    async componentDidMount() {
-        await this.props.intitiateEinfo()
-    }
-    render() {
-        return (
-            <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                    <View style={{ alignItems: 'flex-end' }}>
-                        <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
-                    </View>
-                    {/* <View style={{ alignItems: 'flex-start' }}>
+    const dispatch = useDispatch()
+    const {einfosArray} = useSelector(state => state.bizInfoReducer, shallowEqual)
+
+    useEffect(() => {
+
+        dispatch(actionCreator.intitiateEinfo())
+        
+    }, []); // empty-array means don't watch for any updates
+
+   
+
+    return (
+        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+            <View style={{ flex: 1, justifyContent: 'space-between' }}>
+                <View style={{ alignItems: 'flex-end' }}>
+                    <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
+                </View>
+                {/* <View style={{ alignItems: 'flex-start' }}>
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
                     </View> */}
-                </View>
-                <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
-                                <Ionicons name='ios-arrow-back' size={32} />
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
-                                <Image source={require('../assets/images/e-info.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
-                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>e-info</Text>
-                            </View>
+            </View>
+            <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
+                        <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                            <Ionicons name='ios-arrow-back' size={32} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
+                        <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
+                            <Image source={require('../assets/images/e-info.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
+                            <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>e-info</Text>
                         </View>
                     </View>
-                    {/** Content */}
-                    <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center', padding: 10, backgroundColor: 'transparent' }}>
-                        {this.props.einfosArray && this.props.einfosArray.length > 0 ? <Accordion style={{ alignSelf: 'stretch', backgroundColor: 'transparent' }} dataArray={this.props.einfosArray} icon="add" expandedIcon="remove" />
-                            : <View style={{justifyContent:'flex-start',alignItems:'flex-start'}}>
-                                <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14,color:'lightgrey' }]}>Please check back for latest info soon</Text>
-{/*                             
+                </View>
+                {/** Content */}
+                <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center', padding: 10, backgroundColor: 'transparent' }}>
+                    {einfosArray && einfosArray.length > 0 ? <Accordion style={{ alignSelf: 'stretch', backgroundColor: 'transparent' }} dataArray={einfosArray} icon="add" expandedIcon="remove" />
+                        : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                            <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14, color: 'lightgrey' }]}>Please check back for latest info soon</Text>
+                            {/*                             
                                 <Image source={require('../assets/images/bizlicensing.png')} style={{ flex:1,width: undefined, height: Layout.window.height / 1.5, alignSelf: 'center',opacity:0.3, borderWidth:1,borderColor:'#000' }} resizeMode={'contain'} /> */}
 
-                            </View>}</View>
-                </View>
+                        </View>}</View>
             </View>
-        );
-    }
+        </View>
+    );
+
 }
 
-function mapStateToProps(state) {
-    return {
-        einfosArray: state.einfosScreenReducer.einfosArray
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-        intitiateEinfo: () => dispatch(actionCreator.intitiateEinfo())
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(InfoScreen)
+
+export default InfoScreen

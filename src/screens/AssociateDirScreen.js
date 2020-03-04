@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React from 'react';
+import React,{useEffect} from 'react';
 import {
     Image,
     Platform,
@@ -21,7 +21,7 @@ import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
-
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 //import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
@@ -29,16 +29,17 @@ import { Thumbnail } from 'native-base'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class AssociateDirScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
 
-    componentDidMount(){
-        this.props.initiateAssociateDir()
-    }
+const AssociateDirScreen = (props) => {
 
-    render() {
+    const dispatch = useDispatch()
+    const  {assoDirArray} = useSelector(state => state.assoDirReducer, shallowEqual)
+    useEffect(() => {
+        dispatch(actionCreator.initiateAssociateDir())
+
+    }, []); // empty-array means don't watch for any updates
+
+    
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
 
@@ -98,26 +99,26 @@ class AssociateDirScreen extends React.PureComponent {
                                         </View>
                                     </View>
                                 </View> */}
-                                {this.props.assoDirArray && this.props.assoDirArray.length > 0 ?
+                                {assoDirArray && assoDirArray.length > 0 ?
 
-                                   <FlatList
-                                data={this.props.assoDirArray}
-                                keyExtractor={(item, index) => index.toString()}
-                               
-                                renderItem={({ item }) => (
-                                    <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
-                                        <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
-                                            <Thumbnail source={{uri:item.profile_pic}} circle small style={{ borderWidth: 1, borderColor: 'lightgrey' }} />
-                                            <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.name}</Text>
-                                        </View>
-                                        <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: 5 }}>
-                                            <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
-                                                <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#fff' }]}>Friend</Text>
+                                    <FlatList
+                                        data={assoDirArray}
+                                        keyExtractor={(item, index) => index.toString()}
+
+                                        renderItem={({ item }) => (
+                                            <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
+                                                <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
+                                                    <Thumbnail source={{ uri: item.profile_pic }} circle small style={{ borderWidth: 1, borderColor: 'lightgrey' }} />
+                                                    <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.name}</Text>
+                                                </View>
+                                                <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: 5 }}>
+                                                    <View style={{ backgroundColor: '#6949EF', borderRadius: 10 }}>
+                                                        <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#fff' }]}>Friend</Text>
+                                                    </View>
+                                                </View>
                                             </View>
-                                        </View>
-                                    </View>
-                                )}
-                            />
+                                        )}
+                                    />
                                     :
                                     <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
                                         <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
@@ -133,28 +134,16 @@ class AssociateDirScreen extends React.PureComponent {
                 {/* <PopupScoreScreen /> */}
 
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('QR')}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('QR')}>
                         <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
                     </TouchableOpacity>
                 </View>
             </View>
 
         );
-    }
+    
 }
 
 
-function mapStateToProps(state) {
-    return {
-        assoDirArray: state.assoDirReducer.assoDirArray
 
-
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-        
-        initiateAssociateDir: () => dispatch(actionCreator.initiateAssociateDir()),
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(AssociateDirScreen)
+export default AssociateDirScreen
