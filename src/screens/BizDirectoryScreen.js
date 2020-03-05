@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React from 'react';
+import React,{useEffect} from 'react';
 import {
     Image,
     Platform,
@@ -21,7 +21,7 @@ import Constants from 'expo-constants'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import Layout from '../constants/Layout'
-
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab } from 'native-base'
@@ -40,36 +40,36 @@ const BizDirectoryScreen = (props) => {
     const { pendingDirArray } = useSelector(state => state.pendingDirReducer, shallowEqual)
 
     useEffect(() => {
-         dispatch(actionCreator.initiateBizDir()),
-         dispatch(actionCreator.initiatePendingDir()),
-         dispatch(actionCreator.initiateAssociateDir())
-         dispatch(actionCreator.getConnectionStatus())
+        dispatch(actionCreator.initiateBizDir()),
+            dispatch(actionCreator.initiatePendingDir()),
+            dispatch(actionCreator.initiateAssociateDir())
+        dispatch(actionCreator.getConnectionStatus())
     }, []); // empty-array means don't watch for any updates
 
 
-    connect = (val) => {
-        this.props.requestConnect(val)
-        this.props.getConnectionStatus()
-        this.props.initiateBizDir()
-        this.props.initiateAssociateDir()
-        this.props.initiatePendingDir()
+    const connect = (val) => {
+        dispatch(actionCreator.requestConnect(val)),
+            dispatch(actionCreator.getConnectionStatus())
+        dispatch(actionCreator.initiateBizDir()),
+            dispatch(actionCreator.initiateAssociateDir())
+        dispatch(actionCreator.initiatePendingDir())
     }
 
-    accept = (val) => {
-        this.props.accept(val)
-        this.props.getConnectionStatus()
-        this.props.initiateBizDir()
-        this.props.initiateAssociateDir()
-        this.props.initiatePendingDir()
+    const accept = (val) => {
+        dispatch(actionCreator.accept(val))
+        dispatch(actionCreator.getConnectionStatus())
+        dispatch(actionCreator.initiateBizDir())
+        dispatch(actionCreator.initiateAssociateDir())
+        dispatch(actionCreator.initiatePendingDir())
     }
 
 
 
- 
 
 
-    this.props.bizDirArray && console.log(`ini lah bizdir ${JSON.stringify(this.props.bizDirArray)}`)
-    this.props.pendingDirArray && console.log(`ini lah pending ${JSON.stringify(this.props.pendingDirArray)}`)
+
+    bizDirArray && console.log(`ini lah bizdir ${JSON.stringify(bizDirArray)}`)
+    pendingDirArray && console.log(`ini lah pending ${JSON.stringify(pendingDirArray)}`)
     return (
         <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
             <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -83,7 +83,7 @@ const BizDirectoryScreen = (props) => {
             <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                        <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                        <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                             <Ionicons name='ios-arrow-back' size={32} />
                         </TouchableOpacity>
                     </View>
@@ -98,14 +98,14 @@ const BizDirectoryScreen = (props) => {
                 <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
 
                     <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarA tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
-                        <Tab heading={`Associate (${this.props.associateConnection})`}>
-                            <Associate connect={this.connect} assoDirArray={this.props.assoDirArray} />
+                        <Tab heading={`Associate (${associateConnection})`}>
+                            <Associate connect={connect} assoDirArray={assoDirArray} />
                         </Tab>
-                        <Tab heading={`Request (${this.props.requestConnection})`}>
-                            <Pending connect={this.connect} accept={this.accept} pendingDirArray={this.props.pendingDirArray} />
+                        <Tab heading={`Request (${requestConnection})`}>
+                            <Pending connect={connect} accept={accept} pendingDirArray={pendingDirArray} />
                         </Tab>
-                        <Tab heading={`All (${this.props.allConnection})`}>
-                            <All connect={this.connect} bizDirArray={this.props.bizDirArray} />
+                        <Tab heading={`All (${allConnection})`}>
+                            <All connect={connect} bizDirArray={bizDirArray} />
                         </Tab>
                     </Tabs>
 
@@ -117,119 +117,110 @@ const BizDirectoryScreen = (props) => {
 
 }
 
-class Associate extends React.PureComponent {
-    render() {
-        const { assoDirArray } = this.props
-        const assoSize = _.size(assoDirArray)
 
-        if (assoSize % 2 > 0) { assoDirArray.push({ name: '' }) }
+const Associate = (props) => {
+
+    const { assoDirArray } = props
+    const assoSize = _.size(assoDirArray)
+
+    if (assoSize % 2 > 0) { assoDirArray.push({ name: '' }) }
 
 
-        return (
-            <View style={{ flex: 1, paddingTop: 10 }}>
-                <FlatList
-                    data={assoDirArray}
-                    keyExtractor={(item, index) => index.toString()}
-                    numColumns={2}
-                    renderItem={({ item }) => {
-                        if (item.name != '') {
-                            return (
-                                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 5, marginRight: 5, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                    <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
-                                        <Image source={{ uri: item.profile_pic }} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
-                                    </View>
-                                    <Text style={[styles.textDefault, { fontWeight: 'bold' }]}>{item.name}</Text>
-                                    <Text numberOfLines={1} ellipsizeMode={'tail'} style={[styles.caption, {}]}># :{item.member_id}</Text>
-
-                                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                    </View>
+    return (
+        <View style={{ flex: 1, paddingTop: 10 }}>
+            <FlatList
+                data={assoDirArray}
+                keyExtractor={(item, index) => index.toString()}
+                numColumns={2}
+                renderItem={({ item }) => {
+                    if (item.name != '') {
+                        return (
+                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 5, marginRight: 5, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                                <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
+                                    <Image source={{ uri: item.profile_pic }} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
                                 </View>
-                            )
-                        } else {
-                            return (<View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                                <Text style={[styles.textDefault, { fontWeight: 'bold' }]}>{item.name}</Text>
+                                <Text numberOfLines={1} ellipsizeMode={'tail'} style={[styles.caption, {}]}># :{item.member_id}</Text>
 
-                            </View>)
-                        }
-                    }}
-                />
-            </View>
-        )
-    }
+                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                                </View>
+                            </View>
+                        )
+                    } else {
+                        return (<View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+
+                        </View>)
+                    }
+                }}
+            />
+        </View>
+    )
 }
 
-class Pending extends React.PureComponent {
-    render() {
-        return (
-            <View style={{ flex: 1, paddingTop: 10 }}>
-                <FlatList
-                    data={this.props.pendingDirArray}
-                    keyExtractor={(item, index) => index.toString()}
-                    numColumns={2}
-                    renderItem={({ item }) => (
-                        <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                            <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
-                                <Image source={{ uri: item.profile_pic }} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
-                            </View>
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.name}</Text>
-                            <Text style={[styles.caption, { margin: 5, }]}>Member since : {moment(item.created_at).format('LL')}</Text>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.props.accept(item.id)} style={{ margin: 10, }}>
-                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                        <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
-                                    </LinearGradient>
-                                </TouchableOpacity>
-                            </View>
+
+
+const Pending = (props) => {
+    return (
+        <View style={{ flex: 1, paddingTop: 10 }}>
+            <FlatList
+                data={pendingDirArray}
+                keyExtractor={(item, index) => index.toString()}
+                numColumns={2}
+                renderItem={({ item }) => (
+                    <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                        <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
+                            <Image source={{ uri: item.profile_pic }} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
                         </View>
-                    )}
-                />
-            </View>
-        )
-    }
-}
-
-class All extends React.PureComponent {
-    render() {
-        return (
-            <View style={{ flex: 1, paddingTop: 10 }}>
-                <FlatList
-                    data={this.props.bizDirArray}
-                    keyExtractor={(item, index) => index.toString()}
-                    numColumns={2}
-                    renderItem={({ item }) => (
-                        <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                            <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
-                                <Image source={{ uri: item.profile_pic }} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
-                            </View>
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.name}</Text>
-                            <Text style={[styles.caption, { margin: 5, }]}>Member since : {moment(item.created_at).format('LL')}</Text>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.props.connect(item.id)} style={{ margin: 10, }}>
-                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
-                                        <Text style={[styles.caption, { color: '#fff' }]}>Connect</Text>
-                                    </LinearGradient>
-                                </TouchableOpacity>
-                            </View>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.name}</Text>
+                        <Text style={[styles.caption, { margin: 5, }]}>Member since : {moment(item.created_at).format('LL')}</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                            <TouchableOpacity onPress={() => props.accept(item.id)} style={{ margin: 10, }}>
+                                <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                    <Text style={[styles.caption, { color: '#fff' }]}>View</Text>
+                                </LinearGradient>
+                            </TouchableOpacity>
                         </View>
-                    )}
-                />
-            </View>
-        )
-    }
+                    </View>
+                )}
+            />
+        </View>
+    )
 }
 
 
 
-function mapDispatchToProps(dispatch) {
-    return {
-        initiateBizDir: () => dispatch(actionCreator.initiateBizDir()),
-        initiatePendingDir: () => dispatch(actionCreator.initiatePendingDir()),
-        initiateAssociateDir: () => dispatch(actionCreator.initiateAssociateDir()),
-
-        getConnectionStatus: () => dispatch(actionCreator.getConnectionStatus()),
-        requestConnect: (val) => dispatch(actionCreator.requestConnect(val)),
-        accept: (val) => dispatch(actionCreator.accept(val)),
-    }
+const All = (props) => {
+    return (
+        <View style={{ flex: 1, paddingTop: 10 }}>
+            <FlatList
+                data={bizDirArray}
+                keyExtractor={(item, index) => index.toString()}
+                numColumns={2}
+                renderItem={({ item }) => (
+                    <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                        <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
+                            <Image source={{ uri: item.profile_pic }} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
+                        </View>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.name}</Text>
+                        <Text style={[styles.caption, { margin: 5, }]}>Member since : {moment(item.created_at).format('LL')}</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                            <TouchableOpacity onPress={() => props.connect(item.id)} style={{ margin: 10, }}>
+                                <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                    <Text style={[styles.caption, { color: '#fff' }]}>Connect</Text>
+                                </LinearGradient>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                )}
+            />
+        </View>
+    )
 }
-export default connect( mapDispatchToProps)(BizDirectoryScreen)
+
+
+
+
+
+export default BizDirectoryScreen
 
 
