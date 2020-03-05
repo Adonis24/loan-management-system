@@ -74,9 +74,7 @@ const SignupOtpEnterScreen = (props) => {
         }, 1000);
     }
 
-    const reset = () => {
-        reset()
-    }
+    
 
     const getBoxes = () => {
         //var d1Focus,d2Focus,d3Focus,d4Focus=false

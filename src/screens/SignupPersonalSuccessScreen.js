@@ -29,7 +29,7 @@ import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 import { Button } from 'native-base';
 
-const SignupPersonalSuccessScreen = () => {
+const SignupPersonalSuccessScreen = (props) => {
 
     const dispatch = useDispatch()
     const { listWorkers } = useSelector(state => state.listWorkersReducer, shallowEqual)

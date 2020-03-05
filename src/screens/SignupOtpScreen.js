@@ -49,11 +49,10 @@ const SignupOtpScreen = (props) => {
 
 
     useEffect(() => {
-        const screen = route.params?.screen ?? 'NA';
-
+        const screen = props.route.params?.screen ?? 'NA';
 
         if (screen != 'setting') { dispatch(actionCreator.getPersonalToken()) } else {
-            const personalToken = await SecureStore.getItemAsync('personalToken')
+            const personalToken =  SecureStore.getItemAsync('personalToken')
             const { token_type, access_token } = JSON.parse(personalToken)
             setRegister({ token_type, access_token })
         }

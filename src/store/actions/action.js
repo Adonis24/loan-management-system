@@ -9,7 +9,7 @@ import s3 from '../../do/DigitalOcean'
 import config from '../../do/config'
 
 import { requestToken, kycMobile, kycMobileVerify, kycBasicInformation, requestPersonalToken, urlToBlob, kycBasicInformation2, kycPinNumber, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI, requestTokenLMS, registerLMSApi, requestPersonalTokenLMS } from './apiRegistration'
-import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi,acceptApi } from './apiDashboard'
+import { userInfo, latestTransaction, depositApi, sendMoney, withdrawApi, requestMoney, analyticSummary, notificationApi, analytic, userList, resetPinApi, editMobileDetail, editMobileDetailVerify, pushNotification, editPersonalDetail, newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi, acceptApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -34,61 +34,28 @@ export const generateJWT = () => {
     }
 }
 
-export const register = () => {
+export const register = (values) => {
     return async (dispatch, getState) => {
         dispatch({ type: 'SET_REGISTER', payload: { indicator: true } })
-        const { token_type, access_token, name, email, password, password_confirmation, expo_token } = await getState().registrationReducer
+        const { token_type, access_token, expo_token } = await getState().registrationReducer
+        const { name, email, password, password_confirmation } = values
         console.log(`ada ke tak register info : ${JSON.stringify(getState().registrationReducer)}`)
 
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        const errorArray = []
-        const errorColor = []
+        console.log('takde error dalam screen and boleh proceed utk register')
+        await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation, expo_token))
+        //await dispatch(getPersonalToken())
 
-        if (name == undefined || name == '') {
-            errorArray.push({ title: "name", desc: "No Name" })
-            errorColor.push("Name")
-        }
-        if (email == undefined || email == '') {
-            errorArray.push({ title: "email", desc: "No e-mail" })
-            errorColor.push("E-mail")
-        } else if (reg.test(email) === false) {
-            errorArray.push("Not e-mail format")
-            errorColor.push("E-mail")
-        }
-        if (password == undefined || password == '') {
-            errorArray.push({ title: "password", desc: "No password" })
-            errorColor.push("Password")
-        } else if (password.length < 6) {
-            errorArray.push({ title: "password", desc: "Password need 6 character" })
-            errorColor.push("Password")
-        }
-        if (password_confirmation == undefined || password_confirmation == '') {
-            errorArray.push({ title: "confirm password", desc: "No Confirm password" })
-            errorColor.push("Confirm Password")
-        } else if (password_confirmation.length < 6) {
-            errorArray.push({ title: "confirm password", desc: "Password need 6 character" })
-            errorColor.push("Confirm Password")
-        } else if (password_confirmation != password) {
-            errorArray.push({ title: "confirm password", desc: "Password not same" })
-            errorColor.push("Confirm Password")
-        }
-        if (errorArray.length > 0) {
-            dispatch({ type: 'SET_REGISTER', payload: { error: errorArray, errorColor, indicator: false } })
-        } else {
-            console.log('takde error dalam screen and boleh proceed utk register')
-            await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation, expo_token))
-            //await dispatch(getPersonalToken())
-        }
     }
 }
 
-export const registerLMS = () => {
+export const registerLMS = (values) => {
     return async (dispatch, getState) => {
 
-        const { name, email, password, password_confirmation, lms } = await getState().registrationReducer
-        const { token_type, access_token, } = lms
+        const {  lms } = await getState().registrationReducer
+        const { name, email, password, password_confirmation } = await values
+        const { token_type, access_token } = lms
         console.log(`token lms :${JSON.stringify(lms)}`)
-        await dispatch(registerLMSApi(token_type, access_token, name, email, password, password_confirmation))
+        await dispatch(registerLMSApi(token_type, access_token,  name, email, password, password_confirmation))
     }
 }
 
@@ -191,6 +158,7 @@ export const loginLMS = () => {
 
 export const companyInfo = () => {
     return (dispatch, getState) => {
+        console.log(`add company info`)
         const { comp_name, comp_regno, comp_regdate, comp_main_biz_act } = getState().companyInformationReducer
 
         const errorArray = []
@@ -457,10 +425,10 @@ export const doneForNow = () => {
     }
 }
 
-export const sendNotification = (expo_token,id) => {
+export const sendNotification = (expo_token, id) => {
     return async (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-        await dispatch(sendNotificationApi(expo_token,id))
+        await dispatch(sendNotificationApi(expo_token, id))
     }
 }
 

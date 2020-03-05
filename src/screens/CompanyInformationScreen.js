@@ -35,6 +35,7 @@ const CompanyInformationScreen = (props) => {
 
     const companyInformation = async () => {
         await dispatch(actionCreator.companyInfo())
+        props.navigation.navigate('CompanyContactInformation')
     }
 
     const [chosenDate, setChosenDate] = useState(new Date())

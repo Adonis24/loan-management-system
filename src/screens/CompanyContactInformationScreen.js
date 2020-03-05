@@ -44,7 +44,7 @@ const CompanyContactInformationScreen = (props) => {
     const setCompanyInfo = (value) => dispatch({ type: 'SET_COMPANY_INFO', payload: { ...value } })
 
 
-    proceedCompany && props.navigation.navigate('ContactPerson')
+    //proceedCompany && props.navigation.navigate('ContactPerson')
 
     var phoneBorderColor = '#5a83c2'
     const phoneError = errorColor && errorColor.find(test => test == "Phone")

@@ -13,13 +13,9 @@ import MainTabNav from './MainTabNav';
 
 const Stack = createStackNavigator();
 
-
-
 const Nav = (props) => {
   const dispatch = useDispatch()
-
   //const { token } = useSelector(state => state.apiReducer, shallowEqual)
-
   const [tokenExists, setTokenExists] = useState(false)
   const { token } = useSelector(state => state.apiReducer, shallowEqual)
   const checkLogin = async () => {

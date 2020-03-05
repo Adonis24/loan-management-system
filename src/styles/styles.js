@@ -55,6 +55,12 @@ export default StyleSheet.create({
         ...elevationShadowStyle(5),
         backgroundColor:'white'
 
+    },
+    error:{
+        fontFamily: 'Montserrat_medium',
+       color:'red',
+       fontSize:10
+
     }
     
 
