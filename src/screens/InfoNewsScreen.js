@@ -34,8 +34,10 @@ import * as actionCreator from '../store/actions/action'
 const InfoNewsScreen = (props) => {
 
 
-    const item = props.route.param?.item ?? 'NA'
-    console.log(`dapat item : ${JSON.stringify(item)}`)
+    //const item = props.route.param?.test ?? 'NA'
+    const { item } = props.route.params;
+    const parseItem=JSON.parse(item)
+    console.log(`dapat item : ${JSON.stringify(parseItem)}`)
     return (
         <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
             <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -46,7 +48,7 @@ const InfoNewsScreen = (props) => {
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
                     </View> */}
                 <View style={{ position: 'absolute', top: 0, left: 0, right: 0, justifyContent: 'flex-start' }}>
-                    <Image source={{ uri: item.picture }} style={{ height: Layout.window.height * 0.3, width: Layout.window.width }} resizeMode={'cover'} />
+                    <Image source={{ uri: parseItem.picture }} style={{ height: Layout.window.height * 0.3, width: Layout.window.width }} resizeMode={'cover'} />
                 </View>
             </View>
             <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
@@ -69,7 +71,7 @@ const InfoNewsScreen = (props) => {
                     <ScrollView style={{ flex: 1 }}>
                         <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center', pading: 20 }}>
 
-                            <HTML html={item.content} imagesMaxWidth={Layout.window.width} style={{ margin: 10 }} containerStyle={{ padding: 10, margin: 10 }} />
+                            <HTML html={parseItem.content} imagesMaxWidth={Layout.window.width} style={{ margin: 10 }} containerStyle={{ padding: 10, margin: 10 }} />
 
                         </View>
                     </ScrollView>
