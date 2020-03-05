@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     Image,
     Platform,
@@ -15,7 +15,7 @@ import {
     CheckBox
 
 } from 'react-native';
-
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
 import * as DocumentPicker from 'expo-document-picker';
 //import { Constants, LinearGradient, FileSystem } from 'expo'
@@ -31,21 +31,27 @@ import * as actionCreator from '../store/actions/action'
 import { Button } from 'native-base';
 
 
-class DocUploadScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
+const DocUploadScreen = (props) => {
 
-    pickDoc() {
+    const dispatch = useDispatch()
+
+    const { fullName, myKad, phoneNum, position } = useSelector(state => state.companyInformationReducer, shallowEqual)
+
+
+
+    const saveDocument = (result) => dispatch(actionCreator.saveDocument(result))
+    const saveDocumentDO = (result) => dispatch(actionCreator.saveDocumentDO(result))
+
+    const pickDoc = () => {
         DocumentPicker.getDocumentAsync({ type: '*/*', copyToCacheDirectory: false })
             .then(result => {
                 console.log(JSON.stringify(result))
-                //this.props.saveDocument(result)
-                this.props.saveDocumentDO(result)
+                //saveDocument(result)
+               saveDocumentDO(result)
             })
     }
 
-    render() {
+    
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -61,14 +67,14 @@ class DocUploadScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.fullName} onChangeText={(fullName) => this.props.setContactPerson({ fullName })} placeholder={'Full Name '} value={this.props.contactFullName} style={{ marginLeft: 5 }} />
+                                <TextInput value={fullName} onChangeText={(fullName) => setContactPerson({ fullName })} placeholder={'Full Name '} value={contactFullName} style={{ marginLeft: 5 }} />
                             </View>
 
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12 }]}>
                                 <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12, fontWeight: 'bold' }]}>Upload documents needed:</Text> Copies of identity cards of the owners or partners / copies of the identity cards of all the shareholders and directors / official registration document, business official documents.
                             </Text>
                             <View style={{ width: Layout.window.width * 0.7, height: Layout.window.height * 0.06, borderWidth: 1, alignSelf: 'center', borderRadius: 15, borderColor: 'darkblue', margin: 10, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
-                                <TouchableOpacity onPress={() => this.pickDoc()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', margin: 10, backgroundColor: 'gainsboro' }}>
+                                <TouchableOpacity onPress={() => pickDoc()} style={{ width: Layout.window.width * 0.25, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', margin: 10, backgroundColor: 'gainsboro' }}>
                                     <Text style={[styles.caption, { color: '#000', fontSize: 10 }]}>Upload documents</Text>
                                 </TouchableOpacity>
                             </View>
@@ -79,22 +85,7 @@ class DocUploadScreen extends React.PureComponent {
             </View >
         );
     }
-}
 
 
-function mapStateToProps(state) {
-    return {
-        fullName: state.companyInformationReducer.fullName,
-        myKad: state.companyInformationReducer.myKad,
-        phoneNum: state.companyInformationReducer.phoneNum,
-        position: state.companyInformationReducer.position
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
 
-        saveDocument: (result) => dispatch(actionCreator.saveDocument(result)),
-        saveDocumentDO: (result) => dispatch(actionCreator.saveDocumentDO(result))
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(DocUploadScreen)
+    export default DocUploadScreen

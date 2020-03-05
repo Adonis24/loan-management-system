@@ -16,7 +16,7 @@ import {
 
 
 } from 'react-native';
-
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -30,117 +30,98 @@ import styles from '../styles/styles'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class CompanyContactInformationScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
+const CompanyContactInformationScreen = (props) => {
 
-    async Next() {
-        await this.props.companyContactInfo()
-        // await this.props.navigation.navigate('CompanyInfoSuccess')
+    const dispatch = useDispatch()
+
+    const Next = async () => {
+        await dispatch(actionCreator.companyContactInfo())
+        // await props.navigation.navigate('CompanyInfoSuccess')
     }
 
-    render() {
-        this.props.proceedCompany && this.props.navigation.navigate('ContactPerson')
 
-        var phoneBorderColor = '#5a83c2'
-        const phoneError = this.props.errorColor && this.props.errorColor.find(test => test == "Phone")
-        if (phoneError == "Phone") {
-            phoneBorderColor = '#d94498'
-        }
+    const { comp_phone, comp_email, comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, proceedContact, error, errorColor } = useSelector(state => state.companyInformationReducer, shallowEqual)
+    const setCompanyInfo = (value) => dispatch({ type: 'SET_COMPANY_INFO', payload: { ...value } })
 
-        var emailBorderColor = '#5a83c2'
-        const emailError = this.props.error && this.props.errorColor.find(test => test == "Email")
-        if (emailError == "Email") {
-            emailBorderColor = '#d94498'
-        }
 
-        var addressBorderColor = '#5a83c2'
-        const addressError = this.props.error && this.props.errorColor.find(test => test == "Address")
-        if (addressError == "Address") {
-            addressBorderColor = '#d94498'
-        }
+    proceedCompany && props.navigation.navigate('ContactPerson')
 
-        var phoneErrorHint = ''
-        var emailErrorHint = ''
-        var addressErrorHint = ''
+    var phoneBorderColor = '#5a83c2'
+    const phoneError = errorColor && errorColor.find(test => test == "Phone")
+    if (phoneError == "Phone") {
+        phoneBorderColor = '#d94498'
+    }
 
-        this.props.error && this.props.error.map(err => {
-            if (err.title == 'phone') { phoneErrorHint = err.desc }
-            if (err.title == 'email') { emailErrorHint = err.desc }
-            if (err.title == 'address') { addressErrorHint = err.desc }
-        })
-        return (
-            <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-              <View style={{ flex: 1, justifyContent: 'flex-start' }}>
-                    <Image source={require('../assets/images/tekunA.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
-                </View>
-                <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
-                    <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                            <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY CONTACT INFORMATION</Text>
-                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
+    var emailBorderColor = '#5a83c2'
+    const emailError = error && errorColor.find(test => test == "Email")
+    if (emailError == "Email") {
+        emailBorderColor = '#d94498'
+    }
 
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/phoneNum.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.comp_phone} onChangeText={(comp_phone) => this.props.setCompanyInfo({ comp_phone })} style={{ marginLeft: 5, flex: 1 }} placeholder={(phoneErrorHint.length > 0) ? phoneErrorHint : 'Company Phone Number'} placeholderTextColor={(phoneErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'phone-pad'}/>
-                            </View>
-                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={this.props.comp_email} onChangeText={(comp_email) => this.props.setCompanyInfo({ comp_email })} style={{ marginLeft: 5, flex: 1 }} placeholder={(emailErrorHint.length > 0) ? emailErrorHint : 'Company Email Address'} placeholderTextColor={(emailErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'email-address'} />
-                            </View>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('CompanyContactAddressInformation')} style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                                <Image source={require('../assets/images/company.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                {!this.props.comp_state ? <TextInput editable={false} value={this.props.comp_addr} onChangeText={(comp_addr) => this.props.setCompanyInfo({ comp_addr })} style={{ marginLeft: 5 }} placeholder={(addressErrorHint.length > 0) ? addressErrorHint : 'Company Address'} placeholderTextColor={(addressErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                                    : <View style={{ marginRight: 3, paddingBottom: 5 }}>
-                                        <Text>{this.props.comp_addr}</Text>
-                                        {this.props.comp_addr_2 && <Text>{this.props.comp_addr_2}</Text>}
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text>{this.props.comp_postcode}</Text>
-                                            <Text>{this.props.comp_city}</Text>
-                                        </View>
-                                        <Text>{this.props.comp_state}</Text>
-                                    </View>}
-                            </TouchableOpacity>
-                            <View style={{ flexDirection: 'row', margin: 5 }}>
-                                <TouchableOpacity onPress={() => this.Next()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
-                                        <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
-                                    </LinearGradient>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
-                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </KeyboardAvoidingView>
-                </View>
+    var addressBorderColor = '#5a83c2'
+    const addressError = error && errorColor.find(test => test == "Address")
+    if (addressError == "Address") {
+        addressBorderColor = '#d94498'
+    }
+
+    var phoneErrorHint = ''
+    var emailErrorHint = ''
+    var addressErrorHint = ''
+
+    error && error.map(err => {
+        if (err.title == 'phone') { phoneErrorHint = err.desc }
+        if (err.title == 'email') { emailErrorHint = err.desc }
+        if (err.title == 'address') { addressErrorHint = err.desc }
+    })
+    return (
+        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+            <View style={{ flex: 1, justifyContent: 'flex-start' }}>
+                <Image source={require('../assets/images/tekunA.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
             </View>
-        );
-    }
+            <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
+                <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                        <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY CONTACT INFORMATION</Text>
+                        <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
+
+                        <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                            <Image source={require('../assets/images/phoneNum.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                            <TextInput value={comp_phone} onChangeText={(comp_phone) => setCompanyInfo({ comp_phone })} style={{ marginLeft: 5, flex: 1 }} placeholder={(phoneErrorHint.length > 0) ? phoneErrorHint : 'Company Phone Number'} placeholderTextColor={(phoneErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'phone-pad'} />
+                        </View>
+                        <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                            <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                            <TextInput value={comp_email} onChangeText={(comp_email) => setCompanyInfo({ comp_email })} style={{ marginLeft: 5, flex: 1 }} placeholder={(emailErrorHint.length > 0) ? emailErrorHint : 'Company Email Address'} placeholderTextColor={(emailErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'email-address'} />
+                        </View>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('CompanyContactAddressInformation')} style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                            <Image source={require('../assets/images/company.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                            {!comp_state ? <TextInput editable={false} value={comp_addr} onChangeText={(comp_addr) => setCompanyInfo({ comp_addr })} style={{ marginLeft: 5 }} placeholder={(addressErrorHint.length > 0) ? addressErrorHint : 'Company Address'} placeholderTextColor={(addressErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                : <View style={{ marginRight: 3, paddingBottom: 5 }}>
+                                    <Text>{comp_addr}</Text>
+                                    {comp_addr_2 && <Text>{comp_addr_2}</Text>}
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <Text>{comp_postcode}</Text>
+                                        <Text>{comp_city}</Text>
+                                    </View>
+                                    <Text>{comp_state}</Text>
+                                </View>}
+                        </TouchableOpacity>
+                        <View style={{ flexDirection: 'row', margin: 5 }}>
+                            <TouchableOpacity onPress={() => Next()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
+                                </LinearGradient>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
+                                <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </KeyboardAvoidingView>
+            </View>
+        </View>
+    );
 }
 
 
-function mapStateToProps(state) {
-    return {
-        comp_phone: state.companyInformationReducer.comp_phone,
-        comp_email: state.companyInformationReducer.comp_email,
-        comp_addr: state.companyInformationReducer.comp_addr,
-        comp_addr_2: state.companyInformationReducer.comp_addr_2,
-        comp_city: state.companyInformationReducer.comp_city,
-        comp_state: state.companyInformationReducer.comp_state,
-        comp_postcode: state.companyInformationReducer.comp_postcode,
-
-        proceedCompany: state.companyInformationReducer.proceedCompany,
-        error: state.companyInformationReducer.error,
-        errorColor: state.companyInformationReducer.errorColor,
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-        setCompanyInfo: (value) => dispatch({ type: 'SET_COMPANY_INFO', payload: { ...value } }),
-        companyContactInfo: () => dispatch(actionCreator.companyContactInfo())
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(CompanyContactInformationScreen)
+export default CompanyContactInformationScreen

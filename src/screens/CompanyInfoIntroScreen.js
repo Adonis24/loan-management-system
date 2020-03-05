@@ -28,11 +28,8 @@ import styles from '../styles/styles'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class CompanyInfoIntroScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
-    render() {
+const CompanyInfoIntroScreen=(props)=> {
+ 
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'flex-start' }}>
@@ -45,7 +42,7 @@ class CompanyInfoIntroScreen extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 20 }]}>Phone Verified.Proceed to company registration or skip to dashboard for now</Text>
                             
                            
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('CompanyInformation')} style={{ width: Layout.window.width * 0.4, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#4A90E2' }}>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('CompanyInformation')} style={{ width: Layout.window.width * 0.4, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#4A90E2' }}>
                                 <LinearGradient
                                     colors={['#4c669f', '#3b5998', '#192f6a']}
                                     style={{ paddingTop: 5, paddingBottom: 5, alignItems: 'center', borderRadius: 15, width: Layout.window.width * 0.4, }}>
@@ -53,7 +50,7 @@ class CompanyInfoIntroScreen extends React.PureComponent {
                                 </LinearGradient>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Dashboard')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('Dashboard')} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                 <Text style={[styles.textDefault,]}>Skip</Text>
                             </TouchableOpacity>
                             
@@ -63,19 +60,8 @@ class CompanyInfoIntroScreen extends React.PureComponent {
             </View >
         );
     }
-}
-
-
-function mapStateToProps(state) {
-    return {
 
 
 
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
 
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(CompanyInfoIntroScreen)
+export default CompanyInfoIntroScreen
