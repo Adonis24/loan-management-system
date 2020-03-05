@@ -29,15 +29,13 @@ import styles from '../styles/styles'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class UserAccountScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
 
-    constructor(props) {
+const UserAccountScreen = (props) => {
+
+    {/* constructor(props) {
         super(props)
         this.state = { popUp: false }
-    }
+    } 
     // toggleShow = () => {
     //     this.setState({ popUp: !this.state.popUp })
     // }
@@ -50,11 +48,11 @@ class UserAccountScreen extends React.PureComponent {
         //this.props.initiateMyAccount()
         //this.props.navigation.navigate('PopupScore')
         //this.props.getConnectionStatus()
-    }
+    }  */}
 
-    capitalizeString = (text = 'NA') => text.length > 0 && `${text[0].toUpperCase()}${text.slice(1)}`
+    const capitalizeString = (text = 'NA') => text.length > 0 && `${text[0].toUpperCase()}${text.slice(1)}`
 
-    render() {
+    
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -73,25 +71,25 @@ class UserAccountScreen extends React.PureComponent {
                             style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between' }}>
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                                    <TouchableOpacity onPress={() => this.props.navigation.goBack()} >
+                                    <TouchableOpacity onPress={() => props.navigation.goBack()} >
                                         <Ionicons name={Platform.OS === 'ios' ? 'ios-arrow-down' : 'ios-arrow-back'} size={32} color={'#fff'} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
                             <View style={{ alignItems: 'center', padding: 5 }}>
-                                <Image source={{ uri: this.props.profile_pic }} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff', marginBottom: 5 }]} resizeMode={'cover'} />
-                                <Text style={[styles.textDefault, { color: '#fff' }]}>{this.capitalizeString(this.props.name)}</Text>
-                                <Text style={[styles.textDefault, { color: '#fff' }]}>{this.props.companyName}</Text>
+                                <Image source={{ uri: profile_pic }} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff', marginBottom: 5 }]} resizeMode={'cover'} />
+                                <Text style={[styles.textDefault, { color: '#fff' }]}>{capitalizeString(name)}</Text>
+                                <Text style={[styles.textDefault, { color: '#fff' }]}>{companyName}</Text>
                                 <View style={{ flexDirection: 'row', padding: 5, margin: 10, borderRadius: 5, backgroundColor: '#fff' }}>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('QR')} style={{ padding: 5, paddingLeft: 10, paddingRight: 10 }}>
+                                    <TouchableOpacity onPress={() => props.navigation.navigate('QR')} style={{ padding: 5, paddingLeft: 10, paddingRight: 10 }}>
                                         <QRCode value={'test'} size={20} backgroundColor='#fff' color='#2FD9FE' />
                                     </TouchableOpacity>
                                 </View>
                             </View>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignSelf: 'stretch', padding: 5 }}>
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Connections</Text>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('AssociateDir')}><Text style={[styles.caption, { color: '#fff' }]}>{this.props.associateConnection} connected</Text></TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate('PendingDir')}><Text style={[styles.caption, { color: '#fff' }]}>{this.props.requestConnection} pending</Text></TouchableOpacity>
+                                <TouchableOpacity onPress={() => props.navigation.navigate('AssociateDir')}><Text style={[styles.caption, { color: '#fff' }]}>{associateConnection} connected</Text></TouchableOpacity>
+                                <TouchableOpacity onPress={() => props.navigation.navigate('PendingDir')}><Text style={[styles.caption, { color: '#fff' }]}>{requestConnection} pending</Text></TouchableOpacity>
                             </View>
                         </LinearGradient>
                     </View>
@@ -121,10 +119,10 @@ class UserAccountScreen extends React.PureComponent {
                 </View>
             </View >
         );
-    }
+    
 }
 
-function mapStateToProps(state) {
+{/*function mapStateToProps(state) {
     return {
         // connect_id: state.myAccountReducer.id,
         // member_id: state.myAccountReducer.member_id,
@@ -150,5 +148,5 @@ function mapDispatchToProps(dispatch) {
         // getConnectionStatus: () => dispatch(actionCreator.getConnectionStatus()),
         // accept: (val) => dispatch(actionCreator.accept(val))
     }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(UserAccountScreen)
+} */}
+export default UserAccountScreen
