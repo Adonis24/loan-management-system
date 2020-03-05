@@ -28,11 +28,8 @@ import styles from '../styles/styles'
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
-class UnderConstructionScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
-    render() {
+const UnderConstructionScreen=(props)=>{
+
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -58,19 +55,7 @@ class UnderConstructionScreen extends React.PureComponent {
             </View >
         );
     }
-}
-
-
-function mapStateToProps(state) {
-    return {
 
 
 
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(UnderConstructionScreen)
+export default UnderConstructionScreen
