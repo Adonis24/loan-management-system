@@ -31,10 +31,22 @@ import * as actionCreator from '../store/actions/action'
 import moment from 'moment'
 import _ from 'lodash'
 
-class BizDirectoryScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
+const BizDirectoryScreen = (props) => {
+
+    const dispatch = useDispatch()
+    const { associateConnection, requestConnection, allConnection } = useSelector(state => state.myAccountReducer, shallowEqual)
+    const { bizDirArray } = useSelector(state => state.bizDirReducer, shallowEqual)
+    const { assoDirArray } = useSelector(state => state.assoDirReducer, shallowEqual)
+    const { pendingDirArray } = useSelector(state => state.pendingDirReducer, shallowEqual)
+
+    useEffect(() => {
+         dispatch(actionCreator.initiateBizDir()),
+         dispatch(actionCreator.initiatePendingDir()),
+         dispatch(actionCreator.initiateAssociateDir())
+         dispatch(actionCreator.getConnectionStatus())
+    }, []); // empty-array means don't watch for any updates
+
+
     connect = (val) => {
         this.props.requestConnect(val)
         this.props.getConnectionStatus()
@@ -53,62 +65,56 @@ class BizDirectoryScreen extends React.PureComponent {
 
 
 
-    componentDidMount() {
-        this.props.getConnectionStatus()
-        this.props.initiateBizDir()
-        this.props.initiateAssociateDir()
-        this.props.initiatePendingDir()
+ 
 
-    }
 
-    render() {
-        this.props.bizDirArray && console.log(`ini lah bizdir ${JSON.stringify(this.props.bizDirArray)}`)
-        this.props.pendingDirArray && console.log(`ini lah pending ${JSON.stringify(this.props.pendingDirArray)}`)
-        return (
-            <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                    <View style={{ alignItems: 'flex-end' }}>
-                        <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
-                    </View>
-                    <View style={{ alignItems: 'flex-start' }}>
-                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
-                    </View>
+    this.props.bizDirArray && console.log(`ini lah bizdir ${JSON.stringify(this.props.bizDirArray)}`)
+    this.props.pendingDirArray && console.log(`ini lah pending ${JSON.stringify(this.props.pendingDirArray)}`)
+    return (
+        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+            <View style={{ flex: 1, justifyContent: 'space-between' }}>
+                <View style={{ alignItems: 'flex-end' }}>
+                    <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
                 </View>
-                <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
-                                <Ionicons name='ios-arrow-back' size={32} />
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 5, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
-                                <Image source={require('../assets/images/directory.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
-                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Directory</Text>
-                            </View>
+                <View style={{ alignItems: 'flex-start' }}>
+                    <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
+                </View>
+            </View>
+            <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
+                        <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                            <Ionicons name='ios-arrow-back' size={32} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
+                        <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 5, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
+                            <Image source={require('../assets/images/directory.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
+                            <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Directory</Text>
                         </View>
                     </View>
-                    {/* START CONTENT */}
-                    <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
-
-                        <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarA tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
-                            <Tab heading={`Associate (${this.props.associateConnection})`}>
-                                <Associate connect={this.connect} assoDirArray={this.props.assoDirArray} />
-                            </Tab>
-                            <Tab heading={`Request (${this.props.requestConnection})`}>
-                                <Pending connect={this.connect} accept={this.accept} pendingDirArray={this.props.pendingDirArray} />
-                            </Tab>
-                            <Tab heading={`All (${this.props.allConnection})`}>
-                                <All connect={this.connect} bizDirArray={this.props.bizDirArray} />
-                            </Tab>
-                        </Tabs>
-
-                    </View>
-                    {/* END CONTENT */}
                 </View>
-            </View >
-        );
-    }
+                {/* START CONTENT */}
+                <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
+
+                    <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarA tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
+                        <Tab heading={`Associate (${this.props.associateConnection})`}>
+                            <Associate connect={this.connect} assoDirArray={this.props.assoDirArray} />
+                        </Tab>
+                        <Tab heading={`Request (${this.props.requestConnection})`}>
+                            <Pending connect={this.connect} accept={this.accept} pendingDirArray={this.props.pendingDirArray} />
+                        </Tab>
+                        <Tab heading={`All (${this.props.allConnection})`}>
+                            <All connect={this.connect} bizDirArray={this.props.bizDirArray} />
+                        </Tab>
+                    </Tabs>
+
+                </View>
+                {/* END CONTENT */}
+            </View>
+        </View >
+    );
+
 }
 
 class Associate extends React.PureComponent {
@@ -128,14 +134,14 @@ class Associate extends React.PureComponent {
                     renderItem={({ item }) => {
                         if (item.name != '') {
                             return (
-                                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 5, marginRight: 5, borderWidth: 1, borderColor: '#ddd', padding:10, marginBottom: 20, justifyContent: 'space-between' }]}>
+                                <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 5, marginRight: 5, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
                                     <View style={[{ marginLeft: 10, padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
                                         <Image source={{ uri: item.profile_pic }} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
                                     </View>
                                     <Text style={[styles.textDefault, { fontWeight: 'bold' }]}>{item.name}</Text>
                                     <Text numberOfLines={1} ellipsizeMode={'tail'} style={[styles.caption, {}]}># :{item.member_id}</Text>
-                                    
-                                    <View  style={{ flexDirection: 'row', justifyContent: 'center' }}>
+
+                                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                                     </View>
                                 </View>
                             )
@@ -212,18 +218,7 @@ class All extends React.PureComponent {
 }
 
 
-function mapStateToProps(state) {
-    return {
-        bizDirArray: state.bizDirReducer.bizDirArray,
-        assoDirArray: state.assoDirReducer.assoDirArray,
-        pendingDirArray: state.pendingDirReducer.pendingDirArray,
 
-        associateConnection: state.myAccountReducer.associateConnection,
-        requestConnection: state.myAccountReducer.requestConnection,
-        allConnection: state.myAccountReducer.allConnection,
-
-    }
-}
 function mapDispatchToProps(dispatch) {
     return {
         initiateBizDir: () => dispatch(actionCreator.initiateBizDir()),
@@ -235,6 +230,6 @@ function mapDispatchToProps(dispatch) {
         accept: (val) => dispatch(actionCreator.accept(val)),
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(BizDirectoryScreen)
+export default connect( mapDispatchToProps)(BizDirectoryScreen)
 
 
