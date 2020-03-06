@@ -2,18 +2,11 @@
 import React from 'react';
 import {
     Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
     Text,
     TouchableOpacity,
     View,
-    Dimensions,
     TextInput,
-    AsyncStorage,
-    ImageBackground,
     KeyboardAvoidingView
-
 
 } from 'react-native';
 
@@ -22,7 +15,6 @@ import Constants from 'expo-constants'
 
 import Layout from '../constants/Layout'
 
-import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 //import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
 import { LinearGradient } from 'expo-linear-gradient'
