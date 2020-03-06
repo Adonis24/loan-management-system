@@ -82,7 +82,7 @@ const InfoNewsListScreen = (props) => {
                             <Latest nav={nav} hafiz={hafiz} newsArray={newsArray} />
                         </Tab>
                         <Tab heading="Popular">
-                            <Popular nav={nav} newsArray={newsArray} />
+                            <Popular nav={nav} hafiz={hafiz} newsArray={newsArray} />
                         </Tab>
                     </Tabs> : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                             <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14, color: 'lightgrey' }]}>Please check back for latest info soon</Text>
@@ -131,7 +131,7 @@ const Popular = (props) => {
 
                     renderItem={({ item }) => (
                         <View style={{ flex: 1, alignItems: 'center' }}>
-                            <TouchableOpacity onPress={() => props.nav('InfoNews', item)}>
+                            <TouchableOpacity onPress={() => props.hafiz(item)}>
                                 <Image source={{ uri: item.picture }} style={{ flex: 1, width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10, borderRadius: 10 }} resizeMode={'cover'} />
                             </TouchableOpacity>
                         </View>
