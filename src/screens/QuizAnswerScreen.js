@@ -2,18 +2,10 @@
 import React from 'react';
 import {
     Image,
-    Platform,
     ScrollView,
-    StyleSheet,
     Text,
     TouchableOpacity,
-    View,
-    Dimensions,
-    TextInput,
-    AsyncStorage,
-    ImageBackground
-
-
+    View
 } from 'react-native';
 
 import Constants from 'expo-constants'
@@ -23,10 +15,7 @@ import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab, Radio, ListItem } from 'native-base'
-
-import { connect } from 'react-redux'
-import * as actionCreator from '../store/actions/action'
+import {  Left, Right,Radio, ListItem } from 'native-base'
 
 
 const QuizAnswerScreen = (props) => {
