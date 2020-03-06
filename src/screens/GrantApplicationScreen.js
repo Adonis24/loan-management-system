@@ -2,17 +2,10 @@
 import React,{useEffect} from 'react';
 import {
     Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
     Text,
     TouchableOpacity,
     View,
-    Dimensions,
     TextInput,
-    AsyncStorage,
-    ImageBackground,
-    CheckBox
 
 } from 'react-native';
 
@@ -21,13 +14,10 @@ import Constants from 'expo-constants'
 
 import Layout from '../constants/Layout'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import { Picker } from 'native-base'
 import * as DocumentPicker from 'expo-document-picker';
-import { connect} from 'react-redux'
 import * as actionCreator from '../store/actions/action'
-import { Button } from 'native-base';
+
 
 
 const GrantApplicationScreen = (props) => {
