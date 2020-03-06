@@ -97,6 +97,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="UnderConstruction" component={UnderConstructionScreen} />
             <Stack.Screen name="PopupScore" component={PopupScoreScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="Settings" component={SettingsScreen} />
             <Stack.Screen name="Info" component={InfoScreen} />
             <Stack.Screen name="InfoEvent" component={InfoEventScreen} />
             <Stack.Screen name="InfoEventList" component={InfoEventListScreen} />
