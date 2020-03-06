@@ -231,7 +231,12 @@ export const companyInfoAPI = () => {
     const access_credential = 'api'
     console.log(`Company Registration : ${JSON.stringify(getState().companyInformationReducer)}`)
     const companyInfo = getState().companyInformationReducer
+
+
     const comp_regdate = moment(companyInfo.comp_regdate).format("YYYY-MM-DD HH:mm:ss")
+
+
+    console.log(`company info ialah :${JSON.stringify(companyInfo)}`)
     fetch(`${apiUrl}api/registerCompany/basic`, {
       method: 'POST',
       headers: {

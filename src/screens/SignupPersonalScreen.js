@@ -38,7 +38,7 @@ const validationSchema = Yup.object().shape({
 
     name: Yup
         .string('Please enter')
-        .required('Please enter')
+        .required()
         .min(3)
         .label('Name'),
 
@@ -92,7 +92,9 @@ const SignupPersonalScreen = (props) => {
             </View>
             <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
                 <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Formik initialValues={{ name: undefined, email: undefined, password: undefined, password_confirmation: undefined }} onSubmit={(values, actions) => {
+                    <Formik 
+                    validateOnMount
+                     initialValues={{  }} onSubmit={(values, actions) => {
                         console.log(`values formik ialah ${JSON.stringify(values)}`)
                         dispatch({type:'SET_REGISTER',payload:{...values}}) 
                         register(values)
@@ -125,7 +127,7 @@ const SignupPersonalScreen = (props) => {
                                     <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>REGISTRATION</Text>
                                     <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} />
                                     <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Personal Info</Text>
-
+                                 
                                     <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: nameTouched && nameError ? '#d94498' : '#5a83c2' }}>
                                         <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                         <TextInput value={name} onChangeText={FormikProps.handleChange(`name`)} onBlur={FormikProps.handleBlur(`name`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Full name'} placeholderTextColor={nameTouched && nameError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />

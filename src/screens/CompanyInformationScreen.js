@@ -213,14 +213,14 @@ const CompanyInformationScreen = (props) => {
                                         <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY INFORMATION</Text>
                                         <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
                                         <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_nameTouched && comp_nameError ? '#d94498' : '#5a83c2' }}>
-                                            <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                            <Image source={require('../assets/images/company.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                             <TextInput value={comp_name} onChangeText={FormikProps.handleChange(`comp_name`)} onBlur={FormikProps.handleBlur(`comp_name`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Name'} placeholderTextColor={comp_nameTouched && comp_nameError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                                         </View>
                                         <View style={{ width: Layout.window.width * 0.65 }}>
                                             {comp_nameTouched && comp_nameError && <Text style={styles.error}>{comp_nameError}</Text>}
                                         </View>
                                         <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_regnoTouched && comp_regnoError ? '#d94498' : '#5a83c2' }}>
-                                            <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                            <Image source={require('../assets/images/compRegNum.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                             <TextInput value={comp_regno} onChangeText={FormikProps.handleChange(`comp_regno`)} onBlur={FormikProps.handleBlur(`comp_regno`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Number'} placeholderTextColor={comp_regnoTouched && comp_regnoError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
                                         </View>
                                         <View style={{ width: Layout.window.width * 0.65 }}>
@@ -253,9 +253,6 @@ const CompanyInformationScreen = (props) => {
                                                 onChange={onChange}
                                             />
                                         )}
-
-
-
                                         <View style={{ flexDirection: 'row', margin: 5 }}>
                                             <TouchableOpacity disabled={!FormikProps.isValid} onPress={() => FormikProps.handleSubmit()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                                                 <LinearGradient colors={FormikProps.isValid ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
@@ -272,10 +269,6 @@ const CompanyInformationScreen = (props) => {
                             )
                         }}
                     </Formik >
-
-
-
-
                     {/* <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                         <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
                         <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY INFORMATION</Text>

@@ -51,11 +51,11 @@ export const register = (values) => {
 export const registerLMS = (values) => {
     return async (dispatch, getState) => {
 
-        const {  lms } = await getState().registrationReducer
+        const { lms } = await getState().registrationReducer
         const { name, email, password, password_confirmation } = await values
         const { token_type, access_token } = lms
         console.log(`token lms :${JSON.stringify(lms)}`)
-        await dispatch(registerLMSApi(token_type, access_token,  name, email, password, password_confirmation))
+        await dispatch(registerLMSApi(token_type, access_token, name, email, password, password_confirmation))
     }
 }
 
@@ -156,36 +156,14 @@ export const loginLMS = () => {
     }
 }
 
-export const companyInfo = () => {
+export const companyInfo = (values) => {
     return (dispatch, getState) => {
         console.log(`add company info`)
-        const { comp_name, comp_regno, comp_regdate, comp_main_biz_act } = getState().companyInformationReducer
+        const { comp_name, comp_regno, comp_regdate, comp_main_biz_act } = values
 
-        const errorArray = []
-        const errorColor = []
+        // dispatch(companyInfoAPI())
+        dispatch({ type: 'SET_COMPANY_INFO', payload: { proceed: true } })
 
-        if (comp_name == undefined || comp_name == '') {
-            errorArray.push({ title: "name", desc: "No Company Name" })
-            errorColor.push("Name")
-        }
-        if (comp_regno == undefined || comp_regno == '') {
-            errorArray.push({ title: "reg number", desc: "No Registration Number" })
-            errorColor.push("Reg Number")
-        }
-        if (comp_regdate == undefined || comp_regdate == '') {
-            errorArray.push({ title: "date", desc: "Please Select Date" })
-            errorColor.push("Date")
-        }
-        if (comp_main_biz_act == undefined || comp_main_biz_act == '') {
-            errorArray.push({ title: "business", desc: "No Registration Number" })
-            errorColor.push("Business")
-        }
-        if (errorArray.length > 0) {
-            dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
-        } else {
-            // dispatch(companyInfoAPI())
-            dispatch({ type: 'SET_COMPANY_INFO', payload: { proceed: true } })
-        }
     }
 }
 
@@ -218,64 +196,20 @@ export const companyContactInfo = () => {
 
 export const companyContactAddress = () => {
     return (dispatch, getState) => {
-        const { comp_addr, comp_city, comp_state, comp_postcode } = getState().companyInformationReducer
-        const errorArray = []
-        const errorColor = []
+        //const { comp_addr, comp_city, comp_state, comp_postcode } = getState().companyInformationReducer
 
-        if (comp_addr == undefined || comp_addr == '') {
-            errorArray.push({ title: "address", desc: "No Address" })
-            errorColor.push("Address")
-        }
-        if (comp_city == undefined || comp_city == '') {
-            errorArray.push({ title: "city", desc: "No City" })
-            errorColor.push("City")
-        }
-        if (comp_state == undefined || comp_state == '') {
-            errorArray.push({ title: "state", desc: "No State" })
-            errorColor.push("State")
-        }
-        if (comp_postcode == undefined || comp_postcode == '') {
-            errorArray.push({ title: "postcode", desc: "No PostCode" })
-            errorColor.push("Postcode")
-        }
-        if (errorArray.length > 0) {
-            dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
-        } else {
-            // dispatch(companyInfoAPI())
-            dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedContact: true } })
-        }
+       // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedContact: true } })
+
     }
 }
 
 export const contactPerson = () => {
     return (dispatch, getState) => {
-        const { full_name, ic_no, phone, position, ic_image } = getState().companyInformationReducer
-        const errorArray = []
-        const errorColor = []
-
-        if (full_name == undefined || full_name == '') {
-            errorArray.push({ title: "name", desc: "No Name" })
-            errorColor.push("Name")
-        }
-        if (ic_no == undefined || ic_no == '') {
-            errorArray.push({ title: "mykad", desc: "No MyKad" })
-            errorColor.push("MyKad")
-        }
-        if (position == undefined || position == '') {
-            errorArray.push({ title: "position", desc: "No Address" })
-            errorColor.push("Position")
-        }
-        if (phone == undefined || phone == '') {
-            errorArray.push({ title: "phone", desc: "No Phone Number" })
-            errorColor.push("Phone")
-        }
-        if (errorArray.length > 0) {
-            dispatch({ type: 'SET_COMPANY_INFO', payload: { loggedIn: false, error: errorArray, errorColor } })
-        } else {
+       
             // dispatch(contactPersonAPI())
             dispatch(companyInfoAPI())
             // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
-        }
+        
     }
 }
 
