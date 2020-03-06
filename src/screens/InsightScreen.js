@@ -2,32 +2,20 @@
 import React,{useEffect} from 'react';
 import {
     Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
     Text,
-    TouchableOpacity,
     View,
-    Dimensions,
-    TextInput,
-    AsyncStorage,
-    ImageBackground,
     FlatList
-
 
 } from 'react-native';
 
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
-import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 
-import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 //import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
 import { Thumbnail } from 'native-base'
-import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
 
