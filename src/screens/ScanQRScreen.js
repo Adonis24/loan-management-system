@@ -1,35 +1,15 @@
 //console.ignoredYellowBox = ['Setting a timer']
 import React, { useState, useEffect } from 'react';
 import {
-    Image,
-    Platform,
-    ScrollView,
     StyleSheet,
     Text,
-    TouchableOpacity,
     View,
-    Dimensions,
-    TextInput,
-    AsyncStorage,
-    ImageBackground
-
 
 } from 'react-native';
 
-import { BarCodeScanner } from 'expo-barcode-scanner'
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions'
 
-import Constants from 'expo-constants'
-//import { Constants, LinearGradient, FileSystem } from 'expo'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
-
-import { Ionicons } from '@expo/vector-icons';
-import styles from '../styles/styles'
-import { Icon } from 'native-base'
-
-import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
     const ScanQRScreen = (props) => {
