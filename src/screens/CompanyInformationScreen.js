@@ -2,27 +2,17 @@
 import React from 'react';
 import {
     Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
     Text,
     TouchableOpacity,
     View,
-    Dimensions,
     TextInput,
-    AsyncStorage,
-    ImageBackground,
     KeyboardAvoidingView
-
-
 } from 'react-native';
 
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
-
-import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 import { DatePicker } from 'native-base'
 import moment from 'moment'
