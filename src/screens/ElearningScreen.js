@@ -47,7 +47,7 @@ const ElearningScreen = (props) => {
 
             <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, right: 0, flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <View style={{ flex: 1, alignSelf: 'stretch', justifyContent: 'center', border: 1, borderColor: '#000', alignItems: 'center' }}>
-                    <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                    <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                         <View style={{ borderWidth: 3, borderColor: '#fff', width: Layout.window.width / 5 }} />
                     </TouchableOpacity>
                 </View>
@@ -60,16 +60,5 @@ const ElearningScreen = (props) => {
 }
 
 
-function mapStateToProps(state) {
-    return {
 
-        jwt: state.myAccountReducer.jwt
-
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(ElearningScreen)
+export default ElearningScreen
