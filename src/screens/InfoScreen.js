@@ -2,17 +2,9 @@
 import React from 'react';
 import {
     Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
     Text,
     TouchableOpacity,
-    View,
-    Dimensions,
-    TextInput,
-    AsyncStorage,
-    ImageBackground
-
+    View
 
 } from 'react-native';
 
@@ -23,9 +15,8 @@ import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import { Accordion, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab } from 'native-base'
+import { Accordion} from 'native-base'
 
-import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
 const dataArray = [
