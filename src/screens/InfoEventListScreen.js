@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
     Image,
     Platform,
@@ -31,17 +31,17 @@ import * as actionCreator from '../store/actions/action'
 
 const InfoEventListScreen = (props) => {
 
-const nav = (screen, item) => {
-    props.navigation.navigate(screen, { item })
-}
-const dispatch = useDispatch()
-const  {eventArray} = useSelector(state => state.eventScreenReducer, shallowEqual)
+    const nav = (screen, item) => {
+        props.navigation.navigate(screen, { item })
+    }
+    const dispatch = useDispatch()
+    const { eventArray } = useSelector(state => state.eventScreenReducer, shallowEqual)
 
-useEffect(() => {
+    useEffect(() => {
 
-    dispatch(actionCreator.initiateEvent())
+        dispatch(actionCreator.initiateEvent())
 
-}, []); // empty-array means don't watch for any updates
+    }, []); // empty-array means don't watch for any updates
 
 
 
@@ -92,49 +92,50 @@ useEffect(() => {
 
 }
 
-class Latest extends React.PureComponent {
-    render() {
-        return (
-            <ScrollView style={{ padding: 20 }}>
-                {eventArray &&
-                    <FlatList
-                        data={eventArray}
-                        keyExtractor={(item, index) => index.toString()}
-                        numColumns={2}
-                        renderItem={({ item }) => (
-                            <View style={{ flex: 1, alignItems: 'center' }}>
-                                <TouchableOpacity onPress={() => props.nav('InfoEvent', item)}>
-                                    <Image source={{ uri: item.picture }} style={{ flex: 1, width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10, borderRadius: 10 }} resizeMode={'contain'} />
-                                </TouchableOpacity>
-                            </View>
-                        )} />
-                }
-            </ScrollView>
-        )
-    }
+
+const Latest = (props) => {
+    return (
+        <ScrollView style={{ padding: 20 }}>
+            {eventArray &&
+                <FlatList
+                    data={eventArray}
+                    keyExtractor={(item, index) => index.toString()}
+                    numColumns={2}
+                    renderItem={({ item }) => (
+                        <View style={{ flex: 1, alignItems: 'center' }}>
+                            <TouchableOpacity onPress={() => props.nav('InfoEvent', item)}>
+                                <Image source={{ uri: item.picture }} style={{ flex: 1, width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10, borderRadius: 10 }} resizeMode={'contain'} />
+                            </TouchableOpacity>
+                        </View>
+                    )} />
+            }
+        </ScrollView>
+    )
+
 }
 
-class Popular extends React.PureComponent {
-    render() {
-        return (
-            <ScrollView style={{ padding: 20 }}>
-                {eventArray &&
-                    <FlatList
-                        data={eventArray}
-                        keyExtractor={(item, index) => index.toString()}
-                        numColumns={2}
-                        renderItem={({ item }) => (
-                            <View style={{ flex: 1, alignItems: 'center' }}>
-                                <TouchableOpacity onPress={() => props.nav('InfoEvent', item)}>
-                                    <Image source={{ uri: item.picture }} style={{ flex: 1, width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10, borderRadius: 10 }} resizeMode={'contain'} />
-                                </TouchableOpacity>
-                            </View>
-                        )} />
-                }
-            </ScrollView>
-        )
-    }
+
+const Popular = (props) => {
+
+    return (
+        <ScrollView style={{ padding: 20 }}>
+            {eventArray &&
+                <FlatList
+                    data={eventArray}
+                    keyExtractor={(item, index) => index.toString()}
+                    numColumns={2}
+                    renderItem={({ item }) => (
+                        <View style={{ flex: 1, alignItems: 'center' }}>
+                            <TouchableOpacity onPress={() => props.nav('InfoEvent', item)}>
+                                <Image source={{ uri: item.picture }} style={{ flex: 1, width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10, borderRadius: 10 }} resizeMode={'contain'} />
+                            </TouchableOpacity>
+                        </View>
+                    )} />
+            }
+        </ScrollView>
+    )
 }
+
 
 
 
