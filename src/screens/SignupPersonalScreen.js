@@ -85,45 +85,6 @@ const SignupPersonalScreen = (props) => {
          await props.navigation.navigate('SignUpPersonalSuccess')
     }
 
-
-
-    //proceed && props.navigation.navigate('SignUpPersonalSuccess')
-
-    // var emailBorderColor = '#5a83c2'
-    // const emailError = errorColor && errorColor.find(test => test == "E-mail")
-    // if (emailError == "E-mail") {
-    //     emailBorderColor = '#d94498'
-    // }
-
-    // var nameBorderColor = '#5a83c2'
-    // const nameError = error && errorColor.find(test => test == "Name")
-    // if (nameError == "Name") {
-    //     nameBorderColor = '#d94498'
-    // }
-
-    // var passwordBorderColor = '#5a83c2'
-    // const passwordError = error && errorColor.find(test => test == "Password")
-    // if (passwordError == "Password") {
-    //     passwordBorderColor = '#d94498'
-    // }
-
-    // var passwordConfirmBorderColor = '#5a83c2'
-    // const passwordConfirmError = error && errorColor.find(test => test == "Confirm Password")
-    // if (passwordConfirmError == "Confirm Password") {
-    //     passwordConfirmBorderColor = '#d94498'
-    // }
-
-    // var emailErrorHint = ''
-    // var nameErrorHint = ''
-    // var passwordErrorHint = ''
-    // var passwordConfirmErrorHint = ''
-
-    // error && error.map(err => {
-    //     if (err.title == 'email') { emailErrorHint = err.desc }
-    //     if (err.title == 'name') { nameErrorHint = err.desc }
-    //     if (err.title == 'password') { passwordErrorHint = err.desc }
-    //     if (err.title == 'confirm password') { passwordConfirmErrorHint = err.desc }
-    // })
     return (
         <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
             <View style={{ flex: 1, justifyContent: 'flex-start' }}>
@@ -216,14 +177,6 @@ const SignupPersonalScreen = (props) => {
                             )
                         }}
                     </Formik >
-
-
-
-
-
-
-
-
                 </KeyboardAvoidingView>
             </View>
         </View>
