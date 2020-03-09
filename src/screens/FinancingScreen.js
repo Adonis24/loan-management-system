@@ -1,17 +1,10 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React from 'react';
+import React,{useEffect} from 'react';
 import {
     Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
     Text,
     TouchableOpacity,
     View,
-    Dimensions,
-    TextInput,
-    AsyncStorage,
-    ImageBackground,
     FlatList
 
 
@@ -23,39 +16,43 @@ import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 
 import Layout from '../constants/Layout'
-
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab } from 'native-base'
+import { Tabs, Tab, ScrollableTab } from 'native-base'
 import { LinearGradient } from 'expo-linear-gradient'
-import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
 
-class FinancingScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
+const FinancingScreen = (props) => {
 
-    componentDidMount() {
-        this.props.initiateListAgency()
-        this.props.initiateGrantInfo()
+    const { current_page, last_page } = useSelector(state => state.grantApplicationReducer, shallowEqual)
+    const grantStatusArray = useSelector(state => state.grantApplicationReducer.data, shallowEqual)
+    const { agencyArray } = useSelector(state => state.agencyListReducer, shallowEqual)
+    const all = useSelector(state => state.loanApplicationReducer, shallowEqual)
+
+    const dispatch = useDispatch ()
+
+    useEffect(() => {
+        dispatch(actionCreator.initiateListAgency())
+        dispatch(actionCreator.initiateGrantInfo())
+    
+    }, []); // empty-array means don't watch for any updates
+
+   
+    const nav = (screen) => {
+        props.navigation.navigate(screen)
     }
 
-    nav = (screen) => {
-        this.props.navigation.navigate(screen)
+    const applyFinance = (agency_id) => {
+        props.navigation.navigate('GrantApplication', { agency_id })
     }
 
-    applyFinance = (agency_id) => {
-        this.props.navigation.navigate('GrantApplication', { agency_id })
+    const changePage = (page = 1) => {
+        dispatch(actionCreator.initiateGrantInfo(page))
     }
 
-    changePage = (page = 1) => {
-        this.props.initiateGrantInfo(page)
-    }
-
-    render() {
-        this.props.all && console.log(`inilah loan info : ${JSON.stringify(this.props.all)}`)
+        all && console.log(`inilah loan info : ${JSON.stringify(all)}`)
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -69,7 +66,7 @@ class FinancingScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                            <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -81,13 +78,13 @@ class FinancingScreen extends React.PureComponent {
                         </View>
                     </View>
                     <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
-                        {this.props.agencyArray && this.props.agencyArray.length > 0 &&
+                        {agencyArray && agencyArray.length > 0 &&
                             <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
                                 <Tab heading="Providers">
-                                    <Micro nav={this.nav} agencyArray={this.props.agencyArray} applyFinance={this.applyFinance} />
+                                    <Micro nav={nav} agencyArray={agencyArray} applyFinance={applyFinance} />
                                 </Tab>
                                 <Tab heading="Status">
-                                    <SME nav={this.nav} grantStatusArray={this.props.grantStatusArray} current_page={this.props.current_page} last_page={this.props.last_page} changePage={this.changePage} />
+                                    <SME nav={nav} grantStatusArray={grantStatusArray} current_page={current_page} last_page={last_page} changePage={changePage} />
                                 </Tab>
                             </Tabs>}
 
@@ -97,14 +94,13 @@ class FinancingScreen extends React.PureComponent {
 
         );
     }
-}
 
-class Micro extends React.PureComponent {
-    render() {
+
+   const Micro = (props) => {
         return (
             <View style={{ flex: 1, paddingTop: 10 }}>
                 <FlatList
-                    data={this.props.agencyArray}
+                    data={agencyArray}
                     keyExtractor={(item, index) => index.toString()}
                     numColumns={2}
                     renderItem={({ item }) => (
@@ -115,7 +111,7 @@ class Micro extends React.PureComponent {
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>{item.title}</Text>
                             <Text numberOfLines={3} ellipsizeMode={'tail'} style={[styles.caption, { margin: 5, }]}>{item.desc}</Text>
                             <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.props.applyFinance(item.id)} style={{ margin: 10, }}>
+                                <TouchableOpacity onPress={() => props.applyFinance(item.id)} style={{ margin: 10, }}>
                                     <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
                                         <Text style={[styles.caption, { color: '#fff' }]}>Apply</Text>
                                     </LinearGradient>
@@ -126,21 +122,22 @@ class Micro extends React.PureComponent {
                 />
             </View>
         )
-    }
+    
 }
 
-class SME extends React.PureComponent {
-    render() {
+
+    const SME = (props) => {
+    
         return (
             <View style={{ flex: 1, paddingTop: 10 }}>
 
-                {this.props.last_page > 1 && <View style={{ flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'space-between', margin: 10 }}>
-                    {this.props.current_page > 1 && <TouchableOpacity onPress={() => this.props.changePage(this.props.current_page - 1)}><Text>Prev :  {this.props.current_page - 1}</Text></TouchableOpacity>}
-                    {this.props.current_page < this.props.last_page && <TouchableOpacity onPress={() => this.props.changePage(this.props.current_page + 1)}><Text>Next :  {this.props.current_page + 1}</Text></TouchableOpacity>}
+                {last_page > 1 && <View style={{ flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'space-between', margin: 10 }}>
+                    {current_page > 1 && <TouchableOpacity onPress={() => props.changePage(current_page - 1)}><Text>Prev :  {current_page - 1}</Text></TouchableOpacity>}
+                    {current_page < last_page && <TouchableOpacity onPress={() => props.changePage(current_page + 1)}><Text>Next :  {current_page + 1}</Text></TouchableOpacity>}
                 </View>}
 
                 <FlatList
-                    data={this.props.grantStatusArray}
+                    data={grantStatusArray}
                     keyExtractor={(item, index) => index.toString()}
 
                     renderItem={({ item }) => (
@@ -164,26 +161,10 @@ class SME extends React.PureComponent {
                 />
             </View>
         )
-    }
+    
 }
 
 
 
-function mapStateToProps(state) {
-    return {
 
-        agencyArray: state.agencyListReducer.agencyArray,
-
-        all: state.loanApplicationReducer,
-        grantStatusArray: state.grantApplicationReducer.data,
-        current_page: state.grantApplicationReducer.current_page,
-        last_page: state.grantApplicationReducer.last_page,
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-        initiateListAgency: () => dispatch(actionCreator.initiateListAgency()),
-        initiateGrantInfo: (page) => dispatch(actionCreator.initiateGrantInfo(page)),
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(FinancingScreen)
+export default FinancingScreen

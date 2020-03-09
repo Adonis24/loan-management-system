@@ -2,16 +2,10 @@
 import React from 'react';
 import {
     Image,
-    Platform,
     ScrollView,
-    StyleSheet,
     Text,
     TouchableOpacity,
-    View,
-    Dimensions,
-    TextInput,
-    AsyncStorage,
-    ImageBackground,
+    View
 
 } from 'react-native';
 
@@ -22,19 +16,15 @@ import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab } from 'native-base'
 
-import { connect } from 'react-redux'
-import * as actionCreator from '../store/actions/action'
 
-class BizAppScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
-    nav = (screen) => {
-        this.props.navigation.navigate(screen)
+
+const BizAppScreen = (props) => {
+
+    const nav = (screen) => {
+        props.navigation.navigate(screen)
     }
-    render() {
+   
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -48,7 +38,7 @@ class BizAppScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                            <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                            <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -61,27 +51,27 @@ class BizAppScreen extends React.PureComponent {
                     </View>
                     <View style={{ flex: 7 }}>
                         <ScrollView style={{ padding: 20 }}>
-    
+
                             <View style={[{ flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, paddingTop: 10, marginBottom: 20 }]}>
                                 <Text style={[styles.textDefault, { margin: 5, fontSize: 12, textAlign: 'justify' }]}>Our selection of various tools and systems to assist in day-to-day operation and beyond </Text>
                             </View>
 
                             <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                <Image source={require('../assets/images/urusniaga.png')} style={{ width: undefined, height: Layout.window.height /10, }} resizeMode='contain' />
+                                <Image source={require('../assets/images/urusniaga.png')} style={{ width: undefined, height: Layout.window.height / 10, }} resizeMode='contain' />
                                 <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>UrusNiaga</Text>
                                 <Text style={[styles.textDefault, { margin: 5, fontSize: 12 }]}>Created to help you to manage sales, purchases, products, goods in stock, simple accounting, employees and customers.</Text>
                                 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('BizAppDetail', { uri: 'https://urusniaga.my/refgctc' })} style={{ margin: 5, }}>
+                                    <TouchableOpacity onPress={() => props.navigation.navigate('BizAppDetail', { uri: 'https://urusniaga.my/refgctc' })} style={{ margin: 5, }}>
                                         <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
                                             <Text style={[styles.caption, { color: '#fff' }]}>Detail</Text>
                                         </LinearGradient>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('BizAppDetail', { uri: 'https://register.urusniaga.my/' })} style={{ margin: 5, }}>
+                                    <TouchableOpacity onPress={() => props.navigation.navigate('BizAppDetail', { uri: 'https://register.urusniaga.my/' })} style={{ margin: 5, }}>
                                         <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
                                             <Text style={[styles.caption, { color: '#fff' }]}>Subscribe</Text>
                                         </LinearGradient>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('BizAppDetail', { uri: 'https://demo.urusniaga.my/' })} style={{ margin: 5, }}>
+                                    <TouchableOpacity onPress={() => props.navigation.navigate('BizAppDetail', { uri: 'https://demo.urusniaga.my/' })} style={{ margin: 5, }}>
                                         <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
                                             <Text style={[styles.caption, { color: '#fff' }]}>Demo</Text>
                                         </LinearGradient>
@@ -90,7 +80,7 @@ class BizAppScreen extends React.PureComponent {
                             </View>
 
                             <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                <Text style={[styles.caption,{marginTop:20,marginBottom:20,marginLeft:10,marginRight:10,color:'lightgrey'}]}>Come back soon for more recommendation</Text>
+                                <Text style={[styles.caption, { marginTop: 20, marginBottom: 20, marginLeft: 10, marginRight: 10, color: 'lightgrey' }]}>Come back soon for more recommendation</Text>
                             </View>
 
                         </ScrollView>
@@ -99,20 +89,9 @@ class BizAppScreen extends React.PureComponent {
             </View>
 
         );
-    }
+    
 }
 
 
-function mapStateToProps(state) {
-    return {
 
-
-
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(BizAppScreen)
+export default BizAppScreen

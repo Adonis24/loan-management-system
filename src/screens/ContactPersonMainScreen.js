@@ -2,18 +2,10 @@
 import React from 'react';
 import {
     Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
     Text,
     TouchableOpacity,
     View,
-    Dimensions,
     TextInput,
-    AsyncStorage,
-    ImageBackground,
-    CheckBox
-
 } from 'react-native';
 
 import Constants from 'expo-constants'
@@ -22,13 +14,11 @@ import { LinearGradient } from 'expo-linear-gradient'
 import * as DocumentPicker from 'expo-document-picker';
 import Layout from '../constants/Layout'
 
-import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 //import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
 
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
-import { Button } from 'native-base';
 
 class ContactPersonMainScreen extends React.PureComponent {
     static navigationOptions = {

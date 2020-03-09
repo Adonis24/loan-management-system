@@ -1,19 +1,12 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
     Image,
-    Platform,
     ScrollView,
-    StyleSheet,
     Text,
     TouchableOpacity,
     View,
-    Dimensions,
-    TextInput,
-    AsyncStorage,
-    ImageBackground,
     FlatList
-
 
 } from 'react-native';
 
@@ -24,9 +17,8 @@ import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab } from 'native-base'
+import { Tabs, Tab, ScrollableTab } from 'native-base'
 
-import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
 
@@ -36,6 +28,13 @@ const InfoNewsListScreen = (props) => {
         props.navigation.navigate(screen, { item })
     }
 
+    const hafiz = (item) => {
+        console.log(`item ialah : ${JSON.stringify(item)}`)
+        props.navigation.navigate('InfoNews', { item:JSON.stringify(item) })
+    }
+
+    // props.nav('InfoNews', { item })
+
     const dispatch = useDispatch()
     const { newsArray } = useSelector(state => state.newsScreenReducer, shallowEqual)
 
@@ -44,7 +43,7 @@ const InfoNewsListScreen = (props) => {
         dispatch(actionCreator.initiateNews())
 
     }, []); // empty-array means don't watch for any updates
-  
+
     return (
         <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
             <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -72,10 +71,10 @@ const InfoNewsListScreen = (props) => {
                 <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
                     {newsArray && newsArray.length > 0 ? <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: 'transparent' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
                         <Tab heading="Latest">
-                            <Latest nav={nav} newsArray={newsArray} />
+                            <Latest nav={nav} hafiz={hafiz} newsArray={newsArray} />
                         </Tab>
                         <Tab heading="Popular">
-                            <Popular nav={nav} newsArray={newsArray} />
+                            <Popular nav={nav} hafiz={hafiz} newsArray={newsArray} />
                         </Tab>
                     </Tabs> : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                             <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14, color: 'lightgrey' }]}>Please check back for latest info soon</Text>
@@ -89,9 +88,9 @@ const InfoNewsListScreen = (props) => {
         </View>
     );
 
-  }
+}
 
- const Latest = (props) => {
+const Latest = (props) => {
     return (
         <ScrollView contentContainerStyle={{ width: Layout.window.width }} style={{ width: Layout.window.width, padding: 20 }}>
             {props.newsArray &&
@@ -101,15 +100,15 @@ const InfoNewsListScreen = (props) => {
 
                     renderItem={({ item }) => (
 
-                        <TouchableOpacity onPress={() => props.nav('InfoNews', item)}>
+                        <TouchableOpacity onPress={() => props.hafiz(item)}>
                             <Image source={{ uri: item.picture }} style={{ flex: 1, width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 5, borderRadius: 10 }} resizeMode={'cover'} />
                         </TouchableOpacity>
 
                     )} />}
         </ScrollView>
     )
-                    
-} 
+
+}
 
 
 
@@ -124,7 +123,7 @@ const Popular = (props) => {
 
                     renderItem={({ item }) => (
                         <View style={{ flex: 1, alignItems: 'center' }}>
-                            <TouchableOpacity onPress={() => props.nav('InfoNews', item)}>
+                            <TouchableOpacity onPress={() => props.hafiz(item)}>
                                 <Image source={{ uri: item.picture }} style={{ flex: 1, width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 10, borderRadius: 10 }} resizeMode={'cover'} />
                             </TouchableOpacity>
                         </View>
@@ -133,7 +132,7 @@ const Popular = (props) => {
         </ScrollView>
     )
 
-} 
+}
 
 
 

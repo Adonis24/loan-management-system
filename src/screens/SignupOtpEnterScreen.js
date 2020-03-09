@@ -2,17 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import {
     Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
     Text,
     TouchableOpacity,
     View,
-    Dimensions,
     TextInput,
-    AsyncStorage,
-    ImageBackground
-
 
 } from 'react-native';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'

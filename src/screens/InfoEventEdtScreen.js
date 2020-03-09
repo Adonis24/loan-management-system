@@ -2,17 +2,9 @@
 import React from 'react';
 import {
     Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
     Text,
     TouchableOpacity,
-    View,
-    Dimensions,
-    TextInput,
-    AsyncStorage,
-    ImageBackground
-
+    View
 
 } from 'react-native';
 
@@ -25,15 +17,10 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 //import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
 
-import { connect } from 'react-redux'
-import * as actionCreator from '../store/actions/action'
 
-class InfoEventEdtScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
-    render() {
-        const item = this.props.navigation.getParam('item', 'NA')
+  const InfoEventEdtScreen = (props) => {
+
+        const item = props.route.param?.item ?? 'NA'
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -51,7 +38,7 @@ class InfoEventEdtScreen extends React.PureComponent {
                     {/* HEADER */}
                     <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, marginTop: 10 }}>
-                           <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                           <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -89,20 +76,9 @@ class InfoEventEdtScreen extends React.PureComponent {
 
 
         );
-    }
+    
 }
 
 
-function mapStateToProps(state) {
-    return {
 
-
-
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(InfoEventEdtScreen)
+export default InfoEventEdtScreen

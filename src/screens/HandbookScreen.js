@@ -2,18 +2,10 @@
 import React from 'react';
 import {
     Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
     Text,
     TouchableOpacity,
     View,
-    Dimensions,
-    TextInput,
-    AsyncStorage,
-    ImageBackground
-
-
+    
 } from 'react-native';
 
 import Constants from 'expo-constants'
@@ -23,18 +15,10 @@ import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab } from 'native-base'
 
-import { connect } from 'react-redux'
-import * as actionCreator from '../store/actions/action'
+const HandbookScreen = (props) => {
 
-class HandbookScreen extends React.PureComponent {
-    static navigationOptions = {
-        header: null,
-    };
-
-    render() {
-        const item = this.props.navigation.getParam('item', 'NA')
+        const item = props.route.param?.item ?? 'NA'
         return (
             <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -48,7 +32,7 @@ class HandbookScreen extends React.PureComponent {
                 <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                           <TouchableOpacity onPress={() => this.props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                           <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
                                 <Ionicons name='ios-arrow-back' size={32} />
                             </TouchableOpacity>
                         </View>
@@ -60,7 +44,7 @@ class HandbookScreen extends React.PureComponent {
                         </View>
                     </View>
                     <View style={{ flex: 7, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                        <View onPress={() => this.props.nav('Handbook')} style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
+                        <View onPress={() => props.nav('Handbook')} style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', margin: 10, }}>
                             <Image source={{ uri: item.picture }} style={{ flex: 1, height: Layout.window.height * 0.25, width: undefined, }} resizeMode={'cover'} />
                             <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
                                 <Text style={[styles.textDefault, { fontWeight: 'bold', textAlign: 'left', alignSelf: 'flex-start' }]}>{item.title}</Text>
@@ -70,8 +54,8 @@ class HandbookScreen extends React.PureComponent {
                                     <Text style={[styles.caption, { color: 'blue', alignSelf: 'flex-start', margin: 5, textAlign: 'left' }]}>50 review</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <TouchableOpacity style={{ margin: 5, padding: 5, borderWidth: 1, borderColor: 'blue', borderRadius: 5 }} onPress={() => this.props.nav(Handbook)}><Text>View</Text></TouchableOpacity>
-                                    <TouchableOpacity style={{ margin: 5, padding: 5, borderWidth: 1, borderColor: 'blue', borderRadius: 5 }} onPress={() => this.props.nav(Handbook)}><Text>+ Add to Favorite</Text></TouchableOpacity>
+                                    <TouchableOpacity style={{ margin: 5, padding: 5, borderWidth: 1, borderColor: 'blue', borderRadius: 5 }} onPress={() => props.nav(Handbook)}><Text>View</Text></TouchableOpacity>
+                                    <TouchableOpacity style={{ margin: 5, padding: 5, borderWidth: 1, borderColor: 'blue', borderRadius: 5 }} onPress={() => props.nav(Handbook)}><Text>+ Add to Favorite</Text></TouchableOpacity>
                                 </View>
                             </View>
                         </View>
@@ -83,23 +67,11 @@ class HandbookScreen extends React.PureComponent {
                 </View>
             </View>
         );
-    }
+    
 }
 
 
 
 
 
-function mapStateToProps(state) {
-    return {
-
-
-
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(HandbookScreen)
+export default HandbookScreen
