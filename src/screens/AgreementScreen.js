@@ -88,8 +88,4 @@ FCGB is referred to as “we”, “us”, “our” or “ours”. Any person u
     );
 }
 
-
-
-
-
 export default AgreementScreen

@@ -156,16 +156,7 @@ export const loginLMS = () => {
     }
 }
 
-export const companyInfo = (values) => {
-    return (dispatch, getState) => {
-        console.log(`add company info`)
-        const { comp_name, comp_regno, comp_regdate, comp_main_biz_act } = values
 
-        // dispatch(companyInfoAPI())
-        dispatch({ type: 'SET_COMPANY_INFO', payload: { proceed: true } })
-
-    }
-}
 
 export const companyContactInfo = () => {
     return (dispatch, getState) => {
@@ -198,18 +189,18 @@ export const companyContactAddress = () => {
     return (dispatch, getState) => {
         //const { comp_addr, comp_city, comp_state, comp_postcode } = getState().companyInformationReducer
 
-       // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedContact: true } })
+        // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedContact: true } })
 
     }
 }
 
 export const contactPerson = () => {
     return (dispatch, getState) => {
-       
-            // dispatch(contactPersonAPI())
-            dispatch(companyInfoAPI())
-            // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
-        
+
+        // dispatch(contactPersonAPI())
+        dispatch(companyInfoAPI())
+        // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
+
     }
 }
 
@@ -247,11 +238,8 @@ export const contactPersonMain = () => {
 
 export const detailConnect = () => {
     return (dispatch, getState) => {
-        const capacity = getState().companyInformationReducer.capacity
-        const nameCP = getState().companyInformationReducer.mynameCPKad
-        const icNumber = getState().companyInformationReducer.icNumber
-        const relationship = getState().companyInformationReducer.relationship
-        const emailSME = getState().companyInformationReducer.emailSME
+
+        const { capacity, nameCP, icNumber, relationship, emailSME } = getState().companyInformationReducer
         dispatch(detailConnectAPI(capacity, nameCP, icNumber, relationship, emailSME))
     }
 }

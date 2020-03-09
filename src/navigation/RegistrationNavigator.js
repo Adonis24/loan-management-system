@@ -28,13 +28,13 @@ const Stack = createStackNavigator();
 const Registration = () => {
   return (
     <Stack.Navigator initialRouteName="Intro" screenOptions={{ headerShown: false }}>
-      {/* <Stack.Screen name="Intro" component={IntroScreen} />
-      <Stack.Screen name="Agreement" component={AgreementScreen} /> */}
+      <Stack.Screen name="Intro" component={IntroScreen} />
+      <Stack.Screen name="Agreement" component={AgreementScreen} />
       <Stack.Screen name="SignUpPersonal" component={SignupPersonalScreen} />
       <Stack.Screen name="SignUpPersonalSuccess" component={SignupPersonalSuccessScreen} />
       <Stack.Screen name="SignUpOtp" component={SignupOtpScreen} />
       <Stack.Screen name="SignUpOtpEnter" component={SignupOtpEnterScreen} />
-     {/* <Stack.Screen name="SignUpSuccess" component={SignupSuccessScreen} /> */} 
+     {/* <Stack.Screen name="SignUpSuccess" component={SignupSuccessScreen} /> */}
       <Stack.Screen name="CompanyInfoIntro" component={CompanyInfoIntroScreen} />
       <Stack.Screen name="CompanyInformation" component={CompanyInformationScreen} />
       <Stack.Screen name="CompanyContactInformation" component={CompanyContactInformationScreen} />

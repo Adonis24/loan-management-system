@@ -49,7 +49,7 @@ const validationSchema = Yup.object().shape({
         .label('Registration Number'),
 
     comp_regdate: Yup
-        .string()
+        .date()
         .required()
         .min(3)
         .label('Registration Date'),
@@ -59,33 +59,25 @@ const validationSchema = Yup.object().shape({
         .min(6)
         .required()
         .label('Business Activities'),
-
-
-
 });
 
 const CompanyInformationScreen = (props) => {
+
     const ios = Platform.OS === "ios" ? true : false
     const dispatch = useDispatch()
 
     const companyInformation = (values) => {
-        dispatch({ type: 'SET_COMPANY_INFO', payload: { ...values } })
-        dispatch(actionCreator.companyInfo(values))
+        const reg_date = moment(values.comp_regdate).format("YYYY-MM-DD HH:mm:ss")
+        //const reg_date ='2020-03-09 02:05:38'
+        const newValues = { ...values, reg_date }
+        console.log(`new values ialah : ${JSON.stringify(newValues)}`)
+        dispatch({ type: 'SET_COMPANY_INFO', payload: { ...newValues } })
+
         props.navigation.navigate('CompanyContactInformation')
     }
 
     const [iosDatePickerShow, setIosDatePickerShow] = useState(false)
     const [chosenDate, setChosenDate] = useState(new Date())
-
-    const setCompanyInfo = (value) => dispatch({ type: 'SET_COMPANY_INFO', payload: { ...value } })
-
-    const setDate1 = (newDate) => {
-
-        setChosenDate(newDate)
-        setCompanyInfo({ compAddress: moment(newDate).format() })
-    }
-
-    //const { comp_name, comp_regno, compAddress, comp_main_biz_act, proceed, error, errorColor } = useSelector(state => state.companyInformationReducer, shallowEqual)
 
 
     //proceed && props.navigation.navigate('CompanyContactInformation')
@@ -93,8 +85,6 @@ const CompanyInformationScreen = (props) => {
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-
-
 
     return (
         <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -105,12 +95,10 @@ const CompanyInformationScreen = (props) => {
             <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
                 <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Formik initialValues={{ comp_name: undefined, comp_regno: undefined, comp_main_biz_act: undefined, }} onSubmit={(values, actions) => {
-                        console.log(`values formik ialah ${JSON.stringify(values)}`)
-                        dispatch({ type: 'SET_REGISTER', payload: { ...values } })
+
                         companyInformation(values)
                         actions.setSubmitting(false)
-                    }
-                    }
+                    }}
                         validationSchema={validationSchema}
                     >
                         {FormikProps => {
@@ -119,7 +107,7 @@ const CompanyInformationScreen = (props) => {
                                 const currentDate = selectedDate || date;
                                 setShow(ios);
                                 setDate(currentDate);
-                                FormikProps.setFieldValue('comp_regdate', moment(currentDate).format(" MMMM Do YYYY"))
+                                FormikProps.setFieldValue('comp_regdate', currentDate)
                             };
 
                             const showMode = currentMode => {
@@ -230,7 +218,7 @@ const CompanyInformationScreen = (props) => {
                                             <TouchableOpacity onPress={() => showDatepicker()} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
                                                 <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                             </TouchableOpacity>
-                                            <TextInput value={comp_regdate} onChangeText={FormikProps.handleChange(`comp_regdate`)} onBlur={FormikProps.handleBlur(`comp_regdate`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Date'} placeholderTextColor={comp_regdateTouched && comp_regdateError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
+                                            {/* <TextInput value={comp_regdate} onChangeText={FormikProps.handleChange(`comp_regdate`)} onBlur={FormikProps.handleBlur(`comp_regdate`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Date'} placeholderTextColor={comp_regdateTouched && comp_regdateError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} /> */}
                                         </View>
                                         <View style={{ width: Layout.window.width * 0.65 }}>
                                             {comp_regdateTouched && comp_regdateError && <Text style={styles.error}>{comp_regdateError}</Text>}

@@ -85,7 +85,7 @@ const ContactPersonScreen = (props) => {
     const ContactPerson = async () => {
         //await this.props.companyInfo()
         dispatch(actionCreator.contactPerson())
-        // this.props.navigation.navigate('ContactPersonSuccess')
+         props.navigation.navigate('CompanyInfoSuccess')
     }
 
 

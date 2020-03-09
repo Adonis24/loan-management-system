@@ -233,7 +233,7 @@ export const companyInfoAPI = () => {
     const companyInfo = getState().companyInformationReducer
 
 
-    const comp_regdate = moment(companyInfo.comp_regdate).format("YYYY-MM-DD HH:mm:ss")
+    const comp_regdate = companyInfo.reg_date
 
 
     console.log(`company info ialah :${JSON.stringify(companyInfo)}`)
@@ -244,7 +244,7 @@ export const companyInfoAPI = () => {
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-      body: JSON.stringify({ ...companyInfo, comp_regdate, access_credential: 'api' }),
+      body: JSON.stringify({ ...companyInfo,comp_regdate, access_credential: 'api' }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
@@ -290,6 +290,7 @@ export const contactPersonAPI = () => {
 export const detailConnectAPI = (capacity, nameCP, icNumber, relationship, emailSME) => {
   return async (dispatch, getState) => {
 
+    console.log(`detail connect api ialah : ${JSON.stringify({capacity, nameCP, icNumber, relationship, emailSME})}`)
   }
 }
 

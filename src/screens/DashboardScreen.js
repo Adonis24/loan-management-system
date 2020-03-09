@@ -180,7 +180,6 @@ const DashboardScreen = (props) => {
                                             <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                         </View>
                                     </View>
-
                                     <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                         <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
                                             <TouchableOpacity style={{ flex: 1, }} />
