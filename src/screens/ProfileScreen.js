@@ -56,7 +56,7 @@ const ProfileScreen = (props) => {
         return (
             < LayoutB
                 title={'Biz Profile'}
-                screenType='form'
+                screenType='NO'
                 navigation={props.navigation}
                 imageUri={require('../assets/icon/rfq.png')}
             >
