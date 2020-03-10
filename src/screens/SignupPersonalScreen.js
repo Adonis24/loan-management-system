@@ -69,9 +69,6 @@ const SignupPersonalScreen = (props) => {
     //const { name, email, password, password_confirmation, proceed, error, errorColor, indicator } = useSelector(state => state.registrationReducer, shallowEqual)
 
 
-
-
-
     useEffect(() => {
         dispatch(actionCreator.getToken())
         dispatch(actionCreator.getTokenLMS())

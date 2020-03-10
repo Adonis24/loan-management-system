@@ -44,8 +44,8 @@ const Nav = (props) => {
       <Stack.Navigator>
         {token ?
           <Stack.Screen name="MainTabNav" component={MainTabNav} options={{ headerShown: false }} /> :
-          <Stack.Screen name="Authentication" component={AuthenticationStack} options={{ headerShown: false }} />}
-        <Stack.Screen name="Registration" component={RegistrationStack} options={{ headerShown: false }} />
+          <Stack.Screen name="AuthenticationStack" component={AuthenticationStack} options={{ headerShown: false }} />}
+        <Stack.Screen name="Registration" component={RegistrationStack} options={{ headerShown: false }}  />
       </Stack.Navigator>
     </NavigationContainer>
   )
