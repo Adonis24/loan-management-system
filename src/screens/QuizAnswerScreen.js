@@ -10,7 +10,7 @@ import {
 
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
-
+import LayoutB from '../Layout/Layout B';
 import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
@@ -25,31 +25,13 @@ const QuizAnswerScreen = (props) => {
     }
 
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-            <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                <View style={{ alignItems: 'flex-end' }}>
-                    <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
-                </View>
-                <View style={{ alignItems: 'flex-start' }}>
-                    <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
-                </View>
-            </View>
-            <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
-                            <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
-                                <Ionicons name='ios-arrow-back' size={32} />
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
-                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
-                                <Image source={require('../assets/images/quiz.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
-                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Quiz</Text>
-                            </View>
-                        </View>
-                    </View>
-                </View>
+        < LayoutB
+        title={'Quiz'}
+        screenType='form'
+        navigation={props.navigation}
+        imageUri={require('../assets/images/quiz.png')}
+    >
+       
                 <ScrollView style={{ padding: 20 }}>
                     <View style={[{ backgroundColor: '#fff', flex: 1, alignSelf: 'flex-start', borderRadius: 20, marginLeft: 10, marginRight: 10, paddingTop: 10, marginBottom: 5 }]}>
                         <Text style={[styles.textDefault, { margin: 5, textAlign: 'left', fontWeight: 'bold' }]}>Quiz 1: Lorem ipsum dolor sit amet</Text>
@@ -88,8 +70,7 @@ const QuizAnswerScreen = (props) => {
                         </View>
                     </View>
                 </ScrollView>
-            </View>
-        </View>
+           </ LayoutB>
     );
 
 }
