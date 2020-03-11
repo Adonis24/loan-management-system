@@ -23,10 +23,13 @@ const Nav = (props) => {
       //const personalToken = await AsyncStorage.getItem('personalToken');
       const personalToken = await SecureStore.getItemAsync('personalToken')
       if (personalToken !== null && !personalToken.includes('error')) {
+        const { token_type, access_token,error } = JSON.parse(personalToken)
+        
+        //const parsedPer
         console.log(`personal token ialah : ${personalToken}`)
         //this.setState({ tokenExists: true })
         setTokenExists(true)
-        const { token_type, access_token } = JSON.parse(personalToken)
+   
         dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
       }
     } catch (error) {
@@ -34,6 +37,8 @@ const Nav = (props) => {
       return 'takde'
     }
   }
+
+  console.log(`token kat Nav ialah : ${JSON.stringify(token)}`)
 
   useEffect(() => {
     checkLogin()
@@ -44,7 +49,7 @@ const Nav = (props) => {
       <Stack.Navigator>
         {token ?
           <Stack.Screen name="MainTabNav" component={MainTabNav} options={{ headerShown: false }} /> :
-          <Stack.Screen name="Authentication" component={AuthenticationStack} options={{ headerShown: false }} />}
+          <Stack.Screen name="AuthenticationStack" component={AuthenticationStack} options={{ headerShown: false }} />}
         <Stack.Screen name="Registration" component={RegistrationStack} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>

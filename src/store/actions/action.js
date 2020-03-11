@@ -107,51 +107,26 @@ export const getPersonalTokenLMS = () => {
     }
 }
 
-export const login = () => {
+export const login = (values) => {
     return (dispatch, getState) => {
-        dispatch({ type: 'SET_LOGIN', payload: { indicator: true } })
-        const username = getState().loginScreenReducer.email
+    
+        //const username = getState().loginScreenReducer.email
         //const password = getState().loginScreenReducer.password
 
-        const { email, password } = getState().loginScreenReducer
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        const errorArray = []
-        const errorColor = []
+        const { email, password } = values
+        const username = email
 
-        if (email == undefined || email == '') {
+        dispatch(requestPersonalToken('login', username, password))
 
-            errorArray.push({ title: "email", desc: "No e-mail" })
-            errorColor.push("E-mail")
-        } else if (reg.test(email) === false) {
-            errorArray.push("Wrong e-mail format")
-            errorColor.push("E-mail")
-        }
-        if (password == undefined || password == '') {
-
-            errorArray.push({ title: "password", desc: "No password" })
-            errorColor.push("Password")
-        } else if (password.length < 6) {
-            errorArray.push({ title: "password", desc: "Wrong password" })
-            errorColor.push("Password")
-        }
-
-        if (errorArray.length > 0) {
-            dispatch({ type: 'SET_LOGIN', payload: { loggedIn: false, error: errorArray, errorColor, indicator: false } })
-
-        } else {
-            dispatch(requestPersonalToken('login', username, password))
-        }
     }
 }
 
-export const loginLMS = () => {
+export const loginLMS = (values) => {
     return (dispatch, getState) => {
-        dispatch({ type: 'SET_LOGIN', payload: { indicator: true } })
-        const username = getState().loginScreenReducer.email
-        //const password = getState().loginScreenReducer.password
-
+    
+    
         const { email, password } = getState().loginScreenReducer
-
+        const username = email
         dispatch(requestPersonalTokenLMS('login', username, password))
     }
 }

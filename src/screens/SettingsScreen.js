@@ -20,13 +20,13 @@ import styles from '../styles/styles'
 
 
 import * as actionCreator from '../store/actions/action'
-import LayoutB from '../Layout/Layout B';
+import LayoutB from '../Layout/LayoutB';
 
 const SettingScreen = (props) => {
 
     const logout = async () => {
         await dispatch(actionCreator.logout())
-        await props.navigation.navigate('Authentication')
+        //await props.navigation.navigate('AuthenticationStack')
     }
     const dispatch = useDispatch()
     const { name, email, phone_no, profile_pic, email_verified_at, ic_no, member_id } = useSelector(state => state.myAccountReducer, shallowEqual)

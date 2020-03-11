@@ -66,7 +66,7 @@ const App = (props) => {
     registerForPushNotificationsAsync();
     const _notificationSubscription = Notifications.addListener(_handleNotification);
 
-    checkLogin()
+    //checkLogin()
 
   }, [])
 

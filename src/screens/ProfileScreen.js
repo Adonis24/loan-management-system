@@ -12,7 +12,7 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import { LinearGradient } from 'expo-linear-gradient'
-import LayoutB from '../Layout/Layout B';
+import LayoutB from '../Layout/LayoutB';
 
 import Layout from '../constants/Layout'
 import _ from 'lodash'

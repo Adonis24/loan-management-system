@@ -18,7 +18,7 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 import { Tabs, Tab, ScrollableTab} from 'native-base'
-import LayoutB from '../Layout/Layout B';
+import LayoutB from '../Layout/LayoutB';
 
 import * as actionCreator from '../store/actions/action'
 

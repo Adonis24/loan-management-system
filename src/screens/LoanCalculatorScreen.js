@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import Constants from 'expo-constants'
-import LayoutB from '../Layout/Layout B';
+import LayoutB from '../Layout/LayoutB';
 import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';

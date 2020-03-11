@@ -16,7 +16,7 @@ import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import LayoutB from '../Layout/Layout B';
+import LayoutB from '../Layout/LayoutB';
 
 
 const QuizScreen = (props) => {

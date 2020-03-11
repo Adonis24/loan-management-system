@@ -20,7 +20,7 @@ import styles from '../styles/styles'
 import { Tabs, Tab, ScrollableTab } from 'native-base'
 
 import * as actionCreator from '../store/actions/action'
-import LayoutB from '../Layout/Layout B';
+import LayoutB from '../Layout/LayoutB';
 
 
 const InfoNewsListScreen = (props) => {

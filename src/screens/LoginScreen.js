@@ -17,6 +17,8 @@ import {
 
 
 } from 'react-native';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -29,6 +31,22 @@ import styles from '../styles/styles'
 
 import * as actionCreator from '../store/actions/action'
 
+const validationSchema = Yup.object().shape({
+
+    email: Yup
+        .string()
+        .required()
+        .email()
+        .label('Email'),
+
+    password: Yup
+        .string()
+        .required()
+        .label('Password'),
+
+});
+
+
 const LoginScreen = (props) => {
 
     const dispatch = useDispatch()
@@ -39,41 +57,19 @@ const LoginScreen = (props) => {
     };
 
 
-    const login = async () => {
-        await dispatch(actionCreator.login())
-        await dispatch(actionCreator.loginLMS())
+    const login = async (values) => {
+        await dispatch(actionCreator.login(values))
+        await dispatch(actionCreator.loginLMS(values))
 
     }
 
-    useEffect(() => {
-        (proceed && token) && props.navigation.navigate('MainTabNav')
-    }, [proceed, token]);
-
-    const setLogin = (value) => dispatch({ type: 'SET_LOGIN', payload: { ...value } })
-
-    const { email, password, error, errorColor, indicator, proceed } = useSelector(state => state.loginScreenReducer, shallowEqual)
+    const {error,message} = useSelector(state => state.loginScreenReducer, shallowEqual)
     const token = useSelector(state => state.apiReducer.token, shallowEqual)
 
-    var emailBorderColor = '#5a83c2'
-    const emailError = errorColor && errorColor.find(test => test == "E-mail")
-    if (emailError == "E-mail") {
-        emailBorderColor = '#d94498'
-    }
+ 
+    const setLogin = (value) => dispatch({ type: 'SET_LOGIN', payload: { ...value } })
 
-    var passwordBorderColor = '#5a83c2'
-    const passwordError = error && errorColor.find(test => test == "Password")
-    if (passwordError == "Password") {
-        passwordBorderColor = '#d94498'
-    }
 
-    var emailErrorHint = ''
-    var passwordErrorHint = ''
-
-    error && error.map(err => {
-        if (err.title == 'email') { emailErrorHint = err.desc }
-        if (err.title == 'password') { passwordErrorHint = err.desc }
-
-    })
 
     return (
         <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -83,6 +79,87 @@ const LoginScreen = (props) => {
             </View>
             <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
                 <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+
+                    <Formik
+                        validateOnMount
+                        initialValues={{}} onSubmit={async (values, actions) => {
+                            console.log(`values formik ialah ${JSON.stringify(values)}`)
+                            dispatch({ type: 'SET_REGISTER', payload: { ...values } })
+                            await login(values)
+                            actions.setSubmitting(false)
+                        }
+                        }
+                        validationSchema={validationSchema}
+                    >
+                        {FormikProps => {
+
+                            const { email, password } = FormikProps.values
+
+
+
+                            const emailError = FormikProps.errors.email
+                            const emailTouched = FormikProps.touched.email
+
+                            const passwordError = FormikProps.errors.password
+                            const passwordTouched = FormikProps.touched.password
+
+
+
+                            return (
+
+
+                                <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                                    <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
+
+
+                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: emailTouched && emailError ? '#d94498' : '#5a83c2' }}>
+                                        <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                        <TextInput value={email} onChangeText={FormikProps.handleChange(`email`)} onBlur={FormikProps.handleBlur(`email`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'email@address.com'} placeholderTextColor={emailTouched && emailError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'email-address'} />
+
+                                    </View>
+                                    <View style={{ width: Layout.window.width * 0.65 }}>
+                                        {emailTouched && emailError && <Text style={styles.error}>{emailError}</Text>}
+                                    </View>
+
+                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: passwordError && passwordTouched ? '#d94498' : '#5a83c2' }}>
+                                        <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                        <TextInput secureTextEntry value={password} onChangeText={FormikProps.handleChange(`password`)} onBlur={FormikProps.handleBlur(`password`)} style={{ marginLeft: 5 }} placeholder={'Password'} placeholderTextColor={passwordTouched && passwordError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                    </View>
+                                    <View style={{ width: Layout.window.width * 0.65 }}>
+                                        {passwordTouched && passwordError && <Text style={styles.error}>{passwordError}</Text>}
+                                    </View>
+
+                                    <View style={{ width: Layout.window.width * 0.65 }}>
+                                        {error && <Text style={styles.error}>{message}</Text>}
+                                    </View>
+                                    <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                                        <Text style={[styles.textDefault, { margin: 5 }]}>Forgot password?</Text>
+                                        <TouchableOpacity onPress={() => forgotPassword()}>
+                                            <Text style={[styles.textDefault, { margin: 5, color: 'dodgerblue' }]}>Click here</Text>
+                                        </TouchableOpacity>
+                                    </View>
+
+
+
+                                    <View style={{ flexDirection: 'row', margin: 5 }}>
+                                        <TouchableOpacity disabled={!FormikProps.isValid} onPress={() => FormikProps.handleSubmit()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                            <LinearGradient colors={FormikProps.isValid ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+                                                <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
+                                            </LinearGradient>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
+                                            <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                    {/* {indicator && <ActivityIndicator color={'#34c6f4'} style={{ marginLeft: 5 }} />} */}
+                                </View>
+
+                            )
+                        }}
+                    </Formik >
+
+
+                    {/* 
                     <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                         <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
                         <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: emailBorderColor, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
@@ -110,7 +187,7 @@ const LoginScreen = (props) => {
                             </TouchableOpacity>
                         </View>
                         {indicator && <ActivityIndicator color={'#34c6f4'} style={{ marginLeft: 5 }} />}
-                    </View>
+                    </View> */}
                 </KeyboardAvoidingView>
             </View>
         </View >
