@@ -130,9 +130,6 @@ const SettingScreen = (props) => {
 
 }
 
-SettingScreen.navigationOptions = {
-    header: null,
-};
 
 
 export default SettingScreen
