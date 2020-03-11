@@ -1,4 +1,4 @@
-import {  Platform } from 'react-native'
+import { Platform } from 'react-native'
 import { FileSystem, Notifications } from 'expo'
 import * as SecureStore from 'expo-secure-store'
 import moment from 'moment'
@@ -253,8 +253,9 @@ export const companyInfoAPI = () => {
       body: JSON.stringify({ ...companyInfo, comp_regdate, access_credential: 'api' }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
+        const companyRegistrationStatus = await responseJson
         const { status } = await responseJson
-        await dispatch({ type: 'SET_COMPANY_INFO', payload: { status, proceedSubmit: true } })
+        await dispatch({ type: 'SET_COMPANY_INFO', payload: { companyRegistrationStatus, code, status, proceedSubmit: true } })
         await console.log(`companyInfo  ${JSON.stringify(responseJson)}`)
       })
       .catch((error) => {

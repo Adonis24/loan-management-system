@@ -5,6 +5,7 @@ import {
     Text,
     TouchableOpacity,
     View,
+    ActivityIndicator,
 
 } from 'react-native';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
@@ -23,8 +24,9 @@ import * as actionCreator from '../store/actions/action'
 const CompanyInfoSuccessScreen = (props) => {
 
     const dispatch = useDispatch()
-
     const { listWorkers } = useSelector(state => state.listWorkersReducer, shallowEqual)
+    const { companyRegistrationStatus } = useSelector(state => state.companyInformationReducer, shallowEqual)
+
 
 
     const done = async () => {
@@ -39,11 +41,9 @@ const CompanyInfoSuccessScreen = (props) => {
         props.navigation.navigate('Dashboard')
     }
 
-
     useEffect(() => {
         dispatch(actionCreator.initiateListWorkers())
     }, []);
-
 
     return (
         <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -52,7 +52,7 @@ const CompanyInfoSuccessScreen = (props) => {
             </View>
             <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                    {companyRegistrationStatus ? !companyRegistrationStatus.status ? <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                         <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
                         <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY INFO</Text>
                         <View style={{ alignSelf: 'stretch', flexDirection: 'column', margin: 5 }}>
@@ -70,14 +70,28 @@ const CompanyInfoSuccessScreen = (props) => {
                         <TouchableOpacity onPress={() => skip()} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
                             <Text style={[styles.textDefault,]}>Skip</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> :
+
+                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                            <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
+                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY INFO</Text>
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'column', margin: 5 }}>
+                                <Text style={[styles.textDefault, { margin: 5, color: 'darkturquoise' }]}>Problems Detected!</Text>
+                                <Text style={[styles.textDefault, { margin: 5, marginBottom: 20 }]}>Please return to previous screen to try again</Text>
+                            </View>
+
+
+                            <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ width: Layout.window.width * 0.4, paddingTop: 5, paddingBottom: 5, borderWidth: 1, borderColor: '#4A90E2', borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                <Text style={[styles.textDefault,]}>Go Back</Text>
+                            </TouchableOpacity>
+                        </View>
+                        :
+                        <ActivityIndicator />}
+
                 </View>
             </View>
         </View>
     );
 }
-
-
-
 
 export default CompanyInfoSuccessScreen

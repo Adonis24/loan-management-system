@@ -109,7 +109,7 @@ export const getPersonalTokenLMS = () => {
 
 export const login = (values) => {
     return (dispatch, getState) => {
-    
+
         //const username = getState().loginScreenReducer.email
         //const password = getState().loginScreenReducer.password
 
@@ -123,8 +123,8 @@ export const login = (values) => {
 
 export const loginLMS = (values) => {
     return (dispatch, getState) => {
-    
-    
+
+
         const { email, password } = getState().loginScreenReducer
         const username = email
         dispatch(requestPersonalTokenLMS('login', username, password))
@@ -174,6 +174,47 @@ export const contactPerson = () => {
 
         // dispatch(contactPersonAPI())
         dispatch(companyInfoAPI())
+        // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
+
+    }
+}
+
+export const contactPersonUploadFirst = () => {
+    return async (dispatch, getState) => {
+
+        const { type, uri, name, size } = getState().companyInformationReducer
+        const blob = await urlToBlob(uri)
+        const { data } = blob
+
+        console.log(`blob ialah ${JSON.stringify(blob)}`)
+        const fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+
+        const params = {
+            Body: blob,
+            Bucket: `${config.bucketName}`,
+            Key: fileName
+        };
+        // Sending the file to the Spaces
+        s3.putObject(params)
+            .on('build', request => {
+                request.httpRequest.headers.Host = `${config.digitalOceanSpaces}`;
+                request.httpRequest.headers['Content-Length'] = data.size;
+                request.httpRequest.headers['Content-Type'] = data.type;
+                request.httpRequest.headers['x-amz-acl'] = 'public-read';
+            })
+            .send((err) => {
+                if (err) console.log(err);
+                else {
+                    // If there is no error updating the editor with the imageUrl
+                    const imageUrl = `${config.digitalOceanSpaces}/` + fileName
+                    console.log(imageUrl, name);
+                    dispatch(companyInfoAPI())
+                    dispatch({ type: 'SET_CONTACT_PERSON', payload: { ic_image: imageUrl, fileName: name } })
+                }
+            });
+
+        // dispatch(contactPersonAPI())
+
         // dispatch({ type: 'SET_COMPANY_INFO', payload: { proceedCompany: true } })
 
     }
@@ -724,8 +765,9 @@ export const saveDocument = (result) => {
 }
 
 export const saveDocumentDO = (result) => {
-    const { type, uri, name, size } = result
+
     return async (dispatch, getState) => {
+        const { type, uri, name, size } = result
         const blob = await urlToBlob(uri)
         const { data } = blob
 

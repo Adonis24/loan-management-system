@@ -18,21 +18,15 @@ import {
 } from 'react-native';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
-//import { Constants, LinearGradient, FileSystem } from 'expo'
+
 import { LinearGradient } from 'expo-linear-gradient'
 import * as DocumentPicker from 'expo-document-picker';
 import Layout from '../constants/Layout'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-//import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
 
-import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
-import { Button } from 'native-base';
-
-
 
 const validationSchema = Yup.object().shape({
 
@@ -69,7 +63,9 @@ const ContactPersonScreen = (props) => {
 
     const dispatch = useDispatch()
 
-    const { full_name, ic_no, phone, position, ic_image, proceedSubmit, error, errorColor, fileName } = useSelector(state => state.companyInformationReducer, shallowEqual)
+    const { fileName,name } = useSelector(state => state.companyInformationReducer, shallowEqual)
+
+    const all = useSelector(state => state.companyInformationReducer, shallowEqual)
 
     const setContactPerson = (value) => dispatch({ type: 'SET_CONTACT_PERSON', payload: { ...value } })
 
@@ -78,19 +74,19 @@ const ContactPersonScreen = (props) => {
             .then(result => {
                 console.log(JSON.stringify(result))
                 //this.props.saveDocument(result)
-                dispatch(actionCreator.saveDocumentDO(result))
+                setContactPerson(result)
+                //dispatch(actionCreator.saveDocumentDO(result))
             })
     }
 
     const ContactPerson = async () => {
         //await this.props.companyInfo()
-        dispatch(actionCreator.contactPerson())
-         props.navigation.navigate('CompanyInfoSuccess')
+        dispatch(actionCreator.contactPersonUploadFirst())
+        props.navigation.navigate('CompanyInfoSuccess')
     }
 
 
     //proceedSubmit && props.navigation.navigate('CompanyInfoSuccess')
-
 
 
     return (
@@ -178,7 +174,7 @@ const ContactPersonScreen = (props) => {
 
                                     <View style={{ alignSelf: 'stretch', borderWidth: 1, borderRadius: 15, borderColor: 'darkblue', margin: 10, justifyContent: 'space-between', alignItems: 'flex-end', flexDirection: 'row' }}>
                                         {!fileName ? <Text style={[styles.caption, { alignSelf: 'flex-start', textAlign: 'left', margin: 10, padding: 10 }]}>MyKad Scanned Copy</Text> :
-                                            <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left', margin: 10, padding: 10 }]}>{fileName}</Text>}
+                                            <Text style={[styles.textDefault, { alignSelf: 'flex-start', textAlign: 'left', margin: 10, padding: 10 }]}>{name}</Text>}
                                         <TouchableOpacity onPress={() => pickDoc()} style={{ padding: 10, borderRadius: 5, justifyContent: 'center', backgroundColor: 'gainsboro', margin: 10 }}>
                                             <Text style={[styles.caption, { color: '#000', fontSize: 10 }]}>Select</Text>
                                         </TouchableOpacity>
