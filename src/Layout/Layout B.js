@@ -51,7 +51,7 @@ const LayoutB = (props) => {
                     </View>
                 </View>
                 <View style={{ flex: 4 }}>
-                    {!((props.screenType === 'form') || (props.screenType === 'logo')) ? <View style={{ padding: 20 }}>{props.children}</View> : <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, paddingBottom: 10, marginBottom: 20 },boxStyle1]}>{props.children}</View>}
+                    {!((props.screenType === 'form') || (props.screenType === 'logo')) ? <View style={{ padding: 20 }}>{props.children}</View> : <View style={{padding:10},boxStyle1}>{props.children}</View>}
                 </View>
             </View> : <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
