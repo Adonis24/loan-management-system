@@ -100,7 +100,7 @@ const FinancingScreen = (props) => {
         return (
             <View style={{ flex: 1, paddingTop: 10 }}>
                 <FlatList
-                    data={agencyArray}
+                    data={props.agencyArray}
                     keyExtractor={(item, index) => index.toString()}
                     numColumns={2}
                     renderItem={({ item }) => (
@@ -131,13 +131,13 @@ const FinancingScreen = (props) => {
         return (
             <View style={{ flex: 1, paddingTop: 10 }}>
 
-                {last_page > 1 && <View style={{ flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'space-between', margin: 10 }}>
-                    {current_page > 1 && <TouchableOpacity onPress={() => props.changePage(current_page - 1)}><Text>Prev :  {current_page - 1}</Text></TouchableOpacity>}
-                    {current_page < last_page && <TouchableOpacity onPress={() => props.changePage(current_page + 1)}><Text>Next :  {current_page + 1}</Text></TouchableOpacity>}
+                {props.last_page > 1 && <View style={{ flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'space-between', margin: 10 }}>
+                    {props.current_page > 1 && <TouchableOpacity onPress={() => props.changePage(current_page - 1)}><Text>Prev :  {props.current_page - 1}</Text></TouchableOpacity>}
+                    {props.current_page < props.last_page && <TouchableOpacity onPress={() => props.changePage(current_page + 1)}><Text>Next :  {props.current_page + 1}</Text></TouchableOpacity>}
                 </View>}
 
                 <FlatList
-                    data={grantStatusArray}
+                    data={props.grantStatusArray}
                     keyExtractor={(item, index) => index.toString()}
 
                     renderItem={({ item }) => (
