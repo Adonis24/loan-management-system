@@ -254,7 +254,7 @@ export const companyInfoAPI = () => {
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const companyRegistrationStatus = await responseJson
-        const { status } = await responseJson
+        const { status,code } = await responseJson
         await dispatch({ type: 'SET_COMPANY_INFO', payload: { companyRegistrationStatus, code, status, proceedSubmit: true } })
         await console.log(`companyInfo  ${JSON.stringify(responseJson)}`)
       })
