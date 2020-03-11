@@ -117,24 +117,30 @@ export const requestPersonalToken = (screen, username, password) => {
 
         console.log(`personal token ialah : ${JSON.stringify(responseJson)}`)
 
-        const { token_type, access_token } = responseJson
+        const { token_type, access_token, error, message } = responseJson
 
-        //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
-        const stringifyJson = JSON.stringify(responseJson)
+        if (!error) {
 
-        SecureStore.setItemAsync('personalToken', stringifyJson);
+          //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
+          const stringifyJson = JSON.stringify(responseJson)
 
-        dispatch({ type: 'SET_REGISTER', payload: { access_token } });
-        dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
+          SecureStore.setItemAsync('personalToken', stringifyJson);
 
-        if (screen == 'login' && access_token) {
-          dispatch({ type: 'SET_LOGIN', payload: { proceed: true, indicator: false } })
+          dispatch({ type: 'SET_REGISTER', payload: { access_token } });
           dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
+
+          if (screen == 'login' && access_token) {
+            dispatch({ type: 'SET_LOGIN', payload: { proceed: true, indicator: false } })
+            dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
+          } else {
+
+            dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false, ...responseJson } })
+          }
+
         } else {
-          
-          dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false } })
+          dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false, ...responseJson } })
         }
-       
+
 
       })
       .catch((error) => {
@@ -244,7 +250,7 @@ export const companyInfoAPI = () => {
         'Accept': 'application/json',
         'Authorization': token_type + ' ' + access_token
       },
-      body: JSON.stringify({ ...companyInfo,comp_regdate, access_credential: 'api' }),
+      body: JSON.stringify({ ...companyInfo, comp_regdate, access_credential: 'api' }),
     }).then((response) => response.json())
       .then(async (responseJson) => {
         const { status } = await responseJson
@@ -290,7 +296,7 @@ export const contactPersonAPI = () => {
 export const detailConnectAPI = (capacity, nameCP, icNumber, relationship, emailSME) => {
   return async (dispatch, getState) => {
 
-    console.log(`detail connect api ialah : ${JSON.stringify({capacity, nameCP, icNumber, relationship, emailSME})}`)
+    console.log(`detail connect api ialah : ${JSON.stringify({ capacity, nameCP, icNumber, relationship, emailSME })}`)
   }
 }
 

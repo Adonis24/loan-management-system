@@ -63,13 +63,10 @@ const LoginScreen = (props) => {
 
     }
 
-    const proceed = useSelector(state => state.loginScreenReducer.proceed, shallowEqual)
+    const {error,message} = useSelector(state => state.loginScreenReducer, shallowEqual)
     const token = useSelector(state => state.apiReducer.token, shallowEqual)
 
-    useEffect(() => {
-        (proceed && token) && props.navigation.navigate('MainTabNav')
-    }, [proceed, token]);
-
+ 
     const setLogin = (value) => dispatch({ type: 'SET_LOGIN', payload: { ...value } })
 
 
@@ -85,10 +82,10 @@ const LoginScreen = (props) => {
 
                     <Formik
                         validateOnMount
-                        initialValues={{}} onSubmit={(values, actions) => {
+                        initialValues={{}} onSubmit={async (values, actions) => {
                             console.log(`values formik ialah ${JSON.stringify(values)}`)
                             dispatch({ type: 'SET_REGISTER', payload: { ...values } })
-                            login(values)
+                            await login(values)
                             actions.setSubmitting(false)
                         }
                         }
@@ -130,6 +127,10 @@ const LoginScreen = (props) => {
                                     </View>
                                     <View style={{ width: Layout.window.width * 0.65 }}>
                                         {passwordTouched && passwordError && <Text style={styles.error}>{passwordError}</Text>}
+                                    </View>
+
+                                    <View style={{ width: Layout.window.width * 0.65 }}>
+                                        {error && <Text style={styles.error}>{message}</Text>}
                                     </View>
                                     <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                                         <Text style={[styles.textDefault, { margin: 5 }]}>Forgot password?</Text>
