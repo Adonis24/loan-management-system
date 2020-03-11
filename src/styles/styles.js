@@ -60,9 +60,24 @@ export default StyleSheet.create({
         fontFamily: 'Montserrat_medium',
        color:'red',
        fontSize:10
-
-    }
+    },
+    image:{
+        width: undefined, 
+        height: Layout.window.height / 15, 
+        justifyContent: 'flex-start'
+    },
+    banner:{
+        width: Layout.window.width - 20,
+        height: Layout.window.height / 6, 
+        borderRadius: 10, 
+        borderWidth: 1,
+        borderColor: 'lightgrey'
+    },   
+     logo:{
+        width: Layout.window.width / 3,
+        height: undefined,
+        flex: 1
+    },
     
-
 });
 
