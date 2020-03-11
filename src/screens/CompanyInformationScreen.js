@@ -243,7 +243,7 @@ const CompanyInformationScreen = (props) => {
                                                     <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
                                                 </LinearGradient>
                                             </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
+                                            <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box,{backgroundColor: '#5A647F' }]} >
                                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
                                             </TouchableOpacity>
                                         </View>

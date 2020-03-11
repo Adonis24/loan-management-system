@@ -21,6 +21,15 @@ export default StyleSheet.create({
         fontFamily: 'Montserrat_medium',
         color: '#000'
     },
+    headText:{
+        fontSize: 18,
+        alignSelf: 'center',
+        textAlign: 'center',
+        fontFamily: 'Montserrat_medium',
+        fontWeight:'bold',
+        paddingLeft:5,
+        color: '#000'
+    },
     textBold: {
         fontSize: 17,
         
@@ -78,6 +87,15 @@ export default StyleSheet.create({
         height: undefined,
         flex: 1
     },
-    
+    box:{
+        width: Layout.window.width * 0.3,
+        paddingTop: 5,
+        paddingBottom: 5, 
+        borderRadius: 15, 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        margin: 10
+    }
+
 });
 

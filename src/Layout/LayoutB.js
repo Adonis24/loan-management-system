@@ -45,7 +45,7 @@ const LayoutB = (props) => {
                         </View>
                         <View style={[{ backgroundColor: '#fff', flex: 4, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', paddingLeft: 5, flexDirection: 'row', elevation: 2 }]}>
                             <Image source={props.imageUri} style={{ width: Layout.window.width / 10, height: undefined, }} resizeMode={'contain'} />
-                            <Text style={[styles.textDefault, { fontSize: 18, fontWeight: "bold", paddingLeft: 5, }]} numberOfLines={1} ellipsizeMode={'tail'}>{props.title}</Text>
+                            <Text style={styles.headText} numberOfLines={1} ellipsizeMode={'tail'}>{props.title}</Text>
 
                         </View>
                     </View>
@@ -63,7 +63,7 @@ const LayoutB = (props) => {
                         <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
                             <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }, boxStyle]}>
                                 <Image source={props.imageUri} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
-                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>{props.title}</Text>
+                                <Text style={[styles.headText ,{ alignSelf: 'center'}]} numberOfLines={1} ellipsizeMode={'tail'}>{props.title}</Text>
                             </View>
                         </View>
                     </View>

@@ -88,7 +88,7 @@ const ProfileScreen = (props) => {
                         </View>
                     </View>
                     <View style={{ flexDirection: 'row', margin: 5, justifyContent: 'space-evenly' }}>
-                        <TouchableOpacity onPress={() => props.navigation.navigate('Settings')} style={{ width: Layout.window.width * 0.3, padding: 5, borderRadius: 5, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
+                        <TouchableOpacity onPress={() => props.navigation.navigate('Settings')} style={[styles.box,{ borderRadius: 5, backgroundColor: '#5A647F' }]} >
                             <Text style={[styles.caption, { color: '#fff' }]}>Go To Settings</Text>
                         </TouchableOpacity>
                     </View>
@@ -164,7 +164,7 @@ const ProfileScreen = (props) => {
                         <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
                             <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
                                 <Image source={require('../assets/icon/rfq.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
-                                <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
+                                <Text style={styles.headText} numberOfLines={1} ellipsizeMode={'tail'}>Biz Profile</Text>
                             </View>
                         </View>
                     </View>
