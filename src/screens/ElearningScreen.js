@@ -3,8 +3,10 @@ import React from 'react';
 import {
     TouchableOpacity,
     View,
-    WebView
+    
 } from 'react-native';
+import { WebView } from 'react-native-webview';
+
 
 import Constants from 'expo-constants'
 import { shallowEqual, useSelector} from 'react-redux'

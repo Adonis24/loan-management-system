@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React,{useEffect} from 'react';
+import React,{useState,useEffect} from 'react';
 import {
     Image,
     Text,

@@ -90,17 +90,22 @@ const CompanyInformationScreen = (props) => {
             </View>
             <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
                 <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Formik initialValues={{ comp_name: undefined, comp_regno: undefined, comp_main_biz_act: undefined, }} onSubmit={(values, actions) => {
+                    <Formik
+                        validateOnMount
+                        initialValues={{ comp_name: undefined, comp_regno: undefined, comp_main_biz_act: undefined, }}
+                        onSubmit={(values, actions) => {
 
-                        companyInformation(values)
-                        actions.setSubmitting(false)
-                    }}
+                            companyInformation(values)
+                            actions.setSubmitting(false)
+                        }}
                         validationSchema={validationSchema}
                     >
                         {FormikProps => {
 
                             const onChange = (event, selectedDate) => {
                                 const currentDate = selectedDate || date;
+                                console.log(`selected date ialah ${currentDate}`)
+
                                 setShow(ios);
                                 setDate(currentDate);
                                 FormikProps.setFieldValue('comp_regdate', currentDate)
@@ -115,31 +120,7 @@ const CompanyInformationScreen = (props) => {
                                 showMode('date');
                             };
 
-                            const showTimepicker = () => {
-                                showMode('time');
-                            };
 
-
-                            const datePicker = async () => {
-                                if (!ios) {
-                                    try {
-                                        const { action, year, month, day } = await DatePicker.open({
-                                            // Use `new Date()` for current date.
-                                            // May 25 2020. Month 0 is January.
-                                            date: new Date(2020, 4, 25),
-                                        });
-                                        if (action !== DatePicker.dismissedAction) {
-                                            // Selected year, month (0-11), day
-                                            FormikProps.setFieldValue('cddRegisteredDate', `${year}-${month}-${day}`)
-                                        }
-                                    } catch ({ code, message }) {
-                                        console.warn('Cannot open date picker', message);
-                                    }
-                                } else {
-                                    setIosDatePickerShow(true)
-                                }
-
-                            }
 
                             const { comp_name, comp_regno, comp_main_biz_act, comp_regdate } = FormikProps.values
 
@@ -170,7 +151,7 @@ const CompanyInformationScreen = (props) => {
                                     <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                                         <View style={[styles.titleMargin, { flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4', marginBottom: 25 }]}>
                                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0 }}>
-                                                <TouchableOpacity onPress={() => setShow(false)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
+                                                <TouchableOpacity onPress={() => setShow(!ios)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
                                                     <Ionicons name="ios-arrow-back" color={'#3EC2D9'} style={{ fontSize: 30, paddingLeft: 20 }} />
                                                 </TouchableOpacity>
                                             </View>
@@ -182,7 +163,7 @@ const CompanyInformationScreen = (props) => {
 
                                             <DateTimePicker
                                                 testID="dateTimePicker"
-                                                timeZoneOffsetInMinutes={0}
+                                                //timeZoneOffsetInMinutes={0}
                                                 value={date}
                                                 mode={mode}
                                                 is24Hour={true}
@@ -210,18 +191,17 @@ const CompanyInformationScreen = (props) => {
                                         <View style={{ width: Layout.window.width * 0.65 }}>
                                             {comp_regnoTouched && comp_regnoError && <Text style={styles.error}>{comp_regnoError}</Text>}
                                         </View>
-                                        <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_regdateTouched && comp_regdateError ? '#d94498' : '#5a83c2' }}>
-                                            <TouchableOpacity onPress={() => showDatepicker()} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                                <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                            </TouchableOpacity>
-                                            {/* <TextInput value={comp_regdate} onChangeText={FormikProps.handleChange(`comp_regdate`)} onBlur={FormikProps.handleBlur(`comp_regdate`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Date'} placeholderTextColor={comp_regdateTouched && comp_regdateError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} /> */}
-                                        </View>
+                                        <TouchableOpacity onPress={() => showDatepicker()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_regdateTouched && comp_regdateError ? '#d94498' : '#5a83c2' }}>
+                                            <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+
+                                            <TextInput editable={false} value={moment(comp_regdate).format("MMMM Do YYYY")} onChangeText={FormikProps.handleChange(`comp_regdate`)} onBlur={FormikProps.handleBlur(`comp_regdate`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Date'} placeholderTextColor={comp_regdateTouched && comp_regdateError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
+                                        </TouchableOpacity>
                                         <View style={{ width: Layout.window.width * 0.65 }}>
                                             {comp_regdateTouched && comp_regdateError && <Text style={styles.error}>{comp_regdateError}</Text>}
                                         </View>
                                         <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_main_biz_actError && comp_main_biz_actTouched ? '#d94498' : '#5a83c2' }}>
                                             <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                            <TextInput value={comp_main_biz_act} onChangeText={FormikProps.handleChange(`comp_main_biz_act`)} onBlur={FormikProps.handleBlur(`password`)} style={{ marginLeft: 5 }} placeholder={'Business Activities'} placeholderTextColor={comp_main_biz_actTouched && comp_main_biz_actError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                            <TextInput value={comp_main_biz_act} onChangeText={FormikProps.handleChange(`comp_main_biz_act`)} onBlur={FormikProps.handleBlur(`comp_main_biz_act`)} style={{ marginLeft: 5 }} placeholder={'Business Activities'} placeholderTextColor={comp_main_biz_actTouched && comp_main_biz_actError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                                         </View>
                                         <View style={{ width: Layout.window.width * 0.65 }}>
                                             {comp_main_biz_actTouched && comp_main_biz_actError && <Text style={styles.error}>{comp_main_biz_actError}</Text>}
@@ -238,7 +218,7 @@ const CompanyInformationScreen = (props) => {
                                             />
                                         )}
                                         <View style={{ flexDirection: 'row', margin: 5 }}>
-                                            <TouchableOpacity disabled={!FormikProps.isValid} onPress={() => FormikProps.handleSubmit()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                                            <TouchableOpacity disabled={!FormikProps.isValid} onPress={() => FormikProps.handleSubmit()} style={styles.box}>
                                                 <LinearGradient colors={FormikProps.isValid ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
                                                     <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
                                                 </LinearGradient>

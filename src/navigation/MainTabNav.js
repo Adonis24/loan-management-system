@@ -6,8 +6,7 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+
 import SettingsScreen from '../screens/SettingsScreen';
 
 import WelcomeScreen from '../screens/WelcomeScreen';
@@ -79,6 +78,7 @@ import WalletScreen from '../screens/WalletScreen';
 import BillScreen from '../screens/BillScreen';
 import DeliveryScreen from '../screens/DeliveryScreen';
 import UnderConstructionScreen from '../screens/UnderConstructionScreen';
+import EAdvertisementScreen from '../screens/EAdvertisementScreen';
 
 
 
@@ -124,6 +124,8 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="CertificationView" component={CertificationViewScreen} />
             <Stack.Screen name="Elearning" component={ElearningScreen} />
             <Stack.Screen name="EcommerceDetail" component={EcommerceDetailScreen} />
+            <Stack.Screen name="EAdvertisement" component={EAdvertisementScreen} />
+            
             <Stack.Screen name="Ecommerce" component={EcommerceScreen} />
             <Stack.Screen name="Edonation" component={EdonationScreen} />
             <Stack.Screen name="Loan" component={LoanCalculatorScreen} />
