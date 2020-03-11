@@ -1,4 +1,4 @@
-import { AsyncStorage, Platform } from 'react-native'
+import {  Platform } from 'react-native'
 import { FileSystem, Notifications } from 'expo'
 import * as SecureStore from 'expo-secure-store'
 import moment from 'moment'

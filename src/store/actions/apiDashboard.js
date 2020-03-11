@@ -1,4 +1,3 @@
-import { AsyncStorage } from 'react-native'
 import { Notifications } from 'expo'
 import * as SecureStore from 'expo-secure-store'
 
@@ -17,112 +16,96 @@ import moment from 'moment'
 const apiUrl = 'https://staging.bxcess.my/'
 const lmsApiUrl = 'https://lms.bxcess.my/'
 
+const apiGetCall = async (uri, apiAccess, lms = false) => {
+
+
+  const access = !lms ? apiAccess ? apiAccess : JSON.parse(await SecureStore.getItemAsync('personalToken')) : JSON.parse(await SecureStore.getItemAsync('lmsPersonalToken'))
+
+  const { token_type, access_token } = access
+  const method = 'GET'
+  const Accept = 'application/json'
+  const Authorization = token_type + ' ' + access_token
+
+  const headers = { 'Content-Type': 'application/json', Accept, Authorization }
+  let response = await fetch(`${!lms ? apiUrl : lmsApiUrl}${uri}`, { method, headers })
+  let responseJson = await response.json()
+  return responseJson
+
+
+}
+
+const apiPostCall = async (uri, values, apiAccess) => {
+
+  const body = JSON.stringify({ ...values, access_credential: 'api' })
+
+  const access = apiAccess ? apiAccess : JSON.parse(await SecureStore.getItemAsync('personalToken'))
+
+  const { token_type, access_token } = access
+  const method = 'POST'
+  const Accept = 'application/json'
+  const Authorization = token_type + ' ' + access_token
+
+  const headers = { 'Content-Type': 'application/json', Accept, Authorization }
+  let response = await fetch(`${apiUrl}${uri}`, { method, headers, body })
+  let responseJson = await response.json()
+  return responseJson
+
+}
+
+
+
 export const newsApi = () => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
-    const access_credential = 'api'
-    fetch(`${apiUrl}api/news/view`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      }, body: JSON.stringify({ access_credential }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
 
-        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
-        const newsArray = await responseJson.data
-        await console.log(`NEWS API  ${JSON.stringify(newsArray)}`)
+    const responseJson = await apiPostCall(`api/news/view`, null, getState().apiReducer)
+    const newsArray = await responseJson.data
+    // await console.log(`NEWS API  ${JSON.stringify(newsArray)}`)
 
-        await dispatch({ type: 'SET_NEWS', payload: { newsArray } })
-      })
-      .catch((error) => {
-        console.log('Error News Api : ' + error);
-      });
+    await dispatch({ type: 'SET_NEWS', payload: { newsArray } })
+
+
   }
 }
 
 export const eventApi = () => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
-    const access_credential = 'api'
-    fetch(`${apiUrl}api/events/view`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      }, body: JSON.stringify({ access_credential }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
 
-        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
-        const eventArray = await responseJson.data
-        await console.log(`EVENT API  ${JSON.stringify(eventArray)}`)
+    const responseJson = await apiPostCall(`api/events/view`, null, getState().apiReducer)
+    const eventArray = await responseJson.data
+    //await console.log(`EVENT API  ${JSON.stringify(eventArray)}`)
 
-        await dispatch({ type: 'SET_EVENT', payload: { eventArray } })
-      })
-      .catch((error) => {
-        console.log('Error Event Api : ' + error);
-      });
+    await dispatch({ type: 'SET_EVENT', payload: { eventArray } })
+
+
   }
 }
 
 
 export const promotionApi = () => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
-    const access_credential = 'api'
-    fetch(`${apiUrl}api/promotions/view`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      }, body: JSON.stringify({ access_credential }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
 
-        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
-        const promotionArray = await responseJson.data
-        await console.log(`PROMOTION API  ${JSON.stringify(promotionArray)}`)
+    const responseJson = await apiPostCall(`api/promotions/view`, null, getState().apiReducer)
 
-        await dispatch({ type: 'SET_PROMOTION', payload: { promotionArray } })
-      })
-      .catch((error) => {
-        console.log('Error Promotion Api : ' + error);
-      });
+    const promotionArray = await responseJson.data
+
+    await dispatch({ type: 'SET_PROMOTION', payload: { promotionArray } })
+
+
   }
 }
 
 export const handbooksApi = () => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
-    const access_credential = 'api'
-    fetch(`${apiUrl}api/handbooks/view`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      }, body: JSON.stringify({ access_credential }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
+   
+    const responseJson = await apiPostCall(`api/handbooks/view`, null, getState().apiReducer)
+    
+ 
+    const handbooksArray = await responseJson.data
+    await console.log(`HANDBOOKS API  ${JSON.stringify(handbooksArray)}`)
 
-        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
-        const handbooksArray = await responseJson.data
-        await console.log(`HANDBOOKS API  ${JSON.stringify(handbooksArray)}`)
-
-        await dispatch({ type: 'SET_HANDBOOKS', payload: { handbooksArray } })
-      })
-      .catch((error) => {
-        console.log('Error Handbooks Api : ' + error);
-      });
+    await dispatch({ type: 'SET_HANDBOOKS', payload: { handbooksArray } })
+    
+    
   }
 }
 
@@ -156,165 +139,93 @@ export const einfoApi = () => {
 
 export const bizDirApi = () => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
-    const access_credential = 'api'
-    fetch(`${apiUrl}api/business_directory/listAllDirectory`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      }, body: JSON.stringify({ access_credential }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
+    
+    const responseJson = await apiPostCall(`api/business_directory/listAllDirectory`, null, getState().apiReducer)
+    
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const bizDirArray = await responseJson.data
+    //await console.log(`BIZDIR API  ${JSON.stringify(bizDirArray)}`)
 
-        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
-        const bizDirArray = await responseJson.data
-        await console.log(`BIZDIR API  ${JSON.stringify(bizDirArray)}`)
+    await dispatch({ type: 'SET_BIZ_DIR', payload: { bizDirArray } })
 
-        await dispatch({ type: 'SET_BIZ_DIR', payload: { bizDirArray } })
-      })
-      .catch((error) => {
-        console.log('Error Biz Dir Api : ' + error);
-      });
+    
   }
 }
 
 export const getAssociateApi = () => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
-    const access_credential = 'api'
-    fetch(`${apiUrl}api/business_directory/listAssociateDirectory`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      }, body: JSON.stringify({ access_credential }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
+   
+    const responseJson = await apiPostCall(`api/business_directory/listAssociateDirectory`, null, getState().apiReducer)
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const assoDirArray = await responseJson.data
+    //await console.log(`assoc API  ${JSON.stringify(assoDirArray)}`)
 
-        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
-        const assoDirArray = await responseJson.data
-        await console.log(`assoc API  ${JSON.stringify(assoDirArray)}`)
+    await dispatch({ type: 'SET_ASSO_DIR', payload: { assoDirArray } })
 
-        await dispatch({ type: 'SET_ASSO_DIR', payload: { assoDirArray } })
-      })
-      .catch((error) => {
-        console.log('Error Asso Dir Api : ' + error);
-      });
+    
   }
 }
 
 
 export const getPendingApi = () => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
-    const access_credential = 'api'
-    fetch(`${apiUrl}api/business_directory/listRequestDirectory`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      }, body: JSON.stringify({ access_credential }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
+    
+    const responseJson = await apiPostCall(`api/business_directory/listRequestDirectory`, null, getState().apiReducer)
+   
+    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const pendingDirArray = await responseJson.data
+    await console.log(`assoc API  ${JSON.stringify(pendingDirArray)}`)
 
-        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
-        const pendingDirArray = await responseJson.data
-        await console.log(`assoc API  ${JSON.stringify(pendingDirArray)}`)
-
-        await dispatch({ type: 'SET_PENDING_DIR', payload: { pendingDirArray } })
-      })
-      .catch((error) => {
-        console.log('Error Pending Dir Api : ' + error);
-      });
+    await dispatch({ type: 'SET_PENDING_DIR', payload: { pendingDirArray } })
+    
   }
 }
 
 
 export const listAgencyApi = () => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
-    const access_credential = 'api'
-    fetch(`${apiUrl}api/agency/listAgencies`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      }, body: JSON.stringify({ access_credential }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
+    
+    const responseJson = await apiPostCall(`api/agency/listAgencies`, null, getState().apiReducer)
+   
+    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const agencyArray = await responseJson.data
+    await console.log(`agency list API  ${JSON.stringify(agencyArray)}`)
 
-        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
-        const agencyArray = await responseJson.data
-        await console.log(`agency list API  ${JSON.stringify(agencyArray)}`)
+    await dispatch({ type: 'SET_AGENCY_LIST', payload: { agencyArray } })
+    
 
-        await dispatch({ type: 'SET_AGENCY_LIST', payload: { agencyArray } })
-      })
-      .catch((error) => {
-        console.log('Error Agency List Api : ' + error);
-      });
   }
 }
 
 export const loanInfoApi = (page) => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
-    const access_credential = 'api'
-    fetch(`${apiUrl}api/loan/viewLoanInformation?page=${page}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      }, body: JSON.stringify({ access_credential }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
+   
+    
+    const responseJson = await apiPostCall(`api/loan/viewLoanInformation?page=${page}`, null, getState().apiReducer)
+   
+    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const loanInfo = await responseJson.data
+    await console.log(`loan info API  ${JSON.stringify(loanInfo)}`)
 
-        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
-        const loanInfo = await responseJson.data
-        await console.log(`loan info API  ${JSON.stringify(loanInfo)}`)
-
-        await dispatch({ type: 'SET_LOAN_INFO', payload: { ...loanInfo } })
-      })
-      .catch((error) => {
-        console.log('Error loanInfo Api : ' + error);
-      });
+    await dispatch({ type: 'SET_LOAN_INFO', payload: { ...loanInfo } })
+    
   }
 }
 
 export const grantInfoApi = (page) => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
-    const access_credential = 'api'
-    fetch(`${apiUrl}api/grant/listGrantInformation?page=${page}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      }, body: JSON.stringify({ access_credential }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
 
-        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
-        const grantInfo = await responseJson.data
-        await console.log(`grant info list API  ${JSON.stringify(grantInfo)}`)
 
-        await dispatch({ type: 'SET_GRANT_INFO', payload: { ...grantInfo } })
-      })
-      .catch((error) => {
-        console.log('Error grantInfo Api : ' + error);
-      });
+    const responseJson = await apiPostCall(`api/grant/listGrantInformation?page=${page}`, null, getState().apiReducer)
+   
+    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const grantInfo = await responseJson.data
+    await console.log(`grant info list API  ${JSON.stringify(grantInfo)}`)
+
+    await dispatch({ type: 'SET_GRANT_INFO', payload: { ...grantInfo } })
+
+
+    
   }
 }
 
@@ -591,56 +502,29 @@ export const editUserApi = () => {
 
 export const generateJWTApi = () => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
-    const access_credential = 'api'
-    fetch(`${apiUrl}api/jwt/generate`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      }
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
 
-        console.log(`inilah JWT : ${JSON.stringify(responseJson)}`)
-        const jwt = await responseJson.data
-        // await console.log(`Company Info  ${JSON.stringify(bizInfo)}`)
+    const responseJson = await apiGetCall(`api/jwt/generate`, getState().apiReducer)
 
-        await dispatch({ type: 'SET_USER_PROFILE', payload: { jwt } })
-      })
-      .catch((error) => {
-        console.log('Error JWT Api : ' + error);
-      });
+    const jwt = await responseJson.data
+    // await console.log(`Company Info  ${JSON.stringify(bizInfo)}`)
+
+    await dispatch({ type: 'SET_USER_PROFILE', payload: { jwt } })
+
+
   }
 }
 
 
 export const getCompanyInfoApi = () => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
-    const access_credential = 'api'
-    fetch(`${apiUrl}api/companyInfo`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      }
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
 
-        console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
-        const bizInfo = await responseJson.data
-        await console.log(`Company Info  ${JSON.stringify(bizInfo)}`)
+    const responseJson = await apiGetCall(`api/companyInfo`, getState().apiReducer)
+    const bizInfo = await responseJson.data
+    await console.log(`Company Info  ${JSON.stringify(bizInfo)}`)
 
-        await dispatch({ type: 'GET_BIZ_INFO', payload: { ...bizInfo } })
-      })
-      .catch((error) => {
-        console.log('Error Company Api : ' + error);
-      });
+    await dispatch({ type: 'GET_BIZ_INFO', payload: { ...bizInfo } })
+
+
   }
 }
 
@@ -674,7 +558,7 @@ export const getListWorkersApi = () => {
 
 export const sendNotificationApi = (expo_token, id) => {
   return async (dispatch, getState) => {
-    
+
     fetch(`https://exp.host/--/api/v2/push/send`, {
       method: 'POST',
       headers: {
@@ -725,11 +609,15 @@ export const doneForNowApi = () => {
 
 export const getCoursesApi = () => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('lmsPersonalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
-    // const token_type='Bearer'
-    // const access_token='eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjU3ZmMwNzdkNmU4ODQ0MGNiNmYxMWFkMzRkNWE5MDQxOGFmZmVmYWQwMmQ4YWRiZjc0ZTAxZDQwMGU1MTRkMDAyNDc5NzUxODc5ZTdiOGUwIn0.eyJhdWQiOiIyIiwianRpIjoiNTdmYzA3N2Q2ZTg4NDQwY2I2ZjExYWQzNGQ1YTkwNDE4YWZmZWZhZDAyZDhhZGJmNzRlMDFkNDAwZTUxNGQwMDI0Nzk3NTE4NzllN2I4ZTAiLCJpYXQiOjE1NjM2NTg1ODIsIm5iZiI6MTU2MzY1ODU4MiwiZXhwIjoxNTk1MjgwOTgyLCJzdWIiOiIxMiIsInNjb3BlcyI6W119.mGYw6ngyvIYDGaSMdevxMD0yx4pzj3PjcRyjmDxY5zB_CJOfxd0MS0M2wkfvG-BvLB31d9DPr3dj52ETfK_eOdCeFeHliECF450QC6aZElvrHskDgb09DOcU0gTyYCToiCybF-RpDaOMPYpzq_hqCfBM_V1JfovoPZWDS-iqt0V7lCvUODWya0bIzb0B4J2kHI9vt7h7-OFKOnzYoF-4jpeJAq_T2U6VQlEIwLKWL3LUW_g_Y5IwK3q4VCm7a2Nw5oleEbhEqqmpdmTmsTpvQ_e_rtOaIloMYEvzmw4lsLP9fLDO9KaEx9UY3drq4xL2f2hV2XIzhnSERKJT2HRe3cJdBuHHjqvFQuyf2oXfkHoeeOh1h1k5CN_pCGqibzkk-SXALPBMH2aqeSlyKKjPJLkLcVIUZE-2Rh0moVsrkmaVT6TWwOCdIU0-tk9xe1QWKQlTU5i8Fxp5o3uucT0p5o7qQ6NF6xCMm6cv_XqbHz_OQ9fjXZIKL_-zmLmkZh3fBOSCtqa36-c2-OMYCL3CrV1bVP_glPJzn3rUXX2rqb5lvU8GSzILiwxzOyvhd1l44bhgFvOU94nl8EMb7fZLiZjbq4u7c1k4jg8ll0JtYIkrhafbKKZmERJqkMREsEwia5LJD-O8BkgRYSK00q9yDPrL-szRNpecPPhb5TpMzAE'
-    // const access_credential = 'api'
+
+    const responseJson = await apiGetCall(`api/courses`, getState().apiReducer, true)
+
+    const trainingArray = await responseJson.data
+
+
+    await dispatch({ type: 'GET_COURSES', payload: { trainingArray } })
+
+
     fetch(`${lmsApiUrl}api/courses`, {
       method: 'GET',
       headers: {
@@ -764,31 +652,19 @@ export const getUrl = (pic) => {
 
 export const userInfo = () => {
   return async (dispatch, getState) => {
-    //const personalToken = await AsyncStorage.getItem('personalToken');    
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
 
-    fetch(`${apiUrl}api/userInfo`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      }
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
-        const selfieKey = await responseJson.data.filename_2
-        var selfieUri = ''
+    const responseJson = await apiGetCall(`api/userInfo`, getState().apiReducer)
 
-        await Storage.get(selfieKey)
-          .then(async result => {
-            await dispatch({ type: 'SET_DASHBOARD', payload: { userInfo: { ...responseJson.data, ...{ selfieUri: result } } } })
-          })
-          .catch(err => console.log('error : ' + err))
+    const selfieKey = await responseJson.data.filename_2
+    var selfieUri = ''
+
+    await Storage.get(selfieKey)
+      .then(async result => {
+        await dispatch({ type: 'SET_DASHBOARD', payload: { userInfo: { ...responseJson.data, ...{ selfieUri: result } } } })
       })
-      .catch((error) => {
-        console.log('Error initiating dashboard : ' + error);
-      });
+      .catch(err => console.log('error : ' + err))
+
+
   }
 }
 
@@ -796,62 +672,21 @@ export const userInfo = () => {
 
 export const latestTransaction = () => {
   return async (dispatch, getState) => {
-    //const personalToken = await AsyncStorage.getItem('personalToken');
-    const personalToken = await SecureStore.getItemAsync('personalToken')
 
-    const { token_type, access_token } = JSON.parse(personalToken)
+    const responseJson = await apiGetCall(`api/LatestTransaction`, getState().apiReducer)
 
-    fetch(`${apiUrl}api/LatestTransaction`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
+    dispatch({ type: 'SET_DASHBOARD', payload: { latestTransaction: responseJson.data } })
 
-      }
-
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
-
-
-        await console.log(`latest transaction info  ${JSON.stringify(responseJson)}`)
-        dispatch({ type: 'SET_DASHBOARD', payload: { latestTransaction: responseJson.data } })
-
-
-      })
-      .catch((error) => {
-        console.log('Error latest transaction : ' + error);
-      });
   }
 }
 
 export const analyticSummary = () => {
   return async (dispatch, getState) => {
 
+    const responseJson = await apiGetCall(`api/AnalyticSummary`, getState().apiReducer)
+    dispatch({ type: 'SET_DASHBOARD', payload: { analyticSummary: responseJson.data } })
 
 
-    //const personalToken = await AsyncStorage.getItem('personalToken');
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-
-    const { token_type, access_token } = JSON.parse(personalToken)
-
-    fetch(`${apiUrl}api/AnalyticSummary`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-
-      }
-
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
-        await console.log(`analytic summary info  ${JSON.stringify(responseJson)}`)
-        dispatch({ type: 'SET_DASHBOARD', payload: { analyticSummary: responseJson.data } })
-      })
-      .catch((error) => {
-        console.log('Error analytic summary : ' + error);
-      });
   }
 }
 
@@ -888,30 +723,12 @@ export const analytic = () => {
 export const notificationApi = () => {
   return async (dispatch, getState) => {
 
-    //const personalToken = await AsyncStorage.getItem('personalToken');
-    const personalToken = await SecureStore.getItemAsync('personalToken')
-    const { token_type, access_token } = JSON.parse(personalToken)
+    const responseJson = await apiGetCall(`api/Notification`, getState().apiReducer)
+    const notificationByDate = [...responseJson.data.promotion, ...responseJson.data.annoucement, ...responseJson.data.advertisement]
 
-    fetch(`${apiUrl}api/Notification`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-
-      }
-
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
-        const notificationByDate = [...responseJson.data.promotion, ...responseJson.data.annoucement, ...responseJson.data.advertisement]
-
-        dispatch({ type: 'SET_NOTIFICATION', payload: { notificationList: notificationByDate } })
+    dispatch({ type: 'SET_NOTIFICATION', payload: { notificationList: notificationByDate } })
 
 
-      })
-      .catch((error) => {
-        console.log('Error initiating notification : ' + error);
-      });
   }
 }
 
@@ -964,41 +781,21 @@ export const depositApi = () => {
 export const userList = () => {
   return async (dispatch, getState) => {
 
-    //const personalToken = await AsyncStorage.getItem('personalToken');
-    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const responseJson = await apiGetCall(`api/userList`, getState().apiReducer)
+    const recipientList = await responseJson.data
+    const phoneNoList = await []
+    const phoneNoList6 = await []
 
-    const { token_type, access_token } = JSON.parse(personalToken)
+    await recipientList.map(rL => {
 
-    fetch(`${apiUrl}api/userList`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-
-      }
-
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
-        await console.log(`list of recipient  ${JSON.stringify(responseJson)}`)
-        const recipientList = await responseJson.data
-        const phoneNoList = await []
-        const phoneNoList6 = await []
-
-        await recipientList.map(rL => {
-
-          phoneNoList.push(rL.phone_no)
-          phoneNoList6.push((rL.phone_no ? rL.phone_no.replace(/[^A-Z0-9]+/ig, "").substr(rL.phone_no.length - 6) : 'NA'))
-        })
+      phoneNoList.push(rL.phone_no)
+      phoneNoList6.push((rL.phone_no ? rL.phone_no.replace(/[^A-Z0-9]+/ig, "").substr(rL.phone_no.length - 6) : 'NA'))
+    })
 
 
-        await dispatch({ type: 'SET_RECIPIENT_LIST', payload: { recipientList, phoneNoList, phoneNoList6, memberFilter: true } })
-        await dispatch({ type: 'SET_PAYER_LIST', payload: { payerList: recipientList, phoneNoList, phoneNoList6, memberFilter: true } })
+    await dispatch({ type: 'SET_RECIPIENT_LIST', payload: { recipientList, phoneNoList, phoneNoList6, memberFilter: true } })
+    await dispatch({ type: 'SET_PAYER_LIST', payload: { payerList: recipientList, phoneNoList, phoneNoList6, memberFilter: true } })
 
-      })
-      .catch((error) => {
-        console.log('Error userList: ' + error);
-      });
   }
 }
 
