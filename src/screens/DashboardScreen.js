@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import {
     Image,
-    Platform,
     ScrollView,
     StyleSheet,
     Text,
