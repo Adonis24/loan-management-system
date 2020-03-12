@@ -5,11 +5,8 @@ import {
     Text,
     TouchableOpacity,
     View,
-    TextInput,
-    AsyncStorage,
-    ImageBackground,
+    TextInput,    
     KeyboardAvoidingView,
-    DatePicker,
     Modal,
 
 } from 'react-native';

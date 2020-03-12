@@ -11,13 +11,12 @@ import {
 
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
-
+import ScrollableTabView from 'react-native-scrollable-tab-view'
 import Layout from '../constants/Layout'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-//import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
-import { Tabs, Tab, ScrollableTab} from 'native-base'
+
 
 import * as actionCreator from '../store/actions/action'
 
@@ -63,14 +62,15 @@ const InfoEventListScreen = (props) => {
                     </View>
                 </View>
                 <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
-                    {eventArray && eventArray.length > 0 ? <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: 'transparent' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
-                        <Tab heading="Latest">
-                            <Latest nav={nav} eventArray={eventArray} />
-                        </Tab>
-                        <Tab heading="Popular">
-                            <Popular nav={nav} eventArray={eventArray} />
-                        </Tab>
-                    </Tabs> : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                    {eventArray && eventArray.length > 0 ? 
+                        
+                    <ScrollableTabView style={{ width: Layout.window.width }}>
+                        <Latest tabLabel='Latest' nav={nav}  eventArray={eventArray} />
+                        <Popular tabLabel='Popular' nav={nav}  eventArray={eventArray} />
+
+                    </ScrollableTabView>
+
+                        : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                             <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14, color: 'lightgrey' }]}>Please check back for latest info soon</Text>
                             {/*                             
                                 <Image source={require('../assets/images/bizlicensing.png')} style={{ flex:1,width: undefined, height: Layout.window.height / 1.5, alignSelf: 'center',opacity:0.3, borderWidth:1,borderColor:'#000' }} resizeMode={'contain'} /> */}

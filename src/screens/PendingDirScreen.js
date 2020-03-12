@@ -18,8 +18,7 @@ import Layout from '../constants/Layout'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 
 import styles from '../styles/styles'
-//import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
-import { Thumbnail } from 'native-base'
+
 import * as actionCreator from '../store/actions/action'
 
 const PendingDirScreen = (props) => {
@@ -66,7 +65,7 @@ const PendingDirScreen = (props) => {
                 </View>
                 {/* CONTENT AREA */}
                 <View style={{ flex: 4 }}>
-                    <ScrollView contentStyle={{ padding: 10 }} >
+         
 
                         <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, paddingBottom: 10, marginBottom: 20 }]}>
                             {/* <View style={{ flexDirection: 'row', marginBottom: 10 }}>
@@ -101,7 +100,7 @@ const PendingDirScreen = (props) => {
                                     renderItem={({ item }) => (
                                         <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
                                             <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row' }]}>
-                                                <Thumbnail source={{ uri: item.profile_pic }} circle small style={{ borderWidth: 1, borderColor: 'lightgrey' }} />
+                                            <Image source={{ uri: item.profile_pic }} style={{ borderWidth: 1, borderColor: 'lightgrey',width:36,height:36,borderRadius:18 }} />
                                                 <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.name}</Text>
                                             </View>
                                             <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', marginRight: 5 }}>
@@ -122,7 +121,7 @@ const PendingDirScreen = (props) => {
                                 </View>
                             }
                         </View>
-                    </ScrollView>
+              
                 </View>
             </View>
             {/* <PopupScoreScreen /> */}

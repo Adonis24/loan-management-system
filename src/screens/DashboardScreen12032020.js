@@ -2,11 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import {
     Image,
-<<<<<<< HEAD
-    ScrollView,
-    StyleSheet,
-=======
->>>>>>> origin/upgradeExpo36
     Text,
     TouchableOpacity,
     View, 
@@ -21,6 +16,7 @@ import * as actionCreator from '../store/actions/action'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 
 import Constants from 'expo-constants'
+
 
 import Layout from '../constants/Layout'
 
@@ -174,33 +170,29 @@ const DashboardScreen = (props) => {
                                         </View>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
-                                        <View style={{ flex:1, flexDirection: 'row' }}>
-                                           
+                                        <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
+                                            <TouchableOpacity style={{ flex: 1, }} />
                                             
-                                            <TouchableOpacity onPress={() => props.navigation.navigate('Elearning')} style={[{ flex: 2, padding: 5, marginRight: 10, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
+                                            <TouchableOpacity onPress={() => props.navigation.navigate('Elearning')} style={[{ flex: 2, padding: 5, marginRight: 15, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
                                                 <Image source={require('../assets/icon/e-learning.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                 <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>E-Learning</Text>
                                             </TouchableOpacity>
                                             
+
                                             <TouchableOpacity onPress={() => props.navigation.navigate('InfoNewsList')} style={[{ flex: 2, padding: 5, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
                                                 <Image source={require('../assets/icon/news.png')} style={styles.image} resizeMode={'contain'} />
                                                 <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>E-News</Text>
                                             </TouchableOpacity>
 
-                                            <TouchableOpacity onPress={() => props.navigation.navigate('EAdvertisement')} style={[{ flex: 2, padding: 5, marginLeft: 10, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
+                                            <TouchableOpacity onPress={() => props.navigation.navigate('EAdvertisement')} style={[{ flex: 2, padding: 5, marginLeft: 15, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
                                                 <Image source={require('../assets/images/ecommerce.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                 <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>E-Advertisement</Text>
                                             </TouchableOpacity>
-                                            
-                                            <TouchableOpacity onPress={() => props.navigation.navigate('Financing')} style={[{ flex: 2, padding: 5, marginLeft: 10, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
-                                                <Image source={require('../assets/icon/bill.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                                <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>E-Financing</Text>
-                                            </TouchableOpacity>
-
+                                            <TouchableOpacity style={{ flex: 1, }} />
                                         </View>
                                     </View>
                                     <View style={{ margin: 10 }} />
-                                    {/* <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                         <View style={{ width: Layout.window.width, flexDirection: 'row' }}>
                                             <TouchableOpacity style={{ flex: 1, }} />
                                             
@@ -220,7 +212,7 @@ const DashboardScreen = (props) => {
                                             </TouchableOpacity>
                                             <TouchableOpacity style={{ flex: 1, }} />
                                         </View>
-                                    </View> */}
+                                    </View>
                                     <View style={{ margin: 10 }} />
 
                                 </View>

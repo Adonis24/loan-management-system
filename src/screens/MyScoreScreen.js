@@ -6,7 +6,7 @@ import {
     Text,
     TouchableOpacity,
     View
- 
+
 } from 'react-native';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
@@ -16,7 +16,8 @@ import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import { Tabs, Tab, ScrollableTab} from 'native-base'
+import ScrollableTabView from 'react-native-scrollable-tab-view'
+
 import LayoutB from '../Layout/LayoutB';
 
 const MyScoreScreen = (props) => {
@@ -31,25 +32,23 @@ const MyScoreScreen = (props) => {
     if (companyName) {
         return (
             < LayoutB
-            title={'My Score'}
-            screenType='form'
-            navigation={props.navigation}
-            imageUri={require('../assets/images/grant.png')}
-        >
+                title={'My Score'}
+                screenType='form'
+                navigation={props.navigation}
+                imageUri={require('../assets/images/grant.png')}
+            >
 
-                    <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                            <Tabs tabBarBackgroundColor={'#fff'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
-                                <Tab heading="Mi-score">
-                                    <Latest nav={nav} />
-                                </Tab>
-                                <Tab heading="E-score">
-                                    <Popular nav={nav} />
-                                </Tab>
-                            </Tabs>
-                        </View>
+                <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
+                        <ScrollableTabView style={{ width: Layout.window.width }}>
+                            <Latest tabLabel='Latest' nav={nav} />
+                            <Popular tabLabel='Popular' nav={nav} />
+
+                        </ScrollableTabView>
+
                     </View>
-        </LayoutB>
+                </View>
+            </LayoutB>
 
         );
     } else {

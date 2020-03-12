@@ -15,7 +15,7 @@ import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import {  Left, Right,Radio, ListItem } from 'native-base'
+
 
 
 const QuizAnswerScreen = (props) => {
@@ -43,30 +43,30 @@ const QuizAnswerScreen = (props) => {
                         <View style={{ flex: 1, flexDirection: 'column', margin: 10 }}>
                             <Text style={[styles.textDefault, { margin: 5, textAlign: 'left', color: 'darkblue', alignSelf: 'flex-start' }]}>Question 1</Text>
                             <Text style={[styles.textDefault, { margin: 10, textAlign: 'left', fontSize: 13, alignSelf: 'flex-start', fontWeight: 'bold' }]}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </Text>
-                            <ListItem>
-                                <Left style={{ flex: 1 }}>
-                                    <Radio selected={false} />
-                                </Left>
-                                <Right style={{ flex: 4 }}>
+                            <View style={{flexDirection:'row'}}>
+                                <View style={{ flex: 1 }}>
+                                    <View style={{width:20,height:20,borderRadius:10,borderWidth:2}} />
+                                </View>
+                                <View style={{ flex: 4 }}>
                                     <Text>Lorem Ipsum is simply dummy text</Text>
-                                </Right>
-                            </ListItem>
-                            <ListItem>
-                                <Left style={{ flex: 1 }}>
-                                    <Radio selected={true} />
-                                </Left>
-                                <Right style={{ flex: 4 }}>
+                                </View>
+                            </View>
+                            <View style={{flexDirection:'row'}}>
+                                <View style={{ flex: 1 }}>
+                                <View style={{width:20,height:20,borderRadius:10,borderWidth:2}} />
+                                </View>
+                                <View style={{ flex: 4 }}>
                                     <Text>Lorem Ipsum is simply dummy text</Text>
-                                </Right>
-                            </ListItem>
-                            <ListItem>
-                                <Left style={{ flex: 1 }}>
-                                    <Radio selected={false} />
-                                </Left>
-                                <Right style={{ flex: 4 }}>
+                                </View>
+                            </View>
+                            <View style={{flexDirection:'row'}}>
+                                <View style={{ flex: 1 }}>
+                                <View style={{width:20,height:20,borderRadius:10,borderWidth:2}} />
+                                </View>
+                                <View style={{ flex: 4 }}>
                                     <Text>Lorem Ipsum is simply dummy text</Text>
-                                </Right>
-                            </ListItem>
+                                </View>
+                            </View>
                         </View>
                     </View>
                 </ScrollView>

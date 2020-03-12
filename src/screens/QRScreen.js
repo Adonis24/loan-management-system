@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet,
     Text,
@@ -16,24 +16,22 @@ import Constants from 'expo-constants'
 import Layout from '../constants/Layout'
 
 import styles from '../styles/styles'
-import {  Tabs, Tab, ScrollableTab } from 'native-base'
+import ScrollableTabView from 'react-native-scrollable-tab-view'
 
 import * as actionCreator from '../store/actions/action'
 
+const QRScreen = (props) => {
 
-
-const QRScreen = (props) => { 
-
-    const [hasCameraPermission,setHasCameraPermission] = useState (null)
-    const [scanned,setScanned] = useState(false)
-   {/* constructor(props) {
+    const [hasCameraPermission, setHasCameraPermission] = useState(null)
+    const [scanned, setScanned] = useState(false)
+    {/* constructor(props) {
         super(props)
         this.state = { hasCameraPermission: null, scanned: false }
     } */}
 
     const dispatch = useDispatch()
-    const {  id, member_id, name, email, phone_no, profile_pic, email_verified_at, expo_token, phone} = useSelector(state => state.myAccountReducer, shallowEqual)
-    const  allNoti  = useSelector(state => state.notificationScreenReducer, shallowEqual)
+    const { id, member_id, name, email, phone_no, profile_pic, email_verified_at, expo_token, phone } = useSelector(state => state.myAccountReducer, shallowEqual)
+    const allNoti = useSelector(state => state.notificationScreenReducer, shallowEqual)
 
     const getPermission = async () => {
         const { status } = await Permissions.askAsync(Permissions.CAMERA)
@@ -42,11 +40,11 @@ const QRScreen = (props) => {
 
     useEffect(() => {
         console.log(`expo token ialah ${expo_token} dan id ialah ${id}`)
-       getPermission()
-    },[]); // empty-array means don't watch for any updates
+        getPermission()
+    }, []); // empty-array means don't watch for any updates
 
 
-  {/*  async componentDidMount() {
+    {/*  async componentDidMount() {
 
         console.log(`expo token ialah ${expo_token} dan id ialah ${id}`)
 
@@ -62,61 +60,61 @@ const QRScreen = (props) => {
         setScanned({ scanned: true });
         console.log(`data ialah : ${JSON.stringify(data)}`)
 
-        const {connect_id,expo_token}=JSON.parse(data)
+        const { connect_id, expo_token } = JSON.parse(data)
 
         await requestConnect(connect_id)
         // this.props.initiateBizDir()
         // this.props.initiateAssociateDir()
         // this.props.initiatePendingDir()
-        sendNotification(expo_token,connect_id)
+        sendNotification(expo_token, connect_id)
         //props.navigation.navigate('BizDirectory')
     };
-    
-        return (
-            <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: 'transparent' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
-                    <Tab heading="Scan">
-                        <ScanQRScreen hasCameraPermission={hasCameraPermission} scanned={scanned} handleBarCodeScanned={handleBarCodeScanned} />
-                    </Tab>
-                    <Tab heading="QR">
-                        <QR id={id} expo_token={expo_token} allNoti={allNoti} />
-                    </Tab>
-                </Tabs>
-            </View>
-        );
-    }
+
+    return (
+        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+
+            <ScrollableTabView  style={{ width: Layout.window.width }}>
+                <ScanQRScreen tabLabel='Scan' hasCameraPermission={hasCameraPermission} scanned={scanned} handleBarCodeScanned={handleBarCodeScanned} />
+                <QR id={id} tabLabel='QR' expo_token={expo_token} allNoti={allNoti} />
+
+            </ScrollableTabView>
+
+
+        </View>
+    );
+}
 
 
 const ScanQRScreen = (props) => {
-    
-        const { hasCameraPermission, scanned } = props;
+const [camera,setCamera]=useState(null)
+    const { hasCameraPermission, scanned } = props;
 
-        if (hasCameraPermission === null) {
-            return <Text>Requesting for camera permission</Text>;
-        }
-        if (hasCameraPermission === false) {
-            return <Text>No access to camera</Text>;
-        }
-        return (
-            <View style={{ flex: 1 }}>
-                <Camera ref={ref => {camera = ref; }} ratio={'16:9'} onBarCodeScanned={scanned ? undefined : props.handleBarCodeScanned} style={[StyleSheet.absoluteFill, { flex: 1 }]} >
-                </Camera>
-            </View>
-        );
+    if (hasCameraPermission === null) {
+        return <Text>Requesting for camera permission</Text>;
     }
+    if (hasCameraPermission === false) {
+        return <Text>No access to camera</Text>;
+    }
+    return (
+        <View style={{ flex: 1 }}>
+            <Camera ref={ref => { setCamera(camera) }} ratio={'16:9'} onBarCodeScanned={scanned ? undefined : props.handleBarCodeScanned} style={[StyleSheet.absoluteFill, { flex: 1 }]} >
+            </Camera>
+        </View>
+    );
+}
 
 
 
-    const QR = (props) => {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <View style={{ color: '#fff', borderRadius: 10, elevation: 3, padding: 10 }}>
-                    <QRCode value={JSON.stringify({ connect_id: props.id, expo_token: props.expo_token })} size={Layout.window.width / 1.5} backgroundColor='#fff' color='#000' />
+const QR = (props) => {
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ color: '#fff', borderRadius: 10, elevation: 3, padding: 10 }}>
+                <QRCode value={JSON.stringify({ connect_id: props.id, expo_token: props.expo_token })} size={Layout.window.width / 1.5} backgroundColor='#fff' color='#000' />
                 <Text>{JSON.stringify(props.allNoti)}</Text>
-                </View>
             </View>
-        );
-    
+        </View>
+    );
+
 }
 
 

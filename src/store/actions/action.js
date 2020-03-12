@@ -278,163 +278,163 @@ export const initiateDashboardScreen = () => {
 }
 
 export const initiateNews = () => {
-    return async (dispatch, getState) => {
-        await dispatch(newsApi())
+    return (dispatch, getState) => {
+        dispatch(newsApi())
     }
 }
 
 export const initiateEvent = () => {
-    return async (dispatch, getState) => {
-        await dispatch(eventApi())
+    return (dispatch, getState) => {
+        dispatch(eventApi())
     }
 }
 
 export const initiatePromotion = () => {
-    return async (dispatch, getState) => {
-        await dispatch(promotionApi())
+    return (dispatch, getState) => {
+        dispatch(promotionApi())
     }
 }
 
 export const initiateHandbooks = () => {
-    return async (dispatch, getState) => {
-        await dispatch(handbooksApi())
+    return (dispatch, getState) => {
+        dispatch(handbooksApi())
     }
 }
 
 export const intitiateEinfo = () => {
-    return async (dispatch, getState) => {
-        await dispatch(einfoApi())
+    return (dispatch, getState) => {
+        dispatch(einfoApi())
     }
 }
 
 export const applyLoan = () => {
-    return async (dispatch, getState) => {
+    return (dispatch, getState) => {
         console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-        await dispatch(applyLoanApi())
+        dispatch(applyLoanApi())
     }
 }
 
 export const applyGrant = () => {
-    return async (dispatch, getState) => {
+    return  (dispatch, getState) => {
         console.log(`kat action : ${JSON.stringify(getState().grantApplicationReducer)}`)
-        await dispatch(applyGrantApi())
+         dispatch(applyGrantApi())
     }
 }
 
 export const initiateMyAccount = () => {
-    return async (dispatch, getState) => {
+    return  (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-        await dispatch(getUserInfoApi())
+         dispatch(getUserInfoApi())
     }
 }
 
 export const initiateCompanyInfo = () => {
-    return async (dispatch, getState) => {
+    return  (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-        await dispatch(getCompanyInfoApi())
+         dispatch(getCompanyInfoApi())
     }
 }
 
 export const initiateAssociateDir = () => {
-    return async (dispatch, getState) => {
+    return  (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-        await dispatch(getAssociateApi())
+         dispatch(getAssociateApi())
     }
 }
 
 export const initiatePendingDir = () => {
-    return async (dispatch, getState) => {
+    return  (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-        await dispatch(getPendingApi())
+         dispatch(getPendingApi())
     }
 }
 
 export const initiateListWorkers = () => {
-    return async (dispatch, getState) => {
+    return  (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-        await dispatch(getListWorkersApi())
+         dispatch(getListWorkersApi())
     }
 }
 
 export const doneForNow = () => {
-    return async (dispatch, getState) => {
+    return  (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-        await dispatch(doneForNowApi())
+         dispatch(doneForNowApi())
     }
 }
 
 export const sendNotification = (expo_token, id) => {
-    return async (dispatch, getState) => {
+    return  (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-        await dispatch(sendNotificationApi(expo_token, id))
+         dispatch(sendNotificationApi(expo_token, id))
     }
 }
 
 export const initiateBizDir = () => {
-    return async (dispatch, getState) => {
-        await dispatch(bizDirApi())
+    return  (dispatch, getState) => {
+         dispatch(bizDirApi())
     }
 }
 
 export const initiateListAgency = () => {
-    return async (dispatch, getState) => {
-        await dispatch(listAgencyApi())
+    return  (dispatch, getState) => {
+         dispatch(listAgencyApi())
     }
 }
 
 export const initiateLoanInfo = (page) => {
-    return async (dispatch, getState) => {
-        await dispatch(loanInfoApi(page))
+    return  (dispatch, getState) => {
+         dispatch(loanInfoApi(page))
     }
 }
 
 export const initiateGrantInfo = (page) => {
-    return async (dispatch, getState) => {
+    return  (dispatch, getState) => {
         console.log(`grant kat action`)
-        await dispatch(grantInfoApi(page))
+         dispatch(grantInfoApi(page))
     }
 }
 
 export const enableNotification = () => {
-    return async (dispatch, getState) => {
-        await dispatch(addExpoTokenApi())
+    return  (dispatch, getState) => {
+         dispatch(addExpoTokenApi())
     }
 }
 
 export const addExpoToken = () => {
-    return async (dispatch, getState) => {
-        await dispatch(addExpoTokenApi())
+    return  (dispatch, getState) => {
+         dispatch(addExpoTokenApi())
     }
 }
 
 export const getConnectionStatus = () => {
-    return async (dispatch, getState) => {
-        await dispatch(connectionStatusApi())
+    return  (dispatch, getState) => {
+         dispatch(connectionStatusApi())
     }
 }
 
 
 export const initiateTraining = () => {
-    return async (dispatch, getState) => {
-        await dispatch(getCoursesApi())
+    return  (dispatch, getState) => {
+         dispatch(getCoursesApi())
     }
 }
 
 export const editUser = () => {
-    return async (dispatch, getState) => {
-        await dispatch(editUserApi())
+    return  (dispatch, getState) => {
+         dispatch(editUserApi())
     }
 }
 
 export const requestConnect = (val) => {
-    return async (dispatch, getState) => {
-        await dispatch(requestConnectApi(val))
+    return  (dispatch, getState) => {
+         dispatch(requestConnectApi(val))
     }
 }
 
 export const accept = (val) => {
-    return async (dispatch, getState) => {
-        await dispatch(acceptApi(val))
+    return  (dispatch, getState) => {
+         dispatch(acceptApi(val))
     }
 }
 
@@ -688,9 +688,9 @@ export const logout = () => {
 // }
 
 export const resetPin = () => {
-    return async (dispatch, getState) => {
+    return  (dispatch, getState) => {
 
-        await dispatch(resetPinApi())
+         dispatch(resetPinApi())
     }
 }
 

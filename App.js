@@ -12,9 +12,7 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import rootReducer from './src/store/reducers/Reducer';
 
-import { StyleProvider } from 'native-base';
-import getTheme from './native-base-theme/components';
-import minimal from './native-base-theme/variables/minimal';
+
 import Nav from './src/navigation/Nav';
 // import DashboardAsset from './src/components/DashboardAsset';
 
@@ -109,7 +107,7 @@ const App = (props) => {
     // reporting service, for example Sentry
     console.warn(error);
   };
-  
+
   const _handleFinishLoading = () => {
     //this.setState({ isLoadingComplete: true });
     setIsLoadingComplete(true)
@@ -126,13 +124,13 @@ const App = (props) => {
   } else {
     return (
       <Provider store={store}>
-        <StyleProvider style={getTheme(minimal)}>
-          <View style={styles.container}>
-            {/* <DashboardAsset /> */}
-            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            <Nav />
-          </View>
-        </StyleProvider>
+
+        <View style={styles.container}>
+          {/* <DashboardAsset /> */}
+          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          <Nav />
+        </View>
+
       </Provider>
     );
   }
