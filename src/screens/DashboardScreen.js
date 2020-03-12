@@ -2,20 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import {
     Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
     Text,
     TouchableOpacity,
-    View,
-    Dimensions,
-    TextInput,
-    AsyncStorage,
-    ImageBackground,
+    View, 
     Animated,
     Easing,
     Modal,
-    FlatList
+    
 
 } from 'react-native';
 
@@ -23,7 +16,6 @@ import * as actionCreator from '../store/actions/action'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 
 import Constants from 'expo-constants'
-import { LinearGradient } from 'expo-linear-gradient'
 
 
 import Layout from '../constants/Layout'
@@ -40,9 +32,6 @@ const DashboardScreen = (props) => {
     const dispatch = useDispatch()
     const { member_id, name, email, phone_no, profile_pic, email_verified_at } = useSelector(state => state.myAccountReducer, shallowEqual)
     const companyName = useSelector(state => state.bizInfoReducer.name, shallowEqual)
-
-
-
 
     const toggleShow = () => {
         setPopUp(!popUp)
