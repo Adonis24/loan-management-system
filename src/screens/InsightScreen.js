@@ -15,7 +15,7 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 
 import styles from '../styles/styles'
 //import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
-import { Thumbnail } from 'native-base'
+
 import * as actionCreator from '../store/actions/action'
 
 
@@ -77,7 +77,7 @@ const InsightScreen = (props) => {
                                 renderItem={({ item }) => (
                                     <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'space-between', alignSelf: 'stretch' }}>
                                         <View style={[{ marginLeft: 10, padding: 2, alignSelf: 'stretch', flexDirection: 'row', flex: 4 }]}>
-                                            <Thumbnail source={{ uri: item.profile_pic }} circle small style={{ borderWidth: 1, borderColor: 'lightgrey' }} />
+                                        <Image source={{ uri: item.profile_pic }} style={{ borderWidth: 1, borderColor: 'lightgrey',width:36,height:36,borderRadius:18 }} />
                                             <View>
                                                 <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.name}</Text>
                                                 <Text style={[styles.textDefault, { margin: 5, alignSelf: 'flex-start', textAlign: 'left' }]}>{item.phone_no}</Text>
