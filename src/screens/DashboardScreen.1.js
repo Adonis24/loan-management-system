@@ -17,16 +17,10 @@ import {
 } from 'react-native';
 
 import Constants from 'expo-constants'
-//import { Constants, LinearGradient, FileSystem } from 'expo'
 
 import Layout from '../constants/Layout'
 
-import { Ionicons } from '@expo/vector-icons';
-import styles from '../styles/styles'
-//import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
-
 import { connect } from 'react-redux'
-import * as actionCreator from '../store/actions/action'
 
 class DashboardScreen extends React.PureComponent {
     static navigationOptions = {
