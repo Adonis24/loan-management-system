@@ -276,10 +276,12 @@ export const grantInfoApi = (page) => {
   }
 } */}
 
+
 export const addExpoTokenApi = () => {
   return async (dispatch, getState) => {
 
     
+    const { expo_token } = getState().registrationReducer
 
     console.log(`expo registrationReducer ${expo_token}`)
     const responseJson = await apiPostCall(`api/user/expo_token`, null, getState().apiReducer)
