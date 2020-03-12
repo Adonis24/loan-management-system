@@ -129,7 +129,7 @@ const DashboardScreen = (props) => {
                         {/* HEADER */}
                         <View style={{ flex: 1 }}>
                             <Animated.View style={{ opacity: logoOpac, flex: 1, marginLeft: -10 }}>
-                                <Image source={require('../assets/images/logo-white.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+                                <Image source={require('../assets/images/logo-white.png')} style={styles.logo} resizeMode='contain' />
                             </Animated.View>
                             <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
                                 <Animated.View style={{ opacity: profilePicOpac, flex: 5, flexDirection: 'row' }}>
@@ -180,7 +180,7 @@ const DashboardScreen = (props) => {
                                             
 
                                             <TouchableOpacity onPress={() => props.navigation.navigate('InfoNewsList')} style={[{ flex: 2, padding: 5, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
-                                                <Image source={require('../assets/icon/news.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
+                                                <Image source={require('../assets/icon/news.png')} style={styles.image} resizeMode={'contain'} />
                                                 <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>E-News</Text>
                                             </TouchableOpacity>
 
@@ -207,7 +207,7 @@ const DashboardScreen = (props) => {
                                             </TouchableOpacity>
 
                                             <TouchableOpacity onPress={() => props.navigation.navigate('Delivery')} style={[{ flex: 2, padding: 5, marginLeft: 15, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
-                                                <Image source={require('../assets/icon/delivery-truck.png')} style={{ width: undefined, height: Layout.window.height / 15, justifyContent: 'flex-start' }} resizeMode={'contain'} />
+                                                <Image source={require('../assets/icon/delivery-truck.png')} style={styles.image} resizeMode={'contain'} />
                                                 <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>Delivery</Text>
                                             </TouchableOpacity>
                                             <TouchableOpacity style={{ flex: 1, }} />
@@ -228,10 +228,10 @@ const DashboardScreen = (props) => {
                                     </View>
 
                                     <TouchableOpacity onPress={() => console.log(`navigate('None')`)} style={{ margin: 10 }}  >
-                                        <Image source={require('../assets/images/banner1.png')} style={{ width: Layout.window.width - 20, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode={'cover'} />
+                                        <Image source={require('../assets/images/banner1.png')} style={styles.banner} resizeMode={'cover'} />
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={() => console.log(`navigate('None')`)} style={{ margin: 10 }}  >
-                                        <Image source={require('../assets/images/banner2.png')} style={{ width: Layout.window.width - 20, height: Layout.window.height / 6, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode={'cover'} />
+                                        <Image source={require('../assets/images/banner2.png')} style={styles.banner} resizeMode={'cover'} />
                                     </TouchableOpacity>
 
 

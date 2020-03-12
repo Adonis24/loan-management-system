@@ -90,12 +90,12 @@ const SignupOtpScreen = (props) => {
                             <TextInput keyboardType={'phone-pad'} value={phone} onChangeText={(phone) => setOTP({ phone })} placeholder={(phoneErrorHint.length > 0) ? phoneErrorHint : '012 345 6789'} style={{ marginLeft: 5, flex: 1 }} />
                         </View>
                         <View style={{ flexDirection: 'row', margin: 5 }}>
-                            <TouchableOpacity onPress={() => registerOTP()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
+                            <TouchableOpacity onPress={() => registerOTP()} style={styles.box}>
                                 <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
                                     <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
                                 </LinearGradient>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
+                            <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box,{backgroundColor: '#5A647F' }]} >
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
                             </TouchableOpacity>
                         </View>

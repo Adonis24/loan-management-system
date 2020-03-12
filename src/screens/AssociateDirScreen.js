@@ -46,7 +46,7 @@ const AssociateDirScreen = (props) => {
                     {/* HEADER */}
                     <View style={{ flex: 1 }}>
                         <View style={{ flex: 1, marginLeft: 5 }}>
-                            <Image source={require('../assets/images/logo.png')} style={{ width: Layout.window.width / 3, height: undefined, flex: 1 }} resizeMode='contain' />
+                            <Image source={require('../assets/images/logo.png')} style={styles.logo} resizeMode='contain' />
 
                         </View>
                         <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
