@@ -27,7 +27,7 @@ import Layout from '../constants/Layout'
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import { Tabs, Tab, ScrollableTab, Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, H2, FooterTab } from 'native-base'
+import ScrollableTabView from 'react-native-scrollable-tab-view'
 
 
 import { connect } from 'react-redux'
@@ -68,17 +68,17 @@ class ScanQRScreen extends React.PureComponent {
 
         return (
             <View style={{ flex: 1 }}>
-                <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
-                    <Tab heading="Scanner">
-                        <Scanner
+                 <ScrollableTabView style={{ width: Layout.window.width }}>
+                 <Scanner tabLabel='Scanner'
                             scanned={this.state.scanned}
                             hasCameraPermission={this.state.hasCameraPermission}
                         />
-                    </Tab>
-                    <Tab heading="QR Code">
-                        <QR />
-                    </Tab>
-                </Tabs>
+                          <QR tabLabel='QR Code' />
+                        <Latest tabLabel='Latest' nav={nav}  eventArray={eventArray} />
+                        <Popular tabLabel='Popular' nav={nav}  eventArray={eventArray} />
+
+                    </ScrollableTabView>
+                
             </View>
         );
     }

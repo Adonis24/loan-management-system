@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
     Image,
     Text,
@@ -17,8 +17,7 @@ import Layout from '../constants/Layout'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import { Tabs, Tab, ScrollableTab} from 'native-base'
-
+import ScrollableTabView from 'react-native-scrollable-tab-view'
 import * as actionCreator from '../store/actions/action'
 import moment from 'moment'
 import _ from 'lodash'
@@ -89,17 +88,13 @@ const BizDirectoryScreen = (props) => {
                 {/* START CONTENT */}
                 <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
 
-                    <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarA tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
-                        <Tab heading={`Associate (${associateConnection})`}>
-                            <Associate connect={connect} assoDirArray={assoDirArray} />
-                        </Tab>
-                        <Tab heading={`Request (${requestConnection})`}>
-                            <Pending connect={connect} accept={accept} pendingDirArray={pendingDirArray} />
-                        </Tab>
-                        <Tab heading={`All (${allConnection})`}>
-                            <All connect={connect} bizDirArray={bizDirArray} />
-                        </Tab>
-                    </Tabs>
+                    <ScrollableTabView style={{ width: Layout.window.width }}>
+                        <Associate tabLabel={`Associate (${associateConnection})`} connect={connect} assoDirArray={assoDirArray} />
+                        <Pending tabLabel={`Request (${requestConnection})`} connect={connect} accept={accept} pendingDirArray={pendingDirArray} />
+                        <All tabLabel={`All (${allConnection})`} connect={connect} bizDirArray={bizDirArray} />                
+                    </ScrollableTabView>
+
+
 
                 </View>
                 {/* END CONTENT */}
