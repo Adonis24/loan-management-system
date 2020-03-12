@@ -2,11 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import {
     Image,
-<<<<<<< HEAD
-    ScrollView,
-    StyleSheet,
-=======
->>>>>>> origin/upgradeExpo36
     Text,
     TouchableOpacity,
     View, 
