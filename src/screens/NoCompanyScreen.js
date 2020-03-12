@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {
     Image,
     ScrollView,
@@ -8,7 +8,7 @@ import {
     View
 
 } from 'react-native';
-
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import { LinearGradient } from 'expo-linear-gradient'

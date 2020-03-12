@@ -16,18 +16,13 @@ import {
 
 } from 'react-native';
 
-import { BarCodeScanner } from 'expo-barcode-scanner'
+
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions'
 
-import Constants from 'expo-constants'
-//import { Constants, LinearGradient, FileSystem } from 'expo'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
 
-import { Ionicons } from '@expo/vector-icons';
+
 import styles from '../styles/styles'
-import { Icon } from 'native-base'
 
 import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'

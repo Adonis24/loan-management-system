@@ -2,18 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import {
     Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
+
     Text,
     TouchableOpacity,
     View,
-    Dimensions,
     TextInput,
-    AsyncStorage,
-    ImageBackground,
+
     KeyboardAvoidingView,
-    ActivityIndicator
+    
 
 } from 'react-native';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
@@ -23,15 +19,12 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 
-//import { Constants, LinearGradient, FileSystem } from 'expo'
+
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 
-import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-//import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
 
-import { connect } from 'react-redux'
 import * as actionCreator from '../store/actions/action'
 
 const validationSchema = Yup.object().shape({

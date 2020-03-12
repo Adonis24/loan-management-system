@@ -16,17 +16,13 @@ import {
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
-//import { Constants, LinearGradient, FileSystem } from 'expo'
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-// import { DatePicker } from 'native-base'
 import moment from 'moment'
-import { connect } from 'react-redux'
-import * as actionCreator from '../store/actions/action'
 
 
 
@@ -233,53 +229,7 @@ const CompanyInformationScreen = (props) => {
                             )
                         }}
                     </Formik >
-                    {/* <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                        <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY INFORMATION</Text>
-                        <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
-                        <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                            <Image source={require('../assets/images/company.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                            <TextInput value={comp_name} onChangeText={(comp_name) => setCompanyInfo({ comp_name })} style={{ marginLeft: 5, flex: 1 }} placeholder={(nameErrorHint.length > 0) ? nameErrorHint : 'Company/Firm Name'} placeholderTextColor={(nameErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                        </View>
-                        <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                            <Image source={require('../assets/images/compRegNum.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                            <TextInput value={comp_regno} onChangeText={(comp_regno) => setCompanyInfo({ comp_regno })} style={{ marginLeft: 5, flex: 1 }} placeholder={(regErrorHint.length > 0) ? regErrorHint : 'Company Registration Number'} placeholderTextColor={(regErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                        </View>
-                        <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                            <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5, marginRight: 3 }} resizeMode={'contain'} />
-                            <DatePicker
-                                defaultDate={new Date()}
-                                // minimumDate={new Date(2018, 1, 1)}
-                                // maximumDate={new Date(2018, 12, 31)}
-                                locale={"en"}
-                                timeZoneOffsetInMinutes={undefined}
-                                modalTransparent={false}
-                                animationType={"fade"}
-                                androidMode={"default"}
-                                // placeHolderText="Company Registration Date"
-                                placeHolderText={(dateErrorHint.length > 0) ? dateErrorHint : 'Company Registration Date'}
-                                placeHolderTextColor={(dateErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'}
-                                textStyle={{ color: "#000" }}
-                                placeHolderTextStyle={{ fontFamily: 'Roboto-regular', color: 'lightgrey' }}
-                                onDateChange={(newDate) => setDate(newDate)}
-                                disabled={false}
-                            />
-                        </View>
-                        <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
-                            <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                            <TextInput value={comp_main_biz_act} onChangeText={(comp_main_biz_act) => setCompanyInfo({ comp_main_biz_act })} style={{ marginLeft: 5, flex: 1 }} placeholder={(businessErrorHint.length > 0) ? businessErrorHint : 'Main Business Activities'} placeholderTextColor={(businessErrorHint.length > 0) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                        </View>
-                        <View style={{ flexDirection: 'row', margin: 5 }}>
-                            <TouchableOpacity onPress={() => companyInformation()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10 }}>
-                                <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
-                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => props.navigation.goBack()} style={{ width: Layout.window.width * 0.3, paddingTop: 5, paddingBottom: 5, borderRadius: 15, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
-                                <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View> */}
+                    
                 </KeyboardAvoidingView>
             </View>
         </View>

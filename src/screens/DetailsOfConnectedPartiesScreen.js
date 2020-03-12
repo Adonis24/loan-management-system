@@ -1,34 +1,24 @@
 //console.ignoredYellowBox = ['Setting a timer']
 import React from 'react';
 import {
-    Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
+    Image, 
     Text,
     TouchableOpacity,
     View,
-    Dimensions,
     TextInput,
-    AsyncStorage,
-    ImageBackground,
     KeyboardAvoidingView
-
 
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
-//import { Constants, LinearGradient, FileSystem } from 'expo'
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 
-import { Ionicons } from '@expo/vector-icons';
-import styles from '../styles/styles'
-//import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
 
-import { connect } from 'react-redux'
+import styles from '../styles/styles'
+
 import * as actionCreator from '../store/actions/action'
 
 const validationSchema = Yup.object().shape({

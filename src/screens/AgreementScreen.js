@@ -2,32 +2,21 @@
 import React, { useState } from 'react';
 import {
     Image,
-    Platform,
-    ScrollView,
-    StyleSheet,
+    Platform, 
     Text,
     TouchableOpacity,
-    View,
-    Dimensions,
-    TextInput,
-    AsyncStorage,
-    ImageBackground,
+    View, 
     CheckBox
 
 } from 'react-native';
 
 import Constants from 'expo-constants'
-//import { Constants, LinearGradient, FileSystem } from 'expo'
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 
-import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-//import { Drawer, Container, Header, Content, Footer, Left, Right, Body, Title, Subtitle, Button, Icon, Card, CardItem, Text, H2, FooterTab } from 'native-base'
 import CheckBox2 from 'react-native-check-box'
-import { connect } from 'react-redux'
-import * as actionCreator from '../store/actions/action'
-import { Button } from 'native-base';
+
 
 const AgreementScreen = (props) => {
 
