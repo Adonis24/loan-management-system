@@ -7,73 +7,73 @@ import moment from 'moment'
 const apiUrl = 'https://staging.bxcess.my/'
 const lmsApiUrl = 'https://lms.bxcess.my/'
 
+
+const apiGetCall = async (uri, apiAccess, lms = false) => {
+
+
+  const access = !lms ? apiAccess ? apiAccess : JSON.parse(await SecureStore.getItemAsync('personalToken')) : JSON.parse(await SecureStore.getItemAsync('lmsPersonalToken'))
+
+  const { token_type, access_token } = access
+  const method = 'GET'
+  const Accept = 'application/json'
+  const Authorization = token_type + ' ' + access_token
+
+  const headers = { 'Content-Type': 'application/json', Accept, Authorization }
+  let response = await fetch(`${!lms ? apiUrl : lmsApiUrl}${uri}`, { method, headers })
+  let responseJson = await response.json()
+  return responseJson
+
+
+}
+
+const apiPostCall = async (uri, values, apiAccess, lms = false, isPublicToken = false) => {
+
+  const body = JSON.stringify({ ...values, access_credential: !isPublicToken && 'api' })
+
+  const access = apiAccess ? apiAccess : JSON.parse(await SecureStore.getItemAsync('personalToken'))
+
+
+  const { token_type, access_token } = access
+  const method = 'POST'
+  const Accept = 'application/json'
+  const Authorization = token_type + ' ' + access_token
+
+  const headers = { 'Content-Type': 'application/json', Accept, Authorization: !isPublicToken && Authorization }
+  let response = await fetch(`${!lms ? apiUrl : lmsApiUrl}${uri}`, { method, headers, body })
+  let responseJson = await response.json()
+  return responseJson
+
+}
+
 export const requestToken = () => {
-  return (dispatch, getState) => {
-    fetch(`${apiUrl}oauth/token`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ client_id: '2', client_secret: 'dFX2OFK95Va8PfvyzT6ZnbLJxCXDAfvBCC1fdX4k', grant_type: 'client_credentials' }),
+  return async (dispatch, getState) => {
 
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
-
-        const { token_type, access_token } = await responseJson
-        await console.log(`token is ${JSON.stringify(responseJson)}`)
-        //this.props.setToken({ token_type, access_token })
-        await dispatch({ type: 'GET_TOKEN', payload: { ...responseJson } })
-
-      })
-      .catch((error) => {
-        console.error('Error : ' + error);
-      });
+    const value = { client_id: '2', client_secret: 'dFX2OFK95Va8PfvyzT6ZnbLJxCXDAfvBCC1fdX4k', grant_type: 'client_credentials' }
+    const responseJson = await apiPostCall(`oauth/token`, value, getState().apiReducer, false, true)
+    dispatch({ type: 'GET_TOKEN', payload: { ...responseJson } })
   }
 }
 
 export const requestTokenLMS = () => {
-  return (dispatch, getState) => {
-    fetch(`${lmsApiUrl}oauth/token`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ client_id: '1', client_secret: 'Hri7puJsjOSMp3SxH4Gds6XtMxSJJwe8jUay80TC', grant_type: 'client_credentials' }),
+  return async (dispatch, getState) => {
 
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
+    const value = { client_id: '1', client_secret: 'Hri7puJsjOSMp3SxH4Gds6XtMxSJJwe8jUay80TC', grant_type: 'client_credentials' }
+    const responseJson = await apiPostCall(`oauth/token`, value, getState().apiReducer, true, true)
+    await dispatch({ type: 'GET_TOKEN', payload: { lms: { ...responseJson } } })
 
-        const { token_type, access_token } = await responseJson
-        await console.log(`LMS token is ${JSON.stringify(responseJson)}`)
-        //this.props.setToken({ token_type, access_token })
-        await dispatch({ type: 'GET_TOKEN', payload: { lms: { ...responseJson } } })
-
-      })
-      .catch((error) => {
-        console.error('Error : ' + error);
-      });
   }
 }
 
 export const registerApi = (token_type, access_token, name, email, password, password_confirmation, expo_token) => {
   return async (dispatch, getState) => {
-    fetch(`${apiUrl}api/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      },
-      body: JSON.stringify({ name, email, password, password_confirmation, expo_token }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
-        const { status } = await responseJson
-        await dispatch({ type: 'SET_REGISTER', payload: { status, proceed: true, indicator: false } })
-        await console.log(`register  ${JSON.stringify(responseJson)}`)
-      })
-      .catch((error) => {
-        console.error('Error : ' + error);
-      });
+
+    const value = { name, email, password, password_confirmation, expo_token }
+    const responseJson = await apiPostCall(`api/register`, value, getState().apiReducer)
+    const { status } = await responseJson
+    await dispatch({ type: 'SET_REGISTER', payload: { status, proceed: true, indicator: false } })
+    await console.log(`register  ${JSON.stringify(responseJson)}`)
+
+
   }
 }
 
@@ -81,104 +81,76 @@ export const registerLMSApi = (token_type, access_token, name, email, password, 
   return async (dispatch, getState) => {
     const first_name = name
     const last_name = name
-    fetch(`${lmsApiUrl}api/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      },
-      body: JSON.stringify({ first_name, last_name, email, password, password_confirmation }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
-        const { status } = await responseJson
-        //await dispatch({ type: 'SET_REGISTER', payload: { status, proceed: true, indicator: false } })
-        await console.log(`register LMS  ${JSON.stringify(responseJson)}`)
-      })
-      .catch((error) => {
-        console.error('Error : ' + error);
-      });
+
+    const value = { first_name, last_name, email, password, password_confirmation }
+    const responseJson = await apiPostCall(`api/register`, value, getState().apiReducer, true)
+
+    const { status } = await responseJson
+    //await dispatch({ type: 'SET_REGISTER', payload: { status, proceed: true, indicator: false } })
+    await console.log(`register LMS  ${JSON.stringify(responseJson)}`)
+
   }
 }
 
 
 export const requestPersonalToken = (screen, username, password) => {
-  console.log(`kat api : ${username} dan ${password}`)
   return async (dispatch, getState) => {
-    fetch(`${apiUrl}oauth/token`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ client_id: '2', client_secret: 'dFX2OFK95Va8PfvyzT6ZnbLJxCXDAfvBCC1fdX4k', grant_type: 'password', username, password }),
 
-    }).then((response) => response.json())
-      .then((responseJson) => {
+    const value = { client_id: '2', client_secret: 'dFX2OFK95Va8PfvyzT6ZnbLJxCXDAfvBCC1fdX4k', grant_type: 'password', username, password }
+    const responseJson = await apiPostCall(`api/register`, value, getState().apiReducer)
 
-        console.log(`personal token ialah : ${JSON.stringify(responseJson)}`)
+    console.log(`personal token ialah : ${JSON.stringify(responseJson)}`)
 
-        const { token_type, access_token, error, message } = responseJson
+    const { token_type, access_token, error, message } = responseJson
 
-        if (!error) {
+    if (!error) {
 
-          //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
-          const stringifyJson = JSON.stringify(responseJson)
+      //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
+      const stringifyJson = JSON.stringify(responseJson)
 
-          SecureStore.setItemAsync('personalToken', stringifyJson);
+      SecureStore.setItemAsync('personalToken', stringifyJson);
 
-          dispatch({ type: 'SET_REGISTER', payload: { access_token } });
-          dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
+      dispatch({ type: 'SET_REGISTER', payload: { access_token } });
+      dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
 
-          if (screen == 'login' && access_token) {
-            dispatch({ type: 'SET_LOGIN', payload: { proceed: true, indicator: false } })
-            dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
-          } else {
+      if (screen == 'login' && access_token) {
+        dispatch({ type: 'SET_LOGIN', payload: { proceed: true, indicator: false } })
+        dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
+      } else {
 
-            dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false, ...responseJson } })
-          }
+        dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false, ...responseJson } })
+      }
 
-        } else {
-          dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false, ...responseJson } })
-        }
+    } else {
+      dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false, ...responseJson } })
+    }
 
 
-      })
-      .catch((error) => {
-        console.error('Error : ' + error);
-      });
+
   }
 }
 
 export const requestPersonalTokenLMS = (screen, username, password) => {
-  console.log(`kat api : ${username} dan ${password}`)
   return async (dispatch, getState) => {
-    fetch(`${lmsApiUrl}oauth/token`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ client_id: '2', client_secret: 'b21IuZWBmOiyKjLNgFA4jvgGHDM5HSFKXx5A5ZB0', grant_type: 'password', username, password }),
 
-    }).then((response) => response.json())
-      .then((responseJson) => {
+    const value = { client_id: '2', client_secret: 'b21IuZWBmOiyKjLNgFA4jvgGHDM5HSFKXx5A5ZB0', grant_type: 'password', username, password }
+    const responseJson = await apiPostCall(`api/register`, value, getState().apiReducer, true)
 
-        console.log(`personal token lms ialah : ${JSON.stringify(responseJson)}`)
+    console.log(`personal token lms ialah : ${JSON.stringify(responseJson)}`)
 
-        const { token_type, access_token } = responseJson
+    const { token_type, access_token } = responseJson
 
-        //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
-        const stringifyJson = JSON.stringify(responseJson)
+    //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
+    const stringifyJson = JSON.stringify(responseJson)
 
-        SecureStore.setItemAsync('lmsPersonalToken', stringifyJson);
+    SecureStore.setItemAsync('lmsPersonalToken', stringifyJson);
 
-        dispatch({ type: 'SET_REGISTER', payload: { access_token } });
+    dispatch({ type: 'SET_REGISTER', payload: { access_token } });
 
-        (screen == 'login' && access_token) ? dispatch({ type: 'SET_LOGIN', payload: { proceed: true, indicator: false } }) : dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false } })
+    (screen == 'login' && access_token) ? dispatch({ type: 'SET_LOGIN', payload: { proceed: true, indicator: false } }) : dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false } })
 
-      })
-      .catch((error) => {
-        console.error('Error : ' + error);
-      });
+
+
   }
 }
 
@@ -188,45 +160,27 @@ export const registerOTPApi = (token_type, access_token, country_code, mobile_no
     console.log(`token and type ialah : ${access_token} dan ${token_type}`)
     console.log(`phone and country ialah : ${country_code} dan ${mobile_no}`)
 
-    fetch(`${apiUrl}api/requestOPT`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      },
-      body: JSON.stringify({ country_code, mobile_no }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
-        const { status } = await responseJson
-        await dispatch({ type: 'SET_OTP', payload: { status } })
-        await console.log(`requestOPT  ${JSON.stringify(responseJson)}`)
-      })
-      .catch((error) => {
-        console.error('Error : ' + error);
-      });
+
+    const value = { country_code, mobile_no }
+    const responseJson = await apiPostCall(`api/requestOPT`, value, getState().apiReducer, true)
+    const { status } = await responseJson
+    await dispatch({ type: 'SET_OTP', payload: { status } })
+    await console.log(`requestOPT  ${JSON.stringify(responseJson)}`)
+
   }
 }
 
 export const verifyPhoneApi = (token_type, access_token, country_code, mobile_no, code) => {
   return async (dispatch, getState) => {
-    fetch(`${apiUrl}api/verifyPhoneData`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      },
-      body: JSON.stringify({ country_code, mobile_no, code, access_credential: 'api' }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
-        const { status } = await responseJson
-        await dispatch({ type: 'VERIFY_OTP', payload: { phoneVerified: status, proceedOTP: true, status } })
-        await console.log(`verifyPhone  ${JSON.stringify(responseJson)}`)
-      })
-      .catch((error) => {
-        console.error('Error : ' + error);
-      });
+
+    const value = { country_code, mobile_no, code, access_credential: 'api' }
+    const responseJson = await apiPostCall(`api/verifyPhoneData`, value, getState().apiReducer, true)
+
+    const { status } = await responseJson
+    await dispatch({ type: 'VERIFY_OTP', payload: { phoneVerified: status, proceedOTP: true, status } })
+    await console.log(`verifyPhone  ${JSON.stringify(responseJson)}`)
+
+
   }
 }
 
@@ -237,30 +191,19 @@ export const companyInfoAPI = () => {
     const access_credential = 'api'
     console.log(`Company Registration : ${JSON.stringify(getState().companyInformationReducer)}`)
     const companyInfo = getState().companyInformationReducer
-
-
     const comp_regdate = companyInfo.reg_date
 
-
     console.log(`company info ialah :${JSON.stringify(companyInfo)}`)
-    fetch(`${apiUrl}api/registerCompany/basic`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      },
-      body: JSON.stringify({ ...companyInfo, comp_regdate, access_credential: 'api' }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
-        const companyRegistrationStatus = await responseJson
-        const { status,code } = await responseJson
-        await dispatch({ type: 'SET_COMPANY_INFO', payload: { companyRegistrationStatus, code, status, proceedSubmit: true } })
-        await console.log(`companyInfo  ${JSON.stringify(responseJson)}`)
-      })
-      .catch((error) => {
-        console.error('Error : ' + error);
-      });
+
+    const value = { ...companyInfo, comp_regdate, access_credential: 'api' }
+    const responseJson = await apiPostCall(`api/registerCompany/basic`, value, getState().apiReducer, true)
+    const companyRegistrationStatus = await responseJson
+    const { status, code } = await responseJson
+    await dispatch({ type: 'SET_COMPANY_INFO', payload: { companyRegistrationStatus, code, status, proceedSubmit: true } })
+    await console.log(`companyInfo  ${JSON.stringify(responseJson)}`)
+
+
+
 
   }
 }
@@ -273,23 +216,14 @@ export const contactPersonAPI = () => {
     console.log(`Company Registration : ${JSON.stringify(getState().companyInformationReducer)}`)
     const { full_name, ic_no, phone, ic_image, position } = getState().companyInformationReducer
     //const comp_regdate=moment(companyInfo.comp_regdate).format("YYYY-MM-DD HH:mm:ss")
-    fetch(`${apiUrl}api/company/addWorker`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token_type + ' ' + access_token
-      },
-      body: JSON.stringify({ full_name, ic_no, phone, ic_image, position, access_credential: 'api' }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
-        const { status } = await responseJson
-        await dispatch({ type: 'SET_COMPANY_INFO', payload: { status, proceedMain: true } })
-        await console.log(`companyInfo  ${JSON.stringify(responseJson)}`)
-      })
-      .catch((error) => {
-        console.error('Error : ' + error);
-      });
+    const value = { full_name, ic_no, phone, ic_image, position, access_credential: 'api' }
+    const responseJson = await apiPostCall(`api/company/addWorker`, value, getState().apiReducer, true)
+    const { status } = await responseJson
+    await dispatch({ type: 'SET_COMPANY_INFO', payload: { status, proceedMain: true } })
+    await console.log(`companyInfo  ${JSON.stringify(responseJson)}`)
+
+
+
 
   }
 }
