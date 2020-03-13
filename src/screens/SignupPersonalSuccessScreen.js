@@ -28,20 +28,8 @@ import * as actionCreator from '../store/actions/action'
 const SignupPersonalSuccessScreen = (props) => {
 
     const dispatch = useDispatch()
-    const { listWorkers } = useSelector(state => state.listWorkersReducer, shallowEqual)
-
-
-
-    const done = async () => {
-        //await this.props.companyInfo()
-        //this.props.contactPerson()
-
-
-        dispatch(actionCreator.doneForNow())
-        props.navigation.navigate('Agreement')
-    }
-
-
+    
+ 
     useEffect(() => {
         dispatch(actionCreator.getPersonalToken())
         dispatch(actionCreator.getPersonalTokenLMS())

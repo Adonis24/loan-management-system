@@ -1,27 +1,19 @@
 //console.ignoredYellowBox = ['Setting a timer']
 import React from 'react';
 import {
-    Image,
- 
+    Image, 
     Text,
     TouchableOpacity,
     TouchableHighlight,
     View,
-   
-
-
 } from 'react-native';
 
 import Constants from 'expo-constants'
-
-
 import Layout from '../constants/Layout'
 import ImageSlider from 'react-native-image-slider';
 import styles from '../styles/styles'
 
-
 const IntroScreen = (props) => {
-
 
     const images = [
         { id: 1, title: 'Welcome to   Tent! Sign up now to join us or login to your account', screenshotUri: require('../assets/images/intro2.png') },
