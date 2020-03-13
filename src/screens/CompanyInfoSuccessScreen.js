@@ -30,12 +30,12 @@ const CompanyInfoSuccessScreen = (props) => {
         //await this.props.companyInfo()
         //this.props.contactPerson()
         dispatch(actionCreator.doneForNow())
-        props.navigation.navigate('Dashboard')
+        props.navigation.navigate('MainTabNav')
     }
 
     const skip = () => {
         dispatch(actionCreator.initiateCompanyInfo())
-        props.navigation.navigate('Dashboard')
+        props.navigation.navigate('MainTabNav')
     }
 
     useEffect(() => {
@@ -56,15 +56,15 @@ const CompanyInfoSuccessScreen = (props) => {
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkturquoise' }]}>Congratulation!</Text>
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 20 }]}>You have entered your company information</Text>
                         </View>
-                        <TouchableOpacity onPress={() => done()} style={{borderRadius:15}}>
+                        <TouchableOpacity onPress={() => done()} style={{ borderRadius: 15 }}>
                             <LinearGradient
                                 colors={['#4c669f', '#3b5998', '#192f6a']}
-                                style={[styles.box,{width: Layout.window.width * 0.4,borderColor:'#4A90E2',borderWidth:1,borderRadius:15 }]}>
+                                style={[styles.box, { width: Layout.window.width * 0.4, borderColor: '#4A90E2', borderWidth: 1, borderRadius: 15 }]}>
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
                             </LinearGradient>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => skip()} style={[styles.box,{ width: Layout.window.width * 0.4,borderWidth: 1, borderColor: '#4A90E2'}]}>
+                        <TouchableOpacity onPress={() => skip()} style={[styles.box, { width: Layout.window.width * 0.4, borderWidth: 1, borderColor: '#4A90E2' }]}>
                             <Text style={[styles.textDefault,]}>Skip</Text>
                         </TouchableOpacity>
                     </View> :

@@ -62,22 +62,9 @@ export const registerLMS = (values) => {
 export const registerOTP = () => {
     return async (dispatch, getState) => {
 
-        const { token_type, access_token, countryCode, phone } = getState().registrationReducer
+        const { countryCode, phone } = getState().registrationReducer
 
-        const errorArray = []
-        const errorColor = []
-
-        if (phone == undefined || phone == '') {
-            errorArray.push({ title: "phone", desc: 'Please enter phone no' })
-            errorColor.push('phone')
-        }
-        if (errorArray.length > 0) {
-            dispatch({ type: 'SET_REGISTER', payload: { error: errorArray, errorColor, proceed: false } })
-        } else {
-            dispatch({ type: 'SET_REGISTER', payload: { proceed: true } })
-            console.log('takde error dalam screen and boleh proceed utk register')
-            await dispatch(registerOTPApi(token_type, access_token, '+6', phone))
-        }
+        await dispatch(registerOTPApi('+6', phone))
     }
 }
 
@@ -315,126 +302,126 @@ export const applyLoan = () => {
 }
 
 export const applyGrant = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         console.log(`kat action : ${JSON.stringify(getState().grantApplicationReducer)}`)
-         dispatch(applyGrantApi())
+        dispatch(applyGrantApi())
     }
 }
 
 export const initiateMyAccount = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         dispatch(getUserInfoApi())
+        dispatch(getUserInfoApi())
     }
 }
 
 export const initiateCompanyInfo = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         dispatch(getCompanyInfoApi())
+        dispatch(getCompanyInfoApi())
     }
 }
 
 export const initiateAssociateDir = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         dispatch(getAssociateApi())
+        dispatch(getAssociateApi())
     }
 }
 
 export const initiatePendingDir = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         dispatch(getPendingApi())
+        dispatch(getPendingApi())
     }
 }
 
 export const initiateListWorkers = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         dispatch(getListWorkersApi())
+        dispatch(getListWorkersApi())
     }
 }
 
 export const doneForNow = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         dispatch(doneForNowApi())
+        dispatch(doneForNowApi())
     }
 }
 
 export const sendNotification = (expo_token, id) => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         dispatch(sendNotificationApi(expo_token, id))
+        dispatch(sendNotificationApi(expo_token, id))
     }
 }
 
 export const initiateBizDir = () => {
-    return  (dispatch, getState) => {
-         dispatch(bizDirApi())
+    return (dispatch, getState) => {
+        dispatch(bizDirApi())
     }
 }
 
 export const initiateListAgency = () => {
-    return  (dispatch, getState) => {
-         dispatch(listAgencyApi())
+    return (dispatch, getState) => {
+        dispatch(listAgencyApi())
     }
 }
 
 export const initiateLoanInfo = (page) => {
-    return  (dispatch, getState) => {
-         dispatch(loanInfoApi(page))
+    return (dispatch, getState) => {
+        dispatch(loanInfoApi(page))
     }
 }
 
 export const initiateGrantInfo = (page) => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         console.log(`grant kat action`)
-         dispatch(grantInfoApi(page))
+        dispatch(grantInfoApi(page))
     }
 }
 
 export const enableNotification = () => {
-    return  (dispatch, getState) => {
-         dispatch(addExpoTokenApi())
+    return (dispatch, getState) => {
+        dispatch(addExpoTokenApi())
     }
 }
 
 export const addExpoToken = () => {
-    return  (dispatch, getState) => {
-         dispatch(addExpoTokenApi())
+    return (dispatch, getState) => {
+        dispatch(addExpoTokenApi())
     }
 }
 
 export const getConnectionStatus = () => {
-    return  (dispatch, getState) => {
-         dispatch(connectionStatusApi())
+    return (dispatch, getState) => {
+        dispatch(connectionStatusApi())
     }
 }
 
 
 export const initiateTraining = () => {
-    return  (dispatch, getState) => {
-         dispatch(getCoursesApi())
+    return (dispatch, getState) => {
+        dispatch(getCoursesApi())
     }
 }
 
 export const editUser = () => {
-    return  (dispatch, getState) => {
-         dispatch(editUserApi())
+    return (dispatch, getState) => {
+        dispatch(editUserApi())
     }
 }
 
 export const requestConnect = (val) => {
-    return  (dispatch, getState) => {
-         dispatch(requestConnectApi(val))
+    return (dispatch, getState) => {
+        dispatch(requestConnectApi(val))
     }
 }
 
 export const accept = (val) => {
-    return  (dispatch, getState) => {
-         dispatch(acceptApi(val))
+    return (dispatch, getState) => {
+        dispatch(acceptApi(val))
     }
 }
 
@@ -688,9 +675,9 @@ export const logout = () => {
 // }
 
 export const resetPin = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
 
-         dispatch(resetPinApi())
+        dispatch(resetPinApi())
     }
 }
 

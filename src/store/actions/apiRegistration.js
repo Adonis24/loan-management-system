@@ -39,7 +39,12 @@ const apiPostCall = async (uri, values, apiAccess, lms = false, isPublicToken = 
   const Authorization = token_type + ' ' + access_token
 
   const headers = { 'Content-Type': 'application/json', Accept, Authorization: !isPublicToken && Authorization }
+
+  console.log(`body ialah : ${JSON.stringify({ ...values, access_credential: !isPublicToken && 'api' })}`)
   let response = await fetch(`${!lms ? apiUrl : lmsApiUrl}${uri}`, { method, headers, body })
+
+
+
   let responseJson = await response.json()
   return responseJson
 
@@ -67,8 +72,12 @@ export const requestTokenLMS = () => {
 export const registerApi = (token_type, access_token, name, email, password, password_confirmation, expo_token) => {
   return async (dispatch, getState) => {
 
+    const reg = getState().registrationReducer
+
+    console.log(` ada api reducer ke kat sini : ${JSON.stringify(getState().registrationReducer)}`)
+
     const value = { name, email, password, password_confirmation, expo_token }
-    const responseJson = await apiPostCall(`api/register`, value, getState().apiReducer)
+    const responseJson = await apiPostCall(`api/register`, value, reg)
     const { status } = await responseJson
     await dispatch({ type: 'SET_REGISTER', payload: { status, proceed: true, indicator: false } })
     await console.log(`register  ${JSON.stringify(responseJson)}`)
@@ -82,8 +91,10 @@ export const registerLMSApi = (token_type, access_token, name, email, password, 
     const first_name = name
     const last_name = name
 
+    const lmsreg = getState().registrationReducer.lms
+
     const value = { first_name, last_name, email, password, password_confirmation }
-    const responseJson = await apiPostCall(`api/register`, value, getState().apiReducer, true)
+    const responseJson = await apiPostCall(`api/register`, value, getState().apiReducer, lmsreg)
 
     const { status } = await responseJson
     //await dispatch({ type: 'SET_REGISTER', payload: { status, proceed: true, indicator: false } })
@@ -97,7 +108,7 @@ export const requestPersonalToken = (screen, username, password) => {
   return async (dispatch, getState) => {
 
     const value = { client_id: '2', client_secret: 'dFX2OFK95Va8PfvyzT6ZnbLJxCXDAfvBCC1fdX4k', grant_type: 'password', username, password }
-    const responseJson = await apiPostCall(`api/register`, value, getState().apiReducer)
+    const responseJson = await apiPostCall(`oauth/token`, value, getState().apiReducer)
 
     console.log(`personal token ialah : ${JSON.stringify(responseJson)}`)
 
@@ -119,6 +130,7 @@ export const requestPersonalToken = (screen, username, password) => {
       } else {
 
         dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false, ...responseJson } })
+        dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
       }
 
     } else {
@@ -147,7 +159,8 @@ export const requestPersonalTokenLMS = (screen, username, password) => {
 
     dispatch({ type: 'SET_REGISTER', payload: { access_token } });
 
-    (screen == 'login' && access_token) ? dispatch({ type: 'SET_LOGIN', payload: { proceed: true, indicator: false } }) : dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false } })
+    (screen == 'login' && access_token) ? dispatch({ type: 'SET_LOGIN', payload: { proceed: true, indicator: false } }) :
+      dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false } })
 
 
 
@@ -155,14 +168,15 @@ export const requestPersonalTokenLMS = (screen, username, password) => {
 }
 
 
-export const registerOTPApi = (token_type, access_token, country_code, mobile_no) => {
+export const registerOTPApi = (country_code, mobile_no) => {
   return async (dispatch, getState) => {
-    console.log(`token and type ialah : ${access_token} dan ${token_type}`)
-    console.log(`phone and country ialah : ${country_code} dan ${mobile_no}`)
+
+
+    console.log(`api reducer kat registerOTPApi : ${JSON.stringify(getState().apiReducer)}`)
 
 
     const value = { country_code, mobile_no }
-    const responseJson = await apiPostCall(`api/requestOPT`, value, getState().apiReducer, true)
+    const responseJson = await apiPostCall(`api/requestOPT`, value, getState().apiReducer)
     const { status } = await responseJson
     await dispatch({ type: 'SET_OTP', payload: { status } })
     await console.log(`requestOPT  ${JSON.stringify(responseJson)}`)
@@ -174,7 +188,7 @@ export const verifyPhoneApi = (token_type, access_token, country_code, mobile_no
   return async (dispatch, getState) => {
 
     const value = { country_code, mobile_no, code, access_credential: 'api' }
-    const responseJson = await apiPostCall(`api/verifyPhoneData`, value, getState().apiReducer, true)
+    const responseJson = await apiPostCall(`api/verifyPhoneData`, value, getState().apiReducer)
 
     const { status } = await responseJson
     await dispatch({ type: 'VERIFY_OTP', payload: { phoneVerified: status, proceedOTP: true, status } })
@@ -196,7 +210,7 @@ export const companyInfoAPI = () => {
     console.log(`company info ialah :${JSON.stringify(companyInfo)}`)
 
     const value = { ...companyInfo, comp_regdate, access_credential: 'api' }
-    const responseJson = await apiPostCall(`api/registerCompany/basic`, value, getState().apiReducer, true)
+    const responseJson = await apiPostCall(`api/registerCompany/basic`, value, getState().apiReducer)
     const companyRegistrationStatus = await responseJson
     const { status, code } = await responseJson
     await dispatch({ type: 'SET_COMPANY_INFO', payload: { companyRegistrationStatus, code, status, proceedSubmit: true } })

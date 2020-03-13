@@ -59,7 +59,7 @@ const SignupPersonalSuccessScreen = (props) => {
                             </LinearGradient>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => props.navigation.navigate('Dashboard')} style={[styles.box,{ width: Layout.window.width * 0.4,borderWidth: 1, borderColor: '#4A90E2' }]}>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('MainTabNav')} style={[styles.box,{ width: Layout.window.width * 0.4,borderWidth: 1, borderColor: '#4A90E2' }]}>
                             <Text style={[styles.textDefault,]}>Skip</Text>
                         </TouchableOpacity>
                     </View>

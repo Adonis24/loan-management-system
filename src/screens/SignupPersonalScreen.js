@@ -2,23 +2,17 @@
 import React, { useEffect, useState } from 'react';
 import {
     Image,
-
     Text,
     TouchableOpacity,
     View,
     TextInput,
-
     KeyboardAvoidingView,
-    
 
 } from 'react-native';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
-
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-
-
 
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
@@ -58,8 +52,9 @@ const validationSchema = Yup.object().shape({
 const SignupPersonalScreen = (props) => {
 
     const dispatch = useDispatch()
-
-    //const { name, email, password, password_confirmation, proceed, error, errorColor, indicator } = useSelector(state => state.registrationReducer, shallowEqual)
+    const publicToken = useSelector(state => state.registrationReducer, shallowEqual)
+    
+    publicToken && console.log(`registration token ialah :${JSON.stringify(publicToken)} `)
 
 
     useEffect(() => {
@@ -159,7 +154,7 @@ const SignupPersonalScreen = (props) => {
                                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
                                             </LinearGradient>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box,{backgroundColor: '#5A647F' }]} >
+                                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box, { backgroundColor: '#5A647F' }]} >
                                             <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
                                         </TouchableOpacity>
                                     </View>
