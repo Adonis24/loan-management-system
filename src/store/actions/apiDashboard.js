@@ -110,7 +110,7 @@ export const handbooksApi = () => {
 }
 
 
-export const einfoApi = () => {
+{/*export const einfoApi = () => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
@@ -135,7 +135,25 @@ export const einfoApi = () => {
         console.log('Error E-info Api : ' + error);
       });
   }
+} */}
+
+export const einfoApi = () => {
+  return async (dispatch, getState) => {
+
+
+    const responseJson = await apiPostCall(`api/einfos/view`, null, getState().apiReducer)
+   
+    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const einfosArray = await responseJson.data
+    await console.log(`EINFO API  ${JSON.stringify(einfosArray)}`)
+
+    await dispatch({ type: 'SET_EINFO', payload: { einfosArray } })
+
+
+    
+  }
 }
+
 
 export const bizDirApi = () => {
   return async (dispatch, getState) => {
@@ -229,7 +247,7 @@ export const grantInfoApi = (page) => {
   }
 }
 
-export const addExpoTokenApi = () => {
+{/*export const addExpoTokenApi = () => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
@@ -256,9 +274,30 @@ export const addExpoTokenApi = () => {
         console.log('Error expo token Api : ' + error);
       });
   }
+} */}
+
+
+export const addExpoTokenApi = () => {
+  return async (dispatch, getState) => {
+
+    
+    const { expo_token } = getState().registrationReducer
+
+    console.log(`expo registrationReducer ${expo_token}`)
+    const responseJson = await apiPostCall(`api/user/expo_token`, null, getState().apiReducer)
+   
+    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const agencyArray = await responseJson.data
+    await console.log(`expo token API  ${JSON.stringify(agencyArray)}`)
+
+    //await dispatch({ type: 'SET_AGENCY_LIST', payload: { agencyArray } })
+
+
+    
+  }
 }
 
-export const requestConnectApi = (connect_id) => {
+{ /*export const requestConnectApi = (connect_id) => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
@@ -286,9 +325,28 @@ export const requestConnectApi = (connect_id) => {
         console.log('Error expo token Api : ' + error);
       });
   }
+} */}
+
+export const requestConnectApi = (connect_id) => {
+  return async (dispatch, getState) => {
+
+    console.log(`connect id ialah : ${connect_id}`)
+    const responseJson = await apiPostCall(`api/business_directory/request_connection`, null,connect_id, getState().apiReducer)
+   
+    console.log(`inilah request connect : ${JSON.stringify(responseJson)}`)
+    //const agencyArray = await responseJson.data
+   //await console.log(`expo token API  ${JSON.stringify(agencyArray)}`)
+
+  //await dispatch({ type: 'SET_AGENCY_LIST', payload: { agencyArray } })
+
+
+    
+  }
 }
 
-export const acceptApi = (connect_id) => {
+
+
+{/*export const acceptApi = (connect_id) => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
@@ -316,11 +374,29 @@ export const acceptApi = (connect_id) => {
         console.log('Error expo token Api : ' + error);
       });
   }
+}*/ } 
+
+
+export const acceptApi = (connect_id) => {
+  return async (dispatch, getState) => {
+
+    console.log(`connect id ialah : ${connect_id}`)
+    const responseJson = await apiPostCall(`api/business_directory/acceptConnection`, null,connect_id, getState().apiReducer)
+   
+    console.log(`inilah request connect : ${JSON.stringify(responseJson)}`)
+    //const agencyArray = await responseJson.data
+   //await console.log(`expo token API  ${JSON.stringify(agencyArray)}`)
+
+  //await dispatch({ type: 'SET_AGENCY_LIST', payload: { agencyArray } })
+
+
+    
+  }
 }
 
 
 
-export const connectionStatusApi = () => {
+{/*export const connectionStatusApi = () => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
@@ -347,12 +423,27 @@ export const connectionStatusApi = () => {
         console.log('Error expo token Api : ' + error);
       });
   }
+} */}
+
+
+export const connectionStatusApi = () => {
+  return async (dispatch, getState) => {
+    
+    const responseJson = await apiPostCall(`api/business_directory/analyticBusinessDirectory`, null, getState().apiReducer)
+   
+    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const connectionStatus = await responseJson.data
+    await console.log(`connectionstatus API  ${JSON.stringify(connectionStatus)}`)
+
+    await dispatch({ type: 'SET_USER_PROFILE', payload: { ...connectionStatus } })
+
+
+    
+  }
 }
 
 
-
-
-export const applyLoanApi = () => {
+{/*export const applyLoanApi = () => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
@@ -378,10 +469,27 @@ export const applyLoanApi = () => {
         console.log('Error Loan Application : ' + error);
       });
   }
+} */}
+
+export const applyLoanApi = () => {
+  return async (dispatch, getState) => {
+
+    const { proposal, income_tax, loan_amount, estimate_time, payment_method } = getState().loanApplicationReducer
+
+    const responseJson = await apiPostCall(`api/loan/addInformation`, null,proposal, income_tax, loan_amount, estimate_time, payment_method , getState().apiReducer)
+
+    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const einfosArray = await responseJson.data
+    await console.log(`Loan Application  ${JSON.stringify(einfosArray)}`)
+
+    
+
+  }
 }
 
 
-export const applyGrantApi = () => {
+
+{/*export const applyGrantApi = () => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
@@ -408,10 +516,27 @@ export const applyGrantApi = () => {
         console.log('Error Loan Application : ' + error);
       });
   }
+} */}
+
+export const applyGrantApi = () => {
+  return async (dispatch, getState) => {
+
+    const { proposal, income_tax, agency_id } = getState().grantApplicationReducer
+
+    console.log(`inilah apply grant : ${JSON.stringify(getState().grantApplicationReducer)}`)
+    const responseJson = await apiPostCall(`api/grant/addGrantInformation`, null,proposal, income_tax, agency_id , getState().apiReducer)
+
+    console.log(`inilah grant: ${JSON.stringify(responseJson)}`)
+    const einfosArray = await responseJson.data
+    await console.log(`Loan Application  ${JSON.stringify(einfosArray)}`)
+
+    
+
+  }
 }
 
 
-export const uploadDocApi = (blob) => {
+{/*export const uploadDocApi = (blob) => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
@@ -441,10 +566,30 @@ export const uploadDocApi = (blob) => {
         console.log('Error Upload : ' + error);
       });
   }
+} */}
+
+export const uploadDocApi = (blob) => {
+  return async (dispatch, getState) => {
+
+    const { proposal, income_tax, loan_amount, estimate_time, payment_method } = getState().loanApplicationReducer
+    const document = blob
+    const document_name = 'testing'
+
+    console.log(`inilah apply grant : ${JSON.stringify(getState().grantApplicationReducer)}`)
+    const responseJson = await apiPostCall(`api/grant/addGrantInformation`, null,document, document_name , getState().apiReducer)
+
+    console.log(`inilah grant: ${JSON.stringify(responseJson)}`)
+    const einfosArray = await responseJson.data
+    await console.log(`Loan Application  ${JSON.stringify(einfosArray)}`)
+
+    
+
+  }
 }
 
 
-export const getUserInfoApi = () => {
+
+{/*export const getUserInfoApi = () => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
@@ -469,9 +614,25 @@ export const getUserInfoApi = () => {
         console.log('Error Event Api : ' + error);
       });
   }
+} */}
+
+export const getUserInfoApi = () => {
+  return async (dispatch, getState) => {
+
+    const responseJson = await apiPostCall(`api/user/information`, null, getState().apiReducer)
+   
+    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const userProfile = await responseJson.data
+    await console.log(`USER  ${JSON.stringify(userProfile)}`)
+
+    await dispatch({ type: 'SET_USER_PROFILE', payload: { ...userProfile } })
+
+
+    
+  }
 }
 
-export const editUserApi = () => {
+{/*export const editUserApi = () => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
@@ -498,6 +659,24 @@ export const editUserApi = () => {
         console.log('Error Event Api : ' + error);
       });
   }
+} */}
+
+export const editUserApi = () => {
+  return async (dispatch, getState) => {
+
+    const { name, full_name, profile_pic } = getState().myAccountReducer
+
+    const responseJson = await apiPostCall(`api/user/edit`, null, name, full_name, profile_pic, getState().apiReducer)
+   
+    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const userProfile = await responseJson.data
+    await console.log(`USER  ${JSON.stringify(userProfile)}`)
+
+    //await dispatch({ type: 'SET_USER_PROFILE', payload: { ...userProfile } })
+
+
+    
+  }
 }
 
 export const generateJWTApi = () => {
@@ -515,6 +694,8 @@ export const generateJWTApi = () => {
 }
 
 
+
+
 export const getCompanyInfoApi = () => {
   return async (dispatch, getState) => {
 
@@ -530,7 +711,7 @@ export const getCompanyInfoApi = () => {
 
 
 
-export const getListWorkersApi = () => {
+{/*export const getListWorkersApi = () => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
@@ -554,7 +735,27 @@ export const getListWorkersApi = () => {
         console.log('Error WORKER Api : ' + error);
       });
   }
+} */}
+
+export const getListWorkersApi = () => {
+  return async (dispatch, getState) => {
+
+    const responseJson = await apiPostCall(`api/company/listWorkers`, null, getState().apiReducer)
+   
+    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const listWorkers = await responseJson.data
+   // await console.log(`Company Info  ${JSON.stringify(eventArray)}`)
+
+   await dispatch({ type: 'GET_LIST_WORKERS', payload: { listWorkers } })
+
+
+    
+  }
 }
+
+
+
+
 
 export const sendNotificationApi = (expo_token, id) => {
   return async (dispatch, getState) => {
@@ -579,7 +780,7 @@ export const sendNotificationApi = (expo_token, id) => {
 
 
 
-export const doneForNowApi = () => {
+{/* export const doneForNowApi = () => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
@@ -602,7 +803,24 @@ export const doneForNowApi = () => {
         console.log('Error WORKER Api : ' + error);
       });
   }
+} */}
+
+export const doneForNowApi = () => {
+  return async (dispatch, getState) => {
+
+    const responseJson = await apiPostCall(`api/registerCompany/additional`, null, getState().apiReducer)
+   
+    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const done = await responseJson.data
+    await console.log(`Company Info  ${JSON.stringify(done)}`)
+
+   //await dispatch({ type: 'GET_LIST_WORKERS', payload: { ...listWorkers } })
+
+
+    
+  }
 }
+
 
 
 
@@ -690,7 +908,7 @@ export const analyticSummary = () => {
   }
 }
 
-export const analytic = () => {
+{/*export const analytic = () => {
   return async (dispatch, getState) => {
     const type = 'Deposit'
     const credit_debit = 'Credit'
@@ -718,6 +936,22 @@ export const analytic = () => {
         console.log('Error analytic : ' + error);
       });
   }
+} */}
+
+export const analytic = () => {
+  return async (dispatch, getState) => {
+
+    const type = 'Deposit'
+    const credit_debit = 'Credit'
+
+    const responseJson = await apiPostCall(`api/Analytic`, null,type, credit_debit, getState().apiReducer)
+   
+    await console.log(`analytic  info  ${JSON.stringify(responseJson)}`)
+    dispatch({ type: 'SET_ANALYTIC', payload: { analyticSummary: responseJson.data } })
+
+
+    
+  }
 }
 
 export const notificationApi = () => {
@@ -733,7 +967,7 @@ export const notificationApi = () => {
 }
 
 
-export const depositApi = () => {
+{/*export const depositApi = () => {
   return async (dispatch, getState) => {
 
     const { amount, bank, d1, d2, d3, d4 } = getState().depositScreenReducer
@@ -776,7 +1010,35 @@ export const depositApi = () => {
         console.log('Error deposit : ' + error);
       });
   }
+} */}
+
+export const depositApi = () => {
+  return async (dispatch, getState) => {
+
+    const { amount, bank, d1, d2, d3, d4 } = getState().depositScreenReducer
+    const type = 'Deposit'
+    const tag = ''
+    const channel = 'Deposit Channel'
+    const pin = '' + d1 + d2 + d3 + d4
+    const remarks = 'Deposit from ' + bank
+
+    console.log(`amount ialah ${amount}`)
+
+    const responseJson = await apiPostCall(`api/Deposit`, null, amount, tag, channel, pin, access_credential, remarks , getState().apiReducer)
+   
+        const { status } = await responseJson
+        await console.log(`deposit ${JSON.stringify(responseJson)}`)
+        await dispatch({ type: 'SET_DEPOSIT', payload: { status } })
+
+
+   
+
+
+    
+  }
 }
+
+
 
 export const userList = () => {
   return async (dispatch, getState) => {
@@ -800,7 +1062,7 @@ export const userList = () => {
 }
 
 
-export const sendMoney = () => {
+{/*export const sendMoney = () => {
   return async (dispatch, getState) => {
 
     const { amount, phone_no, recipientRemark, d1, d2, d3, d4, expoToken } = getState().transferOutScreenReducer
@@ -835,10 +1097,34 @@ export const sendMoney = () => {
         console.log('Error send money : ' + error);
       });
   }
+} */}
+
+export const sendMoney = () => {
+  return async (dispatch, getState) => {
+
+    const { amount, phone_no, recipientRemark, d1, d2, d3, d4, expoToken } = getState().transferOutScreenReducer
+    const pin = '' + d1 + d2 + d3 + d4
+    const phone = phone_no
+    const access_credential = 'api'
+    const remarks = recipientRemark
+
+    console.log(`expo token ialah ${amount}`)
+
+    const responseJson = await apiPostCall(`api/SendMoney`, null, phone, amount, pin, access_credential, remarks, getState().apiReducer)
+   
+    const { status } = await responseJson
+    status ? await dispatch(pushNotification(expoToken)) : null
+    await console.log(`send money : ${JSON.stringify(responseJson)}`)
+
+
+    
+
+
+    
+  }
 }
 
-
-export const withdrawApi = () => {
+{/*export const withdrawApi = () => {
   return async (dispatch, getState) => {
 
     const { amount, bank, d1, d2, d3, d4 } = getState().withdrawScreenReducer
@@ -882,10 +1168,36 @@ export const withdrawApi = () => {
         console.log('Error withdraw : ' + error);
       });
   }
+} */}
+
+export const withdrawApi = () => {
+  return async (dispatch, getState) => {
+
+    const { amount, bank, d1, d2, d3, d4 } = getState().withdrawScreenReducer
+    const tag = ''
+    const channel = 'Withdraw Channel'
+    const pin = '' + d1 + d2 + d3 + d4
+    const withdraw_currency = 'MYR'
+    const access_credential = 'api'
+    const remarks = 'Withdraw from ' + bank
+
+    console.log(`amount ialah ${amount}`)
+
+    const responseJson = await apiPostCall(`api/Withdraw`, null, amount, channel, withdraw_currency, tag, access_credential, pin, remarks, getState().apiReducer)
+   
+    const { status } = await responseJson
+    await console.log(`withdraw ${JSON.stringify(responseJson)}`)
+    await dispatch({ type: 'SET_WITHDRAW', payload: { status } })
+
+    
+
+
+    
+  }
 }
 
 
-export const requestMoney = () => {
+{/*export const requestMoney = () => {
   return async (dispatch, getState) => {
 
     const { amount, phone_no } = getState().requestScreenReducer
@@ -925,9 +1237,29 @@ export const requestMoney = () => {
         console.log('Error request money : ' + error);
       });
   }
+} */}
+
+export const requestMoney = () => {
+  return async (dispatch, getState) => {
+
+    const { amount, phone_no } = getState().requestScreenReducer
+
+    // const pin='1111'
+    const payer_phone = phone_no
+    //const payer='59707060'
+    const remark = 'NA'
+
+
+    console.log(`amount ialah ${amount}`)
+    const responseJson = await apiPostCall(`api/RequestMoney`, null, amount, payer_phone, access_credential, remark, getState().apiReducer)
+   
+    const { status } = await responseJson
+        await console.log(`request money : ${JSON.stringify(responseJson)}`)
+    
+  }
 }
 
-export const payRequestMoney = () => {
+{/*export const payRequestMoney = () => {
   return async (dispatch, getState) => {
 
     const { amount } = getState().requestScreenReducer
@@ -968,10 +1300,30 @@ export const payRequestMoney = () => {
         console.log('Error request money : ' + error);
       });
   }
+} */}
+
+export const payRequestMoney = () => {
+  return async (dispatch, getState) => {
+
+    const { amount } = getState().requestScreenReducer
+
+    const pin = '1111'
+    const references = '004458557598369'
+
+    const payer = '59707060'
+    // const personalToken=JSON.parse(AsyncStorage.getItem('personalToken'))
+
+    console.log(`amount ialah ${amount}`)
+    const responseJson = await apiPostCall(`api/RequestMoney`, null, references, payer , getState().apiReducer)
+   
+    const { status } = await responseJson
+    await console.log(`pay request money : ${JSON.stringify(responseJson)}`)
+
+  }
 }
 
 
-export const resetPinApi = () => {
+{/*export const resetPinApi = () => {
   return async (dispatch, getState) => {
 
     const { d1, d2, d3, d4, n1, n2, n3, n4 } = await getState().resetPinReducer
@@ -1003,9 +1355,25 @@ export const resetPinApi = () => {
         console.log('reset pin error : ' + error);
       });
   }
+} */}
+
+export const resetPinApi = () => {
+  return async (dispatch, getState) => {
+
+    const { d1, d2, d3, d4, n1, n2, n3, n4 } = await getState().resetPinReducer
+    const old_pin = '' + d1 + d2 + d3 + d4
+    const new_pin = '' + n1 + n2 + n3 + n4
+    // const personalToken=JSON.parse(AsyncStorage.getItem('personalToken'))
+
+    const responseJson = await apiPostCall(`api/resetPin`, null,old_pin, new_pin, getState().apiReducer)
+   
+    await console.log(`reset pin ${JSON.stringify(responseJson)}`)
+    //dispatch({ type: 'SET_DASHBOARD', payload: { analyticSummary:responseJson.data } })      
+
+  }
 }
 
-export const editMobileDetail = () => {
+{/*export const editMobileDetail = () => {
   return async (dispatch, getState) => {
     const { phone_country_code, phone_no } = getState().kycReducer
     const mobile_no = phone_no
@@ -1036,9 +1404,25 @@ export const editMobileDetail = () => {
         console.error('Error : ' + error);
       });
   }
+} */}
+
+export const editMobileDetail = () => {
+  return async (dispatch, getState) => {
+
+    const { phone_country_code, phone_no } = getState().kycReducer
+    const mobile_no = phone_no
+    const country_code = phone_country_code.replace('0', '')
+    // const personalToken=JSON.parse(AsyncStorage.getItem('personalToken'))
+
+    const responseJson = await apiPostCall(`api/EditMobileDetail`, null,country_code, mobile_no , getState().apiReducer)
+   
+    const { token_type, access_token } = await responseJson
+    await console.log(`sms is ${JSON.stringify(responseJson)}`)  
+
+  }
 }
 
-export const editMobileDetailVerify = (d) => {
+{/*export const editMobileDetailVerify = (d) => {
   return async (dispatch, getState) => {
     const { phone_country_code, phone_no } = getState().kycReducer
     const mobile_no = phone_no
@@ -1079,8 +1463,33 @@ export const editMobileDetailVerify = (d) => {
         console.error('Error : ' + error);
       });
   }
-}
+} */}
+ 
+export const editMobileDetailVerify = (d) => {
+  return async (dispatch, getState) => {
 
+    const { phone_country_code, phone_no } = getState().kycReducer
+    const mobile_no = phone_no
+    const country_code = phone_country_code.replace('0', '')
+    const code = d
+
+    const responseJson = await apiPostCall(`api/KycMobileVerify`, null,country_code, mobile_no, code, getState().apiReducer)
+   
+    const { status } = await responseJson
+        await console.log(`verification status ${JSON.stringify(status)}`)
+
+        if (status) {
+          await dispatch({ type: 'SET_INDICATOR_PHONE_VERIFICATION', payload: { displayIndicator: false, proceed: true, actionList: false } })
+        } else {
+          await dispatch({ type: 'SET_INDICATOR_PHONE_VERIFICATION', payload: { displayIndicator: false, proceed: false, actionList: true } })
+        }
+
+        //dispatch({ type: 'SET_INDICATOR_PHONE_VERIFICATION', payload: { displayIndicator: false, proceed: true,actionList:false } })
+
+
+
+  }
+}
 
 
 /////////////////////////////
@@ -1137,7 +1546,7 @@ export const pushNotification = (expoToken) => {
   }
 }
 
-export const editPersonalDetail = () => {
+{/*export const editPersonalDetail = () => {
   return async (dispatch, getState) => {
     const personalToken = await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
@@ -1193,6 +1602,48 @@ export const editPersonalDetail = () => {
       .catch((error) => {
         console.error('Error : ' + error);
       });
+
+  }
+} */}
+
+export const editPersonalDetail = () => {
+  return async (dispatch, getState) => {
+
+    const expoToken = await Notifications.getExpoPushTokenAsync();
+    const dashboard = getState().dashboardScreenReducer.userInfo
+    //const password = getState().editInfoScreenReducer.password
+
+    const test = {
+      first_name: dashboard.name,
+      last_name: expoToken,
+      name: dashboard.name,
+      email: dashboard.email,
+      password: getState().editInfoScreenReducer.password,
+      gender: dashboard.gender,
+      birth_date: moment(dashboard.birth_date).format("YYYY-MM-DD"),
+      nationality: dashboard.nationality,
+      occupation: dashboard.occupation,
+      industry: dashboard.industry,
+      street_address: dashboard.street_address,
+      street_address_2: dashboard.street_address_2,
+      country: dashboard.country,
+      region: 'Asia',
+      city: dashboard.city,
+      postcode: dashboard.postcode,
+      national_id_passport: dashboard.national_id_passport
+    }
+
+
+
+
+    console.log(`dashboard ialah ${JSON.stringify(dashboard)}`)
+    console.log(`expo token ialah ${JSON.stringify(expoToken)}`)
+
+    const responseJson = await apiPostCall(`api/EditPersonalDetail`, null,test, getState().apiReducer)
+   
+    const { status } = await responseJson
+    await console.log(`edit info  ${JSON.stringify(responseJson)}`)
+
 
   }
 }
