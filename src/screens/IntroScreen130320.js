@@ -68,6 +68,7 @@ class IntroScreen extends React.Component {
                 </View>
                 <View style={{ flex: 10, alignSelf: 'stretch', justifyContent: 'center' }}>
                     <Slideshow
+                    containerStyle={{backgroundColor: 'transparent'}}
                         height={400}
                         dataSource={this.state.dataSource}
                         position={this.state.position}
