@@ -28,20 +28,8 @@ import * as actionCreator from '../store/actions/action'
 const SignupPersonalSuccessScreen = (props) => {
 
     const dispatch = useDispatch()
-    const { listWorkers } = useSelector(state => state.listWorkersReducer, shallowEqual)
-
-
-
-    const done = async () => {
-        //await this.props.companyInfo()
-        //this.props.contactPerson()
-
-
-        dispatch(actionCreator.doneForNow())
-        props.navigation.navigate('Agreement')
-    }
-
-
+    
+ 
     useEffect(() => {
         dispatch(actionCreator.getPersonalToken())
         dispatch(actionCreator.getPersonalTokenLMS())
@@ -71,7 +59,7 @@ const SignupPersonalSuccessScreen = (props) => {
                             </LinearGradient>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => props.navigation.navigate('Dashboard')} style={[styles.box,{ width: Layout.window.width * 0.4,borderWidth: 1, borderColor: '#4A90E2' }]}>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('MainTabNav')} style={[styles.box,{ width: Layout.window.width * 0.4,borderWidth: 1, borderColor: '#4A90E2' }]}>
                             <Text style={[styles.textDefault,]}>Skip</Text>
                         </TouchableOpacity>
                     </View>

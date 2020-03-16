@@ -62,22 +62,9 @@ export const registerLMS = (values) => {
 export const registerOTP = () => {
     return async (dispatch, getState) => {
 
-        const { token_type, access_token, countryCode, phone } = getState().registrationReducer
+        const { countryCode, phone } = getState().registrationReducer
 
-        const errorArray = []
-        const errorColor = []
-
-        if (phone == undefined || phone == '') {
-            errorArray.push({ title: "phone", desc: 'Please enter phone no' })
-            errorColor.push('phone')
-        }
-        if (errorArray.length > 0) {
-            dispatch({ type: 'SET_REGISTER', payload: { error: errorArray, errorColor, proceed: false } })
-        } else {
-            dispatch({ type: 'SET_REGISTER', payload: { proceed: true } })
-            console.log('takde error dalam screen and boleh proceed utk register')
-            await dispatch(registerOTPApi(token_type, access_token, '+6', phone))
-        }
+        await dispatch(registerOTPApi('+6', phone))
     }
 }
 
@@ -315,126 +302,126 @@ export const applyLoan = () => {
 }
 
 export const applyGrant = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         console.log(`kat action : ${JSON.stringify(getState().grantApplicationReducer)}`)
-         dispatch(applyGrantApi())
+        dispatch(applyGrantApi())
     }
 }
 
 export const initiateMyAccount = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         dispatch(getUserInfoApi())
+        dispatch(getUserInfoApi())
     }
 }
 
 export const initiateCompanyInfo = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         dispatch(getCompanyInfoApi())
+        dispatch(getCompanyInfoApi())
     }
 }
 
 export const initiateAssociateDir = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         dispatch(getAssociateApi())
+        dispatch(getAssociateApi())
     }
 }
 
 export const initiatePendingDir = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         dispatch(getPendingApi())
+        dispatch(getPendingApi())
     }
 }
 
 export const initiateListWorkers = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         dispatch(getListWorkersApi())
+        dispatch(getListWorkersApi())
     }
 }
 
 export const doneForNow = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         dispatch(doneForNowApi())
+        dispatch(doneForNowApi())
     }
 }
 
 export const sendNotification = (expo_token, id) => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         // console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
-         dispatch(sendNotificationApi(expo_token, id))
+        dispatch(sendNotificationApi(expo_token, id))
     }
 }
 
 export const initiateBizDir = () => {
-    return  (dispatch, getState) => {
-         dispatch(bizDirApi())
+    return (dispatch, getState) => {
+        dispatch(bizDirApi())
     }
 }
 
 export const initiateListAgency = () => {
-    return  (dispatch, getState) => {
-         dispatch(listAgencyApi())
+    return (dispatch, getState) => {
+        dispatch(listAgencyApi())
     }
 }
 
 export const initiateLoanInfo = (page) => {
-    return  (dispatch, getState) => {
-         dispatch(loanInfoApi(page))
+    return (dispatch, getState) => {
+        dispatch(loanInfoApi(page))
     }
 }
 
 export const initiateGrantInfo = (page) => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
         console.log(`grant kat action`)
-         dispatch(grantInfoApi(page))
+        dispatch(grantInfoApi(page))
     }
 }
 
 export const enableNotification = () => {
-    return  (dispatch, getState) => {
-         dispatch(addExpoTokenApi())
+    return (dispatch, getState) => {
+        dispatch(addExpoTokenApi())
     }
 }
 
 export const addExpoToken = () => {
-    return  (dispatch, getState) => {
-         dispatch(addExpoTokenApi())
+    return (dispatch, getState) => {
+        dispatch(addExpoTokenApi())
     }
 }
 
 export const getConnectionStatus = () => {
-    return  (dispatch, getState) => {
-         dispatch(connectionStatusApi())
+    return (dispatch, getState) => {
+        dispatch(connectionStatusApi())
     }
 }
 
 
 export const initiateTraining = () => {
-    return  (dispatch, getState) => {
-         dispatch(getCoursesApi())
+    return (dispatch, getState) => {
+        dispatch(getCoursesApi())
     }
 }
 
 export const editUser = () => {
-    return  (dispatch, getState) => {
-         dispatch(editUserApi())
+    return (dispatch, getState) => {
+        dispatch(editUserApi())
     }
 }
 
 export const requestConnect = (val) => {
-    return  (dispatch, getState) => {
-         dispatch(requestConnectApi(val))
+    return (dispatch, getState) => {
+        dispatch(requestConnectApi(val))
     }
 }
 
 export const accept = (val) => {
-    return  (dispatch, getState) => {
-         dispatch(acceptApi(val))
+    return (dispatch, getState) => {
+        dispatch(acceptApi(val))
     }
 }
 
@@ -444,176 +431,176 @@ export const accept = (val) => {
 
 
 
-export const getSMS = () => {
-    return async (dispatch, getState) => {
-        await dispatch(kycMobile())
-    }
-}
+// export const getSMS = () => {
+//     return async (dispatch, getState) => {
+//         await dispatch(kycMobile())
+//     }
+// }
 
-export const getSMSEdit = () => {
-    return async (dispatch, getState) => {
-        await dispatch(editMobileDetail())
-    }
-}
+// export const getSMSEdit = () => {
+//     return async (dispatch, getState) => {
+//         await dispatch(editMobileDetail())
+//     }
+// }
 
 ///////=================================================================================
 
-export const deleteStatus = () => {
-    return async (dispatch, getState) => {
-        await dispatch({ type: 'SET_PERSONAL_INFO', payload: { status: 'none' } })
-        await AsyncStorage.removeItem('status')
-        //await AsyncStorage.removeItem('personalToken')
-        await SecureStore.deleteItemAsync('personalToken')
-    }
-}
+// export const deleteStatus = () => {
+//     return async (dispatch, getState) => {
+//         await dispatch({ type: 'SET_PERSONAL_INFO', payload: { status: 'none' } })
+//         await AsyncStorage.removeItem('status')
+//         //await AsyncStorage.removeItem('personalToken')
+//         await SecureStore.deleteItemAsync('personalToken')
+//     }
+// }
 
-export const setKyc = (val, screen) => {
-    switch (screen) {
-        case 'RegistrationCountryScreen':
-            return (dispatch, getState) => {
-                dispatch({ type: 'SET_INDICATOR_KYC_1', payload: { displayIndicator: true } })
+// export const setKyc = (val, screen) => {
+//     switch (screen) {
+//         case 'RegistrationCountryScreen':
+//             return (dispatch, getState) => {
+//                 dispatch({ type: 'SET_INDICATOR_KYC_1', payload: { displayIndicator: true } })
 
-                const { phone_no } = getState().kyc1ScreenReducer
-                const errorArray = []
-                const errorColor = []
+//                 const { phone_no } = getState().kyc1ScreenReducer
+//                 const errorArray = []
+//                 const errorColor = []
 
-                if (phone_no == undefined || phone_no == '') {
-                    errorArray.push({ title: "phone_no", desc: "Enter phone no" })
-                    errorColor.push("phone_no")
-                } else if (phone_no.length < 10) {
-                    errorArray.push({ title: "phone_no", desc: "Ensure the correct number is entered" })
-                    errorColor.push("phone_no")
-                }
-                if (errorArray.length > 0) {
-                    dispatch({ type: 'SET_INDICATOR_KYC_1', payload: { displayIndicator: false, proceed: false } })
-                    dispatch({ type: 'SET_KYC_1', payload: { error: errorArray, errorColor } })
-                } else {
-                    dispatch({ type: 'SET_INDICATOR_KYC_1', payload: { displayIndicator: false, proceed: true } })
-                    dispatch({ type: 'SET_KYC', payload: { ...val } })
-                }
-            }
+//                 if (phone_no == undefined || phone_no == '') {
+//                     errorArray.push({ title: "phone_no", desc: "Enter phone no" })
+//                     errorColor.push("phone_no")
+//                 } else if (phone_no.length < 10) {
+//                     errorArray.push({ title: "phone_no", desc: "Ensure the correct number is entered" })
+//                     errorColor.push("phone_no")
+//                 }
+//                 if (errorArray.length > 0) {
+//                     dispatch({ type: 'SET_INDICATOR_KYC_1', payload: { displayIndicator: false, proceed: false } })
+//                     dispatch({ type: 'SET_KYC_1', payload: { error: errorArray, errorColor } })
+//                 } else {
+//                     dispatch({ type: 'SET_INDICATOR_KYC_1', payload: { displayIndicator: false, proceed: true } })
+//                     dispatch({ type: 'SET_KYC', payload: { ...val } })
+//                 }
+//             }
 
-            break;
+//             break;
 
-        case 'TermsScreen':
-            return (dispatch, getState) => {
-                dispatch({ type: 'SET_KYC', payload: { termAgree: val } })
-            }
-            break;
+//         case 'TermsScreen':
+//             return (dispatch, getState) => {
+//                 dispatch({ type: 'SET_KYC', payload: { termAgree: val } })
+//             }
+//             break;
 
-        case 'PdpaScreen':
-            return (dispatch, getState) => {
-                dispatch({ type: 'SET_KYC', payload: { pdpaAgree: val } })
-            }
-            break;
+//         case 'PdpaScreen':
+//             return (dispatch, getState) => {
+//                 dispatch({ type: 'SET_KYC', payload: { pdpaAgree: val } })
+//             }
+//             break;
 
-        case 'PersonalInformationGetScreen':
-            return (dispatch, getState) => {
-                dispatch({ type: 'SET_INDICATOR_KYC_2', payload: { displayIndicator: true } })
+//         case 'PersonalInformationGetScreen':
+//             return (dispatch, getState) => {
+//                 dispatch({ type: 'SET_INDICATOR_KYC_2', payload: { displayIndicator: true } })
 
-                const { fullName, preferredName, email, password, birth_date, gender, nationality, occupation, industry } = getState().kyc2ScreenReducer
-                const errorArray = []
-                const errorColor = []
+//                 const { fullName, preferredName, email, password, birth_date, gender, nationality, occupation, industry } = getState().kyc2ScreenReducer
+//                 const errorArray = []
+//                 const errorColor = []
 
-                if (fullName == undefined || fullName == '') {
-                    errorArray.push({ title: "fullName", desc: "Enter full name" })
-                    errorColor.push("fullName")
-                }
-                if (preferredName == undefined || preferredName == '') {
-                    errorArray.push({ title: "preferredName", desc: "Enter nickname" })
-                    errorColor.push("preferredName")
-                }
-                if (email == undefined || email == '') {
-                    errorArray.push({ title: "email", desc: "Enter email" })
-                    errorColor.push("email")
-                }
-                if (password == undefined || password == '') {
-                    errorArray.push({ title: "password", desc: "Enter password" })
-                    errorColor.push("password")
-                }
-                if (birth_date == undefined || birth_date == '') {
-                    errorArray.push({ title: "birth_date", desc: "Enter date of birth" })
-                    errorColor.push("birth_date")
-                }
-                if (gender == undefined || gender == '') {
-                    errorArray.push({ title: "gender", desc: "Enter gender" })
-                    errorColor.push("gender")
-                }
-                if (nationality == undefined || nationality == '') {
-                    errorArray.push({ title: "nationality", desc: "Enter nationality" })
-                    errorColor.push("nationality")
-                }
-                if (occupation == undefined || occupation == '') {
-                    errorArray.push({ title: "occupation", desc: "Enter occupation" })
-                    errorColor.push("occupation")
-                }
-                if (industry == undefined || industry == '') {
-                    errorArray.push({ title: "industry", desc: "Enter industry" })
-                    errorColor.push("industry")
-                }
-                if (errorArray.length > 0) {
-                    dispatch({ type: 'SET_INDICATOR_KYC_2', payload: { displayIndicator: false, proceed: false } })
-                    dispatch({ type: 'SET_KYC_2', payload: { error: errorArray, errorColor } })
-                } else {
-                    dispatch({ type: 'SET_INDICATOR_KYC_2', payload: { displayIndicator: false, proceed: true } })
-                    dispatch({ type: 'SET_KYC', payload: { ...val } })
-                }
-            }
-            break;
+//                 if (fullName == undefined || fullName == '') {
+//                     errorArray.push({ title: "fullName", desc: "Enter full name" })
+//                     errorColor.push("fullName")
+//                 }
+//                 if (preferredName == undefined || preferredName == '') {
+//                     errorArray.push({ title: "preferredName", desc: "Enter nickname" })
+//                     errorColor.push("preferredName")
+//                 }
+//                 if (email == undefined || email == '') {
+//                     errorArray.push({ title: "email", desc: "Enter email" })
+//                     errorColor.push("email")
+//                 }
+//                 if (password == undefined || password == '') {
+//                     errorArray.push({ title: "password", desc: "Enter password" })
+//                     errorColor.push("password")
+//                 }
+//                 if (birth_date == undefined || birth_date == '') {
+//                     errorArray.push({ title: "birth_date", desc: "Enter date of birth" })
+//                     errorColor.push("birth_date")
+//                 }
+//                 if (gender == undefined || gender == '') {
+//                     errorArray.push({ title: "gender", desc: "Enter gender" })
+//                     errorColor.push("gender")
+//                 }
+//                 if (nationality == undefined || nationality == '') {
+//                     errorArray.push({ title: "nationality", desc: "Enter nationality" })
+//                     errorColor.push("nationality")
+//                 }
+//                 if (occupation == undefined || occupation == '') {
+//                     errorArray.push({ title: "occupation", desc: "Enter occupation" })
+//                     errorColor.push("occupation")
+//                 }
+//                 if (industry == undefined || industry == '') {
+//                     errorArray.push({ title: "industry", desc: "Enter industry" })
+//                     errorColor.push("industry")
+//                 }
+//                 if (errorArray.length > 0) {
+//                     dispatch({ type: 'SET_INDICATOR_KYC_2', payload: { displayIndicator: false, proceed: false } })
+//                     dispatch({ type: 'SET_KYC_2', payload: { error: errorArray, errorColor } })
+//                 } else {
+//                     dispatch({ type: 'SET_INDICATOR_KYC_2', payload: { displayIndicator: false, proceed: true } })
+//                     dispatch({ type: 'SET_KYC', payload: { ...val } })
+//                 }
+//             }
+//             break;
 
-        case 'PersonalInformationGetAddressScreen':
-            return (dispatch, getState) => {
-                dispatch({ type: 'SET_INDICATOR_KYC_2', payload: { displayIndicator: true } })
+//         case 'PersonalInformationGetAddressScreen':
+//             return (dispatch, getState) => {
+//                 dispatch({ type: 'SET_INDICATOR_KYC_2', payload: { displayIndicator: true } })
 
-                const { street_address, postcode, city, state, country } = getState().kyc2ScreenReducer
-                const errorArray = []
-                const errorColor = []
+//                 const { street_address, postcode, city, state, country } = getState().kyc2ScreenReducer
+//                 const errorArray = []
+//                 const errorColor = []
 
-                if (street_address == undefined || street_address == '') {
-                    errorArray.push({ title: "street_address", desc: "Enter Line 1" })
-                    errorColor.push("street_address")
-                }
-                if (postcode == undefined || postcode == '') {
-                    errorArray.push({ title: "postcode", desc: "Enter postcode" })
-                    errorColor.push("postcode")
-                }
-                if (city == undefined || city == '') {
-                    errorArray.push({ title: "city", desc: "Enter city" })
-                    errorColor.push("city")
-                }
-                if (state == undefined || state == '') {
-                    errorArray.push({ title: "state", desc: "Enter state" })
-                    errorColor.push("state")
-                }
-                if (country == undefined || country == '') {
-                    errorArray.push({ title: "country", desc: "Enter country" })
-                    errorColor.push("country")
-                }
+//                 if (street_address == undefined || street_address == '') {
+//                     errorArray.push({ title: "street_address", desc: "Enter Line 1" })
+//                     errorColor.push("street_address")
+//                 }
+//                 if (postcode == undefined || postcode == '') {
+//                     errorArray.push({ title: "postcode", desc: "Enter postcode" })
+//                     errorColor.push("postcode")
+//                 }
+//                 if (city == undefined || city == '') {
+//                     errorArray.push({ title: "city", desc: "Enter city" })
+//                     errorColor.push("city")
+//                 }
+//                 if (state == undefined || state == '') {
+//                     errorArray.push({ title: "state", desc: "Enter state" })
+//                     errorColor.push("state")
+//                 }
+//                 if (country == undefined || country == '') {
+//                     errorArray.push({ title: "country", desc: "Enter country" })
+//                     errorColor.push("country")
+//                 }
 
-                if (errorArray.length > 0) {
-                    dispatch({ type: 'SET_INDICATOR_KYC_2', payload: { displayIndicator: false, proceed: false } })
-                    dispatch({ type: 'SET_KYC_2', payload: { error: errorArray, errorColor } })
-                } else {
-                    dispatch({ type: 'SET_INDICATOR_KYC_2', payload: { displayIndicator: false, proceed: true } })
-                    dispatch({ type: 'SET_KYC', payload: { ...val } })
-                }
-            }
-            break;
+//                 if (errorArray.length > 0) {
+//                     dispatch({ type: 'SET_INDICATOR_KYC_2', payload: { displayIndicator: false, proceed: false } })
+//                     dispatch({ type: 'SET_KYC_2', payload: { error: errorArray, errorColor } })
+//                 } else {
+//                     dispatch({ type: 'SET_INDICATOR_KYC_2', payload: { displayIndicator: false, proceed: true } })
+//                     dispatch({ type: 'SET_KYC', payload: { ...val } })
+//                 }
+//             }
+//             break;
 
-        case 'Login':
-            return (dispatch, getState) => {
-                console.log(`value login adalah ${JSON.stringify(val)}`)
-                dispatch({ type: 'SET_KYC', payload: { ...val } })
-                dispatch({ type: 'SET_INDICATOR_KYC_2', payload: { displayIndicator: false, proceed: true } })
+//         case 'Login':
+//             return (dispatch, getState) => {
+//                 console.log(`value login adalah ${JSON.stringify(val)}`)
+//                 dispatch({ type: 'SET_KYC', payload: { ...val } })
+//                 dispatch({ type: 'SET_INDICATOR_KYC_2', payload: { displayIndicator: false, proceed: true } })
 
-            }
+//             }
 
-            break;
+//             break;
 
 
-    }
+//     }
 
-}
+// }
 
 export const checkLogin = () => {
     return async (dispatch, getState) => {
@@ -688,9 +675,9 @@ export const logout = () => {
 // }
 
 export const resetPin = () => {
-    return  (dispatch, getState) => {
+    return (dispatch, getState) => {
 
-         dispatch(resetPinApi())
+        dispatch(resetPinApi())
     }
 }
 

@@ -13,17 +13,13 @@ import {
 import Constants from 'expo-constants'
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
-
 import styles from '../styles/styles'
 import CheckBox2 from 'react-native-check-box'
 
 
 const AgreementScreen = (props) => {
 
-
-
     const [agreement, setAgreement] = useState(false)
-
 
 
     return (
