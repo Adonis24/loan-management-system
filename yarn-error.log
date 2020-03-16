@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @react-native-community/netinfo@4.6.0
 
 PATH: 
   C:\Python27\;C:\Python27\Scripts;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Amazon\AWSCLI\bin\;C:\Program Files\Android\Android Studio\jre\bin;C:\Users\User\AppData\Local\Android\Sdk\platform-tools;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\nodejs\;C:\Users\User\AppData\Local\Microsoft\WindowsApps;C:\Users\User\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\User\AppData\Roaming\Composer\vendor\bin;C:\flutter\flutter\bin;C:\Users\User\AppData\Local\Yarn\bin;C:\Users\User\AppData\Roaming\npm
@@ -61,6 +61,7 @@ npm manifest:
       "react-native-gesture-handler": "^1.5.6",
       "react-native-image-slider": "^2.0.3",
       "react-native-image-slider-box": "^1.0.12",
+      "react-native-image-slider-show": "^1.0.3",
       "react-native-qrcode": "^0.2.7",
       "react-native-qrcode-svg": "^5.1.2",
       "react-native-reanimated": "^1.4.0",
@@ -7384,6 +7385,11 @@ Lockfile:
     integrity sha512-Yq7xLmrAxNWjSAZJ78ZQkg13/30UJc17yvBwRFAidGrMaVo2Go9glRdRJ2U212APsQVHskAhSgW6YHinuTLoIA==
     dependencies:
       react-native-snap-carousel "*"
+  
+  react-native-image-slider-show@^1.0.3:
+    version "1.0.3"
+    resolved "https://registry.yarnpkg.com/react-native-image-slider-show/-/react-native-image-slider-show-1.0.3.tgz#4df4c0ba520074f7a5513cca9a83ea48ac8868a5"
+    integrity sha512-9Tysqt4Q1I2OIYN1hJ+291Axy9JwsKFpr1a4uxu9uDMLGgkYsOLhbsMdgj7qVBmtLWZDQ9Kr45r+LNIRmmSvGg==
   
   react-native-image-slider@^2.0.3:
     version "2.0.3"

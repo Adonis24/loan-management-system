@@ -12,6 +12,8 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import rootReducer from './src/store/reducers/Reducer';
 
+import NetInfo from '@react-native-community/netinfo';
+
 
 import Nav from './src/navigation/Nav';
 // import DashboardAsset from './src/components/DashboardAsset';
@@ -26,6 +28,14 @@ const App = (props) => {
   const [isLoadingComplete, setIsLoadingComplete] = useState(false)
   const [notification, setNotification] = useState({})
   const [tokenExists, setTokenExists] = useState(false)
+
+  const [isInternetReachable, setNetInfo] = useState(null)
+
+  const _handleNetInfo = (netInfo) => {
+    console.log(`netInfo received ${JSON.stringify(netInfo)}`)
+    store.dispatch({ type: 'SET_NET_INFO_STATUS', payload: { ...netInfo } })
+    setNetInfo(netInfo.isInternetReachable)
+  }
 
   const registerForPushNotificationsAsync = async () => {
     const { status: existingStatus } = await Permissions.getAsync(
@@ -63,6 +73,7 @@ const App = (props) => {
 
     registerForPushNotificationsAsync();
     const _notificationSubscription = Notifications.addListener(_handleNotification);
+    const netInfoUnsubscribe = NetInfo.addEventListener(_handleNetInfo);
 
     //checkLogin()
 
@@ -129,6 +140,10 @@ const App = (props) => {
           {/* <DashboardAsset /> */}
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           <Nav />
+          {!isInternetReachable && <View style={{ justifyContent: 'center', alignItems: 'center', padding: 5, backgroundColor: 'orange' }}>
+          <Text style={styles.small}>No internet connection</Text>
+        </View>
+        }
         </View>
 
       </Provider>
