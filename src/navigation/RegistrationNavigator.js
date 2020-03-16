@@ -4,7 +4,7 @@ import {createBottomTabNavigator } from 'react-navigation';
 import { createStackNavigator } from '@react-navigation/stack';
 
 
-import IntroScreen from '../screens/IntroScreen';
+import IntroScreen from '../screens/IntroScreen130320';
 import SignupPersonalScreen from '../screens/SignupPersonalScreen';
 import SignupOtpScreen from '../screens/SignupOtpScreen';
 import SignupOtpEnterScreen from '../screens/SignupOtpEnterScreen';

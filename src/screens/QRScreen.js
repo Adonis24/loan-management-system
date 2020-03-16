@@ -17,6 +17,7 @@ import Layout from '../constants/Layout'
 
 import styles from '../styles/styles'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
+import LayoutB from '../Layout/LayoutB';
 
 import * as actionCreator from '../store/actions/action'
 
@@ -71,7 +72,13 @@ const QRScreen = (props) => {
     };
 
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        < LayoutB
+        title={'QR'}
+        screenType='form'
+        navigation={props.navigation}
+        imageUri={require('../assets/images/qr.png')}
+    >
+        <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
 
             <ScrollableTabView  style={{ width: Layout.window.width }}>
                 <ScanQRScreen tabLabel='Scan' hasCameraPermission={hasCameraPermission} scanned={scanned} handleBarCodeScanned={handleBarCodeScanned} />
@@ -81,6 +88,7 @@ const QRScreen = (props) => {
 
 
         </View>
+        </ LayoutB>
     );
 }
 

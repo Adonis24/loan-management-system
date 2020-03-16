@@ -1,14 +1,20 @@
 //console.ignoredYellowBox = ['Setting a timer']
 import React from 'react';
 import {
-    Image, 
+    Image,
+
     Text,
     TouchableOpacity,
     TouchableHighlight,
     View,
+
+
+
 } from 'react-native';
 
 import Constants from 'expo-constants'
+import { LinearGradient } from 'expo-linear-gradient'
+
 import Layout from '../constants/Layout'
 import ImageSlider from 'react-native-image-slider';
 import styles from '../styles/styles'
@@ -59,12 +65,25 @@ const IntroScreen = (props) => {
                         </View>
                     )}
                 />
-                <TouchableOpacity onPress={() => props.navigation.navigate('Agreement')} style={{ flex: 1, justifyContent: 'center' }}><Text style={{ color: 'darkblue', textAlign: 'center' }}>Next</Text></TouchableOpacity>
+                <View style={{flex:1,flexDirection: 'row', justifyContent: 'center' }}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('Agreement')} >
+                        <LinearGradient
+                            colors={['#4DCB3E', '#269B1D']}
+                            style={[styles.box, { borderColor: '#4A90E2', borderWidth: 1, borderRadius: 15 }]}>
+                            <Text style={[styles.textDefault, { color: 'white' }]}>Next</Text>
+                        </LinearGradient>
+
+                    </TouchableOpacity>
+                </View>
             </View>
         </View >
     );
 
 }
-
+<LinearGradient
+    colors={['#4DCB3E', '#269B1D']}
+    style={[styles.box, { borderColor: '#4A90E2', borderWidth: 1, borderRadius: 15 }]}>
+    <Text style={[styles.textDefault, { color: 'white' }]}>Next</Text>
+</LinearGradient>
 
 export default IntroScreen
