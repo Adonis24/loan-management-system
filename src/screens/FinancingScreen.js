@@ -5,7 +5,8 @@ import {
     Text,
     TouchableOpacity,
     View,
-    FlatList
+    FlatList,
+    ActivityIndicator
 
 
 } from 'react-native';
@@ -80,12 +81,21 @@ const FinancingScreen = (props) => {
                     </View>
                 </View>
                 <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
-                    {agencyArray && agencyArray.length > 0 &&
-                        <ScrollableTabView style={{width:Layout.window.width}}>
+                    {agencyArray ? agencyArray.length > 0 ?
+                        <ScrollableTabView style={{ width: Layout.window.width }}>
                             <Micro tabLabel='Providers' nav={nav} agencyArray={agencyArray} applyFinance={applyFinance} />
                             <SME tabLabel='Status' nav={nav} grantStatusArray={grantStatusArray} current_page={current_page} last_page={last_page} changePage={changePage} />
 
                         </ScrollableTabView>
+                        : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                            <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14, color: 'lightgrey' }]}>Please check back for latest info soon</Text>
+
+                        </View>
+                        :
+                        <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                            <ActivityIndicator color={'grey'} />
+                        </View>
+
                     }
 
 

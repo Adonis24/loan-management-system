@@ -6,11 +6,12 @@ import {
     Text,
     TouchableOpacity,
     View,
-    FlatList
+    FlatList,
+    ActivityIndicator
 
 } from 'react-native';
 
-import Constants from 'expo-constants'
+
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Layout from '../constants/Layout'
@@ -39,7 +40,6 @@ const InfoNewsListScreen = (props) => {
     const { newsArray } = useSelector(state => state.newsScreenReducer, shallowEqual)
 
     useEffect(() => {
-
         dispatch(actionCreator.initiateNews())
 
     }, []); // empty-array means don't watch for any updates
@@ -53,7 +53,7 @@ const InfoNewsListScreen = (props) => {
             imageUri={require('../assets/images/news.png')}
         >
             <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
-                {newsArray && newsArray.length > 0 ?
+                {newsArray ? newsArray.length > 0 ?
 
                     <ScrollableTabView style={{ width: Layout.window.width }}>
                         <Latest tabLabel='Latest' nav={nav} hafiz={hafiz} newsArray={newsArray} />
@@ -64,8 +64,11 @@ const InfoNewsListScreen = (props) => {
 
                     : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                         <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14, color: 'lightgrey' }]}>Please check back for latest info soon</Text>
-                        {/*                             
-                                <Image source={require('../assets/images/bizlicensing.png')} style={{ flex:1,width: undefined, height: Layout.window.height / 1.5, alignSelf: 'center',opacity:0.3, borderWidth:1,borderColor:'#000' }} resizeMode={'contain'} /> */}
+
+
+                    </View>
+                    : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                        <ActivityIndicator color={grey} />
 
                     </View>
                 }
