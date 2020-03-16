@@ -2,14 +2,10 @@
 import React from 'react';
 import {
     Image,
-
     Text,
     TouchableOpacity,
     TouchableHighlight,
     View,
-
-
-
 } from 'react-native';
 
 import Constants from 'expo-constants'
