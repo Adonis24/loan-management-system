@@ -14,6 +14,9 @@ import rootReducer from './src/store/reducers/Reducer';
 
 import NetInfo from '@react-native-community/netinfo';
 
+///// All Below for Navigation
+//import { enableScreens } from 'react-native-screens';
+//enableScreens();
 
 import Nav from './src/navigation/Nav';
 // import DashboardAsset from './src/components/DashboardAsset';
