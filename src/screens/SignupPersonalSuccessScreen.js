@@ -12,7 +12,7 @@ import {
     TextInput,
     AsyncStorage,
     ImageBackground,
-    CheckBox
+    ActivityIndicator
 
 } from 'react-native';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
@@ -28,13 +28,17 @@ import * as actionCreator from '../store/actions/action'
 const SignupPersonalSuccessScreen = (props) => {
 
     const dispatch = useDispatch()
+    const { token,error } = useSelector(state => state.apiReducer, shallowEqual)
     
- 
+
     useEffect(() => {
         dispatch(actionCreator.getPersonalToken())
         dispatch(actionCreator.getPersonalTokenLMS())
     }, []);
 
+    const resetCode = () => {
+        dispatch({ type: 'SET_API_AUTH', payload: { error:undefined } })
+    }
 
 
     return (
@@ -42,7 +46,7 @@ const SignupPersonalSuccessScreen = (props) => {
             <View style={{ flex: 1, justifyContent: 'flex-start' }}>
                 <Image source={require('../assets/images/tekunA.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
             </View>
-            <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
+            { token ? <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                         <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
@@ -54,17 +58,48 @@ const SignupPersonalSuccessScreen = (props) => {
                         <TouchableOpacity onPress={() => props.navigation.navigate('SignUpOtp')} >
                             <LinearGradient
                                 colors={['#4c669f', '#3b5998', '#192f6a']}
-                                style={[styles.box,{width: Layout.window.width * 0.4,borderColor:'#4A90E2',borderWidth:1,borderRadius:15 }]}>
+                                style={[styles.box, { width: Layout.window.width * 0.4, borderColor: '#4A90E2', borderWidth: 1, borderRadius: 15 }]}>
                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Verify Phone</Text>
                             </LinearGradient>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => props.navigation.navigate('MainTabNav')} style={[styles.box,{ width: Layout.window.width * 0.4,borderWidth: 1, borderColor: '#4A90E2' }]}>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('MainTabNav')} style={[styles.box, { width: Layout.window.width * 0.4, borderWidth: 1, borderColor: '#4A90E2' }]}>
                             <Text style={[styles.textDefault,]}>Skip</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+            </View> : error ? <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                            <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
+                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>USER REGISTRATION</Text>
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'column', margin: 5 }}>
+                                <Text style={[styles.textDefault, { margin: 5, color: 'darkturquoise' }]}>Unfortunately!</Text>
+                                <Text style={[styles.textDefault, { margin: 5, marginBottom: 20 }]}>Please Check Your Information Properly And Try Again</Text>
+                            </View>
+                            <TouchableOpacity onPress={() => {resetCode(); props.navigation.goBack()}} >
+                                <LinearGradient
+                                    colors={['#4c669f', '#3b5998', '#192f6a']}
+                                    style={[styles.box, { width: Layout.window.width * 0.4, borderColor: '#4A90E2', borderWidth: 1, borderRadius: 15 }]}>
+                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
+                                </LinearGradient>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View> : <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+                        <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.5 }} resizeMode={'contain'} />
+                    </View>
+                    <View style={{ flex: 2, alignSelf: 'stretch' }}>
+                        <ActivityIndicator />
+                    </View>
+                    <View style={{ flex: 1, alignItems: 'center' }} />
+
+                    <View style={{ flex: 1 }} />
+                    
+                </View>
+            </View>}
         </View>
     );
 }
