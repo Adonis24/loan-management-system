@@ -1,29 +1,18 @@
 import React from 'react';
-import NavigationTestUtils from 'react-navigation/NavigationTestUtils';
+
 import renderer from 'react-test-renderer';
 
-import App from '../App';
+import Login from '../src/screens/LoginScreen';
 
-jest.mock('expo', () => ({
-  AppLoading: 'AppLoading',
-}));
+test('given empty GroceryShoppingList, user can add an item to it', () => {
+  const { getByPlaceholder, getByText, getAllByText } = renderer(
+    <Login />,
+  );
 
-jest.mock('../navigation/AppNavigator', () => 'AppNavigator');
+  fireEvent.changeText(getByPlaceholder('email@address.com'), 'afihisam95@gmail.com');
+  fireEvent.changeText(getByPlaceholder('Password'), 'pass123');
+  fireEvent.press(getByText('Next'));
 
-describe('App', () => {
-  jest.useFakeTimers();
-
-  beforeEach(() => {
-    NavigationTestUtils.resetInternalState();
-  });
-
-  it(`renders the loading screen`, () => {
-    const tree = renderer.create(<App />).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`renders the root without loading screen`, () => {
-    const tree = renderer.create(<App skipLoadingScreen />).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
+  const result = ['test']
+  expect(result).toHaveLength(1); // expect 'banana' to be on the list
 });
