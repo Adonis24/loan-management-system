@@ -118,6 +118,7 @@ export const requestPersonalToken = (screen, username, password) => {
 
       //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
       const stringifyJson = JSON.stringify(responseJson)
+      console.log(`ada apa ni : ${JSON.stringify(responseJson)}`)
 
       SecureStore.setItemAsync('personalToken', stringifyJson);
 
@@ -134,7 +135,9 @@ export const requestPersonalToken = (screen, username, password) => {
       }
 
     } else {
-      dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false, ...responseJson } })
+      dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false, ...responseJson, token: false,error} })
+      dispatch({ type: 'SET_API_AUTH', payload: { error, token: false } })
+
     }
 
 
