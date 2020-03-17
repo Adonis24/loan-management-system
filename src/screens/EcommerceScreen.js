@@ -18,9 +18,7 @@ const EcommerceScreen = (props) => {
   
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(actionCreator.initiateDashboardScreen())
-    }, []); // empty-array means don't watch for any updates
+
 
     const { jwt } = useSelector(state => state.myAccountReducer, shallowEqual)
     console.log(`jwt ialah ${jwt}`)

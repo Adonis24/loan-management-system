@@ -59,9 +59,6 @@ const CompanyContactAddressInformationScreen = (props) => {
     const {  comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode,  } = useSelector(state => state.companyInformationReducer, shallowEqual)
 
 
-    const Save = () => {
-        dispatch(actionCreator.companyContactAddress())
-    }
 
     const setCompanyInfo = (value) => dispatch({ type: 'SET_COMPANY_INFO', payload: { ...value } })
 
@@ -85,7 +82,7 @@ const CompanyContactAddressInformationScreen = (props) => {
                             console.log(`values formik ialah ${JSON.stringify(values)}`)
                             dispatch({ type: 'SET_REGISTER', payload: { ...values } })
                             setCompanyInfo(values)
-                            Save(values)
+                       
                             actions.setSubmitting(false)
                             props.navigation.goBack()
                         }}

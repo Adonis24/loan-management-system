@@ -69,7 +69,7 @@ const DashboardScreen = (props) => {
 
     useEffect(() => {
         dispatch(actionCreator.addExpoToken())
-        dispatch(actionCreator.initiateDashboardScreen())
+        //dispatch(actionCreator.initiateDashboardScreen())
         dispatch(actionCreator.initiateMyAccount())
         dispatch(actionCreator.initiateCompanyInfo())
         dispatch(actionCreator.generateJWT())

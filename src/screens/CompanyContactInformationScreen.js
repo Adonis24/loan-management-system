@@ -50,10 +50,7 @@ const CompanyContactInformationScreen = (props) => {
 
     const dispatch = useDispatch()
 
-    const Next = async () => {
-        await dispatch(actionCreator.companyContactInfo())
-        // await props.navigation.navigate('CompanyInfoSuccess')
-    }
+ 
 
 
     const { comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, } = useSelector(state => state.companyInformationReducer, shallowEqual)
