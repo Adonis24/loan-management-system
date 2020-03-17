@@ -65,7 +65,7 @@ const IntroScreen = (props) => {
                     <TouchableOpacity onPress={() => props.navigation.navigate('Agreement')} >
                         <LinearGradient
                             colors={['#4DCB3E', '#269B1D']}
-                            style={[styles.box, { borderColor: '#4A90E2', borderWidth: 1, borderRadius: 15 }]}>
+                            style={[styles.box, { borderRadius: 15 }]}>
                             <Text style={[styles.textDefault, { color: 'white' }]}>Next</Text>
                         </LinearGradient>
 

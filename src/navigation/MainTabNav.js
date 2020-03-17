@@ -63,7 +63,7 @@ import EdonationScreen from '../screens/EdonationScreen';
 import LoanCalculatorScreen from '../screens/LoanCalculatorScreen';
 import ElearningPlayScreen from '../screens/ElearningPlayScreen';
 import UserAccountScreen from '../screens/UserAccountScreen';
-import ContactPersonMainScreen from '../screens/ContactPersonMainScreen';
+import ContactPersonMainScreen from '../screens/ContactPersonMainScreen160320';
 import EcommerceDetailScreen from '../screens/EcommerceDetailScreen';
 import InfoEventEdtScreen from '../screens/InfoEventEdtScreen';
 import PendingDirScreen from '../screens/PendingDirScreen';

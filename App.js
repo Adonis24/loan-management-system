@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Platform, StatusBar, StyleSheet, View, AsyncStorage } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, AsyncStorage,Text } from 'react-native';
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
 import * as Permissions from 'expo-permissions'
@@ -31,14 +31,15 @@ const App = (props) => {
   const [isLoadingComplete, setIsLoadingComplete] = useState(false)
   const [notification, setNotification] = useState({})
   const [tokenExists, setTokenExists] = useState(false)
-
   const [isInternetReachable, setNetInfo] = useState(null)
 
-  const _handleNetInfo = (netInfo) => {
-    console.log(`netInfo received ${JSON.stringify(netInfo)}`)
-    store.dispatch({ type: 'SET_NET_INFO_STATUS', payload: { ...netInfo } })
-    setNetInfo(netInfo.isInternetReachable)
-  }
+  //const [isInternetReachable, setNetInfo] = useState(null)
+
+  // const _handleNetInfo = (netInfo) => {
+  //   console.log(`netInfo received ${JSON.stringify(netInfo)}`)
+  //   store.dispatch({ type: 'SET_NET_INFO_STATUS', payload: { ...netInfo } })
+  //   setNetInfo(netInfo.isInternetReachable)
+  // }
 
   const registerForPushNotificationsAsync = async () => {
     const { status: existingStatus } = await Permissions.getAsync(
@@ -77,7 +78,6 @@ const App = (props) => {
     registerForPushNotificationsAsync();
     const _notificationSubscription = Notifications.addListener(_handleNotification);
     const netInfoUnsubscribe = NetInfo.addEventListener(_handleNetInfo);
-
     //checkLogin()
 
   }, [])
@@ -127,6 +127,12 @@ const App = (props) => {
     setIsLoadingComplete(true)
   };
 
+  const _handleNetInfo = (netInfo) => {
+    console.log(`netInfo received ${JSON.stringify(netInfo)}`)
+    store.dispatch({ type: 'SET_NET_INFO_STATUS', payload: { ...netInfo } })
+    setNetInfo(netInfo.isInternetReachable)
+  }
+
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
       <AppLoading
@@ -140,15 +146,12 @@ const App = (props) => {
       <Provider store={store}>
 
         <View style={styles.container}>
-          {/* <DashboardAsset /> */}
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           <Nav />
           {!isInternetReachable && <View style={{ justifyContent: 'center', alignItems: 'center', padding: 5, backgroundColor: 'orange' }}>
           <Text style={styles.small}>No internet connection</Text>
         </View>
         }
         </View>
-
       </Provider>
     );
   }
