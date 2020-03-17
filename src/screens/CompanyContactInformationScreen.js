@@ -55,7 +55,7 @@ const CompanyContactInformationScreen = (props) => {
         // await props.navigation.navigate('CompanyInfoSuccess')
     }
 
-
+    const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, } = useSelector(state => state.companyInformationReducer, shallowEqual)
     const setCompanyInfo = (value) => dispatch({ type: 'SET_COMPANY_INFO', payload: { ...value } })
 
@@ -110,7 +110,7 @@ const CompanyContactInformationScreen = (props) => {
 
                                     <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_phoneTouched && comp_phoneError ? '#d94498' : '#5a83c2' }}>
                                         <Image source={require('../assets/images/phoneNum.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={comp_phone} onChangeText={FormikProps.handleChange(`comp_phone`)} onBlur={FormikProps.handleBlur(`comp_phone`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Phone No'} placeholderTextColor={comp_phoneTouched && comp_phoneError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                        <TextInput value={comp_phone} onChangeText={FormikProps.handleChange(`comp_phone`)} onBlur={FormikProps.handleBlur(`comp_phone`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Phone No'} placeholderTextColor={comp_phoneTouched && comp_phoneError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'phone-pad'}  />
                                     </View>
                                     <View style={{ width: Layout.window.width * 0.65 }}>
                                         {comp_phoneTouched && comp_phoneError && <Text style={styles.error}>{comp_phoneError}</Text>}
@@ -142,8 +142,8 @@ const CompanyContactInformationScreen = (props) => {
                                     </View>
 
                                     <View style={{ flexDirection: 'row', margin: 5 }}>
-                                        <TouchableOpacity disabled={!FormikProps.isValid} onPress={() => FormikProps.handleSubmit()} style={styles.box}>
-                                            <LinearGradient colors={FormikProps.isValid ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+                                        <TouchableOpacity disabled={!FormikProps.isValid || !isInternetReachable} onPress={() => FormikProps.handleSubmit()} style={styles.box}>
+                                            <LinearGradient colors={(FormikProps.isValid&&isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
                                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
                                             </LinearGradient>
                                         </TouchableOpacity>
