@@ -23,7 +23,7 @@ import moment from 'moment'
 const SignupOtpEnterScreen = (props) => {
 
     const dispatch = useDispatch()
-
+    const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { c1, c2, c3, c4, phoneVerified, proceedOTP, status } = useSelector(state => state.registrationReducer, shallowEqual)
 
     const verifyOTP = (value) => dispatch({ type: 'VERIFY_OTP', payload: { ...value } })
@@ -165,8 +165,8 @@ const SignupOtpEnterScreen = (props) => {
                                 <TouchableOpacity onPress={() => dispatch(actionCreator.registerOTP())} style={{ justifyContent: 'center', alignItems: 'center', borderWidth: 1, borderColor: 'orange', borderRadius: 5, padding: 5 }}><Text style={styles.caption}>Resend</Text></TouchableOpacity>}
                         </View>
                         <View style={{ flexDirection: 'row', margin: 5 }}>
-                            <TouchableOpacity disabled={button} onPress={() => verifyPhone()} style={styles.box}>
-                                <LinearGradient colors={!button ? ['#4DCB3E', '#269B1D'] : ['rgba(77, 203, 62, 0.5)', 'rgba(38, 155, 29, 0.5)']} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+                            <TouchableOpacity disabled={button || !isInternetReachable} onPress={() => verifyPhone()} style={styles.box}>
+                                <LinearGradient colors={(!button&& isInternetReachable)  ? ['#4DCB3E', '#269B1D'] : ['rgba(77, 203, 62, 0.5)', 'rgba(38, 155, 29, 0.5)']} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
                                     <Text style={[styles.textDefault, { color: '#fff' }]}>Verify</Text>
                                 </LinearGradient>
                             </TouchableOpacity>
