@@ -54,22 +54,15 @@ const InfoNewsListScreen = (props) => {
         >
             <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
                 {newsArray ? newsArray.length > 0 ?
-
                     <ScrollableTabView style={{ width: Layout.window.width }}>
                         <Latest tabLabel='Latest' nav={nav} hafiz={hafiz} newsArray={newsArray} />
                         <Popular tabLabel='Popular' nav={nav} hafiz={hafiz} newsArray={newsArray} />
-
                     </ScrollableTabView>
-
-
                     : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                         <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14, color: 'lightgrey' }]}>Please check back for latest info soon</Text>
-
-
                     </View>
                     : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                        <ActivityIndicator color={grey} />
-
+                        <ActivityIndicator color={'lightgrey'} />
                     </View>
                 }
             </View>
