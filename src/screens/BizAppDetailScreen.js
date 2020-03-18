@@ -17,7 +17,7 @@ const BizAppDetailScreen = (props) => {
     const uri = props.route.param?.uri ?? 'NA' 
     
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        <View style={styles.container}>
             <WebView style={{ flex: 1 }} source={{ uri }} />
             <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>

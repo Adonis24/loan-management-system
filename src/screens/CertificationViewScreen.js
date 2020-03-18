@@ -23,7 +23,7 @@ const CertificationViewScreen = (props) => {
     const item = props.route.param?.item ?? 'NA'
     console.log(`dapat item : ${JSON.stringify(item)}`)
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        <View style={styles.container}>
             <View style={{ flex: 1, justifyContent: 'space-between' }}>
                 <View style={{ alignItems: 'flex-end' }}>
                     <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />

@@ -71,7 +71,7 @@ const SignupPersonalScreen = (props) => {
     }
 
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        <View style={styles.container}>
             <View style={{ flex: 1, justifyContent: 'flex-start' }}>
                 <Image source={require('../assets/images/tekunA.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
             </View>

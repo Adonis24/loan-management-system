@@ -34,7 +34,7 @@ const PendingDirScreen = (props) => {
     }, []); // empty-array means don't watch for any updates
 
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        <View style={styles.container}>
 
             <View style={{ flex: 1, justifyContent: 'space-between' }}>
                 <View style={{ alignItems: 'flex-end' }}>

@@ -36,7 +36,7 @@ const InsightScreen = (props) => {
 
 
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        <View style={styles.container}>
 
             <View style={{ flex: 1, justifyContent: 'space-between' }}>
                 <View style={{ alignItems: 'flex-end' }}>

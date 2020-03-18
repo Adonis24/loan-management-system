@@ -118,7 +118,7 @@ class DashboardScreen extends React.PureComponent {
         if (!(this.props.phone_no == null)) {
             if (this.props.companyName) {
                 return (
-                    <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+                    <View style={styles.container}>
                         <Modal
                             animationType="slide"
                             transparent={true}
@@ -322,7 +322,7 @@ class DashboardScreen extends React.PureComponent {
             } else {
                 {/** TAKDE COMPANY*/ }
                 return (
-                    <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+                    <View style={styles.container}>
                         <Modal
                             animationType="slide"
                             transparent={true}
@@ -527,7 +527,7 @@ class DashboardScreen extends React.PureComponent {
             }
         } else {
             return (
-                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+                <View style={styles.container}>
                     <Modal
                         animationType="slide"
                         transparent={true}

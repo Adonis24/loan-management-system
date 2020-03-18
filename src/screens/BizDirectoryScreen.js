@@ -62,7 +62,7 @@ const BizDirectoryScreen = (props) => {
     bizDirArray && console.log(`ini lah bizdir ${JSON.stringify(bizDirArray)}`)
     pendingDirArray && console.log(`ini lah pending ${JSON.stringify(pendingDirArray)}`)
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        <View style={styles.container}>
             <View style={{ flex: 1, justifyContent: 'space-between' }}>
                 <View style={{ alignItems: 'flex-end' }}>
                     <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />

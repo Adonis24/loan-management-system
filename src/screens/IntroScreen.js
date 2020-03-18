@@ -21,7 +21,7 @@ const IntroScreen = (props) => {
         { id: 1, title: 'Welcome to   Tent! Sign up now to join us or login to your account', screenshotUri: require('../assets/images/intro2.png') },
     ]
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        <View style={styles.container}>
             <View style={{ flex: 1, justifyContent: 'flex-start' }}>
                 <Image source={require('../assets/images/tekunA.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
             </View>

@@ -107,7 +107,7 @@ const DashboardScreen = (props) => {
     if (!(phone_no == null)) {
         if (companyName) {
             return (
-                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+                <View style={styles.container}>
                     <Modal
                         animationType="slide"
                         transparent={true}
@@ -265,7 +265,7 @@ const DashboardScreen = (props) => {
         } else {
             {/** TAKDE COMPANY*/ }
             return (
-                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+                <View style={styles.container}>
                     <Modal
                         animationType="slide"
                         transparent={true}
@@ -366,7 +366,7 @@ const DashboardScreen = (props) => {
         }
     } else {
         return (
-            <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+            <View style={styles.container}>
                 <Modal
                     animationType="slide"
                     transparent={true}

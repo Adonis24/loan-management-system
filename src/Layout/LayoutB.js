@@ -20,7 +20,7 @@ const LayoutB = (props) => {
 
     return (
 
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        <View style={styles.container}>
             {props.screenType === 'NO' ? <View style={{ flex: 1, justifyContent: 'space-between' }}>
                 <View style={{ alignItems: 'flex-end' }}>
                     <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />

@@ -23,7 +23,7 @@ const EdonationScreen = (props) => {
  
 
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        <View style={styles.container}>
             <WebView source={{ uri: 'https://www.ensani.my' }} style={{ flex: 1 }} />
             <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>

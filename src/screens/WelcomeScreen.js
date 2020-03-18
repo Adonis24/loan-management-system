@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import {
     Image,
-
     Text,
     TouchableOpacity,
     View,
@@ -20,12 +19,7 @@ import Layout from '../constants/Layout'
 //import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 
-import { connect } from 'react-redux'
-import * as actionCreator from '../store/actions/action'
-
 const WelcomeScreen = (props) => {
-
-
 
     const [logo, setLogo] = useState(new Animated.Value(0))
     const [intro, setIntro] = useState(new Animated.Value(0))
@@ -80,7 +74,7 @@ const WelcomeScreen = (props) => {
 
 
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        <View style={styles.container}>
             <View style={{ flex: 1, justifyContent: 'flex-start' }}>
                 <Image source={require('../assets/images/tekunA.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
             </View>
@@ -108,8 +102,6 @@ const WelcomeScreen = (props) => {
         </View >
     );
 }
-
-
 
 
 export default WelcomeScreen

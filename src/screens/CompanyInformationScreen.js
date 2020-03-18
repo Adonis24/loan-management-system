@@ -76,7 +76,7 @@ const CompanyInformationScreen = (props) => {
     const [show, setShow] = useState(false);
 
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        <View style={styles.container}>
 
             <View style={{ flex: 1, justifyContent: 'flex-start' }}>
                 <Image source={require('../assets/images/tekunA.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
@@ -141,7 +141,7 @@ const CompanyInformationScreen = (props) => {
                                         setIosDatePickerShow(!iosDatePickerShow)
                                     }}>
 
-                                    <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+                                    <View style={styles.container}>
                                         <View style={[styles.titleMargin, { flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4', marginBottom: 25 }]}>
                                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0 }}>
                                                 <TouchableOpacity onPress={() => setShow(!ios)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>

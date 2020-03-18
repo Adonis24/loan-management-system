@@ -96,7 +96,7 @@ const DashboardScreen = (props) => {
     })
 
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        <View style={styles.container}>
             <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                 <Image source={require('../assets/images/tekunB.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
             </View>

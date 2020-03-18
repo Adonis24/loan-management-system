@@ -62,7 +62,7 @@ const LoanApplicationScreen = (props) => {
 
 
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        <View style={styles.container}>
             <Modal
                 animationType="slide"
                 transparent={false}
@@ -72,7 +72,7 @@ const LoanApplicationScreen = (props) => {
                     setIosPicker(!iosPicker)
                 }}>
 
-                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+                <View style={styles.container}>
                     <View style={[styles.titleMargin, { flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4', marginBottom: 25 }]}>
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0 }}>
                             <TouchableOpacity onPress={() => setIosPicker(!iosPicker)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>

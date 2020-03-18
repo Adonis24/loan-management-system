@@ -24,7 +24,7 @@ const EcommerceScreen = (props) => {
     console.log(`jwt ialah ${jwt}`)
     const uri = `https://www.mayamall.com/guest-user/bxcess?bx-token=${jwt}`
     return (
-        <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+        <View style={styles.container}>
             <WebView source={{ uri }} style={{ flex: 1, backgroundColor: 'transparent' }} />
 
             <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, right: 0, flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
