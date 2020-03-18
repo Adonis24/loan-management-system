@@ -18,7 +18,7 @@ import Layout from '../constants/Layout'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from '../styles/styles'
-
+import { CustomTextInput } from '../components/Custom'
 import * as actionCreator from '../store/actions/action'
 
 
@@ -98,21 +98,28 @@ const SignupOtpScreen = (props) => {
                                     <Image source={require('../assets/images/2.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} />
                                     <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>OTP Verification</Text>
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: countryCodeTouched && countryCodeError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/cc.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput editable={false} value={countryCode} onChangeText={FormikProps.handleChange(`countryCode`)} onBlur={FormikProps.handleBlur(`countryCode`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'+6'} placeholderTextColor={countryCodeTouched && countryCodeError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {countryCodeTouched && countryCodeError && <Text style={styles.error}>{countryCodeError}</Text>}
-                                    </View>
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/cc.png')}
+                                        value={countryCode}
+                                        handleChange={FormikProps.handleChange(`countryCode`)}
+                                        handleBlur={FormikProps.handleBlur(`countryCode`)}
+                                        touched={countryCodeTouched}
+                                        error={countryCodeError}
+                                        placeholder={'+6'}
+                                        editable={false}
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: phoneTouched && phoneError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/mobile.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={phone} onChangeText={FormikProps.handleChange(`phone`)} onBlur={FormikProps.handleBlur(`phone`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'019 123456789'} placeholderTextColor={phoneTouched && phoneError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'phone-pad'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {phoneTouched && phoneError && <Text style={styles.error}>{phoneError}</Text>}
-                                    </View>
+                                    />
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/mobile.png')}
+                                        value={phone}
+                                        handleChange={FormikProps.handleChange(`phone`)}
+                                        handleBlur={FormikProps.handleBlur(`phone`)}
+                                        touched={phoneTouched}
+                                        error={phoneError}
+                                        placeholder={'019 123456789'}
+                                        keyboardType={'phone-pad'} 
+
+                                    />
 
 
                                     <View style={{ flexDirection: 'row', margin: 5 }}>

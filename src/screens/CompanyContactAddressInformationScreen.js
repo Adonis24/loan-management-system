@@ -15,7 +15,7 @@ import * as Yup from 'yup';
 import Constants from 'expo-constants'
 
 import Layout from '../constants/Layout'
-
+import { CustomTextInput } from '../components/Custom'
 import styles from '../styles/styles'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as actionCreator from '../store/actions/action'
@@ -29,19 +29,19 @@ const validationSchema = Yup.object().shape({
         .min(3)
         .label('Address'),
 
-        comp_state: Yup
+    comp_state: Yup
         .string('Please enter')
         .required('Please enter')
         .min(3)
         .label('State'),
 
-        comp_city: Yup
+    comp_city: Yup
         .string('Please enter')
         .required('Please enter')
         .min(3)
         .label('City'),
 
-        comp_postcode: Yup
+    comp_postcode: Yup
         .string('Please enter')
         .required('Please enter')
         .min(5)
@@ -56,7 +56,7 @@ const CompanyContactAddressInformationScreen = (props) => {
     const dispatch = useDispatch()
 
     //const { comp_phone, comp_email, comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, proceedContact, error, errorColor } = useSelector(state => state.companyInformationReducer, shallowEqual)
-    const {  comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode,  } = useSelector(state => state.companyInformationReducer, shallowEqual)
+    const { comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, } = useSelector(state => state.companyInformationReducer, shallowEqual)
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
 
 
@@ -77,13 +77,13 @@ const CompanyContactAddressInformationScreen = (props) => {
             <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
                 <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Formik
-                        initialValues={{comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode}}
+                        initialValues={{ comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode }}
                         validateOnMount
                         onSubmit={(values, actions) => {
                             console.log(`values formik ialah ${JSON.stringify(values)}`)
                             dispatch({ type: 'SET_REGISTER', payload: { ...values } })
                             setCompanyInfo(values)
-                       
+
                             actions.setSubmitting(false)
                             props.navigation.goBack()
                         }}
@@ -114,55 +114,66 @@ const CompanyContactAddressInformationScreen = (props) => {
                                     <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
                                     <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY ADDRESS</Text>
 
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/address.png')}
+                                        value={comp_addr}
+                                        handleChange={FormikProps.handleChange(`comp_addr`)}
+                                        handleBlur={FormikProps.handleBlur(`comp_addr`)}
+                                        touched={comp_addrTouched}
+                                        error={comp_addrError}
+                                        placeholder={'Address Line 1'}
 
-                       
+                                    />
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_addrTouched && comp_addrError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/address.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={comp_addr} onChangeText={FormikProps.handleChange(`comp_addr`)} onBlur={FormikProps.handleBlur(`comp_addr`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Address Line 1'} placeholderTextColor={comp_addrTouched && comp_addrError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {comp_addrTouched && comp_addrError && <Text style={styles.error}>{comp_addrError}</Text>}
-                                    </View>
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/address.png')}
+                                        value={comp_addr_2}
+                                        handleChange={FormikProps.handleChange(`comp_addr_2`)}
+                                        handleBlur={FormikProps.handleBlur(`comp_addr_2`)}
+                                        touched={comp_addr_2Touched}
+                                        error={comp_addr_2Error}
+                                        placeholder={'Address Line 2'}
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_addr_2Touched && comp_addr_2Error ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/address.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={comp_addr_2} onChangeText={FormikProps.handleChange(`comp_addr_2`)} onBlur={FormikProps.handleBlur(`comp_addr_2`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Address Line 2'} placeholderTextColor={comp_addr_2Touched && comp_addr_2Error ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {comp_addr_2Touched && comp_addr_2Error && <Text style={styles.error}>{comp_addr_2Error}</Text>}
-                                    </View>
+                                    />
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/city.png')}
+                                        value={comp_city}
+                                        handleChange={FormikProps.handleChange(`comp_city`)}
+                                        handleBlur={FormikProps.handleBlur(`comp_city`)}
+                                        touched={comp_cityTouched}
+                                        error={comp_cityError}
+                                        placeholder={'City'}
+                                        keyboardType={'default'}
+                                    />
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_cityTouched && comp_cityError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/city.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={comp_city} onChangeText={FormikProps.handleChange(`comp_city`)} onBlur={FormikProps.handleBlur(`comp_city`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'City'} placeholderTextColor={comp_cityTouched && comp_cityError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {comp_cityTouched && comp_cityError && <Text style={styles.error}>{comp_cityError}</Text>}
-                                    </View>
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/state.png')}
+                                        value={comp_state}
+                                        handleChange={FormikProps.handleChange(`comp_state`)}
+                                        handleBlur={FormikProps.handleBlur(`comp_state`)}
+                                        touched={comp_cityTouched}
+                                        error={comp_cityError}
+                                        placeholder={'State'}
+                                        keyboardType={'default'}
+                                    />
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/compRegNum.png')}
+                                        value={comp_postcode}
+                                        handleChange={FormikProps.handleChange(`comp_postcode`)}
+                                        handleBlur={FormikProps.handleBlur(`comp_postcode`)}
+                                        touched={comp_postcodeTouched}
+                                        error={comp_postcodeError}
+                                        placeholder={'Postcode'}
+                                        keyboardType={'decimal-pad'}
+                                    />
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_stateTouched && comp_stateError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/state.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={comp_state} onChangeText={FormikProps.handleChange(`comp_state`)} onBlur={FormikProps.handleBlur(`comp_state`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'State'} placeholderTextColor={comp_stateTouched && comp_stateError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {comp_cityTouched && comp_cityError && <Text style={styles.error}>{comp_cityError}</Text>}
-                                    </View>
-
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_postcodeTouched && comp_postcodeError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/compRegNum.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={comp_postcode} onChangeText={FormikProps.handleChange(`comp_postcode`)} onBlur={FormikProps.handleBlur(`comp_postcode`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Postcode'} placeholderTextColor={comp_postcodeTouched && comp_postcodeError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'decimal-pad'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {comp_postcodeTouched && comp_postcodeError && <Text style={styles.error}>{comp_postcodeError}</Text>}
-                                    </View>
                                     <View style={{ flexDirection: 'row', margin: 5 }}>
                                         <TouchableOpacity disabled={!FormikProps.isValid || !isInternetReachable} onPress={() => FormikProps.handleSubmit()} style={styles.box}>
                                             <LinearGradient colors={(FormikProps.isValid && isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
                                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
                                             </LinearGradient>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box,{backgroundColor: '#5A647F' }]} >
+                                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box, { backgroundColor: '#5A647F' }]} >
                                             <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
                                         </TouchableOpacity>
                                     </View>

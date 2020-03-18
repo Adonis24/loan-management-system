@@ -28,7 +28,7 @@ const Stack = createStackNavigator();
 const Registration = () => {
   return (
     <Stack.Navigator initialRouteName="Intro" screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Intro" component={IntroScreen} />
+      <Stack.Screen name="Intro" component={DetailsOfConnectedPartiesScreen} />
       <Stack.Screen name="Agreement" component={AgreementScreen} />
       <Stack.Screen name="SignUpPersonal" component={SignupPersonalScreen} />
       <Stack.Screen name="SignUpPersonalSuccess" component={SignupPersonalSuccessScreen} />

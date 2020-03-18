@@ -1,7 +1,7 @@
 //console.ignoredYellowBox = ['Setting a timer']
 import React from 'react';
 import {
-    Image, 
+    Image,
     Text,
     TouchableOpacity,
     View,
@@ -15,7 +15,7 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
-
+import { CustomTextInput } from '../components/Custom'
 
 import styles from '../styles/styles'
 
@@ -131,59 +131,68 @@ const DetailsOfConnectedPartiesScreen = (props) => {
                                     {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                                     <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Details of Connected Party</Text>
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: capacityTouched && capacityError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={capacity} onChangeText={FormikProps.handleChange(`capacity`)} onBlur={FormikProps.handleBlur(`capacity`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Capacity'} placeholderTextColor={capacityTouched && capacityError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {capacityTouched && capacityError && <Text style={styles.error}>{capacityError}</Text>}
-                                    </View>
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: nameCPTouched && nameCPError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={nameCP} onChangeText={FormikProps.handleChange(`nameCP`)} onBlur={FormikProps.handleBlur(`nameCP`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Name of Connected Party'} placeholderTextColor={nameCPTouched && nameCPError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {nameCPTouched && nameCPError && <Text style={styles.error}>{nameCPError}</Text>}
-                                    </View>
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/user.png')}
+                                        value={capacity}
+                                        handleChange={FormikProps.handleChange(`capacity`)}
+                                        handleBlur={FormikProps.handleBlur(`capacity`)}
+                                        touched={capacityTouched}
+                                        error={capacityError}
+                                        placeholder={'Capacity'}
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: icNumberTouched && icNumberError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={icNumber} onChangeText={FormikProps.handleChange(`icNumber`)} onBlur={FormikProps.handleBlur(`icNumber`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'MyKad No'} placeholderTextColor={icNumberTouched && icNumberError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'numbers-and-punctuation'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {icNumberTouched && icNumberError && <Text style={styles.error}>{icNumberError}</Text>}
-                                    </View>
+                                    />
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: relationshipTouched && relationshipError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={relationship} onChangeText={FormikProps.handleChange(`relationship`)} onBlur={FormikProps.handleBlur(`relationship`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Relationship'} placeholderTextColor={relationshipTouched && relationshipError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {relationshipTouched && relationshipError && <Text style={styles.error}>{relationshipError}</Text>}
-                                    </View>
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/mykad.png')}
+                                        value={nameCP}
+                                        handleChange={FormikProps.handleChange(`nameCP`)}
+                                        handleBlur={FormikProps.handleBlur(`nameCP`)}
+                                        touched={nameCPTouched}
+                                        error={nameCPError}
+                                        placeholder={'Name of Connected Party'}
+                                        keyboardType={'default'}
+                                    />
 
-
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: emailSMETouched && emailSMEError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={emailSME} onChangeText={FormikProps.handleChange(`emailSME`)} onBlur={FormikProps.handleBlur(`emailSME`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Email SME Bank'} placeholderTextColor={emailSMETouched && emailSMEError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'email-address'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {emailSMETouched && emailSMEError && <Text style={styles.error}>{emailSMEError}</Text>}
-                                    </View>
-
-
-
-
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/mykad.png')}
+                                        value={icNumber}
+                                        handleChange={FormikProps.handleChange(`icNumber`)}
+                                        handleBlur={FormikProps.handleBlur(`icNumber`)}
+                                        touched={icNumberTouched}
+                                        error={icNumberError}
+                                        placeholder={'MyKad No'}
+                                        keyboardType={'numbers-and-punctuation'}
+                                    />
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/user.png')}
+                                        value={relationship}
+                                        handleChange={FormikProps.handleChange(`relationship`)}
+                                        handleBlur={FormikProps.handleBlur(`relationship`)}
+                                        touched={relationshipTouched}
+                                        error={relationshipError}
+                                        placeholder={'Relationship'}
+                                        keyboardType={'default'}
+                                    />
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/email.png')}
+                                        value={emailSME}
+                                        handleChange={FormikProps.handleChange(`emailSME`)}
+                                        handleBlur={FormikProps.handleBlur(`emailSME`)}
+                                        touched={emailSMETouched}
+                                        error={emailSMEError}
+                                        placeholder={'Email SME Bank'}
+                                        keyboardType={'email-address'}
+                                    />
 
 
                                     <View style={{ flexDirection: 'row', margin: 5 }}>
                                         <TouchableOpacity disabled={!FormikProps.isValid || !isInternetReachable} onPress={() => FormikProps.handleSubmit()} style={styles.box}>
-                                            <LinearGradient colors={(FormikProps.isValid&&isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+                                            <LinearGradient colors={(FormikProps.isValid && isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
                                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
                                             </LinearGradient>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box,{ backgroundColor: '#5A647F' }]} >
+                                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box, { backgroundColor: '#5A647F' }]} >
                                             <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -193,7 +202,7 @@ const DetailsOfConnectedPartiesScreen = (props) => {
                         }}
                     </Formik >
 
-                   
+
                 </KeyboardAvoidingView>
             </View>
         </View>

@@ -16,7 +16,7 @@ import * as Yup from 'yup';
 
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
-
+import { CustomTextInput } from '../components/Custom'
 import styles from '../styles/styles'
 
 import * as actionCreator from '../store/actions/action'
@@ -113,44 +113,52 @@ const SignupPersonalScreen = (props) => {
                                     <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} />
                                     <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Personal Info</Text>
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: nameTouched && nameError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={name} onChangeText={FormikProps.handleChange(`name`)} onBlur={FormikProps.handleBlur(`name`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Full name'} placeholderTextColor={nameTouched && nameError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/user.png')}
+                                        value={name}
+                                        handleChange={FormikProps.handleChange(`name`)}
+                                        handleBlur={FormikProps.handleBlur(`name`)}
+                                        touched={nameTouched}
+                                        error={nameError}
+                                        placeholder={'Full name'}
 
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {nameTouched && nameError && <Text style={styles.error}>{nameError}</Text>}
-                                    </View>
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: emailTouched && emailError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={email} onChangeText={FormikProps.handleChange(`email`)} onBlur={FormikProps.handleBlur(`email`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'email@address.com'} placeholderTextColor={emailTouched && emailError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'email-address'} />
+                                    />
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/email.png')}
+                                        value={email}
+                                        handleChange={FormikProps.handleChange(`email`)}
+                                        handleBlur={FormikProps.handleBlur(`email`)}
+                                        touched={emailTouched}
+                                        error={emailError}
+                                        placeholder={'email@address.com'}
 
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {emailTouched && emailError && <Text style={styles.error}>{emailError}</Text>}
-                                    </View>
+                                    />
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/password.png')}
+                                        value={password}
+                                        secureText={true}
+                                        handleChange={FormikProps.handleChange(`password`)}
+                                        handleBlur={FormikProps.handleBlur(`password`)}
+                                        touched={passwordTouched}
+                                        error={passwordError}
+                                        placeholder={'Password'}
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: passwordError && passwordTouched ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput secureTextEntry value={password} onChangeText={FormikProps.handleChange(`password`)} onBlur={FormikProps.handleBlur(`password`)} style={{ marginLeft: 5 }} placeholder={'Password'} placeholderTextColor={passwordTouched && passwordError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {passwordTouched && passwordError && <Text style={styles.error}>{passwordError}</Text>}
-                                    </View>
+                                    />
+                                     <CustomTextInput
+                                        imageUri={require('../assets/images/password.png')}
+                                        value={password_confirmation}
+                                        secureText={true}
+                                        handleChange={FormikProps.handleChange(`password_confirmation`)}
+                                        handleBlur={FormikProps.handleBlur(`password_confirmation`)}
+                                        touched={password_confirmationTouched}
+                                        error={password_confirmationError}
+                                        placeholder={'Confirm Password'}
 
-
-
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20, borderColor: password_confirmationTouched && password_confirmationError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput secureTextEntry value={password_confirmation} onChangeText={FormikProps.handleChange(`password_confirmation`)} onBlur={FormikProps.handleBlur(`password_confirmation`)} style={{ marginLeft: 5 }} placeholder={'Confirm Password'} placeholderTextColor={passwordTouched && password_confirmationError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {password_confirmationTouched && password_confirmationError && <Text style={styles.error}>{passwordError}</Text>}
-                                    </View>
+                                    />
 
                                     <View style={{ flexDirection: 'row', margin: 5 }}>
                                         <TouchableOpacity disabled={!FormikProps.isValid || !isInternetReachable} onPress={() => FormikProps.handleSubmit()} style={styles.box}>
-                                            <LinearGradient colors={(FormikProps.isValid && isInternetReachable)  ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+                                            <LinearGradient colors={(FormikProps.isValid && isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
                                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
                                             </LinearGradient>
                                         </TouchableOpacity>
