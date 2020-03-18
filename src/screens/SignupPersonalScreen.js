@@ -6,11 +6,11 @@ import {
     TouchableOpacity,
     View,
     TextInput,
-    KeyboardAvoidingView,
+
 
 } from 'react-native';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
+import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -20,6 +20,7 @@ import Layout from '../constants/Layout'
 import styles from '../styles/styles'
 
 import * as actionCreator from '../store/actions/action'
+import LayoutA from '../Layout/LayoutA';
 
 const validationSchema = Yup.object().shape({
 
@@ -56,12 +57,21 @@ const SignupPersonalScreen = (props) => {
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     publicToken && console.log(`registration token ialah :${JSON.stringify(publicToken)} `)
 
+    useEffect(() => {
+        const open = () => setshowLogo(false)
+        const off = () => setshowLogo(true)
+
+        keyboardBeingDisplay(open)
+        keyboardBeingClose(off)
+    }, []); // empty-array means don't watch for any updates
 
     useEffect(() => {
         dispatch(actionCreator.getToken())
         dispatch(actionCreator.getTokenLMS())
     }, []);
-
+    
+    const [showLogo, setshowLogo] = useState(true)
+    
     const register = async (values) => {
 
         await dispatch(actionCreator.register(values))
@@ -71,102 +81,90 @@ const SignupPersonalScreen = (props) => {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={{ flex: 1, justifyContent: 'flex-start' }}>
-                <Image source={require('../assets/images/tekunA.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
-            </View>
-            <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
-                <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Formik
-                        validateOnMount
-                        initialValues={{}} onSubmit={(values, actions) => {
-                            console.log(`values formik ialah ${JSON.stringify(values)}`)
-                            dispatch({ type: 'SET_REGISTER', payload: { ...values } })
-                            register(values)
-                            actions.setSubmitting(false)
-                        }
-                        }
-                        validationSchema={validationSchema}
-                    >
-                        {FormikProps => {
+        <LayoutA>
+            <Formik
+                validateOnMount
+                initialValues={{}} onSubmit={(values, actions) => {
+                    console.log(`values formik ialah ${JSON.stringify(values)}`)
+                    dispatch({ type: 'SET_REGISTER', payload: { ...values } })
+                    register(values)
+                    actions.setSubmitting(false)
+                }
+                }
+                validationSchema={validationSchema}
+            >
+                {FormikProps => {
 
-                            const { name, email, password, password_confirmation } = FormikProps.values
+                    const { name, email, password, password_confirmation } = FormikProps.values
 
-                            const nameError = FormikProps.errors.name
-                            const nameTouched = FormikProps.touched.name
+                    const nameError = FormikProps.errors.name
+                    const nameTouched = FormikProps.touched.name
 
-                            const emailError = FormikProps.errors.email
-                            const emailTouched = FormikProps.touched.email
+                    const emailError = FormikProps.errors.email
+                    const emailTouched = FormikProps.touched.email
 
-                            const passwordError = FormikProps.errors.password
-                            const passwordTouched = FormikProps.touched.password
+                    const passwordError = FormikProps.errors.password
+                    const passwordTouched = FormikProps.touched.password
 
-                            const password_confirmationError = FormikProps.errors.password_confirmation
-                            const password_confirmationTouched = FormikProps.touched.password_confirmation
+                    const password_confirmationError = FormikProps.errors.password_confirmation
+                    const password_confirmationTouched = FormikProps.touched.password_confirmation
 
-                            return (
+                    return (
+                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                            {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
+                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>REGISTRATION</Text>
+                            {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
+                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Personal Info</Text>
 
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: nameTouched && nameError ? '#d94498' : '#5a83c2' }}>
+                                <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <TextInput value={name} onChangeText={FormikProps.handleChange(`name`)} onBlur={FormikProps.handleBlur(`name`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Full name'} placeholderTextColor={nameTouched && nameError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
 
-                                <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
-                                    <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>REGISTRATION</Text>
-                                    <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} />
-                                    <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Personal Info</Text>
+                            </View>
+                            <View style={{ width: Layout.window.width * 0.65 }}>
+                                {nameTouched && nameError && <Text style={styles.error}>{nameError}</Text>}
+                            </View>
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: emailTouched && emailError ? '#d94498' : '#5a83c2' }}>
+                                <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <TextInput value={email} onChangeText={FormikProps.handleChange(`email`)} onBlur={FormikProps.handleBlur(`email`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'email@address.com'} placeholderTextColor={emailTouched && emailError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'email-address'} />
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: nameTouched && nameError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={name} onChangeText={FormikProps.handleChange(`name`)} onBlur={FormikProps.handleBlur(`name`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Full name'} placeholderTextColor={nameTouched && nameError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                            </View>
+                            <View style={{ width: Layout.window.width * 0.65 }}>
+                                {emailTouched && emailError && <Text style={styles.error}>{emailError}</Text>}
+                            </View>
 
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {nameTouched && nameError && <Text style={styles.error}>{nameError}</Text>}
-                                    </View>
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: emailTouched && emailError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/email.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={email} onChangeText={FormikProps.handleChange(`email`)} onBlur={FormikProps.handleBlur(`email`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'email@address.com'} placeholderTextColor={emailTouched && emailError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'email-address'} />
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: passwordError && passwordTouched ? '#d94498' : '#5a83c2' }}>
+                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <TextInput secureTextEntry value={password} onChangeText={FormikProps.handleChange(`password`)} onBlur={FormikProps.handleBlur(`password`)} style={{ marginLeft: 5 }} placeholder={'Password'} placeholderTextColor={passwordTouched && passwordError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                            </View>
+                            <View style={{ width: Layout.window.width * 0.65 }}>
+                                {passwordTouched && passwordError && <Text style={styles.error}>{passwordError}</Text>}
+                            </View>
+                            <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20, borderColor: password_confirmationTouched && password_confirmationError ? '#d94498' : '#5a83c2' }}>
+                                <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <TextInput secureTextEntry value={password_confirmation} onChangeText={FormikProps.handleChange(`password_confirmation`)} onBlur={FormikProps.handleBlur(`password_confirmation`)} style={{ marginLeft: 5 }} placeholder={'Confirm Password'} placeholderTextColor={passwordTouched && password_confirmationError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                            </View>
+                            <View style={{ width: Layout.window.width * 0.65 }}>
+                                {password_confirmationTouched && password_confirmationError && <Text style={styles.error}>{passwordError}</Text>}
+                            </View>
 
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {emailTouched && emailError && <Text style={styles.error}>{emailError}</Text>}
-                                    </View>
+                            <View style={{ flexDirection: 'row', margin: 5 }}>
+                                <TouchableOpacity disabled={!FormikProps.isValid || !isInternetReachable} onPress={() => FormikProps.handleSubmit()} style={styles.box}>
+                                    <LinearGradient colors={(FormikProps.isValid && isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+                                        <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
+                                    </LinearGradient>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box, { backgroundColor: '#5A647F' }]} >
+                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
+                                </TouchableOpacity>
+                            </View>
+                            {/* {indicator && <ActivityIndicator color={'#34c6f4'} style={{ marginLeft: 5 }} />} */}
+                        </View>
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: passwordError && passwordTouched ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput secureTextEntry value={password} onChangeText={FormikProps.handleChange(`password`)} onBlur={FormikProps.handleBlur(`password`)} style={{ marginLeft: 5 }} placeholder={'Password'} placeholderTextColor={passwordTouched && passwordError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {passwordTouched && passwordError && <Text style={styles.error}>{passwordError}</Text>}
-                                    </View>
-
-
-
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, marginBottom: 20, borderColor: password_confirmationTouched && password_confirmationError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput secureTextEntry value={password_confirmation} onChangeText={FormikProps.handleChange(`password_confirmation`)} onBlur={FormikProps.handleBlur(`password_confirmation`)} style={{ marginLeft: 5 }} placeholder={'Confirm Password'} placeholderTextColor={passwordTouched && password_confirmationError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {password_confirmationTouched && password_confirmationError && <Text style={styles.error}>{passwordError}</Text>}
-                                    </View>
-
-                                    <View style={{ flexDirection: 'row', margin: 5 }}>
-                                        <TouchableOpacity disabled={!FormikProps.isValid || !isInternetReachable} onPress={() => FormikProps.handleSubmit()} style={styles.box}>
-                                            <LinearGradient colors={(FormikProps.isValid && isInternetReachable)  ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
-                                                <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
-                                            </LinearGradient>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box, { backgroundColor: '#5A647F' }]} >
-                                            <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    {/* {indicator && <ActivityIndicator color={'#34c6f4'} style={{ marginLeft: 5 }} />} */}
-                                </View>
-
-                            )
-                        }}
-                    </Formik >
-                </KeyboardAvoidingView>
-            </View>
-        </View>
+                    )
+                }}
+            </Formik >
+        </LayoutA>
     );
 }
 
