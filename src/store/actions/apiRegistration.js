@@ -72,10 +72,11 @@ export const registerApi = (token_type, access_token, name, email, password, pas
     console.log(` ada api reducer ke kat sini : ${JSON.stringify(getState().registrationReducer)}`)
     const value = { name, email, password, password_confirmation, expo_token }
     const responseJson = await apiPostCall(`api/register`, value, reg)
-    const { status } = await responseJson
-    await dispatch({ type: 'SET_REGISTER', payload: { status, proceed: true, indicator: false } })
-    await console.log(`register  ${JSON.stringify(responseJson)}`)
+    const { status, errors, message } = await responseJson
+    const error = errors
 
+    error && dispatch({ type: 'SET_API_AUTH', payload: { error, message, token: false } })
+    await console.log(`register  ${JSON.stringify(responseJson)}`)
 
   }
 }
@@ -125,7 +126,7 @@ export const requestPersonalToken = (screen, username, password) => {
       }
 
     } else {
-      dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false, ...responseJson, token: false,error} })
+      dispatch({ type: 'SET_LOGIN', payload: { proceed: false, indicator: false, ...responseJson, token: false, error } })
       dispatch({ type: 'SET_API_AUTH', payload: { error, token: false } })
 
     }
@@ -231,7 +232,6 @@ export const contactPersonAPI = () => {
 
 export const detailConnectAPI = (capacity, nameCP, icNumber, relationship, emailSME) => {
   return async (dispatch, getState) => {
-
     console.log(`detail connect api ialah : ${JSON.stringify({ capacity, nameCP, icNumber, relationship, emailSME })}`)
   }
 }

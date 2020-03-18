@@ -41,7 +41,6 @@ export const register = (values) => {
         const { name, email, password, password_confirmation } = values
         console.log(`ada ke tak register info : ${JSON.stringify(getState().registrationReducer)}`)
 
-        console.log('takde error dalam screen and boleh proceed utk register')
         await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation, expo_token))
         //await dispatch(getPersonalToken())
 
