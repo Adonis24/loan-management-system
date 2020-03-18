@@ -12,6 +12,7 @@ const keyboardBeingDisplay = callback => {
     });
 };
 
+
 const keyboardBeingClose = callback => {
     Keyboard.addListener('keyboardDidHide', () => {
         callback();
