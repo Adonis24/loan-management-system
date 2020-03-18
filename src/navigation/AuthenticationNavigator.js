@@ -15,8 +15,7 @@ const AuthenticationStack = () => {
     return (
       <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        <Stack.Screen name="UnderConstruction" component={UnderConstructionScreen} />
-        
+        <Stack.Screen name="UnderConstruction" component={UnderConstructionScreen} />        
         <Stack.Screen name="Login" component={LoginScreen} />
       </Stack.Navigator>
     )
