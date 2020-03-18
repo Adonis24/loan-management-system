@@ -20,7 +20,7 @@ import * as Yup from 'yup';
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 import moment from 'moment'
-
+import { CustomTextInput } from '../components/Custom'
 
 
 const validationSchema = Yup.object().shape({
@@ -170,20 +170,28 @@ const CompanyInformationScreen = (props) => {
                                         <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
                                         <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY INFORMATION</Text>
                                         <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
-                                        <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_nameTouched && comp_nameError ? '#d94498' : '#5a83c2' }}>
-                                            <Image source={require('../assets/images/company.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                            <TextInput value={comp_name} onChangeText={FormikProps.handleChange(`comp_name`)} onBlur={FormikProps.handleBlur(`comp_name`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Name'} placeholderTextColor={comp_nameTouched && comp_nameError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                                        </View>
-                                        <View style={{ width: Layout.window.width * 0.65 }}>
-                                            {comp_nameTouched && comp_nameError && <Text style={styles.error}>{comp_nameError}</Text>}
-                                        </View>
-                                        <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_regnoTouched && comp_regnoError ? '#d94498' : '#5a83c2' }}>
-                                            <Image source={require('../assets/images/compRegNum.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                            <TextInput value={comp_regno} onChangeText={FormikProps.handleChange(`comp_regno`)} onBlur={FormikProps.handleBlur(`comp_regno`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Number'} placeholderTextColor={comp_regnoTouched && comp_regnoError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
-                                        </View>
-                                        <View style={{ width: Layout.window.width * 0.65 }}>
-                                            {comp_regnoTouched && comp_regnoError && <Text style={styles.error}>{comp_regnoError}</Text>}
-                                        </View>
+
+                                        <CustomTextInput
+                                        imageUri={require('../assets/images/company.png')}
+                                        value={comp_name}
+                                        handleChange={FormikProps.handleChange(`comp_name`)}
+                                        handleBlur={FormikProps.handleBlur(`comp_name`)}
+                                        touched={comp_nameTouched}
+                                        error={comp_nameError}
+                                        placeholder={'Company Name'}
+
+                                    /> 
+                                        <CustomTextInput
+                                        imageUri={require('../assets/images/compRegNum.png')}
+                                        value={comp_regno}
+                                        handleChange={FormikProps.handleChange(`comp_regno`)}
+                                        handleBlur={FormikProps.handleBlur(`comp_regno`)}
+                                        touched={comp_regnoTouched}
+                                        error={comp_regnoError}
+                                        placeholder={'Company Registration Number'}
+                                        keyboardType={'default'}
+                                    />
+                                      
                                         <TouchableOpacity onPress={() => showDatepicker()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_regdateTouched && comp_regdateError ? '#d94498' : '#5a83c2' }}>
                                             <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
 
@@ -192,13 +200,16 @@ const CompanyInformationScreen = (props) => {
                                         <View style={{ width: Layout.window.width * 0.65 }}>
                                             {comp_regdateTouched && comp_regdateError && <Text style={styles.error}>{comp_regdateError}</Text>}
                                         </View>
-                                        <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_main_biz_actError && comp_main_biz_actTouched ? '#d94498' : '#5a83c2' }}>
-                                            <Image source={require('../assets/images/password.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                            <TextInput value={comp_main_biz_act} onChangeText={FormikProps.handleChange(`comp_main_biz_act`)} onBlur={FormikProps.handleBlur(`comp_main_biz_act`)} style={{ marginLeft: 5 }} placeholder={'Business Activities'} placeholderTextColor={comp_main_biz_actTouched && comp_main_biz_actError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                                        </View>
-                                        <View style={{ width: Layout.window.width * 0.65 }}>
-                                            {comp_main_biz_actTouched && comp_main_biz_actError && <Text style={styles.error}>{comp_main_biz_actError}</Text>}
-                                        </View>
+                                        <CustomTextInput
+                                        imageUri={require('../assets/images/password.png')}
+                                        value={comp_main_biz_act}
+                                        handleChange={FormikProps.handleChange(`comp_main_biz_act`)}
+                                        handleBlur={FormikProps.handleBlur(`comp_main_biz_act`)}
+                                        touched={comp_main_biz_actTouched}
+                                        error={comp_main_biz_actError}
+                                        placeholder={'Business Activities'}
+                                    />
+                        
                                         {!ios && show && (
                                             <DateTimePicker
                                                 testID="dateTimePicker"

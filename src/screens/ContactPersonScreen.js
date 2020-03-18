@@ -1,11 +1,11 @@
 //console.ignoredYellowBox = ['Setting a timer']
 import React from 'react';
 import {
-    Image,  
+    Image,
     Text,
     TouchableOpacity,
     View,
-    TextInput, 
+    TextInput,
     KeyboardAvoidingView
 
 } from 'react-native';
@@ -18,7 +18,7 @@ import Layout from '../constants/Layout'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from '../styles/styles'
-
+import { CustomTextInput } from '../components/Custom'
 import * as actionCreator from '../store/actions/action'
 
 const validationSchema = Yup.object().shape({
@@ -65,13 +65,13 @@ const ContactPersonScreen = (props) => {
 
     const pickDoc = () => {
         DocumentPicker.getDocumentAsync({ type: '*/*', copyToCacheDirectory: false })
-            .then(result => {           
-                setContactPerson(result)            
+            .then(result => {
+                setContactPerson(result)
             })
     }
 
     const ContactPerson = async () => {
- 
+
         dispatch(actionCreator.contactPersonUploadFirst())
         props.navigation.navigate('CompanyInfoSuccess')
     }
@@ -123,39 +123,48 @@ const ContactPersonScreen = (props) => {
                                     <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>CONTACT PERSON</Text>
                                     <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
 
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/user.png')}
+                                        value={full_name}
+                                        handleChange={FormikProps.handleChange(`full_name`)}
+                                        handleBlur={FormikProps.handleBlur(`full_name`)}
+                                        touched={full_nameTouched}
+                                        error={full_nameError}
+                                        placeholder={'Full Name'}
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: full_nameTouched && full_nameError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={full_name} onChangeText={FormikProps.handleChange(`full_name`)} onBlur={FormikProps.handleBlur(`full_name`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Full Name'} placeholderTextColor={full_nameTouched && full_nameError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {full_nameTouched && full_nameError && <Text style={styles.error}>{full_nameError}</Text>}
-                                    </View>
+                                    />
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/mykad.png')}
+                                        value={ic_no}
+                                        handleChange={FormikProps.handleChange(`ic_no`)}
+                                        handleBlur={FormikProps.handleBlur(`ic_no`)}
+                                        touched={ic_noTouched}
+                                        error={ic_noError}
+                                        placeholder={'MyKad No'}
+                                        keyboardType={'decimal-pad'}
+                                    />
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: ic_noTouched && ic_noError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={ic_no} onChangeText={FormikProps.handleChange(`ic_no`)} onBlur={FormikProps.handleBlur(`ic_no`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'MyKad No'} placeholderTextColor={ic_noTouched && ic_noError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'decimal-pad'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {ic_noTouched && ic_noError && <Text style={styles.error}>{ic_noError}</Text>}
-                                    </View>
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/position.png')}
+                                        value={position}
+                                        handleChange={FormikProps.handleChange(`position`)}
+                                        handleBlur={FormikProps.handleBlur(`position`)}
+                                        touched={positionTouched}
+                                        error={positionError}
+                                        placeholder={'Position'}
+                                        keyboardType={'default'}
+                                    />
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/phoneNum.png')}
+                                        value={phone}
+                                        handleChange={FormikProps.handleChange(`phone`)}
+                                        handleBlur={FormikProps.handleBlur(`phone`)}
+                                        touched={phoneTouched}
+                                        error={phoneError}
+                                        placeholder={'Phone'}
+                                        keyboardType={'decimal-pad'}
+                                    />
 
-
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: positionTouched && positionError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/position.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={position} onChangeText={FormikProps.handleChange(`position`)} onBlur={FormikProps.handleBlur(`position`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Position'} placeholderTextColor={positionTouched && positionError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {positionTouched && positionError && <Text style={styles.error}>{positionError}</Text>}
-                                    </View>
-
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: phoneTouched && phoneError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/phoneNum.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={phone} onChangeText={FormikProps.handleChange(`phone`)} onBlur={FormikProps.handleBlur(`phone`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Phone'} placeholderTextColor={phoneTouched && phoneError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'decimal-pad'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {phoneTouched && phoneError && <Text style={styles.error}>{phoneError}</Text>}
-                                    </View>
 
                                     <View style={{ alignSelf: 'stretch', borderWidth: 1, borderRadius: 15, borderColor: 'darkblue', margin: 10, justifyContent: 'space-between', alignItems: 'flex-end', flexDirection: 'row' }}>
                                         {!name ? <Text style={[styles.caption, { alignSelf: 'flex-start', textAlign: 'left', margin: 10, padding: 10 }]}>MyKad Scanned Copy</Text> :
@@ -170,11 +179,11 @@ const ContactPersonScreen = (props) => {
 
                                     <View style={{ flexDirection: 'row', margin: 5 }}>
                                         <TouchableOpacity disabled={!FormikProps.isValid || !isInternetReachable} onPress={() => FormikProps.handleSubmit()} style={styles.box}>
-                                            <LinearGradient colors={(FormikProps.isValid&&isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+                                            <LinearGradient colors={(FormikProps.isValid && isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
                                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
                                             </LinearGradient>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box,{ backgroundColor: '#5A647F' }]} >
+                                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box, { backgroundColor: '#5A647F' }]} >
                                             <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
                                         </TouchableOpacity>
                                     </View>

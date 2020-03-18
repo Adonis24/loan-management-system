@@ -1,12 +1,12 @@
 //console.ignoredYellowBox = ['Setting a timer']
 import React from 'react';
 import {
-    Image,  
+    Image,
     Text,
     TouchableOpacity,
     View,
     TextInput,
-   
+
     KeyboardAvoidingView
 
 
@@ -22,6 +22,7 @@ import Layout from '../constants/Layout'
 import { LinearGradient } from 'expo-linear-gradient'
 import styles from '../styles/styles'
 
+import { CustomTextInput } from '../components/Custom'
 
 import * as actionCreator from '../store/actions/action'
 
@@ -115,7 +116,7 @@ const DeclarationDigitalSignScreen = (props) => {
                             const declareStampError = FormikProps.errors.declareStamp
                             const declareStampTouched = FormikProps.touched.declareStamp
 
-                        
+
 
 
                             return (
@@ -126,48 +127,58 @@ const DeclarationDigitalSignScreen = (props) => {
                                     {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                                     <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Details of Connected Party</Text>
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: declareSignTouched && declareSignError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={declareSign} onChangeText={FormikProps.handleChange(`declareSign`)} onBlur={FormikProps.handleBlur(`declareSign`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Authorized Personal Digital Sign'} placeholderTextColor={declareSignTouched && declareSignError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {declareSignTouched && declareSignError && <Text style={styles.error}>{declareSignError}</Text>}
-                                    </View>
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/user.png')}
+                                        value={declareSign}
+                                        handleChange={FormikProps.handleChange(`declareSign`)}
+                                        handleBlur={FormikProps.handleBlur(`declareSign`)}
+                                        touched={declareSignTouched}
+                                        error={declareSignError}
+                                        placeholder={'Authorized Personal Digital Sign'}
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: declareNameTouched && declareNameError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={declareName} onChangeText={FormikProps.handleChange(`declareName`)} onBlur={FormikProps.handleBlur(`declareName`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Name'} placeholderTextColor={declareNameTouched && declareNameError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {declareNameTouched && declareNameError && <Text style={styles.error}>{declareNameError}</Text>}
-                                    </View>
+                                    />
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/mykad.png')}
+                                        value={declareName}
+                                        handleChange={FormikProps.handleChange(`declareName`)}
+                                        handleBlur={FormikProps.handleBlur(`declareName`)}
+                                        touched={declareNameTouched}
+                                        error={declareNameError}
+                                        placeholder={'Name'}
+                                        keyboardType={'default'}
+                                    />
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: declarePositionTouched && declarePositionError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={declarePosition} onChangeText={FormikProps.handleChange(`declarePosition`)} onBlur={FormikProps.handleBlur(`declarePosition`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Position'} placeholderTextColor={declarePositionTouched && declarePositionError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'numbers-and-punctuation'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {declarePositionTouched && declarePositionError && <Text style={styles.error}>{declarePositionError}</Text>}
-                                    </View>
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/mykad.png')}
+                                        value={declarePosition}
+                                        handleChange={FormikProps.handleChange(`declarePosition`)}
+                                        handleBlur={FormikProps.handleBlur(`declarePosition`)}
+                                        touched={declarePositionTouched}
+                                        error={declarePositionError}
+                                        placeholder={'Position'}
+                                        keyboardType={'numbers-and-punctuation'}
+                                    />
 
-                                    <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: declareStampTouched && declareStampError ? '#d94498' : '#5a83c2' }}>
-                                        <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                        <TextInput value={declareStamp} onChangeText={FormikProps.handleChange(`declareStamp`)} onBlur={FormikProps.handleBlur(`declareStamp`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Stamp'} placeholderTextColor={declareStampTouched && declareStampError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
-                                    </View>
-                                    <View style={{ width: Layout.window.width * 0.65 }}>
-                                        {declareStampTouched && declareStampError && <Text style={styles.error}>{declareStampError}</Text>}
-                                    </View>
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/user.png')}
+                                        value={declareStamp}
+                                        handleChange={FormikProps.handleChange(`declareStamp`)}
+                                        handleBlur={FormikProps.handleBlur(`declareStamp`)}
+                                        touched={declareStampTouched}
+                                        error={declareStampError}
+                                        placeholder={'Stamp'}
+                                        keyboardType={'default'}
+                                    />
 
 
-                                 
 
                                     <View style={{ flexDirection: 'row', margin: 5 }}>
                                         <TouchableOpacity disabled={!FormikProps.isValid || !isInternetReachable} onPress={() => FormikProps.handleSubmit()} style={styles.box}>
-                                            <LinearGradient colors={(FormikProps.isValid&&isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+                                            <LinearGradient colors={(FormikProps.isValid && isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
                                                 <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
                                             </LinearGradient>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={styles.box,{backgroundColor: '#5A647F' }} >
+                                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box, { backgroundColor: '#5A647F' }]} >
                                             <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
                                         </TouchableOpacity>
                                     </View>
