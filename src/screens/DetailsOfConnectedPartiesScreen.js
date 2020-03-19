@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React from 'react';
+import React,{ useEffect, useState } from 'react';
 import {
     Image,
     Text,
@@ -16,8 +16,11 @@ import Constants from 'expo-constants'
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 import { CustomTextInput } from '../components/Custom'
+import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 
 import styles from '../styles/styles'
+
+import LayoutA from '../Layout/LayoutA';
 
 import * as actionCreator from '../store/actions/action'
 
@@ -73,17 +76,20 @@ const DetailsOfConnectedPartiesScreen = (props) => {
 
     //const { capacity, nameCP, icNumber, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
 
+    useEffect(() => {
+        const open = () => setshowLogo(false)
+        const off = () => setshowLogo(true)
+
+        keyboardBeingDisplay(open)
+        keyboardBeingClose(off)
+    }, []); // empty-array means don't watch for any updates
+
+    const [showLogo, setshowLogo] = useState(true)
+
 
 
     return (
-        <View style={styles.container}>
-            <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                <View style={{ alignItems: 'flex-start' }}><Image source={require('../assets/images/topLeft.png')} style={{ width: 79, height: 120 }} /></View>
-                <View style={{ alignItems: 'flex-end' }}><Image source={require('../assets/images/bottomRight.png')} style={{ width: 106, height: 92 }} /></View>
-            </View>
-            <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
-                <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-
+        <LayoutA>
 
 
                     <Formik
@@ -126,7 +132,7 @@ const DetailsOfConnectedPartiesScreen = (props) => {
                             return (
 
                                 <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
+                                  {showLogo&& <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} /> }
                                     <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>REGISTRATION</Text>
                                     {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                                     <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Details of Connected Party</Text>
@@ -202,10 +208,7 @@ const DetailsOfConnectedPartiesScreen = (props) => {
                         }}
                     </Formik >
 
-
-                </KeyboardAvoidingView>
-            </View>
-        </View>
+</LayoutA>
     );
 }
 
