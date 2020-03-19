@@ -58,7 +58,7 @@ const DocUploadScreen = (props) => {
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for contact person.</Text>
                             <View style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
                                 <Image source={require('../assets/images/user.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <TextInput value={fullName} onChangeText={(fullName) => setContactPerson({ fullName })} placeholder={'Full Name '} value={contactFullName} style={{ marginLeft: 5 }} />
+                                <TextInput value={fullName} onChangeText={(fullName) => setContactPerson({ fullName })} placeholder={'Full Name '} value={fullName} style={{ marginLeft: 5 }} />
                             </View>
 
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12 }]}>
