@@ -18,7 +18,7 @@ import Layout from '../constants/Layout'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from '../styles/styles'
-import { CustomTextInput } from '../components/Custom'
+import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import * as actionCreator from '../store/actions/action'
 import LayoutA from '../Layout/LayoutA';
 import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
@@ -89,7 +89,7 @@ const SignupOtpScreen = (props) => {
 
 
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                          {showLogo &&  <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
+                            {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
 
 
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PHONE VERIFICATION</Text>
@@ -120,29 +120,24 @@ const SignupOtpScreen = (props) => {
                             />
 
 
-                            <View style={{ flexDirection: 'row', margin: 5 }}>
-                                <TouchableOpacity disabled={!FormikProps.isValid || !isInternetReachable} onPress={() => FormikProps.handleSubmit()} style={styles.box}>
-                                    <LinearGradient colors={(FormikProps.isValid && isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
-                                        <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
-                                    </LinearGradient>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box, { backgroundColor: '#5A647F' }]} >
-                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
-                                </TouchableOpacity>
-                            </View>
+                            <CustomFormAction
+                                navigation={props.navigation}
+                                isValid={FormikProps.isValid}
+                                handleSubmit={FormikProps.handleSubmit}
+                            />
                             {/* {indicator && <ActivityIndicator color={'#34c6f4'} style={{ marginLeft: 5 }} />} */}
                         </View>
 
                     )
-                }} 
+                }}
             </Formik >
         </LayoutA>
-  );
+    );
 }
 
 
 
-                    {/* 
+{/* 
 
                     <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                         <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
@@ -169,8 +164,8 @@ const SignupOtpScreen = (props) => {
                             </TouchableOpacity>
                         </View>
                     </View> */}
-              
-  
+
+
 
 
 export default SignupOtpScreen
