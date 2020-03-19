@@ -1,17 +1,7 @@
 import { Notifications } from 'expo'
 import * as SecureStore from 'expo-secure-store'
 
-// import Amplify, { Auth,Storage } from 'aws-amplify';
-// import aws_exports from '../../aws-exports';
-// Amplify.configure(aws_exports);///
-
 import moment from 'moment'
-
-
-// import Amplify, { Auth, Storage } from 'aws-amplify';
-// import aws_exports from '../../aws-exports';
-// import { sendNotification } from './action';
-// Amplify.configure(aws_exports);///
 
 const apiUrl = 'https://staging.bxcess.my/'
 const lmsApiUrl = 'https://lms.bxcess.my/'
@@ -85,9 +75,7 @@ export const promotionApi = () => {
   return async (dispatch, getState) => {
 
     const responseJson = await apiPostCall(`api/promotions/view`, null, getState().apiReducer)
-
     const promotionArray = await responseJson.data
-
     await dispatch({ type: 'SET_PROMOTION', payload: { promotionArray } })
 
 
@@ -95,17 +83,11 @@ export const promotionApi = () => {
 }
 
 export const handbooksApi = () => {
-  return async (dispatch, getState) => {
-   
-    const responseJson = await apiPostCall(`api/handbooks/view`, null, getState().apiReducer)
-    
- 
+  return async (dispatch, getState) => {   
+    const responseJson = await apiPostCall(`api/handbooks/view`, null, getState().apiReducer)   
     const handbooksArray = await responseJson.data
     await console.log(`HANDBOOKS API  ${JSON.stringify(handbooksArray)}`)
-
-    await dispatch({ type: 'SET_HANDBOOKS', payload: { handbooksArray } })
-    
-    
+    await dispatch({ type: 'SET_HANDBOOKS', payload: { handbooksArray } })       
   }
 }
 
@@ -113,14 +95,10 @@ export const handbooksApi = () => {
 
 export const einfoApi = () => {
   return async (dispatch, getState) => {
-
-
-    const responseJson = await apiPostCall(`api/einfos/view`, null, getState().apiReducer)
-   
+    const responseJson = await apiPostCall(`api/einfos/view`, null, getState().apiReducer)   
     console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const einfosArray = await responseJson.data
     await console.log(`EINFO API  ${JSON.stringify(einfosArray)}`)
-
     await dispatch({ type: 'SET_EINFO', payload: { einfosArray } })
 
 
@@ -133,11 +111,7 @@ export const bizDirApi = () => {
   return async (dispatch, getState) => {
     
     const responseJson = await apiPostCall(`api/business_directory/listAllDirectory`, null, getState().apiReducer)
-    
-    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const bizDirArray = await responseJson.data
-    //await console.log(`BIZDIR API  ${JSON.stringify(bizDirArray)}`)
-
     await dispatch({ type: 'SET_BIZ_DIR', payload: { bizDirArray } })
 
     
@@ -152,16 +126,13 @@ export const getAssociateApi = () => {
     const assoDirArray = await responseJson.data
     //await console.log(`assoc API  ${JSON.stringify(assoDirArray)}`)
 
-    await dispatch({ type: 'SET_ASSO_DIR', payload: { assoDirArray } })
-
-    
+    await dispatch({ type: 'SET_ASSO_DIR', payload: { assoDirArray } })    
   }
 }
 
 
 export const getPendingApi = () => {
-  return async (dispatch, getState) => {
-    
+  return async (dispatch, getState) => {    
     const responseJson = await apiPostCall(`api/business_directory/listRequestDirectory`, null, getState().apiReducer)
    
     console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
@@ -252,11 +223,6 @@ export const requestConnectApi = (connect_id) => {
     const responseJson = await apiPostCall(`api/business_directory/request_connection`, null,connect_id, getState().apiReducer)
    
     console.log(`inilah request connect : ${JSON.stringify(responseJson)}`)
-    //const agencyArray = await responseJson.data
-   //await console.log(`expo token API  ${JSON.stringify(agencyArray)}`)
-
-  //await dispatch({ type: 'SET_AGENCY_LIST', payload: { agencyArray } })
-
 
     
   }
@@ -337,27 +303,6 @@ export const applyGrantApi = () => {
 
   }
 }
-
-
-
-// export const uploadDocApi = (blob) => {
-//   return async (dispatch, getState) => {
-
-//     const { proposal, income_tax, loan_amount, estimate_time, payment_method } = getState().loanApplicationReducer
-//     const document = blob
-//     const document_name = 'testing'
-
-//     console.log(`inilah apply grant : ${JSON.stringify(getState().grantApplicationReducer)}`)
-//     const responseJson = await apiPostCall(`api/grant/addGrantInformation`, null,document, document_name , getState().apiReducer)
-
-//     console.log(`inilah grant: ${JSON.stringify(responseJson)}`)
-//     const einfosArray = await responseJson.data
-//     await console.log(`Loan Application  ${JSON.stringify(einfosArray)}`)
-
-    
-
-//   }
-// }
 
 
 
@@ -468,21 +413,13 @@ export const sendNotificationApi = (expo_token, id) => {
   }
 }
 
-
-
 export const doneForNowApi = () => {
   return async (dispatch, getState) => {
-
-    const responseJson = await apiPostCall(`api/registerCompany/additional`, null, getState().apiReducer)
-   
+    const responseJson = await apiPostCall(`api/registerCompany/additional`, null, getState().apiReducer)   
     console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const done = await responseJson.data
     await console.log(`Company Info  ${JSON.stringify(done)}`)
-
-   //await dispatch({ type: 'GET_LIST_WORKERS', payload: { ...listWorkers } })
-
-
-    
+   //await dispatch({ type: 'GET_LIST_WORKERS', payload: { ...listWorkers } })    
   }
 }
 
@@ -520,72 +457,6 @@ export const getCoursesApi = () => {
 }
 
 
-//////////////////////////////////LUNAWALLET/////////////////////////////////////////
-
-// export const getUrl = (pic) => {
-//   var kucing = ''
-//   Storage.get(pic)
-//     .then(result => kucing = result)
-//     .catch(err => console.log('error : ' + err))
-//   return kucing
-// }
-
-// export const userInfo = () => {
-//   return async (dispatch, getState) => {
-
-//     const responseJson = await apiGetCall(`api/userInfo`, getState().apiReducer)
-
-//     const selfieKey = await responseJson.data.filename_2
-//     var selfieUri = ''
-
-//     await Storage.get(selfieKey)
-//       .then(async result => {
-//         await dispatch({ type: 'SET_DASHBOARD', payload: { userInfo: { ...responseJson.data, ...{ selfieUri: result } } } })
-//       })
-//       .catch(err => console.log('error : ' + err))
-
-
-//   }
-// }
-
-
-
-export const latestTransaction = () => {
-  return async (dispatch, getState) => {
-
-    const responseJson = await apiGetCall(`api/LatestTransaction`, getState().apiReducer)
-
-    dispatch({ type: 'SET_DASHBOARD', payload: { latestTransaction: responseJson.data } })
-
-  }
-}
-
-export const analyticSummary = () => {
-  return async (dispatch, getState) => {
-
-    const responseJson = await apiGetCall(`api/AnalyticSummary`, getState().apiReducer)
-    dispatch({ type: 'SET_DASHBOARD', payload: { analyticSummary: responseJson.data } })
-
-
-  }
-}
-
-
-// export const analytic = () => {
-//   return async (dispatch, getState) => {
-
-//     const type = 'Deposit'
-//     const credit_debit = 'Credit'
-
-//     const responseJson = await apiPostCall(`api/Analytic`, null,type, credit_debit, getState().apiReducer)
-   
-//     await console.log(`analytic  info  ${JSON.stringify(responseJson)}`)
-//     dispatch({ type: 'SET_ANALYTIC', payload: { analyticSummary: responseJson.data } })
-
-
-    
-//   }
-// }
 
 export const notificationApi = () => {
   return async (dispatch, getState) => {
@@ -599,213 +470,7 @@ export const notificationApi = () => {
   }
 }
 
-
-
-export const depositApi = () => {
-  return async (dispatch, getState) => {
-
-    const { amount, bank, d1, d2, d3, d4 } = getState().depositScreenReducer
-    const type = 'Deposit'
-    const tag = ''
-    const channel = 'Deposit Channel'
-    const pin = '' + d1 + d2 + d3 + d4
-    const remarks = 'Deposit from ' + bank
-
-    console.log(`amount ialah ${amount}`)
-
-    const responseJson = await apiPostCall(`api/Deposit`, null, amount, tag, channel, pin, access_credential, remarks , getState().apiReducer)
-   
-        const { status } = await responseJson
-        await console.log(`deposit ${JSON.stringify(responseJson)}`)
-        await dispatch({ type: 'SET_DEPOSIT', payload: { status } })
-
-
-   
-
-
-    
-  }
-}
-
-
-
-export const userList = () => {
-  return async (dispatch, getState) => {
-
-    const responseJson = await apiGetCall(`api/userList`, getState().apiReducer)
-    const recipientList = await responseJson.data
-    const phoneNoList = await []
-    const phoneNoList6 = await []
-
-    await recipientList.map(rL => {
-
-      phoneNoList.push(rL.phone_no)
-      phoneNoList6.push((rL.phone_no ? rL.phone_no.replace(/[^A-Z0-9]+/ig, "").substr(rL.phone_no.length - 6) : 'NA'))
-    })
-
-
-    await dispatch({ type: 'SET_RECIPIENT_LIST', payload: { recipientList, phoneNoList, phoneNoList6, memberFilter: true } })
-    await dispatch({ type: 'SET_PAYER_LIST', payload: { payerList: recipientList, phoneNoList, phoneNoList6, memberFilter: true } })
-
-  }
-}
-
-
-
-export const sendMoney = () => {
-  return async (dispatch, getState) => {
-
-    const { amount, phone_no, recipientRemark, d1, d2, d3, d4, expoToken } = getState().transferOutScreenReducer
-    const pin = '' + d1 + d2 + d3 + d4
-    const phone = phone_no
-    const access_credential = 'api'
-    const remarks = recipientRemark
-
-    console.log(`expo token ialah ${amount}`)
-
-    const responseJson = await apiPostCall(`api/SendMoney`, null, phone, amount, pin, access_credential, remarks, getState().apiReducer)
-   
-    const { status } = await responseJson
-    status ? await dispatch(pushNotification(expoToken)) : null
-    await console.log(`send money : ${JSON.stringify(responseJson)}`)    
-  }
-}
-
-
-export const withdrawApi = () => {
-  return async (dispatch, getState) => {
-
-    const { amount, bank, d1, d2, d3, d4 } = getState().withdrawScreenReducer
-    const tag = ''
-    const channel = 'Withdraw Channel'
-    const pin = '' + d1 + d2 + d3 + d4
-    const withdraw_currency = 'MYR'
-    const access_credential = 'api'
-    const remarks = 'Withdraw from ' + bank
-
-    console.log(`amount ialah ${amount}`)
-
-    const responseJson = await apiPostCall(`api/Withdraw`, null, amount, channel, withdraw_currency, tag, access_credential, pin, remarks, getState().apiReducer)
-   
-    const { status } = await responseJson
-    await console.log(`withdraw ${JSON.stringify(responseJson)}`)
-    await dispatch({ type: 'SET_WITHDRAW', payload: { status } })
-
-    
-
-
-    
-  }
-}
-
-
-
-export const requestMoney = () => {
-  return async (dispatch, getState) => {
-
-    const { amount, phone_no } = getState().requestScreenReducer
-
-    // const pin='1111'
-    const payer_phone = phone_no
-    //const payer='59707060'
-    const remark = 'NA'
-
-
-    console.log(`amount ialah ${amount}`)
-    const responseJson = await apiPostCall(`api/RequestMoney`, null, amount, payer_phone, access_credential, remark, getState().apiReducer)
-   
-    const { status } = await responseJson
-        await console.log(`request money : ${JSON.stringify(responseJson)}`)
-    
-  }
-}
-
-
-export const payRequestMoney = () => {
-  return async (dispatch, getState) => {
-
-    const { amount } = getState().requestScreenReducer
-
-    const pin = '1111'
-    const references = '004458557598369'
-
-    const payer = '59707060'
-    // const personalToken=JSON.parse(AsyncStorage.getItem('personalToken'))
-
-    console.log(`amount ialah ${amount}`)
-    const responseJson = await apiPostCall(`api/RequestMoney`, null, references, payer , getState().apiReducer)
-   
-    const { status } = await responseJson
-    await console.log(`pay request money : ${JSON.stringify(responseJson)}`)
-
-  }
-}
-
-
-
-export const resetPinApi = () => {
-  return async (dispatch, getState) => {
-
-    const { d1, d2, d3, d4, n1, n2, n3, n4 } = await getState().resetPinReducer
-    const old_pin = '' + d1 + d2 + d3 + d4
-    const new_pin = '' + n1 + n2 + n3 + n4
-    // const personalToken=JSON.parse(AsyncStorage.getItem('personalToken'))
-
-    const responseJson = await apiPostCall(`api/resetPin`, null,old_pin, new_pin, getState().apiReducer)
-   
-    await console.log(`reset pin ${JSON.stringify(responseJson)}`)
-    //dispatch({ type: 'SET_DASHBOARD', payload: { analyticSummary:responseJson.data } })      
-
-  }
-}
-
-
-
-export const editMobileDetail = () => {
-  return async (dispatch, getState) => {
-
-    const { phone_country_code, phone_no } = getState().kycReducer
-    const mobile_no = phone_no
-    const country_code = phone_country_code.replace('0', '')
-    // const personalToken=JSON.parse(AsyncStorage.getItem('personalToken'))
-
-    const responseJson = await apiPostCall(`api/EditMobileDetail`, null,country_code, mobile_no , getState().apiReducer)
-   
-    const { token_type, access_token } = await responseJson
-    await console.log(`sms is ${JSON.stringify(responseJson)}`)  
-
-  }
-}
-
-
  
-export const editMobileDetailVerify = (d) => {
-  return async (dispatch, getState) => {
-
-    const { phone_country_code, phone_no } = getState().kycReducer
-    const mobile_no = phone_no
-    const country_code = phone_country_code.replace('0', '')
-    const code = d
-
-    const responseJson = await apiPostCall(`api/KycMobileVerify`, null,country_code, mobile_no, code, getState().apiReducer)
-   
-    const { status } = await responseJson
-        await console.log(`verification status ${JSON.stringify(status)}`)
-
-        if (status) {
-          await dispatch({ type: 'SET_INDICATOR_PHONE_VERIFICATION', payload: { displayIndicator: false, proceed: true, actionList: false } })
-        } else {
-          await dispatch({ type: 'SET_INDICATOR_PHONE_VERIFICATION', payload: { displayIndicator: false, proceed: false, actionList: true } })
-        }
-
-        //dispatch({ type: 'SET_INDICATOR_PHONE_VERIFICATION', payload: { displayIndicator: false, proceed: true,actionList:false } })
-
-
-
-  }
-}
-
-
 /////////////////////////////
 
 export const urlToBlob = (url) => {
@@ -822,83 +487,4 @@ export const urlToBlob = (url) => {
     xhr.responseType = 'blob'; // convert type
     xhr.send();
   })
-}
-
-// export const uploadImage = async (fileName, blob, contentType) => {
-//   await Storage.put(fileName, blob, contentType).then(data => {
-//     //this.props.savePicture(data.key, kidId)
-//     console.log('save success')
-//     //this.props.navigation.goBack()
-//   })
-//     .catch(err => console.log(err))
-// }
-
-export const pushNotification = (expoToken) => {
-  return async (dispatch, getState) => {
-    const data = { nama: 'Syahrizan' }
-    const to = expoToken//android
-    //const to = 'ExponentPushToken[XXMeNqKO_IQNthjQU8uxgO]'//iphone
-    const title = 'test'
-    const body = 'body'
-
-    fetch(`https://exp.host/--/api/v2/push/send`, {
-      method: 'POST',
-      headers: {
-        'host': 'exp.host',
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'accept-encoding': 'gzip, deflate',
-      },
-      body: JSON.stringify({ data, to, title, body }),
-    }).then((response) => response.json())
-      .then(async (responseJson) => {
-        await console.log(`pay request money : ${JSON.stringify(responseJson)}`)
-      })
-      .catch((error) => {
-        console.log('Error request money : ' + error);
-      });
-  }
-}
-
-
-export const editPersonalDetail = () => {
-  return async (dispatch, getState) => {
-
-    const expoToken = await Notifications.getExpoPushTokenAsync();
-    const dashboard = getState().dashboardScreenReducer.userInfo
-    //const password = getState().editInfoScreenReducer.password
-
-    const test = {
-      first_name: dashboard.name,
-      last_name: expoToken,
-      name: dashboard.name,
-      email: dashboard.email,
-      password: getState().editInfoScreenReducer.password,
-      gender: dashboard.gender,
-      birth_date: moment(dashboard.birth_date).format("YYYY-MM-DD"),
-      nationality: dashboard.nationality,
-      occupation: dashboard.occupation,
-      industry: dashboard.industry,
-      street_address: dashboard.street_address,
-      street_address_2: dashboard.street_address_2,
-      country: dashboard.country,
-      region: 'Asia',
-      city: dashboard.city,
-      postcode: dashboard.postcode,
-      national_id_passport: dashboard.national_id_passport
-    }
-
-
-
-
-    console.log(`dashboard ialah ${JSON.stringify(dashboard)}`)
-    console.log(`expo token ialah ${JSON.stringify(expoToken)}`)
-
-    const responseJson = await apiPostCall(`api/EditPersonalDetail`, null,test, getState().apiReducer)
-   
-    const { status } = await responseJson
-    await console.log(`edit info  ${JSON.stringify(responseJson)}`)
-
-
-  }
 }

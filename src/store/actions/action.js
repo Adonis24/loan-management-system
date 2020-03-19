@@ -8,8 +8,8 @@ Amplify.configure(aws_exports);///
 import s3 from '../../do/DigitalOcean'
 import config from '../../do/config'
 
-import { requestToken,  requestPersonalToken, urlToBlob, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI, requestTokenLMS, registerLMSApi, requestPersonalTokenLMS } from './apiRegistration'
-import {   newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi, acceptApi } from './apiDashboard'
+import { requestToken, requestPersonalToken, urlToBlob, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI, requestTokenLMS, registerLMSApi, requestPersonalTokenLMS } from './apiRegistration'
+import { newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi, acceptApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -96,9 +96,6 @@ export const getPersonalTokenLMS = () => {
 export const login = (values) => {
     return (dispatch, getState) => {
 
-        //const username = getState().loginScreenReducer.email
-        //const password = getState().loginScreenReducer.password
-
         const { email, password } = values
         const username = email
 
@@ -121,7 +118,7 @@ export const loginLMS = (values) => {
 export const contactPerson = () => {
     return (dispatch, getState) => {
         dispatch(companyInfoAPI())
-       }
+    }
 }
 
 export const contactPersonUploadFirst = () => {
@@ -177,11 +174,7 @@ export const detailConnect = () => {
 
 export const declarationSign = () => {
     return (dispatch, getState) => {
-        const declareSign = getState().companyInformationReducer.declareSign
-        const declareName = getState().companyInformationReducer.declareName
-        const declarePosition = getState().companyInformationReducer.declarePosition
-        const declareStamp = getState().companyInformationReducer.declareStamp
-        const declareDate = getState().companyInformationReducer.declareDate
+        const { declareSign, declareName, declarePosition, declareStamp, declareDate } = getState().companyInformationReducer
         dispatch(declarationSignAPI(declareSign, declareName, declarePosition, declareStamp, declareDate))
     }
 }
@@ -445,12 +438,4 @@ export const saveSelfie = (result) => {
 
 
 
-///////////// testing pusher 
 
-
-export const listen = () => {
-
-    return (dispatch, getState) => {
-        dispatch(pusherListen())
-    }
-}
