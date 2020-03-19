@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React from 'react';
+import React,{ useEffect, useState } from 'react';
 import {
     Image,
     Text,
@@ -13,7 +13,9 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Constants from 'expo-constants'
+import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 
+import LayoutA from '../Layout/LayoutA';
 import Layout from '../constants/Layout'
 import { CustomTextInput } from '../components/Custom'
 import styles from '../styles/styles'
@@ -63,19 +65,21 @@ const CompanyContactAddressInformationScreen = (props) => {
 
     const setCompanyInfo = (value) => dispatch({ type: 'SET_COMPANY_INFO', payload: { ...value } })
 
+    useEffect(() => {
+        const open = () => setshowLogo(false)
+        const off = () => setshowLogo(true)
+
+        keyboardBeingDisplay(open)
+        keyboardBeingClose(off)
+    }, []); // empty-array means don't watch for any updates
+
+    const [showLogo, setshowLogo] = useState(true)
 
     //proceedContact && props.navigation.goBack()
 
 
     return (
-        <View style={styles.container}>
-            <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                <View style={{ alignItems: 'flex-start' }}><Image source={require('../assets/images/topLeft.png')} style={{ width: 79, height: 120 }} /></View>
-                <View style={{ alignItems: 'flex-end' }}><Image source={require('../assets/images/bottomRight.png')} style={{ width: 106, height: 92 }} /></View>
-
-            </View>
-            <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
-                <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+       <LayoutA>
                     <Formik
                         initialValues={{ comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode }}
                         validateOnMount
@@ -111,7 +115,7 @@ const CompanyContactAddressInformationScreen = (props) => {
                             return (
 
                                 <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
+                                 {showLogo &&   <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} /> }
                                     <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY ADDRESS</Text>
 
                                     <CustomTextInput
@@ -184,9 +188,7 @@ const CompanyContactAddressInformationScreen = (props) => {
                     </Formik >
 
 
-                </KeyboardAvoidingView>
-            </View>
-        </View>
+           </LayoutA>
     );
 }
 
