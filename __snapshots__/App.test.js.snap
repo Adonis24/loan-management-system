@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> renders correctly 1`] = `null`;
+
+exports[`<WelcomeScreen /> renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "paddingTop": 44,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "flex-start",
+      }
+    }
+  >
+    <Image
+      resizeMode="contain"
+      source={1}
+      style={
+        Object {
+          "width": 750,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+            "width": 600,
+          }
+        }
+      >
+        <Image
+          resizeMode="contain"
+          source={1}
+          style={
+            Object {
+              "height": 266.8,
+              "opacity": 0,
+              "width": 525,
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "#000",
+              "fontFamily": "Montserrat_medium",
+              "fontSize": 14,
+              "margin": 20,
+              "opacity": 0,
+              "textAlign": "center",
+            }
+          }
+        >
+          Welcome to Tent! Sign up now to join us or login to your account
+        </Text>
+        <View
+          style={
+            Object {
+              "opacity": 0,
+            }
+          }
+        >
+          <View
+            accessible={true}
+            focusable={true}
+            isTVSelectable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderColor": "#4A90E2",
+                "borderRadius": 15,
+                "borderWidth": 1,
+                "justifyContent": "center",
+                "margin": 10,
+                "opacity": 1,
+                "paddingBottom": 5,
+                "paddingTop": 5,
+                "width": 300,
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "alignSelf": "center",
+                    "color": "#000",
+                    "fontFamily": "Montserrat_medium",
+                    "fontSize": 14,
+                    "textAlign": "center",
+                  },
+                  Object {
+                    "color": "#4A90E2",
+                  },
+                ]
+              }
+            >
+              Sign Up
+            </Text>
+          </View>
+          <View
+            accessible={true}
+            focusable={true}
+            isTVSelectable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+          >
+            <ViewManagerAdapter_ExpoLinearGradient
+              proxiedProperties={
+                Object {
+                  "colors": Array [
+                    4283288382,
+                    4280720157,
+                  ],
+                  "endPoint": undefined,
+                  "locations": undefined,
+                  "startPoint": undefined,
+                }
+              }
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "borderRadius": 15,
+                    "justifyContent": "center",
+                    "margin": 10,
+                    "paddingBottom": 5,
+                    "paddingTop": 5,
+                    "width": 225,
+                  },
+                  Object {
+                    "borderColor": "#4A90E2",
+                    "borderRadius": 15,
+                    "borderWidth": 1,
+                    "width": 300,
+                  },
+                ]
+              }
+            >
+              <Text
+                style={
+                  Array [
+                    Object {
+                      "alignSelf": "center",
+                      "color": "#000",
+                      "fontFamily": "Montserrat_medium",
+                      "fontSize": 14,
+                      "textAlign": "center",
+                    },
+                    Object {
+                      "color": "#fff",
+                    },
+                  ]
+                }
+              >
+                Log In
+              </Text>
+            </ViewManagerAdapter_ExpoLinearGradient>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
