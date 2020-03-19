@@ -20,7 +20,8 @@ import * as Yup from 'yup';
 import styles from '../styles/styles'
 import { CustomTextInput } from '../components/Custom'
 import * as actionCreator from '../store/actions/action'
-
+import LayoutA from '../Layout/LayoutA';
+import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 
 const validationSchema = Yup.object().shape({
 
@@ -48,97 +49,96 @@ const SignupOtpScreen = (props) => {
         await dispatch(actionCreator.registerOTP())
         await proceed && props.navigation.navigate('SignUpOtpEnter')
     }
+    useEffect(() => {
+        const open = () => setshowLogo(false)
+        const off = () => setshowLogo(true)
 
+        keyboardBeingDisplay(open)
+        keyboardBeingClose(off)
+    }, []); // empty-array means don't watch for any updates
+
+    const [showLogo, setshowLogo] = useState(true)
 
 
     return (
-        <View style={styles.container}>
-            <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                <View style={{ alignItems: 'flex-start' }}>
-                    <Image source={require('../assets/images/topLeft.png')} style={{ width: 79, height: 120 }} />
-                </View>
-                <View style={{ alignItems: 'flex-end' }}>
-                    <Image source={require('../assets/images/bottomRight.png')} style={{ width: 106, height: 92 }} />
-                </View>
 
-            </View>
-            <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
-                <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <LayoutA>
+            <Formik
+                validateOnMount
+                initialValues={{}} onSubmit={(values, actions) => {
+                    console.log(`values formik ialah ${JSON.stringify(values)}`)
+                    setOTP(values)
+                    registerOTP(values)
+                    actions.setSubmitting(false)
+                }
+                }
+                validationSchema={validationSchema}
+            >
+                {FormikProps => {
 
-                    <Formik
-                        validateOnMount
-                        initialValues={{}} onSubmit={(values, actions) => {
-                            console.log(`values formik ialah ${JSON.stringify(values)}`)
-                            setOTP(values)
-                            registerOTP(values)
-                            actions.setSubmitting(false)
-                        }
-                        }
-                        validationSchema={validationSchema}
-                    >
-                        {FormikProps => {
+                    const { phone, countryCode } = FormikProps.values
 
-                            const { phone, countryCode } = FormikProps.values
+                    const phoneError = FormikProps.errors.phone
+                    const phoneTouched = FormikProps.touched.phone
 
-                            const phoneError = FormikProps.errors.phone
-                            const phoneTouched = FormikProps.touched.phone
-
-                            const countryCodeError = FormikProps.errors.countryCode
-                            const countryCodeTouched = FormikProps.touched.countryCode
+                    const countryCodeError = FormikProps.errors.countryCode
+                    const countryCodeTouched = FormikProps.touched.countryCode
 
 
-                            return (
+                    return (
 
 
-                                <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
+                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                          {showLogo &&  <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
 
 
-                                    <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PHONE VERIFICATION</Text>
-                                    <Image source={require('../assets/images/2.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} />
-                                    <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>OTP Verification</Text>
+                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PHONE VERIFICATION</Text>
+                            <Image source={require('../assets/images/2.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} />
+                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>OTP Verification</Text>
 
-                                    <CustomTextInput
-                                        imageUri={require('../assets/images/cc.png')}
-                                        value={countryCode}
-                                        handleChange={FormikProps.handleChange(`countryCode`)}
-                                        handleBlur={FormikProps.handleBlur(`countryCode`)}
-                                        touched={countryCodeTouched}
-                                        error={countryCodeError}
-                                        placeholder={'+6'}
-                                        editable={false}
+                            <CustomTextInput
+                                imageUri={require('../assets/images/cc.png')}
+                                value={countryCode}
+                                handleChange={FormikProps.handleChange(`countryCode`)}
+                                handleBlur={FormikProps.handleBlur(`countryCode`)}
+                                touched={countryCodeTouched}
+                                error={countryCodeError}
+                                placeholder={'+6'}
+                                editable={false}
 
-                                    />
-                                    <CustomTextInput
-                                        imageUri={require('../assets/images/mobile.png')}
-                                        value={phone}
-                                        handleChange={FormikProps.handleChange(`phone`)}
-                                        handleBlur={FormikProps.handleBlur(`phone`)}
-                                        touched={phoneTouched}
-                                        error={phoneError}
-                                        placeholder={'019 123456789'}
-                                        keyboardType={'phone-pad'} 
+                            />
+                            <CustomTextInput
+                                imageUri={require('../assets/images/mobile.png')}
+                                value={phone}
+                                handleChange={FormikProps.handleChange(`phone`)}
+                                handleBlur={FormikProps.handleBlur(`phone`)}
+                                touched={phoneTouched}
+                                error={phoneError}
+                                placeholder={'019 123456789'}
+                                keyboardType={'phone-pad'}
 
-                                    />
+                            />
 
 
-                                    <View style={{ flexDirection: 'row', margin: 5 }}>
-                                        <TouchableOpacity disabled={!FormikProps.isValid || !isInternetReachable} onPress={() => FormikProps.handleSubmit()} style={styles.box}>
-                                            <LinearGradient colors={(FormikProps.isValid && isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
-                                                <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
-                                            </LinearGradient>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box, { backgroundColor: '#5A647F' }]} >
-                                            <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
-                                        </TouchableOpacity>
-                                    </View>
-                                    {/* {indicator && <ActivityIndicator color={'#34c6f4'} style={{ marginLeft: 5 }} />} */}
-                                </View>
+                            <View style={{ flexDirection: 'row', margin: 5 }}>
+                                <TouchableOpacity disabled={!FormikProps.isValid || !isInternetReachable} onPress={() => FormikProps.handleSubmit()} style={styles.box}>
+                                    <LinearGradient colors={(FormikProps.isValid && isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+                                        <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
+                                    </LinearGradient>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => props.navigation.goBack()} style={[styles.box, { backgroundColor: '#5A647F' }]} >
+                                    <Text style={[styles.textDefault, { color: '#fff' }]}>Back</Text>
+                                </TouchableOpacity>
+                            </View>
+                            {/* {indicator && <ActivityIndicator color={'#34c6f4'} style={{ marginLeft: 5 }} />} */}
+                        </View>
 
-                            )
-                        }}
-                    </Formik >
-
+                    )
+                }} 
+            </Formik >
+        </LayoutA>
+  );
+}
 
 
 
@@ -169,12 +169,8 @@ const SignupOtpScreen = (props) => {
                             </TouchableOpacity>
                         </View>
                     </View> */}
-                </KeyboardAvoidingView>
-            </View>
-        </View>
-    );
-}
-
+              
+  
 
 
 export default SignupOtpScreen
