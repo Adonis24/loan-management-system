@@ -3,13 +3,13 @@ import React from 'react';
 import {
     TouchableOpacity,
     View,
-    
+
 } from 'react-native';
 import { WebView } from 'react-native-webview';
-
+import styles from '../styles/styles'
 
 import Constants from 'expo-constants'
-import { shallowEqual, useSelector} from 'react-redux'
+import { shallowEqual, useSelector } from 'react-redux'
 import Layout from '../constants/Layout'
 
 
@@ -26,7 +26,6 @@ const ElearningScreen = (props) => {
     return (
         <View style={styles.container}>
             <WebView source={{ uri }} style={{ flex: 1, backgroundColor: 'transparent' }} />
-
             <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, right: 0, flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <View style={{ flex: 1, alignSelf: 'stretch', justifyContent: 'center', border: 1, borderColor: '#000', alignItems: 'center' }}>
                     <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
