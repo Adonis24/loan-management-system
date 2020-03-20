@@ -54,10 +54,31 @@ const InfoNewsListScreen = (props) => {
         >
             <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
                 {newsArray ? newsArray.length > 0 ?
-                    <ScrollableTabView style={{ width: Layout.window.width }}>
-                        <Latest tabLabel='Latest' nav={nav} hafiz={hafiz} newsArray={newsArray} />
-                        <Popular tabLabel='Popular' nav={nav} hafiz={hafiz} newsArray={newsArray} />
-                    </ScrollableTabView>
+                    <FlatList 
+                   
+                    data={newsArray}
+                        keyExtractor={(item, index) => index.toString()}
+
+                        renderItem={({ item }) =>
+                            <TouchableOpacity
+                                onPress={() => hafiz(item)}
+                                style={{ width:Layout.window.width, marginBottom: 15,  borderWidth: 1, borderColor: 'lightgrey' ,alignSelf:'stretch'}}>
+                                <View style={{ alignSelf:'stretch', flexDirection: 'row', alignSelf: 'stretch' }}>
+                                    <View style={{ flex:2,backgroundColor: 'lightgrey' }}>
+                                        <Image source={{ uri: item.picture }} style={{ flex:1,  height: undefined, width: undefined }} />
+                                    </View>
+                                    <View style={{flex:5,padding:5}} >
+                                        <Text>{item.author}</Text>
+                                        <Text>{item.title}</Text>
+                                        <Text>{item.date}</Text>
+                                        <Text>{item.source}</Text>
+                                        {/* <Text numberOfLines={5} ellipsizeMode='tail'>{item.content}</Text> */}
+                                    </View>
+                                </View>
+                               
+
+                            </TouchableOpacity>
+                        } />
                     : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                         <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14, color: 'lightgrey' }]}>Please check back for latest info soon</Text>
                     </View>
