@@ -211,6 +211,17 @@ const InfoNewsDrawer = () => {
     )
 }
 
+const InsightDrawer = () => {
+    return (
+        <Drawer.Navigator initialRouteName="Withdraw" drawerPosition={'right'} drawerContent={props => {
+            const close = () => { props.navigation.closeDrawer() }
+            const nav = (screen) => { props.navigation.navigate(screen) }
+            return (<FilterBarInfoNews nav={nav} close={close} />)
+        }}>
+            <Drawer.Screen name="Insight" component={InsightStack} />
+        </Drawer.Navigator>
+    )
+}
 
 const InfoNewsStack = () => {
     return (
@@ -238,7 +249,7 @@ const MainTabNav = () => {
                     />
                 ),
             }} />
-            <Tab.Screen name="InsightStack" component={InsightStack} options={{
+            <Tab.Screen name="InsightStack" component={InsightDrawer} options={{
                 tabBarOptions: {
                     activeTintColor: '#4967AE',
                     inactiveTintColor: '#7896dc',
