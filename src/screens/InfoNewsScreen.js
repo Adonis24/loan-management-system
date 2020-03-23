@@ -8,7 +8,7 @@ import {
     View
 
 } from 'react-native';
-
+import moment from 'moment'
 import HTML from 'react-native-render-html'
 
 import Constants from 'expo-constants'
@@ -26,7 +26,7 @@ const InfoNewsScreen = (props) => {
 
     //const item = props.route.param?.test ?? 'NA'
     const { item } = props.route.params;
-    const parseItem=JSON.parse(item)
+    const parseItem = JSON.parse(item)
     console.log(`dapat item : ${JSON.stringify(parseItem)}`)
     return (
         <View style={styles.container}>
@@ -59,9 +59,39 @@ const InfoNewsScreen = (props) => {
                 {/* CONTENT AREA */}
                 <View style={{ flex: 4 }}>
                     <ScrollView style={{ flex: 1 }}>
-                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center', pading: 20 }}>
+                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'flex-start', pading: 20 }}>
+                            <View style={{ margin: 20, marginBottom: 0, alignSelf: 'stretch', flexDirection: 'row',justifyContent:'space-between' }}>
+                                <View style={{ flexDirection: 'row',alignItems:'center' }}>
+                                    <View style={{flexDirection:'row',marginRight:10}}>
+                                    <Text style={styles.textSmall}>Local</Text>
+                                    <Text style={styles.textSmall}> |</Text>
+                                    <Text style={styles.textSmall}> Technology</Text>
+                                    </View>
+                                    <TouchableOpacity
+                                        style={{ margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
+                                        onPress={() => console.log('tag pressed')}>
+                                        <Text style={[styles.textSmall, {}]}>TEKUN</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={{ margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
+                                        onPress={() => console.log('tag pressed')}>
+                                        <Text style={[styles.textSmall, {}]}>MALAS</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <Ionicons name="ios-bookmark" color={'lightgrey'} style={{ fontSize: 27, paddingRight: 5, paddingLeft: 5 }} />
 
-                            <HTML html={parseItem.content} imagesMaxWidth={Layout.window.width} style={{ margin: 10 }} containerStyle={{ padding: 10, margin: 10 }} />
+                            </View>
+                            <View style={{ margin: 20, marginBottom: 0, alignSelf: 'stretch' }}>
+                                <Text style={[styles.textDefault, { textTransform: 'uppercase', marginBottom: 5, textAlign: 'justify' }]}>{parseItem.title}</Text>
+
+                                <Text style={styles.textSmall}>{parseItem.author}, {parseItem.source}</Text>
+                                <Text style={styles.textSmall}>Published on {moment(parseItem.date).format("ddd, MMM D, YYYY")}</Text>
+                            </View>
+
+                            <HTML html={parseItem.content}
+                                imagesMaxWidth={Layout.window.width}
+                                style={{ margin: 10 }}
+                                containerStyle={{ padding: 10, margin: 10 }} />
 
                         </View>
                     </ScrollView>
