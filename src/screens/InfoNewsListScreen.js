@@ -73,9 +73,9 @@ const InfoNewsListScreen = (props) => {
 
                     </View> :
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10, flex: 1, padding: 10 }}>
-
-                        <TextInput placeholder='Please Enter Keyword' style={[styles.searchBar, { flex: 4 }]} onChangeText={(val) => console.log(val)} />
-
+                        <View style={{ flex: 4, borderBottomColor: 'lightgrey', borderBottomWidth: 1 }}>
+                            <TextInput placeholder='Please Enter Keyword' style={[styles.searchBar, { flex: 4 }]} onChangeText={(val) => console.log(val)} />
+                        </View>
                         <TouchableOpacity onPress={props.navigation.openDrawer} >
                             <Ionicons name="ios-options" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5 }} />
                         </TouchableOpacity>
@@ -88,13 +88,13 @@ const InfoNewsListScreen = (props) => {
             <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
                 {newsArray ? newsArray.length > 0 ?
                     <FlatList
-
+                        contentContainerStyle={{ paddingLeft: 10, paddingRight: 10 }}
                         data={newsArray}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item }) =>
                             <TouchableOpacity
                                 onPress={() => hafiz(item)}
-                                style={{ width: Layout.window.width, marginBottom: 15, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch' }}>
+                                style={{ width: Layout.window.width - 20, marginBottom: 15, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch' }}>
                                 <View style={{ alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch' }}>
                                     <View style={{ padding: 5, flex: 2, }}>
                                         <Image source={{ uri: item.picture }} style={{ flex: 1, height: undefined, width: undefined }} />
@@ -106,7 +106,7 @@ const InfoNewsListScreen = (props) => {
                                         </View>
                                         <Text style={[styles.textDefault, { textTransform: 'uppercase', marginBottom: 5, textAlign: 'justify' }]}>{item.title}</Text>
                                         <Text numberOfLines={3} ellipsizeMode='tail' style={[styles.textSmall, { marginBottom: 5 }]}>{striptags(item.content)}</Text>
-                                        <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between',alignItems:'center' }}>
+                                        <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between', alignItems: 'center' }}>
                                             <View style={{ flexDirection: 'row' }}>
                                                 <TouchableOpacity
                                                     style={{ margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
