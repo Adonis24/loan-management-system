@@ -15,9 +15,7 @@ const elevationShadowStyle = (elevation) => {
 export default StyleSheet.create({
     container: { flex: 1, paddingTop: Constants.statusBarHeight, backgroundColor: '#fff' },
     textDefault: {
-        fontSize: 14,
-        alignSelf: 'center',
-        textAlign: 'center',
+        fontSize: 14,     
         fontFamily: 'Montserrat_medium',
         color: '#000'
     },
@@ -32,7 +30,6 @@ export default StyleSheet.create({
     },
     textBold: {
         fontSize: 17,
-
         fontFamily: 'Montserrat_bold',
         color: '#000'
     },
@@ -50,6 +47,7 @@ export default StyleSheet.create({
         fontFamily: 'Montserrat_medium',
         color: '#2C4690'
     },
+    textSmall:{ fontSize:10,fontFamily: 'Montserrat_medium',},
     shadow: {
         shadowColor: "#000",
         shadowOffset: {

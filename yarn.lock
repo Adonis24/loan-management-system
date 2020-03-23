@@ -1855,6 +1855,14 @@
     query-string "^6.4.2"
     react-is "^16.8.6"
 
+"@react-navigation/drawer@^5.3.3":
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/@react-navigation/drawer/-/drawer-5.3.3.tgz#c24e72f5ed81231adefc0d22c0fa43ae83bb61c5"
+  integrity sha512-ZXY+taFv2KIdDly9yeGRcUvT+GPskPOqjzL6kuWh7DtElWzSvU4hHAQICn6D/Zg0V4jFNdLYfh8w9oYDu2T0zA==
+  dependencies:
+    color "^3.1.2"
+    react-native-iphone-x-helper "^1.2.1"
+
 "@react-navigation/native@^5.0.9":
   version "5.0.9"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.0.9.tgz#bbd22928f0fbe808a96dd525ebeb9a1aa0b82900"
@@ -8277,6 +8285,11 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
+
+striptags@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/striptags/-/striptags-3.1.1.tgz#c8c3e7fdd6fb4bb3a32a3b752e5b5e3e38093ebd"
+  integrity sha1-yMPn/db7S7OjKjt1LltePjgJPr0=
 
 sudo-prompt@^9.0.0:
   version "9.1.1"
