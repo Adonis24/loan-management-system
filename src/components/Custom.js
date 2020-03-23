@@ -41,7 +41,7 @@ export const CustomFormAction = (props) => {
 
         <View style={{ flexDirection: 'row', margin: 5 }}>
         <TouchableOpacity disabled={!isValid || !isInternetReachable} onPress={handleSubmit} style={styles.box}>
-            <LinearGradient colors={(isValid && isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center' }}>
+            <LinearGradient colors={(isValid && isInternetReachable) ? ['#4DCB3E', '#269B1D',] : ['rgba(77,203,62,0.5)', 'rgba(38,155,29,0.5)',]} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0, borderRadius: 15, justifyContent: 'center',alignItems:'center' }}>
                 <Text style={[styles.textDefault, { color: '#fff' }]}>Next</Text>
             </LinearGradient>
         </TouchableOpacity>
