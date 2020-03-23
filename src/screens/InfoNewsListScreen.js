@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Image,
     ScrollView,
@@ -7,27 +7,25 @@ import {
     TouchableOpacity,
     View,
     FlatList,
-    ActivityIndicator
+    ActivityIndicator,
+    TextInput
 
 } from 'react-native';
-
-
+import { Ionicons } from '@expo/vector-icons';
+import striptags from 'striptags'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Layout from '../constants/Layout'
-
+import moment from 'moment'
 import styles from '../styles/styles'
-import ScrollableTabView from 'react-native-scrollable-tab-view'
 
 import * as actionCreator from '../store/actions/action'
 import LayoutB from '../Layout/LayoutB';
 
+const tags = ['current', 'latest', 'finance', 'commerce', 'covid-19', 'mro']
+
 
 const InfoNewsListScreen = (props) => {
-
-    const nav = (screen, item) => {
-        props.navigation.navigate(screen, { item })
-    }
 
     const hafiz = (item) => {
         console.log(`item ialah : ${JSON.stringify(item)}`)
@@ -44,6 +42,8 @@ const InfoNewsListScreen = (props) => {
 
     }, []); // empty-array means don't watch for any updates
 
+    const [tagMode, setTagMode] = useState(true)
+
     return (
 
         < LayoutB
@@ -52,30 +52,78 @@ const InfoNewsListScreen = (props) => {
             navigation={props.navigation}
             imageUri={require('../assets/images/news.png')}
         >
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 10 }}>
+
+                {tagMode ?
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10, flex: 1, }}>
+                        <FlatList
+                            contentContainerStyle={{ padding: 10 }}
+                            horizontal
+                            data={tags}
+                            keyExtractor={(item, index) => index.toString()}
+                            renderItem={({ item }) =>
+                                <TouchableOpacity
+                                    style={{ margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
+                                    onPress={() => console.log('tag pressed')}>
+                                    <Text style={styles.textSmall}>{item}</Text>
+                                </TouchableOpacity>} />
+                        <TouchableOpacity onPress={() => setTagMode(false)}>
+                            <Ionicons name="ios-search" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5, paddingLeft: 5 }} />
+                        </TouchableOpacity>
+
+                    </View> :
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10, flex: 1, padding: 10 }}>
+
+                        <TextInput placeholder='Please Enter Keyword' style={[styles.searchBar, { flex: 4 }]} onChangeText={(val) => console.log(val)} />
+
+                        <TouchableOpacity onPress={props.navigation.openDrawer} >
+                            <Ionicons name="ios-options" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5 }} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setTagMode(true)}>
+                            <Ionicons name="ios-pricetags" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5, paddingLeft: 5 }} />
+                        </TouchableOpacity>
+                    </View>}
+
+            </View>
             <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
                 {newsArray ? newsArray.length > 0 ?
-                    <FlatList 
-                   
-                    data={newsArray}
-                        keyExtractor={(item, index) => index.toString()}
+                    <FlatList
 
+                        data={newsArray}
+                        keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item }) =>
                             <TouchableOpacity
                                 onPress={() => hafiz(item)}
-                                style={{ width:Layout.window.width, marginBottom: 15,  borderWidth: 1, borderColor: 'lightgrey' ,alignSelf:'stretch'}}>
-                                <View style={{ alignSelf:'stretch', flexDirection: 'row', alignSelf: 'stretch' }}>
-                                    <View style={{ flex:2,backgroundColor: 'lightgrey' }}>
-                                        <Image source={{ uri: item.picture }} style={{ flex:1,  height: undefined, width: undefined }} />
+                                style={{ width: Layout.window.width, marginBottom: 15, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch' }}>
+                                <View style={{ alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch' }}>
+                                    <View style={{ padding: 5, flex: 2, }}>
+                                        <Image source={{ uri: item.picture }} style={{ flex: 1, height: undefined, width: undefined }} />
                                     </View>
-                                    <View style={{flex:5,padding:5}} >
-                                        <Text>{item.author}</Text>
-                                        <Text>{item.title}</Text>
-                                        <Text>{item.date}</Text>
-                                        <Text>{item.source}</Text>
-                                        {/* <Text numberOfLines={5} ellipsizeMode='tail'>{item.content}</Text> */}
+                                    <View style={{ flex: 5, padding: 5 }} >
+                                        <View style={{ flexDirection: 'row', marginBottom: 5 }}>
+                                            <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.textSmall, { flex: 1 }}>{item.source}</Text>
+                                            <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.textSmall, { flex: 1, textAlign: 'right' }}>{moment(item.date).format("ddd, MMM D, YYYY")}</Text>
+                                        </View>
+                                        <Text style={[styles.textDefault, { textTransform: 'uppercase', marginBottom: 5, textAlign: 'justify' }]}>{item.title}</Text>
+                                        <Text numberOfLines={3} ellipsizeMode='tail' style={[styles.textSmall, { marginBottom: 5 }]}>{striptags(item.content)}</Text>
+                                        <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between',alignItems:'center' }}>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <TouchableOpacity
+                                                    style={{ margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
+                                                    onPress={() => console.log('tag pressed')}>
+                                                    <Text style={[styles.textSmall, {}]}>TEKUN</Text>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity
+                                                    style={{ margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
+                                                    onPress={() => console.log('tag pressed')}>
+                                                    <Text style={[styles.textSmall, {}]}>MALAS</Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                            <Ionicons name="ios-bookmark" color={'lightgrey'} style={{ fontSize: 15, paddingRight: 5, paddingLeft: 5 }} />
+                                        </View>
                                     </View>
                                 </View>
-                               
+
 
                             </TouchableOpacity>
                         } />
@@ -101,7 +149,6 @@ const Latest = (props) => {
                     keyExtractor={(item, index) => index.toString()}
 
                     renderItem={({ item }) => (
-
                         <TouchableOpacity onPress={() => props.hafiz(item)}>
                             <Image source={{ uri: item.picture }} style={{ flex: 1, width: Layout.window.width - 10, height: Layout.window.height * 0.2, margin: 5, borderRadius: 10 }} resizeMode={'cover'} />
                         </TouchableOpacity>

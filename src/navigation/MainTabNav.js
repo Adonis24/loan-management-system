@@ -2,8 +2,10 @@ import React from 'react';
 import { Platform, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 import TabBarIcon from '../components/TabBarIcon';
 
@@ -79,6 +81,7 @@ import BillScreen from '../screens/BillScreen';
 import DeliveryScreen from '../screens/DeliveryScreen';
 import UnderConstructionScreen from '../screens/UnderConstructionScreen';
 import EAdvertisementScreen from '../screens/EAdvertisementScreen';
+import FilterBarInfoNews from './FilterBarInfoNews';
 
 
 
@@ -102,10 +105,10 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="InfoEvent" component={InfoEventScreen} />
             <Stack.Screen name="InfoEventList" component={InfoEventListScreen} />
             <Stack.Screen name="InfoNews" component={InfoNewsScreen} />
-            <Stack.Screen name="InfoNewsList" component={InfoNewsListScreen} />
+            <Stack.Screen name="InfoNewsList" component={InfoNewsDrawer} />
             <Stack.Screen name="BizHub" component={BusinessHubScreen} />
             <Stack.Screen name="PromotionList" component={PromotionListScreen} />
-            <Stack.Screen name="Promotion" component={PromotionScreen } />
+            <Stack.Screen name="Promotion" component={PromotionScreen} />
             <Stack.Screen name="HandbookList" component={HandbookListScreen} />
             <Stack.Screen name="Handbook" component={HandbookScreen} />
             <Stack.Screen name="MyScore" component={MyScoreScreen} />
@@ -125,7 +128,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="Elearning" component={ElearningScreen} />
             <Stack.Screen name="EcommerceDetail" component={EcommerceDetailScreen} />
             <Stack.Screen name="EAdvertisement" component={EAdvertisementScreen} />
-            
+
             <Stack.Screen name="Ecommerce" component={EcommerceScreen} />
             <Stack.Screen name="Edonation" component={EdonationScreen} />
             <Stack.Screen name="Loan" component={LoanCalculatorScreen} />
@@ -176,6 +179,8 @@ const NotificationStack = () => {
 
 
 
+
+
 const SettingsStack = () => {
     return (
         <Stack.Navigator initialRouteName="Settings" screenOptions={{ headerShown: false }}>
@@ -189,6 +194,30 @@ const SettingStackWithModal = () => {
         <Stack.Navigator initialRouteName="Settings" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Settings" component={SettingsStack} />
             <Stack.Screen name="CameraSelfie" component={CameraSelfieScreen} />
+        </Stack.Navigator>
+    )
+}
+
+
+const InfoNewsDrawer = () => {
+    return (
+        <Drawer.Navigator initialRouteName="Withdraw" drawerPosition={'right'} drawerContent={props => {
+            const close = () => { props.navigation.closeDrawer() }
+            const nav = (screen) => { props.navigation.navigate(screen) }
+            return (<FilterBarInfoNews nav={nav} close={close} />)
+        }}>
+            <Drawer.Screen name="InfoNewsList" component={InfoNewsStack} />
+        </Drawer.Navigator>
+    )
+}
+
+
+const InfoNewsStack = () => {
+    return (
+        <Stack.Navigator initialRouteName="InfoNewsList" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="InfoNewsList" component={InfoNewsListScreen} />
+            <Stack.Screen name="InfoNews" component={InfoNewsScreen} />
+
         </Stack.Navigator>
     )
 }
@@ -208,7 +237,7 @@ const MainTabNav = () => {
                         name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
                     />
                 ),
-            }}   />
+            }} />
             <Tab.Screen name="InsightStack" component={InsightStack} options={{
                 tabBarOptions: {
                     activeTintColor: '#4967AE',
@@ -220,7 +249,7 @@ const MainTabNav = () => {
                         name={Platform.OS === 'ios' ? 'ios-contacts' : 'md-contacts'}
                     />
                 ),
-            }}  />
+            }} />
             <Tab.Screen name="NotificationStack" component={NotificationStack} options={{
                 tabBarOptions: {
                     activeTintColor: '#4967AE',
