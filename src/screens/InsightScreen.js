@@ -1,13 +1,15 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React, { useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import {
     Image,
     Text,
     View,
-    FlatList
+    FlatList,
+    TouchableOpacity,
+    TextInput,
 
 } from 'react-native';
-
+import { Ionicons } from '@expo/vector-icons';
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import Layout from '../constants/Layout'
@@ -16,6 +18,8 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import styles from '../styles/styles'
 
 import * as actionCreator from '../store/actions/action'
+
+const tags = ['current', 'latest', 'finance', 'commerce', 'covid-19', 'mro']
 
 
 
@@ -32,7 +36,7 @@ const InsightScreen = (props) => {
         console.log(`ini kat screen contact sudah : ${JSON.stringify(props.assoDirArray)}`)
     }, []); // empty-array means don't watch for any updates
 
-
+    const [tagMode, setTagMode] = useState(true)
 
 
     return (
@@ -65,6 +69,40 @@ const InsightScreen = (props) => {
                         </View>
                     </View>
                 </View>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 10 }}>
+                {tagMode ?
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10, flex: 1, }}>
+                        <FlatList
+                            contentContainerStyle={{ padding: 10 }}
+                            horizontal
+                            data={tags}
+                            keyExtractor={(item, index) => index.toString()}
+                            renderItem={({ item }) =>
+                                <TouchableOpacity
+                                    style={{ margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
+                                    onPress={() => console.log('tag pressed')}>
+                                    <Text style={styles.textSmall}>{item}</Text>
+                                </TouchableOpacity>} />
+                        <TouchableOpacity onPress={() => setTagMode(false)}>
+                            <Ionicons name="ios-search" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5, paddingLeft: 5 }} />
+                        </TouchableOpacity>
+
+                    </View> :
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10, flex: 1, padding: 10 }}>
+
+                        <TextInput placeholder='Please Enter Keyword' style={[styles.searchBar, { flex: 4 }]} onChangeText={(val) => console.log(val)} />
+
+                        <TouchableOpacity onPress={props.navigation.openDrawer} >
+                            <Ionicons name="ios-options" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5 }} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setTagMode(true)}>
+                            <Ionicons name="ios-pricetags" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5, paddingLeft: 5 }} />
+                        </TouchableOpacity>
+                    </View>}
+
+            </View>
+
                 {/* CONTENT AREA */}
                 <View style={{ flex: 4 }}>
                     <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, paddingBottom: 10, marginBottom: 20 }]}>
