@@ -5,7 +5,8 @@ import {
     ScrollView,
     Text,
     TouchableOpacity,
-    View
+    View,
+    Share
 
 } from 'react-native';
 import moment from 'moment'
@@ -22,6 +23,26 @@ import styles from '../styles/styles'
 
 
 const InfoNewsScreen = (props) => {
+
+    const onShare = async () => {
+        try {
+            const result = await Share.share({
+                message: 'https://www.google.com', url: 'https://www.google.com', title: 'what what'
+            }, { dialogTitle: 'test', subject: 'test' });
+
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    console.log(`share berjaya :${JSON.stringify(result.activityType)}` )
+                } else {
+                    console.log(`share tak berjaya` )
+                }
+            } else if (result.action === Share.dismissedAction) {
+                console.log(`share dismissed` )
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    };
 
 
     //const item = props.route.param?.test ?? 'NA'
@@ -60,12 +81,12 @@ const InfoNewsScreen = (props) => {
                 <View style={{ flex: 4 }}>
                     <ScrollView style={{ flex: 1 }}>
                         <View style={{ flex: 5, justifyContent: 'center', alignItems: 'flex-start', pading: 20 }}>
-                            <View style={{ margin: 20, marginBottom: 0, alignSelf: 'stretch', flexDirection: 'row',justifyContent:'space-between' }}>
-                                <View style={{ flexDirection: 'row',alignItems:'center' }}>
-                                    <View style={{flexDirection:'row',marginRight:10}}>
-                                    <Text style={styles.textSmall}>Local</Text>
-                                    <Text style={styles.textSmall}> |</Text>
-                                    <Text style={styles.textSmall}> Technology</Text>
+                            <View style={{ margin: 20, marginBottom: 0, alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <View style={{ flexDirection: 'row', marginRight: 10 }}>
+                                        <Text style={styles.textSmall}>Local</Text>
+                                        <Text style={styles.textSmall}> |</Text>
+                                        <Text style={styles.textSmall}> Technology</Text>
                                     </View>
                                     <TouchableOpacity
                                         style={{ margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
@@ -78,7 +99,12 @@ const InfoNewsScreen = (props) => {
                                         <Text style={[styles.textSmall, {}]}>MALAS</Text>
                                     </TouchableOpacity>
                                 </View>
-                                <Ionicons name="ios-bookmark" color={'lightgrey'} style={{ fontSize: 27, paddingRight: 5, paddingLeft: 5 }} />
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Ionicons name="ios-bookmark" color={'lightgrey'} style={{ fontSize: 25, paddingRight: 5, paddingLeft: 5 }} />
+                                    <TouchableOpacity onPress={() => onShare()}>
+                                        <Ionicons name="md-share" color={'lightgrey'} style={{ fontSize: 25, paddingRight: 5, paddingLeft: 5 }} />
+                                    </TouchableOpacity>
+                                </View>
 
                             </View>
                             <View style={{ margin: 20, marginBottom: 0, alignSelf: 'stretch' }}>
@@ -91,6 +117,7 @@ const InfoNewsScreen = (props) => {
                             <HTML html={parseItem.content}
                                 imagesMaxWidth={Layout.window.width}
                                 style={{ margin: 10 }}
+                                baseFontStyle={{color:'grey',fontFamily : 'Montserrat_medium',fontSize:14*0.8}}
                                 containerStyle={{ padding: 10, margin: 10 }} />
 
                         </View>

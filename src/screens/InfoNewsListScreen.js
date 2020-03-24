@@ -88,21 +88,21 @@ const InfoNewsListScreen = (props) => {
             <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
                 {newsArray ? newsArray.length > 0 ?
                     <FlatList
-                        contentContainerStyle={{ paddingLeft: 10, paddingRight: 10 }}
+                        contentContainerStyle={{ paddingLeft: 0, paddingRight: 0 }}
                         data={newsArray}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item }) =>
                             <TouchableOpacity
                                 onPress={() => hafiz(item)}
-                                style={{ width: Layout.window.width - 20, marginBottom: 15, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch' }}>
+                                style={{ width: Layout.window.width-10 , marginBottom: 10, borderBottomWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch' }}>
                                 <View style={{ alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch' }}>
                                     <View style={{ padding: 5, flex: 2, }}>
                                         <Image source={{ uri: item.picture }} style={{ flex: 1, height: undefined, width: undefined }} />
                                     </View>
                                     <View style={{ flex: 5, padding: 5 }} >
                                         <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                                            <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.textSmall, { flex: 1 }}>{item.source}</Text>
-                                            <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.textSmall, { flex: 1, textAlign: 'right' }}>{moment(item.date).format("ddd, MMM D, YYYY")}</Text>
+                                            <Text numberOfLines={1} ellipsizeMode={'tail'} style={[styles.textSmall, { flex: 1 }]}>{item.source}</Text>
+                                            <Text numberOfLines={1} ellipsizeMode={'tail'} style={[styles.textSmall, { flex: 1, textAlign: 'right' }]}>{moment(item.date).format("ddd, MMM D, YYYY")}</Text>
                                         </View>
                                         <Text style={[styles.textDefault, { textTransform: 'uppercase', marginBottom: 5, textAlign: 'justify' }]}>{item.title}</Text>
                                         <Text numberOfLines={3} ellipsizeMode='tail' style={[styles.textSmall, { marginBottom: 5 }]}>{striptags(item.content)}</Text>
@@ -119,7 +119,7 @@ const InfoNewsListScreen = (props) => {
                                                     <Text style={[styles.textSmall, {}]}>MALAS</Text>
                                                 </TouchableOpacity>
                                             </View>
-                                            <Ionicons name="ios-bookmark" color={'lightgrey'} style={{ fontSize: 15, paddingRight: 5, paddingLeft: 5 }} />
+                                            <Ionicons name="ios-bookmark" color={'lightgrey'} style={{ fontSize: 17, paddingRight: 5, paddingLeft: 5 }} />
                                         </View>
                                     </View>
                                 </View>
