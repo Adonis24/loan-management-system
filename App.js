@@ -174,6 +174,7 @@ const _loadResourcesAsync = async () => {
       require('./src/assets/images/tekunB.png'),
       require('./src/assets/images/tekunC.png'),
       require('./src/assets/images/tekunD.png'),
+      require('./src/assets/images/tekunE.png'),
 
       require('./src/assets/images/girl.png'),
       require('./src/assets/images/intro2.png'),

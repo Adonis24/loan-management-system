@@ -8,7 +8,8 @@ import {
     Animated,
     Easing,
     Modal,
-    FlatList
+    FlatList,
+    ActivityIndicator
 
 
 } from 'react-native';
@@ -115,12 +116,16 @@ const DashboardScreen = (props) => {
         outputRange: [0, 1,]
     })
 
+    const ratio = Layout.window.width / (Layout.window.height / 3.5)
+    console.log(`width : ${Layout.window.width}`)
+    console.log(`height : ${Layout.window.height}`)
+    console.log(`ratio : ${ratio}`)
 
 
     return (
         <View style={styles.container}>
             <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                <Image source={require('../assets/images/tekunD.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
+                <Image source={require('../assets/images/tekunE.png')} style={{ width: Layout.window.width,height:Layout.window.height/3.5 }} resizeMode={'cover'} />
             </View>
             <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                 {/* HEADER */}
