@@ -81,7 +81,33 @@ const FinancingScreen = (props) => {
                     </View>
                 </View>
                 <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
-                   <Text>Bla</Text>
+                    {agencyArray ? agencyArray.length > 0 ?
+                        <ScrollableTabView style={{ width: Layout.window.width }}>
+                            <Micro tabLabel='Providers' nav={nav} agencyArray={agencyArray} applyFinance={applyFinance} />
+                            <SME tabLabel='Status' nav={nav} grantStatusArray={grantStatusArray} current_page={current_page} last_page={last_page} changePage={changePage} />
+
+                        </ScrollableTabView>
+                        : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                            <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14, color: 'lightgrey' }]}>Please check back for latest info soon</Text>
+
+                        </View>
+                        :
+                        <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                            <ActivityIndicator color={'grey'} />
+                        </View>
+
+                    }
+
+
+                    {/* {agencyArray && agencyArray.length > 0 &&
+                        <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
+                            <Tab heading="Providers">
+                                <Micro nav={nav} agencyArray={agencyArray} applyFinance={applyFinance} />
+                            </Tab>
+                            <Tab heading="Status">
+                                <SME nav={nav} grantStatusArray={grantStatusArray} current_page={current_page} last_page={last_page} changePage={changePage} />
+                            </Tab>
+                        </Tabs>} */}
 
                 </View>
             </View>

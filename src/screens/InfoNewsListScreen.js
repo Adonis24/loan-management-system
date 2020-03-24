@@ -52,10 +52,10 @@ const InfoNewsListScreen = (props) => {
             navigation={props.navigation}
             imageUri={require('../assets/images/news.png')}
         >
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 10 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end',  }}>
 
                 {tagMode ?
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10, flex: 1, }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center',  flex: 1, }}>
                         <FlatList
                             contentContainerStyle={{ padding: 10 }}
                             horizontal
@@ -68,7 +68,7 @@ const InfoNewsListScreen = (props) => {
                                     <Text style={styles.textSmall}>{item}</Text>
                                 </TouchableOpacity>} />
                         <TouchableOpacity onPress={() => setTagMode(false)}>
-                            <Ionicons name="ios-search" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5, paddingLeft: 5 }} />
+                            <Ionicons name="ios-search" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5, paddingLeft: 10 }} />
                         </TouchableOpacity>
 
                     </View> :
@@ -77,10 +77,10 @@ const InfoNewsListScreen = (props) => {
                             <TextInput placeholder='Please Enter Keyword' style={[styles.searchBar, { flex: 4 }]} onChangeText={(val) => console.log(val)} />
                         </View>
                         <TouchableOpacity onPress={props.navigation.openDrawer} >
-                            <Ionicons name="ios-options" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5 }} />
+                            <Ionicons name="ios-options" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5,paddingLeft: 10 }} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => setTagMode(true)}>
-                            <Ionicons name="ios-pricetags" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5, paddingLeft: 5 }} />
+                            <Ionicons name="ios-pricetags" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5,  }} />
                         </TouchableOpacity>
                     </View>}
 
