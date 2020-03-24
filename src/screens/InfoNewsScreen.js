@@ -105,7 +105,6 @@ const InfoNewsScreen = (props) => {
                                         <Ionicons name="md-share" color={'lightgrey'} style={{ fontSize: 25, paddingRight: 5, paddingLeft: 5 }} />
                                     </TouchableOpacity>
                                 </View>
-
                             </View>
                             <View style={{ margin: 20, marginBottom: 0, alignSelf: 'stretch' }}>
                                 <Text style={[styles.textDefault, { textTransform: 'uppercase', marginBottom: 5, textAlign: 'justify' }]}>{parseItem.title}</Text>
