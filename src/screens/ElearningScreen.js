@@ -14,7 +14,7 @@ import styles from '../styles/styles'
 import Constants from 'expo-constants'
 import { shallowEqual, useSelector } from 'react-redux'
 import LayoutB from '../Layout/LayoutB'
-
+import { LinearGradient } from 'expo-linear-gradient'
 
 const ElearningScreen = (props) => {
 
@@ -44,11 +44,14 @@ const ElearningScreen = (props) => {
             navigation={props.navigation}
             imageUri={require('../assets/images/news.png')}
         >
-            <View style={{ borderWidth: 1, borderColor: 'lightgrey', padding: 10, alignSelf: 'stretch' }}>
-                <Text style={styles.textSmall}>For better learning experience, please got to the website by clicking the button below :</Text>
-                <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity onPress={() => _handlePressButtonAsync()} style={{ backgroundColor: '#4DCB3E', padding: 5, borderRadius: 10, marginTop: 5 }}>
-                        <Text style={styles.textDefault, { color: '#fff' }}>TEKUN Academy</Text>
+            <View style={{ margin: 10 }} />
+            <View style={{ borderWidth: 1, borderColor: 'lightgrey', padding: 10, margin: 10, alignSelf: 'stretch', borderRadius: 15 }}>
+                <Text style={styles.textSmall}>For better learning experience, please go to the website by clicking the button below :</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                    <TouchableOpacity onPress={() => _handlePressButtonAsync()} style={{ marginTop: 5 }} >
+                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ backgroundColor: '#4DCB3E', padding: 5, borderRadius: 10, }}>
+                            <Text style={[styles.textSmall, { color: '#fff' }]}>TEKUN Academy</Text>
+                        </LinearGradient>
                     </TouchableOpacity>
                 </View>
             </View>
