@@ -20,7 +20,7 @@ export default StyleSheet.create({
     textDefault: {
         fontSize,
         fontFamily,
-        color: '#000'
+        color: 'grey'
     },
     headText: {
         fontSize: fontSize * 1.25,
@@ -51,9 +51,9 @@ export default StyleSheet.create({
         color: '#2C4690'
     },
     textSmall: {
-        fontSize:
-            fontSize * 0.8,
+        fontSize: fontSize * 0.8,
         fontFamily,
+        color:'grey'
     },
     shadow: {
         shadowColor: "#000",
@@ -101,7 +101,6 @@ export default StyleSheet.create({
         alignItems: 'center',
         margin: 10
     },
-
 
 });
 

@@ -116,12 +116,16 @@ const DashboardScreen = (props) => {
         outputRange: [0, 1,]
     })
 
+    const ratio = Layout.window.width / (Layout.window.height / 3.5)
+    console.log(`width : ${Layout.window.width}`)
+    console.log(`height : ${Layout.window.height}`)
+    console.log(`ratio : ${ratio}`)
 
 
     return (
         <View style={styles.container}>
             <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                <Image source={require('../assets/images/tekunD.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
+                <Image source={require('../assets/images/tekunE.png')} style={{ width: Layout.window.width, height: Layout.window.height / 3.5 }} resizeMode={'cover'} />
             </View>
             <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                 {/* HEADER */}
@@ -203,7 +207,7 @@ const DashboardScreen = (props) => {
 
                                         </View>
                                     </View>
-                                    <View style={{ margin: 10 }} />
+
                                 </View>
                                 <View style={{ margin: 10 }} />
                             </View>
@@ -223,7 +227,7 @@ const DashboardScreen = (props) => {
                             </View> :
                                 <View />
                         }
-                        {/**Highlight */}
+                        {/**Advertisement */}
 
 
                         <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
@@ -235,16 +239,16 @@ const DashboardScreen = (props) => {
                             </View>
 
                             {advert ? <FlatList
-                                contentContainerStyle={{ paddingLeft: 10, paddingRight: 10 }}
+                                contentContainerStyle={{ paddingLeft: 0, paddingRight: 0 }}
                                 horizontal
                                 data={advert}
                                 keyExtractor={(item, index) => index.toString()}
                                 renderItem={({ item }) =>
-                                    <TouchableOpacity onPress={() => console.log(`navigate('None')`)} style={{ margin: 10 }}  >
+                                    <TouchableOpacity onPress={() => console.log(`navigate('None')`)} style={{ margin: 0 }}  >
                                         <Image source={require('../assets/images/banner1.png')} style={styles.banner} resizeMode={'cover'} />
                                     </TouchableOpacity>}
                             /> : <Text>No Advert</Text>}
-
+                            <View style={{ margin: 10 }} />
                         </View>
                         {/**Latest Info */}
                         <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
@@ -256,23 +260,23 @@ const DashboardScreen = (props) => {
                             </View>
                             {newsArray ? newsArray.length > 0 ?
                                 <FlatList
-                                    contentContainerStyle={{ paddingLeft: 10, paddingRight: 10 }}
+                                    contentContainerStyle={{ paddingLeft: 0, paddingRight: 0 }}
                                     data={newsArray}
                                     keyExtractor={(item, index) => index.toString()}
                                     renderItem={({ item }) =>
                                         <TouchableOpacity
                                             onPress={() => hafiz(item)}
-                                            style={{ width: Layout.window.width - 20, marginBottom: 15, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch' }}>
+                                            style={{ width: Layout.window.width - 20, marginBottom: 5, borderBottomWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch' }}>
                                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch' }}>
                                                 <View style={{ padding: 5, flex: 2, }}>
                                                     <Image source={{ uri: item.picture }} style={{ flex: 1, height: undefined, width: undefined }} />
                                                 </View>
                                                 <View style={{ flex: 5, padding: 5 }} >
                                                     <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                                                        <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.textSmall, { flex: 1 }}>{item.source}</Text>
-                                                        <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.textSmall, { flex: 1, textAlign: 'right' }}>{moment(item.date).fromNow()}</Text>
+                                                        <Text numberOfLines={1} ellipsizeMode={'tail'} style={[styles.textSmall, { flex: 1 }]}>{item.source}</Text>
+                                                        <Text numberOfLines={1} ellipsizeMode={'tail'} style={[styles.textSmall, { flex: 1, textAlign: 'right' }]}>{moment(item.date).fromNow()}</Text>
                                                     </View>
-                                                    <Text numberOfLines={2} ellipsizeMode={'tail'} style={[styles.textDefault, { marginBottom: 5, textAlign: 'justify' }]}>{item.title}</Text>
+                                                    <Text numberOfLines={2} ellipsizeMode={'tail'} style={[styles.textSmall, { marginBottom: 5, textAlign: 'justify' }]}>{item.title}</Text>
 
                                                 </View>
                                             </View>
@@ -288,9 +292,6 @@ const DashboardScreen = (props) => {
                                 </View>
                             }
                         </View>
-
-
-
                     </Animated.ScrollView>
                 </View>
             </View>

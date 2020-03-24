@@ -39,8 +39,6 @@ const LoanApplicationScreen = (props) => {
         dispatch(actionCreator.applyLoan())
     }
 
-
-
     const pickEstimate = (estimate_time) => {
         setLoanInfo({ estimate_time })
     }

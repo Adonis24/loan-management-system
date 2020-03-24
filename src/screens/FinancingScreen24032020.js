@@ -76,12 +76,38 @@ const FinancingScreen = (props) => {
                     <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
                         <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 8, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }]}>
                             <Image source={require('../assets/images/e-scoring.png')} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
-                            <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Financing</Text>
+                            <Text style={[styles.default, { alignSelf: 'center', fontSize: 18, fontWeight: "bold" }]} numberOfLines={1} ellipsizeMode={'tail'}>Financing & Grant</Text>
                         </View>
                     </View>
                 </View>
                 <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
-                   <Text>Bla</Text>
+                    {agencyArray ? agencyArray.length > 0 ?
+                        <ScrollableTabView style={{ width: Layout.window.width }}>
+                            <Micro tabLabel='Providers' nav={nav} agencyArray={agencyArray} applyFinance={applyFinance} />
+                            <SME tabLabel='Status' nav={nav} grantStatusArray={grantStatusArray} current_page={current_page} last_page={last_page} changePage={changePage} />
+
+                        </ScrollableTabView>
+                        : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                            <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14, color: 'lightgrey' }]}>Please check back for latest info soon</Text>
+
+                        </View>
+                        :
+                        <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                            <ActivityIndicator color={'grey'} />
+                        </View>
+
+                    }
+
+
+                    {/* {agencyArray && agencyArray.length > 0 &&
+                        <Tabs tabBarBackgroundColor={'transparent'} tabContainerStyle={{ backgroundColor: '#fff' }} tabBarTextStyle={[styles.textDefault, { color: '#000' }]} tabBarUnderlineStyle={{ backgroundColor: 'lightgrey' }} renderTabBar={() => <ScrollableTab />}>
+                            <Tab heading="Providers">
+                                <Micro nav={nav} agencyArray={agencyArray} applyFinance={applyFinance} />
+                            </Tab>
+                            <Tab heading="Status">
+                                <SME nav={nav} grantStatusArray={grantStatusArray} current_page={current_page} last_page={last_page} changePage={changePage} />
+                            </Tab>
+                        </Tabs>} */}
 
                 </View>
             </View>

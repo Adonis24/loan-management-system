@@ -52,10 +52,10 @@ const InfoNewsListScreen = (props) => {
             navigation={props.navigation}
             imageUri={require('../assets/images/news.png')}
         >
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 10 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end',  }}>
 
                 {tagMode ?
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10, flex: 1, }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center',  flex: 1, }}>
                         <FlatList
                             contentContainerStyle={{ padding: 10 }}
                             horizontal
@@ -68,7 +68,7 @@ const InfoNewsListScreen = (props) => {
                                     <Text style={styles.textSmall}>{item}</Text>
                                 </TouchableOpacity>} />
                         <TouchableOpacity onPress={() => setTagMode(false)}>
-                            <Ionicons name="ios-search" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5, paddingLeft: 5 }} />
+                            <Ionicons name="ios-search" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5, paddingLeft: 10 }} />
                         </TouchableOpacity>
 
                     </View> :
@@ -77,10 +77,10 @@ const InfoNewsListScreen = (props) => {
                             <TextInput placeholder='Please Enter Keyword' style={[styles.searchBar, { flex: 4 }]} onChangeText={(val) => console.log(val)} />
                         </View>
                         <TouchableOpacity onPress={props.navigation.openDrawer} >
-                            <Ionicons name="ios-options" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5 }} />
+                            <Ionicons name="ios-options" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5,paddingLeft: 10 }} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => setTagMode(true)}>
-                            <Ionicons name="ios-pricetags" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5, paddingLeft: 5 }} />
+                            <Ionicons name="ios-pricetags" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5,  }} />
                         </TouchableOpacity>
                     </View>}
 
@@ -88,21 +88,21 @@ const InfoNewsListScreen = (props) => {
             <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
                 {newsArray ? newsArray.length > 0 ?
                     <FlatList
-                        contentContainerStyle={{ paddingLeft: 10, paddingRight: 10 }}
+                        contentContainerStyle={{ paddingLeft: 0, paddingRight: 0 }}
                         data={newsArray}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item }) =>
                             <TouchableOpacity
                                 onPress={() => hafiz(item)}
-                                style={{ width: Layout.window.width - 20, marginBottom: 15, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch' }}>
+                                style={{ width: Layout.window.width-10 , marginBottom: 10, borderBottomWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch' }}>
                                 <View style={{ alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch' }}>
                                     <View style={{ padding: 5, flex: 2, }}>
                                         <Image source={{ uri: item.picture }} style={{ flex: 1, height: undefined, width: undefined }} />
                                     </View>
                                     <View style={{ flex: 5, padding: 5 }} >
                                         <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                                            <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.textSmall, { flex: 1 }}>{item.source}</Text>
-                                            <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.textSmall, { flex: 1, textAlign: 'right' }}>{moment(item.date).format("ddd, MMM D, YYYY")}</Text>
+                                            <Text numberOfLines={1} ellipsizeMode={'tail'} style={[styles.textSmall, { flex: 1 }]}>{item.source}</Text>
+                                            <Text numberOfLines={1} ellipsizeMode={'tail'} style={[styles.textSmall, { flex: 1, textAlign: 'right' }]}>{moment(item.date).format("ddd, MMM D, YYYY")}</Text>
                                         </View>
                                         <Text style={[styles.textDefault, { textTransform: 'uppercase', marginBottom: 5, textAlign: 'justify' }]}>{item.title}</Text>
                                         <Text numberOfLines={3} ellipsizeMode='tail' style={[styles.textSmall, { marginBottom: 5 }]}>{striptags(item.content)}</Text>
@@ -119,7 +119,7 @@ const InfoNewsListScreen = (props) => {
                                                     <Text style={[styles.textSmall, {}]}>MALAS</Text>
                                                 </TouchableOpacity>
                                             </View>
-                                            <Ionicons name="ios-bookmark" color={'lightgrey'} style={{ fontSize: 15, paddingRight: 5, paddingLeft: 5 }} />
+                                            <Ionicons name="ios-bookmark" color={'lightgrey'} style={{ fontSize: 17, paddingRight: 5, paddingLeft: 5 }} />
                                         </View>
                                     </View>
                                 </View>
