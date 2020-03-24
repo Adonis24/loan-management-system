@@ -8,7 +8,8 @@ import {
     Animated,
     Easing,
     Modal,
-    FlatList
+    FlatList,
+    ActivityIndicator
 
 
 } from 'react-native';
