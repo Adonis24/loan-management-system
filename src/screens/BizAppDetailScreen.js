@@ -8,14 +8,18 @@ import {
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import Layout from '../constants/Layout'
-
+import styles from '../styles/styles'
 import { Ionicons } from '@expo/vector-icons';
-
+import { WebView } from 'react-native-webview';
 
 const BizAppDetailScreen = (props) => {
 
-    const uri = props.route.param?.uri ?? 'NA' 
-    
+    const uri = props.route.params?.uri ?? 'NA'
+    console.log(`uri ialah ${uri}`)
+
+    // const { uri } = props.route.params;
+    // console.log(`uri1 ialah ${uri}`)
+
     return (
         <View style={styles.container}>
             <WebView style={{ flex: 1 }} source={{ uri }} />
