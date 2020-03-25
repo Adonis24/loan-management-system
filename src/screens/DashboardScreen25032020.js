@@ -158,6 +158,8 @@ const DashboardScreen = (props) => {
                     <Animated.ScrollView style={{ opacity: scrollBarOpac, }} contentStyle={{ padding: 10 }} >
                         {companyName ?
                             <View style={{ margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
+
+
                                 {/* <View style={{ margin: 10 }} /> */}
                                 <View style={{ margin: 5, paddingBottom: 5, borderStyle: 'solid' }}>
                                     <View style={{ marginBottom: 10 }}>
@@ -166,34 +168,6 @@ const DashboardScreen = (props) => {
                                             <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                         </View>
                                     </View>
-
-
-                                    {/* start experiment */}
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignSelf: 'stretch' }}>
-                                        <FeatureIcon>
-                                            <Image source={require('../assets/icon/e-learning.png')} style={{ flex: 3, width: undefined, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                        </FeatureIcon>
-
-                                        <FeatureIcon>
-                                            <Image source={require('../assets/icon/e-learning.png')} style={{ flex: 3, width: undefined, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                        </FeatureIcon>
-
-                                        <FeatureIcon>
-                                            <Image source={require('../assets/icon/e-learning.png')} style={{ flex: 3, width: undefined, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                        </FeatureIcon>
-
-                                        <FeatureIcon>
-                                            <Image source={require('../assets/icon/e-learning.png')} style={{ flex: 3, width: undefined, justifyContent: 'flex-start' }} resizeMode={'contain'} />
-                                        </FeatureIcon>
-
-
-
-                                    </View>
-                                    <View style={{ margin: 10 }} />
-
-                                    {/* end experiment */}
-
-
                                     <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                         <View style={{ flex: 1, flexDirection: 'row', paddingLeft: 5, paddingRight: 5 }}>
                                             <TouchableOpacity onPress={() => props.navigation.navigate('Elearning')} style={[{ flex: 2, padding: 5, marginRight: 15, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
@@ -213,10 +187,12 @@ const DashboardScreen = (props) => {
                                     <View style={{ margin: 10 }} />
                                     <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignSelf: 'stretch' }}>
                                         <View style={{ flex: 1, flexDirection: 'row', paddingLeft: 5, paddingRight: 5 }}>
+
                                             <TouchableOpacity onPress={() => props.navigation.navigate('Financing')} style={[{ flex: 2, padding: 5, marginRight: 15, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
                                                 <Image source={require('../assets/images/loan.png')} style={{ width: undefined, height: Layout.window.height / 12, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                 <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>E-Financing</Text>
                                             </TouchableOpacity>
+
                                             <TouchableOpacity onPress={() => props.navigation.navigate('Bill')} style={[{ flex: 2, padding: 5, justifyContent: 'flex-start', borderRadius: 10 }, styles.shadowNew]}>
                                                 <Image source={require('../assets/icon/bill.png')} style={{ width: undefined, height: Layout.window.height / 12, justifyContent: 'flex-start' }} resizeMode={'contain'} />
                                                 <Text style={[styles.caption]} numberOfLines={1} ellipsizeMode={'tail'}>E-Billing</Text>
@@ -328,15 +304,6 @@ const DashboardScreen = (props) => {
 
 }
 
-
-const FeatureIcon = (props) => {
-
-    return (<TouchableOpacity onPress={() => props.navigation.navigate('Elearning')} style={[{ width: Layout.window.height / 10, height: Layout.window.height / 10, padding: 5, justifyContent: 'flex-start', borderRadius: 10, alignSelf: 'stretch' }, styles.shadowNew]}>
-        {props.children}
-        <Text style={[styles.caption, { flex: 1 }]} numberOfLines={1} ellipsizeMode={'tail'}>E-Learning</Text>
-    </TouchableOpacity>)
-
-}
 
 
 export default DashboardScreen
