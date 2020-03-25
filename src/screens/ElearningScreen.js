@@ -24,7 +24,7 @@ const ElearningScreen = (props) => {
     console.log(`jwt ialah ${jwt}`)
     const uri = `https://lms.bxcess.my/?bx-token=${jwt}`
 
-    _handlePressButtonAsync = async () => {
+    const _handlePressButtonAsync = async () => {
         let result = await WebBrowser.openBrowserAsync(uri);
         //this.setState({ result });
     };

@@ -10,6 +10,7 @@ import WelcomeScreen from '../screens/WelcomeScreen'
 import AuthenticationStack from './AuthenticationNavigator'
 import RegistrationStack from './RegistrationNavigator'
 import MainTabNav from './MainTabNav';
+import MapTestScreen from '../screens/MapTestScreen';
 
 const Stack = createStackNavigator();
 
@@ -48,7 +49,7 @@ const Nav = (props) => {
     <NavigationContainer>
       <Stack.Navigator>
         {token ?
-          <Stack.Screen name="MainTabNav" component={MainTabNav} options={{ headerShown: false }} /> :
+          <Stack.Screen name="MapTest" component={MapTestScreen} options={{ headerShown: false }} /> :
           <Stack.Screen name="AuthenticationStack" component={AuthenticationStack} options={{ headerShown: false }} />}
         <Stack.Screen name="Registration" component={RegistrationStack} options={{ headerShown: false }} />
       </Stack.Navigator>
