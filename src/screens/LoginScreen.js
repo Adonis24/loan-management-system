@@ -81,7 +81,7 @@ const LoginScreen = (props) => {
                 <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
                     <Formik
-                        validateOnMount
+                        validateOnMount 
                         initialValues={{}} onSubmit={async (values, actions) => {
                             console.log(`values formik ialah ${JSON.stringify(values)}`)
                             dispatch({ type: 'SET_REGISTER', payload: { ...values } })

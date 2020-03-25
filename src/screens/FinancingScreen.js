@@ -46,9 +46,9 @@ const FinancingScreen = (props) => {
     const nav = (screen) => {
         props.navigation.navigate(screen)
     }
-
+ 
     const applyFinance = (agency_id) => {
-        props.navigation.navigate('GrantApplication', { agency_id })
+    props.navigation.navigate('GrantApplication', { agency_id })
     }
 
     const changePage = (page = 1) => {
@@ -80,8 +80,21 @@ const FinancingScreen = (props) => {
                         </View>
                     </View>
                 </View>
-                <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
-                   <Text>Bla</Text>
+                <View style={{ flex: 7, justifyContent: 'flex-start', alignItems: 'center',paddingTop:40 }}>
+                <View style={[styles.shadow, { backgroundColor: '#fff', alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'center',alignItems:'center' }]}>
+                        <View style={[{  padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
+                            <Image source={require('../assets/images/TEKUN.png')} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
+                        </View>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>TEKUN</Text>
+                        <Text numberOfLines={3} ellipsizeMode={'tail'} style={[styles.caption, { margin: 5, }]}>Borang Permohonan Pembiayaan Tekun</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                            <TouchableOpacity onPress={() =>  props.navigation.navigate('LoanMaklumatAsas')} style={{ margin: 10, }}>
+                                <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                    <Text style={[styles.caption, { color: '#fff' }]}>Apply</Text>
+                                </LinearGradient>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
 
                 </View>
             </View>
@@ -113,8 +126,24 @@ const Micro = (props) => {
                             </TouchableOpacity>
                         </View>
                     </View>
+                    
                 )}
+                
             />
+              <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, marginBottom: 20, justifyContent: 'center',alignItems:'center' }]}>
+                        <View style={[{  padding: 2, height: 50, width: 50, borderRadius: 25, borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'center' }]}>
+                            <Image source={require('../assets/images/TEKUN.png')} style={{ height: 40, width: 40, alignSelf: 'center', borderRadius: 20 }} resizeMode='cover' />
+                        </View>
+                        <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>TEKUN</Text>
+                        <Text numberOfLines={3} ellipsizeMode={'tail'} style={[styles.caption, { margin: 5, }]}>Borang Permohonan Pembiayaan Tekun</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                            <TouchableOpacity onPress={() => props.applyLoan()} style={{ margin: 10, }}>
+                                <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
+                                    <Text style={[styles.caption, { color: '#fff' }]}>Apply</Text>
+                                </LinearGradient>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
         </View>
     )
 

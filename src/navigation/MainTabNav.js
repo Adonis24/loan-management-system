@@ -82,8 +82,12 @@ import DeliveryScreen from '../screens/DeliveryScreen';
 import UnderConstructionScreen from '../screens/UnderConstructionScreen';
 import EAdvertisementScreen from '../screens/EAdvertisementScreen';
 import FilterBarInfoNews from './FilterBarInfoNews';
-
-
+import LoanMaklumatAsasScreen from '../screens/LoanMaklumatAsasScreen';
+import LoanPerniagaanScreen from '../screens/LoanPerniagaanScreen'
+import LoanMaklumatPeribadiScreen from '../screens/LoanMaklumatPeribadiScreen'
+import LoanPersonalStatusScreen from '../screens/LoanPersonalStatusScreen'
+import LoanContactAddressInfoScreen from '../screens/LoanContactAddressInfoScreen'
+import LoanPendapatanScreen from '../screens/LoanPendapatanScreen'
 
 const DashboardStack = () => {
     return (
@@ -154,6 +158,12 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="Wallet" component={WalletScreen} />
             <Stack.Screen name="Bill" component={BillScreen} />
             <Stack.Screen name="Delivery" component={DeliveryScreen} />
+            <Stack.Screen name="LoanMaklumatAsas" component={LoanMaklumatAsasScreen} />
+            <Stack.Screen name="LoanSektorPerniagaan" component={LoanPerniagaanScreen} />
+            <Stack.Screen name="LoanMaklumatPeribadi" component={LoanMaklumatPeribadiScreen} />
+            <Stack.Screen name="LoanPersonalStatus" component={LoanPersonalStatusScreen} />
+            <Stack.Screen name="LoanContactAddressInfo" component={LoanContactAddressInfoScreen} />
+            <Stack.Screen name="LoanPendapatan" component={LoanPendapatanScreen} />
         </Stack.Navigator>
     )
 }
