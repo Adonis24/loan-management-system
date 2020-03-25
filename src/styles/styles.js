@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native'
 import Layout from '../constants/Layout'
 import Constants from 'expo-constants'
 
+const fontSize = 14
+const fontFamily = 'Montserrat_medium'
+
 const elevationShadowStyle = (elevation) => {
     return {
         elevation,
@@ -15,39 +18,43 @@ const elevationShadowStyle = (elevation) => {
 export default StyleSheet.create({
     container: { flex: 1, paddingTop: Constants.statusBarHeight, backgroundColor: '#fff' },
     textDefault: {
-        fontSize: 14,     
-        fontFamily: 'Montserrat_medium',
-        color: '#000'
+        fontSize,
+        fontFamily,
+        color: 'grey'
     },
     headText: {
-        fontSize: 18,
+        fontSize: fontSize * 1.25,
         alignSelf: 'center',
         textAlign: 'center',
-        fontFamily: 'Montserrat_medium',
+        fontFamily,
         fontWeight: 'bold',
         paddingLeft: 5,
         color: '#000'
     },
     textBold: {
-        fontSize: 17,
+        fontSize: fontSize * 1.2,
         fontFamily: 'Montserrat_bold',
         color: '#000'
     },
     subTitle: {
-        fontSize: 14,
+        fontSize,
         alignSelf: 'center',
         textAlign: 'center',
-        fontFamily: 'Montserrat_medium',
+        fontFamily,
         color: '#2C4690'
     },
     caption: {
-        fontSize: 10,
+        fontSize: fontSize * 0.8,
         alignSelf: 'center',
         textAlign: 'center',
-        fontFamily: 'Montserrat_medium',
+        fontFamily,
         color: '#2C4690'
     },
-    textSmall:{ fontSize:10,fontFamily: 'Montserrat_medium',},
+    textSmall: {
+        fontSize: fontSize * 0.8,
+        fontFamily,
+        color:'grey'
+    },
     shadow: {
         shadowColor: "#000",
         shadowOffset: {
@@ -64,9 +71,9 @@ export default StyleSheet.create({
 
     },
     error: {
-        fontFamily: 'Montserrat_medium',
+        fontFamily,
         color: 'red',
-        fontSize: 10
+        fontSize: fontSize * 0.8
     },
     image: {
         width: undefined,
@@ -94,7 +101,6 @@ export default StyleSheet.create({
         alignItems: 'center',
         margin: 10
     },
-
 
 });
 
