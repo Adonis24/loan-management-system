@@ -46,9 +46,7 @@ const FinancingScreen = (props) => {
     const nav = (screen) => {
         props.navigation.navigate(screen)
     }
- const applyLoan = () => {
-    props.navigation.navigate('MaklumatAsas')
-}
+ 
     const applyFinance = (agency_id) => {
     props.navigation.navigate('GrantApplication', { agency_id })
     }
@@ -90,7 +88,7 @@ const FinancingScreen = (props) => {
                         <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>TEKUN</Text>
                         <Text numberOfLines={3} ellipsizeMode={'tail'} style={[styles.caption, { margin: 5, }]}>Borang Permohonan Pembiayaan Tekun</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <TouchableOpacity onPress={() => props.applyLoan()} style={{ margin: 10, }}>
+                            <TouchableOpacity onPress={() =>  props.navigation.navigate('MaklumatAsas')} style={{ margin: 10, }}>
                                 <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ borderRadius: 10, padding: 20, paddingTop: 5, paddingBottom: 5 }}>
                                     <Text style={[styles.caption, { color: '#fff' }]}>Apply</Text>
                                 </LinearGradient>
