@@ -24,13 +24,13 @@ const Nav = (props) => {
       //const personalToken = await AsyncStorage.getItem('personalToken');
       const personalToken = await SecureStore.getItemAsync('personalToken')
       if (personalToken !== null && !personalToken.includes('error')) {
-        const { token_type, access_token,error } = JSON.parse(personalToken)
-        
+        const { token_type, access_token, error } = JSON.parse(personalToken)
+
         //const parsedPer
         console.log(`personal token ialah : ${personalToken}`)
         //this.setState({ tokenExists: true })
         setTokenExists(true)
-   
+
         dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
       }
     } catch (error) {
@@ -49,7 +49,7 @@ const Nav = (props) => {
     <NavigationContainer>
       <Stack.Navigator>
         {token ?
-          <Stack.Screen name="MapTest" component={MapTestScreen} options={{ headerShown: false }} /> :
+          <Stack.Screen name="MainTabNav" component={MainTabNav} options={{ headerShown: false }} /> :
           <Stack.Screen name="AuthenticationStack" component={AuthenticationStack} options={{ headerShown: false }} />}
         <Stack.Screen name="Registration" component={RegistrationStack} options={{ headerShown: false }} />
       </Stack.Navigator>

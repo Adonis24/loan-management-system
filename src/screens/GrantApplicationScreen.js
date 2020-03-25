@@ -29,7 +29,7 @@ const GrantApplicationScreen = (props) => {
     const [selected, setSelected] = useState(null)
 
     useEffect(() => {
-        const agency_id = props.route.param?.agency_id ?? 'NA'
+        const agency_id = props.route.params?.agency_id ?? 'NA'
         setGrantInfo({ agency_id })
     }, []); // empty-array means don't watch for any updates
 

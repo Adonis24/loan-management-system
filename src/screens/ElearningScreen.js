@@ -32,8 +32,7 @@ const ElearningScreen = (props) => {
     
     document.querySelector("#slide").setAttribute("style", "display:none");
     document.querySelector("#main-menu").setAttribute("style", "display:none"); 
-    document.querySelector(".best-course-section").setAttribute("style", "background-color:#fff");
-   
+    document.querySelector(".best-course-section").setAttribute("style", "background-color:#fff");   
        `
     return (
 
