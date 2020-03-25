@@ -63,6 +63,7 @@ const LoanApplicationScreen = (props) => {
         <View style={styles.container}>
             <Modal
                 animationType="slide"
+                presentationStyle={'pageSheet'}
                 transparent={false}
                 visible={iosPicker}
                 onRequestClose={() => {
@@ -84,7 +85,7 @@ const LoanApplicationScreen = (props) => {
                     <View style={{ flex: 9, justifyContent: 'flex-start' }}>
                         {pickerType === 'freq' ? <Picker
                             note
-                            mode="dropdown"
+                            mode="dialog"
                             style={{ width: 120 }}
                             selectedValue={estimate_time}
                             onValueChange={(value) => pickEstimate(value)}

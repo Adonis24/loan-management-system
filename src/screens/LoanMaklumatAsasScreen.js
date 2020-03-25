@@ -35,7 +35,7 @@ const validationSchema = Yup.object().shape({
         .min(3)
         .label('Negeri'),
 
-    cawangan_parlimen: Yup
+    cawanganParlimen: Yup
         .string('Please enter')
         .required('Please enter')
         .min(3)
@@ -44,12 +44,12 @@ const validationSchema = Yup.object().shape({
 
 });
 
-const MaklumatAsasScreen = (props) => {
+const LoanMaklumatAsasScreen = (props) => {
 
     const dispatch = useDispatch()
 
     //const { comp_phone, comp_email, comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, proceedContact, error, errorColor } = useSelector(state => state.companyInformationReducer, shallowEqual)
-    const { negeri, cawangan_parlimen,pengundi_berdaftar,status_perniagaan } = useSelector(state => state.financingReducer, shallowEqual)
+    const { negeri, cawanganParlimen,pengundiBerdaftar,statusPerniagaan } = useSelector(state => state.financingReducer, shallowEqual)
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
 
 
@@ -72,28 +72,28 @@ const MaklumatAsasScreen = (props) => {
     return (
         <LayoutA>
             <Formik
-                initialValues={{ negeri, cawangan_parlimen, pengundi_berdaftar: true,status_perniagaan:true }}
+                initialValues={{ negeri, cawanganParlimen, pengundiBerdaftar: true,statusPerniagaan:true }}
                 validateOnMount
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatAsas(values)
                     actions.setSubmitting(false)
-                    props.navigation.navigate('SektorPerniagaan')
+                    props.navigation.navigate('LoanSektorPerniagaan')
                 }}
                 validationSchema={validationSchema}
             >
                 {FormikProps => {
-                    const { negeri, cawangan_parlimen, pengundi_berdaftar,status_perniagaan } = FormikProps.values
+                    const { negeri, cawanganParlimen, pengundiBerdaftar,statusPerniagaan } = FormikProps.values
 
 
                     const negeriError = FormikProps.errors.negeri
                     const negeriTouched = FormikProps.touched.negeri
-                    const cawangan_parlimenError = FormikProps.errors.cawangan_parlimen
-                    const cawangan_parlimenTouched = FormikProps.touched.cawangan_parlimen
+                    const cawanganParlimenError = FormikProps.errors.cawanganParlimen
+                    const cawanganParlimenTouched = FormikProps.touched.cawanganParlimen
 
 
-                    const handleCheckBox = () => { console.log(`apa ni ${pengundi_berdaftar}`); FormikProps.setFieldValue('pengundi_berdaftar', !pengundi_berdaftar) }
-                    const handleCheckBox1 = () => { console.log(`apa ni ${status_perniagaan}`); FormikProps.setFieldValue('status_perniagaan', !status_perniagaan) }
+                    const handleCheckBox = () => { console.log(`apa ni ${pengundiBerdaftar}`); FormikProps.setFieldValue('pengundiBerdaftar', !pengundiBerdaftar) }
+                    const handleCheckBox1 = () => { console.log(`apa ni ${statusPerniagaan}`); FormikProps.setFieldValue('statusPerniagaan', !statusPerniagaan) }
                    
                     return (
                         
@@ -115,11 +115,11 @@ const MaklumatAsasScreen = (props) => {
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/state.png')}
-                                value={cawangan_parlimen}
-                                handleChange={FormikProps.handleChange(`cawangan_parlimen`)}
-                                handleBlur={FormikProps.handleBlur(`cawangan_parlimen`)}
-                                touched={cawangan_parlimenTouched}
-                                error={cawangan_parlimenError}
+                                value={cawanganParlimen}
+                                handleChange={FormikProps.handleChange(`cawanganParlimen`)}
+                                handleBlur={FormikProps.handleBlur(`cawanganParlimen`)}
+                                touched={cawanganParlimenTouched}
+                                error={cawanganParlimenError}
                                 placeholder={'Cawangan Parlimen'}
                                 keyboardType={'default'}
                             />
@@ -128,9 +128,9 @@ const MaklumatAsasScreen = (props) => {
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                     {(Platform.OS == 'ios') ?
 
-                                        <CheckBox2 onClick={() => handleCheckBox()} isChecked={pengundi_berdaftar} />
+                                        <CheckBox2 onClick={() => handleCheckBox()} isChecked={pengundiBerdaftar} />
                                         :
-                                        <CheckBox onValueChange={handleCheckBox} value={pengundi_berdaftar} />
+                                        <CheckBox onValueChange={handleCheckBox} value={pengundiBerdaftar} />
                                     }
                                     <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 12 }]}>
                                         YA
@@ -140,9 +140,9 @@ const MaklumatAsasScreen = (props) => {
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                     {(Platform.OS == 'ios') ?
 
-                                        <CheckBox2 onClick={() => handleCheckBox()} isChecked={!pengundi_berdaftar} />
+                                        <CheckBox2 onClick={() => handleCheckBox()} isChecked={!pengundiBerdaftar} />
                                         :
-                                        <CheckBox onValueChange={handleCheckBox} value={!pengundi_berdaftar} />
+                                        <CheckBox onValueChange={handleCheckBox} value={!pengundiBerdaftar} />
                                     }
                                     <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 12 }]}>
                                         TIDAK
@@ -155,9 +155,9 @@ const MaklumatAsasScreen = (props) => {
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                     {(Platform.OS == 'ios') ?
 
-                                        <CheckBox2 onClick={() => handleCheckBox1()} isChecked={status_perniagaan} />
+                                        <CheckBox2 onClick={() => handleCheckBox1()} isChecked={statusPerniagaan} />
                                         :
-                                        <CheckBox onValueChange={handleCheckBox1} value={status_perniagaan} />
+                                        <CheckBox onValueChange={handleCheckBox1} value={statusPerniagaan} />
                                     }
                                     <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 12 }]}>
                                        SEDANG BERNIAGA
@@ -167,9 +167,9 @@ const MaklumatAsasScreen = (props) => {
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                     {(Platform.OS == 'ios') ?
 
-                                        <CheckBox2 onClick={() => handleCheckBox1()} isChecked={!status_perniagaan} />
+                                        <CheckBox2 onClick={() => handleCheckBox1()} isChecked={!statusPerniagaan} />
                                         :
-                                        <CheckBox onValueChange={handleCheckBox1} value={!status_perniagaan} />
+                                        <CheckBox onValueChange={handleCheckBox1} value={!statusPerniagaan} />
                                     }
                                     <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 12 }]}>
                                         MEMULAKAN PERNIAGAAN
@@ -196,4 +196,4 @@ const MaklumatAsasScreen = (props) => {
 
 
 
-export default MaklumatAsasScreen
+export default LoanMaklumatAsasScreen

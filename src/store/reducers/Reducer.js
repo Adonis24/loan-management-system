@@ -51,6 +51,8 @@ const financingReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_MAKLUMAT_ASAS':
             return { ...state, ...action.payload }
+        case 'SET_MAKLUMAT_PERIBADI':
+            return { ...state, ...action.payload }
         default:
             return state
     }
@@ -161,7 +163,7 @@ const netInfoReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_NET_INFO_STATUS':
             return { ...state, ...action.payload }
-     
+
         default:
             return state
     }
@@ -225,7 +227,7 @@ const bizInfoReducer = (state = [], action) => {
     switch (action.type) {
         case 'GET_BIZ_INFO':
             return { ...state, ...action.payload }
-            case 'BIZ_INFO_RESET':
+        case 'BIZ_INFO_RESET':
             return state = []
         default:
             return state
@@ -250,7 +252,7 @@ const listWorkersReducer = (state = [], action) => {
     }
 }
 
-const appReducer = combineReducers({  notificationScreenReducer,  personalInformationScreenReducer,  loginScreenReducer, registrationReducer, companyInformationReducer, newsScreenReducer, eventScreenReducer, promotionScreenReducer, handbookScreenReducer, einfosScreenReducer, loanApplicationReducer, bizInfoReducer, listWorkersReducer, myAccountReducer, bizDirReducer, agencyListReducer, assoDirReducer, pendingDirReducer, trainingReducer,grantApplicationReducer,apiReducer,netInfoReducer,financingReducer });
+const appReducer = combineReducers({ notificationScreenReducer, personalInformationScreenReducer, loginScreenReducer, registrationReducer, companyInformationReducer, newsScreenReducer, eventScreenReducer, promotionScreenReducer, handbookScreenReducer, einfosScreenReducer, loanApplicationReducer, bizInfoReducer, listWorkersReducer, myAccountReducer, bizDirReducer, agencyListReducer, assoDirReducer, pendingDirReducer, trainingReducer, grantApplicationReducer, apiReducer, netInfoReducer, financingReducer });
 
 const rootReducer = (state, action) => {
     switch (action.type) {

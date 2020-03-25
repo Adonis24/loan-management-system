@@ -194,9 +194,9 @@ export const grantInfoApi = (page) => {
 export const applyfinancingApi = (page) => {
   return async (dispatch, getState) => {
 
-    const { negeri,cawangan_parlimen,pengundi_berdaftar,status_perniagaan,bank,no_akaun,pertanian, peruncitan, perkhidmatan, pembuatan, kontraktorKecil } = getState().loanApplicationReducer
+    const { negeri,cawanganParlimen,pengundiBerdaftar,statusPerniagaan,bank,noAkaun,typeBusiness,name, icNumber, agama, tarikhLahir,jantina,alamat, alamat_2, phoneNum, email, poskod,alamatComp, pendapatan, pekerjaan, status } = getState().loanApplicationReducer
 
-    const responseJson = await apiPostCall(`api/loan/addFinancingInformation`, null,negeri ,cawangan_parlimen,pengundi_berdaftar,status_perniagaan,bank,no_akaun,pertanian, peruncitan, perkhidmatan, pembuatan, kontraktorKecil, getState().apiReducer)
+    const responseJson = await apiPostCall(`api/loan/addFinancingInformation`, null,negeri,cawanganParlimen,pengundiBerdaftar,statusPerniagaan,bank,noAkaun,typeBusiness,name, icNumber, agama, tarikhLahir,jantina,alamat, alamat_2, phoneNum, email, poskod,alamatComp, phoneNum, pendapatan, pekerjaan, status, getState().apiReducer)
 
     console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const einfosArray = await responseJson.data
