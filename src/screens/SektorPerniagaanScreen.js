@@ -148,28 +148,28 @@ const SektorPerniagaanScreen = (props) => {
                                 placeholder={'No.Akaun'}
                                 keyboardType={'phone-pad'}
                             />
-                            <View style={{ justifyContent: 'center',alignItems:'flex-start',justifyContent:'center'  }}>
-                                <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Sektor Perniagaan</Text>
-                                <View style={{ flexDirection: 'row', marginBottom: 10,justifyContent:'center',alignItems:'center',marginLeft:15 }}>
+                            <View style={{ justifyContent: 'center',alignItems:'flex-start',justifyContent:'center',marginLeft:10 }}>
+                                <Text style={[styles.textDefault, { margin: 5, color: 'darkblue',fontSize:12 }]}>Sektor Perniagaan</Text>
+                                <View style={{ flexDirection: 'row', marginBottom: 10,justifyContent:'center',alignItems:'center', }}>
                                             <CheckBox onClick={() => handleCheckBox('pertanian')} isChecked={pertanian} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
-                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 12,flexWrap: 'wrap' }]}>PERTANIAN DAN PERUSAHAAN ASAS TANI</Text>
+                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10,flexWrap: 'wrap' }]}>PERTANIAN DAN PERUSAHAAN ASAS TANI</Text>
                                         </View>
                                         <View style={{ flexDirection: 'row', marginBottom: 10,justifyContent:'center',alignItems:'center'}}>
                                             <CheckBox onClick={() => handleCheckBox('peruncitan')} isChecked={peruncitan} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
-                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 12 }]}> PERUNCITAN</Text>
+                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10 }]}> PERUNCITAN</Text>
                                         </View>
                                         <View style={{ flexDirection: 'row', marginBottom: 10,justifyContent:'center',alignItems:'center' }}>
                                             <CheckBox onClick={() => handleCheckBox('perkhidmatan')} isChecked={perkhidmatan} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
 
-                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 12 }]}>PERKHIDMATAN</Text>
+                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10 }]}>PERKHIDMATAN</Text>
                                         </View>
                                         <View style={{ flexDirection: 'row', marginBottom: 10,justifyContent:'center',alignItems:'center' }}>
                                             <CheckBox onClick={() => handleCheckBox('pembuatan')} isChecked={pembuatan} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
-                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 12 }]}>PEMBUATAN</Text>
+                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10 }]}>PEMBUATAN</Text>
                                         </View>
                                         <View style={{ flexDirection: 'row', marginBottom: 10,justifyContent:'center',alignItems:'center' }}>
                                             <CheckBox onClick={() => handleCheckBox('kontraktorKecil')} isChecked={kontraktorKecil} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
-                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 12 }]}>KONTRAKTOR KECIL</Text>
+                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10 }]}>KONTRAKTOR KECIL</Text>
                                         </View>
                                     </View>
                                     
