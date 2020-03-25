@@ -82,8 +82,8 @@ import DeliveryScreen from '../screens/DeliveryScreen';
 import UnderConstructionScreen from '../screens/UnderConstructionScreen';
 import EAdvertisementScreen from '../screens/EAdvertisementScreen';
 import FilterBarInfoNews from './FilterBarInfoNews';
-
-
+import MaklumatAsasScreen from '../screens/MaklumatAsasScreen';
+import SektorPerniagaanScreen from '../screens/SektorPerniagaanScreen';
 
 const DashboardStack = () => {
     return (
@@ -154,6 +154,8 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="Wallet" component={WalletScreen} />
             <Stack.Screen name="Bill" component={BillScreen} />
             <Stack.Screen name="Delivery" component={DeliveryScreen} />
+            <Stack.Screen name="MaklumatAsas" component={MaklumatAsasScreen} />
+            <Stack.Screen name="SektorPerniagaan" component={SektorPerniagaanScreen} />
         </Stack.Navigator>
     )
 }
