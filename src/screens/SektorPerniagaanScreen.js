@@ -29,17 +29,17 @@ import CheckBox2 from 'react-native-check-box'
 const validationSchema = Yup.object().shape({
 
 
-    negeri: Yup
+    bank: Yup
         .string('Please enter')
         .required('Please enter')
         .min(3)
-        .label('Negeri'),
+        .label('Bank'),
 
-    cawangan_parlimen: Yup
+    no_akaun: Yup
         .string('Please enter')
         .required('Please enter')
-        .min(3)
-        .label('Cawangan Parlimen'),
+        .min(16)
+        .label('No Akaun'),
 
 
 });
@@ -49,7 +49,7 @@ const SektorPerniagaanScreen = (props) => {
     const dispatch = useDispatch()
 
     //const { comp_phone, comp_email, comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, proceedContact, error, errorColor } = useSelector(state => state.companyInformationReducer, shallowEqual)
-    const { bank,no_akaun,pertanian, peruncitan, perkhidmatan, pembuatan, kontraktorKecil } = useSelector(state => state.financingReducer, shallowEqual)
+    const { bank, no_akaun, pertanian, peruncitan, perkhidmatan, pembuatan, kontraktorKecil } = useSelector(state => state.financingReducer, shallowEqual)
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
 
 
@@ -72,17 +72,17 @@ const SektorPerniagaanScreen = (props) => {
     return (
         <LayoutA>
             <Formik
-                initialValues={{ bank,no_akaun,pertanian: false, peruncitan: false, perkhidmatan: false, pembuatan: false, kontraktorKecil: false,}}
+                initialValues={{ bank, no_akaun, pertanian: false, peruncitan: false, perkhidmatan: false, pembuatan: false, kontraktorKecil: false, }}
                 validateOnMount
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatAsas(values)
-                    
+
                 }}
                 validationSchema={validationSchema}
             >
                 {FormikProps => {
-                    const { bank,no_akaun,pertanian, peruncitan, perkhidmatan, pembuatan, kontraktorKecil } = FormikProps.values
+                    const { bank, no_akaun, pertanian, peruncitan, perkhidmatan, pembuatan, kontraktorKecil } = FormikProps.values
 
 
                     const bankError = FormikProps.errors.bank
@@ -91,37 +91,37 @@ const SektorPerniagaanScreen = (props) => {
                     const no_akaunTouched = FormikProps.touched.no_akaun
 
 
-                    
+
                     const handleCheckBox = (field) => {
                         console.log(`field ialah ${field}`)
-    
+
                         switch (field) {
-    
+
                             case 'pertanian':
                                 FormikProps.setFieldValue('pertanian', !pertanian)
                                 break;
-    
+
                             case 'peruncitan':
                                 FormikProps.setFieldValue('peruncitan', !peruncitan)
                                 break;
-    
+
                             case 'perkhidmatan':
                                 FormikProps.setFieldValue('perkhidmatan', !perkhidmatan)
                                 break;
-    
+
                             case 'pembuatan':
                                 FormikProps.setFieldValue('pembuatan', !pembuatan)
                                 break;
-    
+
                             case 'kontraktorKecil':
                                 FormikProps.setFieldValue('kontraktorKecil', !kontraktorKecil)
                                 break;
-                            
-    
+
+
                         }
                     }
                     return (
-                        
+
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center', }}>
                             {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
@@ -148,31 +148,31 @@ const SektorPerniagaanScreen = (props) => {
                                 placeholder={'No.Akaun'}
                                 keyboardType={'phone-pad'}
                             />
-                            <View style={{ justifyContent: 'center',alignItems:'flex-start',justifyContent:'center',marginLeft:10 }}>
-                                <Text style={[styles.textDefault, { margin: 5, color: 'darkblue',fontSize:12 }]}>Sektor Perniagaan</Text>
-                                <View style={{ flexDirection: 'row', marginBottom: 10,justifyContent:'center',alignItems:'center', }}>
-                                            <CheckBox onClick={() => handleCheckBox('pertanian')} isChecked={pertanian} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
-                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10,flexWrap: 'wrap' }]}>PERTANIAN DAN PERUSAHAAN ASAS TANI</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', marginBottom: 10,justifyContent:'center',alignItems:'center'}}>
-                                            <CheckBox onClick={() => handleCheckBox('peruncitan')} isChecked={peruncitan} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
-                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10 }]}> PERUNCITAN</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', marginBottom: 10,justifyContent:'center',alignItems:'center' }}>
-                                            <CheckBox onClick={() => handleCheckBox('perkhidmatan')} isChecked={perkhidmatan} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
+                            <View style={{ justifyContent: 'center', alignItems: 'flex-start', justifyContent: 'center', marginLeft: 10 }}>
+                                <Text style={[styles.textDefault, { margin: 5, color: 'darkblue', fontSize: 12 }]}>Sektor Perniagaan</Text>
+                                <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'center', alignItems: 'center', }}>
+                                    <CheckBox onClick={() => handleCheckBox('pertanian')} isChecked={pertanian} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
+                                    <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10, flexWrap: 'wrap' }]}>PERTANIAN DAN PERUSAHAAN ASAS TANI</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'center', alignItems: 'center' }}>
+                                    <CheckBox onClick={() => handleCheckBox('peruncitan')} isChecked={peruncitan} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
+                                    <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10 }]}> PERUNCITAN</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'center', alignItems: 'center' }}>
+                                    <CheckBox onClick={() => handleCheckBox('perkhidmatan')} isChecked={perkhidmatan} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
 
-                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10 }]}>PERKHIDMATAN</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', marginBottom: 10,justifyContent:'center',alignItems:'center' }}>
-                                            <CheckBox onClick={() => handleCheckBox('pembuatan')} isChecked={pembuatan} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
-                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10 }]}>PEMBUATAN</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row', marginBottom: 10,justifyContent:'center',alignItems:'center' }}>
-                                            <CheckBox onClick={() => handleCheckBox('kontraktorKecil')} isChecked={kontraktorKecil} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
-                                            <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10 }]}>KONTRAKTOR KECIL</Text>
-                                        </View>
-                                    </View>
-                                    
+                                    <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10 }]}>PERKHIDMATAN</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'center', alignItems: 'center' }}>
+                                    <CheckBox onClick={() => handleCheckBox('pembuatan')} isChecked={pembuatan} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
+                                    <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10 }]}>PEMBUATAN</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'center', alignItems: 'center' }}>
+                                    <CheckBox onClick={() => handleCheckBox('kontraktorKecil')} isChecked={kontraktorKecil} checkBoxColor={'rgba(62,194,217,1)'} style={{ borderColor: 'rgba(0,0,0,0.3)' }} />
+                                    <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 10 }]}>KONTRAKTOR KECIL</Text>
+                                </View>
+                            </View>
+
 
                             <CustomFormAction
                                 navigation={props.navigation}
@@ -180,7 +180,7 @@ const SektorPerniagaanScreen = (props) => {
                                 handleSubmit={FormikProps.handleSubmit}
                             />
                         </View>
-                        
+
 
                     )
                 }}
