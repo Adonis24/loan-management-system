@@ -7,9 +7,10 @@ import {
     View,
     TextInput,
     KeyboardAvoidingView,
+    
 
 } from 'react-native';
-
+import Constants from 'expo-constants'
 import Layout from '../constants/Layout'
 
 import styles from '../styles/styles'
@@ -25,7 +26,7 @@ const LayoutA = (props) => {
             <View style={{ flex: 1, justifyContent: 'flex-start' }}>
                 <Image source={require('../assets/images/tekunA.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
             </View>
-            <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
+            <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                 <KeyboardAvoidingView behavior="padding" enabled style={{ flex:1, justifyContent: 'center', alignItems: 'center' }}>
                     {props.children}
                 </KeyboardAvoidingView>
