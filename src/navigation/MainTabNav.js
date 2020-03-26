@@ -186,11 +186,6 @@ const NotificationStack = () => {
     )
 }
 
-
-
-
-
-
 const SettingsStack = () => {
     return (
         <Stack.Navigator initialRouteName="Settings" screenOptions={{ headerShown: false }}>
@@ -247,17 +242,25 @@ const InfoNewsStack = () => {
 const MainTabNav = () => {
     return (
         <Tab.Navigator tabBarOptions={{ showLabel: false }}>
-            <Tab.Screen name="DashboardStackWithModal" component={DashboardStackWithModal} options={{
-                tabBarOptions: {
-                    activeTintColor: '#4967AE',
-                    inactiveTintColor: '#7896dc',
-                },
-                tabBarIcon: ({ focused }) => (
-                    <TabBarIcon
-                        focused={focused}
-                        name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
-                    />
-                ),
+            <Tab.Screen name="DashboardStackWithModal" component={DashboardStackWithModal} options={({ route }) => {
+                // const {state}=route
+                // const {index,routes}=state
+                const routeName = route.state.routes[route.state.index].name
+                let tabBarVisible = true
+                if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan')
+                    tabBarVisible = false
+                return {
+                    tabBarOptions: {
+                        activeTintColor: '#4967AE',
+                        inactiveTintColor: '#7896dc',
+                    },
+                    tabBarIcon: ({ focused }) => (
+                        <TabBarIcon
+                            focused={focused}
+                            name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+                        />
+                    ), tabBarVisible
+                }
             }} />
             <Tab.Screen name="InsightStack" component={InsightDrawer} options={{
                 tabBarOptions: {
