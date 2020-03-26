@@ -93,6 +93,8 @@ import LoanConnectedPartiesAddrScreeen from '../screens/LoanConnectedPartiesAddr
 import LoanBusinessInfoScreen from '../screens/LoanBusinessInfoScreen'
 import LoanBusinessAddrInfoScreen from '../screens/LoanBusinessAddrInfoScreen'
 import LoanBusinessInfoContScreen from '../screens/LoanBusinessInfoContScreen'
+import LoanBusinessDetailScreen from '../screens/LoanBusinessDetailScreen'
+import LoanDetailScreen from '../screens/LoanDetailScreen'
 
 const DashboardStack = () => {
     return (
@@ -163,7 +165,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="Wallet" component={WalletScreen} />
             <Stack.Screen name="Bill" component={BillScreen} />
             <Stack.Screen name="Delivery" component={DeliveryScreen} />
-            <Stack.Screen name="LoanMaklumatAsas" component={LoanBusinessInfoContScreen} />
+            <Stack.Screen name="LoanMaklumatAsas" component={LoanMaklumatAsasScreen} />
             <Stack.Screen name="LoanSektorPerniagaan" component={LoanPerniagaanScreen} />
             <Stack.Screen name="LoanMaklumatPeribadi" component={LoanMaklumatPeribadiScreen} />
             <Stack.Screen name="LoanPersonalStatus" component={LoanPersonalStatusScreen} />
@@ -174,6 +176,8 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="LoanBusinessInfo" component={LoanBusinessInfoScreen} />
             <Stack.Screen name="LoanBusinessAddrInfo" component={LoanBusinessAddrInfoScreen} />
             <Stack.Screen name="LoanBusinessInfoCont" component={LoanBusinessInfoContScreen} />
+            <Stack.Screen name="LoanBusinessDetail" component={LoanBusinessDetailScreen} />
+            <Stack.Screen name="LoanDetail" component={LoanDetailScreen} />
         </Stack.Navigator>
     )
 }

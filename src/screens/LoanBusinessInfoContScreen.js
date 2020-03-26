@@ -58,7 +58,7 @@ const LoanBusinessInfoContScreen = (props) => {
     const { compStat, pemilikan,keahlian } = useSelector(state => state.financingReducer, shallowEqual)
 
 
-    const setMaklumatPeribadi = (value) => dispatch({ type: 'SET_MAKLUMAT_PERIBADI', payload: { ...value } })
+    const setMaklumatPerniagaan = (value) => dispatch({ type: 'SET_MAKLUMAT_PERNIAGAAN', payload: { ...value } })
 
 
     //const { capacity, nameCP, icNumber, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
@@ -90,7 +90,7 @@ const LoanBusinessInfoContScreen = (props) => {
 
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
-                    setMaklumatPeribadi(values)
+                    setMaklumatPerniagaan(values)
                     props.navigation.navigate('LoanPersonalStatus')
                     actions.setSubmitting(false)
 

@@ -82,7 +82,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
-                    setDetailConnect(values)
+                    setConnectParties(values)
                     //props.navigation.navigate('CompanyInfoSuccess')
                     actions.setSubmitting(false)
                 }
