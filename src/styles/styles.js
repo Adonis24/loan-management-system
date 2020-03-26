@@ -100,7 +100,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 10
-    },
+    },featureIconStyle:{ flex: 3, width: undefined, justifyContent: 'flex-start' }
 
 });
 
