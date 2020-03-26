@@ -73,20 +73,20 @@ const LoanPendapatanScreen = (props) => {
 
     const setMaklumatPeribadi = (value) => dispatch({ type: 'SET_MAKLUMAT_PERIBADI', payload: { ...value } })
 
-    useEffect(() => {
-        const open = () => setshowLogo(false)
-        const off = () => setshowLogo(true)
+    // useEffect(() => {
+    //     const open = () => setshowLogo(false)
+    //     const off = () => setshowLogo(true)
 
-        keyboardBeingDisplay(open)
-        keyboardBeingClose(off)
-    }, []); // empty-array means don't watch for any updates
+    //     keyboardBeingDisplay(open)
+    //     keyboardBeingClose(off)
+    // }, []); // empty-array means don't watch for any updates
 
     const handleIosPicker = (modalContent) => {
         setModalContent(modalContent)
         setIosPickerVisible(!iosPickerVisible)
     }
 
-    const [showLogo, setshowLogo] = useState(true)
+    // const [showLogo, setshowLogo] = useState(true)
 
     //proceedContact && props.navigation.goBack()
 
@@ -155,7 +155,7 @@ const LoanPendapatanScreen = (props) => {
                                     </View>
                                 </View>
                             </Modal>
-                            {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
+                            {/* {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />} */}
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>CONTACT ADDRESS</Text>
 
                             <View style={{marginTop:20, alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
