@@ -30,8 +30,8 @@ const DashboardScreen = (props) => {
     const dispatch = useDispatch()
     const { member_id, name, email, phone_no, profile_pic, email_verified_at } = useSelector(state => state.myAccountReducer, shallowEqual)
     const companyName = useSelector(state => state.bizInfoReducer.name, shallowEqual)
-    const {logo} = useSelector(state => state.bizInfoReducer, shallowEqual)
-    
+    const { logo } = useSelector(state => state.bizInfoReducer, shallowEqual)
+
     const toggleShow = () => {
         setPopUp(!popUp)
     }
@@ -144,8 +144,11 @@ const DashboardScreen = (props) => {
                         </Animated.View>
                         {!(phone_no == null) && <Animated.View style={[{ opacity: topBarOpac, backgroundColor: '#fff', flex: 4, flexDirection: 'row', borderBottomLeftRadius: 20, borderTopLeftRadius: 20, }, styles.shadowNew]}>
                             <TouchableOpacity onPress={() => companyName ? props.navigation.navigate('Profile') : props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row' }} >
-                                <Image  source={!logo?require('../assets/images/profile.png'):{uri:logo}} style={{ width: Layout.window.width / 8, height: 40, }} resizeMode={'contain'} />
-                                <Text style={[styles.textDefault,{color:'#000',marginLeft:5}]} numberOfLines={1} ellipsizeMode={'tail'}>{companyName}</Text>
+                                <View style={{ height: Layout.window.width / 8, width: Layout.window.width / 8, borderRadius: Layout.window.width / 16, borderWidth: 1, borderColor: 'lightgrey', padding: 3 }}>
+                                    <Image source={!logo ? require('../assets/images/profile.png') : { uri: logo }} style={{ flex: 1, width: undefined, height: undefined, }} resizeMode={'contain'} />
+
+                                </View>
+                                <Text style={[styles.textDefault, { color: '#000', marginLeft: 5 }]} numberOfLines={1} ellipsizeMode={'tail'}>{companyName}</Text>
                             </TouchableOpacity>
                         </Animated.View>}
                     </View>
@@ -212,8 +215,8 @@ const DashboardScreen = (props) => {
                         }
 
                         {/**Latest Info */}
-                        <View style={{ flex: 3, margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                            <View style={{ marginBottom: 10 }}>
+                        <View style={{ flex: 3, margin: 0, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
+                            <View style={{ marginBottom: 10,marginLeft:5,marginRight:5 }}>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Latest Info</Text>
                                     <Ionicons name={'md-more'} size={24} color={'#2C4690'} />

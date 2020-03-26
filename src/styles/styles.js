@@ -27,7 +27,7 @@ export default StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'center',
         fontFamily,
-        fontWeight: 'bold',
+      
         paddingLeft: 5,
         color: '#000'
     },

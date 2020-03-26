@@ -57,7 +57,6 @@ const ProfileScreen = (props) => {
                 navigation={props.navigation}
                 imageUri={require('../assets/icon/rfq.png')}
             >
-
                 <ScrollView>
                     <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: 5 }}>
                         <View style={{ flexDirection: 'row', }}>
