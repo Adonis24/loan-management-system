@@ -88,6 +88,11 @@ import LoanMaklumatPeribadiScreen from '../screens/LoanMaklumatPeribadiScreen'
 import LoanPersonalStatusScreen from '../screens/LoanPersonalStatusScreen'
 import LoanContactAddressInfoScreen from '../screens/LoanContactAddressInfoScreen'
 import LoanPendapatanScreen from '../screens/LoanPendapatanScreen'
+import LoanConnectedPartiesScreen from '../screens/LoanConnectedPartiesScreen'
+import LoanConnectedPartiesAddrScreeen from '../screens/LoanConnectedPartiesAddrScreeen'
+import LoanBusinessInfoScreen from '../screens/LoanBusinessInfoScreen'
+import LoanBusinessAddrInfoScreen from '../screens/LoanBusinessAddrInfoScreen'
+import LoanBusinessInfoContScreen from '../screens/LoanBusinessInfoContScreen'
 
 const DashboardStack = () => {
     return (
@@ -158,12 +163,17 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="Wallet" component={WalletScreen} />
             <Stack.Screen name="Bill" component={BillScreen} />
             <Stack.Screen name="Delivery" component={DeliveryScreen} />
-            <Stack.Screen name="LoanMaklumatAsas" component={LoanMaklumatAsasScreen} />
+            <Stack.Screen name="LoanMaklumatAsas" component={LoanBusinessInfoContScreen} />
             <Stack.Screen name="LoanSektorPerniagaan" component={LoanPerniagaanScreen} />
             <Stack.Screen name="LoanMaklumatPeribadi" component={LoanMaklumatPeribadiScreen} />
             <Stack.Screen name="LoanPersonalStatus" component={LoanPersonalStatusScreen} />
             <Stack.Screen name="LoanContactAddressInfo" component={LoanContactAddressInfoScreen} />
             <Stack.Screen name="LoanPendapatan" component={LoanPendapatanScreen} />
+            <Stack.Screen name="LoanConnectedParties" component={LoanConnectedPartiesScreen} />
+            <Stack.Screen name="LoanConnectedPartiesAddr" component={LoanConnectedPartiesAddrScreeen} />
+            <Stack.Screen name="LoanBusinessInfo" component={LoanBusinessInfoScreen} />
+            <Stack.Screen name="LoanBusinessAddrInfo" component={LoanBusinessAddrInfoScreen} />
+            <Stack.Screen name="LoanBusinessInfoCont" component={LoanBusinessInfoContScreen} />
         </Stack.Navigator>
     )
 }

@@ -204,7 +204,7 @@ const LoanMaklumatPeribadiScreen = (props) => {
                                 <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('typeBusiness')}>
+                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('jantina')}>
                                                 <Text style={{ fontSize: 12 }}>{jantina ? jantina : `Jantina`}</Text>
                                             </TouchableOpacity>
                                             {jantinaTouched && jantinaError && <Text style={styles.error}>{jantinaError}</Text>}
@@ -224,10 +224,10 @@ const LoanMaklumatPeribadiScreen = (props) => {
                                 <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('typeBusiness')}>
+                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('agama')}>
                                                 <Text style={{ fontSize: 12 }}>{agama ? agama : `Agama`}</Text>
                                             </TouchableOpacity>
-                                            {typeBusinessTouched && typeBusinessError && <Text style={styles.error}>{typeBusinessError}</Text>}
+                                            {agamaTouched && agamaError && <Text style={styles.error}>{agamaError}</Text>}
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={agama} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('agama', itemValue)}>
                                                 <Picker.Item label={'Agama'} value={undefined} />
