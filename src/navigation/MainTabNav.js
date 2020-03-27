@@ -169,7 +169,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="Wallet" component={WalletScreen} />
             <Stack.Screen name="Bill" component={BillScreen} />
             <Stack.Screen name="Delivery" component={DeliveryScreen} />
-            <Stack.Screen name="LoanMaklumatAsas" component={LoanReferrerScreen} />
+            <Stack.Screen name="LoanMaklumatAsas" component={LoanMaklumatAsasScreen} />
             <Stack.Screen name="LoanSektorPerniagaan" component={LoanPerniagaanScreen} />
             <Stack.Screen name="LoanMaklumatPeribadi" component={LoanMaklumatPeribadiScreen} />
             <Stack.Screen name="LoanPersonalStatus" component={LoanPersonalStatusScreen} />
