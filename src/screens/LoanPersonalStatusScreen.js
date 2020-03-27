@@ -208,7 +208,7 @@ const LoanPersonalStatusScreen = (props) => {
                                 <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('typeBusiness')}>
+                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('pendidikan')}>
                                                 <Text style={{ fontSize: 12 }}>{pendidikan ? pendidikan : `Taraf Pendidikan`}</Text>
                                             </TouchableOpacity>
                                             {pendidikanTouched && pendidikanError && <Text style={styles.error}>{pendidikanError}</Text>}
@@ -232,10 +232,10 @@ const LoanPersonalStatusScreen = (props) => {
                                 <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('typeBusiness')}>
+                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('taraf')}>
                                                 <Text style={{ fontSize: 12 }}>{taraf ? taraf : `Taraf Perkahwinan`}</Text>
                                             </TouchableOpacity>
-                                            {typeBusinessTouched && typeBusinessError && <Text style={styles.error}>{typeBusinessError}</Text>}
+                                            {tarafTouched && tarafError && <Text style={styles.error}>{tarafError}</Text>}
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={taraf} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('taraf', itemValue)}>
                                             <Picker.Item label={'Taraf Perkahwinan'} value={undefined} />

@@ -101,7 +101,7 @@ const LoanPendapatanScreen = (props) => {
                     setMaklumatPeribadi(values)
 
                     actions.setSubmitting(false)
-                    props.navigation.navigate('LoanPersonalStatus')
+                    props.navigation.navigate('LoanConnectedParties')
                 }}
                 validationSchema={validationSchema}
             >
@@ -163,7 +163,7 @@ const LoanPendapatanScreen = (props) => {
                                 <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('typeBusiness')}>
+                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('status')}>
                                                 <Text style={{ fontSize: 12 }}>{status ? status : `Status Kediaman`}</Text>
                                             </TouchableOpacity>
                                             {statusTouched && statusError && <Text style={styles.error}>{statusError}</Text>}

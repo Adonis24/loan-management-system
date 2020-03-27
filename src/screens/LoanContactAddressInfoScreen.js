@@ -127,7 +127,7 @@ const LoanContactAddressInfoScreen = (props) => {
                     return (
 
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                             <Modal animationType={'slide'}
+                             {/* <Modal animationType={'slide'}
                                 visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
                             >
                                 <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
@@ -159,7 +159,7 @@ const LoanContactAddressInfoScreen = (props) => {
                                         }
                                     </View>
                                 </View>
-                            </Modal>
+                            </Modal> */}
                             {/* {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />} */}
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>CONTACT ADDRESS</Text>
 

@@ -88,6 +88,13 @@ import LoanMaklumatPeribadiScreen from '../screens/LoanMaklumatPeribadiScreen'
 import LoanPersonalStatusScreen from '../screens/LoanPersonalStatusScreen'
 import LoanContactAddressInfoScreen from '../screens/LoanContactAddressInfoScreen'
 import LoanPendapatanScreen from '../screens/LoanPendapatanScreen'
+import LoanConnectedPartiesScreen from '../screens/LoanConnectedPartiesScreen'
+import LoanConnectedPartiesAddrScreeen from '../screens/LoanConnectedPartiesAddrScreeen'
+import LoanBusinessInfoScreen from '../screens/LoanBusinessInfoScreen'
+import LoanBusinessAddrInfoScreen from '../screens/LoanBusinessAddrInfoScreen'
+import LoanBusinessInfoContScreen from '../screens/LoanBusinessInfoContScreen'
+import LoanBusinessDetailScreen from '../screens/LoanBusinessDetailScreen'
+import LoanDetailScreen from '../screens/LoanDetailScreen'
 
 const DashboardStack = () => {
     return (
@@ -164,6 +171,13 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="LoanPersonalStatus" component={LoanPersonalStatusScreen} />
             <Stack.Screen name="LoanContactAddressInfo" component={LoanContactAddressInfoScreen} />
             <Stack.Screen name="LoanPendapatan" component={LoanPendapatanScreen} />
+            <Stack.Screen name="LoanConnectedParties" component={LoanConnectedPartiesScreen} />
+            <Stack.Screen name="LoanConnectedPartiesAddr" component={LoanConnectedPartiesAddrScreeen} />
+            <Stack.Screen name="LoanBusinessInfo" component={LoanBusinessInfoScreen} />
+            <Stack.Screen name="LoanBusinessAddrInfo" component={LoanBusinessAddrInfoScreen} />
+            <Stack.Screen name="LoanBusinessInfoCont" component={LoanBusinessInfoContScreen} />
+            <Stack.Screen name="LoanBusinessDetail" component={LoanBusinessDetailScreen} />
+            <Stack.Screen name="LoanDetail" component={LoanDetailScreen} />
         </Stack.Navigator>
     )
 }
@@ -233,7 +247,6 @@ const InfoNewsStack = () => {
         <Stack.Navigator initialRouteName="InfoNewsList" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="InfoNewsList" component={InfoNewsListScreen} />
             <Stack.Screen name="InfoNews" component={InfoNewsScreen} />
-
         </Stack.Navigator>
     )
 }
@@ -245,9 +258,11 @@ const MainTabNav = () => {
             <Tab.Screen name="DashboardStackWithModal" component={DashboardStackWithModal} options={({ route }) => {
                 // const {state}=route
                 // const {index,routes}=state
-                const routeName = route.state.routes[route.state.index].name
+                //console.log(`index ialah ${JSON.stringify(route.state.index)}`)
+                //console.log(`route ialah ${JSON.stringify(route.state.routes[route.state.index].name)}`)
+                 const routeName = route.state.routes[route.state.index].name
                 let tabBarVisible = true
-                if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan')
+                if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan'|| routeName === 'LoanConnectedParties'|| routeName === 'LoanConnectedPartiesAddr'|| routeName === 'LoanBusinessInfo'|| routeName === 'LoanBusinessAddrInfo'|| routeName === 'LoanBusinessInfoCont'|| routeName === 'LoanBusinessDetail'|| routeName === 'LoanDetail')
                     tabBarVisible = false
                 return {
                     tabBarOptions: {

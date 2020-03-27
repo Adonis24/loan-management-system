@@ -31,7 +31,7 @@ const NotificationsScreen = (props) => {
         >
 
             {/* CONTENT AREA */}
-            
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 20 }} />
                 <ScrollView contentStyle={{ padding: 10 }} >
                     {notificationList && notificationList.length > 0 ?
                         <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>

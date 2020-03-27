@@ -38,8 +38,6 @@ const ProfileScreen = (props) => {
     const { profile_pic } = useSelector(state => state.myAccountReducer, shallowEqual)
     const score = 0
 
-
-
     useEffect(() => {
 
         dispatch(actionCreator.initiateCompanyInfo())
@@ -59,13 +57,12 @@ const ProfileScreen = (props) => {
                 navigation={props.navigation}
                 imageUri={require('../assets/icon/rfq.png')}
             >
-
                 <ScrollView>
                     <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginLeft: 5 }}>
                         <View style={{ flexDirection: 'row', }}>
                             <Image source={{ uri: logo }} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode={'cover'} />
                         </View>
-                        <View style={{ flexDirection: 'column', alignSelf: 'flex-start', alignItems: 'flex-start', paddingLeft: 2 }}>
+                        <View style={{ flexDirection: 'column', alignSelf: 'flex-start', alignItems: 'flex-start', paddingLeft: 5 }}>
                             <Text style={[styles.subTitle, { alignSelf: 'flex-start', textAlign: 'left' }]}>{companyName || 'John Doe Sdn Bhd'}</Text>
                             <Text style={[styles.subTitle, { alignSelf: 'flex-start', textAlign: 'left' }]}>SSM NO : {companyRegNo || '123456789'}</Text>
                         </View>

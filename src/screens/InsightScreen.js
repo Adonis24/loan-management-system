@@ -1,80 +1,55 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Image,
     Text,
     View,
     FlatList,
     TouchableOpacity,
-    TextInput,
+    TextInput, ActivityIndicator
 
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Entypo } from '@expo/vector-icons';
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import Layout from '../constants/Layout'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-
+import moment from 'moment'
 import styles from '../styles/styles'
+import { Linking } from 'expo';
 
 import * as actionCreator from '../store/actions/action'
+import LayoutB from '../Layout/LayoutB';
 
-const tags = ['current', 'latest', 'finance', 'commerce', 'covid-19', 'mro']
+const tags = ['daging', 'cuka', 'sabun', 'roti', 'covid-19', 'panadol']
 
 
 
 const InsightScreen = (props) => {
-
-
     const { assoDirArray } = useSelector(state => state.assoDirReducer, shallowEqual)
-
     const dispatch = useDispatch()
-
     useEffect(() => {
 
         dispatch(actionCreator.initiateAssociateDir())
-        console.log(`ini kat screen contact sudah : ${JSON.stringify(props.assoDirArray)}`)
+
     }, []); // empty-array means don't watch for any updates
 
     const [tagMode, setTagMode] = useState(true)
-
+    assoDirArray && console.log(`ini kat screen contact sudah : ${JSON.stringify(assoDirArray)}`)
 
     return (
-        <View style={styles.container}>
+        < LayoutB
+            title={'Directory'}
+            screenType='logo'
+            navigation={props.navigation}
+            imageUri={require('../assets/images/profile.png')}
+        >
 
-            <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                <View style={{ alignItems: 'flex-end' }}>
-                    <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
-                </View>
-                {/* <View style={{ alignItems: 'flex-start' }}>
-                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 46, height: 332 }} />
-                    </View> */}
-            </View>
-            <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
-                {/* HEADER */}
-                <View style={{ flex: 1 }}>
-                    <View style={{ flex: 1, marginLeft: -10 }}>
-                        <Image source={require('../assets/images/logo.png')} style={styles.logo} resizeMode='contain' />
-
-                    </View>
-                    <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
-                        <View style={{ flex: 5, flexDirection: 'row' }}>
-
-                        </View>
-                        <View style={[{ backgroundColor: '#fff', flex: 4, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', paddingLeft: 5, flexDirection: 'row', elevation: 2 }]}>
-
-                            <Image source={require('../assets/images/profile.png')} style={{ width: Layout.window.width / 10, height: undefined, }} resizeMode={'contain'} />
-                            <Text style={[styles.textDefault, { fontSize: 18, fontWeight: "bold", paddingLeft: 5, }]} numberOfLines={1} ellipsizeMode={'tail'}>Contact</Text>
-
-                        </View>
-                    </View>
-                </View>
-
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 10 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 10 }}>
                 {tagMode ?
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10, flex: 1, }}>
                         <FlatList
-                            contentContainerStyle={{ padding: 10 }}
+                            contentContainerStyle={{ paddingTop: 10, paddingBottom: 10 }}
                             horizontal
                             data={tags}
                             keyExtractor={(item, index) => index.toString()}
@@ -103,8 +78,84 @@ const InsightScreen = (props) => {
 
             </View>
 
-                {/* CONTENT AREA */}
-                <View style={{ flex: 4 }}>
+            {/* CONTENT AREA */}
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                {assoDirArray ? assoDirArray.length > 0 ?
+                    <FlatList
+                        contentContainerStyle={{ paddingLeft: 0, paddingRight: 0 }}
+                        data={assoDirArray}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={({ item }) =>
+                            <TouchableOpacity
+                                onPress={() => hafiz(item)}
+                                style={{ width: Layout.window.width, marginBottom: 10, borderBottomWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch' }}>
+                                <View style={{ alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch' }}>
+                                    <View style={{ padding: 5, flex: 2, paddingTop: 0 }}>
+                                        {/* <Image source={{ uri: item.profile_pic }} style={{ flex: 1, height: undefined, width: undefined }} /> */}
+                                        <Entypo name="shop" color={'lightblue'} style={{ fontSize: 80, paddingRight: 5, paddingLeft: 5 }} />
+                                    </View>
+                                    <View style={{ flex: 5, padding: 5 }} >
+                                        <View style={{ flexDirection: 'row', }}>
+                                            <Text style={[styles.textDefault, { textTransform: 'uppercase', textAlign: 'justify' }]}>Kedai {item.name}</Text>
+                                            {/* <Text numberOfLines={1} ellipsizeMode={'tail'} style={[styles.textSmall, { flex: 1, textAlign: 'right' }]}>{moment(item.date).format("ddd, MMM D, YYYY")}</Text> */}
+                                        </View>
+                                        <Text style={[styles.textDefault, { marginBottom: 5 }]}>Pembekal Barangan Runcit dan Basah</Text>
+                                        <Text style={[styles.textSmall, { marginBottom: 5 }]}>Seri Kembangan, Selangor</Text>
+                                        <View style={{ marginBottom: 5, flexDirection: 'row', flexWrap: 'wrap' }}>
+                                            <View style={{ padding: 3, borderWidth: 1, borderRadius: 5, borderColor: 'lightgrey', margin: 3,marginLeft:0 }}>
+                                                <Text style={styles.textSmall}>kicap</Text>
+                                            </View>
+                                            <View style={{ padding: 3, borderWidth: 1, borderRadius: 5, borderColor: 'lightgrey', margin: 3 }}>
+                                                <Text style={styles.textSmall}>maggi</Text>
+                                            </View>
+                                            <View style={{ padding: 3, borderWidth: 1, borderRadius: 5, borderColor: 'lightgrey', margin: 3 }}>
+                                                <Text style={styles.textSmall}>topeng muka</Text>
+                                            </View>
+                                        </View>
+
+                                        <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between', alignItems: 'center' }}>
+                                            {/* <View style={{ flexDirection: 'row' }}>
+                                                <TouchableOpacity
+                                                    style={{ margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
+                                                    onPress={() => console.log('tag pressed')}>
+                                                    <Text style={[styles.textSmall, {}]}>TEKUN</Text>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity
+                                                    style={{ margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
+                                                    onPress={() => console.log('tag pressed')}>
+                                                    <Text style={[styles.textSmall, {}]}>MALAS</Text>
+                                                </TouchableOpacity>
+                                            </View> */}
+                                            <View style={{ flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'space-around' }}>
+                                                <TouchableOpacity onPress={() => Linking.openURL(`mailto:${item.email}`)}>
+                                                    <Ionicons name="ios-mail" color={'lightgrey'} style={{ fontSize: 27, paddingRight: 10, }} />
+                                                </TouchableOpacity>
+                                                <Ionicons name="ios-call" color={'lightgrey'} style={{ fontSize: 27, paddingRight: 10, paddingLeft: 5 }} />
+                                                <Ionicons name="ios-bookmark" color={'lightgrey'} style={{ fontSize: 27, paddingRight: 10, paddingLeft: 5 }} />
+                                                <TouchableOpacity onPress={() => Linking.openURL(`waze://ul?ll=45.6906304,-120.810983&z=10`)}>
+                                                    <Ionicons name="md-map" color={'lightgrey'} style={{ fontSize: 27, paddingRight: 10, paddingLeft: 5 }} />
+                                                </TouchableOpacity>
+                                            </View>
+                                        </View>
+                                    </View>
+                                </View>
+
+
+                            </TouchableOpacity>
+                        } />
+                    : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                        <Text style={[styles.textDefault, { textAlign: 'left', margin: 10, alignSelf: 'flex-start', fontSize: 14, color: 'lightgrey' }]}>Please check back for latest info soon</Text>
+                    </View>
+                    : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                        <ActivityIndicator color={'lightgrey'} />
+                    </View>
+                }
+            </View>
+
+
+
+
+            {/* <View style={{ flex: 4 }}>
                     <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', paddingTop: 10, paddingBottom: 10, marginBottom: 20 }]}>
 
                         {assoDirArray && assoDirArray.length > 0 ?
@@ -139,16 +190,10 @@ const InsightScreen = (props) => {
                             </View>
                         }
                     </View>
-                </View>
-            </View>
-            {/* <PopupScoreScreen /> */}
+                </View>    */}
 
-            {/* <View style={{ position: 'absolute', top: Constants.statusBarHeight, right: 0 }}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('QR')}>
-                        <Image source={require('../assets/images/qr.png')} style={{ width: 50, height: 50 }} />
-                    </TouchableOpacity>
-                </View> */}
-        </ View>
+
+        </LayoutB>
 
     );
 }
