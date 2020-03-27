@@ -42,6 +42,7 @@ import MyScoreScreen from '../screens/MyScoreScreen';
 import PromotionScreen from '../screens/PromotionScreen';
 import LoanApplicationScreen from '../screens/LoanApplicationScreen';
 import FinancingScreen from '../screens/FinancingScreen';
+import LoanCheckListScreen from '../screens/LoanCheckListScreen';
 import GrantScreen from '../screens/GrantScreen';
 import QuizScreen from '../screens/QuizScreen';
 import QuizAnswerScreen from '../screens/QuizAnswerScreen';
@@ -100,6 +101,7 @@ import LoanReferrerScreen from '../screens/LoanReferrerScreen'
 import LoanValidationScreen from '../screens/LoanValidationScreen'
 import LoanDeclarationScreen from '../screens/LoanDeclarationScreen'
 
+
 const DashboardStack = () => {
     return (
         <Stack.Navigator initialRouteName="Dashboard" screenOptions={{ headerShown: false }}>
@@ -129,6 +131,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="MyScore" component={MyScoreScreen} />
             <Stack.Screen name="LoanApplication" component={LoanApplicationScreen} />
             <Stack.Screen name="Financing" component={FinancingScreen} />
+            <Stack.Screen name="LoanCheckList" component={LoanCheckListScreen} />
             <Stack.Screen name="Grant" component={GrantScreen} />
             <Stack.Screen name="Quiz" component={QuizScreen} />
             <Stack.Screen name="QuizAnswer" component={QuizAnswerScreen} />
@@ -269,14 +272,20 @@ const MainTabNav = () => {
     return (
         <Tab.Navigator tabBarOptions={{ showLabel: false }}>
             <Tab.Screen name="DashboardStackWithModal" component={DashboardStackWithModal} options={({ route }) => {
-                // const {state}=route
-                // const {index,routes}=state
-                //console.log(`index ialah ${JSON.stringify(route.state.index)}`)
-                //console.log(`route ialah ${JSON.stringify(route.state.routes[route.state.index].name)}`)
-                 const routeName = route.state.routes[route.state.index].name
-                let tabBarVisible = true
-                if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan'|| routeName === 'LoanConnectedParties'|| routeName === 'LoanConnectedPartiesAddr'|| routeName === 'LoanBusinessInfo'|| routeName === 'LoanBusinessAddrInfo'|| routeName === 'LoanBusinessInfoCont'|| routeName === 'LoanBusinessDetail'|| routeName === 'LoanDetail')
-                    tabBarVisible = false
+               
+               let tabBarVisible = true
+
+                if (route.state) {
+                    if (route.state.routes) {
+                        if (route.state.routes) {
+                            const routeName = route.state.routes[route.state.index].name
+                            if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan'|| routeName === 'LoanConnectedParties'|| routeName === 'LoanConnectedPartiesAddr'|| routeName === 'LoanBusinessInfo'|| routeName === 'LoanBusinessAddrInfo'|| routeName === 'LoanBusinessInfoCont'|| routeName === 'LoanBusinessDetail'|| routeName === 'LoanDetail')
+                                tabBarVisible = false
+                        }
+                    }
+
+                }
+
                 return {
                     tabBarOptions: {
                         activeTintColor: '#4967AE',
