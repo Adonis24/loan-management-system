@@ -40,7 +40,7 @@ const InsightScreen = (props) => {
     return (
         < LayoutB
             title={'Directory'}
-            screenType='form'
+            screenType='logo'
             navigation={props.navigation}
             imageUri={require('../assets/images/profile.png')}
         >
@@ -79,7 +79,7 @@ const InsightScreen = (props) => {
             </View>
 
             {/* CONTENT AREA */}
-            <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                 {assoDirArray ? assoDirArray.length > 0 ?
                     <FlatList
                         contentContainerStyle={{ paddingLeft: 0, paddingRight: 0 }}

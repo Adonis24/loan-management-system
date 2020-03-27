@@ -42,6 +42,7 @@ const SettingScreen = (props) => {
             navigation={props.navigation}
             imageUri={require('../assets/images/profile.png')}
         >
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 20 }} />
             <ScrollView contentStyle={{ padding: 10 }} >
                 <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                     <Text style={[styles.subTitle, { margin: 5 }]}>Profile Picture</Text>

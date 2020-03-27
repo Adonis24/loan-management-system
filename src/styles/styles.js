@@ -88,7 +88,7 @@ export default StyleSheet.create({
         borderColor: 'lightgrey'
     },
     logo: {
-        width: Layout.window.width / 3,
+        width: undefined,
         height: undefined,
         flex: 1
     },
