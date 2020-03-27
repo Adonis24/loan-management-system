@@ -18,7 +18,7 @@ import styles from '../styles/styles'
 
 const HandbookScreen = (props) => {
 
-        const item = props.route.param?.item ?? 'NA'
+        const item = props.route.params?.item ?? 'NA'
         return (
             <View style={styles.container}>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>

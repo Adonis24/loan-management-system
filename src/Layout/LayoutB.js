@@ -15,7 +15,7 @@ import Constants from 'expo-constants'
 import Layout from '../constants/Layout'
 
 const LayoutB = (props) => {
-    const { boxStyle,boxStyle1 } = props
+    const { boxStyle, boxStyle1 } = props
 
 
     return (
@@ -34,26 +34,27 @@ const LayoutB = (props) => {
                         <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
                     </View>
                 </View>}
-            {props.screenType === 'logo' ? <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
-                {/* HEADER */}
-                <View style={{ flex: 1 }}>
-                    <View style={{ flex: 1, marginLeft: -10 }}>
-                        <Image source={require('../assets/images/logo.png')} style={styles.logo} resizeMode='contain' />
-                    </View>
-                    <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
-                        <View style={{ flex: 5, flexDirection: 'row' }}>
+            {props.screenType === 'logo' ?
+                <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
+                    {/* HEADER */}
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <View style={{ width:Layout.window.width/5,justifyContent:'center',paddingLeft:5}}>
+                            <Image source={require('../assets/images/logo.png')} style={{width:Layout.window.width/5,height:(Layout.window.width/5)*2/3,paddingTop:5}} resizeMode='cover' />
                         </View>
-                        <View style={[{ backgroundColor: '#fff', flex: 4, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', paddingLeft: 5, flexDirection: 'row', elevation: 2 }]}>
-                            <Image source={props.imageUri} style={{ width: Layout.window.width / 10, height: undefined, }} resizeMode={'contain'} />
-                            <Text style={styles.headText} numberOfLines={1} ellipsizeMode={'tail'}>{props.title}</Text>
-
+                        <View style={{ width:Layout.window.width-Layout.window.width/5, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5}}>
+                            <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }, boxStyle]}>
+                                <Image source={props.imageUri} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
+                                <Text style={[styles.headText, { alignSelf: 'center' }]} numberOfLines={1} ellipsizeMode={'tail'}>{props.title}</Text>
+                            </View>
                         </View>
                     </View>
-                </View>
-                <View style={{ flex: 4 }}>
-                    {!((props.screenType === 'form') || (props.screenType === 'logo')) ? <View style={{ padding: 20 }}>{props.children}</View> : <View style={{padding:10},boxStyle1}>{props.children}</View>}
-                </View>
-            </View> : <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
+                    <View style={{ flex: 8}}>
+                      
+                        {!((props.screenType === 'form') || (props.screenType === 'logo')) ? 
+                        <View style={{ padding: 20 }}>{props.children}</View> : 
+                        <View style={{ padding: 10 }, boxStyle1}>{props.children}</View>}
+                    </View>
+                </View> : <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
                             <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
@@ -63,7 +64,7 @@ const LayoutB = (props) => {
                         <View style={{ flex: 4, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5 }}>
                             <View style={[{ backgroundColor: '#fff', marginLeft: Layout.window.width / 3, borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey', flexDirection: 'row', elevation: 2, justifyContent: 'flex-start' }, boxStyle]}>
                                 <Image source={props.imageUri} style={{ width: Layout.window.height / 15, height: Layout.window.height / 15, margin: 5 }} resizeMode={'contain'} />
-                                <Text style={[styles.headText ,{ alignSelf: 'center'}]} numberOfLines={1} ellipsizeMode={'tail'}>{props.title}</Text>
+                                <Text style={[styles.headText, { alignSelf: 'center' }]} numberOfLines={1} ellipsizeMode={'tail'}>{props.title}</Text>
                             </View>
                         </View>
                     </View>

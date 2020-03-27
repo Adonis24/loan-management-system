@@ -27,7 +27,7 @@ export default StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'center',
         fontFamily,
-        fontWeight: 'bold',
+      
         paddingLeft: 5,
         color: '#000'
     },
@@ -88,7 +88,7 @@ export default StyleSheet.create({
         borderColor: 'lightgrey'
     },
     logo: {
-        width: Layout.window.width / 3,
+        width: undefined,
         height: undefined,
         flex: 1
     },
@@ -100,7 +100,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 10
-    },
+    },featureIconStyle:{ flex: 3, width: undefined, justifyContent: 'flex-start' }
 
 });
 

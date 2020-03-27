@@ -10,6 +10,7 @@ import WelcomeScreen from '../screens/WelcomeScreen'
 import AuthenticationStack from './AuthenticationNavigator'
 import RegistrationStack from './RegistrationNavigator'
 import MainTabNav from './MainTabNav';
+import MapTestScreen from '../screens/MapTestScreen';
 
 const Stack = createStackNavigator();
 
@@ -23,13 +24,13 @@ const Nav = (props) => {
       //const personalToken = await AsyncStorage.getItem('personalToken');
       const personalToken = await SecureStore.getItemAsync('personalToken')
       if (personalToken !== null && !personalToken.includes('error')) {
-        const { token_type, access_token,error } = JSON.parse(personalToken)
-        
+        const { token_type, access_token, error } = JSON.parse(personalToken)
+
         //const parsedPer
         console.log(`personal token ialah : ${personalToken}`)
         //this.setState({ tokenExists: true })
         setTokenExists(true)
-   
+
         dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
       }
     } catch (error) {

@@ -19,7 +19,7 @@ import styles from '../styles/styles'
 
 const ElearningPlayScreen = (props) => {
 
-    const item = props.route.param?.item ?? 'NA'
+    const item = props.route.params?.item ?? 'NA'
     console.log(`dapat item : ${JSON.stringify(item)}`)
     return (
         <View style={styles.container}>
