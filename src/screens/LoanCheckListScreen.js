@@ -29,7 +29,14 @@ import LayoutB from '../Layout/LayoutB';
 const checklist = [
     { item: 'Borang permohonan pembiayaan TEKUN', button: 'LoanMaklumatAsas', check: true },
     { item: 'Kertas rancangan perniagaan', button: 'LoanMaklumatAsas', check: true },
-    { item: 'Gambar berukuran passport', button: 'LoanMaklumatAsas', check: true }
+    { item: 'Gambar berukuran passport', button: 'LoanMaklumatAsas', check: true },
+    { item: 'Salinan kad pengenalan pemohon dan pasangan', button: 'LoanMaklumatAsas', check: true },
+    { item: '3 keping gambar premis/tapak perniagaan', button: 'LoanMaklumatAsas', check: true },
+    { item: 'Salinan buku simpanan/penyata bank ( 3 bulan terakhir)', button: 'LoanMaklumatAsas', check: true },
+    { item: 'Salinan bil utiliti rumah atau premis perniagaan', button: 'LoanMaklumatAsas', check: true },
+    { item: 'Borang kebenaran penzahiran maklumat kredit individu', button: 'LoanMaklumatAsas', check: true },
+    { item: 'Peta ringkas lokasi tempat perniagaan ke pejabat cawangan tekun', button: 'LoanMaklumatAsas', check: true },
+    
 ]
 
 
