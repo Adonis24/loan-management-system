@@ -94,7 +94,11 @@ import LoanBusinessInfoScreen from '../screens/LoanBusinessInfoScreen'
 import LoanBusinessAddrInfoScreen from '../screens/LoanBusinessAddrInfoScreen'
 import LoanBusinessInfoContScreen from '../screens/LoanBusinessInfoContScreen'
 import LoanBusinessDetailScreen from '../screens/LoanBusinessDetailScreen'
+import LoanBusinessDetail2Screen from '../screens/LoanBusinessDetail2Screen'
 import LoanDetailScreen from '../screens/LoanDetailScreen'
+import LoanReferrerScreen from '../screens/LoanReferrerScreen'
+import LoanValidationScreen from '../screens/LoanValidationScreen'
+import LoanDeclarationScreen from '../screens/LoanDeclarationScreen'
 
 const DashboardStack = () => {
     return (
@@ -165,7 +169,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="Wallet" component={WalletScreen} />
             <Stack.Screen name="Bill" component={BillScreen} />
             <Stack.Screen name="Delivery" component={DeliveryScreen} />
-            <Stack.Screen name="LoanMaklumatAsas" component={LoanMaklumatAsasScreen} />
+            <Stack.Screen name="LoanMaklumatAsas" component={LoanReferrerScreen} />
             <Stack.Screen name="LoanSektorPerniagaan" component={LoanPerniagaanScreen} />
             <Stack.Screen name="LoanMaklumatPeribadi" component={LoanMaklumatPeribadiScreen} />
             <Stack.Screen name="LoanPersonalStatus" component={LoanPersonalStatusScreen} />
@@ -177,7 +181,11 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="LoanBusinessAddrInfo" component={LoanBusinessAddrInfoScreen} />
             <Stack.Screen name="LoanBusinessInfoCont" component={LoanBusinessInfoContScreen} />
             <Stack.Screen name="LoanBusinessDetail" component={LoanBusinessDetailScreen} />
+            <Stack.Screen name="LoanBusinessDetail2" component={LoanBusinessDetail2Screen} />
             <Stack.Screen name="LoanDetail" component={LoanDetailScreen} />
+            <Stack.Screen name="LoanReferrer" component={LoanReferrerScreen} />
+            <Stack.Screen name="LoanValidation" component={LoanValidationScreen} />
+            <Stack.Screen name="LoanDeclaration" component={LoanDeclarationScreen} />
         </Stack.Navigator>
     )
 }
@@ -199,6 +207,11 @@ const NotificationStack = () => {
         </Stack.Navigator>
     )
 }
+
+
+
+
+
 
 const SettingsStack = () => {
     return (
@@ -256,25 +269,17 @@ const InfoNewsStack = () => {
 const MainTabNav = () => {
     return (
         <Tab.Navigator tabBarOptions={{ showLabel: false }}>
-            <Tab.Screen name="DashboardStackWithModal" component={DashboardStackWithModal} options={({ route }) => {
-                // const {state}=route
-                // const {index,routes}=state
-                const routeName = route.state.routes[route.state.index].name
-                let tabBarVisible = true
-                if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan')
-                    tabBarVisible = false
-                return {
-                    tabBarOptions: {
-                        activeTintColor: '#4967AE',
-                        inactiveTintColor: '#7896dc',
-                    },
-                    tabBarIcon: ({ focused }) => (
-                        <TabBarIcon
-                            focused={focused}
-                            name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
-                        />
-                    ), tabBarVisible
-                }
+            <Tab.Screen name="DashboardStackWithModal" component={DashboardStackWithModal} options={{
+                tabBarOptions: {
+                    activeTintColor: '#4967AE',
+                    inactiveTintColor: '#7896dc',
+                },
+                tabBarIcon: ({ focused }) => (
+                    <TabBarIcon
+                        focused={focused}
+                        name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+                    />
+                ),
             }} />
             <Tab.Screen name="InsightStack" component={InsightDrawer} options={{
                 tabBarOptions: {

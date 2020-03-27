@@ -26,19 +26,19 @@ import * as actionCreator from '../store/actions/action'
 const validationSchema = Yup.object().shape({
 
    
-    phoneNum: Yup
+    cpPhoneNum: Yup
         .string()
         .required()
         .min(3)
         .label('No Tel'),
 
-    alamat: Yup
+    cpAlamat: Yup
         .string()
         .required()
         .min(3)
         .label('Alamat'),
 
-    poskod: Yup
+    cpPoskod: Yup
         .string('Please enter')
         .required('Please enter')
         .min(5)
@@ -52,13 +52,13 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const {  phoneNum ,alamat,alamat_2, poskod } = useSelector(state => state.financingReducer, shallowEqual)
+    const {  cpPhoneNum ,cpAlamat,cpAlamat_2, cpPoskod } = useSelector(state => state.financingReducer, shallowEqual)
 
 
     const setConnectParties = (value) => dispatch({ type: 'SET_CONNECT_PARTIES', payload: { ...value } })
 
 
-    //const { capacity, nameCP, phoneNum, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
+    //const { capacity, nameCP, cpPhoneNum, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
 
     useEffect(() => {
         const open = () => setshowLogo(false)
@@ -78,12 +78,12 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{  phoneNum,alamat_2, alamat,poskod }}
+                initialValues={{  cpPhoneNum,cpAlamat_2, cpAlamat,cpPoskod }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setConnectParties(values)
-                    //props.navigation.navigate('CompanyInfoSuccess')
+                    props.navigation.navigate('LoanBusinessInfo')
                     actions.setSubmitting(false)
                 }
                 }
@@ -94,21 +94,21 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
 
 
 
-                    const {  phoneNum, alamat,alamat_2, poskod } = FormikProps.values
+                    const {  cpPhoneNum, cpAlamat,cpAlamat_2, cpPoskod } = FormikProps.values
 
                
 
-                    const phoneNumError = FormikProps.errors.phoneNum
-                    const phoneNumTouched = FormikProps.touched.phoneNum
+                    const cpPhoneNumError = FormikProps.errors.cpPhoneNum
+                    const cpPhoneNumTouched = FormikProps.touched.cpPhoneNum
 
-                    const alamatError = FormikProps.errors.alamat
-                    const alamatTouched = FormikProps.touched.alamat
+                    const cpAlamatError = FormikProps.errors.cpAlamat
+                    const cpAlamatTouched = FormikProps.touched.cpAlamat
 
-                    const alamat_2Error = FormikProps.errors.alamat_2
-                    const alamat_2Touched = FormikProps.touched.alamat_2
+                    const cpAlamat_2Error = FormikProps.errors.cpAlamat_2
+                    const cpAlamat_2Touched = FormikProps.touched.cpAlamat_2
 
-                    const poskodError = FormikProps.errors.poskod
-                    const poskodTouched = FormikProps.touched.poskod
+                    const cpPoskodError = FormikProps.errors.cpPoskod
+                    const cpPoskodTouched = FormikProps.touched.cpPoskod
 
 
                     return (
@@ -122,42 +122,42 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/phoneNum.png')}
-                                value={phoneNum}
-                                handleChange={FormikProps.handleChange(`phoneNum`)}
-                                handleBlur={FormikProps.handleBlur(`phoneNum`)}
-                                touched={phoneNumTouched}
-                                error={phoneNumError}
+                                value={cpPhoneNum}
+                                handleChange={FormikProps.handleChange(`cpPhoneNum`)}
+                                handleBlur={FormikProps.handleBlur(`cpPhoneNum`)}
+                                touched={cpPhoneNumTouched}
+                                error={cpPhoneNumError}
                                 placeholder={'No Telefon'}
                                 keyboardType={'numbers-and-punctuation'}
                             />
                            
                             <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}
-                                value={alamat}
-                                handleChange={FormikProps.handleChange(`alamat`)}
-                                handleBlur={FormikProps.handleBlur(`alamat`)}
-                                touched={alamatTouched}
-                                error={alamatError}
+                                value={cpAlamat}
+                                handleChange={FormikProps.handleChange(`cpAlamat`)}
+                                handleBlur={FormikProps.handleBlur(`cpAlamat`)}
+                                touched={cpAlamatTouched}
+                                error={cpAlamatError}
                                 placeholder={'Alamat Majikan Line 1'}
                                 keyboardType={'default'}
                             />
                              <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}
-                                value={alamat_2}
-                                handleChange={FormikProps.handleChange(`alamat_2`)}
-                                handleBlur={FormikProps.handleBlur(`alamat_2`)}
-                                touched={alamat_2Touched}
-                                error={alamat_2Error}
+                                value={cpAlamat_2}
+                                handleChange={FormikProps.handleChange(`cpAlamat_2`)}
+                                handleBlur={FormikProps.handleBlur(`cpAlamat_2`)}
+                                touched={cpAlamat_2Touched}
+                                error={cpAlamat_2Error}
                                 placeholder={'Alamat Majikan Line 2'}
 
                             /> 
                             <CustomTextInput
                                 imageUri={require('../assets/images/compRegNum.png')}
-                                value={poskod}
-                                handleChange={FormikProps.handleChange(`poskod`)}
-                                handleBlur={FormikProps.handleBlur(`poskod`)}
-                                touched={poskodTouched}
-                                error={poskodError}
+                                value={cpPoskod}
+                                handleChange={FormikProps.handleChange(`cpPoskod`)}
+                                handleBlur={FormikProps.handleBlur(`cpPoskod`)}
+                                touched={cpPoskodTouched}
+                                error={cpPoskodError}
                                 placeholder={'Poskod'}
                                 keyboardType={'phone-pad'}
                             />

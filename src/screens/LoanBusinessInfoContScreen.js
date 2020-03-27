@@ -91,7 +91,7 @@ const LoanBusinessInfoContScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatPerniagaan(values)
-                    props.navigation.navigate('LoanPersonalStatus')
+                    props.navigation.navigate('LoanBusinessDetail')
                     actions.setSubmitting(false)
 
                 }

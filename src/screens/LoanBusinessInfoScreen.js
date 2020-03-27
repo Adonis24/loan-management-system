@@ -43,7 +43,7 @@ const validationSchema = Yup.object().shape({
         .min(3)
         .label('Pengalaman'),
 
-    pendapatan: Yup
+    compPendapatan: Yup
         .string()
         .required()
         .min(3)
@@ -58,7 +58,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { compName, pengalaman, compAct, pendapatan, } = useSelector(state => state.financingReducer, shallowEqual)
+    const { compName, pengalaman, compAct, compPendapatan, } = useSelector(state => state.financingReducer, shallowEqual)
 
 
     const setBusinessInfo = (value) => dispatch({ type: 'SET_BUSINESS_INFO', payload: { ...value } })
@@ -84,7 +84,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ compName, pengalaman, compAct, pendapatan, }}
+                initialValues={{ compName, pengalaman, compAct, compPendapatan, }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -100,7 +100,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
 
 
-                    const { compAct, compName, pengalaman, pendapatan, poskod } = FormikProps.values
+                    const { compAct, compName, pengalaman, compPendapatan, poskod } = FormikProps.values
 
                     const compActError = FormikProps.errors.compAct
                     const compActTouched = FormikProps.touched.compAct
@@ -111,8 +111,8 @@ const LoanConnectedPartiesScreen = (props) => {
                     const pengalamanError = FormikProps.errors.pengalaman
                     const pengalamanTouched = FormikProps.touched.pengalaman
 
-                    const pendapatanError = FormikProps.errors.pendapatan
-                    const pendapatanTouched = FormikProps.touched.pendapatan
+                    const compPendapatanError = FormikProps.errors.compPendapatan
+                    const compPendapatanTouched = FormikProps.touched.compPendapatan
 
 
 
@@ -154,16 +154,16 @@ const LoanConnectedPartiesScreen = (props) => {
                                 touched={pengalamanTouched}
                                 error={pengalamanError}
                                 placeholder={'Tempoh/Pengalaman Berniaga'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'default'}
                             />
                            
                             <CustomTextInput
                                 imageUri={require('../assets/images/user.png')}
-                                value={pendapatan}
-                                handleChange={FormikProps.handleChange(`pendapatan`)}
-                                handleBlur={FormikProps.handleBlur(`pendapatan`)}
-                                touched={pendapatanTouched}
-                                error={pendapatanError}
+                                value={compPendapatan}
+                                handleChange={FormikProps.handleChange(`compPendapatan`)}
+                                handleBlur={FormikProps.handleBlur(`compPendapatan`)}
+                                touched={compPendapatanTouched}
+                                error={compPendapatanError}
                                 placeholder={'Anggaran Pendapatan'}
                                 keyboardType={'phone-pad'}
                             />

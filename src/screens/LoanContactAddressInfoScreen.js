@@ -99,9 +99,8 @@ const LoanContactAddressInfoScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatPeribadi(values)
-
                     actions.setSubmitting(false)
-                    props.navigation.navigate('LoanPersonalStatus')
+                    props.navigation.navigate('LoanPendapatan')
                 }}
                 validationSchema={validationSchema}
             >
@@ -127,39 +126,7 @@ const LoanContactAddressInfoScreen = (props) => {
                     return (
 
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                             <Modal animationType={'slide'}
-                                visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
-                            >
-                                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                                    <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
-                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
-                                            <TouchableOpacity onPress={() => setIosPickerVisible(!iosPickerVisible)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                                <Ionicons name="ios-arrow-back" color={'#5a83c2'} style={{ fontSize: 30 }} />
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
-                                            <Text style={{ fontSize: 12 }}>Select</Text>
-                                        </View>
-                                        <View style={{ flex: 1 }} />
-                                    </View>
-                                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
-                                        {(modalContent === "jantina") ?
-                                            <Picker style={{ flex: 1, height: 35 }} selectedValue={jantina} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('jantina', itemValue)}>
-                                                <Picker.Item label={'Jantina'} value={undefined} />
-                                                <Picker.Item label="Lelaki" value="lelaki" />
-                                                <Picker.Item label="Wanita" value="wanita" />
-                                               
-                                            </Picker> : <Picker style={{ flex: 1, height: 35 }} selectedValue={agama} onValueChange={(itemValue, itemIndex) =>
-                                                FormikProps.setFieldValue('agama', itemValue)}>
-                                                <Picker.Item label={'Agama'} value={undefined} />
-                                                <Picker.Item label="Islam" value="islam" />
-                                                <Picker.Item label="Bukan Islam" value="bukanIslam" />
-                                                
-                                            </Picker>
-                                        }
-                                    </View>
-                                </View>
-                            </Modal>
+                            
                             {/* {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />} */}
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>CONTACT ADDRESS</Text>
 

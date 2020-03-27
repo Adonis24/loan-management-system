@@ -34,22 +34,7 @@ const validationSchema = Yup.object().shape({
     pembiayaan: Yup
         .string()
         .required(),
-    institusi: Yup
-        .string('Please enter')
-        .required('Please enter')
-        .min(3)
-        .label('Institusi'),
-
-    totalLoan: Yup
-        .string('Please enter')
-        .required('Please enter')
-        .min(3)
-        .label('Jumlah Pembiayaan'),
-    loanBal: Yup
-        .string('Please enter')
-        .required('Please enter')
-        .min(3)
-        .label('Baki Pembiayaan'),
+    
 
 
 });
@@ -88,38 +73,37 @@ const LoanBusinessDetailScreen = (props) => {
         setIosPickerVisible(!iosPickerVisible)
     }
 
+    const changeLoan = () => {
+        if (pembiayaan == 1) {
+            props.navigation.navigate('LoanBusinessDetail2')
+         } else {
+            props.navigation.navigate('LoanDetail')
+    }
+}
+
 
     return (
         <LayoutA>
             <Formik
-                initialValues={{ institusi, totalLoan, pembiayaan }}
+                initialValues={{ pembiayaan }}
                 validateOnMount
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setPembiayaan(values)
+                    changeLoan()
                     actions.setSubmitting(false)
-                    props.navigation.navigate('LoanMaklumatPeribadi')
+                    
                 }}
                 validationSchema={validationSchema}
             >
                 {FormikProps => {
-                    const { institusi, totalLoan, pembiayaan,loanBal } = FormikProps.values
+                    const {  pembiayaan } = FormikProps.values
 
 
-                    const institusiError = FormikProps.errors.institusi
-                    const institusiTouched = FormikProps.touched.institusi
-                    const totalLoanError = FormikProps.errors.totalLoan
-                    const totalLoanTouched = FormikProps.touched.totalLoan
-                    const loanBalError = FormikProps.errors.loanBal
-                    const loanBalTouched = FormikProps.touched.loanBal
                     const pembiayaanError = FormikProps.errors.pembiayaan
                     const pembiayaanTouched = FormikProps.touched.pembiayaan
 
-                    const changeLoan = (itemValue, itemIndex) => {
-                        FormikProps.setFieldValue('pembiayaan', itemValue)
-                        setLoan(itemValue)
-                    }
-
+                   
 
 
                     return (
@@ -141,7 +125,7 @@ const LoanBusinessDetailScreen = (props) => {
                                         <View style={{ flex: 1 }} />
                                     </View>
                                     <View style={{ flex: 9, justifyContent: 'flex-start' }}>
-                                        <Picker style={{ flex: 1, height: 35 }} selectedValue={pembiayaan} onValueChange={(itemValue, itemIndex) => changeLoan(itemValue, itemIndex)}>
+                                        <Picker style={{ flex: 1, height: 35 }} selectedValue={pembiayaan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pembiayaan', itemValue)}>
                                             <Picker.Item label={'Pembiayaan'} value={undefined} />
                                             <Picker.Item label="Ada" value={1} />
                                             <Picker.Item label="Tiada" value={2} />
@@ -165,7 +149,7 @@ const LoanBusinessDetailScreen = (props) => {
                                                 </TouchableOpacity>
                                                 {pembiayaanTouched && pembiayaanError && <Text style={styles.error}>{pembiayaanError}</Text>}
                                             </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
-                                                <Picker style={{ flex: 1, height: 35 }} selectedValue={pembiayaan} onValueChange={(itemValue, itemIndex) => changeLoan(itemValue, itemIndex)}>
+                                                <Picker style={{ flex: 1, height: 35 }} selectedValue={pembiayaan} onValueChange={(itemValue, itemIndex) =>FormikProps.setFieldValue('pembiayaan', itemValue)}>
                                                     <Picker.Item label={'Pembiayaan'} value={undefined} />
                                                     <Picker.Item label="Ada" value={1} />
                                                     <Picker.Item label="Tiada" value={2} />
@@ -174,39 +158,7 @@ const LoanBusinessDetailScreen = (props) => {
                                             </View>}
                                     </View>
                                 </View>
-                                {loan && pembiayaan == 1 &&
-                                    <View>
-                                        <CustomTextInput
-                                            imageUri={require('../assets/images/city.png')}
-                                            value={institusi}
-                                            handleChange={FormikProps.handleChange(`institusi`)}
-                                            handleBlur={FormikProps.handleBlur(`institusi`)}
-                                            touched={institusiTouched}
-                                            error={institusiError}
-                                            placeholder={'Institusi Pembiayaan'}
-                                            keyboardType={'default'}
-                                        />
-                                        <CustomTextInput
-                                            imageUri={require('../assets/images/state.png')}
-                                            value={totalLoan}
-                                            handleChange={FormikProps.handleChange(`totalLoan`)}
-                                            handleBlur={FormikProps.handleBlur(`totalLoan`)}
-                                            touched={totalLoanTouched}
-                                            error={totalLoanError}
-                                            placeholder={'Jumlah Pembiayaan'}
-                                            keyboardType={'phone-pad'}
-                                        />
-                                        <CustomTextInput
-                                            imageUri={require('../assets/images/state.png')}
-                                            value={loanBal}
-                                            handleChange={FormikProps.handleChange(`loanBal`)}
-                                            handleBlur={FormikProps.handleBlur(`loanBal`)}
-                                            touched={loanBalTouched}
-                                            error={loanBalError}
-                                            placeholder={'Baki Pembiayaan'}
-                                            keyboardType={'phone-pad'}
-                                        />
-                                    </View>}
+                               
                             </ScrollView>
 
                             <CustomFormAction

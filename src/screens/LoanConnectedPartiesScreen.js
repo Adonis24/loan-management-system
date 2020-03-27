@@ -25,26 +25,26 @@ import * as actionCreator from '../store/actions/action'
 
 const validationSchema = Yup.object().shape({
 
-    pekerjaan: Yup
+    cpPekerjaan: Yup
         .string()
         .required()
         .min(3)
         .label('Pekerjaan'),
 
-    name: Yup
+    cpName: Yup
         .string()
         .required()
         .min(3)
         .label('Connected Party Name'),
 
-    icNumber: Yup
+    cpIcNumber: Yup
         .string()
         .required()
         .min(12)
         .max(12)
         .label('MyKad No'),
 
-    pendapatan: Yup
+    cpPendapatan: Yup
         .string()
         .required()
         .min(3)
@@ -59,13 +59,13 @@ const LoanConnectedPartiesScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { name, icNumber, pekerjaan, pendapatan, } = useSelector(state => state.financingReducer, shallowEqual)
+    const { cpName, cpIcNumber, cpPekerjaan, cpPendapatan, } = useSelector(state => state.financingReducer, shallowEqual)
 
 
     const setConnectParties = (value) => dispatch({ type: 'SET_CONNECT_PARTIES', payload: { ...value } })
 
 
-    //const { capacity, nameCP, icNumber, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
+    //const { capacity, nameCP, cpIcNumber, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
 
     useEffect(() => {
         const open = () => setshowLogo(false)
@@ -85,7 +85,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ name, icNumber, pekerjaan, pendapatan, }}
+                initialValues={{ cpName, cpIcNumber, cpPekerjaan, cpPendapatan, }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -101,19 +101,19 @@ const LoanConnectedPartiesScreen = (props) => {
 
 
 
-                    const { pekerjaan, name, icNumber, pendapatan, poskod } = FormikProps.values
+                    const { cpPekerjaan, cpName, cpIcNumber, cpPendapatan, poskod } = FormikProps.values
 
-                    const pekerjaanError = FormikProps.errors.pekerjaan
-                    const pekerjaanTouched = FormikProps.touched.pekerjaan
+                    const cpPekerjaanError = FormikProps.errors.cpPekerjaan
+                    const cpPekerjaanTouched = FormikProps.touched.cpPekerjaan
 
-                    const nameError = FormikProps.errors.name
-                    const nameTouched = FormikProps.touched.name
+                    const cpNameError = FormikProps.errors.cpName
+                    const cpNameTouched = FormikProps.touched.cpName
 
-                    const icNumberError = FormikProps.errors.icNumber
-                    const icNumberTouched = FormikProps.touched.icNumber
+                    const cpIcNumberError = FormikProps.errors.cpIcNumber
+                    const cpIcNumberTouched = FormikProps.touched.cpIcNumber
 
-                    const pendapatanError = FormikProps.errors.pendapatan
-                    const pendapatanTouched = FormikProps.touched.pendapatan
+                    const cpPendapatanError = FormikProps.errors.cpPendapatan
+                    const cpPendapatanTouched = FormikProps.touched.cpPendapatan
 
 
 
@@ -129,41 +129,41 @@ const LoanConnectedPartiesScreen = (props) => {
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/mykad.png')}
-                                value={name}
-                                handleChange={FormikProps.handleChange(`name`)}
-                                handleBlur={FormikProps.handleBlur(`name`)}
-                                touched={nameTouched}
-                                error={nameError}
+                                value={cpName}
+                                handleChange={FormikProps.handleChange(`cpName`)}
+                                handleBlur={FormikProps.handleBlur(`cpName`)}
+                                touched={cpNameTouched}
+                                error={cpNameError}
                                 placeholder={'Nama Suami/Isteri/Waris'}
                                 keyboardType={'default'}
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/mykad.png')}
-                                value={icNumber}
-                                handleChange={FormikProps.handleChange(`icNumber`)}
-                                handleBlur={FormikProps.handleBlur(`icNumber`)}
-                                touched={icNumberTouched}
-                                error={icNumberError}
+                                value={cpIcNumber}
+                                handleChange={FormikProps.handleChange(`cpIcNumber`)}
+                                handleBlur={FormikProps.handleBlur(`cpIcNumber`)}
+                                touched={cpIcNumberTouched}
+                                error={cpIcNumberError}
                                 placeholder={'No Kad Pengenalan'}
                                 keyboardType={'numbers-and-punctuation'}
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/user.png')}
-                                value={pekerjaan}
-                                handleChange={FormikProps.handleChange(`pekerjaan`)}
-                                handleBlur={FormikProps.handleBlur(`pekerjaan`)}
-                                touched={pekerjaanTouched}
-                                error={pekerjaanError}
+                                value={cpPekerjaan}
+                                handleChange={FormikProps.handleChange(`cpPekerjaan`)}
+                                handleBlur={FormikProps.handleBlur(`cpPekerjaan`)}
+                                touched={cpPekerjaanTouched}
+                                error={cpPekerjaanError}
                                 placeholder={'Pekerjaan'}
 
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/user.png')}
-                                value={pendapatan}
-                                handleChange={FormikProps.handleChange(`pendapatan`)}
-                                handleBlur={FormikProps.handleBlur(`pendapatan`)}
-                                touched={pendapatanTouched}
-                                error={pendapatanError}
+                                value={cpPendapatan}
+                                handleChange={FormikProps.handleChange(`cpPendapatan`)}
+                                handleBlur={FormikProps.handleBlur(`cpPendapatan`)}
+                                touched={cpPendapatanTouched}
+                                error={cpPendapatanError}
                                 placeholder={'Pendapatan'}
                                 keyboardType={'phone-pad'}
                             />

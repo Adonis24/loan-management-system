@@ -45,13 +45,12 @@ const validationSchema = Yup.object().shape({
     umur: Yup
         .string()
         .required()
-        .min(3)
+        .min(2)
         .label('Umur'),
 
     tanggungan: Yup
         .string()
         .required()
-        .min(3)
         .label('BilTanggungan'),
 
 
@@ -104,7 +103,7 @@ const LoanPersonalStatusScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatPeribadi(values)
-                    //props.navigation.navigate('CompanyInfoSuccess')
+                    props.navigation.navigate('LoanContactAddressInfo')
                     actions.setSubmitting(false)
 
                 }

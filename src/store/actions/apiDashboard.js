@@ -194,9 +194,9 @@ export const grantInfoApi = (page) => {
 export const applyfinancingApi = (page) => {
   return async (dispatch, getState) => {
 
-    const { negeri,cawanganParlimen,pengundiBerdaftar,statusPerniagaan,bank,noAkaun,typeBusiness,name, icNumber, agama, tarikhLahir,jantina,alamat, alamat_2, phoneNum, email, poskod,alamatComp, pendapatan, pekerjaan, status,pembiayaan } = getState().loanApplicationReducer
+    const { negeri,cawanganParlimen,pengundiBerdaftar,statusPerniagaan,bank,noAkaun,typeBusiness,name, icNumber, agama, tarikhLahir,jantina,alamat, alamat_2, phoneNum, email, poskod,alamatComp, pendapatan, pekerjaan, status,pembiayaan,relationship,cpName, cpIcNumber, cpPekerjaan, cpPendapatan,cpPhoneNum ,cpAlamat,cpAlamat_2, cpPoskod,compPendapatan,compPhoneNum ,compAlamat,compAlamat_2, compPoskod,refAlamat, refAlamat_2, refName, refPhoneNum,valAlamat, valAlamat_2, valName, valPhoneNum, jawatan, } = getState().loanApplicationReducer
 
-    const responseJson = await apiPostCall(`api/loan/addFinancingInformation`, null,negeri,cawanganParlimen,pengundiBerdaftar,statusPerniagaan,bank,noAkaun,typeBusiness,name, icNumber, agama, tarikhLahir,jantina,alamat, alamat_2, phoneNum, email, poskod,alamatComp, phoneNum, pendapatan, pekerjaan, status,pembiayaan, getState().apiReducer)
+    const responseJson = await apiPostCall(`api/loan/addFinancingInformation`, null,negeri,cawanganParlimen,pengundiBerdaftar,statusPerniagaan,bank,noAkaun,typeBusiness,name, icNumber, agama, tarikhLahir,jantina,alamat, alamat_2, phoneNum, email, poskod,alamatComp, phoneNum, pendapatan, pekerjaan, status,pembiayaan,relationship,cpName, cpIcNumber, cpPekerjaan, cpPendapatan,cpPhoneNum ,cpAlamat,cpAlamat_2, cpPoskod,compPendapatan,compPhoneNum ,compAlamat,compAlamat_2, compPoskod,refAlamat, refAlamat_2, refName, refPhoneNum,valAlamat, valAlamat_2, valName, valPhoneNum, jawatan, getState().apiReducer)
 
     console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const einfosArray = await responseJson.data

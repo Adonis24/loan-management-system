@@ -98,7 +98,7 @@ const LoanDetailScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatPembiayaan(values)
-                    //props.navigation.navigate('CompanyInfoSuccess')
+                    props.navigation.navigate('LoanReferrer')
                     actions.setSubmitting(false)
 
                 }

@@ -99,7 +99,6 @@ const LoanPendapatanScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatPeribadi(values)
-
                     actions.setSubmitting(false)
                     props.navigation.navigate('LoanConnectedParties')
                 }}
@@ -186,7 +185,7 @@ const LoanPendapatanScreen = (props) => {
                                 touched={pekerjaanTouched}
                                 error={pekerjaanError}
                                 placeholder={'Pekerjaan Sekarang'}
-                                keyboardType={'Default'}
+                                keyboardType={'default'}
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/email.png')}
