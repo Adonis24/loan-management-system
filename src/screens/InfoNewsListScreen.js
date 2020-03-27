@@ -88,13 +88,13 @@ const InfoNewsListScreen = (props) => {
             <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
                 {newsArray ? newsArray.length > 0 ?
                     <FlatList
-                        contentContainerStyle={{ paddingLeft: 0, paddingRight: 0 }}
+                    contentContainerStyle={{ paddingLeft: 0, paddingRight: 0 }}
                         data={newsArray}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item }) =>
                             <TouchableOpacity
                                 onPress={() => hafiz(item)}
-                                style={{ width: Layout.window.width-10 , marginBottom: 10, borderBottomWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch' }}>
+                                style={{ width: Layout.window.width, marginBottom: 10, borderBottomWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch' }}>
                                 <View style={{ alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch' }}>
                                     <View style={{ padding: 5, flex: 2, }}>
                                         <Image source={{ uri: item.picture }} style={{ flex: 1, height: undefined, width: undefined }} />

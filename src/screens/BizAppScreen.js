@@ -21,9 +21,7 @@ import styles from '../styles/styles'
 
 const BizAppScreen = (props) => {
 
-    const nav = (screen) => {
-        props.navigation.navigate(screen)
-    }
+    
    
         return (
             <View style={styles.container}>

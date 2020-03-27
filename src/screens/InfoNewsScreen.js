@@ -45,7 +45,7 @@ const InfoNewsScreen = (props) => {
     };
 
 
-    //const item = props.route.param?.test ?? 'NA'
+    //const item = props.route.params?.test ?? 'NA'
     const { item } = props.route.params;
     const parseItem = JSON.parse(item)
     console.log(`dapat item : ${JSON.stringify(parseItem)}`)

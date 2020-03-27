@@ -24,7 +24,7 @@ const ElearningScreen = (props) => {
     console.log(`jwt ialah ${jwt}`)
     const uri = `https://lms.bxcess.my/?bx-token=${jwt}`
 
-    _handlePressButtonAsync = async () => {
+    const _handlePressButtonAsync = async () => {
         let result = await WebBrowser.openBrowserAsync(uri);
         //this.setState({ result });
     };
@@ -32,8 +32,7 @@ const ElearningScreen = (props) => {
     
     document.querySelector("#slide").setAttribute("style", "display:none");
     document.querySelector("#main-menu").setAttribute("style", "display:none"); 
-    document.querySelector(".best-course-section").setAttribute("style", "background-color:#fff");
-   
+    document.querySelector(".best-course-section").setAttribute("style", "background-color:#fff");   
        `
     return (
 
