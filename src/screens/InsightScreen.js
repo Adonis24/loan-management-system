@@ -9,7 +9,7 @@ import {
     TextInput, ActivityIndicator
 
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Entypo } from '@expo/vector-icons';
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
 import Layout from '../constants/Layout'
@@ -21,7 +21,7 @@ import { Linking } from 'expo';
 import * as actionCreator from '../store/actions/action'
 import LayoutB from '../Layout/LayoutB';
 
-const tags = ['current', 'latest', 'finance', 'commerce', 'covid-19', 'mro']
+const tags = ['daging', 'cuka', 'sabun', 'roti', 'covid-19', 'panadol']
 
 
 
@@ -90,19 +90,31 @@ const InsightScreen = (props) => {
                                 onPress={() => hafiz(item)}
                                 style={{ width: Layout.window.width, marginBottom: 10, borderBottomWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch' }}>
                                 <View style={{ alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch' }}>
-                                    <View style={{ padding: 5, flex: 2, }}>
-                                        <Image source={{ uri: item.profile_pic }} style={{ flex: 1, height: undefined, width: undefined }} />
+                                    <View style={{ padding: 5, flex: 2, paddingTop: 0 }}>
+                                        {/* <Image source={{ uri: item.profile_pic }} style={{ flex: 1, height: undefined, width: undefined }} /> */}
+                                        <Entypo name="shop" color={'lightblue'} style={{ fontSize: 80, paddingRight: 5, paddingLeft: 5 }} />
                                     </View>
                                     <View style={{ flex: 5, padding: 5 }} >
-                                        <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                                            <Text style={[styles.textDefault, { textTransform: 'uppercase', marginBottom: 5, textAlign: 'justify' }]}>Kedai {item.name}</Text>
+                                        <View style={{ flexDirection: 'row', }}>
+                                            <Text style={[styles.textDefault, { textTransform: 'uppercase', textAlign: 'justify' }]}>Kedai {item.name}</Text>
                                             {/* <Text numberOfLines={1} ellipsizeMode={'tail'} style={[styles.textSmall, { flex: 1, textAlign: 'right' }]}>{moment(item.date).format("ddd, MMM D, YYYY")}</Text> */}
                                         </View>
-                                        <Text numberOfLines={3} ellipsizeMode='tail' style={[styles.textSmall, { marginBottom: 5 }]}>{item.name}</Text>
-                                        <Text numberOfLines={3} ellipsizeMode='tail' style={[styles.textSmall, { marginBottom: 5 }]}>{item.phone_no}</Text>
-                                        <Text numberOfLines={3} ellipsizeMode='tail' style={[styles.textSmall, { marginBottom: 5 }]}>{item.email}</Text>
+                                        <Text style={[styles.textDefault, { marginBottom: 5 }]}>Pembekal Barangan Runcit dan Basah</Text>
+                                        <Text style={[styles.textSmall, { marginBottom: 5 }]}>Seri Kembangan, Selangor</Text>
+                                        <View style={{ marginBottom: 5, flexDirection: 'row', flexWrap: 'wrap' }}>
+                                            <View style={{ padding: 3, borderWidth: 1, borderRadius: 5, borderColor: 'lightgrey', margin: 3,marginLeft:0 }}>
+                                                <Text style={styles.textSmall}>kicap</Text>
+                                            </View>
+                                            <View style={{ padding: 3, borderWidth: 1, borderRadius: 5, borderColor: 'lightgrey', margin: 3 }}>
+                                                <Text style={styles.textSmall}>maggi</Text>
+                                            </View>
+                                            <View style={{ padding: 3, borderWidth: 1, borderRadius: 5, borderColor: 'lightgrey', margin: 3 }}>
+                                                <Text style={styles.textSmall}>topeng muka</Text>
+                                            </View>
+                                        </View>
+
                                         <View style={{ flexDirection: 'row', marginBottom: 5, justifyContent: 'space-between', alignItems: 'center' }}>
-                                            <View style={{ flexDirection: 'row' }}>
+                                            {/* <View style={{ flexDirection: 'row' }}>
                                                 <TouchableOpacity
                                                     style={{ margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
                                                     onPress={() => console.log('tag pressed')}>
@@ -113,18 +125,16 @@ const InsightScreen = (props) => {
                                                     onPress={() => console.log('tag pressed')}>
                                                     <Text style={[styles.textSmall, {}]}>MALAS</Text>
                                                 </TouchableOpacity>
-                                            </View>
-                                            <View style={{ flexDirection: 'row' }}>
+                                            </View> */}
+                                            <View style={{ flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'space-around' }}>
                                                 <TouchableOpacity onPress={() => Linking.openURL(`mailto:${item.email}`)}>
-                                                    <Ionicons name="ios-mail" color={'lightgrey'} style={{ fontSize: 17, paddingRight: 5, paddingLeft: 5 }} />
+                                                    <Ionicons name="ios-mail" color={'lightgrey'} style={{ fontSize: 27, paddingRight: 10, }} />
                                                 </TouchableOpacity>
-                                                <Ionicons name="ios-call" color={'lightgrey'} style={{ fontSize: 17, paddingRight: 5, paddingLeft: 5 }} />
-                                                <Ionicons name="ios-bookmark" color={'lightgrey'} style={{ fontSize: 17, paddingRight: 5, paddingLeft: 5 }} />
+                                                <Ionicons name="ios-call" color={'lightgrey'} style={{ fontSize: 27, paddingRight: 10, paddingLeft: 5 }} />
+                                                <Ionicons name="ios-bookmark" color={'lightgrey'} style={{ fontSize: 27, paddingRight: 10, paddingLeft: 5 }} />
                                                 <TouchableOpacity onPress={() => Linking.openURL(`waze://ul?ll=45.6906304,-120.810983&z=10`)}>
-                                                    <Ionicons name="md-map" color={'lightgrey'} style={{ fontSize: 17, paddingRight: 5, paddingLeft: 5 }} />
+                                                    <Ionicons name="md-map" color={'lightgrey'} style={{ fontSize: 27, paddingRight: 10, paddingLeft: 5 }} />
                                                 </TouchableOpacity>
-
-
                                             </View>
                                         </View>
                                     </View>
