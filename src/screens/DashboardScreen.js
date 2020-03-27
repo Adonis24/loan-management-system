@@ -185,7 +185,7 @@ const DashboardScreen = (props) => {
                                             <Image source={require('../assets/icon/bill.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
                                         </FeatureIcon>
 
-                                        <FeatureIcon link={'InfoNewsList'} caption={'BizApp'} navigation={props.navigation}>
+                                        <FeatureIcon link={'BizApp'} caption={'BizApp'} navigation={props.navigation}>
                                             <Image source={require('../assets/icon/marketplace.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
                                         </FeatureIcon>
 
@@ -216,7 +216,7 @@ const DashboardScreen = (props) => {
 
                         {/**Latest Info */}
                         <View style={{ flex: 3, margin: 0, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                            <View style={{ marginBottom: 10,marginLeft:5,marginRight:5 }}>
+                            <View style={{ marginBottom: 10, marginLeft: 5, marginRight: 5 }}>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Latest Info</Text>
                                     <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
@@ -267,13 +267,10 @@ const DashboardScreen = (props) => {
                                         <Image source={require('../assets/images/banner1.png')} style={{ flex: 1, height: undefined, width: undefined }} resizeMode={'cover'} />
                                     </TouchableOpacity>}
                             /> : <Text>No Advert</Text>}
-
                         </View>
                     </Animated.View>
                 </View>
             </View>
-
-
         </View>
     );
 
@@ -287,9 +284,9 @@ const FeatureIcon = (props) => {
             <Text style={[styles.caption, { flex: 1 }]} numberOfLines={1} ellipsizeMode={'tail'}>{props.caption}</Text>
         </TouchableOpacity>)
     else
-        return (<TouchableOpacity onPress={() => props.navigation.navigate(props.link)} style={[{ width: Layout.window.height / 10, height: Layout.window.height / 10, padding: 5, justifyContent: 'flex-start', borderRadius: 10, alignSelf: 'stretch' }, styles.shadowNew]}>
+        return (<View style={[{ width: Layout.window.height / 10, height: Layout.window.height / 10, padding: 5, justifyContent: 'flex-start', borderRadius: 10, alignSelf: 'stretch' }, styles.shadowNew]} />
 
-        </TouchableOpacity>)
+      )
 
 }
 
