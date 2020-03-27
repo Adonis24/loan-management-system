@@ -247,7 +247,6 @@ const InfoNewsStack = () => {
         <Stack.Navigator initialRouteName="InfoNewsList" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="InfoNewsList" component={InfoNewsListScreen} />
             <Stack.Screen name="InfoNews" component={InfoNewsScreen} />
-
         </Stack.Navigator>
     )
 }
@@ -259,9 +258,11 @@ const MainTabNav = () => {
             <Tab.Screen name="DashboardStackWithModal" component={DashboardStackWithModal} options={({ route }) => {
                 // const {state}=route
                 // const {index,routes}=state
-                const routeName = route.state.routes[route.state.index].name
+                //console.log(`index ialah ${JSON.stringify(route.state.index)}`)
+                //console.log(`route ialah ${JSON.stringify(route.state.routes[route.state.index].name)}`)
+                 const routeName = route.state.routes[route.state.index].name
                 let tabBarVisible = true
-                if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan')
+                if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan'|| routeName === 'LoanConnectedParties'|| routeName === 'LoanConnectedPartiesAddr'|| routeName === 'LoanBusinessInfo'|| routeName === 'LoanBusinessAddrInfo'|| routeName === 'LoanBusinessInfoCont'|| routeName === 'LoanBusinessDetail'|| routeName === 'LoanDetail')
                     tabBarVisible = false
                 return {
                     tabBarOptions: {
