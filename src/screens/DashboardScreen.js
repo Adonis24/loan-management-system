@@ -181,7 +181,7 @@ const DashboardScreen = (props) => {
                                     <View style={{ margin: 5 }} />
 
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignSelf: 'stretch' }}>
-                                        <FeatureIcon link={'Elearning'} caption={'Bill'} navigation={props.navigation}>
+                                        <FeatureIcon link={'Bill'} caption={'Bill'} navigation={props.navigation}>
                                             <Image source={require('../assets/icon/bill.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
                                         </FeatureIcon>
 
