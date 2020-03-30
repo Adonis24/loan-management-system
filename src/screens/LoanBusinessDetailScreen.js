@@ -34,7 +34,7 @@ const validationSchema = Yup.object().shape({
     pembiayaan: Yup
         .string()
         .required(),
-    
+
 
 
 });
@@ -49,7 +49,7 @@ const LoanBusinessDetailScreen = (props) => {
     const dispatch = useDispatch()
 
     //const { comp_phone, comp_email, comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, proceedContact, error, errorColor } = useSelector(state => state.companyInformationReducer, shallowEqual)
-    const { institusi, totalLoan, pembiayaan,loanBal } = useSelector(state => state.financingReducer, shallowEqual)
+    const { institusi, totalLoan, pembiayaan, loanBal } = useSelector(state => state.financingReducer, shallowEqual)
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
 
 
@@ -73,13 +73,14 @@ const LoanBusinessDetailScreen = (props) => {
         setIosPickerVisible(!iosPickerVisible)
     }
 
-    const changeLoan = () => {
+    const changeLoan = (pembiayaan) => {
+        console.log(`pembiayaan : ${pembiayaan}`)
         if (pembiayaan == 1) {
             props.navigation.navigate('LoanBusinessDetail2')
-         } else {
+        } else {
             props.navigation.navigate('LoanDetail')
+        }
     }
-}
 
 
     return (
@@ -89,21 +90,22 @@ const LoanBusinessDetailScreen = (props) => {
                 validateOnMount
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
+                    const { pembiayaan } = values
                     setPembiayaan(values)
-                    changeLoan()
+                    changeLoan(pembiayaan)
                     actions.setSubmitting(false)
-                    
+
                 }}
                 validationSchema={validationSchema}
             >
                 {FormikProps => {
-                    const {  pembiayaan } = FormikProps.values
+                    const { pembiayaan } = FormikProps.values
 
 
                     const pembiayaanError = FormikProps.errors.pembiayaan
                     const pembiayaanTouched = FormikProps.touched.pembiayaan
 
-                   
+
 
 
                     return (
@@ -149,7 +151,7 @@ const LoanBusinessDetailScreen = (props) => {
                                                 </TouchableOpacity>
                                                 {pembiayaanTouched && pembiayaanError && <Text style={styles.error}>{pembiayaanError}</Text>}
                                             </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
-                                                <Picker style={{ flex: 1, height: 35 }} selectedValue={pembiayaan} onValueChange={(itemValue, itemIndex) =>FormikProps.setFieldValue('pembiayaan', itemValue)}>
+                                                <Picker style={{ flex: 1, height: 35 }} selectedValue={pembiayaan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pembiayaan', itemValue)}>
                                                     <Picker.Item label={'Pembiayaan'} value={undefined} />
                                                     <Picker.Item label="Ada" value={1} />
                                                     <Picker.Item label="Tiada" value={2} />
@@ -158,7 +160,7 @@ const LoanBusinessDetailScreen = (props) => {
                                             </View>}
                                     </View>
                                 </View>
-                               
+
                             </ScrollView>
 
                             <CustomFormAction
