@@ -18,8 +18,6 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 const ElearningScreen = (props) => {
 
-
-
     const { jwt } = useSelector(state => state.myAccountReducer, shallowEqual)
     console.log(`jwt ialah ${jwt}`)
     const uri = `https://lms.bxcess.my/?bx-token=${jwt}`
@@ -40,20 +38,12 @@ const ElearningScreen = (props) => {
         < LayoutB
             title={'E-Learning'}
             screenType='form'
+            elearning={true}
             navigation={props.navigation}
             imageUri={require('../assets/images/news.png')}
         >
-            <View style={{ margin: 10 }} />
-            <View style={{ borderWidth: 1, borderColor: 'lightgrey', padding: 10, margin: 10, alignSelf: 'stretch', borderRadius: 15 }}>
-                <Text style={styles.textSmall}>For better learning experience, please go to the website by clicking the button below :</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <TouchableOpacity onPress={() => _handlePressButtonAsync()} style={{ marginTop: 5 }} >
-                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ backgroundColor: '#4DCB3E', padding: 5, borderRadius: 10, }}>
-                            <Text style={[styles.textSmall, { color: '#fff' }]}>TEKUN Academy</Text>
-                        </LinearGradient>
-                    </TouchableOpacity>
-                </View>
-            </View>
+           
+
             <WebView
                 source={{ uri }}
                 style={{
@@ -63,7 +53,16 @@ const ElearningScreen = (props) => {
                 javaScriptEnabled={true}
                 domStorageEnabled={true}
                 injectedJavaScript={modifiedStyle} />
-
+            <View style={{  borderColor: 'lightyellow', padding: 10, margin: 0, alignSelf: 'stretch', backgroundColor: 'lightyellow',borderTopWidth:1, borderColor:'lightgrey' }}>
+                <Text style={styles.textSmall}>For better learning experience, please go to the website by clicking the button below :</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                    <TouchableOpacity onPress={() => _handlePressButtonAsync()} style={{ marginTop: 5 }} >
+                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ backgroundColor: '#4DCB3E', padding: 5, borderRadius: 10, }}>
+                            <Text style={[styles.textSmall, { color: '#fff' }]}>TEKUN Academy</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </ LayoutB>
 
 
