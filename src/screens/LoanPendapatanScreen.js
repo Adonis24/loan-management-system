@@ -188,7 +188,7 @@ const LoanPendapatanScreen = (props) => {
                                 keyboardType={'default'}
                             />
                             <CustomTextInput
-                                imageUri={require('../assets/images/email.png')}
+                                imageUri={require('../assets/images/mykad.png')}
                                 value={pendapatan}
                                 handleChange={FormikProps.handleChange(`pendapatan`)}
                                 handleBlur={FormikProps.handleBlur(`pendapatan`)}
