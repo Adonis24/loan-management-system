@@ -155,7 +155,7 @@ const LoanPerniagaanScreen = (props) => {
                                 keyboardType={'default'}
                             />
                             <CustomTextInput
-                                imageUri={require('../assets/images/state.png')}
+                                imageUri={require('../assets/images/compRegNum.png')}
                                 value={noAkaun}
                                 handleChange={FormikProps.handleChange(`noAkaun`)}
                                 handleBlur={FormikProps.handleBlur(`noAkaun`)}

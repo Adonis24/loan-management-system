@@ -128,7 +128,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
 
                             <CustomTextInput
-                                imageUri={require('../assets/images/mykad.png')}
+                                imageUri={require('../assets/images/user.png')}
                                 value={cpName}
                                 handleChange={FormikProps.handleChange(`cpName`)}
                                 handleBlur={FormikProps.handleBlur(`cpName`)}
@@ -158,7 +158,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
                             />
                             <CustomTextInput
-                                imageUri={require('../assets/images/user.png')}
+                                imageUri={require('../assets/images/mykad.png')}
                                 value={cpPendapatan}
                                 handleChange={FormikProps.handleChange(`cpPendapatan`)}
                                 handleBlur={FormikProps.handleBlur(`cpPendapatan`)}
