@@ -83,7 +83,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setConnectParties(values)
-                    props.navigation.navigate('LoanBusinessInfo')
+                    props.navigation.navigate('LoanSectionD')
                     actions.setSubmitting(false)
                 }
                 }

@@ -245,7 +245,7 @@ const LoanDrawer = () => {
 }
 const LoanSectionAStack = () => {
     return (
-        <Stack.Navigator initialRouteName="Settings" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="LoanMaklumatAsas" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="LoanMaklumatAsas" component={LoanMaklumatAsasScreen} />
             <Stack.Screen name="LoanSektorPerniagaan" component={LoanPerniagaanScreen} />
         </Stack.Navigator>)
@@ -263,7 +263,7 @@ const LoanSectionBStack = () => {
 
 const LoanSectionCStack = () => {
     return (
-        <Stack.Navigator initialRouteName="Settings" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="LoanConnectedParties" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="LoanConnectedParties" component={LoanConnectedPartiesScreen} />
             <Stack.Screen name="LoanConnectedPartiesAddr" component={LoanConnectedPartiesAddrScreeen} />
         </Stack.Navigator>)
@@ -271,7 +271,7 @@ const LoanSectionCStack = () => {
 
 const LoanSectionDStack = () => {
     return (
-        <Stack.Navigator initialRouteName="Settings" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="LoanBusinessInfo" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="LoanBusinessInfo" component={LoanBusinessInfoScreen} />
             <Stack.Screen name="LoanBusinessAddrInfo" component={LoanBusinessAddrInfoScreen} />
         </Stack.Navigator>)
@@ -279,7 +279,7 @@ const LoanSectionDStack = () => {
 
 const LoanSectionFStack = () => {
     return (
-        <Stack.Navigator initialRouteName="Settings" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="LoanBusinessDetail" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="LoanBusinessDetail" component={LoanBusinessDetailScreen} />
             <Stack.Screen name="LoanBusinessDetail2" component={LoanBusinessDetail2Screen} />
         </Stack.Navigator>)
