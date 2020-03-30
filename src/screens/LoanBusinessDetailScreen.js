@@ -140,7 +140,7 @@ const LoanBusinessDetailScreen = (props) => {
 
 
                                 <View style={{ marginTop: 10, alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
-                                    <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                    <Image source={require('../assets/images/loanAmount.png')} style={{ height: 35, width: 35, margin: 5 }} resizeMode={'contain'} />
                                     <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
                                         {ios ?
                                             <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>

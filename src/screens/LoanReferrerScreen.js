@@ -46,8 +46,8 @@ const validationSchema = Yup.object().shape({
         .label('Hubungan'),
 
     refAlamat: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('Alamat'),
 
@@ -131,7 +131,7 @@ const LoanReferrerScreen = (props) => {
 
 
                             <CustomTextInput
-                                imageUri={require('../assets/images/mykad.png')}
+                                imageUri={require('../assets/images/user.png')}
                                 value={refName}
                                 handleChange={FormikProps.handleChange(`refName`)}
                                 handleBlur={FormikProps.handleBlur(`refName`)}
@@ -149,7 +149,7 @@ const LoanReferrerScreen = (props) => {
                                 touched={refPhoneNumTouched}
                                 error={refPhoneNumError}
                                 placeholder={'No Telefon'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/user.png')}

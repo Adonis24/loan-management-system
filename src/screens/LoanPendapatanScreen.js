@@ -28,14 +28,14 @@ import * as actionCreator from '../store/actions/action'
 const validationSchema = Yup.object().shape({
 
     alamatComp: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('Alamat'),
 
     phoneNum: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('No Tel'),
 
@@ -46,8 +46,8 @@ const validationSchema = Yup.object().shape({
         .label('Pendapatan'),
 
     pekerjaan: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('Pekerjaan'),
     status: Yup
@@ -178,7 +178,7 @@ const LoanPendapatanScreen = (props) => {
                                 </View>
                             </View>
                             <CustomTextInput
-                                imageUri={require('../assets/images/compRegNum.png')}
+                                imageUri={require('../assets/images/user.png')}
                                 value={pekerjaan}
                                 handleChange={FormikProps.handleChange(`pekerjaan`)}
                                 handleBlur={FormikProps.handleBlur(`pekerjaan`)}
@@ -195,7 +195,7 @@ const LoanPendapatanScreen = (props) => {
                                 touched={pendapatanTouched}
                                 error={pendapatanError}
                                 placeholder={'Pendapatan'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
 
                             <CustomTextInput
@@ -217,7 +217,7 @@ const LoanPendapatanScreen = (props) => {
                                 touched={phoneNumTouched}
                                 error={phoneNumError}
                                 placeholder={'No Tel'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
 
 

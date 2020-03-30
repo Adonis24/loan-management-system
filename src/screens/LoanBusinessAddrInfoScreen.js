@@ -39,8 +39,8 @@ const validationSchema = Yup.object().shape({
         .label('Alamat'),
 
     compPoskod: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(5)
         .max(5)
         .label('Postcode'),
@@ -128,7 +128,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
                                 touched={compPhoneNumTouched}
                                 error={compPhoneNumError}
                                 placeholder={'No Telefon'}
-                                keyboardType={'numbers-and-punctuation'}
+                                keyboardType={'decimal-pad'}
                             />
                            
                             <CustomTextInput
@@ -159,7 +159,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
                                 touched={compPoskodTouched}
                                 error={compPoskodError}
                                 placeholder={'Poskod'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
                           
 

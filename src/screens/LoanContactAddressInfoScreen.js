@@ -29,14 +29,14 @@ import * as actionCreator from '../store/actions/action'
 const validationSchema = Yup.object().shape({
 
     alamat: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('Alamat'),
 
     phoneNum: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('No Tel'),
 
@@ -48,8 +48,8 @@ const validationSchema = Yup.object().shape({
         .label('Emel'),
 
     poskod: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(5)
         .max(5)
         .label('Postcode'),
@@ -201,7 +201,7 @@ const LoanContactAddressInfoScreen = (props) => {
                                 touched={phoneNumTouched}
                                 error={phoneNumError}
                                 placeholder={'No Tel'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/email.png')}

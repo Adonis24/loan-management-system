@@ -30,14 +30,14 @@ import CheckBox2 from 'react-native-check-box'
 const validationSchema = Yup.object().shape({
 
     negeri: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('Negeri'),
 
     cawanganParlimen: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('Cawangan Parlimen'),
 

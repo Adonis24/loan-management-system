@@ -253,7 +253,7 @@ const LoanSectionAStack = () => {
 
 const LoanSectionBStack = () => {
     return (
-        <Stack.Navigator initialRouteName="Settings" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="LoanMaklumatPeribadi" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="LoanMaklumatPeribadi" component={LoanMaklumatPeribadiScreen} />
             <Stack.Screen name="LoanPersonalStatus" component={LoanPersonalStatusScreen} />
             <Stack.Screen name="LoanContactAddressInfo" component={LoanContactAddressInfoScreen} />

@@ -146,7 +146,7 @@ const LoanConnectedPartiesScreen = (props) => {
                                 touched={cpIcNumberTouched}
                                 error={cpIcNumberError}
                                 placeholder={'No Kad Pengenalan'}
-                                keyboardType={'numbers-and-punctuation'}
+                                keyboardType={'decimal-pad'}
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/user.png')}
@@ -159,14 +159,14 @@ const LoanConnectedPartiesScreen = (props) => {
 
                             />
                             <CustomTextInput
-                                imageUri={require('../assets/images/mykad.png')}
+                                imageUri={require('../assets/images/compRegNum.png')}
                                 value={cpPendapatan}
                                 handleChange={FormikProps.handleChange(`cpPendapatan`)}
                                 handleBlur={FormikProps.handleBlur(`cpPendapatan`)}
                                 touched={cpPendapatanTouched}
                                 error={cpPendapatanError}
                                 placeholder={'Pendapatan'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
 
 

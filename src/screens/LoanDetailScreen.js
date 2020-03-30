@@ -46,7 +46,7 @@ const validationSchema = Yup.object().shape({
         .string()
         .required()
         .min(3)
-        .label('BilTanggungan'),
+        .label('Tempoh Bayaran'),
 
 
 
@@ -173,28 +173,28 @@ const LoanDetailScreen = (props) => {
 
 
                             <CustomTextInput
-                                imageUri={require('../assets/images/mykad.png')}
+                                imageUri={require('../assets/images/loanAmount.png')}
                                 value={loanNeed}
                                 handleChange={FormikProps.handleChange(`loanNeed`)}
                                 handleBlur={FormikProps.handleBlur(`loanNeed`)}
                                 touched={loanNeedTouched}
                                 error={loanNeedError}
                                 placeholder={'Jumlah Pembiayaan Diperlukan'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
                             <CustomTextInput
-                                imageUri={require('../assets/images/mykad.png')}
+                                imageUri={require('../assets/images/estimateTime.png')}
                                 value={payBack}
                                 handleChange={FormikProps.handleChange(`payBack`)}
                                 handleBlur={FormikProps.handleBlur(`payBack`)}
                                 touched={payBackTouched}
                                 error={payBackError}
                                 placeholder={'Tempoh Bayaran Balik'}
-                                keyboardType={'default'}
+                                keyboardType={'decimal-pad'}
                             />
 
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
-                                <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <Image source={require('../assets/images/payment.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>

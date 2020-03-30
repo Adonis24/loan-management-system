@@ -35,14 +35,14 @@ const validationSchema = Yup.object().shape({
         .string()
         .required(),
     bank: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('Bank'),
 
     noAkaun: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(16)
         .label('No Akaun'),
 
@@ -162,7 +162,7 @@ const LoanPerniagaanScreen = (props) => {
                                 touched={noAkaunTouched}
                                 error={noAkaunError}
                                 placeholder={'No.Akaun'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
                             <View style={{ marginBottom: 20, alignSelf: 'stretch' }}>
                             <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.65,}}>

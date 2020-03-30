@@ -51,6 +51,7 @@ const validationSchema = Yup.object().shape({
     tanggungan: Yup
         .string()
         .required()
+        .min(3)
         .label('BilTanggungan'),
 
 
@@ -200,7 +201,7 @@ const LoanPersonalStatusScreen = (props) => {
                                 touched={umurTouched}
                                 error={umurError}
                                 placeholder={'Umur'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
@@ -255,7 +256,7 @@ const LoanPersonalStatusScreen = (props) => {
                                 touched={tanggunganTouched}
                                 error={tanggunganError}
                                 placeholder={'Bilangan Tanggungan'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
 
 

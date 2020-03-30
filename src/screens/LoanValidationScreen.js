@@ -48,8 +48,8 @@ const validationSchema = Yup.object().shape({
         .label('Jawatan'),
 
     valAlamat: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('Alamat'),
 
@@ -133,7 +133,7 @@ const LoanValidationScreen = (props) => {
 
 
                             <CustomTextInput
-                                imageUri={require('../assets/images/mykad.png')}
+                                imageUri={require('../assets/images/user.png')}
                                 value={valName}
                                 handleChange={FormikProps.handleChange(`valName`)}
                                 handleBlur={FormikProps.handleBlur(`valName`)}
@@ -144,7 +144,7 @@ const LoanValidationScreen = (props) => {
                             />
 
                             <CustomTextInput
-                                imageUri={require('../assets/images/user.png')}
+                                imageUri={require('../assets/images/position.png')}
                                 value={jawatan}
                                 handleChange={FormikProps.handleChange(`jawatan`)}
                                 handleBlur={FormikProps.handleBlur(`jawatan`)}
@@ -161,7 +161,7 @@ const LoanValidationScreen = (props) => {
                                 touched={valPhoneNumTouched}
                                 error={valPhoneNumError}
                                 placeholder={'No Telefon'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}

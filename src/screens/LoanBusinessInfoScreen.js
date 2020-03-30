@@ -128,7 +128,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
 
                             <CustomTextInput
-                                imageUri={require('../assets/images/city.png')}
+                                imageUri={require('../assets/images/company.png')}
                                 value={compName}
                                 handleChange={FormikProps.handleChange(`compName`)}
                                 handleBlur={FormikProps.handleBlur(`compName`)}
@@ -138,7 +138,7 @@ const LoanConnectedPartiesScreen = (props) => {
                                 keyboardType={'default'}
                             /> 
                             <CustomTextInput
-                                imageUri={require('../assets/images/user.png')}
+                                imageUri={require('../assets/images/bizAct.png')}
                                 value={compAct}
                                 handleChange={FormikProps.handleChange(`compAct`)}
                                 handleBlur={FormikProps.handleBlur(`compAct`)}
@@ -159,14 +159,14 @@ const LoanConnectedPartiesScreen = (props) => {
                             />
                            
                             <CustomTextInput
-                                imageUri={require('../assets/images/mykad.png')}
+                                imageUri={require('../assets/images/compRegNum.png')}
                                 value={compPendapatan}
                                 handleChange={FormikProps.handleChange(`compPendapatan`)}
                                 handleBlur={FormikProps.handleBlur(`compPendapatan`)}
                                 touched={compPendapatanTouched}
                                 error={compPendapatanError}
                                 placeholder={'Anggaran Pendapatan'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
 
 

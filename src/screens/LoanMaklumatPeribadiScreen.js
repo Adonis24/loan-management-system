@@ -197,7 +197,7 @@ const LoanMaklumatPeribadiScreen = (props) => {
                                 touched={icNumberTouched}
                                 error={icNumberError}
                                 placeholder={'MyKad No'}
-                                keyboardType={'numbers-and-punctuation'}
+                                keyboardType={'decimal-pad'}
                             />
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
@@ -240,14 +240,14 @@ const LoanMaklumatPeribadiScreen = (props) => {
                                 </View>
                             </View>
                             <CustomTextInput
-                                imageUri={require('../assets/images/mykad.png')}
+                                imageUri={require('../assets/images/regDate.png')}
                                 value={tarikhLahir}
                                 handleChange={FormikProps.handleChange(`tarikhLahir`)}
                                 handleBlur={FormikProps.handleBlur(`tarikhLahir`)}
                                 touched={tarikhLahirTouched}
                                 error={tarikhLahirError}
                                 placeholder={'Tarikh Lahir'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
 
 

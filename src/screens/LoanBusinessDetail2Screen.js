@@ -33,19 +33,19 @@ const validationSchema = Yup.object().shape({
 
     
     institusi: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('Institusi'),
 
     totalLoan: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('Jumlah Pembiayaan'),
     loanBal: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('Baki Pembiayaan'),
 
@@ -137,7 +137,7 @@ const LoanBusinessDetail2Screen = (props) => {
                                             touched={totalLoanTouched}
                                             error={totalLoanError}
                                             placeholder={'Jumlah Pembiayaan'}
-                                            keyboardType={'phone-pad'}
+                                            keyboardType={'decimal-pad'}
                                         />
                                         <CustomTextInput
                                             imageUri={require('../assets/images/state.png')}
@@ -147,7 +147,7 @@ const LoanBusinessDetail2Screen = (props) => {
                                             touched={loanBalTouched}
                                             error={loanBalError}
                                             placeholder={'Baki Pembiayaan'}
-                                            keyboardType={'phone-pad'}
+                                            keyboardType={'decimal-pad'}
                                         />
                                    
                             <CustomFormAction
