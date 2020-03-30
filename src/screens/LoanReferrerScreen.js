@@ -12,6 +12,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
+import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
@@ -192,7 +193,11 @@ const LoanReferrerScreen = (props) => {
                     )
                 }}
             </Formik >
-
+            <View style={{ position: 'absolute', top: 10, left: 10 }}>
+                <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
+                    <Ionicons name={'md-menu'} size={24} color={'#fff'} />
+                </TouchableOpacity>
+            </View>
         </LayoutA>
     );
 }

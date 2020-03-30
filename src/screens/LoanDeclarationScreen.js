@@ -18,6 +18,7 @@ import Constants from 'expo-constants'
 import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 
 import LayoutA from '../Layout/LayoutA';
+import { Ionicons } from '@expo/vector-icons';
 import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import styles from '../styles/styles'
@@ -160,7 +161,11 @@ const LoanDeclarationScreen = (props) => {
                     )
                 }}
             </Formik >
-
+            <View style={{ position: 'absolute', top: 10, left: 10 }}>
+                <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
+                    <Ionicons name={'md-menu'} size={24} color={'#fff'} />
+                </TouchableOpacity>
+            </View>
 
         </LayoutA>
     );

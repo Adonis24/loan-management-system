@@ -232,7 +232,8 @@ const LoanDrawer = () => {
             <Drawer.Screen name="LoanSectionB" component={LoanSectionBStack} />
             <Drawer.Screen name="LoanSectionC" component={LoanSectionCStack} />
             <Drawer.Screen name="LoanSectionD" component={LoanSectionDStack} />
-            <Drawer.Screen name="LoanSectionE" component={LoanSectionEStack} />
+            <Drawer.Screen name="LoanBusinessInfoCont" component={LoanBusinessInfoContScreen} />
+            <Drawer.Screen name="LoanSectionF" component={LoanSectionFStack} />
             <Drawer.Screen name="LoanDetail" component={LoanDetailScreen} />
             <Drawer.Screen name="LoanReferrer" component={LoanReferrerScreen} />
             <Drawer.Screen name="LoanValidation" component={LoanValidationScreen} />
@@ -276,10 +277,9 @@ const LoanSectionDStack = () => {
         </Stack.Navigator>)
 }
 
-const LoanSectionEStack = () => {
+const LoanSectionFStack = () => {
     return (
         <Stack.Navigator initialRouteName="Settings" screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="LoanBusinessInfoCont" component={LoanBusinessInfoContScreen} />
             <Stack.Screen name="LoanBusinessDetail" component={LoanBusinessDetailScreen} />
             <Stack.Screen name="LoanBusinessDetail2" component={LoanBusinessDetail2Screen} />
         </Stack.Navigator>)

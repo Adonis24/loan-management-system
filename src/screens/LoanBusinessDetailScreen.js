@@ -172,7 +172,11 @@ const LoanBusinessDetailScreen = (props) => {
                     )
                 }}
             </Formik >
-
+            <View style={{ position: 'absolute', top: 10, left: 10 }}>
+                <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
+                    <Ionicons name={'md-menu'} size={24} color={'#fff'} />
+                </TouchableOpacity>
+            </View>
 
         </LayoutA>
     );
