@@ -67,7 +67,7 @@ const InfoNewsListScreen = (props) => {
                                     onPress={() => console.log('tag pressed')}>
                                     <Text style={styles.textSmall}>{item}</Text>
                                 </TouchableOpacity>} />
-                        <TouchableOpacity onPress={() => setTagMode(false)}>
+                        <TouchableOpacity onPress={() => setTagMode(false)} >
                             <Ionicons name="ios-search" color={'#055E7C'} style={{ fontSize: 27, paddingRight: 5, paddingLeft: 10 }} />
                         </TouchableOpacity>
 
@@ -119,7 +119,9 @@ const InfoNewsListScreen = (props) => {
                                                     <Text style={[styles.textSmall, {}]}>MALAS</Text>
                                                 </TouchableOpacity>
                                             </View>
+                                            <TouchableOpacity style={{borderWidth:1,borderColor:'lightgrey', height:26,width:26,borderRadius:13,justifyContent:'center',alignItems:'center'}}>
                                             <Ionicons name="ios-bookmark" color={'lightgrey'} style={{ fontSize: 17, paddingRight: 5, paddingLeft: 5 }} />
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
                                 </View>

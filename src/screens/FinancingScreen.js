@@ -66,7 +66,7 @@ const FinancingScreen = (props) => {
                     </View>
                     <View style={{ flex: 7, padding: 5 }} >
                         <Text style={[styles.textDefault, { textTransform: 'uppercase', marginBottom: 5, textAlign: 'left' }]}>Pembiayaan Tekun</Text>
-                        <Text numberOfLines={3} ellipsizeMode='tail' style={[styles.textSmall, { marginBottom: 5 }]}>something</Text>
+                        <Text numberOfLines={3} ellipsizeMode='tail' style={[styles.textSmall, { marginBottom: 5 }]}>Skim Pembiayaan Sederhana</Text>
                         <TouchableOpacity
                             style={{ alignSelf: 'flex-start', margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
                             // onPress={() => setShowLayak(true)}
@@ -74,7 +74,6 @@ const FinancingScreen = (props) => {
                             <Text style={[styles.textSmall, {}]}>Semak Kelayakan</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-
                             onPress={() => props.navigation.navigate(`LoanCheckList`)}>
                             <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'flex-start', margin: 3, padding: 5, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}>
                                 <Text style={[styles.textSmall, { color: '#fff' }]}>Borang Permohonan</Text>
@@ -83,12 +82,7 @@ const FinancingScreen = (props) => {
 
                     </View>
                 </View>
-            </View>
-
-           
-
-
-
+            </View>   
         </LayoutB>
 
     );

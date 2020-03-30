@@ -127,13 +127,18 @@ const InsightScreen = (props) => {
                                                 </TouchableOpacity>
                                             </View> */}
                                             <View style={{ flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'space-around' }}>
-                                                <TouchableOpacity onPress={() => Linking.openURL(`mailto:${item.email}`)}>
-                                                    <Ionicons name="ios-mail" color={'lightgrey'} style={{ fontSize: 27, paddingRight: 10, }} />
+                                               
+                                                <TouchableOpacity onPress={() => Linking.openURL(`mailto:${item.email}`)} style={{width:34,height:34,borderRadius:17,borderWidth:1,borderColor:'lightgrey',justifyContent:'center',alignItems:'center',marginRight:5}}>
+                                                    <Ionicons name="ios-mail" color={'lightgrey'} style={{ fontSize: 27,  }} />
                                                 </TouchableOpacity>
+                                                <TouchableOpacity onPress={() => Linking.openURL(`mailto:${item.email}`)} style={{width:34,height:34,borderRadius:17,borderWidth:1,borderColor:'lightgrey',justifyContent:'center',alignItems:'center',marginRight:5}}>
                                                 <Ionicons name="ios-call" color={'lightgrey'} style={{ fontSize: 27, paddingRight: 10, paddingLeft: 5 }} />
+                                                </TouchableOpacity>
+                                                <TouchableOpacity onPress={() => Linking.openURL(`mailto:${item.email}`)} style={{width:34,height:34,borderRadius:17,borderWidth:1,borderColor:'lightgrey',justifyContent:'center',alignItems:'center',marginRight:5}}>
                                                 <Ionicons name="ios-bookmark" color={'lightgrey'} style={{ fontSize: 27, paddingRight: 10, paddingLeft: 5 }} />
-                                                <TouchableOpacity onPress={() => Linking.openURL(`waze://ul?ll=45.6906304,-120.810983&z=10`)}>
-                                                    <Ionicons name="md-map" color={'lightgrey'} style={{ fontSize: 27, paddingRight: 10, paddingLeft: 5 }} />
+                                                </TouchableOpacity>
+                                                <TouchableOpacity onPress={() => Linking.openURL(`waze://ul?ll=45.6906304,-120.810983&z=10`)} style={{width:34,height:34,borderRadius:17,borderWidth:1,borderColor:'lightgrey',justifyContent:'center',alignItems:'center',marginRight:5}}>
+                                                    <Ionicons name="md-map" color={'lightgrey'} style={{ fontSize: 27,}} />
                                                 </TouchableOpacity>
                                             </View>
                                         </View>

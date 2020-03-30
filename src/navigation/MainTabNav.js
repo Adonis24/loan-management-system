@@ -172,23 +172,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="Wallet" component={WalletScreen} />
             <Stack.Screen name="Bill" component={BillScreen} />
             <Stack.Screen name="Delivery" component={DeliveryScreen} />
-            <Stack.Screen name="LoanMaklumatAsas" component={LoanMaklumatAsasScreen} />
-            <Stack.Screen name="LoanSektorPerniagaan" component={LoanPerniagaanScreen} />
-            <Stack.Screen name="LoanMaklumatPeribadi" component={LoanMaklumatPeribadiScreen} />
-            <Stack.Screen name="LoanPersonalStatus" component={LoanPersonalStatusScreen} />
-            <Stack.Screen name="LoanContactAddressInfo" component={LoanContactAddressInfoScreen} />
-            <Stack.Screen name="LoanPendapatan" component={LoanPendapatanScreen} />
-            <Stack.Screen name="LoanConnectedParties" component={LoanConnectedPartiesScreen} />
-            <Stack.Screen name="LoanConnectedPartiesAddr" component={LoanConnectedPartiesAddrScreeen} />
-            <Stack.Screen name="LoanBusinessInfo" component={LoanBusinessInfoScreen} />
-            <Stack.Screen name="LoanBusinessAddrInfo" component={LoanBusinessAddrInfoScreen} />
-            <Stack.Screen name="LoanBusinessInfoCont" component={LoanBusinessInfoContScreen} />
-            <Stack.Screen name="LoanBusinessDetail" component={LoanBusinessDetailScreen} />
-            <Stack.Screen name="LoanBusinessDetail2" component={LoanBusinessDetail2Screen} />
-            <Stack.Screen name="LoanDetail" component={LoanDetailScreen} />
-            <Stack.Screen name="LoanReferrer" component={LoanReferrerScreen} />
-            <Stack.Screen name="LoanValidation" component={LoanValidationScreen} />
-            <Stack.Screen name="LoanDeclaration" component={LoanDeclarationScreen} />
+            <Stack.Screen name="LoanDrawer" component={LoanDrawer} />
         </Stack.Navigator>
     )
 }
@@ -233,6 +217,44 @@ const SettingStackWithModal = () => {
     )
 }
 
+const LoanDrawer = () => {
+    return (
+        <Drawer.Navigator initialRouteName="LoanMaklumatAsas"
+        drawerType={'slide'}
+        // drawerContent={props => {
+        //     const close = () => { props.navigation.closeDrawer() }
+        //     const nav = (screen) => { props.navigation.navigate(screen) }
+        //     return (<FilterBarInfoNews nav={nav} close={close} />)
+        // }}
+        >
+
+            <Drawer.Screen name="LoanSectionA" component={LoanSectionAStack} />            
+            <Drawer.Screen name="LoanMaklumatPeribadi" component={LoanMaklumatPeribadiScreen} />
+            <Drawer.Screen name="LoanPersonalStatus" component={LoanPersonalStatusScreen} />
+            <Drawer.Screen name="LoanContactAddressInfo" component={LoanContactAddressInfoScreen} />
+            <Drawer.Screen name="LoanPendapatan" component={LoanPendapatanScreen} />
+            <Drawer.Screen name="LoanConnectedParties" component={LoanConnectedPartiesScreen} />
+            <Drawer.Screen name="LoanConnectedPartiesAddr" component={LoanConnectedPartiesAddrScreeen} />
+            <Drawer.Screen name="LoanBusinessInfo" component={LoanBusinessInfoScreen} />
+            <Drawer.Screen name="LoanBusinessAddrInfo" component={LoanBusinessAddrInfoScreen} />
+            <Drawer.Screen name="LoanBusinessInfoCont" component={LoanBusinessInfoContScreen} />
+            <Drawer.Screen name="LoanBusinessDetail" component={LoanBusinessDetailScreen} />
+            <Drawer.Screen name="LoanBusinessDetail2" component={LoanBusinessDetail2Screen} />
+            <Drawer.Screen name="LoanDetail" component={LoanDetailScreen} />
+            <Drawer.Screen name="LoanReferrer" component={LoanReferrerScreen} />
+            <Drawer.Screen name="LoanValidation" component={LoanValidationScreen} />
+            <Drawer.Screen name="LoanDeclaration" component={LoanDeclarationScreen} />
+
+
+        </Drawer.Navigator>
+    )
+}
+const LoanSectionAStack = () => {
+    return (
+<Stack.Navigator initialRouteName="Settings" screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="LoanMaklumatAsas" component={LoanMaklumatAsasScreen} />
+                    <Stack.Screen name="LoanSektorPerniagaan" component={LoanPerniagaanScreen} />
+                </Stack.Navigator>)}
 
 const InfoNewsDrawer = () => {
     return (
@@ -272,15 +294,17 @@ const MainTabNav = () => {
     return (
         <Tab.Navigator tabBarOptions={{ showLabel: false }}>
             <Tab.Screen name="DashboardStackWithModal" component={DashboardStackWithModal} options={({ route }) => {
-               
-               let tabBarVisible = true
+                console.log(`route ialah :${JSON.stringify(route)}`)
+                let tabBarVisible = true
 
                 if (route.state) {
                     if (route.state.routes) {
                         if (route.state.routes) {
                             const routeName = route.state.routes[route.state.index].name
-                            if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan'|| routeName === 'LoanConnectedParties'|| routeName === 'LoanConnectedPartiesAddr'|| routeName === 'LoanBusinessInfo'|| routeName === 'LoanBusinessAddrInfo'|| routeName === 'LoanBusinessInfoCont'|| routeName === 'LoanBusinessDetail'|| routeName === 'LoanDetail')
-                                tabBarVisible = false
+                            console.log(`route ialah :${JSON.stringify(routeName)}`)
+                            //if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan' || routeName === 'LoanConnectedParties' || routeName === 'LoanConnectedPartiesAddr' || routeName === 'LoanBusinessInfo' || routeName === 'LoanBusinessAddrInfo' || routeName === 'LoanBusinessInfoCont' || routeName === 'LoanBusinessDetail' || routeName === 'LoanDetail')
+                            if (routeName === 'LoanDrawer') 
+                            tabBarVisible = false
                         }
                     }
 

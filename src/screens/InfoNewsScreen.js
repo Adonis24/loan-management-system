@@ -100,8 +100,10 @@ const InfoNewsScreen = (props) => {
                                     </TouchableOpacity>
                                 </View>
                                 <View style={{ flexDirection: 'row' }}>
+                                <TouchableOpacity style={{borderWidth:1,borderColor:'lightgrey', height:30,width:30,borderRadius:15,justifyContent:'center',alignItems:'center',marginRight:5}}>
                                     <Ionicons name="ios-bookmark" color={'lightgrey'} style={{ fontSize: 25, paddingRight: 5, paddingLeft: 5 }} />
-                                    <TouchableOpacity onPress={() => onShare()}>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => onShare()} style={{borderWidth:1,borderColor:'lightgrey', height:30,width:30,borderRadius:15,justifyContent:'center',alignItems:'center'}}>
                                         <Ionicons name="md-share" color={'lightgrey'} style={{ fontSize: 25, paddingRight: 5, paddingLeft: 5 }} />
                                     </TouchableOpacity>
                                 </View>
