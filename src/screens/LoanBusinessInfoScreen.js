@@ -16,6 +16,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
+import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
 
@@ -179,7 +180,11 @@ const LoanConnectedPartiesScreen = (props) => {
                     )
                 }}
             </Formik >
-
+            <View style={{ position: 'absolute', top: 10, left: 10 }}>
+                <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
+                    <Ionicons name={'md-menu'} size={24} color={'#fff'} />
+                </TouchableOpacity>
+            </View>
         </LayoutA>
     );
 }
