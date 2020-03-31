@@ -128,7 +128,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                                 touched={cpPhoneNumTouched}
                                 error={cpPhoneNumError}
                                 placeholder={'No Telefon'}
-                                keyboardType={'decimal-pad'}
+                                keyboardType={'phone-pad'}
                             />
                            
                             <CustomTextInput

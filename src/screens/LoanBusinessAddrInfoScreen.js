@@ -128,7 +128,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
                                 touched={compPhoneNumTouched}
                                 error={compPhoneNumError}
                                 placeholder={'No Telefon'}
-                                keyboardType={'decimal-pad'}
+                                keyboardType={'phone-pad'}
                             />
                            
                             <CustomTextInput

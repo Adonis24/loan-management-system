@@ -35,10 +35,7 @@ const validationSchema = Yup.object().shape({
         .string()
         .required(),
     bank: Yup
-        .string()
-        .required()
-        .min(3)
-        .label('Bank'),
+        .string(),
 
     noAkaun: Yup
         .string()
@@ -128,6 +125,7 @@ const LoanPerniagaanScreen = (props) => {
                                         <View style={{ flex: 1 }} />
                                     </View>
                                     <View style={{ flex: 9, justifyContent: 'flex-start' }}>
+                                         {(modalContent === "typeBusiness") ?
                                         <Picker style={{ flex: 1, height: 35 }} selectedValue={typeBusiness} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('typeBusiness', itemValue)}>
                                             <Picker.Item label={'Please Select'} value={undefined} />
                                             <Picker.Item label="Pertanian Dan Perusahaan Asas Tani" value="pertanian" />
@@ -135,7 +133,14 @@ const LoanPerniagaanScreen = (props) => {
                                             <Picker.Item label="Perkhidmatan" value="perkhidmatan" />
                                             <Picker.Item label="Pembuatan" value="pembuatan" />
                                             <Picker.Item label="Kontraktor Kecil" value="kontraktorKecil" />
-                                        </Picker>
+                                        </Picker> :  <Picker style={{ flex: 1, height: 35 }} selectedValue={bank} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('bank', itemValue)}>
+                                            <Picker.Item label={'Please Select'} value={undefined} />
+                                            <Picker.Item label="Bank Islam" value="bankIslam" />
+                                            <Picker.Item label="Maybank" value="maybank" />
+                                            <Picker.Item label="Bank Rakyat" value="bankRakyat" />
+                                            <Picker.Item label="BSN" value="bsn" />
+                                            <Picker.Item label="Agrobank" value="agrobank" />
+                    </Picker> }
                                     </View>
                                 </View>
                             </Modal>
@@ -144,16 +149,6 @@ const LoanPerniagaanScreen = (props) => {
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Asas</Text>
 <ScrollView>
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/city.png')}
-                                value={bank}
-                                handleChange={FormikProps.handleChange(`bank`)}
-                                handleBlur={FormikProps.handleBlur(`bank`)}
-                                touched={bankTouched}
-                                error={bankError}
-                                placeholder={'Bank Islam/Maybank/Bank Rakyat/BSN/Agrobank'}
-                                keyboardType={'default'}
-                            />
                             <CustomTextInput
                                 imageUri={require('../assets/images/compRegNum.png')}
                                 value={noAkaun}
@@ -164,10 +159,32 @@ const LoanPerniagaanScreen = (props) => {
                                 placeholder={'No.Akaun'}
                                 keyboardType={'decimal-pad'}
                             />
-                            <View style={{ marginBottom: 20, alignSelf: 'stretch' }}>
-                            <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.65,}}>
-                    
-            
+                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
+                                <Image source={require('../assets/images/city.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
+                                    {ios ?
+                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
+                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('bank')}>
+                                                <Text style={{ fontSize: 12 }}>{bank ? bank : `Bank`}</Text>
+                                            </TouchableOpacity>
+                                            {bankTouched && bankError && <Text style={styles.error}>{bankError}</Text>}
+                                        </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
+                                            <Picker style={{ height: 35 }} selectedValue={bank} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('bank', itemValue)}>
+                                                <Picker.Item label={'Bank'} value={undefined} />
+                                                <Picker.Item label="Bank Islam" value="bankIslam" />
+                                            <Picker.Item label="Maybank" value="maybank" />
+                                            <Picker.Item label="Bank Rakyat" value="bankRakyat" />
+                                            <Picker.Item label="BSN" value="bsn" />
+                                            <Picker.Item label="Agrobank" value="agrobank" />
+
+                                            </Picker>
+                                            {bankTouched && bankError && <Text style={styles.error}>{bankError}</Text>}
+                                        </View>}
+                                </View>
+                            </View>
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
+                                <Image source={require('../assets/images/bizAct.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
                                 {ios ?
                                     <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                         <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('typeBusiness')}>
@@ -187,6 +204,7 @@ const LoanPerniagaanScreen = (props) => {
                                     </View>}
                             </View>
                             </View>
+
 </ScrollView>
 
                             <CustomFormAction

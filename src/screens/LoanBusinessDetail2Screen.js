@@ -130,7 +130,7 @@ const LoanBusinessDetail2Screen = (props) => {
                                             keyboardType={'default'}
                                         />
                                         <CustomTextInput
-                                            imageUri={require('../assets/images/state.png')}
+                                            imageUri={require('../assets/images/loanAmount.png')}
                                             value={totalLoan}
                                             handleChange={FormikProps.handleChange(`totalLoan`)}
                                             handleBlur={FormikProps.handleBlur(`totalLoan`)}
@@ -140,7 +140,7 @@ const LoanBusinessDetail2Screen = (props) => {
                                             keyboardType={'decimal-pad'}
                                         />
                                         <CustomTextInput
-                                            imageUri={require('../assets/images/state.png')}
+                                            imageUri={require('../assets/images/compRegNum.png')}
                                             value={loanBal}
                                             handleChange={FormikProps.handleChange(`loanBal`)}
                                             handleBlur={FormikProps.handleBlur(`loanBal`)}

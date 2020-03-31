@@ -15,10 +15,12 @@ import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
 import { LinearGradient } from 'expo-linear-gradient'
+import moment from 'moment'
 import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 import { Ionicons } from '@expo/vector-icons';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import styles from '../styles/styles'
 
@@ -63,13 +65,14 @@ const validationSchema = Yup.object().shape({
 const LoanMaklumatPeribadiScreen = (props) => {
 
     const [iosPickerVisible, setIosPickerVisible] = useState(false)
+    const [iosDatePickerShow, setIosDatePickerShow] = useState(false)
     const [modalContent, setModalContent] = useState(null)
     const ios = Platform.OS === "ios" ? true : false
 
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { name, icNumber, agama, tarikhLahir,jantina } = useSelector(state => state.financingReducer, shallowEqual)
+    const { name, icNumber, agama, tarikhLahir, jantina } = useSelector(state => state.financingReducer, shallowEqual)
 
 
     const setMaklumatPeribadi = (value) => dispatch({ type: 'SET_MAKLUMAT_PERIBADI', payload: { ...value } })
@@ -90,6 +93,10 @@ const LoanMaklumatPeribadiScreen = (props) => {
         setIosPickerVisible(!iosPickerVisible)
     }
 
+    const [date, setDate] = useState(new Date(1598051730000));
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+
     // const [showLogo, setshowLogo] = useState(true)
 
 
@@ -100,7 +107,7 @@ const LoanMaklumatPeribadiScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{name, icNumber, agama, tarikhLahir,jantina}}
+                initialValues={{ name, icNumber, agama, tarikhLahir, jantina }}
 
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -113,6 +120,24 @@ const LoanMaklumatPeribadiScreen = (props) => {
                 validationSchema={validationSchema}
             >
                 {FormikProps => {
+
+                    const onChange = (event, selectedDate) => {
+                        const currentDate = selectedDate || date;
+                        console.log(`selected date ialah ${currentDate}`)
+
+                        setShow(ios);
+                        setDate(currentDate);
+                        FormikProps.setFieldValue('tarikhLahir', currentDate)
+                    };
+
+                    const showMode = currentMode => {
+                        setShow(true);
+                        setMode(currentMode);
+                    };
+
+                    const showDatepicker = () => {
+                        showMode('date');
+                    };
 
 
 
@@ -139,8 +164,11 @@ const LoanMaklumatPeribadiScreen = (props) => {
 
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Modal animationType={'slide'}
-                                visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
-                            >
+                                visible={iosPickerVisible && show} onRequestClose={() => {
+                                    console.log(`test`)
+                                    setIosDatePickerShow(!iosDatePickerShow)
+                                }}>
+
                                 <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
                                     <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
                                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
@@ -159,21 +187,46 @@ const LoanMaklumatPeribadiScreen = (props) => {
                                                 <Picker.Item label={'Jantina'} value={undefined} />
                                                 <Picker.Item label="Lelaki" value="lelaki" />
                                                 <Picker.Item label="Wanita" value="wanita" />
-                                               
+
                                             </Picker> : <Picker style={{ flex: 1, height: 35 }} selectedValue={agama} onValueChange={(itemValue, itemIndex) =>
                                                 FormikProps.setFieldValue('agama', itemValue)}>
                                                 <Picker.Item label={'Agama'} value={undefined} />
                                                 <Picker.Item label="Islam" value="islam" />
                                                 <Picker.Item label="Bukan Islam" value="bukanIslam" />
-                                                
+
                                             </Picker>
                                         }
+                                    </View>
+                                </View>
+                                <View style={styles.container}>
+                                    <View style={[styles.titleMargin, { flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4', marginBottom: 25 }]}>
+                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0 }}>
+                                            <TouchableOpacity onPress={() => setShow(!ios)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
+                                                <Ionicons name="ios-arrow-back" color={'#3EC2D9'} style={{ fontSize: 30, paddingLeft: 20 }} />
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
+                                            <Text style={[styles.title, { color: '#055E7C' }]}>Select Date</Text>
+                                        </View>
+                                    </View>
+                                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
+
+                                        <DateTimePicker
+                                            testID="dateTimePicker"
+                                            //timeZoneOffsetInMinutes={0}
+                                            value={date}
+                                            mode={mode}
+                                            is24Hour={true}
+                                            display="default"
+                                            onChange={onChange}
+                                        />
                                     </View>
                                 </View>
                             </Modal>
 
                             {/* {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />} */}
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
+                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section B</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Peribadi</Text>
 
@@ -197,7 +250,7 @@ const LoanMaklumatPeribadiScreen = (props) => {
                                 touched={icNumberTouched}
                                 error={icNumberError}
                                 placeholder={'MyKad No'}
-                                keyboardType={'decimal-pad'}
+                                keyboardType={'phone-pad'}
                             />
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
@@ -239,18 +292,26 @@ const LoanMaklumatPeribadiScreen = (props) => {
                                         </View>}
                                 </View>
                             </View>
-                            <CustomTextInput
-                                imageUri={require('../assets/images/regDate.png')}
-                                value={tarikhLahir}
-                                handleChange={FormikProps.handleChange(`tarikhLahir`)}
-                                handleBlur={FormikProps.handleBlur(`tarikhLahir`)}
-                                touched={tarikhLahirTouched}
-                                error={tarikhLahirError}
-                                placeholder={'Tarikh Lahir'}
-                                keyboardType={'decimal-pad'}
-                            />
+                        
+                            <TouchableOpacity onPress={() => showDatepicker()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: tarikhLahirTouched && tarikhLahirError ? '#d94498' : '#5a83c2' }}>
+                                <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
 
-
+                                <TextInput editable={false} value={moment(tarikhLahir).format("MMMM Do YYYY")} onChangeText={FormikProps.handleChange(`tarikhLahir`)} onBlur={FormikProps.handleBlur(`tarikhLahir`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Date'} placeholderTextColor={tarikhLahirTouched && tarikhLahirError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
+                            </TouchableOpacity>
+                            <View style={{ width: Layout.window.width * 0.65 }}>
+                                {tarikhLahirTouched && tarikhLahirError && <Text style={styles.error}>{tarikhLahirError}</Text>}
+                            </View>
+                            {!ios && show && (
+                                <DateTimePicker
+                                    testID="dateTimePicker"
+                                    timeZoneOffsetInMinutes={0}
+                                    value={date}
+                                    mode={mode}
+                                    is24Hour={true}
+                                    display="default"
+                                    onChange={onChange}
+                                />
+                            )}
 
                             <CustomFormAction
                                 navigation={props.navigation}

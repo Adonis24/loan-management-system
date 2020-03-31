@@ -4,6 +4,8 @@ import {
     Text,
     TouchableOpacity,
     View,
+    Modal,
+    Picker,
     TextInput,
     KeyboardAvoidingView
 
@@ -51,6 +53,9 @@ const validationSchema = Yup.object().shape({
         .min(3)
         .label('Pendapatan'),
 
+    cpRelation: Yup
+        .string()
+        .required(),
 
 
 
@@ -58,9 +63,13 @@ const validationSchema = Yup.object().shape({
 
 const LoanConnectedPartiesScreen = (props) => {
 
+    const [iosPickerVisible, setIosPickerVisible] = useState(false)
+    const [modalContent, setModalContent] = useState(null)
+    const ios = Platform.OS === "ios" ? true : false
+
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { cpName, cpIcNumber, cpPekerjaan, cpPendapatan, } = useSelector(state => state.financingReducer, shallowEqual)
+    const { cpName, cpIcNumber, cpPekerjaan, cpPendapatan,cpRelation } = useSelector(state => state.financingReducer, shallowEqual)
 
 
     const setConnectParties = (value) => dispatch({ type: 'SET_CONNECT_PARTIES', payload: { ...value } })
@@ -86,7 +95,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ cpName, cpIcNumber, cpPekerjaan, cpPendapatan, }}
+                initialValues={{ cpName, cpIcNumber, cpPekerjaan, cpPendapatan,cpRelation }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -102,7 +111,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
 
 
-                    const { cpPekerjaan, cpName, cpIcNumber, cpPendapatan, poskod } = FormikProps.values
+                    const { cpPekerjaan, cpName, cpIcNumber, cpPendapatan, poskod,cpRelation } = FormikProps.values
 
                     const cpPekerjaanError = FormikProps.errors.cpPekerjaan
                     const cpPekerjaanTouched = FormikProps.touched.cpPekerjaan
@@ -116,18 +125,70 @@ const LoanConnectedPartiesScreen = (props) => {
                     const cpPendapatanError = FormikProps.errors.cpPendapatan
                     const cpPendapatanTouched = FormikProps.touched.cpPendapatan
 
+                    const cpRelationError = FormikProps.errors.cpRelation
+                    const cpRelationTouched = FormikProps.touched.cpRelation
+
+
 
 
 
                     return (
 
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                            <Modal animationType={'slide'}
+                                visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
+                            >
+                                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+                                    <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
+                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
+                                            <TouchableOpacity onPress={() => setIosPickerVisible(!iosPickerVisible)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
+                                                <Ionicons name="ios-arrow-back" color={'#5a83c2'} style={{ fontSize: 30 }} />
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
+                                            <Text style={{ fontSize: 12 }}>Select</Text>
+                                        </View>
+                                        <View style={{ flex: 1 }} />
+                                    </View>
+                                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
+
+                                        <Picker style={{ flex: 1, height: 35 }} selectedValue={cpRelation} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('cpRelation', itemValue)}>
+                                            <Picker.Item label={'Hubungan'} value={undefined} />
+                                            <Picker.Item label="Suami" value="suami" />
+                                            <Picker.Item label="Isteri" value="isteri" />
+                                            <Picker.Item label="Waris" value="waris" />
+
+                                        </Picker>
+
+                                    </View>
+                                </View>
+                            </Modal>
                             {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
+                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section C</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Pasangan</Text>
 
-
+                            <View style={{marginTop:20, alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
+                                <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
+                                    {ios ?
+                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
+                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('cpRelation')}>
+                                                <Text style={{ fontSize: 12 }}>{cpRelation ? cpRelation : `Status Kediaman`}</Text>
+                                            </TouchableOpacity>
+                                            {cpRelationTouched && cpRelationError && <Text style={styles.error}>{cpRelationError}</Text>}
+                                        </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
+                                            <Picker style={{ height: 35 }} selectedValue={cpRelation} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('cpRelation', itemValue)}>
+                                            <Picker.Item label={'Hubungan'} value={undefined} />
+                                            <Picker.Item label="Suami" value="suami" />
+                                            <Picker.Item label="Isteri" value="isteri" />
+                                            <Picker.Item label="Waris" value="waris" />
+                                            </Picker>
+                                            {cpRelationTouched && cpRelationError && <Text style={styles.error}>{cpRelationError}</Text>}
+                                        </View>}
+                                </View>
+                            </View>
                             <CustomTextInput
                                 imageUri={require('../assets/images/user.png')}
                                 value={cpName}
@@ -138,6 +199,7 @@ const LoanConnectedPartiesScreen = (props) => {
                                 placeholder={'Nama Suami/Isteri/Waris'}
                                 keyboardType={'default'}
                             />
+
                             <CustomTextInput
                                 imageUri={require('../assets/images/mykad.png')}
                                 value={cpIcNumber}
@@ -146,7 +208,7 @@ const LoanConnectedPartiesScreen = (props) => {
                                 touched={cpIcNumberTouched}
                                 error={cpIcNumberError}
                                 placeholder={'No Kad Pengenalan'}
-                                keyboardType={'decimal-pad'}
+                                keyboardType={'phone-pad'}
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/user.png')}

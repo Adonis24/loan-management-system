@@ -98,6 +98,7 @@ const LoanMaklumatAsasScreen = (props) => {
                             <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center', }}>
 
                                 <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
+                                <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section A</Text>
                                 <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Asas</Text>
 
 

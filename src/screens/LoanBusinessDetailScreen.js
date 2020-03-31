@@ -137,6 +137,7 @@ const LoanBusinessDetailScreen = (props) => {
                             </Modal>
                             {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
+                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section F</Text>
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Pembiayaan Perniagaan Sedia Ada</Text>
                             <ScrollView>
 
@@ -147,7 +148,7 @@ const LoanBusinessDetailScreen = (props) => {
                                         {ios ?
                                             <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                                 <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('pembiayaan')}>
-                                                    <Text style={{ fontSize: 12 }}>{pembiayaan == 1 ? 'Ada' : pembiayaan == 2 ? 'Tiada' : 'Select invoiceType'}</Text>
+                                                    <Text style={{ fontSize: 12 }}>{pembiayaan == 1 ? 'Ada' : pembiayaan == 2 ? 'Tiada' : 'Pembiayaan'}</Text>
                                                 </TouchableOpacity>
                                                 {pembiayaanTouched && pembiayaanError && <Text style={styles.error}>{pembiayaanError}</Text>}
                                             </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>

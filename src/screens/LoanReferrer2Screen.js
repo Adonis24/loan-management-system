@@ -54,7 +54,7 @@ const validationSchema = Yup.object().shape({
 
 });
 
-const LoanReferrerScreen = (props) => {
+const LoanReferrer2Screen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
@@ -90,7 +90,7 @@ const LoanReferrerScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setReferrer(values)
 
-                    props.navigation.navigate('LoanReferrer2')
+                    props.navigation.navigate('LoanValidation')
                     actions.setSubmitting(false)
                 }
                 }
@@ -125,9 +125,8 @@ const LoanReferrerScreen = (props) => {
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Pembiayaan Tekun</Text>
-                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section H</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Perujuk</Text>
+                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Perujuk 2</Text>
 
 
 
@@ -206,4 +205,4 @@ const LoanReferrerScreen = (props) => {
 
 
 
-export default LoanReferrerScreen
+export default LoanReferrer2Screen
