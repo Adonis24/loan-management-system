@@ -89,9 +89,7 @@ const LoanCustomDrawer = (props) => {
                     description={'Akuan Pemohon'}
                     nav={nav} />
 
-
-
-                <TouchableOpacity onPress={() => dispatch(actionCreator.resetForm())} style={{ backgroundColor: 'red', alignSelf: 'flex-start', padding: 10, borderRadius: 10 }}><Text style={[styles.textDefault, { color: '#fff' }]}>Reset Form</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => dispatch(actionCreator.resetForm())} style={{ borderColor: 'red', borderWidth:1, alignSelf: 'flex-start', padding: 10, borderRadius: 10 }}><Text style={[styles.textSmall, { color: 'red' }]}>Reset Form</Text></TouchableOpacity>
 
             </View>
         </LinearGradient>

@@ -17,10 +17,6 @@ import styles from '../styles/styles'
 
 
 const LayoutA = (props) => {
-
- 
-
-
     return (
         <View style={styles.container}>
             <View style={{ flex: 1, justifyContent: 'flex-start' }}>

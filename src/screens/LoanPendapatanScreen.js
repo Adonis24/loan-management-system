@@ -155,7 +155,10 @@ const LoanPendapatanScreen = (props) => {
                                 </View>
                             </Modal>
                             {/* {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />} */}
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>CONTACT ADDRESS</Text>
+                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
+                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section B</Text>
+                            {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
+                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Peribadi</Text>
 
                             <View style={{marginTop:20, alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
@@ -234,7 +237,11 @@ const LoanPendapatanScreen = (props) => {
                 }}
             </Formik >
 
-
+            <View style={{ position: 'absolute', top: 10, left: 10 }}>
+                <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
+                    <Ionicons name={'md-menu'} size={24} color={'#fff'} />
+                </TouchableOpacity>
+            </View>
         </LayoutA>
     );
 }

@@ -66,17 +66,7 @@ const LoanValidationScreen = (props) => {
     const setValidation = (value) => dispatch({ type: 'SET_VALIDATION', payload: { ...value } })
 
 
-    //const { capacity, valName, valPhoneNum, jawatan, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
-
-    useEffect(() => {
-        const open = () => setshowLogo(false)
-        const off = () => setshowLogo(true)
-
-        keyboardBeingDisplay(open)
-        keyboardBeingClose(off)
-    }, []); // empty-array means don't watch for any updates
-
-    const [showLogo, setshowLogo] = useState(true)
+ 
 
 
 
@@ -125,7 +115,6 @@ const LoanValidationScreen = (props) => {
                     return (
 
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                            {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Pembiayaan Tekun</Text>
                             <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section I</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}

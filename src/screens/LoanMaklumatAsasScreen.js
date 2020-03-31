@@ -19,7 +19,7 @@ import * as Yup from 'yup';
 import Constants from 'expo-constants'
 import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 
-import LayoutA from '../Layout/LayoutA';
+import LayoutLoan from '../Layout/LayoutLoan';
 import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import styles from '../styles/styles'
@@ -56,21 +56,10 @@ const LoanMaklumatAsasScreen = (props) => {
 
     const setMaklumatAsas = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
-    // useEffect(() => {
-    //     const open = () => setshowLogo(false)
-    //     const off = () => setshowLogo(true)
-
-    //     keyboardBeingDisplay(open)
-    //     keyboardBeingClose(off)
-    // }, []); // empty-array means don't watch for any updates
-
-    // const [showLogo, setshowLogo] = useState(true)
-
-    //proceedContact && props.navigation.goBack()
 
 
     return (
-        <LayoutA>
+        <LayoutLoan>
             <Formik
                 initialValues={{ negeri, cawanganParlimen, pengundiBerdaftar: true, statusPerniagaan: true }}
                 validateOnMount
@@ -94,14 +83,10 @@ const LoanMaklumatAsasScreen = (props) => {
                     const handleCheckBox1 = () => { console.log(`apa ni ${statusPerniagaan}`); FormikProps.setFieldValue('statusPerniagaan', !statusPerniagaan) }
 
                     return (
-                        <View style={{ flex: 1, justifyContent: 'center' }}>
-
-                            <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center', }}>
-
-                                <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
-                                <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section A</Text>
-                                <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Asas</Text>
-
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems:'center' }}>
+                            <Text style={[styles.textDefault, { margin: 5, color: 'black' }]}>Section A</Text>
+                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Asas</Text>
+                            <View style={{ justifyContent: 'center', alignItems: 'flex-start', }}>
 
                                 <CustomTextInput
                                     imageUri={require('../assets/images/city.png')}
@@ -123,7 +108,7 @@ const LoanMaklumatAsasScreen = (props) => {
                                     placeholder={'Cawangan Parlimen'}
                                     keyboardType={'default'}
                                 />
-                                <View style={{ marginBottom: 10, justifyContent: 'center', marginLeft: 20 }}>
+                                <View style={{ marginBottom: 10, justifyContent: 'center', }}>
                                     <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Pengundi berdaftar cawangan parlimen</Text>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         {(Platform.OS == 'ios') ?
@@ -187,13 +172,9 @@ const LoanMaklumatAsasScreen = (props) => {
                     )
                 }}
             </Formik >
-            <View style={{ position: 'absolute', top: 10, left: 10 }}>
-                <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
-                    <Ionicons name={'md-menu'} size={24} color={'#fff'} />
-                </TouchableOpacity>
-            </View>
 
-        </LayoutA>
+
+        </LayoutLoan>
     );
 }
 

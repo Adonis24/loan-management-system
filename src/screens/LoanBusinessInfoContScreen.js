@@ -57,31 +57,9 @@ const LoanBusinessInfoContScreen = (props) => {
 
 
     const setMaklumatPerniagaan = (value) => dispatch({ type: 'SET_MAKLUMAT_PERNIAGAAN', payload: { ...value } })
-
-
-    //const { capacity, nameCP, icNumber, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
-
-    useEffect(() => {
-        const open = () => setshowLogo(false)
-        const off = () => setshowLogo(true)
-
-        keyboardBeingDisplay(open)
-        keyboardBeingClose(off)
-    }, []); // empty-array means don't watch for any updates
-
-    const handleIosPicker = (modalContent) => {
-        setModalContent(modalContent)
-        setIosPickerVisible(!iosPickerVisible)
-    }
-
-    const [showLogo, setshowLogo] = useState(true)
-
-
-
+ 
     return (
         <LayoutA>
-
-
             <Formik
                 validateOnMount
                 initialValues={{ compStat, pemilikan,keahlian,noAhli,noAhli2 }}
@@ -158,7 +136,6 @@ const LoanBusinessInfoContScreen = (props) => {
                                 </View>
                             </Modal>
 
-                            {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
                             <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section E</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}

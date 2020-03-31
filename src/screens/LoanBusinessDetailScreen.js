@@ -56,15 +56,7 @@ const LoanBusinessDetailScreen = (props) => {
 
     const setPembiayaan = (value) => dispatch({ type: 'SET_PEMBIAYAAN', payload: { ...value } })
 
-    useEffect(() => {
-        const open = () => setshowLogo(false)
-        const off = () => setshowLogo(true)
-
-        keyboardBeingDisplay(open)
-        keyboardBeingClose(off)
-    }, []); // empty-array means don't watch for any updates
-
-    const [showLogo, setshowLogo] = useState(true)
+    
 
     //proceedContact && props.navigation.goBack()
 
@@ -135,7 +127,6 @@ const LoanBusinessDetailScreen = (props) => {
                                     </View>
                                 </View>
                             </Modal>
-                            {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
                             <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section F</Text>
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Pembiayaan Perniagaan Sedia Ada</Text>
