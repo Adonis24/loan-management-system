@@ -76,7 +76,7 @@ const WelcomeScreen = (props) => {
     return (
         <View style={styles.container}>
             <View style={{ flex: 1, justifyContent: 'flex-start' }}>
-                <Image source={require('../assets/images/tekunA.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
+                <Image source={require('../assets/images/tekunE.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
             </View>
             <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
