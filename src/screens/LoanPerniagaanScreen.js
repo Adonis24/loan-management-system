@@ -92,7 +92,7 @@ const LoanPerniagaanScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatAsas(values)
                     actions.setSubmitting(false)
-                    props.navigation.navigate('LoanMaklumatPeribadi')
+                    props.navigation.navigate('LoanSectionB')
                 }}
                 validationSchema={validationSchema}
             >

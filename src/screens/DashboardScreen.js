@@ -13,6 +13,7 @@ import {
 
 
 } from 'react-native';
+import { SliderBox } from "react-native-image-slider-box";
 
 import * as actionCreator from '../store/actions/action'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
@@ -81,7 +82,7 @@ const DashboardScreen = (props) => {
         ]).start();
     }
 
-    const advert = ['../assets/images/banner1.png', '../assets/images/banner2.png']
+    const advert = [require('../assets/images/banner1.png'), require('../assets/images/banner2.png')]
 
     const capitalizeString = (text = 'NA') => text.length > 0 && `${text[0].toUpperCase()}${text.slice(1)}`
 
@@ -146,7 +147,6 @@ const DashboardScreen = (props) => {
                             <TouchableOpacity onPress={() => companyName ? props.navigation.navigate('Profile') : props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row' }} >
                                 <View style={{ height: Layout.window.width / 8, width: Layout.window.width / 8, borderRadius: Layout.window.width / 16, borderWidth: 1, borderColor: 'lightgrey', padding: 3 }}>
                                     <Image source={!logo ? require('../assets/images/profile.png') : { uri: logo }} style={{ flex: 1, width: undefined, height: undefined, }} resizeMode={'contain'} />
-
                                 </View>
                                 <Text style={[styles.textDefault, { color: '#000', marginLeft: 5 }]} numberOfLines={1} ellipsizeMode={'tail'}>{companyName}</Text>
                             </TouchableOpacity>
@@ -244,8 +244,6 @@ const DashboardScreen = (props) => {
 
                                                 </View>
                                             </View>
-
-
                                         </TouchableOpacity>
                                     } />
                                 : <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
@@ -258,15 +256,11 @@ const DashboardScreen = (props) => {
                         </View>
                         {/**Advertisement */}
                         <View style={{ flex: 1, }}>
-                            {advert ? <FlatList
-                                horizontal
-                                data={advert}
-                                keyExtractor={(item, index) => index.toString()}
-                                renderItem={({ item }) =>
-                                    <TouchableOpacity onPress={() => console.log(`navigate('None')`)} style={{ width: Layout.window.width }}  >
-                                        <Image source={require('../assets/images/banner1.png')} style={{ flex: 1, height: undefined, width: undefined }} resizeMode={'cover'} />
-                                    </TouchableOpacity>}
-                            /> : <Text>No Advert</Text>}
+                            {advert ? <SliderBox 
+                            images={advert} 
+                            autoplay
+                            circleLoop  
+                              /> : <Text>No Advert</Text>}
                         </View>
                     </Animated.View>
                 </View>

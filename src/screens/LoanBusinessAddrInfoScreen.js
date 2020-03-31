@@ -83,7 +83,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setBusinessInfo(values)
-                    props.navigation.navigate('LoanBusinessInfoCont')
+                    props.navigation.navigate('LoanSectionF')
                     actions.setSubmitting(false)
                 }
                 }
