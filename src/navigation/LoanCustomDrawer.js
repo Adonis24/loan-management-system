@@ -30,63 +30,63 @@ const LoanCustomDrawer = (props) => {
                     name={'Section B'}
                     link={'LoanSectionB'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Asas'}
+                    description={'Maklumat Peribadi'}
                     nav={nav} />
 
                 <NavButton
                     name={'Section C'}
                     link={'LoanSectionC'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Asas'}
+                    description={'Maklumat Pasangan'}
                     nav={nav} />
 
                 <NavButton
                     name={'Section D'}
                     link={'LoanSectionD'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Asas'}
+                    description={'Maklumat Perniagaan'}
                     nav={nav} />
 
                 <NavButton
                     name={'Section E'}
                     link={'LoanBusinessInfoCont'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Asas'}
+                    description={'Maklumat Perniagaan'}
                     nav={nav} />
 
                 <NavButton
                     name={'Section F'}
                     link={'LoanSectionF'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Asas'}
+                    description={'Maklumat Pembiayaan Perniagaan'}
                     nav={nav} />
 
                 <NavButton
                     name={'Section G'}
                     link={'LoanDetail'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Asas'}
+                    description={'Maklumat Pembiayaan'}
                     nav={nav} />
 
                 <NavButton
                     name={'Section H'}
-                    link={'LoanReferrer'}
+                    link={'LoanSectionH'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Asas'}
+                    description={'Perujuk'}
                     nav={nav} />
 
                 <NavButton
                     name={'Section I'}
                     link={'LoanValidation'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Asas'}
+                    description={'Pengesahan & Perakuan Perniagaan'}
                     nav={nav} />
 
                 <NavButton
                     name={'Section J'}
                     link={'LoanDeclaration'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Asas'}
+                    description={'Akuan Pemohon'}
                     nav={nav} />
 
 
