@@ -65,22 +65,15 @@ const LoanPerniagaanScreen = (props) => {
 
     const setMaklumatAsas = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
-    // useEffect(() => {
-    //     const open = () => setshowLogo(false)
-    //     const off = () => setshowLogo(true)
 
-    //     keyboardBeingDisplay(open)
-    //     keyboardBeingClose(off)
-    // }, []); // empty-array means don't watch for any updates
-
-    // const [showLogo, setshowLogo] = useState(true)
-
-    //proceedContact && props.navigation.goBack()
 
     const handleIosPicker = (modalContent) => {
         setModalContent(modalContent)
         setIosPickerVisible(!iosPickerVisible)
     }
+
+
+
 
 
     return (
@@ -91,7 +84,10 @@ const LoanPerniagaanScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatAsas(values)
+                    dispatch(actionCreator.saveLoanData())
+
                     actions.setSubmitting(false)
+                    actions.resetForm({})
                     props.navigation.navigate('LoanSectionB')
                 }}
                 validationSchema={validationSchema}
@@ -142,52 +138,52 @@ const LoanPerniagaanScreen = (props) => {
                             {/* {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />} */}
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Asas</Text>
-<ScrollView>
+                            <ScrollView>
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/city.png')}
-                                value={bank}
-                                handleChange={FormikProps.handleChange(`bank`)}
-                                handleBlur={FormikProps.handleBlur(`bank`)}
-                                touched={bankTouched}
-                                error={bankError}
-                                placeholder={'Bank Islam/Maybank/Bank Rakyat/BSN/Agrobank'}
-                                keyboardType={'default'}
-                            />
-                            <CustomTextInput
-                                imageUri={require('../assets/images/compRegNum.png')}
-                                value={noAkaun}
-                                handleChange={FormikProps.handleChange(`noAkaun`)}
-                                handleBlur={FormikProps.handleBlur(`noAkaun`)}
-                                touched={noAkaunTouched}
-                                error={noAkaunError}
-                                placeholder={'No.Akaun'}
-                                keyboardType={'phone-pad'}
-                            />
-                            <View style={{ marginBottom: 20, alignSelf: 'stretch' }}>
-                            <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.65,}}>
-                    
-            
-                                {ios ?
-                                    <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                        <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('typeBusiness')}>
-                                            <Text style={{ fontSize: 12 }}>{typeBusiness ? typeBusiness : `Sektor Perniagaan`}</Text>
-                                        </TouchableOpacity>
-                                        {typeBusinessTouched && typeBusinessError && <Text style={styles.error}>{typeBusinessError}</Text>}
-                                    </View> : <View style={{ alignSelf: 'stretch',borderWidth:1, borderColor: '#5a83c2' }}>
-                                        <Picker style={{ height: 35 }} selectedValue={typeBusiness} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('typeBusiness', itemValue)}>
-                                            <Picker.Item label={'Sektor Perniagaan'} value={undefined} />
-                                            <Picker.Item label="Pertanian Dan Perusahaan Asas Tani" value="pertanian" />
-                                            <Picker.Item label="Peruncitan" value="peruncitan" />
-                                            <Picker.Item label="Perkhidmatan" value="perkhidmatan" />
-                                            <Picker.Item label="Pembuatan" value="pembuatan" />
-                                            <Picker.Item label="Kontraktor Kecil" value="kontraktorKecil" />
-                                        </Picker>
-                                        {typeBusinessTouched && typeBusinessError && <Text style={styles.error}>{typeBusinessError}</Text>}
-                                    </View>}
-                            </View>
-                            </View>
-</ScrollView>
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/city.png')}
+                                    value={bank}
+                                    handleChange={FormikProps.handleChange(`bank`)}
+                                    handleBlur={FormikProps.handleBlur(`bank`)}
+                                    touched={bankTouched}
+                                    error={bankError}
+                                    placeholder={'Bank Islam/Maybank/Bank Rakyat/BSN/Agrobank'}
+                                    keyboardType={'default'}
+                                />
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/compRegNum.png')}
+                                    value={noAkaun}
+                                    handleChange={FormikProps.handleChange(`noAkaun`)}
+                                    handleBlur={FormikProps.handleBlur(`noAkaun`)}
+                                    touched={noAkaunTouched}
+                                    error={noAkaunError}
+                                    placeholder={'No.Akaun'}
+                                    keyboardType={'phone-pad'}
+                                />
+                                <View style={{ marginBottom: 20, alignSelf: 'stretch' }}>
+                                    <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.65, }}>
+
+
+                                        {ios ?
+                                            <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
+                                                <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('typeBusiness')}>
+                                                    <Text style={{ fontSize: 12 }}>{typeBusiness ? typeBusiness : `Sektor Perniagaan`}</Text>
+                                                </TouchableOpacity>
+                                                {typeBusinessTouched && typeBusinessError && <Text style={styles.error}>{typeBusinessError}</Text>}
+                                            </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
+                                                <Picker style={{ height: 35 }} selectedValue={typeBusiness} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('typeBusiness', itemValue)}>
+                                                    <Picker.Item label={'Sektor Perniagaan'} value={undefined} />
+                                                    <Picker.Item label="Pertanian Dan Perusahaan Asas Tani" value="pertanian" />
+                                                    <Picker.Item label="Peruncitan" value="peruncitan" />
+                                                    <Picker.Item label="Perkhidmatan" value="perkhidmatan" />
+                                                    <Picker.Item label="Pembuatan" value="pembuatan" />
+                                                    <Picker.Item label="Kontraktor Kecil" value="kontraktorKecil" />
+                                                </Picker>
+                                                {typeBusinessTouched && typeBusinessError && <Text style={styles.error}>{typeBusinessError}</Text>}
+                                            </View>}
+                                    </View>
+                                </View>
+                            </ScrollView>
 
                             <CustomFormAction
                                 navigation={props.navigation}

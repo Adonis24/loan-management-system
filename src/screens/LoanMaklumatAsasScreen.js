@@ -78,6 +78,7 @@ const LoanMaklumatAsasScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatAsas(values)
                     actions.setSubmitting(false)
+                    actions.resetForm({})
                     props.navigation.navigate('LoanSektorPerniagaan')
                 }}
                 validationSchema={validationSchema}
