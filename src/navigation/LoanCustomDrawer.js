@@ -8,6 +8,8 @@ import Constants from 'expo-constants';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient'
 const LoanCustomDrawer = (props) => {
+
+    const dispatch=useDispatch()
     const nav = (screen) => {
         props.close()
         props.nav(screen)
@@ -17,7 +19,7 @@ const LoanCustomDrawer = (props) => {
     return (
         <LinearGradient colors={['#fff', '#fff']} style={{ position: 'absolute', top: Constants.statusBarHeight, bottom: 0, right: 0, left: 0 }}>
             <View style={{ padding: 10, flex: 1, justifyContent: 'flex-start' }}>
-                <Text style={[styles.textDefault,{marginBottom:20}]}>Borang Permohonan Pembiayaan</Text>
+                <Text style={[styles.textDefault, { marginBottom: 20 }]}>Borang Permohonan Pembiayaan</Text>
                 <NavButton
                     name={'Section A'}
                     link={'LoanSectionA'}
@@ -87,8 +89,9 @@ const LoanCustomDrawer = (props) => {
                     description={'Maklumat Asas'}
                     nav={nav} />
 
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 25, height: 30 }} />
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 25, height: 30 }} />
+
+
+                <TouchableOpacity onPress={() => dispatch(actionCreator.resetForm())} style={{ backgroundColor: 'red', alignSelf: 'flex-start', padding: 10, borderRadius: 10 }}><Text style={[styles.textDefault, { color: '#fff' }]}>Reset Form</Text></TouchableOpacity>
 
             </View>
         </LinearGradient>
