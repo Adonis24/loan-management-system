@@ -53,6 +53,8 @@ const financingReducer = (state = [], action) => {
             return { ...state, ...action.payload }
         case 'SET_MAKLUMAT_PERIBADI':
             return { ...state, ...action.payload }
+        case 'DELETE_FORM_DATA':
+            return []
         default:
             return state
     }

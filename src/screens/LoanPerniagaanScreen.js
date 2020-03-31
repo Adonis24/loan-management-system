@@ -62,22 +62,15 @@ const LoanPerniagaanScreen = (props) => {
 
     const setMaklumatAsas = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
-    // useEffect(() => {
-    //     const open = () => setshowLogo(false)
-    //     const off = () => setshowLogo(true)
 
-    //     keyboardBeingDisplay(open)
-    //     keyboardBeingClose(off)
-    // }, []); // empty-array means don't watch for any updates
-
-    // const [showLogo, setshowLogo] = useState(true)
-
-    //proceedContact && props.navigation.goBack()
 
     const handleIosPicker = (modalContent) => {
         setModalContent(modalContent)
         setIosPickerVisible(!iosPickerVisible)
     }
+
+
+
 
 
     return (
@@ -88,7 +81,10 @@ const LoanPerniagaanScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatAsas(values)
+                    dispatch(actionCreator.saveLoanData())
+
                     actions.setSubmitting(false)
+                    actions.resetForm({})
                     props.navigation.navigate('LoanSectionB')
                 }}
                 validationSchema={validationSchema}
