@@ -16,6 +16,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
+import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
 
@@ -39,8 +40,8 @@ const validationSchema = Yup.object().shape({
         .label('Alamat'),
 
     cpPoskod: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(5)
         .max(5)
         .label('Postcode'),
@@ -60,15 +61,6 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
 
     //const { capacity, nameCP, cpPhoneNum, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
 
-    useEffect(() => {
-        const open = () => setshowLogo(false)
-        const off = () => setshowLogo(true)
-
-        keyboardBeingDisplay(open)
-        keyboardBeingClose(off)
-    }, []); // empty-array means don't watch for any updates
-
-    const [showLogo, setshowLogo] = useState(true)
 
 
 
@@ -114,10 +106,11 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                     return (
 
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                            {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
+                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
+                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section C</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Pasangan</Text>
+
 
 
                             <CustomTextInput
@@ -128,7 +121,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                                 touched={cpPhoneNumTouched}
                                 error={cpPhoneNumError}
                                 placeholder={'No Telefon'}
-                                keyboardType={'numbers-and-punctuation'}
+                                keyboardType={'phone-pad'}
                             />
                            
                             <CustomTextInput
@@ -159,7 +152,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                                 touched={cpPoskodTouched}
                                 error={cpPoskodError}
                                 placeholder={'Poskod'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
                           
 
@@ -174,7 +167,11 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                     )
                 }}
             </Formik >
-
+            <View style={{ position: 'absolute', top: 10, left: 10 }}>
+                <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
+                    <Ionicons name={'md-menu'} size={24} color={'#fff'} />
+                </TouchableOpacity>
+            </View>
         </LayoutA>
     );
 }

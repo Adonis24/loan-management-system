@@ -35,9 +35,7 @@ const validationSchema = Yup.object().shape({
     pemilikan: Yup
         .string()
         .required(),
-    keahlian: Yup
-        .string()
-        .required(),
+ 
 
 
 
@@ -55,38 +53,16 @@ const LoanBusinessInfoContScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { compStat, pemilikan,keahlian } = useSelector(state => state.financingReducer, shallowEqual)
+    const { noAhli,compStat, pemilikan,keahlian,noAhli2 } = useSelector(state => state.financingReducer, shallowEqual)
 
 
     const setMaklumatPerniagaan = (value) => dispatch({ type: 'SET_MAKLUMAT_PERNIAGAAN', payload: { ...value } })
-
-
-    //const { capacity, nameCP, icNumber, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
-
-    useEffect(() => {
-        const open = () => setshowLogo(false)
-        const off = () => setshowLogo(true)
-
-        keyboardBeingDisplay(open)
-        keyboardBeingClose(off)
-    }, []); // empty-array means don't watch for any updates
-
-    const handleIosPicker = (modalContent) => {
-        setModalContent(modalContent)
-        setIosPickerVisible(!iosPickerVisible)
-    }
-
-    const [showLogo, setshowLogo] = useState(true)
-
-
-
+ 
     return (
         <LayoutA>
-
-
             <Formik
                 validateOnMount
-                initialValues={{ compStat, pemilikan,keahlian }}
+                initialValues={{ compStat, pemilikan,keahlian,noAhli,noAhli2 }}
 
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -103,7 +79,7 @@ const LoanBusinessInfoContScreen = (props) => {
 
 
 
-                    const { pemilikan, compStat,keahlian } = FormikProps.values
+                    const { pemilikan, compStat,keahlian,noAhli,noAhli2 } = FormikProps.values
 
 
 
@@ -113,8 +89,11 @@ const LoanBusinessInfoContScreen = (props) => {
                     const compStatError = FormikProps.errors.compStat
                     const compStatTouched = FormikProps.touched.compStat
 
-                    const keahlianError = FormikProps.errors.keahlian
-                    const keahlianTouched = FormikProps.touched.keahlian
+                    const noAhliError = FormikProps.errors.noAhli
+                    const noAhliTouched = FormikProps.touched.noAhli
+
+                    const noAhli2Error = FormikProps.errors.noAhli2
+                    const noAhli2Touched = FormikProps.touched.noAhli2
 
 
                     return (
@@ -144,27 +123,21 @@ const LoanBusinessInfoContScreen = (props) => {
                                                 <Picker.Item label="Perkongsian" value="perkongsian" />
                                                 <Picker.Item label="Sendirian Berhad" value="sendirianBerhad" />
 
-                                            </Picker> : (modalContent === "compStat") ? <Picker style={{ flex: 1, height: 35 }} selectedValue={compStat} onValueChange={(itemValue, itemIndex) =>
+                                            </Picker> : <Picker style={{ flex: 1, height: 35 }} selectedValue={compStat} onValueChange={(itemValue, itemIndex) =>
                                                 FormikProps.setFieldValue('compStat', itemValue)}>
                                                 <Picker.Item label={'Status Premis'} value={undefined} />
                                                 <Picker.Item label="Sendiri" value="sendiri" />
                                                 <Picker.Item label="Sewa" value="sewa" />
                                                 <Picker.Item label="Keluarga" value="keluarga" />
 
-                                            </Picker> : <Picker style={{ flex: 1, height: 35 }} selectedValue={keahlian} onValueChange={(itemValue, itemIndex) =>
-                                                FormikProps.setFieldValue('keahlian', itemValue)}>
-                                                    <Picker.Item label={'Keahlian Persatuan'} value={undefined} />
-                                                    <Picker.Item label="Dewan Perniagaan" value="dewanPerniagaan" />
-                                                    <Picker.Item label="Persatuan Penjaja/Peniaga" value="persatuanPenjaja" />
-                                                    
-                                                </Picker>
+                                            </Picker> 
                                         }
                                     </View>
                                 </View>
                             </Modal>
 
-                            {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
+                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section E</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Perniagaan</Text>
 
@@ -212,26 +185,26 @@ const LoanBusinessInfoContScreen = (props) => {
                                         </View>}
                                 </View>
                             </View>
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
-                                <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
-                                    {ios ?
-                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('keahlian')}>
-                                                <Text style={{ fontSize: 12 }}>{keahlian ? keahlian : `Keahlian Persatuan`}</Text>
-                                            </TouchableOpacity>
-                                            {keahlianTouched && keahlianError && <Text style={styles.error}>{keahlianError}</Text>}
-                                        </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
-                                            <Picker style={{ height: 35 }} selectedValue={keahlian} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('keahlian', itemValue)}>
-                                            <Picker.Item label={'Keahlian Persatuan'} value={undefined} />
-                                                    <Picker.Item label="Dewan Perniagaan" value="dewanPerniagaan" />
-                                                    <Picker.Item label="Persatuan Penjaja/Peniaga" value="persatuanPenjaja" />
-                                            </Picker>
-                                            {keahlianTouched && keahlianError && <Text style={styles.error}>{keahlianError}</Text>}
-                                        </View>}
-                                </View>
-                            </View>
-
+                            <CustomTextInput
+                                imageUri={require('../assets/images/compRegNum.png')}
+                                value={noAhli}
+                                handleChange={FormikProps.handleChange(`noAhli`)}
+                                handleBlur={FormikProps.handleBlur(`noAhli`)}
+                                touched={noAhliTouched}
+                                error={noAhliError}
+                                placeholder={'No keahlian Dewan Perniagaan'}
+                                keyboardType={'phone-pad'}
+                            />
+                             <CustomTextInput
+                                imageUri={require('../assets/images/compRegNum.png')}
+                                value={noAhli2}
+                                handleChange={FormikProps.handleChange(`noAhli2`)}
+                                handleBlur={FormikProps.handleBlur(`noAhli2`)}
+                                touched={noAhli2Touched}
+                                error={noAhli2Error}
+                                placeholder={'No Keahlian Persatuan Penjaja'}
+                                keyboardType={'decimal-pad'}
+                            />
 
 
 

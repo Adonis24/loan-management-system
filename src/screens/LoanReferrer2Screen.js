@@ -11,8 +11,8 @@ import {
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import { Ionicons } from '@expo/vector-icons';
 import Constants from 'expo-constants'
+import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
@@ -27,27 +27,25 @@ import * as actionCreator from '../store/actions/action'
 const validationSchema = Yup.object().shape({
 
 
-    
-   
-    valName: Yup
+    refName: Yup
         .string()
         .required()
         .min(3)
         .label('Nama'),
 
-    valPhoneNum: Yup
+    refPhoneNum: Yup
         .string()
         .required()
         .min(3)
         .label('No Tel'),
 
-    jawatan: Yup
+    relationship: Yup
         .string()
         .required()
         .min(3)
-        .label('Jawatan'),
+        .label('Hubungan'),
 
-    valAlamat: Yup
+    refAlamat: Yup
         .string()
         .required()
         .min(3)
@@ -56,17 +54,17 @@ const validationSchema = Yup.object().shape({
 
 });
 
-const LoanValidationScreen = (props) => {
+const LoanReferrer2Screen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { valAlamat, valAlamat_2, valName, valPhoneNum, jawatan, } = useSelector(state => state.financingReducer, shallowEqual)
+    const { refAlamat, refAlamat_2, refName, refPhoneNum, relationship, } = useSelector(state => state.financingReducer, shallowEqual)
 
 
-    const setValidation = (value) => dispatch({ type: 'SET_VALIDATION', payload: { ...value } })
+    const setReferrer = (value) => dispatch({ type: 'SET_REFERRER', payload: { ...value } })
 
 
- 
+   
 
 
 
@@ -76,13 +74,13 @@ const LoanValidationScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ valAlamat, valAlamat_2, valName, valPhoneNum, jawatan, }}
+                initialValues={{ refAlamat, refAlamat_2, refName, refPhoneNum, relationship, }}
 
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
-                    setValidation(values)
+                    setReferrer(values)
 
-                    props.navigation.navigate('LoanDeclaration')
+                    props.navigation.navigate('LoanValidation')
                     actions.setSubmitting(false)
                 }
                 }
@@ -93,84 +91,84 @@ const LoanValidationScreen = (props) => {
 
 
 
-                    const { valAlamat, valAlamat_2, valName, valPhoneNum, jawatan } = FormikProps.values
+                    const { refAlamat, refAlamat_2, refName, refPhoneNum, relationship } = FormikProps.values
 
 
-                    const valAlamatError = FormikProps.errors.valAlamat
-                    const valAlamatTouched = FormikProps.touched.valAlamat
+                    const refAlamatError = FormikProps.errors.refAlamat
+                    const refAlamatTouched = FormikProps.touched.refAlamat
 
-                    const valAlamat_2Error = FormikProps.errors.valAlamat_2
-                    const valAlamat_2Touched = FormikProps.touched.valAlamat_2
+                    const refAlamat_2Error = FormikProps.errors.refAlamat_2
+                    const refAlamat_2Touched = FormikProps.touched.refAlamat_2
 
-                    const valNameError = FormikProps.errors.valName
-                    const valNameTouched = FormikProps.touched.valName
+                    const refNameError = FormikProps.errors.refName
+                    const refNameTouched = FormikProps.touched.refName
 
-                    const valPhoneNumError = FormikProps.errors.valPhoneNum
-                    const valPhoneNumTouched = FormikProps.touched.valPhoneNum
+                    const refPhoneNumError = FormikProps.errors.refPhoneNum
+                    const refPhoneNumTouched = FormikProps.touched.refPhoneNum
 
-                    const jawatanError = FormikProps.errors.jawatan
-                    const jawatanTouched = FormikProps.touched.jawatan
+                    const relationshipError = FormikProps.errors.relationship
+                    const relationshipTouched = FormikProps.touched.relationship
 
 
                     return (
 
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Pembiayaan Tekun</Text>
-                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section I</Text>
+                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section H</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.textDefault, { textAlign:'center',margin: 5, color: 'darkblue' }]}>Pengesahan Dan Perakuan Menjalankan Perniagaan</Text>
+                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Perujuk (b)</Text>
 
 
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/user.png')}
-                                value={valName}
-                                handleChange={FormikProps.handleChange(`valName`)}
-                                handleBlur={FormikProps.handleBlur(`valName`)}
-                                touched={valNameTouched}
-                                error={valNameError}
+                                value={refName}
+                                handleChange={FormikProps.handleChange(`refName`)}
+                                handleBlur={FormikProps.handleBlur(`refName`)}
+                                touched={refNameTouched}
+                                error={refNameError}
                                 placeholder={'Nama'}
                                 keyboardType={'default'}
                             />
 
                             <CustomTextInput
-                                imageUri={require('../assets/images/position.png')}
-                                value={jawatan}
-                                handleChange={FormikProps.handleChange(`jawatan`)}
-                                handleBlur={FormikProps.handleBlur(`jawatan`)}
-                                touched={jawatanTouched}
-                                error={jawatanError}
-                                placeholder={'Jawatan'}
-                                keyboardType={'default'}
-                            />
-                            <CustomTextInput
                                 imageUri={require('../assets/images/phoneNum.png')}
-                                value={valPhoneNum}
-                                handleChange={FormikProps.handleChange(`valPhoneNum`)}
-                                handleBlur={FormikProps.handleBlur(`valPhoneNum`)}
-                                touched={valPhoneNumTouched}
-                                error={valPhoneNumError}
+                                value={refPhoneNum}
+                                handleChange={FormikProps.handleChange(`refPhoneNum`)}
+                                handleBlur={FormikProps.handleBlur(`refPhoneNum`)}
+                                touched={refPhoneNumTouched}
+                                error={refPhoneNumError}
                                 placeholder={'No Telefon'}
                                 keyboardType={'decimal-pad'}
                             />
                             <CustomTextInput
+                                imageUri={require('../assets/images/user.png')}
+                                value={relationship}
+                                handleChange={FormikProps.handleChange(`relationship`)}
+                                handleBlur={FormikProps.handleBlur(`relationship`)}
+                                touched={relationshipTouched}
+                                error={relationshipError}
+                                placeholder={'Hubungan'}
+                                keyboardType={'default'}
+                            />
+                            <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}
-                                value={valAlamat}
-                                handleChange={FormikProps.handleChange(`valAlamat`)}
-                                handleBlur={FormikProps.handleBlur(`valAlamat`)}
-                                touched={valAlamatTouched}
-                                error={valAlamatError}
+                                value={refAlamat}
+                                handleChange={FormikProps.handleChange(`refAlamat`)}
+                                handleBlur={FormikProps.handleBlur(`refAlamat`)}
+                                touched={refAlamatTouched}
+                                error={refAlamatError}
                                 placeholder={'Alamat Line 1'}
 
                             />
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}
-                                value={valAlamat_2}
-                                handleChange={FormikProps.handleChange(`valAlamat_2`)}
-                                handleBlur={FormikProps.handleBlur(`valAlamat_2`)}
-                                touched={valAlamat_2Touched}
-                                error={valAlamat_2Error}
+                                value={refAlamat_2}
+                                handleChange={FormikProps.handleChange(`refAlamat_2`)}
+                                handleBlur={FormikProps.handleBlur(`refAlamat_2`)}
+                                touched={refAlamat_2Touched}
+                                error={refAlamat_2Error}
                                 placeholder={'Alamat Line 2'}
 
                             />
@@ -197,4 +195,4 @@ const LoanValidationScreen = (props) => {
 
 
 
-export default LoanValidationScreen
+export default LoanReferrer2Screen

@@ -98,6 +98,7 @@ import LoanBusinessDetailScreen from '../screens/LoanBusinessDetailScreen'
 import LoanBusinessDetail2Screen from '../screens/LoanBusinessDetail2Screen'
 import LoanDetailScreen from '../screens/LoanDetailScreen'
 import LoanReferrerScreen from '../screens/LoanReferrerScreen'
+import LoanReferrer2Screen from '../screens/LoanReferrer2Screen'
 import LoanValidationScreen from '../screens/LoanValidationScreen'
 import LoanDeclarationScreen from '../screens/LoanDeclarationScreen'
 import LoanCustomDrawer from './LoanCustomDrawer';
@@ -236,7 +237,7 @@ const LoanDrawer = () => {
             <Drawer.Screen name="LoanBusinessInfoCont" component={LoanBusinessInfoContScreen} />
             <Drawer.Screen name="LoanSectionF" component={LoanSectionFStack} />
             <Drawer.Screen name="LoanDetail" component={LoanDetailScreen} />
-            <Drawer.Screen name="LoanReferrer" component={LoanReferrerScreen} />
+            <Drawer.Screen name="LoanSectionH" component={LoanSectionHStack} />
             <Drawer.Screen name="LoanValidation" component={LoanValidationScreen} />
             <Drawer.Screen name="LoanDeclaration" component={LoanDeclarationScreen} />
 
@@ -283,6 +284,14 @@ const LoanSectionFStack = () => {
         <Stack.Navigator initialRouteName="LoanBusinessDetail" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="LoanBusinessDetail" component={LoanBusinessDetailScreen} />
             <Stack.Screen name="LoanBusinessDetail2" component={LoanBusinessDetail2Screen} />
+        </Stack.Navigator>)
+}
+
+const LoanSectionHStack = () => {
+    return (
+        <Stack.Navigator initialRouteName="LoanReferrer" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="LoanReferrer" component={LoanReferrerScreen} />
+            <Stack.Screen name="LoanReferrer2" component={LoanReferrer2Screen} />
         </Stack.Navigator>)
 }
 const InfoNewsDrawer = () => {

@@ -33,19 +33,19 @@ const validationSchema = Yup.object().shape({
 
     
     institusi: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('Institusi'),
 
     totalLoan: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('Jumlah Pembiayaan'),
     loanBal: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required()
         .min(3)
         .label('Baki Pembiayaan'),
 
@@ -68,15 +68,7 @@ const LoanBusinessDetail2Screen = (props) => {
 
     const setPembiayaan = (value) => dispatch({ type: 'SET_PEMBIAYAAN', payload: { ...value } })
 
-    useEffect(() => {
-        const open = () => setshowLogo(false)
-        const off = () => setshowLogo(true)
-
-        keyboardBeingDisplay(open)
-        keyboardBeingClose(off)
-    }, []); // empty-array means don't watch for any updates
-
-    const [showLogo, setshowLogo] = useState(true)
+  
 
     //proceedContact && props.navigation.goBack()
 
@@ -115,10 +107,10 @@ const LoanBusinessDetail2Screen = (props) => {
                     return (
 
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center', }}>
-                            {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
+                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
+                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section F</Text>
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Pembiayaan Perniagaan Sedia Ada</Text>
-                         
+                       
                                         <CustomTextInput
                                             imageUri={require('../assets/images/city.png')}
                                             value={institusi}
@@ -130,24 +122,24 @@ const LoanBusinessDetail2Screen = (props) => {
                                             keyboardType={'default'}
                                         />
                                         <CustomTextInput
-                                            imageUri={require('../assets/images/state.png')}
+                                            imageUri={require('../assets/images/loanAmount.png')}
                                             value={totalLoan}
                                             handleChange={FormikProps.handleChange(`totalLoan`)}
                                             handleBlur={FormikProps.handleBlur(`totalLoan`)}
                                             touched={totalLoanTouched}
                                             error={totalLoanError}
                                             placeholder={'Jumlah Pembiayaan'}
-                                            keyboardType={'phone-pad'}
+                                            keyboardType={'decimal-pad'}
                                         />
                                         <CustomTextInput
-                                            imageUri={require('../assets/images/state.png')}
+                                            imageUri={require('../assets/images/compRegNum.png')}
                                             value={loanBal}
                                             handleChange={FormikProps.handleChange(`loanBal`)}
                                             handleBlur={FormikProps.handleBlur(`loanBal`)}
                                             touched={loanBalTouched}
                                             error={loanBalError}
                                             placeholder={'Baki Pembiayaan'}
-                                            keyboardType={'phone-pad'}
+                                            keyboardType={'decimal-pad'}
                                         />
                                    
                             <CustomFormAction
@@ -161,7 +153,11 @@ const LoanBusinessDetail2Screen = (props) => {
                     )
                 }}
             </Formik >
-
+            <View style={{ position: 'absolute', top: 10, left: 10 }}>
+                <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
+                    <Ionicons name={'md-menu'} size={24} color={'#fff'} />
+                </TouchableOpacity>
+            </View>
 
         </LayoutA>
     );

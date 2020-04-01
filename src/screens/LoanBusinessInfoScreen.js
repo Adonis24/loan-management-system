@@ -65,17 +65,6 @@ const LoanConnectedPartiesScreen = (props) => {
     const setBusinessInfo = (value) => dispatch({ type: 'SET_BUSINESS_INFO', payload: { ...value } })
 
 
-    //const { capacity, nameCP, icNumber, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
-
-    useEffect(() => {
-        const open = () => setshowLogo(false)
-        const off = () => setshowLogo(true)
-
-        keyboardBeingDisplay(open)
-        keyboardBeingClose(off)
-    }, []); // empty-array means don't watch for any updates
-
-    const [showLogo, setshowLogo] = useState(true)
 
 
 
@@ -121,14 +110,14 @@ const LoanConnectedPartiesScreen = (props) => {
                     return (
 
                         <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                            {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
+                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section D</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Perniagaan</Text>
 
 
                             <CustomTextInput
-                                imageUri={require('../assets/images/city.png')}
+                                imageUri={require('../assets/images/company.png')}
                                 value={compName}
                                 handleChange={FormikProps.handleChange(`compName`)}
                                 handleBlur={FormikProps.handleBlur(`compName`)}
@@ -138,7 +127,7 @@ const LoanConnectedPartiesScreen = (props) => {
                                 keyboardType={'default'}
                             /> 
                             <CustomTextInput
-                                imageUri={require('../assets/images/user.png')}
+                                imageUri={require('../assets/images/bizAct.png')}
                                 value={compAct}
                                 handleChange={FormikProps.handleChange(`compAct`)}
                                 handleBlur={FormikProps.handleBlur(`compAct`)}
@@ -155,18 +144,18 @@ const LoanConnectedPartiesScreen = (props) => {
                                 touched={pengalamanTouched}
                                 error={pengalamanError}
                                 placeholder={'Tempoh/Pengalaman Berniaga'}
-                                keyboardType={'default'}
+                                keyboardType={'phone-pad'}
                             />
                            
                             <CustomTextInput
-                                imageUri={require('../assets/images/mykad.png')}
+                                imageUri={require('../assets/images/compRegNum.png')}
                                 value={compPendapatan}
                                 handleChange={FormikProps.handleChange(`compPendapatan`)}
                                 handleBlur={FormikProps.handleBlur(`compPendapatan`)}
                                 touched={compPendapatanTouched}
                                 error={compPendapatanError}
                                 placeholder={'Anggaran Pendapatan'}
-                                keyboardType={'phone-pad'}
+                                keyboardType={'decimal-pad'}
                             />
 
 
