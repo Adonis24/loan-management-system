@@ -20,15 +20,15 @@ import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKe
 
 import styles from '../styles/styles'
 
-import LayoutA from '../Layout/LayoutA';
+import LayoutLoan from '../Layout/LayoutLoan';
 
 import * as actionCreator from '../store/actions/action'
 
 const validationSchema = Yup.object().shape({
 
 
-    
-   
+
+
     valName: Yup
         .string()
         .required()
@@ -66,12 +66,12 @@ const LoanValidationScreen = (props) => {
     const setValidation = (value) => dispatch({ type: 'SET_VALIDATION', payload: { ...value } })
 
 
- 
+
 
 
 
     return (
-        <LayoutA>
+        <LayoutLoan navigation={props.navigation}>
 
 
             <Formik
@@ -83,6 +83,7 @@ const LoanValidationScreen = (props) => {
                     setValidation(values)
 
                     props.navigation.navigate('LoanDeclaration')
+                    actions.resetForm({})
                     actions.setSubmitting(false)
                 }
                 }
@@ -114,11 +115,10 @@ const LoanValidationScreen = (props) => {
 
                     return (
 
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Pembiayaan Tekun</Text>
-                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section I</Text>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
+                            <Text style={[styles.formTitle]}>Section I</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.textDefault, { textAlign:'center',margin: 5, color: 'darkblue' }]}>Pengesahan Dan Perakuan Menjalankan Perniagaan</Text>
+                            <Text style={[styles.formSubtitle]}>Pengesahan Dan Perakuan Menjalankan Perniagaan</Text>
 
 
 
@@ -176,6 +176,7 @@ const LoanValidationScreen = (props) => {
                             />
 
                             <CustomFormAction
+                                label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}
@@ -190,7 +191,7 @@ const LoanValidationScreen = (props) => {
                     <Ionicons name={'md-menu'} size={24} color={'#fff'} />
                 </TouchableOpacity>
             </View>
-        </LayoutA>
+        </LayoutLoan>
     );
 }
 

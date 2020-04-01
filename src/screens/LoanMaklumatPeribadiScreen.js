@@ -24,7 +24,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import styles from '../styles/styles'
 
-import LayoutA from '../Layout/LayoutA';
+import LayoutLoan from '../Layout/LayoutLoan';
 
 import * as actionCreator from '../store/actions/action'
 
@@ -102,7 +102,7 @@ const LoanMaklumatPeribadiScreen = (props) => {
 
 
     return (
-        <LayoutA>
+        <LayoutLoan navigation={props.navigation}>
 
 
             <Formik
@@ -113,6 +113,7 @@ const LoanMaklumatPeribadiScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatPeribadi(values)
                     props.navigation.navigate('LoanPersonalStatus')
+                    actions.resetForm({})
                     actions.setSubmitting(false)
 
                 }
@@ -162,7 +163,7 @@ const LoanMaklumatPeribadiScreen = (props) => {
 
                     return (
 
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
                             <Modal animationType={'slide'}
                                 visible={iosPickerVisible && show} onRequestClose={() => {
                                     console.log(`test`)
@@ -225,10 +226,9 @@ const LoanMaklumatPeribadiScreen = (props) => {
                             </Modal>
 
                             {/* {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />} */}
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
-                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section B</Text>
+                            <Text style={[styles.formTitle]}>Section B</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Peribadi</Text>
+                            <Text style={[styles.formSubtitle]}>Maklumat Peribadi</Text>
 
 
                             <CustomTextInput
@@ -252,9 +252,11 @@ const LoanMaklumatPeribadiScreen = (props) => {
                                 placeholder={'MyKad No'}
                                 keyboardType={'phone-pad'}
                             />
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
+                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Jantina :</Text>
+
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
+                                <View style={{ alignSelf: 'center', margin: 5, flex:1 }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('jantina')}>
@@ -272,9 +274,11 @@ const LoanMaklumatPeribadiScreen = (props) => {
                                         </View>}
                                 </View>
                             </View>
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
+                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Agama :</Text>
+
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
+                                <View style={{ alignSelf: 'center', margin: 5, flex:1 }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('agama')}>
@@ -292,8 +296,8 @@ const LoanMaklumatPeribadiScreen = (props) => {
                                         </View>}
                                 </View>
                             </View>
-                        
-                            <TouchableOpacity onPress={() => showDatepicker()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: tarikhLahirTouched && tarikhLahirError ? '#d94498' : '#5a83c2' }}>
+                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Tarikh Lahir :</Text>
+                            <TouchableOpacity onPress={() => showDatepicker()} style={{alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', marginBottom: 5, borderColor: tarikhLahirTouched && tarikhLahirError ? '#d94498' : '#5a83c2' }}>
                                 <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
 
                                 <TextInput editable={false} value={moment(tarikhLahir).format("MMMM Do YYYY")} onChangeText={FormikProps.handleChange(`tarikhLahir`)} onBlur={FormikProps.handleBlur(`tarikhLahir`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Date'} placeholderTextColor={tarikhLahirTouched && tarikhLahirError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
@@ -328,7 +332,7 @@ const LoanMaklumatPeribadiScreen = (props) => {
                     <Ionicons name={'md-menu'} size={24} color={'#fff'} />
                 </TouchableOpacity>
             </View>
-        </LayoutA>
+        </LayoutLoan>
     );
 }
 

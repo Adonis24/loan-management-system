@@ -22,7 +22,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
 
-import LayoutA from '../Layout/LayoutA';
+import LayoutLoan from '../Layout/LayoutLoan';
 
 import * as actionCreator from '../store/actions/action'
 
@@ -68,7 +68,7 @@ const LoanPersonalStatusScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { bangsa, umur, taraf, tanggungan,pendidikan } = useSelector(state => state.financingReducer, shallowEqual)
+    const { bangsa, umur, taraf, tanggungan, pendidikan } = useSelector(state => state.financingReducer, shallowEqual)
 
 
     const setMaklumatPeribadi = (value) => dispatch({ type: 'SET_MAKLUMAT_PERIBADI', payload: { ...value } })
@@ -94,19 +94,19 @@ const LoanPersonalStatusScreen = (props) => {
 
 
     return (
-        <LayoutA>
+        <LayoutLoan navigation={props.navigation}>
 
 
             <Formik
                 validateOnMount
-                initialValues={{bangsa, umur, taraf, tanggungan,pendidikan}}
+                initialValues={{ bangsa, umur, taraf, tanggungan, pendidikan }}
 
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatPeribadi(values)
                     props.navigation.navigate('LoanContactAddressInfo')
                     actions.setSubmitting(false)
-
+                    actions.resetForm({})
                 }
                 }
                 validationSchema={validationSchema}
@@ -136,7 +136,7 @@ const LoanPersonalStatusScreen = (props) => {
 
                     return (
 
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                             <Modal animationType={'slide'}
                                 visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
                             >
@@ -169,7 +169,7 @@ const LoanPersonalStatusScreen = (props) => {
                                                 <Picker.Item label="Berkahwin" value="berkahwin" />
                                                 <Picker.Item label="Duda" value="duda" />
                                                 <Picker.Item label="Ibu Tunggal" value="ibuTunggal" />
-                                                
+
                                             </Picker>
                                         }
                                     </View>
@@ -177,10 +177,9 @@ const LoanPersonalStatusScreen = (props) => {
                             </Modal>
 
                             {/* {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />} */}
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
-                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section B</Text>
+                            <Text style={[styles.formTitle]}>Section B</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Peribadi</Text>
+                            <Text style={[styles.formSubtitle]}>Maklumat Peribadi</Text>
 
 
                             <CustomTextInput
@@ -204,9 +203,11 @@ const LoanPersonalStatusScreen = (props) => {
                                 placeholder={'Umur'}
                                 keyboardType={'decimal-pad'}
                             />
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
+                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Taraf Pendidikan :</Text>
+
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
+                                <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('pendidikan')}>
@@ -228,9 +229,11 @@ const LoanPersonalStatusScreen = (props) => {
                                         </View>}
                                 </View>
                             </View>
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
+                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Taraf Perkahwinan :</Text>
+
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
+                                <View style={{ alignSelf: 'center', margin: 5, flex: 1  }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('taraf')}>
@@ -239,7 +242,7 @@ const LoanPersonalStatusScreen = (props) => {
                                             {tarafTouched && tarafError && <Text style={styles.error}>{tarafError}</Text>}
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={taraf} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('taraf', itemValue)}>
-                                            <Picker.Item label={'Taraf Perkahwinan'} value={undefined} />
+                                                <Picker.Item label={'Taraf Perkahwinan'} value={undefined} />
                                                 <Picker.Item label="Bujang" value="bujang" />
                                                 <Picker.Item label="Berkahwin" value="berkahwin" />
                                                 <Picker.Item label="Duda" value="duda" />
@@ -277,7 +280,7 @@ const LoanPersonalStatusScreen = (props) => {
                     <Ionicons name={'md-menu'} size={24} color={'#fff'} />
                 </TouchableOpacity>
             </View>
-        </LayoutA>
+        </LayoutLoan>
     );
 }
 

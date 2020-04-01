@@ -20,13 +20,13 @@ import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
 
-import LayoutA from '../Layout/LayoutA';
+import LayoutLoan from '../Layout/LayoutLoan';
 
 import * as actionCreator from '../store/actions/action'
 
 const validationSchema = Yup.object().shape({
 
-   
+
     cpPhoneNum: Yup
         .string()
         .required()
@@ -53,7 +53,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const {  cpPhoneNum ,cpAlamat,cpAlamat_2, cpPoskod } = useSelector(state => state.financingReducer, shallowEqual)
+    const { cpPhoneNum, cpAlamat, cpAlamat_2, cpPoskod } = useSelector(state => state.financingReducer, shallowEqual)
 
 
     const setConnectParties = (value) => dispatch({ type: 'SET_CONNECT_PARTIES', payload: { ...value } })
@@ -65,12 +65,12 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
 
 
     return (
-        <LayoutA>
+        <LayoutLoan navigation={props.navigation}>
 
 
             <Formik
                 validateOnMount
-                initialValues={{  cpPhoneNum,cpAlamat_2, cpAlamat,cpPoskod }}
+                initialValues={{ cpPhoneNum, cpAlamat_2, cpAlamat, cpPoskod }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -86,9 +86,9 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
 
 
 
-                    const {  cpPhoneNum, cpAlamat,cpAlamat_2, cpPoskod } = FormikProps.values
+                    const { cpPhoneNum, cpAlamat, cpAlamat_2, cpPoskod } = FormikProps.values
 
-               
+
 
                     const cpPhoneNumError = FormikProps.errors.cpPhoneNum
                     const cpPhoneNumTouched = FormikProps.touched.cpPhoneNum
@@ -105,11 +105,10 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
 
                     return (
 
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
-                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section C</Text>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
+                            <Text style={[styles.formTitle]}>Section C</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Pasangan</Text>
+                            <Text style={[styles.formSubtitle]}>Maklumat Pasangan</Text>
 
 
 
@@ -123,7 +122,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                                 placeholder={'No Telefon'}
                                 keyboardType={'phone-pad'}
                             />
-                           
+
                             <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}
                                 value={cpAlamat}
@@ -134,7 +133,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                                 placeholder={'Alamat Majikan Line 1'}
                                 keyboardType={'default'}
                             />
-                             <CustomTextInput
+                            <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}
                                 value={cpAlamat_2}
                                 handleChange={FormikProps.handleChange(`cpAlamat_2`)}
@@ -143,7 +142,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                                 error={cpAlamat_2Error}
                                 placeholder={'Alamat Majikan Line 2'}
 
-                            /> 
+                            />
                             <CustomTextInput
                                 imageUri={require('../assets/images/compRegNum.png')}
                                 value={cpPoskod}
@@ -154,10 +153,11 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                                 placeholder={'Poskod'}
                                 keyboardType={'decimal-pad'}
                             />
-                          
+
 
 
                             <CustomFormAction
+                                label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}
@@ -172,7 +172,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                     <Ionicons name={'md-menu'} size={24} color={'#fff'} />
                 </TouchableOpacity>
             </View>
-        </LayoutA>
+        </LayoutLoan>
     );
 }
 

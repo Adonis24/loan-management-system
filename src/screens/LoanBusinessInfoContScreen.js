@@ -22,7 +22,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
 
-import LayoutA from '../Layout/LayoutA';
+import LayoutLoan from '../Layout/LayoutLoan';
 
 import * as actionCreator from '../store/actions/action'
 
@@ -35,7 +35,7 @@ const validationSchema = Yup.object().shape({
     pemilikan: Yup
         .string()
         .required(),
- 
+
 
 
 
@@ -53,21 +53,22 @@ const LoanBusinessInfoContScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { noAhli,compStat, pemilikan,keahlian,noAhli2 } = useSelector(state => state.financingReducer, shallowEqual)
+    const { noAhli, compStat, pemilikan, keahlian, noAhli2 } = useSelector(state => state.financingReducer, shallowEqual)
 
 
     const setMaklumatPerniagaan = (value) => dispatch({ type: 'SET_MAKLUMAT_PERNIAGAAN', payload: { ...value } })
- 
+
     return (
-        <LayoutA>
+        <LayoutLoan navigation={props.navigation}>
             <Formik
                 validateOnMount
-                initialValues={{ compStat, pemilikan,keahlian,noAhli,noAhli2 }}
+                initialValues={{ compStat, pemilikan, keahlian, noAhli, noAhli2 }}
 
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatPerniagaan(values)
                     props.navigation.navigate('LoanSectionF')
+                    actions.resetForm({})
                     actions.setSubmitting(false)
 
                 }
@@ -79,7 +80,7 @@ const LoanBusinessInfoContScreen = (props) => {
 
 
 
-                    const { pemilikan, compStat,keahlian,noAhli,noAhli2 } = FormikProps.values
+                    const { pemilikan, compStat, keahlian, noAhli, noAhli2 } = FormikProps.values
 
 
 
@@ -98,7 +99,7 @@ const LoanBusinessInfoContScreen = (props) => {
 
                     return (
 
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                             <Modal animationType={'slide'}
                                 visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
                             >
@@ -130,22 +131,24 @@ const LoanBusinessInfoContScreen = (props) => {
                                                 <Picker.Item label="Sewa" value="sewa" />
                                                 <Picker.Item label="Keluarga" value="keluarga" />
 
-                                            </Picker> 
+                                            </Picker>
                                         }
                                     </View>
                                 </View>
                             </Modal>
 
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
-                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section E</Text>
+
+                            <Text style={[styles.formTitle]}>Section E</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Perniagaan</Text>
+                            <Text style={[styles.formSubtitle]}>Maklumat Perniagaan</Text>
 
 
 
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
+                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Pemilikan Perniagaan :</Text>
+
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
+                                <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('pemilikan')}>
@@ -165,9 +168,11 @@ const LoanBusinessInfoContScreen = (props) => {
                                         </View>}
                                 </View>
                             </View>
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
+                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Status Premis :</Text>
+
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
+                                <View style={{ alignSelf: 'center', margin: 5, flex:1  }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('compStat')}>
@@ -195,7 +200,7 @@ const LoanBusinessInfoContScreen = (props) => {
                                 placeholder={'No keahlian Dewan Perniagaan'}
                                 keyboardType={'phone-pad'}
                             />
-                             <CustomTextInput
+                            <CustomTextInput
                                 imageUri={require('../assets/images/compRegNum.png')}
                                 value={noAhli2}
                                 handleChange={FormikProps.handleChange(`noAhli2`)}
@@ -209,6 +214,7 @@ const LoanBusinessInfoContScreen = (props) => {
 
 
                             <CustomFormAction
+                                label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}
@@ -223,7 +229,7 @@ const LoanBusinessInfoContScreen = (props) => {
                     <Ionicons name={'md-menu'} size={24} color={'#fff'} />
                 </TouchableOpacity>
             </View>
-        </LayoutA>
+        </LayoutLoan>
     );
 }
 

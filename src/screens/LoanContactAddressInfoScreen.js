@@ -17,7 +17,7 @@ import * as Yup from 'yup';
 import Constants from 'expo-constants'
 import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 
-import LayoutA from '../Layout/LayoutA';
+import LayoutLoan from '../Layout/LayoutLoan';
 import { Ionicons } from '@expo/vector-icons';
 import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
@@ -92,7 +92,7 @@ const LoanContactAddressInfoScreen = (props) => {
 
 
     return (
-        <LayoutA>
+        <LayoutLoan navigation={props.navigation}>
             <Formik
                 initialValues={{ alamat, alamat_2, phoneNum, email, poskod }}
                 validateOnMount
@@ -100,6 +100,7 @@ const LoanContactAddressInfoScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatPeribadi(values)
                     actions.setSubmitting(false)
+                    actions.resetForm({})
                     props.navigation.navigate('LoanPendapatan')
                 }}
                 validationSchema={validationSchema}
@@ -125,13 +126,12 @@ const LoanContactAddressInfoScreen = (props) => {
 
                     return (
 
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
                             
                             {/* {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />} */}
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
-                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section B</Text>
+                            <Text style={[styles.formTitle]}>Section B</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Peribadi</Text>
+                            <Text style={[styles.formSubtitle]}>Maklumat Peribadi</Text>
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}
@@ -204,7 +204,7 @@ const LoanContactAddressInfoScreen = (props) => {
                     <Ionicons name={'md-menu'} size={24} color={'#fff'} />
                 </TouchableOpacity>
             </View>
-        </LayoutA>
+        </LayoutLoan>
     );
 }
 

@@ -20,7 +20,7 @@ import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKe
 
 import styles from '../styles/styles'
 
-import LayoutA from '../Layout/LayoutA';
+import LayoutLoan from '../Layout/LayoutLoan';
 
 import * as actionCreator from '../store/actions/action'
 
@@ -63,8 +63,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
 
 
     return (
-        <LayoutA>
-
+        <LayoutLoan navigation={props.navigation}>
 
             <Formik
                 validateOnMount
@@ -74,6 +73,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setBusinessInfo(values)
                     props.navigation.navigate('LoanSectionF')
+                    actions.resetForm({})
                     actions.setSubmitting(false)
                 }
                 }
@@ -103,11 +103,11 @@ const LoanBusinessAddrInfoScreen = (props) => {
 
                     return (
 
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
-                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section D</Text>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
+                            
+                            <Text style={[styles.formTitle]}>Section D</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Perniagaan</Text>
+                            <Text style={[styles.formSubtitle]}>Maklumat Perniagaan</Text>
 
 
                             <CustomTextInput
@@ -155,6 +155,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
 
 
                             <CustomFormAction
+                                label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}
@@ -169,7 +170,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
                     <Ionicons name={'md-menu'} size={24} color={'#fff'} />
                 </TouchableOpacity>
             </View>
-        </LayoutA>
+        </LayoutLoan>
     );
 }
 
