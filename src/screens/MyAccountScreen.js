@@ -1,5 +1,5 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React,{useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Image,
     Platform,
@@ -24,42 +24,24 @@ import * as actionCreator from '../store/actions/action'
 
 
 const MyAccountScreen = (props) => {
+    const { name, email, phone_no, profile_pic, email_verified_at, ic_no, member_id } = useSelector(state => state.myAccountReducer, shallowEqual)
 
-    const { member_id, name, email, phone_no, profile_pic, email_verified_at, associateConnection, requestConnection, allConnection } = useSelector(state => state.myAccountReducer, shallowEqual)
+    //const { member_id, name, email, phone_no, profile_pic, email_verified_at, associateConnection, requestConnection, allConnection } = useSelector(state => state.myAccountReducer, shallowEqual)
     const connect_id = useSelector(state => state.myAccountReducer.id, shallowEqual)
     const companyName = useSelector(state => state.bizInfoReducer.name, shallowEqual)
-    {/*const { connect_id } = useSelector(state => state.notificationScreenReducer, shallowEqual)*/}
+    {/*const { connect_id } = useSelector(state => state.notificationScreenReducer, shallowEqual)*/ }
 
     const dispatch = useDispatch()
 
     const [popUp, setPopUp] = useState(false)
 
-    {/* constructor(props) {
-        super(props)
-        this.state = { popUp: false }
 
-    }
-    // toggleShow = () => {
-    //     this.setState({ popUp: !this.state.popUp })
-    // }
-
-    process() {
-        //this.props.accept(this.props.connect_id)
-        //this.toggleShow()
-    }
-    componentDidMount() {
-        //this.props.initiateMyAccount()
-        //this.props.navigation.navigate('PopupScore')
-        this.props.getConnectionStatus()
-    }  */}
 
     useEffect(() => {
-        dispatch(actionCreator.initiateMyAccount()),
-        dispatch(actionCreator.getConnectionStatus())
-    
+        dispatch(actionCreator.initiateMyAccount())
     }, []); // empty-array means don't watch for any updates
 
-    {/*accept: (val) => dispatch(actionCreator.accept(val)) */}
+    {/*accept: (val) => dispatch(actionCreator.accept(val)) */ }
 
 
     const capitalizeString = (text = 'NA') => text.length > 0 && `${text[0].toUpperCase()}${text.slice(1)}`
@@ -80,8 +62,8 @@ const MyAccountScreen = (props) => {
                 <View style={{ flex: 6, backgroundColor: 'blue' }}>
                     <LinearGradient
                         colors={['#4c669f', '#3b5998', '#192f6a']}
-                        style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between' }}>
-                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                        style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
+                        <View style={{  flexDirection: 'row', justifyContent: 'space-between',padding:10 }}>
                             <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
                                 <TouchableOpacity onPress={() => props.navigation.goBack()} >
                                     <Ionicons name={Platform.OS === 'ios' ? 'ios-arrow-down' : 'ios-arrow-back'} size={32} color={'#fff'} />
@@ -92,44 +74,98 @@ const MyAccountScreen = (props) => {
                             <Image source={{ uri: profile_pic }} style={[{ height: Layout.window.height * 0.1, width: Layout.window.height * 0.1, borderRadius: Layout.window.height * 0.1 / 2, borderWidth: 1, borderColor: '#fff', marginBottom: 5 }]} resizeMode={'cover'} />
                             <Text style={[styles.textDefault, { color: '#fff' }]}>{capitalizeString(name)}</Text>
                             <Text style={[styles.textDefault, { color: '#fff' }]}>{companyName}</Text>
-                            <View style={{ flexDirection: 'row', padding: 5, margin: 10, borderRadius: 5, backgroundColor: '#fff' }}>
-
-                                <TouchableOpacity onPress={() =>props.navigation.navigate('QR')} style={{ padding: 5, paddingLeft: 10, paddingRight: 10 }}>
-                                    <QRCode value={'test'} size={20} backgroundColor='#fff' color='#2FD9FE' />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignSelf: 'stretch', padding: 5 }}>
-                            <Text style={[styles.textDefault, { color: '#fff' }]}>Connections</Text>
-                            <TouchableOpacity onPress={() => props.navigation.navigate('AssociateDir')}><Text style={[styles.caption, { color: '#fff' }]}>{associateConnection} connected</Text></TouchableOpacity>
-                            <TouchableOpacity onPress={() => props.navigation.navigate('PendingDir')}><Text style={[styles.caption, { color: '#fff' }]}>{requestConnection} pending</Text></TouchableOpacity>
                         </View>
                     </LinearGradient>
                 </View>
                 {/* CONTENT AREA */}
                 <View style={{ flex: 9 }}>
-                    <ScrollView contentStyle={{ padding: 10 }} >
-
-                        {/**Projects */}
-                        <View style={{ margin: 5, paddingBottom: 5, }}>
+                    <ScrollView >
+                        {/* PERSONAL PROFILE */}
+                        <View style={{ flex: 3, margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                             <View style={{ marginBottom: 10 }}>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}><Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Projects</Text>
-                                    <Text style={styles.caption}>More ></Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Personal</Text>
+                                    <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                 </View>
                             </View>
-                            <View style={[styles.shadow, { backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', borderRadius: 20, marginLeft: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd', padding: 10, marginBottom: 20, justifyContent: 'space-between' }]}>
-                                {/* <View style={[{ flex: 1, marginLeft: 10, padding: 2, alignSelf: 'stretch' }]}>
-                                    <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: Layout.window.height / 10, width: undefined, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' />
-                                </View> */}
-                                {/* <Text style={[styles.caption, { margin: 5, alignSelf: 'flex-end', textAlign: 'right' }]}>20/12/2019</Text> */}
-                                <View style={{ flexDirection: 'row' }}>
-                                    {/* <Image source={require('../assets/images/girl.png')} style={{ flex: 1, height: Layout.window.height / 10, width: undefined, borderWidth: 1, borderColor: 'lightgrey' }} resizeMode='cover' /> */}
-                                    <Text numberOfLines={2} ellipsizeMode={'tail'} style={[styles.caption, { margin: 5, alignSelf: 'flex-start', textAlign: 'left', color: '#000' }]}>No active projects at the moment</Text>
-
+                            <View style={[{ backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', justifyContent: 'space-between', }]}>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Name :</Text></View>
+                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{name}</Text></View>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.label, { alignSelf: 'flex-start', textAlign: 'left' }]}>Email :</Text></View>
+                                    <View style={{ flex: 2, flexDirection: 'row' }}>
+                                        <Text style={[styles.answer]}>{email}</Text><TouchableOpacity >
+                                            {email_verified_at ? <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} /> : <Text style={[styles.caption, { padding: 3, margin: 3, }]}>Verify</Text>}
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Phone :</Text></View>
+                                    <View style={{ flex: 2 }}>
+                                        {phone_no ? <View style={{ flexDirection: 'row' }}>
+                                            <Text style={[styles.answer]}>{phone_no}</Text>
+                                            <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} />
+                                        </View> :
+                                            <TouchableOpacity onPress={() => props.navigation.navigate('SignUpOtp', { screen: 'setting' })} style={{ borderRadius: 5 }}>
+                                                <Text style={[styles.caption, { padding: 5 }]}>Add Phone</Text>
+                                            </TouchableOpacity>}
+                                    </View>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>IC :</Text></View>
+                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{ic_no}</Text></View>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Membership:</Text></View>
+                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{member_id}</Text></View>
                                 </View>
                             </View>
                         </View>
-
+                        {/* END PERSONAL PROFILE --- START COMPANY */}
+                        <View style={{ flex: 3, margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
+                            <View style={{ marginBottom: 10 }}>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Company</Text>
+                                    <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
+                                </View>
+                            </View>
+                            <View style={[{ backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', justifyContent: 'space-between', }]}>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Name :</Text></View>
+                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{name}</Text></View>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.label, { alignSelf: 'flex-start', textAlign: 'left' }]}>Email :</Text></View>
+                                    <View style={{ flex: 2, flexDirection: 'row' }}>
+                                        <Text style={[styles.answer]}>{email}</Text><TouchableOpacity >
+                                            {email_verified_at ? <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} /> : <Text style={[styles.caption, { padding: 3, margin: 3, }]}>Verify</Text>}
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Phone :</Text></View>
+                                    <View style={{ flex: 2 }}>
+                                        {phone_no ? <View style={{ flexDirection: 'row' }}>
+                                            <Text style={[styles.answer]}>{phone_no}</Text>
+                                            <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} />
+                                        </View> :
+                                            <TouchableOpacity onPress={() => props.navigation.navigate('SignUpOtp', { screen: 'setting' })} style={{ borderRadius: 5 }}>
+                                                <Text style={[styles.caption, { padding: 5 }]}>Add Phone</Text>
+                                            </TouchableOpacity>}
+                                    </View>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>IC :</Text></View>
+                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{ic_no}</Text></View>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Membership:</Text></View>
+                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{member_id}</Text></View>
+                                </View>
+                            </View>
+                        </View>
 
                     </ScrollView>
                 </View>

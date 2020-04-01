@@ -93,7 +93,7 @@ export default StyleSheet.create({
         fontSize: fontSize * 0.9
     },
     answer: {
-        fontSize: fontSize * 0.8,
+        fontSize: fontSize * 0.95,
         fontFamily,
         color: '#000'
     },
