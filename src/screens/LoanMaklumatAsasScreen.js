@@ -59,7 +59,7 @@ const LoanMaklumatAsasScreen = (props) => {
 
 
     return (
-        <LayoutLoan>
+        <LayoutLoan navigation={props.navigation}>
             <Formik
                 initialValues={{ negeri, cawanganParlimen, pengundiBerdaftar: true, statusPerniagaan: true }}
                 validateOnMount
@@ -83,9 +83,9 @@ const LoanMaklumatAsasScreen = (props) => {
                     const handleCheckBox1 = () => { console.log(`apa ni ${statusPerniagaan}`); FormikProps.setFieldValue('statusPerniagaan', !statusPerniagaan) }
 
                     return (
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems:'center' }}>
-                            <Text style={[styles.textDefault, { margin: 5, color: 'black' }]}>Section A</Text>
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Asas</Text>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+                            <Text style={[styles.formTitle]}>Section A</Text>
+                            <Text style={[styles.formSubtitle]}>Maklumat Asas</Text>
                             <View style={{ justifyContent: 'center', alignItems: 'flex-start', }}>
 
                                 <CustomTextInput
@@ -109,7 +109,7 @@ const LoanMaklumatAsasScreen = (props) => {
                                     keyboardType={'default'}
                                 />
                                 <View style={{ marginBottom: 10, justifyContent: 'center', }}>
-                                    <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Pengundi berdaftar cawangan parlimen</Text>
+                                    <Text style={[styles.textDefault, { marginBottom: 5, color: 'darkblue' }]}>Pengundi berdaftar cawangan parlimen</Text>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         {(Platform.OS == 'ios') ?
 
@@ -117,8 +117,8 @@ const LoanMaklumatAsasScreen = (props) => {
                                             :
                                             <CheckBox onValueChange={handleCheckBox} value={pengundiBerdaftar} />
                                         }
-                                        <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 12 }]}>
-                                            YA
+                                        <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
+                                            Ya
                                 </Text>
 
                                     </View>
@@ -129,13 +129,13 @@ const LoanMaklumatAsasScreen = (props) => {
                                             :
                                             <CheckBox onValueChange={handleCheckBox} value={!pengundiBerdaftar} />
                                         }
-                                        <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 12 }]}>
-                                            TIDAK
+                                        <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
+                                            Tidak
                                 </Text>
                                     </View>
                                 </View>
 
-                                <View style={{ marginBottom: 10, justifyContent: 'center', marginRight: 40 }}>
+                                <View style={{ marginBottom: 10, justifyContent: 'center' }}>
                                     <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Status perniagaan</Text>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         {(Platform.OS == 'ios') ?
@@ -144,8 +144,8 @@ const LoanMaklumatAsasScreen = (props) => {
                                             :
                                             <CheckBox onValueChange={handleCheckBox1} value={statusPerniagaan} />
                                         }
-                                        <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 12 }]}>
-                                            SEDANG BERNIAGA
+                                        <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
+                                            Sedang berniaga
                                 </Text>
 
                                     </View>
@@ -156,9 +156,7 @@ const LoanMaklumatAsasScreen = (props) => {
                                             :
                                             <CheckBox onValueChange={handleCheckBox1} value={!statusPerniagaan} />
                                         }
-                                        <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'black', fontSize: 12 }]}>
-                                            MEMULAKAN PERNIAGAAN
-                                </Text>
+                                        <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>Memulakan Perniagaan</Text>
                                     </View>
                                 </View>
 
@@ -172,8 +170,6 @@ const LoanMaklumatAsasScreen = (props) => {
                     )
                 }}
             </Formik >
-
-
         </LayoutLoan>
     );
 }

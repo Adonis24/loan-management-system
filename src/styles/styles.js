@@ -22,6 +22,18 @@ export default StyleSheet.create({
         fontFamily,
         color: 'grey'
     },
+    formTitle: {
+        fontSize,
+        fontFamily,
+        color: '#000',
+        margin:5
+    },
+    formSubtitle: {
+        fontSize,
+        fontFamily,
+        color: 'darkblue',
+        margin:5
+    },
     headText: {
         fontSize: fontSize * 1.25,
         alignSelf: 'center',
@@ -74,6 +86,16 @@ export default StyleSheet.create({
         fontFamily,
         color: 'red',
         fontSize: fontSize * 0.8
+    },
+    label: {
+        fontFamily,
+        color: 'darkblue',
+        fontSize: fontSize * 0.9
+    },
+    answer: {
+        fontSize: fontSize * 0.8,
+        fontFamily,
+        color: '#000'
     },
     image: {
         width: undefined,
