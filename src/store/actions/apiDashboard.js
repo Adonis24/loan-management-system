@@ -3,7 +3,8 @@ import * as SecureStore from 'expo-secure-store'
 
 import moment from 'moment'
 
-const apiUrl = 'https://staging.bxcess.my/'
+const apiUrl = 'https://staging.tekun.app/'
+//const apiUrl = 'https://staging.bxcess.my/'
 const lmsApiUrl = 'https://lms.bxcess.my/'
 
 const apiGetCall = async (uri, apiAccess, lms = false) => {
