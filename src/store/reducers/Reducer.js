@@ -60,6 +60,15 @@ const financingReducer = (state = [], action) => {
     }
 }
 
+const businessPlanningReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_LATAR_BELAKANG':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
 
 const loginScreenReducer = (state = [], action) => {
     switch (action.type) {
@@ -254,7 +263,7 @@ const listWorkersReducer = (state = [], action) => {
     }
 }
 
-const appReducer = combineReducers({ notificationScreenReducer, personalInformationScreenReducer, loginScreenReducer, registrationReducer, companyInformationReducer, newsScreenReducer, eventScreenReducer, promotionScreenReducer, handbookScreenReducer, einfosScreenReducer, loanApplicationReducer, bizInfoReducer, listWorkersReducer, myAccountReducer, bizDirReducer, agencyListReducer, assoDirReducer, pendingDirReducer, trainingReducer, grantApplicationReducer, apiReducer, netInfoReducer, financingReducer });
+const appReducer = combineReducers({ notificationScreenReducer, personalInformationScreenReducer, loginScreenReducer, registrationReducer, companyInformationReducer, newsScreenReducer, eventScreenReducer, promotionScreenReducer, handbookScreenReducer, einfosScreenReducer, loanApplicationReducer, bizInfoReducer, listWorkersReducer, myAccountReducer, bizDirReducer, agencyListReducer, assoDirReducer, pendingDirReducer, trainingReducer, grantApplicationReducer, apiReducer, netInfoReducer, financingReducer,businessPlanningReducer });
 
 const rootReducer = (state, action) => {
     switch (action.type) {

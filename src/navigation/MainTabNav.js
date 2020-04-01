@@ -102,7 +102,10 @@ import LoanReferrer2Screen from '../screens/LoanReferrer2Screen'
 import LoanValidationScreen from '../screens/LoanValidationScreen'
 import LoanDeclarationScreen from '../screens/LoanDeclarationScreen'
 import LoanCustomDrawer from './LoanCustomDrawer';
-
+import BusinessPlanCustomDrawer from './BusinessPlanCustomDrawer';
+import BusinessPlanBackgroudScreen from '../screens/BusinessPlanBackgroudScreen'
+import BusinessPlanEstablishCompScreen from '../screens/BusinessPlanEstablishCompScreen'
+import BusinessPlanBankScreen from '../screens/BusinessPlanBankScreen'
 
 const DashboardStack = () => {
     return (
@@ -175,6 +178,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="Bill" component={BillScreen} />
             <Stack.Screen name="Delivery" component={DeliveryScreen} />
             <Stack.Screen name="LoanDrawer" component={LoanDrawer} />
+            <Stack.Screen name="BusinessPlanDrawer" component={BusinessPlanDrawer} />
         </Stack.Navigator>
     )
 }
@@ -294,6 +298,25 @@ const LoanSectionHStack = () => {
             <Stack.Screen name="LoanReferrer2" component={LoanReferrer2Screen} />
         </Stack.Navigator>)
 }
+
+const BusinessPlanDrawer = () => {
+    return (
+        <Drawer.Navigator initialRouteName="BusinessPlanBackgroud"
+            drawerType={'slide'}
+            drawerContent={props => {
+                const close = () => { props.navigation.closeDrawer() }
+                const nav = (screen) => { props.navigation.navigate(screen) }
+                return (<BusinessPlanCustomDrawer {...props} nav={nav} close={close} />)
+            }}
+        >
+
+            <Drawer.Screen name="BusinessPlanBackgroud" component={BusinessPlanBackgroudScreen} />
+            <Drawer.Screen name="BusinessPlanEstablishComp" component={BusinessPlanEstablishCompScreen} />
+            <Drawer.Screen name="BusinessPlanBank" component={BusinessPlanBankScreen} />
+        </Drawer.Navigator>
+    )
+}
+
 const InfoNewsDrawer = () => {
     return (
         <Drawer.Navigator initialRouteName="Withdraw" drawerPosition={'right'} drawerContent={props => {
@@ -344,6 +367,8 @@ const MainTabNav = () => {
                             //console.log(`history ialah :${JSON.stringify(history)}`)
                             //if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan' || routeName === 'LoanConnectedParties' || routeName === 'LoanConnectedPartiesAddr' || routeName === 'LoanBusinessInfo' || routeName === 'LoanBusinessAddrInfo' || routeName === 'LoanBusinessInfoCont' || routeName === 'LoanBusinessDetail' || routeName === 'LoanDetail')
                             if (routeName === 'LoanDrawer')
+                                tabBarVisible = false
+                            if (routeName === 'BusinessPlanDrawer')
                                 tabBarVisible = false
                         }
                     }

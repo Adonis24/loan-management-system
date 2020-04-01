@@ -29,7 +29,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const checklist = [
     { item: 'Borang permohonan pembiayaan TEKUN', button: 'LoanDrawer', check: true },
-    { item: 'Kertas rancangan perniagaan', button: 'LoanDrawer', check: true },
+    { item: 'Kertas rancangan perniagaan', button: 'BusinessPlanDrawer', check: true },
     { item: 'Gambar berukuran passport', button: 'LoanDrawer', check: true },
     { item: 'Salinan kad pengenalan pemohon dan pasangan', button: 'LoanDrawer', check: true },
     { item: '3 keping gambar premis/tapak perniagaan', button: 'LoanDrawer', check: true },
