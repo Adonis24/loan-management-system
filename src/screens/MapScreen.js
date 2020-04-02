@@ -142,9 +142,9 @@ const MapScreen = (props) => {
                     onDragEnd={(e) => setX({ ...e.nativeEvent.coordinate })}
                 >
                     {/* <Callout tooltip/> */}
-                    <View style={{ width: 50, height: 50, backgroundColor: '#fff', borderRadius: 25, borderWidth: 1, borderColor: 'grey', padding: 5 }} >
+                    {/* <View style={{ width: 50, height: 50, backgroundColor: '#fff', borderRadius: 25, borderWidth: 1, borderColor: 'grey', padding: 5 }} >
                         <Image source={{ uri: logo }} style={{ flex: 1, width: undefined, height: undefined }} resizeMode={'cover'} />
-                    </View>
+                    </View> */}
                 </Marker>
 
             </MapView>
