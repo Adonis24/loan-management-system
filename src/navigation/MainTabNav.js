@@ -43,6 +43,7 @@ import PromotionScreen from '../screens/PromotionScreen';
 import LoanApplicationScreen from '../screens/LoanApplicationScreen';
 import FinancingScreen from '../screens/FinancingScreen';
 import LoanCheckListScreen from '../screens/LoanCheckListScreen';
+import MapScreen from '../screens/MapScreen';
 import GrantScreen from '../screens/GrantScreen';
 import QuizScreen from '../screens/QuizScreen';
 import QuizAnswerScreen from '../screens/QuizAnswerScreen';
@@ -134,6 +135,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="LoanApplication" component={LoanApplicationScreen} />
             <Stack.Screen name="Financing" component={FinancingScreen} />
             <Stack.Screen name="LoanCheckList" component={LoanCheckListScreen} />
+            <Stack.Screen name="Map" component={MapScreen} />
             <Stack.Screen name="Grant" component={GrantScreen} />
             <Stack.Screen name="Quiz" component={QuizScreen} />
             <Stack.Screen name="QuizAnswer" component={QuizAnswerScreen} />

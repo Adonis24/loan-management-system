@@ -9,7 +9,6 @@ import {
     ActivityIndicator,
     Modal
 
-
 } from 'react-native';
 
 import moment from 'moment'
@@ -36,7 +35,7 @@ const checklist = [
     { item: 'Salinan buku simpanan/penyata bank ( 3 bulan terakhir)', button: 'LoanDrawer', check: true },
     { item: 'Salinan bil utiliti rumah atau premis perniagaan', button: 'LoanDrawer', check: true },
     { item: 'Borang kebenaran penzahiran maklumat kredit individu', button: 'LoanDrawer', check: true },
-    { item: 'Peta ringkas lokasi tempat perniagaan ke pejabat cawangan tekun', button: 'LoanDrawer', check: true },
+    { item: 'Peta ringkas lokasi tempat perniagaan ke pejabat cawangan tekun', button: 'Map', check: true },
 
 ]
 
@@ -53,10 +52,10 @@ const LoanCheckListScreen = (props) => {
 
 
             <View style={{ flex: 1 }}>
-            <View style={{ flex: 4 }}>
-                <View style={{ margin: 7 }} />
-                <Text style={[styles.textDefault, { paddingLeft: 10 }]}>Dokumen-dokument Diperlukan:</Text>
-               
+                <View style={{ flex: 4 }}>
+                    <View style={{ margin: 7 }} />
+                    <Text style={[styles.textDefault, { paddingLeft: 10 }]}>Dokumen-dokument Diperlukan:</Text>
+
                     <FlatList data={checklist}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item, index }) => (<CustomRow
@@ -68,10 +67,10 @@ const LoanCheckListScreen = (props) => {
                         />)} />
                 </View>
 
-                <View style={{ flex: 1, justifyContent: 'flex-start',alignItems:'flex-start'}}>
+                <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
                     <Text style={[styles.textDefault, { paddingLeft: 10 }]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
                     <TouchableOpacity
-                    style={{alignSelf:'center'}}
+                        style={{ alignSelf: 'center' }}
                         onPress={() => console.log(`hantar`)}>
                         <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'flex-start', margin: 10, padding: 5, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}>
                             <Text style={[styles.textSmall, { color: '#fff' }]}>Hantar</Text>

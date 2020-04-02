@@ -6443,6 +6443,11 @@ makeerror@1.0.x:
   dependencies:
     tmpl "1.0.x"
 
+malaysia-state-city-postcode@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/malaysia-state-city-postcode/-/malaysia-state-city-postcode-1.0.0.tgz#a9e4de86123c5e2e1772220006aa39ad16262009"
+  integrity sha512-VWzy/3ZrmMKv39PHEh5MguscJWo7mTiG5a84MW3xyVD0NtfpyTvEDl50b1hACR7zbcnJ688B+hPM4KOLUTCpUQ==
+
 map-age-cleaner@^0.1.1:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/map-age-cleaner/-/map-age-cleaner-0.1.3.tgz#7d583a7306434c055fe474b0f45078e6e1b4b92a"

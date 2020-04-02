@@ -208,7 +208,7 @@ const MyAccountScreen = (props) => {
                     source={{ uri: profile_pic }}
                 />
                 <View style={styleParalax.bar}>
-                    <Text style={styleParalax.title}>Title</Text>
+                    {/* <Text style={styleParalax.title}>Title</Text> */}
                 </View>
             </Animated.View>
         </View>
