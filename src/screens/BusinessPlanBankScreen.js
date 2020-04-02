@@ -80,7 +80,7 @@ const BusinessPlanBankScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
-                    props.navigation.navigate('none')
+                    props.navigation.navigate('BusinessPlanPartner')
                     actions.resetForm({})
                     actions.setSubmitting(false)
 

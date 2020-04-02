@@ -106,6 +106,11 @@ import BusinessPlanCustomDrawer from './BusinessPlanCustomDrawer';
 import BusinessPlanBackgroudScreen from '../screens/BusinessPlanBackgroudScreen'
 import BusinessPlanEstablishCompScreen from '../screens/BusinessPlanEstablishCompScreen'
 import BusinessPlanBankScreen from '../screens/BusinessPlanBankScreen'
+import BusinessPlanPartnerScreen from '../screens/BusinessPlanPartnerScreen'
+import BusinessPlanBussInfoScreen from '../screens/BusinessPlanBussInfoScreen'
+import BusinessPlanBussModalScreen from '../screens/BusinessPlanBussModalScreen'
+import BusinessPlanBudgIncScreen from '../screens/BusinessPlanBudgIncScreen'
+import BusinessPlanProposalScreen from '../screens/BusinessPlanProposalScreen'
 
 const DashboardStack = () => {
     return (
@@ -313,6 +318,11 @@ const BusinessPlanDrawer = () => {
             <Drawer.Screen name="BusinessPlanBackgroud" component={BusinessPlanBackgroudScreen} />
             <Drawer.Screen name="BusinessPlanEstablishComp" component={BusinessPlanEstablishCompScreen} />
             <Drawer.Screen name="BusinessPlanBank" component={BusinessPlanBankScreen} />
+            <Drawer.Screen name="BusinessPlanPartner" component={BusinessPlanPartnerScreen} />
+            <Drawer.Screen name="BusinessPlanBussInfo" component={BusinessPlanBussInfoScreen} />
+            <Drawer.Screen name="BusinessPlanBussModal" component={BusinessPlanBussModalScreen} />
+            <Drawer.Screen name="BusinessPlanBudgInc" component={BusinessPlanBudgIncScreen} />
+            <Drawer.Screen name="BusinessPlanProposal" component={BusinessPlanProposalScreen} />
         </Drawer.Navigator>
     )
 }

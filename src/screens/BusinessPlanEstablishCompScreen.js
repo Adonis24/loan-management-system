@@ -76,6 +76,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
     const [iosDatePickerShow2, setIosDatePickerShow2] = useState(false)
     const [modalContent, setModalContent] = useState(null)
     const ios = Platform.OS === "ios" ? true : false
+    const ios2 = Platform.OS === "ios2" ? true : false
 
 
     const dispatch = useDispatch()
@@ -106,7 +107,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
     const [show, setShow] = useState(false);
 
     const [date2, setDate2] = useState(new Date(1598051730000));
-    const [mode2, setMode2] = useState('date');
+    const [mode2, setMode2] = useState('date2');
     const [show2, setShow2] = useState(false);
 
     // const [showLogo, setshowLogo] = useState(true)
@@ -124,7 +125,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
-                    props.navigation.navigate('none')
+                    props.navigation.navigate('BusinessPlanBank')
                     actions.resetForm({})
                     actions.setSubmitting(false)
 
@@ -157,7 +158,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
                         const currentDate2 = selectedDate2 || date2;
                         console.log(`selected date ialah ${currentDate2}`)
 
-                        setShow2(ios);
+                        setShow2(ios2);
                         setDate2(currentDate2);
                         FormikProps.setFieldValue('compEstab', currentDate2)
                     };
@@ -245,7 +246,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
                                             testID="dateTimePicker"
                                             //timeZoneOffsetInMinutes={0}
                                             value={date}
-                                            mode={mode2}
+                                            mode={mode}
                                             is24Hour={true}
                                             display="default"
                                             onChange={onChange}
@@ -255,7 +256,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
                                 <View style={styles.container}>
                                     <View style={[styles.titleMargin, { flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4', marginBottom: 25 }]}>
                                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0 }}>
-                                            <TouchableOpacity onPress={() => setShow2(!ios)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
+                                            <TouchableOpacity onPress={() => setShow2(!ios2)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
                                                 <Ionicons name="ios-arrow-back" color={'#3EC2D9'} style={{ fontSize: 30, paddingLeft: 20 }} />
                                             </TouchableOpacity>
                                         </View>
@@ -269,7 +270,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
                                             testID="dateTimePicker"
                                             //timeZoneOffsetInMinutes={0}
                                             value={date2}
-                                            mode={mode}
+                                            mode={mode2}
                                             is24Hour={true}
                                             display="default"
                                             onChange={onChange2}
@@ -298,7 +299,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
                                 <TouchableOpacity onPress={() => showDatepicker2()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', marginBottom: 5, borderColor: compOperationTouched && compOperationError ? '#d94498' : '#5a83c2' }}>
                                     <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
 
-                                    <TextInput editable={false} value={moment(compOperation).format("MMMM Do YYYY")} onChangeText={FormikProps.handleChange(`compOperation`)} onBlur={FormikProps.handleBlur(`compOperation`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Date'} placeholderTextColor={compOperationTouched && compOperationError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
+                                    <TextInput editable={false} value={moment(compOperation).format("MMMM Do YYYY")} onChangeText={FormikProps.handleChange(`compOperation`)} onBlur={FormikProps.handleBlur(`compOperation`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Operation'} placeholderTextColor={compOperationTouched && compOperationError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
                                 </TouchableOpacity>
                                 <View style={{ width: Layout.window.width * 0.65 }}>
                                     {compOperationTouched && compOperationError && <Text style={styles.error}>{compOperationError}</Text>}
@@ -372,9 +373,9 @@ const BusinessPlanEstablishCompScreen = (props) => {
                                     />
                                 )}
 
-                                {!ios && show2 && (
+                                {!ios2 && show2 && (
                                     <DateTimePicker
-                                        testID="dateTimePicker"
+                                        testID="dateTimePicker2"
                                         timeZoneOffsetInMinutes={0}
                                         value={date2}
                                         mode={mode2}
