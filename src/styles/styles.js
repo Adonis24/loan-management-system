@@ -26,20 +26,20 @@ export default StyleSheet.create({
         fontSize,
         fontFamily,
         color: '#000',
-        margin:5
+        margin: 5
     },
     formSubtitle: {
         fontSize,
         fontFamily,
         color: 'darkblue',
-        margin:5
+        margin: 5
     },
     headText: {
         fontSize: fontSize * 1.25,
         alignSelf: 'center',
         textAlign: 'center',
         fontFamily,
-      
+
         paddingLeft: 5,
         color: '#000'
     },
@@ -65,7 +65,7 @@ export default StyleSheet.create({
     textSmall: {
         fontSize: fontSize * 0.8,
         fontFamily,
-        color:'grey'
+        color: 'grey'
     },
     shadow: {
         shadowColor: "#000",
@@ -122,7 +122,9 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 10
-    },featureIconStyle:{ flex: 3, width: undefined, justifyContent: 'flex-start' }
+    }, featureIconStyle: { flex: 3, width: undefined, justifyContent: 'flex-start' },
+    //untuk kegunaan paralax
+
 
 });
 
