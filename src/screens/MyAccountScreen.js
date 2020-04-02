@@ -98,106 +98,106 @@ const MyAccountScreen = (props) => {
                     [{ nativeEvent: { contentOffset: { y: scrollY } } }]
                 )}
             >
-                <View style={{marginTop:250}} />
-              
-               {/* PERSONAL PROFILE */}
-               <View style={{ flex: 3, margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                            <View style={{ marginBottom: 10 }}>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Personal</Text>
-                                    <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
-                                </View>
-                            </View>
-                            <View style={[{ backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', justifyContent: 'space-between', }]}>
-                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Name :</Text></View>
-                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{name}</Text></View>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.label, { alignSelf: 'flex-start', textAlign: 'left' }]}>Email :</Text></View>
-                                    <View style={{ flex: 2, flexDirection: 'row' }}>
-                                        <Text style={[styles.answer]}>{email}</Text><TouchableOpacity >
-                                            {email_verified_at ? <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} /> : <Text style={[styles.caption, { padding: 3, margin: 3, }]}>Verify</Text>}
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Phone :</Text></View>
-                                    <View style={{ flex: 2 }}>
-                                        {phone_no ? <View style={{ flexDirection: 'row' }}>
-                                            <Text style={[styles.answer]}>{phone_no}</Text>
-                                            <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} />
-                                        </View> :
-                                            <TouchableOpacity onPress={() => props.navigation.navigate('SignUpOtp', { screen: 'setting' })} style={{ borderRadius: 5 }}>
-                                                <Text style={[styles.caption, { padding: 5 }]}>Add Phone</Text>
-                                            </TouchableOpacity>}
-                                    </View>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>IC :</Text></View>
-                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{ic_no}</Text></View>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Membership:</Text></View>
-                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{member_id}</Text></View>
-                                </View>
+                <View style={{ marginTop: 250 }} />
+
+                {/* PERSONAL PROFILE */}
+                <View style={{ flex: 3, margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
+                    <View style={{ marginBottom: 10 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Personal</Text>
+                            <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
+                        </View>
+                    </View>
+                    <View style={[{ backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', justifyContent: 'space-between', }]}>
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label]}>Name :</Text></View>
+                            <View style={{ flex: 2 }}><Text style={[styles.answer]}>{name}</Text></View>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label, { alignSelf: 'flex-start', textAlign: 'left' }]}>Email :</Text></View>
+                            <View style={{ flex: 2, flexDirection: 'row' }}>
+                                <Text style={[styles.answer]}>{email}</Text><TouchableOpacity >
+                                    {email_verified_at ? <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} /> : <Text style={[styles.caption, { padding: 3, margin: 3, }]}>Verify</Text>}
+                                </TouchableOpacity>
                             </View>
                         </View>
-                        {/* END PERSONAL PROFILE --- START COMPANY */}
-                        <View style={{ flex: 3, margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                            <View style={{ marginBottom: 10 }}>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Company</Text>
-                                    <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
-                                </View>
-                            </View>
-                            <View style={[{ backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', justifyContent: 'space-between', }]}>
-                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Name :</Text></View>
-                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{companyName}</Text></View>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>SSM :</Text></View>
-                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{companyRegNo || '123456789'}</Text></View>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Established :</Text></View>
-                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{moment(reg_date).fromNow()}</Text></View>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Activities :</Text></View>
-                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{main_biz_act}</Text></View>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Status :</Text></View>
-                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{basic_status}</Text></View>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Email :</Text></View>
-                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{companyEmail}</Text></View>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Phone :</Text></View>
-                                    <View style={{ flex: 2 }}><Text style={[styles.answer]}>{companyPhone}</Text></View>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                                    <View style={{ flex: 1 }}><Text style={[styles.label]}>Address :</Text></View>
-                                    <View style={{ flex: 2 }}>
-                                        <Text style={[styles.answer]}>{addr}</Text>
-                                        <Text style={[styles.answer]}>{addr_2}</Text>
-                                        <Text style={[styles.answer]}>{postcode}</Text>
-                                        <Text style={[styles.answer]}>{city}</Text>
-                                        <Text style={[styles.answer]}>{state}</Text>
-                                    </View>
-                                </View>
-
-
-
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label]}>Phone :</Text></View>
+                            <View style={{ flex: 2 }}>
+                                {phone_no ? <View style={{ flexDirection: 'row' }}>
+                                    <Text style={[styles.answer]}>{phone_no}</Text>
+                                    <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} />
+                                </View> :
+                                    <TouchableOpacity onPress={() => props.navigation.navigate('SignUpOtp', { screen: 'setting' })} style={{ borderRadius: 5 }}>
+                                        <Text style={[styles.caption, { padding: 5 }]}>Add Phone</Text>
+                                    </TouchableOpacity>}
                             </View>
                         </View>
-                        {/* {_renderScrollViewContent()} */}
-                        {/* <View  style={{marginBottom:400}} /> */}
-                        <View style={{marginTop:250}} />
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label]}>IC :</Text></View>
+                            <View style={{ flex: 2 }}><Text style={[styles.answer]}>{ic_no}</Text></View>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label]}>Membership:</Text></View>
+                            <View style={{ flex: 2 }}><Text style={[styles.answer]}>{member_id}</Text></View>
+                        </View>
+                    </View>
+                </View>
+                {/* END PERSONAL PROFILE --- START COMPANY */}
+                <View style={{ flex: 3, margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
+                    <View style={{ marginBottom: 10 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Company</Text>
+                            <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
+                        </View>
+                    </View>
+                    <View style={[{ backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', justifyContent: 'space-between', }]}>
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label]}>Name :</Text></View>
+                            <View style={{ flex: 2 }}><Text style={[styles.answer]}>{companyName}</Text></View>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label]}>SSM :</Text></View>
+                            <View style={{ flex: 2 }}><Text style={[styles.answer]}>{companyRegNo || '123456789'}</Text></View>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label]}>Established :</Text></View>
+                            <View style={{ flex: 2 }}><Text style={[styles.answer]}>{moment(reg_date).fromNow()}</Text></View>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label]}>Activities :</Text></View>
+                            <View style={{ flex: 2 }}><Text style={[styles.answer]}>{main_biz_act}</Text></View>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label]}>Status :</Text></View>
+                            <View style={{ flex: 2 }}><Text style={[styles.answer]}>{basic_status}</Text></View>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label]}>Email :</Text></View>
+                            <View style={{ flex: 2 }}><Text style={[styles.answer]}>{companyEmail}</Text></View>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label]}>Phone :</Text></View>
+                            <View style={{ flex: 2 }}><Text style={[styles.answer]}>{companyPhone}</Text></View>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label]}>Address :</Text></View>
+                            <View style={{ flex: 2 }}>
+                                <Text style={[styles.answer]}>{addr}</Text>
+                                <Text style={[styles.answer]}>{addr_2}</Text>
+                                <Text style={[styles.answer]}>{postcode}</Text>
+                                <Text style={[styles.answer]}>{city}</Text>
+                                <Text style={[styles.answer]}>{state}</Text>
+                            </View>
+                        </View>
+
+
+
+                    </View>
+                </View>
+                {/* {_renderScrollViewContent()} */}
+                {/* <View  style={{marginBottom:400}} /> */}
+                <View style={{ marginTop: 250 }} />
             </ScrollView>
             <Animated.View style={[styleParalax.header, { height: headerHeight }]}>
                 <Animated.Image
@@ -221,11 +221,13 @@ const MyAccountScreen = (props) => {
 const styleParalax = StyleSheet.create({
     fill: {
         flex: 1,
+        backgroundColor: '#fff'
     },
     row: {
         height: 40,
         margin: 16,
-        backgroundColor: '#D3D3D3',
+        // backgroundColor: '#D3D3D3',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     }, header: {
@@ -233,7 +235,7 @@ const styleParalax = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: '#03A9F4',
+        backgroundColor: '#fff',
         overflow: 'hidden',
     },
     bar: {
@@ -258,7 +260,7 @@ const styleParalax = StyleSheet.create({
         width: null,
         height: HEADER_MAX_HEIGHT,
         resizeMode: 'cover',
-      },
+    },
 })
 
 export default MyAccountScreen
