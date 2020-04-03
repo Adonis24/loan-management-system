@@ -152,7 +152,7 @@ const BusinessPlanBussInfoScreen = (props) => {
                             </Modal>
                             <Text style={[styles.formTitle]}>Section B</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.formSubtitle]}>Butir Butir Perniagaan</Text>
+                            <Text style={[styles.formSubtitle]}>Butir-Butir Perniagaan</Text>
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}

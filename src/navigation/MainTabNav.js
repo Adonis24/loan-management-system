@@ -111,6 +111,12 @@ import BusinessPlanBussInfoScreen from '../screens/BusinessPlanBussInfoScreen'
 import BusinessPlanBussModalScreen from '../screens/BusinessPlanBussModalScreen'
 import BusinessPlanBudgIncScreen from '../screens/BusinessPlanBudgIncScreen'
 import BusinessPlanProposalScreen from '../screens/BusinessPlanProposalScreen'
+import BusinessPlanGoalsScreen from '../screens/BusinessPlanGoalsScreen'
+import BusinessPlanGoals2Screen from '../screens/BusinessPlanGoals2Screen'
+import BusinessPlanGoals3Screen from '../screens/BusinessPlanGoals3Screen'
+import BusinessPlanMarketingScreen from '../screens/BusinessPlanMarketingScreen'
+import BusinessPlanAddDetailScreen from '../screens/BusinessPlanAddDetailScreen'
+import BusinessPlanCertScreen from '../screens/BusinessPlanCertScreen'
 
 const DashboardStack = () => {
     return (
@@ -315,18 +321,44 @@ const BusinessPlanDrawer = () => {
             }}
         >
 
-            <Drawer.Screen name="BusinessPlanBackgroud" component={BusinessPlanBackgroudScreen} />
-            <Drawer.Screen name="BusinessPlanEstablishComp" component={BusinessPlanEstablishCompScreen} />
-            <Drawer.Screen name="BusinessPlanBank" component={BusinessPlanBankScreen} />
-            <Drawer.Screen name="BusinessPlanPartner" component={BusinessPlanPartnerScreen} />
-            <Drawer.Screen name="BusinessPlanBussInfo" component={BusinessPlanBussInfoScreen} />
-            <Drawer.Screen name="BusinessPlanBussModal" component={BusinessPlanBussModalScreen} />
+            <Drawer.Screen name="BusinessPlanSectionA" component={BusinessPlanSectionAStack} />
+            <Drawer.Screen name="BusinessPlanSectionB" component={BusinessPlanSectionBStack} />
             <Drawer.Screen name="BusinessPlanBudgInc" component={BusinessPlanBudgIncScreen} />
             <Drawer.Screen name="BusinessPlanProposal" component={BusinessPlanProposalScreen} />
+            <Drawer.Screen name="BusinessPlanSectionE" component={BusinessPlanSectionEStack} />
+            <Drawer.Screen name="BusinessPlanMarketing" component={BusinessPlanMarketingScreen} />
+            <Drawer.Screen name="BusinessPlanAddDetail" component={BusinessPlanAddDetailScreen} />
+            <Drawer.Screen name="BusinessPlanCert" component={BusinessPlanCertScreen} />
         </Drawer.Navigator>
     )
 }
 
+const BusinessPlanSectionAStack = () => {
+    return (
+        <Stack.Navigator initialRouteName="BusinessPlanBackgroud" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="BusinessPlanBackgroud" component={BusinessPlanBackgroudScreen} />
+            <Stack.Screen name="BusinessPlanEstablishComp" component={BusinessPlanEstablishCompScreen} />
+            <Stack.Screen name="BusinessPlanBank" component={BusinessPlanBankScreen} />
+            <Stack.Screen name="BusinessPlanPartner" component={BusinessPlanPartnerScreen} />
+        </Stack.Navigator>)
+}
+
+const BusinessPlanSectionBStack = () => {
+    return (
+        <Stack.Navigator initialRouteName="BusinessPlanBussInfo" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="BusinessPlanBussInfo" component={BusinessPlanBussInfoScreen} />
+            <Stack.Screen name="BusinessPlanBussModal" component={BusinessPlanBussModalScreen} />
+        </Stack.Navigator>)
+}
+
+const BusinessPlanSectionEStack = () => {
+    return (
+        <Stack.Navigator initialRouteName="BusinessPlanGoals" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="BusinessPlanGoals" component={BusinessPlanGoalsScreen} />
+            <Stack.Screen name="BusinessPlanGoals2" component={BusinessPlanGoals2Screen} />
+            <Stack.Screen name="BusinessPlanGoals3" component={BusinessPlanGoals3Screen} />
+        </Stack.Navigator>)
+}
 const InfoNewsDrawer = () => {
     return (
         <Drawer.Navigator initialRouteName="Withdraw" drawerPosition={'right'} drawerContent={props => {

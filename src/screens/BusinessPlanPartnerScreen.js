@@ -89,7 +89,7 @@ const BusinessPlanPartnerScreen = (props) => {
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
-                    props.navigation.navigate('BusinessPlanBussInfo')
+                    props.navigation.navigate('BusinessPlanSectionB')
                     actions.resetForm({})
                     actions.setSubmitting(false)
                 }

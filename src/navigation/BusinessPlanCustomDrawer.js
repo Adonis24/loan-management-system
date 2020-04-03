@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient'
 const BusinessPlanCustomDrawer = (props) => {
 
-    const dispatch=useDispatch()
+    const dispatch = useDispatch()
     const nav = (screen) => {
         props.close()
         props.nav(screen)
@@ -22,13 +22,62 @@ const BusinessPlanCustomDrawer = (props) => {
                 <Text style={[styles.textDefault, { marginBottom: 20 }]}>Rancangan Perniagaan</Text>
                 <NavButton
                     name={'Section A'}
-                    link={'BusinessPlanBackgroud'}
+                    link={'BusinessPlanSectionA'}
                     activeScreen={activeScreen}
                     description={'Latar Belakang Pemohon'}
                     nav={nav} />
-                
 
-                <TouchableOpacity onPress={() => dispatch(actionCreator.resetForm())} style={{ borderColor: 'red', borderWidth:1, alignSelf: 'flex-start', padding: 10, borderRadius: 10 }}><Text style={[styles.textSmall, { color: 'red' }]}>Reset Form</Text></TouchableOpacity>
+                <NavButton
+                    name={'Section B'}
+                    link={'BusinessPlanSectionB'}
+                    activeScreen={activeScreen}
+                    description={'Butir-Butir Perniagaan'}
+                    nav={nav} />
+
+                <NavButton
+                    name={'Section C'}
+                    link={'BusinessPlanBudgInc'}
+                    activeScreen={activeScreen}
+                    description={'Anggaran Pendapatan Dan Perbelanjaan'}
+                    nav={nav} />
+
+                <NavButton
+                    name={'Section D'}
+                    link={'BusinessPlanProposal'}
+                    activeScreen={activeScreen}
+                    description={'Cadangan Keperluan Penggunaan Pembiayaan'}
+                    nav={nav} />
+
+                <NavButton
+                    name={'Section E'}
+                    link={'BusinessPlanSectionE'}
+                    activeScreen={activeScreen}
+                    description={'Sasaran Pencapaian Perniagaan Tahunan     (3 tahun ke hadapan)'}
+                    nav={nav} />
+
+                <NavButton
+                    name={'Section F'}
+                    link={'BusinessPlanMarketing'}
+                    activeScreen={activeScreen}
+                    description={'Rancangan Pemasaran'}
+                    nav={nav} />
+
+                <NavButton
+                    name={'Section G'}
+                    link={'BusinessPlanAddDetail'}
+                    activeScreen={activeScreen}
+                    description={'Maklumat Tambahan'}
+                    nav={nav} />
+
+                <NavButton
+                    name={'Section H'}
+                    link={'BusinessPlanCert'}
+                    activeScreen={activeScreen}
+                    description={'Akuan Pemohon'}
+                    nav={nav} />
+
+
+                <TouchableOpacity onPress={() => dispatch(actionCreator.resetForm())} style={{ borderColor: 'red', borderWidth: 1, alignSelf: 'flex-start', padding: 10, borderRadius: 10 }}><Text style={[styles.textSmall, { color: 'red' }]}>Reset Form</Text></TouchableOpacity>
 
             </View>
         </LinearGradient>

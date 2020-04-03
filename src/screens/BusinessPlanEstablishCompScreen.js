@@ -55,7 +55,7 @@ const validationSchema = Yup.object().shape({
 
     compOperation: Yup
         .string()
-        .required()
+    
         .min(3)
         .label('Tarikh Mula'),
 
