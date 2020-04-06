@@ -195,7 +195,7 @@ const BusinessPlanBussInfoScreen = (props) => {
                                     touched={bilCawanganTouched}
                                     error={bilCawanganError}
                                     placeholder={'Bilangan Cawangan (Jika Ada)'}
-                                    keyboardType={'default'}
+                                    keyboardType={'phone-pad'}
                                 />
 
                                 <CustomTextInput

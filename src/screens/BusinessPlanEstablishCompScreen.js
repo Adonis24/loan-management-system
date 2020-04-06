@@ -283,7 +283,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
                             <Text style={[styles.formTitle]}>Section A</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Latar Belakang Pemohon</Text>
-                            <ScrollView>
+                            
 
                                 <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Tarikh Penubuhan Syarikat :</Text>
                                 <TouchableOpacity onPress={() => showDatepicker()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', marginBottom: 5, borderColor: compEstabTouched && compEstabError ? '#d94498' : '#5a83c2' }}>
@@ -390,7 +390,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
                                     isValid={FormikProps.isValid}
                                     handleSubmit={FormikProps.handleSubmit}
                                 />
-                            </ScrollView>
+                           
                         </View>
 
                     )
