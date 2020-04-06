@@ -31,7 +31,7 @@ const checklist = [
     { item: 'Kertas rancangan perniagaan', button: 'LoanDrawer', check: true },
     { item: 'Gambar berukuran passport', button: 'LoanDrawer', check: true },
     { item: 'Salinan kad pengenalan pemohon dan pasangan', button: 'LoanDrawer', check: true },
-    { item: '3 keping gambar premis/tapak perniagaan', button: 'LoanDrawer', check: true },
+    { item: '3 keping gambar premis/tapak perniagaan', button: 'SitePic', check: true },
     { item: 'Salinan buku simpanan/penyata bank ( 3 bulan terakhir)', button: 'LoanDrawer', check: true },
     { item: 'Salinan bil utiliti rumah atau premis perniagaan', button: 'LoanDrawer', check: true },
     { item: 'Borang kebenaran penzahiran maklumat kredit individu', button: 'LoanDrawer', check: true },
