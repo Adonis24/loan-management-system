@@ -43,6 +43,8 @@ import PromotionScreen from '../screens/PromotionScreen';
 import LoanApplicationScreen from '../screens/LoanApplicationScreen';
 import FinancingScreen from '../screens/FinancingScreen';
 import LoanCheckListScreen from '../screens/LoanCheckListScreen';
+import SitePicScreen from '../screens/SitePicScreen';
+import MapScreen from '../screens/MapScreen';
 import GrantScreen from '../screens/GrantScreen';
 import QuizScreen from '../screens/QuizScreen';
 import QuizAnswerScreen from '../screens/QuizAnswerScreen';
@@ -101,6 +103,10 @@ import LoanReferrerScreen from '../screens/LoanReferrerScreen'
 import LoanReferrer2Screen from '../screens/LoanReferrer2Screen'
 import LoanValidationScreen from '../screens/LoanValidationScreen'
 import LoanDeclarationScreen from '../screens/LoanDeclarationScreen'
+
+import DocumentPickerScreen from '../screens/DocumentPickerScreen'
+import CameraScreen from '../screens/CameraScreen'
+
 import LoanCustomDrawer from './LoanCustomDrawer';
 import BusinessPlanCustomDrawer from './BusinessPlanCustomDrawer';
 import BusinessPlanBackgroudScreen from '../screens/BusinessPlanBackgroudScreen'
@@ -148,6 +154,10 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="LoanApplication" component={LoanApplicationScreen} />
             <Stack.Screen name="Financing" component={FinancingScreen} />
             <Stack.Screen name="LoanCheckList" component={LoanCheckListScreen} />
+            <Stack.Screen name="SitePic" component={SitePicScreen} />
+            <Stack.Screen name="Camera" component={CameraScreen} />
+            <Stack.Screen name="DocumentPicker" component={DocumentPickerScreen} />
+            <Stack.Screen name="Map" component={MapScreen} />
             <Stack.Screen name="Grant" component={GrantScreen} />
             <Stack.Screen name="Quiz" component={QuizScreen} />
             <Stack.Screen name="QuizAnswer" component={QuizAnswerScreen} />
@@ -202,8 +212,6 @@ const InsightStack = () => {
     )
 }
 
-
-
 const NotificationStack = () => {
     return (
         <Stack.Navigator initialRouteName="Notifications" screenOptions={{ headerShown: false }}>
@@ -211,11 +219,6 @@ const NotificationStack = () => {
         </Stack.Navigator>
     )
 }
-
-
-
-
-
 
 const SettingsStack = () => {
     return (
@@ -408,7 +411,7 @@ const MainTabNav = () => {
                             console.log(`route ialah :${JSON.stringify(routeName)}`)
                             //console.log(`history ialah :${JSON.stringify(history)}`)
                             //if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan' || routeName === 'LoanConnectedParties' || routeName === 'LoanConnectedPartiesAddr' || routeName === 'LoanBusinessInfo' || routeName === 'LoanBusinessAddrInfo' || routeName === 'LoanBusinessInfoCont' || routeName === 'LoanBusinessDetail' || routeName === 'LoanDetail')
-                            if (routeName === 'LoanDrawer')
+                            if (routeName === 'LoanDrawer'||routeName === 'Camera')
                                 tabBarVisible = false
                             if (routeName === 'BusinessPlanDrawer')
                                 tabBarVisible = false

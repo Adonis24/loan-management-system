@@ -263,7 +263,17 @@ const listWorkersReducer = (state = [], action) => {
     }
 }
 
-const appReducer = combineReducers({ notificationScreenReducer, personalInformationScreenReducer, loginScreenReducer, registrationReducer, companyInformationReducer, newsScreenReducer, eventScreenReducer, promotionScreenReducer, handbookScreenReducer, einfosScreenReducer, loanApplicationReducer, bizInfoReducer, listWorkersReducer, myAccountReducer, bizDirReducer, agencyListReducer, assoDirReducer, pendingDirReducer, trainingReducer, grantApplicationReducer, apiReducer, netInfoReducer, financingReducer,businessPlanningReducer });
+const locationReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_LOCATION':
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+
+
+const appReducer = combineReducers({ notificationScreenReducer, personalInformationScreenReducer, loginScreenReducer, registrationReducer, companyInformationReducer, newsScreenReducer, eventScreenReducer, promotionScreenReducer, handbookScreenReducer, einfosScreenReducer, loanApplicationReducer, bizInfoReducer, listWorkersReducer, myAccountReducer, bizDirReducer, agencyListReducer, assoDirReducer, pendingDirReducer, trainingReducer, grantApplicationReducer, apiReducer, netInfoReducer, financingReducer,businessPlanningReducer,locationReducer });
 
 const rootReducer = (state, action) => {
     switch (action.type) {

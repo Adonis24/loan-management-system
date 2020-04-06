@@ -553,3 +553,53 @@ export const resetFormApi = () => {
     console.log(`delete form dalam storage`)
   }
 }
+
+
+export const saveLocationApi = (x) => {
+  return async (dispatch, getState) => {
+
+    const location = JSON.parse(await SecureStore.getItemAsync('location'))
+
+    console.log(`bakal di save : ${JSON.stringify(x)}`)
+    console.log(`dalam storage: ${JSON.stringify(location)}`)
+
+    if (location) {
+      console.log(`something in memory`)
+      console.log(JSON.stringify(location))
+      //const newLocation = { ...loanData, ...loanDataReducer }
+      await SecureStore.setItemAsync('location', JSON.stringify(x))
+    } else {
+      await SecureStore.setItemAsync('location', JSON.stringify(x))
+    }
+
+
+    // const responseJson = await apiGetCall(`api/Notification`, getState().apiReducer)
+    // const notificationByDate = [...responseJson.data.promotion, ...responseJson.data.annoucement, ...responseJson.data.advertisement]
+
+    // dispatch({ type: 'SET_NOTIFICATION', payload: { notificationList: notificationByDate } })
+
+
+  }
+}
+
+
+export const getLocationApi = (x) => {
+  return async (dispatch, getState) => {
+
+    const location = JSON.parse(await SecureStore.getItemAsync('location'))
+
+    if (location) {
+      dispatch({ type: 'SET_LOCATION', payload: { ...location } })
+    } else {
+
+    }
+
+
+    // const responseJson = await apiGetCall(`api/Notification`, getState().apiReducer)
+    // const notificationByDate = [...responseJson.data.promotion, ...responseJson.data.annoucement, ...responseJson.data.advertisement]
+
+    // dispatch({ type: 'SET_NOTIFICATION', payload: { notificationList: notificationByDate } })
+
+
+  }
+}
