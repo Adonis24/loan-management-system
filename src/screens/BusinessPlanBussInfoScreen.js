@@ -206,7 +206,7 @@ const BusinessPlanBussInfoScreen = (props) => {
                                     touched={bilPekerjaTouched}
                                     error={bilPekerjaError}
                                     placeholder={'Bilangan Pekerja'}
-                                    keyboardType={'decimal-pad'}
+                                    keyboardType={'phone-pad'}
                                 />
                                 <CustomTextInput
                                     imageUri={require('../assets/images/phoneNum.png')}

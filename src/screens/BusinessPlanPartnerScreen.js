@@ -32,13 +32,13 @@ const validationSchema = Yup.object().shape({
         .string()
         .required()
         .min(3)
-        .label('Pekerjaan'),
+        .label('Jawatan'),
 
     partName: Yup
         .string()
         .required()
         .min(3)
-        .label('Partner Name'),
+        .label('Nama Rakan Kongsi'),
 
     partIcNum: Yup
         .string()
@@ -51,7 +51,7 @@ const validationSchema = Yup.object().shape({
         .string()
         .required()
         .min(3)
-        .label('Jumlah'),
+        .label('Jumlah Saham'),
 
 
 
@@ -167,7 +167,7 @@ const BusinessPlanPartnerScreen = (props) => {
                                 touched={sahamTouched}
                                 error={sahamError}
                                 placeholder={'Jumlah Pegangan Saham (%)'}
-                                keyboardType={'decimal-pad'}
+                                keyboardType={'phone-pad'}
                             />
 
 

@@ -42,7 +42,7 @@ const validationSchema = Yup.object().shape({
         .string()
         .required()
         .min(3)
-        .label('Pendapatan'),
+        .label('No Pendaftaran'),
 
     compAlamat: Yup
         .string()

@@ -97,7 +97,7 @@ const BusinessPlanProposalScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ pembelianStok, ruangNiaga, membeli, kenderaan, modalPusingan,belanjaanLain,jumlah, perkakas }}
+                initialValues={{ pembelianStok, ruangNiaga, membeli, kenderaan, modalPusingan, belanjaanLain, jumlah, perkakas }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -150,7 +150,7 @@ const BusinessPlanProposalScreen = (props) => {
                             <Text style={[styles.formTitle]}>Section D</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Cadangan Keperluan Penggunaan Pembiayaan</Text>
-                            <ScrollView>
+                            <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start', paddingLeft: 10 }}>
                                 <CustomTextInput
                                     imageUri={require('../assets/images/estimateTime.png')}
                                     value={ruangNiaga}
@@ -244,16 +244,19 @@ const BusinessPlanProposalScreen = (props) => {
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}
                             />
+
                         </View>
 
                     )
                 }}
             </Formik >
+
             <View style={{ position: 'absolute', top: 10, left: 10 }}>
                 <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
                     <Ionicons name={'md-menu'} size={24} color={'#fff'} />
                 </TouchableOpacity>
             </View>
+
         </LayoutLoan>
     );
 }

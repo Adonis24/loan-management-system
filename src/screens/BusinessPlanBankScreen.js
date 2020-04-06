@@ -172,7 +172,7 @@ const BusinessPlanBankScreen = (props) => {
                                 touched={noAkaunTouched}
                                 error={noAkaunError}
                                 placeholder={'No Akaun'}
-                                keyboardType={'decimal-pad'}
+                                keyboardType={'phone-pad'}
                             />
 
                             <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Jenis Akaun :</Text>

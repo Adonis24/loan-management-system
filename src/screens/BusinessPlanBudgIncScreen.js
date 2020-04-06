@@ -31,19 +31,19 @@ const validationSchema = Yup.object().shape({
         .string()
         .required()
         .min(1)
-        .label('income'),
+        .label('Pendapatan'),
 
     kosOperasi: Yup
         .string()
         .required()
         .min(1)
-        .label('Sumber'),
+        .label('Kos Operasi'),
 
     totalExpenditure: Yup
         .string()
         .required()
         .min(1)
-        .label('Jumlah'),
+        .label('Jumlah Perbelanjaan'),
     untungKasar: Yup
         .string()
         .required()
@@ -97,7 +97,7 @@ const BusinessPlanBudgIncScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ pembelian, income, kosOperasi, totalExpenditure, untungKasar,perbelanjaanLain,untungBersih, totalIncome }}
+                initialValues={{ pembelian, income, kosOperasi, totalExpenditure, untungKasar, perbelanjaanLain, untungBersih, totalIncome }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -145,12 +145,12 @@ const BusinessPlanBudgIncScreen = (props) => {
 
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 20, paddingRight: 30 }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', }}>
 
                             <Text style={[styles.formTitle]}>Section C</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Anggaran Pendapatan</Text>
-                            <ScrollView>
+                            <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start', paddingLeft: 10 }}>
                                 <CustomTextInput
                                     imageUri={require('../assets/images/estimateTime.png')}
                                     value={income}
@@ -182,7 +182,6 @@ const BusinessPlanBudgIncScreen = (props) => {
                                     touched={pembelianTouched}
                                     error={pembelianError}
                                     placeholder={'Pembelian'}
-                                    keyboardType={'default'}
                                     keyboardType={'phone-pad'}
                                 />
 
@@ -245,6 +244,7 @@ const BusinessPlanBudgIncScreen = (props) => {
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}
                             />
+
                         </View>
 
                     )
