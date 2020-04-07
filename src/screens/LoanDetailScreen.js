@@ -22,7 +22,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
 
-import LayoutA from '../Layout/LayoutA';
+import LayoutLoan from '../Layout/LayoutLoan';
 
 import * as actionCreator from '../store/actions/action'
 
@@ -88,7 +88,7 @@ const LoanDetailScreen = (props) => {
 
 
     return (
-        <LayoutA>
+        <LayoutLoan navigation={props.navigation}>
 
 
             <Formik
@@ -99,6 +99,7 @@ const LoanDetailScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatPembiayaan(values)
                     props.navigation.navigate('LoanSectionH')
+                    actions.resetForm({})
                     actions.setSubmitting(false)
 
                 }
@@ -128,7 +129,7 @@ const LoanDetailScreen = (props) => {
 
                     return (
 
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
                             <Modal animationType={'slide'}
                                 visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
                             >
@@ -165,11 +166,10 @@ const LoanDetailScreen = (props) => {
                                 </View>
                             </Modal>
 
-                            {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
-                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section G</Text>
+                            
+                            <Text style={[styles.formTitle]}>Section G</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Pembiayaan</Text>
+                            <Text style={[styles.formSubtitle]}>Maklumat Pembiayaan</Text>
 
 
 
@@ -194,9 +194,11 @@ const LoanDetailScreen = (props) => {
                                 keyboardType={'phone-pad'}
                             />
 
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
+                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Kekerapan Bayaran :</Text>
+
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
                                 <Image source={require('../assets/images/payment.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
+                                <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('kekerapan')}>
@@ -214,9 +216,11 @@ const LoanDetailScreen = (props) => {
                                         </View>}
                                 </View>
                             </View>
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
+                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Cara Bayaran :</Text>
+
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
+                                <View style={{ alignSelf: 'center', margin: 5, flex: 1}}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('caraBayaran')}>
@@ -234,11 +238,12 @@ const LoanDetailScreen = (props) => {
                                         </View>}
                                 </View>
                             </View>
-                            <View style={{ marginLeft: 25,marginTop:10 }}>
-                                <Text style={[styles.caption, { alignSelf: 'flex-start', textAlign: 'left', fontSize: 9,marginBottom:5 }]}>*Pembiayaan RM 15,000 dan ke atas wajib membuat bayaran balik pembiayaan dengan Cek Tarikh Tertunda (Post-Dated-Cheque) sepanjang tempoh pembiayaan </Text>
+                            <View style={{  marginTop: 10 }}>
+                                <Text style={[styles.caption, { alignSelf: 'flex-start', textAlign: 'left', fontSize: 9, marginBottom: 5 }]}>*Pembiayaan RM 15,000 dan ke atas wajib membuat bayaran balik pembiayaan dengan Cek Tarikh Tertunda (Post-Dated-Cheque) sepanjang tempoh pembiayaan </Text>
                                 <Text style={[styles.caption, { alignSelf: 'flex-start', textAlign: 'left', fontSize: 9 }]}>*Sila rujuk kaedah bayaran balik pembiayaan TEKUN secara terus oleh penerima biaya melalui Portal TEKUN (www.tekun.gov.my) </Text>
                             </View>
                             <CustomFormAction
+                                label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}
@@ -253,7 +258,7 @@ const LoanDetailScreen = (props) => {
                     <Ionicons name={'md-menu'} size={24} color={'#fff'} />
                 </TouchableOpacity>
             </View>
-        </LayoutA>
+        </LayoutLoan>
     );
 }
 

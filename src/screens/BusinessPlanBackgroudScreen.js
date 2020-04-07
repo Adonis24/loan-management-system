@@ -8,7 +8,6 @@ import {
     KeyboardAvoidingView
 
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
@@ -17,6 +16,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
+import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
 
@@ -26,12 +26,23 @@ import * as actionCreator from '../store/actions/action'
 
 const validationSchema = Yup.object().shape({
 
-
-    compPhoneNum: Yup
+    name: Yup
         .string()
         .required()
         .min(3)
-        .label('No Tel'),
+        .label('Nama'),
+
+    compName: Yup
+        .string()
+        .required()
+        .min(3)
+        .label('Nama Syarikat'),
+
+    regNum: Yup
+        .string()
+        .required()
+        .min(3)
+        .label('Pendapatan'),
 
     compAlamat: Yup
         .string()
@@ -39,24 +50,17 @@ const validationSchema = Yup.object().shape({
         .min(3)
         .label('Alamat'),
 
-    compPoskod: Yup
-        .string()
-        .required()
-        .min(5)
-        .max(5)
-        .label('Postcode'),
-
 
 });
 
-const LoanBusinessAddrInfoScreen = (props) => {
+const BusinessPlanBackgroudScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { compPhoneNum, compAlamat, compAlamat_2, compPoskod } = useSelector(state => state.financingReducer, shallowEqual)
+    const { compName, name, regNum, compAlamat, compAlamat_2 } = useSelector(state => state.businessPlanningReducer, shallowEqual)
 
 
-    const setBusinessInfo = (value) => dispatch({ type: 'SET_BUSINESS_INFO', payload: { ...value } })
+    const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
 
 
 
@@ -65,14 +69,15 @@ const LoanBusinessAddrInfoScreen = (props) => {
     return (
         <LayoutLoan navigation={props.navigation}>
 
+
             <Formik
                 validateOnMount
-                initialValues={{ compPhoneNum, compAlamat_2, compAlamat, compPoskod }}
+                initialValues={{ compName, name, regNum, compAlamat, compAlamat_2 }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
-                    setBusinessInfo(values)
-                    props.navigation.navigate('LoanSectionF')
+                    setLatarBelakang(values)
+                    props.navigation.navigate('BusinessPlanEstablishComp')
                     actions.resetForm({})
                     actions.setSubmitting(false)
                 }
@@ -84,12 +89,13 @@ const LoanBusinessAddrInfoScreen = (props) => {
 
 
 
-                    const { compPhoneNum, compAlamat, compAlamat_2, compPoskod } = FormikProps.values
+                    const { name, compName, regNum, compAlamat, compAlamat_2 } = FormikProps.values
 
+                    const nameError = FormikProps.errors.name
+                    const nameTouched = FormikProps.touched.name
 
-
-                    const compPhoneNumError = FormikProps.errors.compPhoneNum
-                    const compPhoneNumTouched = FormikProps.touched.compPhoneNum
+                    const compNameError = FormikProps.errors.compName
+                    const compNameTouched = FormikProps.touched.compName
 
                     const compAlamatError = FormikProps.errors.compAlamat
                     const compAlamatTouched = FormikProps.touched.compAlamat
@@ -97,30 +103,51 @@ const LoanBusinessAddrInfoScreen = (props) => {
                     const compAlamat_2Error = FormikProps.errors.compAlamat_2
                     const compAlamat_2Touched = FormikProps.touched.compAlamat_2
 
-                    const compPoskodError = FormikProps.errors.compPoskod
-                    const compPoskodTouched = FormikProps.touched.compPoskod
+                    const regNumError = FormikProps.errors.regNum
+                    const regNumTouched = FormikProps.touched.regNum
+
+
 
 
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
-                            
-                            <Text style={[styles.formTitle]}>Section D</Text>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+                            <Text style={[styles.formTitle]}>Section A</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.formSubtitle]}>Maklumat Perniagaan</Text>
-
+                            <Text style={[styles.formSubtitle]}>Latar Belakang Pemohon</Text>
 
                             <CustomTextInput
-                                imageUri={require('../assets/images/phoneNum.png')}
-                                value={compPhoneNum}
-                                handleChange={FormikProps.handleChange(`compPhoneNum`)}
-                                handleBlur={FormikProps.handleBlur(`compPhoneNum`)}
-                                touched={compPhoneNumTouched}
-                                error={compPhoneNumError}
-                                placeholder={'No Telefon'}
-                                keyboardType={'phone-pad'}
+                                imageUri={require('../assets/images/user.png')}
+                                value={name}
+                                handleChange={FormikProps.handleChange(`name`)}
+                                handleBlur={FormikProps.handleBlur(`name`)}
+                                touched={nameTouched}
+                                error={nameError}
+                                placeholder={'Nama'}
+
                             />
 
+                            <CustomTextInput
+                                imageUri={require('../assets/images/company.png')}
+                                value={compName}
+                                handleChange={FormikProps.handleChange(`compName`)}
+                                handleBlur={FormikProps.handleBlur(`compName`)}
+                                touched={compNameTouched}
+                                error={compNameError}
+                                placeholder={'Nama Syarikat'}
+                                keyboardType={'default'}
+                            />
+
+                            <CustomTextInput
+                                imageUri={require('../assets/images/compRegNum.png')}
+                                value={regNum}
+                                handleChange={FormikProps.handleChange(`regNum`)}
+                                handleBlur={FormikProps.handleBlur(`regNum`)}
+                                touched={regNumTouched}
+                                error={regNumError}
+                                placeholder={'No Pendaftaran Perniagaan'}
+                                keyboardType={'decimal-pad'}
+                            />
                             <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}
                                 value={compAlamat}
@@ -141,21 +168,8 @@ const LoanBusinessAddrInfoScreen = (props) => {
                                 placeholder={'Alamat Syarikat Line 2'}
 
                             />
-                            <CustomTextInput
-                                imageUri={require('../assets/images/compRegNum.png')}
-                                value={compPoskod}
-                                handleChange={FormikProps.handleChange(`compPoskod`)}
-                                handleBlur={FormikProps.handleBlur(`compPoskod`)}
-                                touched={compPoskodTouched}
-                                error={compPoskodError}
-                                placeholder={'Poskod'}
-                                keyboardType={'decimal-pad'}
-                            />
-
-
 
                             <CustomFormAction
-                                label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}
@@ -177,4 +191,4 @@ const LoanBusinessAddrInfoScreen = (props) => {
 
 
 
-export default LoanBusinessAddrInfoScreen
+export default BusinessPlanBackgroudScreen

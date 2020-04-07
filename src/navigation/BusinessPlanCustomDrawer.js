@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import Constants from 'expo-constants';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient'
-const LoanCustomDrawer = (props) => {
+const BusinessPlanCustomDrawer = (props) => {
 
     const dispatch = useDispatch()
     const nav = (screen) => {
@@ -19,86 +19,65 @@ const LoanCustomDrawer = (props) => {
     return (
         <LinearGradient colors={['#fff', '#fff']} style={{ position: 'absolute', top: Constants.statusBarHeight, bottom: 0, right: 0, left: 0 }}>
             <View style={{ padding: 10, flex: 1, justifyContent: 'flex-start' }}>
-                <Text style={[styles.textDefault, { marginBottom: 20 }]}>Borang Permohonan Pembiayaan</Text>
+                <Text style={[styles.textDefault, { marginBottom: 20 }]}>Rancangan Perniagaan</Text>
                 <NavButton
                     name={'Section A'}
-                    link={'LoanSectionA'}
+                    link={'BusinessPlanSectionA'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Asas'}
+                    description={'Latar Belakang Pemohon'}
                     nav={nav} />
+
                 <NavButton
                     name={'Section B'}
-                    link={'LoanSectionB'}
+                    link={'BusinessPlanSectionB'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Peribadi'}
+                    description={'Butir-Butir Perniagaan'}
                     nav={nav} />
 
                 <NavButton
                     name={'Section C'}
-                    link={'LoanSectionC'}
+                    link={'BusinessPlanBudgInc'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Pasangan'}
+                    description={'Anggaran Pendapatan Dan Perbelanjaan'}
                     nav={nav} />
 
                 <NavButton
                     name={'Section D'}
-                    link={'LoanSectionD'}
+                    link={'BusinessPlanProposal'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Perniagaan'}
+                    description={'Cadangan Keperluan Penggunaan Pembiayaan'}
                     nav={nav} />
 
                 <NavButton
                     name={'Section E'}
-                    link={'LoanBusinessInfoCont'}
+                    link={'BusinessPlanSectionE'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Perniagaan'}
+                    description={'Sasaran Pencapaian Perniagaan Tahunan     (3 tahun ke hadapan)'}
                     nav={nav} />
 
                 <NavButton
                     name={'Section F'}
-                    link={'LoanSectionF'}
+                    link={'BusinessPlanMarketing'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Pembiayaan Perniagaan'}
+                    description={'Rancangan Pemasaran'}
                     nav={nav} />
 
                 <NavButton
                     name={'Section G'}
-                    link={'LoanDetail'}
+                    link={'BusinessPlanAddDetail'}
                     activeScreen={activeScreen}
-                    description={'Maklumat Pembiayaan'}
+                    description={'Maklumat Tambahan'}
                     nav={nav} />
 
                 <NavButton
                     name={'Section H'}
-                    link={'LoanSectionH'}
-                    activeScreen={activeScreen}
-                    description={'Perujuk'}
-                    nav={nav} />
-
-                <NavButton
-                    name={'Section I'}
-                    link={'LoanValidation'}
-                    activeScreen={activeScreen}
-                    description={'Pengesahan & Perakuan Perniagaan'}
-                    nav={nav} />
-
-                <NavButton
-                    name={'Section J'}
-                    link={'LoanDeclaration'}
+                    link={'BusinessPlanCert'}
                     activeScreen={activeScreen}
                     description={'Akuan Pemohon'}
                     nav={nav} />
 
-                <View style={{ alignItems: 'stretch', flexDirection: 'row',  }}>
-                    <TouchableOpacity onPress={() => props.navigation.navigate('LoanCheckList')} style={{ flex:1,borderColor: 'grey', borderWidth: 1, alignSelf: 'flex-start', padding: 10, borderRadius: 10 ,margin:10,alignItems:'center'}}>
-                        <Text style={[styles.textSmall, { color: 'grey' }]}>Checklist</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => dispatch(actionCreator.resetForm())} style={{ flex:1,borderColor: 'red', borderWidth: 1, alignSelf: 'flex-start', padding: 10, borderRadius: 10 ,margin:10,alignItems:'center'}}>
-                        <Text style={[styles.textSmall, { color: 'red' }]}>Reset </Text>
-                    </TouchableOpacity>
-                </View>
 
-
+                <TouchableOpacity onPress={() => dispatch(actionCreator.resetForm())} style={{ borderColor: 'red', borderWidth: 1, alignSelf: 'flex-start', padding: 10, borderRadius: 10 }}><Text style={[styles.textSmall, { color: 'red' }]}>Reset Form</Text></TouchableOpacity>
 
             </View>
         </LinearGradient>
@@ -122,4 +101,4 @@ const NavButton = (props) => {
 }
 
 
-export default LoanCustomDrawer
+export default BusinessPlanCustomDrawer

@@ -28,10 +28,10 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const checklist = [
     { item: 'Borang permohonan pembiayaan TEKUN', button: 'LoanDrawer', check: true },
-    { item: 'Kertas rancangan perniagaan', button: 'BusinessPlanDrawer', check: true },
+    { item: 'Kertas rancangan perniagaan', button: 'LoanDrawer', check: true },
     { item: 'Gambar berukuran passport', button: 'LoanDrawer', check: true },
     { item: 'Salinan kad pengenalan pemohon dan pasangan', button: 'LoanDrawer', check: true },
-    { item: '3 keping gambar premis/tapak perniagaan', button: 'SitePic', check: true },
+    { item: '3 keping gambar premis/tapak perniagaan', button: 'LoanDrawer', check: true },
     { item: 'Salinan buku simpanan/penyata bank ( 3 bulan terakhir)', button: 'LoanDrawer', check: true },
     { item: 'Salinan bil utiliti rumah atau premis perniagaan', button: 'LoanDrawer', check: true },
     { item: 'Borang kebenaran penzahiran maklumat kredit individu', button: 'LoanDrawer', check: true },
@@ -40,7 +40,7 @@ const checklist = [
 ]
 
 
-const LoanCheckListScreen = (props) => {
+const SitePicScreen = (props) => {
     const dispatch = useDispatch()
     return (
         < LayoutB
@@ -50,32 +50,11 @@ const LoanCheckListScreen = (props) => {
             imageUri={require('../assets/images/e-scoring.png')}
         >
 
-
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 4 }}>
                     <View style={{ margin: 7 }} />
-                    <Text style={[styles.textDefault, { paddingLeft: 10 }]}>Dokumen-dokument Diperlukan:</Text>
-
-                    <FlatList data={checklist}
-                        keyExtractor={(item, index) => index.toString()}
-                        renderItem={({ item, index }) => (<CustomRow
-                            navigation={props.navigation}
-                            no={index + 1}
-                            item={item.item}
-                            button={item.button}
-                            check={item.check}
-                        />)} />
-                </View>
-
-                <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                    <Text style={[styles.textDefault, { paddingLeft: 10 }]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
-                    <TouchableOpacity
-                        style={{ alignSelf: 'center' }}
-                        onPress={() => console.log(`hantar`)}>
-                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'flex-start', margin: 10, padding: 5, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}>
-                            <Text style={[styles.textSmall, { color: '#fff' }]}>Hantar</Text>
-                        </LinearGradient>
-                    </TouchableOpacity>
+                    <Text style={[styles.textDefault, { paddingLeft: 10 }]}>Gambal gambal:</Text>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('Camera')}><Text>Test</Text></TouchableOpacity>
                 </View>
             </View>
         </LayoutB >
@@ -105,4 +84,4 @@ const CustomRow = (props) => {
 }
 
 
-export default LoanCheckListScreen
+export default SitePicScreen

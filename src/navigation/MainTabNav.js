@@ -43,6 +43,8 @@ import PromotionScreen from '../screens/PromotionScreen';
 import LoanApplicationScreen from '../screens/LoanApplicationScreen';
 import FinancingScreen from '../screens/FinancingScreen';
 import LoanCheckListScreen from '../screens/LoanCheckListScreen';
+import SitePicScreen from '../screens/SitePicScreen';
+import MapScreen from '../screens/MapScreen';
 import GrantScreen from '../screens/GrantScreen';
 import QuizScreen from '../screens/QuizScreen';
 import QuizAnswerScreen from '../screens/QuizAnswerScreen';
@@ -101,8 +103,26 @@ import LoanReferrerScreen from '../screens/LoanReferrerScreen'
 import LoanReferrer2Screen from '../screens/LoanReferrer2Screen'
 import LoanValidationScreen from '../screens/LoanValidationScreen'
 import LoanDeclarationScreen from '../screens/LoanDeclarationScreen'
-import LoanCustomDrawer from './LoanCustomDrawer';
 
+import DocumentPickerScreen from '../screens/DocumentPickerScreen'
+import CameraScreen from '../screens/CameraScreen'
+
+import LoanCustomDrawer from './LoanCustomDrawer';
+import BusinessPlanCustomDrawer from './BusinessPlanCustomDrawer';
+import BusinessPlanBackgroudScreen from '../screens/BusinessPlanBackgroudScreen'
+import BusinessPlanEstablishCompScreen from '../screens/BusinessPlanEstablishCompScreen'
+import BusinessPlanBankScreen from '../screens/BusinessPlanBankScreen'
+import BusinessPlanPartnerScreen from '../screens/BusinessPlanPartnerScreen'
+import BusinessPlanBussInfoScreen from '../screens/BusinessPlanBussInfoScreen'
+import BusinessPlanBussModalScreen from '../screens/BusinessPlanBussModalScreen'
+import BusinessPlanBudgIncScreen from '../screens/BusinessPlanBudgIncScreen'
+import BusinessPlanProposalScreen from '../screens/BusinessPlanProposalScreen'
+import BusinessPlanGoalsScreen from '../screens/BusinessPlanGoalsScreen'
+import BusinessPlanGoals2Screen from '../screens/BusinessPlanGoals2Screen'
+import BusinessPlanGoals3Screen from '../screens/BusinessPlanGoals3Screen'
+import BusinessPlanMarketingScreen from '../screens/BusinessPlanMarketingScreen'
+import BusinessPlanAddDetailScreen from '../screens/BusinessPlanAddDetailScreen'
+import BusinessPlanCertScreen from '../screens/BusinessPlanCertScreen'
 
 const DashboardStack = () => {
     return (
@@ -134,6 +154,10 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="LoanApplication" component={LoanApplicationScreen} />
             <Stack.Screen name="Financing" component={FinancingScreen} />
             <Stack.Screen name="LoanCheckList" component={LoanCheckListScreen} />
+            <Stack.Screen name="SitePic" component={SitePicScreen} />
+            <Stack.Screen name="Camera" component={CameraScreen} />
+            <Stack.Screen name="DocumentPicker" component={DocumentPickerScreen} />
+            <Stack.Screen name="Map" component={MapScreen} />
             <Stack.Screen name="Grant" component={GrantScreen} />
             <Stack.Screen name="Quiz" component={QuizScreen} />
             <Stack.Screen name="QuizAnswer" component={QuizAnswerScreen} />
@@ -175,6 +199,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="Bill" component={BillScreen} />
             <Stack.Screen name="Delivery" component={DeliveryScreen} />
             <Stack.Screen name="LoanDrawer" component={LoanDrawer} />
+            <Stack.Screen name="BusinessPlanDrawer" component={BusinessPlanDrawer} />
         </Stack.Navigator>
     )
 }
@@ -187,8 +212,6 @@ const InsightStack = () => {
     )
 }
 
-
-
 const NotificationStack = () => {
     return (
         <Stack.Navigator initialRouteName="Notifications" screenOptions={{ headerShown: false }}>
@@ -196,11 +219,6 @@ const NotificationStack = () => {
         </Stack.Navigator>
     )
 }
-
-
-
-
-
 
 const SettingsStack = () => {
     return (
@@ -294,6 +312,56 @@ const LoanSectionHStack = () => {
             <Stack.Screen name="LoanReferrer2" component={LoanReferrer2Screen} />
         </Stack.Navigator>)
 }
+
+const BusinessPlanDrawer = () => {
+    return (
+        <Drawer.Navigator initialRouteName="BusinessPlanBackgroud"
+            drawerType={'slide'}
+            drawerContent={props => {
+                const close = () => { props.navigation.closeDrawer() }
+                const nav = (screen) => { props.navigation.navigate(screen) }
+                return (<BusinessPlanCustomDrawer {...props} nav={nav} close={close} />)
+            }}
+        >
+
+            <Drawer.Screen name="BusinessPlanSectionA" component={BusinessPlanSectionAStack} />
+            <Drawer.Screen name="BusinessPlanSectionB" component={BusinessPlanSectionBStack} />
+            <Drawer.Screen name="BusinessPlanBudgInc" component={BusinessPlanBudgIncScreen} />
+            <Drawer.Screen name="BusinessPlanProposal" component={BusinessPlanProposalScreen} />
+            <Drawer.Screen name="BusinessPlanSectionE" component={BusinessPlanSectionEStack} />
+            <Drawer.Screen name="BusinessPlanMarketing" component={BusinessPlanMarketingScreen} />
+            <Drawer.Screen name="BusinessPlanAddDetail" component={BusinessPlanAddDetailScreen} />
+            <Drawer.Screen name="BusinessPlanCert" component={BusinessPlanCertScreen} />
+        </Drawer.Navigator>
+    )
+}
+
+const BusinessPlanSectionAStack = () => {
+    return (
+        <Stack.Navigator initialRouteName="BusinessPlanBackgroud" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="BusinessPlanBackgroud" component={BusinessPlanBackgroudScreen} />
+            <Stack.Screen name="BusinessPlanEstablishComp" component={BusinessPlanEstablishCompScreen} />
+            <Stack.Screen name="BusinessPlanBank" component={BusinessPlanBankScreen} />
+            <Stack.Screen name="BusinessPlanPartner" component={BusinessPlanPartnerScreen} />
+        </Stack.Navigator>)
+}
+
+const BusinessPlanSectionBStack = () => {
+    return (
+        <Stack.Navigator initialRouteName="BusinessPlanBussInfo" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="BusinessPlanBussInfo" component={BusinessPlanBussInfoScreen} />
+            <Stack.Screen name="BusinessPlanBussModal" component={BusinessPlanBussModalScreen} />
+        </Stack.Navigator>)
+}
+
+const BusinessPlanSectionEStack = () => {
+    return (
+        <Stack.Navigator initialRouteName="BusinessPlanGoals" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="BusinessPlanGoals" component={BusinessPlanGoalsScreen} />
+            <Stack.Screen name="BusinessPlanGoals2" component={BusinessPlanGoals2Screen} />
+            <Stack.Screen name="BusinessPlanGoals3" component={BusinessPlanGoals3Screen} />
+        </Stack.Navigator>)
+}
 const InfoNewsDrawer = () => {
     return (
         <Drawer.Navigator initialRouteName="Withdraw" drawerPosition={'right'} drawerContent={props => {
@@ -343,7 +411,9 @@ const MainTabNav = () => {
                             console.log(`route ialah :${JSON.stringify(routeName)}`)
                             //console.log(`history ialah :${JSON.stringify(history)}`)
                             //if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan' || routeName === 'LoanConnectedParties' || routeName === 'LoanConnectedPartiesAddr' || routeName === 'LoanBusinessInfo' || routeName === 'LoanBusinessAddrInfo' || routeName === 'LoanBusinessInfoCont' || routeName === 'LoanBusinessDetail' || routeName === 'LoanDetail')
-                            if (routeName === 'LoanDrawer')
+                            if (routeName === 'LoanDrawer'||routeName === 'Camera')
+                                tabBarVisible = false
+                            if (routeName === 'BusinessPlanDrawer')
                                 tabBarVisible = false
                         }
                     }

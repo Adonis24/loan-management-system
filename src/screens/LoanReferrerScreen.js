@@ -20,7 +20,7 @@ import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKe
 
 import styles from '../styles/styles'
 
-import LayoutA from '../Layout/LayoutA';
+import LayoutLoan from '../Layout/LayoutLoan';
 
 import * as actionCreator from '../store/actions/action'
 
@@ -68,7 +68,7 @@ const LoanReferrerScreen = (props) => {
 
 
     return (
-        <LayoutA>
+        <LayoutLoan navigation={props.navigation}>
 
 
             <Formik
@@ -78,7 +78,7 @@ const LoanReferrerScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setReferrer(values)
-
+                    actions.resetForm({})
                     props.navigation.navigate('LoanReferrer2')
                     actions.setSubmitting(false)
                 }
@@ -111,11 +111,10 @@ const LoanReferrerScreen = (props) => {
 
                     return (
 
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>Pembiayaan Tekun</Text>
-                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section H</Text>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
+                            <Text style={[styles.formTitle]}>Section H</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Perujuk (a)</Text>
+                            <Text style={[styles.formSubtitle]}>Maklumat Perujuk (a)</Text>
 
 
 
@@ -187,7 +186,7 @@ const LoanReferrerScreen = (props) => {
                     <Ionicons name={'md-menu'} size={24} color={'#fff'} />
                 </TouchableOpacity>
             </View>
-        </LayoutA>
+        </LayoutLoan>
     );
 }
 

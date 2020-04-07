@@ -20,13 +20,14 @@ import Constants from 'expo-constants'
 import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 import { Ionicons } from '@expo/vector-icons';
 
-import LayoutA from '../Layout/LayoutA';
+import LayoutLoan from '../Layout/LayoutLoan';
 import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import styles from '../styles/styles'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as actionCreator from '../store/actions/action'
 import CheckBox2 from 'react-native-check-box'
+
 
 
 const validationSchema = Yup.object().shape({
@@ -79,7 +80,7 @@ const LoanBusinessDetail2Screen = (props) => {
 
 
     return (
-        <LayoutA>
+        <LayoutLoan navigation={props.navigation}>
             <Formik
                 initialValues={{ institusi, totalLoan,loanBal }}
                 validateOnMount
@@ -87,6 +88,7 @@ const LoanBusinessDetail2Screen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setPembiayaan(values)
                     actions.setSubmitting(false)
+                    actions.resetForm({})
                     props.navigation.navigate('LoanDetail')
                 }}
                 validationSchema={validationSchema}
@@ -106,10 +108,9 @@ const LoanBusinessDetail2Screen = (props) => {
 
                     return (
 
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center', }}>
-                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
-                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section F</Text>
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Pembiayaan Perniagaan Sedia Ada</Text>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
+                            <Text style={[styles.formTitle]}>Section F</Text>
+                            <Text style={[styles.formSubtitle]}>Pembiayaan Perniagaan Sedia Ada</Text>
                        
                                         <CustomTextInput
                                             imageUri={require('../assets/images/city.png')}
@@ -143,6 +144,7 @@ const LoanBusinessDetail2Screen = (props) => {
                                         />
                                    
                             <CustomFormAction
+                            label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}
@@ -159,7 +161,7 @@ const LoanBusinessDetail2Screen = (props) => {
                 </TouchableOpacity>
             </View>
 
-        </LayoutA>
+        </LayoutLoan>
     );
 }
 

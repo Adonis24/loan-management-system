@@ -22,7 +22,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
 
-import LayoutA from '../Layout/LayoutA';
+import LayoutLoan from '../Layout/LayoutLoan';
 
 import * as actionCreator from '../store/actions/action'
 
@@ -90,7 +90,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
 
     return (
-        <LayoutA>
+        <LayoutLoan navigation={props.navigation}>
 
 
             <Formik
@@ -101,6 +101,7 @@ const LoanConnectedPartiesScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setConnectParties(values)
                     props.navigation.navigate('LoanConnectedPartiesAddr')
+                    actions.resetForm({})
                     actions.setSubmitting(false)
                 }
                 }
@@ -134,7 +135,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
                     return (
 
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
                             <Modal animationType={'slide'}
                                 visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
                             >
@@ -163,14 +164,15 @@ const LoanConnectedPartiesScreen = (props) => {
                                     </View>
                                 </View>
                             </Modal>
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
-                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section C</Text>
+                            <Text style={[styles.formTitle]}>Section C</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Maklumat Pasangan</Text>
+                            <Text style={[styles.formSubtitle]}>Maklumat Pasangan</Text>
 
-                            <View style={{marginTop:20, alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
+                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Hubungan :</Text>
+
+<View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
+                                <View style={{ alignSelf: 'center', margin: 5, flex:1 }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('cpRelation')}>
@@ -246,7 +248,7 @@ const LoanConnectedPartiesScreen = (props) => {
                     <Ionicons name={'md-menu'} size={24} color={'#fff'} />
                 </TouchableOpacity>
             </View>
-        </LayoutA>
+        </LayoutLoan>
     );
 }
 

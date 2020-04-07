@@ -195,13 +195,28 @@ export const grantInfoApi = (page) => {
 export const applyfinancingApi = (page) => {
   return async (dispatch, getState) => {
 
-    const { negeri, cawanganParlimen, pengundiBerdaftar, statusPerniagaan, bank, noAkaun, typeBusiness, name, icNumber, agama, tarikhLahir, jantina, alamat, alamat_2, phoneNum, email, poskod, alamatComp, pendapatan, pekerjaan, status, pembiayaan, relationship, cpName, cpIcNumber, cpPekerjaan, cpPendapatan, cpPhoneNum, cpAlamat, cpAlamat_2, cpPoskod, compPendapatan, compPhoneNum, compAlamat, compAlamat_2, compPoskod, refAlamat, refAlamat_2, refName, refPhoneNum, valAlamat, valAlamat_2, valName, valPhoneNum, jawatan, } = getState().loanApplicationReducer
+    const { negeri, cawanganParlimen, pengundiBerdaftar, statusPerniagaan, bank, noAkaun, typeBusiness, name, icNumber, agama, tarikhLahir, jantina, alamat, alamat_2, phoneNum, email, poskod, alamatComp, pendapatan, pekerjaan, status, pembiayaan, relationship, cpName, cpIcNumber, cpPekerjaan, cpPendapatan, cpPhoneNum, cpAlamat, cpAlamat_2, cpPoskod, compPendapatan, compPhoneNum, compAlamat, compAlamat_2, compPoskod, refAlamat, refAlamat_2, refName, refPhoneNum, valAlamat, valAlamat_2, valName, valPhoneNum, jawatan, } = getState().financingReducer
 
     const responseJson = await apiPostCall(`api/loan/addFinancingInformation`, null, negeri, cawanganParlimen, pengundiBerdaftar, statusPerniagaan, bank, noAkaun, typeBusiness, name, icNumber, agama, tarikhLahir, jantina, alamat, alamat_2, phoneNum, email, poskod, alamatComp, phoneNum, pendapatan, pekerjaan, status, pembiayaan, relationship, cpName, cpIcNumber, cpPekerjaan, cpPendapatan, cpPhoneNum, cpAlamat, cpAlamat_2, cpPoskod, compPendapatan, compPhoneNum, compAlamat, compAlamat_2, compPoskod, refAlamat, refAlamat_2, refName, refPhoneNum, valAlamat, valAlamat_2, valName, valPhoneNum, jawatan, getState().apiReducer)
 
     console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const einfosArray = await responseJson.data
     await console.log(`Financing  ${JSON.stringify(einfosArray)}`)
+
+
+  }
+}
+
+export const applyBusinessPlanApi = (page) => {
+  return async (dispatch, getState) => {
+
+    const { } = getState().businessPlanningReducer
+
+    const responseJson = await apiPostCall(`api/loan/addBusinessPlanInformation`, null,  getState().apiReducer)
+
+    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    const einfosArray = await responseJson.data
+    await console.log(`Business Plan  ${JSON.stringify(einfosArray)}`)
 
 
   }
@@ -537,5 +552,55 @@ export const resetFormApi = () => {
   return async (dispatch, getState) => {
     await SecureStore.deleteItemAsync('loanData')
     console.log(`delete form dalam storage`)
+  }
+}
+
+
+export const saveLocationApi = (x) => {
+  return async (dispatch, getState) => {
+
+    const location = JSON.parse(await SecureStore.getItemAsync('location'))
+
+    console.log(`bakal di save : ${JSON.stringify(x)}`)
+    console.log(`dalam storage: ${JSON.stringify(location)}`)
+
+    if (location) {
+      console.log(`something in memory`)
+      console.log(JSON.stringify(location))
+      //const newLocation = { ...loanData, ...loanDataReducer }
+      await SecureStore.setItemAsync('location', JSON.stringify(x))
+    } else {
+      await SecureStore.setItemAsync('location', JSON.stringify(x))
+    }
+
+
+    // const responseJson = await apiGetCall(`api/Notification`, getState().apiReducer)
+    // const notificationByDate = [...responseJson.data.promotion, ...responseJson.data.annoucement, ...responseJson.data.advertisement]
+
+    // dispatch({ type: 'SET_NOTIFICATION', payload: { notificationList: notificationByDate } })
+
+
+  }
+}
+
+
+export const getLocationApi = (x) => {
+  return async (dispatch, getState) => {
+
+    const location = JSON.parse(await SecureStore.getItemAsync('location'))
+
+    if (location) {
+      dispatch({ type: 'SET_LOCATION', payload: { ...location } })
+    } else {
+
+    }
+
+
+    // const responseJson = await apiGetCall(`api/Notification`, getState().apiReducer)
+    // const notificationByDate = [...responseJson.data.promotion, ...responseJson.data.annoucement, ...responseJson.data.advertisement]
+
+    // dispatch({ type: 'SET_NOTIFICATION', payload: { notificationList: notificationByDate } })
+
+
   }
 }

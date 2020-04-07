@@ -19,8 +19,7 @@ import * as Yup from 'yup';
 import Constants from 'expo-constants'
 import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 import { Ionicons } from '@expo/vector-icons';
-
-import LayoutA from '../Layout/LayoutA';
+import LayoutLoan from '../Layout/LayoutLoan';
 import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import styles from '../styles/styles'
@@ -56,7 +55,7 @@ const LoanBusinessDetailScreen = (props) => {
 
     const setPembiayaan = (value) => dispatch({ type: 'SET_PEMBIAYAAN', payload: { ...value } })
 
-    
+
 
     //proceedContact && props.navigation.goBack()
 
@@ -76,7 +75,7 @@ const LoanBusinessDetailScreen = (props) => {
 
 
     return (
-        <LayoutA>
+        <LayoutLoan navigation={props.navigation}>
             <Formik
                 initialValues={{ pembiayaan }}
                 validateOnMount
@@ -86,6 +85,7 @@ const LoanBusinessDetailScreen = (props) => {
                     setPembiayaan(values)
                     changeLoan(pembiayaan)
                     actions.setSubmitting(false)
+                    actions.resetForm({})
 
                 }}
                 validationSchema={validationSchema}
@@ -102,7 +102,7 @@ const LoanBusinessDetailScreen = (props) => {
 
                     return (
 
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center', }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
                             <Modal animationType={'slide'}
                                 visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
                             >
@@ -127,15 +127,17 @@ const LoanBusinessDetailScreen = (props) => {
                                     </View>
                                 </View>
                             </Modal>
-                            <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PEMBIAYAAN TEKUN</Text>
-                            <Text style={[styles.textDefault, { margin: 5,color:'black' }]}>Section F</Text>
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Pembiayaan Perniagaan Sedia Ada</Text>
-                            <ScrollView>
+
+                            <Text style={[styles.formTitle]}>Section F</Text>
+                            <Text style={[styles.formSubtitle]}>Pembiayaan Perniagaan Sedia Ada</Text>
+                           
 
 
-                                <View style={{ marginTop: 10, alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginLeft: 3 }}>
+                                <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Pembiayaan :</Text>
+
+                                <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
                                     <Image source={require('../assets/images/loanAmount.png')} style={{ height: 35, width: 35, margin: 5 }} resizeMode={'contain'} />
-                                    <View style={{ alignSelf: 'center', margin: 5, width: Layout.window.width * 0.53, }}>
+                                    <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                         {ios ?
                                             <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                                 <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('pembiayaan')}>
@@ -143,7 +145,7 @@ const LoanBusinessDetailScreen = (props) => {
                                                 </TouchableOpacity>
                                                 {pembiayaanTouched && pembiayaanError && <Text style={styles.error}>{pembiayaanError}</Text>}
                                             </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
-                                                <Picker style={{ flex: 1, height: 35 }} selectedValue={pembiayaan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pembiayaan', itemValue)}>
+                                                <Picker style={{  height: 35 }} selectedValue={pembiayaan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pembiayaan', itemValue)}>
                                                     <Picker.Item label={'Pembiayaan'} value={undefined} />
                                                     <Picker.Item label="Ada" value={1} />
                                                     <Picker.Item label="Tiada" value={2} />
@@ -153,7 +155,7 @@ const LoanBusinessDetailScreen = (props) => {
                                     </View>
                                 </View>
 
-                            </ScrollView>
+                            
 
                             <CustomFormAction
                                 navigation={props.navigation}
@@ -172,7 +174,7 @@ const LoanBusinessDetailScreen = (props) => {
                 </TouchableOpacity>
             </View>
 
-        </LayoutA>
+        </LayoutLoan>
     );
 }
 

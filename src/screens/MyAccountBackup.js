@@ -1,105 +1,39 @@
-//console.ignoredYellowBox = ['Setting a timer']
-import React, { useEffect, useState } from 'react';
-import {
-    Image,
-    Platform,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View, Animated, StyleSheet
-} from 'react-native';
-import moment from 'moment'
-import QRCode from 'react-native-qrcode-svg'
-import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
-//import { Constants, LinearGradient, FileSystem } from 'expo'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
+<View style={styles.container}>
+    <View style={{ flex: 1, justifyContent: 'space-between' }}>
+        <View style={{ alignItems: 'flex-end' }}>
+            <Image source={require('../assets/images/topRight.png')} style={{ width: 140, height: 130 }} resizeMode={'contain'} />
+        </View>
+        {/* <View style={{ alignItems: 'flex-start' }}>
+                        <Image source={require('../assets/images/bottomLeft.png')} style={{ width: 79, height: 143 }} resizeMode={'contain'} />
+                    </View> */}
+    </View>
+    <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
+        {/* HEADER */}
+        <View style={{ flex: 6, backgroundColor: 'blue' }}>
+            <Image source={{ uri: profile_pic }} style={{ flex: 1, width: undefined, height: undefined }} resizeMode={'cover'} />
+            <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.5)', padding: 10, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ color: '#fff' }}>TEST</Text></View>
 
-import { Ionicons } from '@expo/vector-icons';
-import styles from '../styles/styles'
-
-import * as actionCreator from '../store/actions/action'
-
-const HEADER_MAX_HEIGHT = 250;
-const HEADER_MIN_HEIGHT = 60;
-const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
-
-const MyAccountScreen = (props) => {
-
-    const [scrollY, setScrollY] = useState(new Animated.Value(0))
-
-    const headerHeight = scrollY.interpolate({
-        inputRange: [0, HEADER_SCROLL_DISTANCE],
-        outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
-        extrapolate: 'clamp',
-    });
-
-    const imageOpacity = scrollY.interpolate({
-        inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-        outputRange: [1, 1, 0],
-        extrapolate: 'clamp',
-    });
-    const imageTranslate = scrollY.interpolate({
-        inputRange: [0, HEADER_SCROLL_DISTANCE],
-        outputRange: [0, -50],
-        extrapolate: 'clamp',
-    });
-
-    const _renderScrollViewContent = () => {
-        const data = Array.from({ length: 30 });
-        return (
-            <View style={styles.scrollViewContent}>
-                {data.map((_, i) =>
-                    <View key={i} style={styleParalax.row}>
-                        <Text>{i}</Text>
-                    </View>
-                )}
-            </View>
-        );
-    }
-
-    const { name, email, phone_no, profile_pic, email_verified_at, ic_no, member_id } = useSelector(state => state.myAccountReducer, shallowEqual)
-
-    //const { member_id, name, email, phone_no, profile_pic, email_verified_at, associateConnection, requestConnection, allConnection } = useSelector(state => state.myAccountReducer, shallowEqual)
-    const connect_id = useSelector(state => state.myAccountReducer.id, shallowEqual)
-    //const companyName = useSelector(state => state.bizInfoReducer.name, shallowEqual)
-    {/*const { connect_id } = useSelector(state => state.notificationScreenReducer, shallowEqual)*/ }
-    const { companyRegNo, reg_date, addr, addr_2, city, state, postcode, main_biz_act, basic_status, additional_status, logo } = useSelector(state => state.bizInfoReducer, shallowEqual)
-    const companyEmail = useSelector(state => state.bizInfoReducer.email, shallowEqual)
-    const companyPhone = useSelector(state => state.bizInfoReducer.phone, shallowEqual)
-    const companyName = useSelector(state => state.bizInfoReducer.name, shallowEqual)
-    const { listWorkers } = useSelector(state => state.listWorkersReducer, shallowEqual)
-    //const { profile_pic } = useSelector(state => state.myAccountReducer, shallowEqual)
-    const score = 0
-
-    const dispatch = useDispatch()
-
-    const [popUp, setPopUp] = useState(false)
-
-
-
-    useEffect(() => {
-        dispatch(actionCreator.initiateMyAccount())
-    }, []); // empty-array means don't watch for any updates
-
-    {/*accept: (val) => dispatch(actionCreator.accept(val)) */ }
-
-
-    const capitalizeString = (text = 'NA') => text.length > 0 && `${text[0].toUpperCase()}${text.slice(1)}`
-
-
-    return (
-        <View style={styleParalax.fill}>
-            <ScrollView
-                style={styleParalax.fill}
-                scrollEventThrottle={16}
-                onScroll={Animated.event(
-                    [{ nativeEvent: { contentOffset: { y: scrollY } } }]
-                )}
-            >
-                <View style={{ marginTop: 250 }} />
-
+            {/* <LinearGradient
+                        colors={['#4c669f', '#3b5998', '#192f6a']}
+                        style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10 }}>
+                            <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
+                                <TouchableOpacity onPress={() => props.navigation.goBack()} >
+                                    <Ionicons name={Platform.OS === 'ios' ? 'ios-arrow-down' : 'ios-arrow-back'} size={32} color={'#fff'} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={{ alignItems: 'center', padding: 5 }}>
+                            <Image source={{ uri: profile_pic }} style={[{ height: Layout.window.width / 3, width: Layout.window.width / 3, borderRadius: Layout.window.width/ 6, borderWidth: 1, borderColor: '#fff', marginBottom: 5 }]} resizeMode={'cover'} />
+                            <Text style={[styles.textDefault, { color: '#fff' }]}>{capitalizeString(name)}</Text>
+                            <Text style={[styles.textDefault, { color: '#fff' }]}>{companyName}</Text>
+                        </View>
+                    </LinearGradient> */}
+        </View>
+        {/* CONTENT AREA */}
+        <View style={{ flex: 9 }}>
+            <ScrollView >
                 {/* PERSONAL PROFILE */}
                 <View style={{ flex: 3, margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                     <View style={{ marginBottom: 10 }}>
@@ -195,72 +129,8 @@ const MyAccountScreen = (props) => {
 
                     </View>
                 </View>
-                {/* {_renderScrollViewContent()} */}
-                {/* <View  style={{marginBottom:400}} /> */}
-                <View style={{ marginTop: 250 }} />
+
             </ScrollView>
-            <Animated.View style={[styleParalax.header, { height: headerHeight }]}>
-                <Animated.Image
-                    style={[
-                        styleParalax.backgroundImage,
-                        { opacity: imageOpacity, transform: [{ translateY: imageTranslate }] },
-                    ]}
-                    source={{ uri: profile_pic }}
-                />
-                <View style={styleParalax.bar}>
-                    {/* <Text style={styleParalax.title}>Title</Text> */}
-                </View>
-            </Animated.View>
         </View>
-
-    );
-
-}
-
-
-const styleParalax = StyleSheet.create({
-    fill: {
-        flex: 1,
-        backgroundColor: '#fff'
-    },
-    row: {
-        height: 40,
-        margin: 16,
-        // backgroundColor: '#D3D3D3',
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }, header: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: '#fff',
-        overflow: 'hidden',
-    },
-    bar: {
-        marginTop: 28,
-        height: 32,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    title: {
-        backgroundColor: 'transparent',
-        color: 'white',
-        fontSize: 18,
-    },
-    scrollViewContent: {
-        marginTop: HEADER_MAX_HEIGHT,
-    },
-    backgroundImage: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        width: null,
-        height: HEADER_MAX_HEIGHT,
-        resizeMode: 'cover',
-    },
-})
-
-export default MyAccountScreen
+    </View>
+</View >
