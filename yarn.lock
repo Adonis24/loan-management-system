@@ -136,11 +136,7 @@
     semver "^5.4.1"
     source-map "^0.5.0"
 
-<<<<<<< HEAD
-"@babel/core@^7.4.5":
-=======
 "@babel/core@^7.4.5", "@babel/core@^7.7.5":
->>>>>>> origin/upgradeExpo37
   version "7.9.0"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.9.0.tgz#ac977b538b77e132ff706f3b8a4dbad09c03c56e"
   integrity sha512-kWc7L0fw1xwvI0zi8OKVBuxRVefwGOrKSQMvrQ3dW+bIIavBY3/NpXmpjMy7bQnLgwgzWQZ8TlM57YHpHNHz4w==
@@ -659,11 +655,6 @@
   version "7.8.6"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.8.6.tgz#ba5c9910cddb77685a008e3c587af8d27b67962c"
   integrity sha512-trGNYSfwq5s0SgM1BMEB8hX3NDmO7EP2wsDGDexiaKMB92BaRpS+qZfpkMqUBhcsOTBwNy9B/jieo4ad/t/z2g==
-
-"@babel/parser@^7.9.0":
-  version "7.9.4"
-  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.9.4.tgz#68a35e6b0319bbc014465be43828300113f2f2e8"
-  integrity sha512-bC49otXX6N0/VYhgOMh4gnP26E9xnDZK3TmbNpxYzzz9BQLBosQwfyOe9/cXUU3txYhTzLCbcqd5c8y/OmCjHA==
 
 "@babel/plugin-external-helpers@^7.0.0":
   version "7.2.0"
@@ -1781,11 +1772,7 @@
     globals "^11.1.0"
     lodash "^4.17.13"
 
-<<<<<<< HEAD
-"@babel/traverse@^7.9.0":
-=======
 "@babel/traverse@^7.7.4", "@babel/traverse@^7.9.0":
->>>>>>> origin/upgradeExpo37
   version "7.9.0"
   resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.9.0.tgz#d3882c2830e513f4fe4cec9fe76ea1cc78747892"
   integrity sha512-jAZQj0+kn4WTHO5dUZkZKhbFrqZE7K5LAQ5JysMnmvGij+wOdr+8lWqPeW0BcF4wFwrEXXtdGO7wcV6YPJcf3w==
@@ -2176,17 +2163,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
-<<<<<<< HEAD
-"@jest/types@^25.2.6":
-  version "25.2.6"
-  resolved "https://registry.yarnpkg.com/@jest/types/-/types-25.2.6.tgz#c12f44af9bed444438091e4b59e7ed05f8659cb6"
-  integrity sha512-myJTTV37bxK7+3NgKc4Y/DlQ5q92/NOwZsZ+Uch7OXdElxOg61QYc72fPYNAjlvbnJ2YvbXLamIsa9tj48BmyQ==
-=======
 "@jest/types@^25.2.3":
   version "25.2.3"
   resolved "https://registry.yarnpkg.com/@jest/types/-/types-25.2.3.tgz#035c4fb94e2da472f359ff9a211915d59987f6b6"
   integrity sha512-6oLQwO9mKif3Uph3RX5J1i3S7X7xtDHWBaaaoeKw8hOzV6YUd0qDcYcHZ6QXMHDIzSr7zzrEa51o2Ovlj6AtKQ==
->>>>>>> origin/upgradeExpo37
   dependencies:
     "@types/istanbul-lib-coverage" "^2.0.0"
     "@types/istanbul-reports" "^1.1.1"
@@ -4051,15 +4031,9 @@ electron-to-chromium@^1.3.363:
   integrity sha512-V6hyxQ9jzt6Jy6w8tAv4HHKhIaVS6psG/gmwtQ+2+itdkWMHJLHJ4m1sFep/fWkdKvfJcPXuywfnECRzfNa7gw==
 
 electron-to-chromium@^1.3.390:
-<<<<<<< HEAD
-  version "1.3.395"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.395.tgz#2c531a0477bcc41deb440877d1f27509ed286aed"
-  integrity sha512-kdn2cX6hZXDdz/O2Q8tZscITlsSv1a/7bOq/fQs7QAJ9iaRlnhZPccarNhxZv1tXgmgwCnKp/1lJNYLOG8Dxiw==
-=======
   version "1.3.392"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.392.tgz#280ab4f7a3ae47419cfabb15dbfc1567be7f1111"
   integrity sha512-/hsgeVdReDsyTBE0aU9FRdh1wnNPrX3xlz3t61F+CJPOT+Umfi9DXHsCX85TEgWZQqlow0Rw44/4/jbU2Sqgkg==
->>>>>>> origin/upgradeExpo37
 
 emoji-regex@^7.0.1:
   version "7.0.3"
@@ -4290,22 +4264,13 @@ expo-barcode-scanner@~8.1.0:
     lodash "^4.6.0"
     prop-types "^15.6.0"
 
-<<<<<<< HEAD
-expo-camera@~8.2.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-8.2.0.tgz#9c849f0dc409e1fe6ee886f479e0ee0050b6d386"
-  integrity sha512-wGVqQVVR4YCkHuI7u+qloI1p2UbYwpU8hs0IEM+1Th4JQekAPUEfOmJI6ZHGj36El8f87ghRed2MXzOssn4hHg==
-=======
 expo-blur@~8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/expo-blur/-/expo-blur-8.1.0.tgz#44823ddd1ed4db3864c20fa7d9b7b91b65af0d76"
   integrity sha512-X7UUmRPV6I/f+oKJqsgKFJnKshqseK8MukwdLpIwBh7VNHiYp5gK0ynq5KlLGG6kb9zo68acjsD27DYlerARJQ==
->>>>>>> origin/upgradeExpo37
   dependencies:
     prop-types "^15.6.0"
 
-<<<<<<< HEAD
-=======
 expo-camera@~8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/expo-camera/-/expo-camera-8.2.0.tgz#9c849f0dc409e1fe6ee886f479e0ee0050b6d386"
@@ -4314,7 +4279,6 @@ expo-camera@~8.2.0:
     lodash "^4.6.0"
     prop-types "^15.6.0"
 
->>>>>>> origin/upgradeExpo37
 expo-constants@~9.0.0:
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-9.0.0.tgz#35c600079ee91d38fe4f56375caae6e90f122fdd"
@@ -4345,6 +4309,13 @@ expo-font@~8.1.0:
   integrity sha512-c8hY1E6VxDHJTJ91/5Tvr1UEc8acvn50BDiXz7vTvCeH3puDoCDq1weSsXIjKwuF6nF2NJbLQ0Ynenr3k7fiRA==
   dependencies:
     fontfaceobserver "^2.1.0"
+
+expo-image-picker@~8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-8.1.0.tgz#014e4f4aaef4c1daf56d13de27a41ef78660aa15"
+  integrity sha512-UMHiDGiflg47A/nfnmJ1gYdB/sEoxB4STVGgMeLNYpUkVR59kUWqsGTyVEtSywNCLPuXPZVB9NaRUd81Rbs7lA==
+  dependencies:
+    expo-permissions "~8.1.0"
 
 expo-keep-awake@~8.1.0:
   version "8.1.0"
@@ -4957,11 +4928,7 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.3
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.15.tgz#ffb703e1066e8a0eeaa4c8b80ba9253eeefbfb00"
   integrity sha512-6uHUhOPEBgQ24HM+r6b/QwWfZq+yiFcipKFrOFiBEnWdy5sdzYoi+pJeQaPI5qOLRFqWmAXUPQNsielzdLoecA==
 
-<<<<<<< HEAD
-graceful-fs@^4.2.0:
-=======
 graceful-fs@^4.2.0, graceful-fs@^4.2.3:
->>>>>>> origin/upgradeExpo37
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.3.tgz#4a12ff1b60376ef09862c2093edd908328be8423"
   integrity sha512-a30VEBm4PEdx1dRB7MFK7BejejvCvBronbLjht+sHuGYj8PHs7M/5Z+rt5lw551vZ7yfTCj4Vuyy3mSJytDWRQ==
@@ -5823,14 +5790,6 @@ jest-message-util@^24.9.0:
     stack-utils "^1.0.1"
 
 jest-message-util@^25.1.0:
-<<<<<<< HEAD
-  version "25.2.6"
-  resolved "https://registry.yarnpkg.com/jest-message-util/-/jest-message-util-25.2.6.tgz#9d5523bebec8cd9cdef75f0f3069d6ec9a2252df"
-  integrity sha512-Hgg5HbOssSqOuj+xU1mi7m3Ti2nwSQJQf/kxEkrz2r2rp2ZLO1pMeKkz2WiDUWgSR+APstqz0uMFcE5yc0qdcg==
-  dependencies:
-    "@babel/code-frame" "^7.0.0"
-    "@jest/types" "^25.2.6"
-=======
   version "25.2.4"
   resolved "https://registry.yarnpkg.com/jest-message-util/-/jest-message-util-25.2.4.tgz#b1441b9c82f5c11fc661303cbf200a2f136a7762"
   integrity sha512-9wWMH3Bf+GVTv0GcQLmH/FRr0x0toptKw9TA8U5YFLVXx7Tq9pvcNzTyJrcTJ+wLqNbMPPJlJNft4MnlcrtF5Q==
@@ -5838,7 +5797,6 @@ jest-message-util@^25.1.0:
     "@babel/code-frame" "^7.0.0"
     "@jest/test-result" "^25.2.4"
     "@jest/types" "^25.2.3"
->>>>>>> origin/upgradeExpo37
     "@types/stack-utils" "^1.0.1"
     chalk "^3.0.0"
     micromatch "^4.0.2"
@@ -7536,11 +7494,7 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
 
-<<<<<<< HEAD
-picomatch@^2.0.5:
-=======
 picomatch@^2.0.4, picomatch@^2.0.5:
->>>>>>> origin/upgradeExpo37
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.2.2.tgz#21f333e9b6b8eaff02468f5146ea406d345f4dad"
   integrity sha512-q0M/9eZHzmr0AulXyPwNfZjtwZ/RBZlbN3K3CErVrk50T2ASYI7Bye0EvekFY3IP1Nt2DHu0re+V2ZHIpMkuWg==
@@ -9856,8 +9810,6 @@ write-file-atomic@^2.3.0:
     imurmurhash "^0.1.4"
     signal-exit "^3.0.2"
 
-<<<<<<< HEAD
-=======
 write-file-atomic@^3.0.0:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/write-file-atomic/-/write-file-atomic-3.0.3.tgz#56bd5c5a5c70481cd19c571bd39ab965a5de56e8"
@@ -9868,7 +9820,6 @@ write-file-atomic@^3.0.0:
     signal-exit "^3.0.2"
     typedarray-to-buffer "^3.1.5"
 
->>>>>>> origin/upgradeExpo37
 ws@^1.1.0, ws@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/ws/-/ws-1.1.5.tgz#cbd9e6e75e09fc5d2c90015f21f0c40875e0dd51"

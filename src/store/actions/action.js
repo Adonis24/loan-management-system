@@ -9,7 +9,7 @@ import s3 from '../../do/DigitalOcean'
 import config from '../../do/config'
 
 import { requestToken, requestPersonalToken, urlToBlob, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI, requestTokenLMS, registerLMSApi, requestPersonalTokenLMS } from './apiRegistration'
-import { newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi, acceptApi, saveLoanDataApi, resetFormApi, saveLocationApi,getLocationApi } from './apiDashboard'
+import { newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi, acceptApi, saveLoanDataApi, resetFormApi, saveLocationApi, getLocationApi, savePictureApi, getAllAttachmentApi, resetAllAttachmentApi,getAttachmentApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -466,5 +466,34 @@ export const saveLocation = (x) => {
 
 }
 
+
+export const savePicture = (photo, attachment, location) => {
+    return async (dispatch, getState) => {
+        dispatch(savePictureApi(photo, attachment, location))
+    }
+
+}
+
+export const getAllAttachment = () => {
+    return async (dispatch, getState) => {
+        dispatch(getAllAttachmentApi())
+    }
+
+}
+
+export const getAttachment = (title) => {
+    return async (dispatch, getState) => {
+        dispatch(getAttachmentApi(title))
+    }
+
+}
+
+
+export const resetAllAttachment = () => {
+    return async (dispatch, getState) => {
+
+        dispatch(resetAllAttachmentApi())
+    }
+}
 
 
