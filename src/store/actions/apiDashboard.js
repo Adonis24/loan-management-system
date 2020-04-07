@@ -656,9 +656,14 @@ export const getAttachmentApi = (title) => {
     const attachment = JSON.parse(await SecureStore.getItemAsync('attachment'))
 
     if (attachment) {
-      const at = attachment.find(a => a.attachmentName == title)
-      if (at) {
-        console.log(`at ialah ${JSON.stringify(at)}`)
+      const {files} = attachment.find(a => a.attachmentName == title)
+ 
+      const atNew = []
+      if (files) {
+        files.map(a => {
+          atNew.push({ fileName: a.fileName,fileUri:a.fileDetail.uri })
+        })
+        console.log(`atnew ialah ${JSON.stringify(atNew)}`)
       }
     } else {
 
