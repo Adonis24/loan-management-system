@@ -35,9 +35,34 @@ const SitePicScreen = (props) => {
         await dispatch(actionCreator.getAttachment('sitePicture'))
     }
 
+    const { fileList, } = useSelector(state => state.attachmentReducer, shallowEqual)
+
+    const getUri = (fileName) => {
+        if (fileList) {
+            const found = fileList.find(f => f.fileName === fileName)
+            console.log(`uri found ${JSON.stringify(found)}`)
+            return found.fileUri
+        } else { return `https://picsum.photos/300/200` }
+    }
+
+    const getAllAttachment = async () => {
+        await dispatch(actionCreator.getAllAttachment())
+    }
+
+
+    useEffect(() => {
+        const unsubscribe = props.navigation.addListener('focus', () => {
+            console.log('focussed');
+            getAllAttachment()
+            getPicture()
+        });
+
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return unsubscribe;
+    }, [props.navigation]);
+
     useEffect(() => {
         getPicture()
-
     }, []); // empty-array means don't watch for any updates
 
     return (
@@ -56,14 +81,16 @@ const SitePicScreen = (props) => {
                         label={'Picture 1'}
                         navigation={props.navigation}
                         param={{ attachment: 'sitePicture', file: 'picture1' }}
+                        uri={getUri('picture1')}
                     />
                     <Placeholder
                         label={'Picture 2'}
                         navigation={props.navigation}
                         param={{ attachment: 'sitePicture', file: 'picture2' }}
+                        uri={getUri('picture2')}
                     />
 
-                    <TouchableOpacity onPress={() => dispatch(actionCreator.resetAllAttachment())} style={{ margin: 10, padding: 10, borderWidth: 1, borderColor: 'red' }}><Text>RESET</Text></TouchableOpacity>
+                    {/* <TouchableOpacity onPress={() => dispatch(actionCreator.resetAllAttachment())} style={{ margin: 10, padding: 10, borderWidth: 1, borderColor: 'red' }}><Text>RESET</Text></TouchableOpacity> */}
 
                 </View>
             </View>
@@ -75,8 +102,10 @@ const Placeholder = (props) => {
     return (
         <>
             <Text style={[styles.textDefault, { paddingLeft: 10 }]}>{props.label}</Text>
-            <TouchableOpacity onPress={() => props.navigation.navigate('Camera', { ...props.param, label: props.label })} style={{ width: Layout.window.width / 2, height: Layout.window.width / 3, borderWidth: 1, borderColor: 'lightgrey', backgroundColor: 'lightgrey', justifyContent: 'center', alignItems: 'center', borderRadius: 10, margin: 10 }}>
-                <Ionicons name='ios-folder' size={60} color="grey" />
+            <TouchableOpacity onPress={() => props.navigation.navigate('Camera', { ...props.param, label: props.label })} style={{ width: Layout.window.width / 2, height: Layout.window.width / 3, borderWidth: 1, borderColor: 'lightgrey', backgroundColor: 'lightgrey', justifyContent: 'center', alignItems: 'stretch', borderRadius: 10, margin: 10 }}>
+                {props.uri ?
+                    <Image source={{ uri: props.uri }} style={{ flex: 1, width: undefined, height: undefined }} resizeMode={'cover'} />
+                    : <Ionicons name='ios-folder' size={60} color="grey" />}
             </TouchableOpacity>
         </>)
 }
