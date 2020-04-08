@@ -619,18 +619,20 @@ export const savePictureApi = (photo, attachment, file) => {
           aFilter.push(newA)
 
           await SecureStore.setItemAsync('attachment', JSON.stringify(aFilter))
-
+          await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: aFilter } })
 
         }
       } else {
 
         a.push({ attachmentName: attachment, files: [{ fileName: file, fileDetail: photo }] })
         await SecureStore.setItemAsync('attachment', JSON.stringify(a))
+        await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: a } })
 
       }
     } else {
       const newA = [{ attachmentName: attachment, files: [{ fileName: file, fileDetail: photo }] }]
       await SecureStore.setItemAsync('attachment', JSON.stringify(newA))
+      await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: newA } })
     }
 
   }
@@ -643,6 +645,7 @@ export const getAllAttachmentApi = () => {
 
     if (attachment) {
       console.log(`attachment ialah ${JSON.stringify(attachment)}`)
+      dispatch({ type: 'SET_ATTACHMENT', payload: { attachment } })
     } else {
 
     }
@@ -653,20 +656,25 @@ export const getAllAttachmentApi = () => {
 export const getAttachmentApi = (title) => {
   return async (dispatch, getState) => {
 
-    const attachment = JSON.parse(await SecureStore.getItemAsync('attachment'))
-
+    const { attachment } = getState().attachmentReducer
+    console.log(`title is ${JSON.stringify(title)}`)
+    console.log(`attachmentReducer is ${JSON.stringify(attachment)}`)
     if (attachment) {
-      const {files} = attachment.find(a => a.attachmentName == title)
- 
-      const atNew = []
-      if (files) {
-        files.map(a => {
-          atNew.push({ fileName: a.fileName,fileUri:a.fileDetail.uri })
-        })
-        console.log(`atnew ialah ${JSON.stringify(atNew)}`)
+      const jumpa = attachment.find(a => a.attachmentName == title)
+      if (jumpa) {
+        const { files } = jumpa
+        const atNew = []
+        if (files) {
+          files.map(a => {
+            atNew.push({ fileName: a.fileName, fileUri: a.fileDetail.uri })
+          })
+          console.log(`atnew ialah ${JSON.stringify(atNew)}`)
+          dispatch({ type: 'SET_ATTACHMENT', payload: { fileList: atNew } })
+        }
       }
-    } else {
 
+    } else {
+      dispatch({ type: 'SET_ATTACHMENT', payload: { fileList: [] } })
     }
 
   }

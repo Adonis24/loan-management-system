@@ -469,7 +469,7 @@ export const saveLocation = (x) => {
 
 export const savePicture = (photo, attachment, location) => {
     return async (dispatch, getState) => {
-        dispatch(savePictureApi(photo, attachment, location))
+        await dispatch(savePictureApi(photo, attachment, location))
     }
 
 }
