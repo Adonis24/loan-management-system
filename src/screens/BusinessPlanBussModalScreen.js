@@ -5,7 +5,8 @@ import {
     TouchableOpacity,
     View,
     TextInput,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    ScrollView
 
 } from 'react-native';
 import { Formik } from 'formik';
@@ -131,7 +132,7 @@ const BusinessPlanBussModalScreen = (props) => {
                             <Text style={[styles.formTitle]}>Section B</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Butir Butir Perniagaan</Text>
-
+                            <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start'}}>
                             <CustomTextInput
                                 imageUri={require('../assets/images/estimateTime.png')}
                                 value={waktu}
@@ -196,6 +197,7 @@ const BusinessPlanBussModalScreen = (props) => {
 
 
                             />
+                            </ScrollView>
 
                             <CustomFormAction
                                 label={`Save`}

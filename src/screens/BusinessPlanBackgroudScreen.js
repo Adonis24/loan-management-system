@@ -5,7 +5,8 @@ import {
     TouchableOpacity,
     View,
     TextInput,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    ScrollView
 
 } from 'react-native';
 import { Formik } from 'formik';
@@ -116,6 +117,7 @@ const BusinessPlanBackgroudScreen = (props) => {
                             <Text style={[styles.formTitle]}>Section A</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Latar Belakang Pemohon</Text>
+                            <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start', paddingLeft: 10 }}>
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/user.png')}
@@ -169,6 +171,7 @@ const BusinessPlanBackgroudScreen = (props) => {
                                 placeholder={'Alamat Syarikat Line 2'}
 
                             />
+                            </ScrollView>
 
                             <CustomFormAction
                                 navigation={props.navigation}

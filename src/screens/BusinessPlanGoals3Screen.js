@@ -128,78 +128,79 @@ const BusinessPlanGoals3Screen = (props) => {
 
 
                     return (
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', }}>
 
                             <Text style={[styles.formTitle]}>Section E</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Sasaran Pencapaian Perniagaan Tahunan      (3 tahun ke hadapan)</Text>
+                            <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start', paddingLeft: 10, paddingRight: 10 }}>
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/estimateTime.png')}
-                                value={tahun3}
-                                handleChange={FormikProps.handleChange(`tahun3`)}
-                                handleBlur={FormikProps.handleBlur(`tahun3`)}
-                                touched={tahun3Touched}
-                                error={tahun3Error}
-                                placeholder={'Tahun Ketiga'}
-                                keyboardType={'phone-pad'}
-                            />
-                            <CustomTextInput
-                                imageUri={require('../assets/images/company.png')}
-                                value={jualan3}
-                                handleChange={FormikProps.handleChange(`jualan3`)}
-                                handleBlur={FormikProps.handleBlur(`jualan3`)}
-                                touched={jualan3Touched}
-                                error={jualan3Error}
-                                placeholder={'Jualan'}
-                                keyboardType={'phone-pad'}
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/estimateTime.png')}
+                                    value={tahun3}
+                                    handleChange={FormikProps.handleChange(`tahun3`)}
+                                    handleBlur={FormikProps.handleBlur(`tahun3`)}
+                                    touched={tahun3Touched}
+                                    error={tahun3Error}
+                                    placeholder={'Tahun Ketiga'}
+                                    keyboardType={'phone-pad'}
+                                />
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/company.png')}
+                                    value={jualan3}
+                                    handleChange={FormikProps.handleChange(`jualan3`)}
+                                    handleBlur={FormikProps.handleBlur(`jualan3`)}
+                                    touched={jualan3Touched}
+                                    error={jualan3Error}
+                                    placeholder={'Jualan'}
+                                    keyboardType={'phone-pad'}
 
-                            />
+                                />
 
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/bizAct.png')}
-                                value={belian3}
-                                handleChange={FormikProps.handleChange(`belian3`)}
-                                handleBlur={FormikProps.handleBlur(`belian3`)}
-                                touched={belian3Touched}
-                                error={belian3Error}
-                                placeholder={'Belian/Kos Operasi'}
-                                keyboardType={'phone-pad'}
-                            />
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/bizAct.png')}
+                                    value={belian3}
+                                    handleChange={FormikProps.handleChange(`belian3`)}
+                                    handleBlur={FormikProps.handleBlur(`belian3`)}
+                                    touched={belian3Touched}
+                                    error={belian3Error}
+                                    placeholder={'Belian/Kos Operasi'}
+                                    keyboardType={'phone-pad'}
+                                />
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/compRegNum.png')}
-                                value={grossProfit3}
-                                handleChange={FormikProps.handleChange(`grossProfit3`)}
-                                handleBlur={FormikProps.handleBlur(`grossProfit3`)}
-                                touched={grossProfit3Touched}
-                                error={grossProfit3Error}
-                                placeholder={'Untung Kasar'}
-                                keyboardType={'phone-pad'}
-                            />
-                            <CustomTextInput
-                                imageUri={require('../assets/images/payment.png')}
-                                value={belanjaLain3}
-                                handleChange={FormikProps.handleChange(`belanjaLain3`)}
-                                handleBlur={FormikProps.handleBlur(`belanjaLain3`)}
-                                touched={belanjaLain3Touched}
-                                error={belanjaLain3Error}
-                                placeholder={'Perbelanjaan Lain'}
-                                keyboardType={'phone-pad'}
-                            />
-                            <CustomTextInput
-                                imageUri={require('../assets/images/user.png')}
-                                value={netProfit3}
-                                handleChange={FormikProps.handleChange(`netProfit3`)}
-                                handleBlur={FormikProps.handleBlur(`netProfit3`)}
-                                touched={netProfit3Touched}
-                                error={netProfit3Error}
-                                placeholder={'Untung Bersih'}
-                                keyboardType={'phone-pad'}
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/compRegNum.png')}
+                                    value={grossProfit3}
+                                    handleChange={FormikProps.handleChange(`grossProfit3`)}
+                                    handleBlur={FormikProps.handleBlur(`grossProfit3`)}
+                                    touched={grossProfit3Touched}
+                                    error={grossProfit3Error}
+                                    placeholder={'Untung Kasar'}
+                                    keyboardType={'phone-pad'}
+                                />
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/payment.png')}
+                                    value={belanjaLain3}
+                                    handleChange={FormikProps.handleChange(`belanjaLain3`)}
+                                    handleBlur={FormikProps.handleBlur(`belanjaLain3`)}
+                                    touched={belanjaLain3Touched}
+                                    error={belanjaLain3Error}
+                                    placeholder={'Perbelanjaan Lain'}
+                                    keyboardType={'phone-pad'}
+                                />
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/user.png')}
+                                    value={netProfit3}
+                                    handleChange={FormikProps.handleChange(`netProfit3`)}
+                                    handleBlur={FormikProps.handleBlur(`netProfit3`)}
+                                    touched={netProfit3Touched}
+                                    error={netProfit3Error}
+                                    placeholder={'Untung Bersih'}
+                                    keyboardType={'phone-pad'}
 
-                            />
-
+                                />
+                            </ScrollView>
 
                             <CustomFormAction
                                 label={`Save`}

@@ -128,11 +128,12 @@ const BusinessPlanGoalsScreen = (props) => {
 
 
                     return (
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',  }}>
 
                             <Text style={[styles.formTitle]}>Section E</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Sasaran Pencapaian Perniagaan Tahunan      (3 tahun ke hadapan)</Text>
+                            <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start',paddingLeft:10,paddingRight:10}}>
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/estimateTime.png')}
@@ -200,7 +201,7 @@ const BusinessPlanGoalsScreen = (props) => {
 
                             />
 
-
+</ScrollView>
                             <CustomFormAction
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}

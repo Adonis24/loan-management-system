@@ -151,7 +151,7 @@ const BusinessPlanBudgIncScreen = (props) => {
                             <Text style={[styles.formTitle]}>Section C</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Anggaran Pendapatan</Text>
-                            <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start', paddingLeft: 10 }}>
+                            <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start',paddingLeft:10,paddingRight:10 }}>
                                 <CustomTextInput
                                     imageUri={require('../assets/images/payment.png')}
                                     value={income}
