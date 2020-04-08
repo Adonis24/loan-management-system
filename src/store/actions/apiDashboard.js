@@ -209,9 +209,9 @@ export const applyfinancingApi = (page) => {
 export const applyBusinessPlanApi = (page) => {
   return async (dispatch, getState) => {
 
-    const {compName, name, regNum, compAlamat, compAlamat_2,paidCap, authCap, pemilikan, compEstab, compOperation, businessType,bankName, pemegang, akaun, noAkaun,partName, partIcNum, partJawatan, saham,bilCawangan, lokasi, bilPekerja, compPhone, compFax, compStatus,Teknologi, waktu, sourceCap, totalCap, sokongan, pengiktirafan,pembelian, income, kosOperasi, totalExpenditure, untungKasar, perbelanjaanLain, untungBersih, totalIncome,pembelianStok, ruangNiaga, membeli, kenderaan, modalPusingan, belanjaanLain, jumlah, perkakas,belian, tahun, grossProfit, belanjaLain, netProfit, jualan,belian2, tahun2, grossProfit2, belanjaLain2, netProfit2, jualan2, belian3, tahun3, grossProfit3, belanjaLain3, netProfit3, jualan3,perancangan, pasaran,kursus, experience, namaPemohon, cerTarikh, } = getState().businessPlanningReducer
+    const { compName, name, regNum, compAlamat, compAlamat_2, paidCap, authCap, pemilikan, compEstab, compOperation, businessType, bankName, pemegang, akaun, noAkaun, partName, partIcNum, partJawatan, saham, bilCawangan, lokasi, bilPekerja, compPhone, compFax, compStatus, Teknologi, waktu, sourceCap, totalCap, sokongan, pengiktirafan, pembelian, income, kosOperasi, totalExpenditure, untungKasar, perbelanjaanLain, untungBersih, totalIncome, pembelianStok, ruangNiaga, membeli, kenderaan, modalPusingan, belanjaanLain, jumlah, perkakas, belian, tahun, grossProfit, belanjaLain, netProfit, jualan, belian2, tahun2, grossProfit2, belanjaLain2, netProfit2, jualan2, belian3, tahun3, grossProfit3, belanjaLain3, netProfit3, jualan3, perancangan, pasaran, kursus, experience, namaPemohon, cerTarikh, } = getState().businessPlanningReducer
 
-    const responseJson = await apiPostCall(`api/loan/addBusinessPlanInformation`, null,compName, name, regNum, compAlamat, compAlamat_2,paidCap, authCap, pemilikan, compEstab, compOperation, businessType,bankName, pemegang, akaun, noAkaun,partName, partIcNum, partJawatan, saham,bilCawangan, lokasi, bilPekerja, compPhone, compFax, compStatus,Teknologi, waktu, sourceCap, totalCap, sokongan, pengiktirafan,pembelian, income, kosOperasi, totalExpenditure, untungKasar, perbelanjaanLain, untungBersih, totalIncome,pembelianStok, ruangNiaga, membeli, kenderaan, modalPusingan, belanjaanLain, jumlah, perkakas,belian, tahun, grossProfit, belanjaLain, netProfit, jualan,belian2, tahun2, grossProfit2, belanjaLain2, netProfit2, jualan2, belian3, tahun3, grossProfit3, belanjaLain3, netProfit3, jualan3,perancangan, pasaran,kursus, experience, namaPemohon, cerTarikh,  getState().apiReducer)
+    const responseJson = await apiPostCall(`api/loan/addBusinessPlanInformation`, null, compName, name, regNum, compAlamat, compAlamat_2, paidCap, authCap, pemilikan, compEstab, compOperation, businessType, bankName, pemegang, akaun, noAkaun, partName, partIcNum, partJawatan, saham, bilCawangan, lokasi, bilPekerja, compPhone, compFax, compStatus, Teknologi, waktu, sourceCap, totalCap, sokongan, pengiktirafan, pembelian, income, kosOperasi, totalExpenditure, untungKasar, perbelanjaanLain, untungBersih, totalIncome, pembelianStok, ruangNiaga, membeli, kenderaan, modalPusingan, belanjaanLain, jumlah, perkakas, belian, tahun, grossProfit, belanjaLain, netProfit, jualan, belian2, tahun2, grossProfit2, belanjaLain2, netProfit2, jualan2, belian3, tahun3, grossProfit3, belanjaLain3, netProfit3, jualan3, perancangan, pasaran, kursus, experience, namaPemohon, cerTarikh, getState().apiReducer)
 
     console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const einfosArray = await responseJson.data
@@ -737,7 +737,7 @@ export const getLoanDataApi = () => {
 
     if (loanData) {
       console.log(`loan data ialah ${JSON.stringify(loanData)}`)
-      //dispatch({ type: 'SET_ATTACHMENT', payload: { attachment } })
+      dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...loanData } })
     } else {
 
     }

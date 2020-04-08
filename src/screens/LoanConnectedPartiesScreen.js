@@ -69,25 +69,10 @@ const LoanConnectedPartiesScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { cpName, cpIcNumber, cpPekerjaan, cpPendapatan,cpRelation } = useSelector(state => state.financingReducer, shallowEqual)
+    const { cpName, cpIcNumber, cpPekerjaan, cpPendapatan, cpRelation } = useSelector(state => state.financingReducer, shallowEqual)
 
 
-    const setConnectParties = (value) => dispatch({ type: 'SET_CONNECT_PARTIES', payload: { ...value } })
-
-
-    //const { capacity, nameCP, cpIcNumber, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
-
-    useEffect(() => {
-        const open = () => setshowLogo(false)
-        const off = () => setshowLogo(true)
-
-        keyboardBeingDisplay(open)
-        keyboardBeingClose(off)
-    }, []); // empty-array means don't watch for any updates
-
-    const [showLogo, setshowLogo] = useState(true)
-
-
+    const setConnectParties = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
     return (
         <LayoutLoan navigation={props.navigation}>
@@ -95,7 +80,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ cpName, cpIcNumber, cpPekerjaan, cpPendapatan,cpRelation }}
+                initialValues={{ cpName, cpIcNumber, cpPekerjaan, cpPendapatan, cpRelation }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -112,7 +97,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
 
 
-                    const { cpPekerjaan, cpName, cpIcNumber, cpPendapatan, poskod,cpRelation } = FormikProps.values
+                    const { cpPekerjaan, cpName, cpIcNumber, cpPendapatan, poskod, cpRelation } = FormikProps.values
 
                     const cpPekerjaanError = FormikProps.errors.cpPekerjaan
                     const cpPekerjaanTouched = FormikProps.touched.cpPekerjaan
@@ -135,7 +120,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                             <Modal animationType={'slide'}
                                 visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
                             >
@@ -170,9 +155,9 @@ const LoanConnectedPartiesScreen = (props) => {
 
                             <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Hubungan :</Text>
 
-<View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, flex:1 }}>
+                                <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('cpRelation')}>
@@ -181,10 +166,10 @@ const LoanConnectedPartiesScreen = (props) => {
                                             {cpRelationTouched && cpRelationError && <Text style={styles.error}>{cpRelationError}</Text>}
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={cpRelation} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('cpRelation', itemValue)}>
-                                            <Picker.Item label={'Hubungan'} value={undefined} />
-                                            <Picker.Item label="Suami" value="suami" />
-                                            <Picker.Item label="Isteri" value="isteri" />
-                                            <Picker.Item label="Waris" value="waris" />
+                                                <Picker.Item label={'Hubungan'} value={undefined} />
+                                                <Picker.Item label="Suami" value="suami" />
+                                                <Picker.Item label="Isteri" value="isteri" />
+                                                <Picker.Item label="Waris" value="waris" />
                                             </Picker>
                                             {cpRelationTouched && cpRelationError && <Text style={styles.error}>{cpRelationError}</Text>}
                                         </View>}

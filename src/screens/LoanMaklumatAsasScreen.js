@@ -1,30 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import {
-    Image,
     Text,
-    Platform,
-    ScrollView,
-    TouchableOpacity,
-    View,
-    TextInput,
-    KeyboardAvoidingView,
+    Platform, 
+    View, 
     CheckBox
-
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+
 
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import Constants from 'expo-constants'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 
 import LayoutLoan from '../Layout/LayoutLoan';
-import Layout from '../constants/Layout'
+
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import styles from '../styles/styles'
-import { LinearGradient } from 'expo-linear-gradient'
-import * as actionCreator from '../store/actions/action'
+
 import CheckBox2 from 'react-native-check-box'
 
 const validationSchema = Yup.object().shape({
@@ -52,16 +43,12 @@ const LoanMaklumatAsasScreen = (props) => {
     const { negeri, cawanganParlimen, pengundiBerdaftar, statusPerniagaan } = useSelector(state => state.financingReducer, shallowEqual)
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
 
-
-
     const setMaklumatAsas = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
-
-
 
     return (
         <LayoutLoan navigation={props.navigation}>
             <Formik
-                initialValues={{ negeri, cawanganParlimen, pengundiBerdaftar: true, statusPerniagaan: true }}
+                initialValues={{ negeri, cawanganParlimen, pengundiBerdaftar, statusPerniagaan }}
                 validateOnMount
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -173,7 +160,5 @@ const LoanMaklumatAsasScreen = (props) => {
         </LayoutLoan>
     );
 }
-
-
 
 export default LoanMaklumatAsasScreen

@@ -62,7 +62,7 @@ const LoanConnectedPartiesScreen = (props) => {
     const { compName, pengalaman, compAct, compPendapatan, } = useSelector(state => state.financingReducer, shallowEqual)
 
 
-    const setBusinessInfo = (value) => dispatch({ type: 'SET_BUSINESS_INFO', payload: { ...value } })
+    const setBusinessInfo = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
 
 
