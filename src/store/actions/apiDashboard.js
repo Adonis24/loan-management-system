@@ -600,12 +600,6 @@ export const saveLocationApi = (x) => {
     }
 
 
-    // const responseJson = await apiGetCall(`api/Notification`, getState().apiReducer)
-    // const notificationByDate = [...responseJson.data.promotion, ...responseJson.data.annoucement, ...responseJson.data.advertisement]
-
-    // dispatch({ type: 'SET_NOTIFICATION', payload: { notificationList: notificationByDate } })
-
-
   }
 }
 
@@ -621,12 +615,101 @@ export const getLocationApi = (x) => {
 
     }
 
-
-    // const responseJson = await apiGetCall(`api/Notification`, getState().apiReducer)
-    // const notificationByDate = [...responseJson.data.promotion, ...responseJson.data.annoucement, ...responseJson.data.advertisement]
-
-    // dispatch({ type: 'SET_NOTIFICATION', payload: { notificationList: notificationByDate } })
+  }
+}
 
 
+
+export const savePictureApi = (photo, attachment, file) => {
+  return async (dispatch, getState) => {
+
+    const a = JSON.parse(await SecureStore.getItemAsync(`attachment`))
+
+
+    if (a) {
+
+
+      const aToModify = a.find(b => b.attachmentName == attachment)
+
+      if (aToModify) {
+        //const aToModifyFiles = aToModify.files.find(c => c.fileName == file)
+        const { files } = aToModify
+        console.log(`files ialah ${JSON.stringify(files)}`)
+        if (files) {
+
+          const newFiles = files.filter(f => f.fileName !== file)
+          newFiles.push({ fileName: file, fileDetail: photo })
+
+          const newA = { ...aToModify, files: newFiles }
+
+          const aFilter = a.filter(b => b.attachmentName !== attachment)
+          aFilter.push(newA)
+
+          await SecureStore.setItemAsync('attachment', JSON.stringify(aFilter))
+          await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: aFilter } })
+
+        }
+      } else {
+
+        a.push({ attachmentName: attachment, files: [{ fileName: file, fileDetail: photo }] })
+        await SecureStore.setItemAsync('attachment', JSON.stringify(a))
+        await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: a } })
+
+      }
+    } else {
+      const newA = [{ attachmentName: attachment, files: [{ fileName: file, fileDetail: photo }] }]
+      await SecureStore.setItemAsync('attachment', JSON.stringify(newA))
+      await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: newA } })
+    }
+
+  }
+}
+
+export const getAllAttachmentApi = () => {
+  return async (dispatch, getState) => {
+
+    const attachment = JSON.parse(await SecureStore.getItemAsync('attachment'))
+
+    if (attachment) {
+      console.log(`attachment ialah ${JSON.stringify(attachment)}`)
+      dispatch({ type: 'SET_ATTACHMENT', payload: { attachment } })
+    } else {
+
+    }
+
+  }
+}
+
+export const getAttachmentApi = (title) => {
+  return async (dispatch, getState) => {
+
+    const { attachment } = getState().attachmentReducer
+    console.log(`title is ${JSON.stringify(title)}`)
+    console.log(`attachmentReducer is ${JSON.stringify(attachment)}`)
+    if (attachment) {
+      const jumpa = attachment.find(a => a.attachmentName == title)
+      if (jumpa) {
+        const { files } = jumpa
+        const atNew = []
+        if (files) {
+          files.map(a => {
+            atNew.push({ fileName: a.fileName, fileUri: a.fileDetail.uri })
+          })
+          console.log(`atnew ialah ${JSON.stringify(atNew)}`)
+          dispatch({ type: 'SET_ATTACHMENT', payload: { fileList: atNew } })
+        }
+      }
+
+    } else {
+      dispatch({ type: 'SET_ATTACHMENT', payload: { fileList: [] } })
+    }
+
+  }
+}
+
+export const resetAllAttachmentApi = () => {
+  return async (dispatch, getState) => {
+    await SecureStore.deleteItemAsync('attachment')
+    console.log(`delete attachment dalam storage`)
   }
 }

@@ -10,7 +10,7 @@ import {
     Modal
 
 } from 'react-native';
-
+import * as DocumentPicker from 'expo-document-picker';
 import moment from 'moment'
 
 import Constants from 'expo-constants'
@@ -28,11 +28,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 
 
-const SitePicScreen = (props) => {
+const AttachmentScreen = (props) => {
     const dispatch = useDispatch()
 
     const getPicture = async () => {
-        await dispatch(actionCreator.getAttachment('sitePicture'))
+        await dispatch(actionCreator.getAttachment(store))
     }
 
     const { fileList, } = useSelector(state => state.attachmentReducer, shallowEqual)
@@ -40,9 +40,12 @@ const SitePicScreen = (props) => {
     const getUri = (fileName) => {
         if (fileList) {
             const found = fileList.find(f => f.fileName === fileName)
-            console.log(`uri found ${JSON.stringify(found)}`)
-            return found.fileUri
-        } else { return `https://picsum.photos/300/200` }
+            if (found) {
+                console.log(`uri found ${JSON.stringify(found)}`)
+                return found.fileUri
+            } else { return `NA` }
+
+        } else { return `NA` }
     }
 
     const getAllAttachment = async () => {
@@ -65,9 +68,14 @@ const SitePicScreen = (props) => {
         getPicture()
     }, []); // empty-array means don't watch for any updates
 
+    const content = props.route.params?.content ?? 'NA'
+    //console.log(`inilah content ${content}`)
+    //const contentParsed = JSON.parse(content)
+    const { header, atList, store } = JSON.parse(content)
+
     return (
         < LayoutB
-            title={'Checklist'}
+            title={header}
             screenType='form'
             navigation={props.navigation}
             imageUri={require('../assets/images/e-scoring.png')}
@@ -76,8 +84,23 @@ const SitePicScreen = (props) => {
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 4 }}>
                     <View style={{ margin: 7 }} />
+                    <FlatList
+                        data={atList}
+                        keyExtractor={(item, index) => index.toString()}
 
-                    <Placeholder
+                        renderItem={({ item }) => (
+                            < Placeholder
+                                label={item.label}
+                                navigation={props.navigation}
+                                param={item.param}
+                                uri={getUri(item.param.file)}
+                                type={item.param.type}
+                            />
+                        )}
+
+                    />
+
+                    {/* < Placeholder
                         label={'Picture 1'}
                         navigation={props.navigation}
                         param={{ attachment: 'sitePicture', file: 'picture1' }}
@@ -88,7 +111,7 @@ const SitePicScreen = (props) => {
                         navigation={props.navigation}
                         param={{ attachment: 'sitePicture', file: 'picture2' }}
                         uri={getUri('picture2')}
-                    />
+                    /> */}
 
                     {/* <TouchableOpacity onPress={() => dispatch(actionCreator.resetAllAttachment())} style={{ margin: 10, padding: 10, borderWidth: 1, borderColor: 'red' }}><Text>RESET</Text></TouchableOpacity> */}
 
@@ -99,15 +122,37 @@ const SitePicScreen = (props) => {
 }
 
 const Placeholder = (props) => {
+    const dispatch = useDispatch()
+    const docPicker = async () => {
+        const { attachment, file } = props.param
+        const result = await DocumentPicker.getDocumentAsync({ type: '*/*', copyToCacheDirectory: true, multiple: false })
+        console.log(`document ialah : ${JSON.stringify(result)}`)
+        const { cancelled } = result
+        if (!cancelled) {
+            await dispatch(actionCreator.savePicture(result, attachment, file))
+        }
+
+
+
+    }
     return (
         <>
             <Text style={[styles.textDefault, { paddingLeft: 10 }]}>{props.label}</Text>
-            <TouchableOpacity onPress={() => props.navigation.navigate('Camera', { ...props.param, label: props.label })} style={{ width: Layout.window.width / 2, height: Layout.window.width / 3, borderWidth: 1, borderColor: 'lightgrey', backgroundColor: 'lightgrey', justifyContent: 'center', alignItems: 'stretch', borderRadius: 10, margin: 10 }}>
-                {props.uri ?
-                    <Image source={{ uri: props.uri }} style={{ flex: 1, width: undefined, height: undefined }} resizeMode={'cover'} />
-                    : <Ionicons name='ios-folder' size={60} color="grey" />}
-            </TouchableOpacity>
+            {props.type === 'doc' ?
+                <TouchableOpacity onPress={() => docPicker()} style={{ margin: 10 }}>
+                    {props.uri !== 'NA' ?
+                        <Text>Dah isi</Text>
+                        : <Text>Sila isi</Text>}
+                </TouchableOpacity> :
+                <TouchableOpacity onPress={() => props.navigation.navigate('Camera', { ...props.param, label: props.label })} style={{ width: Layout.window.width / 2, height: Layout.window.width / 3, borderWidth: 1, borderColor: 'lightgrey', backgroundColor: 'lightgrey', justifyContent: 'center', alignItems: 'stretch', borderRadius: 10, margin: 10 }}>
+                    {props.uri !== 'NA' ?
+                        <Image source={{ uri: props.uri }} style={{ flex: 1, width: undefined, height: undefined }} resizeMode={'cover'} />
+                        : <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                            <Ionicons name='ios-folder' size={60} color="grey" />
+                        </View>}
+                </TouchableOpacity>}
+
         </>)
 }
 
-export default SitePicScreen
+export default AttachmentScreen
