@@ -11,7 +11,8 @@ import {
     Dimensions,
     TextInput,
     AsyncStorage,
-    ImageBackground
+    ImageBackground,
+    ActivityIndicator
 
 
 } from 'react-native';
@@ -38,6 +39,7 @@ const CameraScreen = (props) => {
     }
 
     const openImagePickerAsync = async () => {
+        setActive(true)
         let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
         if (permissionResult.granted === false) {
             alert("Permission to access camera roll is required!");
@@ -46,12 +48,18 @@ const CameraScreen = (props) => {
 
         let pickerResult = await ImagePicker.launchImageLibraryAsync();
         console.log(pickerResult);
+
+        await dispatch(actionCreator.savePicture(pickerResult, attachment, file))
+        setActive(false)
+        props.navigation.goBack()
     }
 
     useEffect(() => {
         getPermission();
         //getGalleryPermission()
     }, []); // empty-array means don't watch for any updates
+
+    const [active, setActive] = useState(false)
 
     const attachment = props.route.params?.attachment ?? 'NA'
     const file = props.route.params?.file ?? 'NA'
@@ -60,11 +68,14 @@ const CameraScreen = (props) => {
 
     const snap = async () => {
         if (cameraRef) {
+            setActive(true)
             let photo = await cameraRef.current.takePictureAsync();
 
             await dispatch(actionCreator.savePicture(photo, attachment, file))
-            await dispatch(actionCreator.getAllAttachment())
-            //props.navigation.goBack()
+            // await dispatch(actionCreator.getAllAttachment())
+            // await dispatch(actionCreator.getAttachment(attachment))
+            setActive(false)
+            props.navigation.goBack()
         }
     };
 
@@ -81,12 +92,13 @@ const CameraScreen = (props) => {
 
     return (
         <View style={{ flex: 1 }}>
+
             <Camera
                 ref={cameraRef}
                 ratio={'16:9'}
                 type={type}
                 style={[StyleSheet.absoluteFill, { flex: 1, justifyContent: 'space-between', alignItems: 'stretch' }]}>
-                <View style={{ padding: 10, backgroundColor: '#000', flexDirection: 'row', borderTopWidth: 1, paddingTop: Constants.statusBarHeight,paddingRight:10,paddingLeft:10 }}>
+                <View style={{ padding: 10, backgroundColor: '#000', flexDirection: 'row', borderTopWidth: 1, paddingTop: Constants.statusBarHeight, paddingRight: 10, paddingLeft: 10 }}>
 
                     <View style={{ flex: 2, alignItems: 'flex-start', justifyContent: 'center' }}>
 
@@ -98,7 +110,7 @@ const CameraScreen = (props) => {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{ padding: 10, backgroundColor: '#000', flexDirection: 'row', paddingRight:10,paddingLeft:10 }}>
+                <View style={{ padding: 10, backgroundColor: '#000', flexDirection: 'row', paddingRight: 10, paddingLeft: 10 }}>
                     <View style={{ flex: 1, alignItems: 'flex-start' }}>
                         <TouchableOpacity onPress={() => setType(type === Camera.Constants.Type.back ? Camera.Constants.Type.front
                             : Camera.Constants.Type.back
@@ -115,6 +127,7 @@ const CameraScreen = (props) => {
                         </TouchableOpacity>
                     </View>
                 </View>
+                {active && <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center', backgroundColor: '#000' }}><ActivityIndicator size={'large'} color={'#fff'} /></View>}
             </Camera>
         </View >
     );
