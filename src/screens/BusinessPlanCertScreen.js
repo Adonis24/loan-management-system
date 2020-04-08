@@ -86,6 +86,7 @@ const BusinessPlanCertScreen = (props) => {
                     setLatarBelakang(values)
                     actions.setSubmitting(false)
                     actions.resetForm({})
+                    dispatch(actionCreator.saveBussPlanData())
                     props.navigation.navigate('Dashboard')
                 }}
                 validationSchema={validationSchema}
@@ -158,15 +159,15 @@ const BusinessPlanCertScreen = (props) => {
                             <Text style={[styles.formSubtitle]}>Akuan Pemohon</Text>
 
 
-                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start',marginLeft:15 }]}>Perakuan Pemohon</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center',marginLeft:15 }}>
+                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start', marginLeft: 15 }]}>Perakuan Pemohon</Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15 }}>
                                 {(Platform.OS == 'ios') ?
 
                                     <CheckBox2 onClick={() => handleCheckBox()} isChecked={akuan} />
                                     :
                                     <CheckBox onValueChange={handleCheckBox} value={akuan} />
                                 }
-                                <Text style={[styles.caption, { textAlign: 'left', marginLeft: 10,margin:5, fontSize: 10.5 }]}>
+                                <Text style={[styles.caption, { textAlign: 'left', marginLeft: 10, margin: 5, fontSize: 10.5 }]}>
                                     Saya mengaku bahawa maklumat yang dikemukakan ini adalah benar. Saya akan mematuhi syarat-syarat pembiayaan yang ditetapkan
                                     dan bersedia untuk menandatangani Dokumen Perjanjian Pembiayaan TEKUN Nasional sekiranya permohonan pembiayaan saya diluluskan.
                                  </Text>
@@ -183,7 +184,7 @@ const BusinessPlanCertScreen = (props) => {
                                 placeholder={'Nama Pemohon'}
                                 keyboardType={'default'}
                             />
-                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start',marginLeft:15 }]}>Tarikh :</Text>
+                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start', marginLeft: 15 }]}>Tarikh :</Text>
                             <TouchableOpacity onPress={() => showDatepicker()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', marginBottom: 5, borderColor: cerTarikhTouched && cerTarikhError ? '#d94498' : '#5a83c2' }}>
                                 <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
 
@@ -205,6 +206,7 @@ const BusinessPlanCertScreen = (props) => {
                             )}
 
                             <CustomFormAction
+                                label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}

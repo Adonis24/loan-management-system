@@ -60,7 +60,7 @@ const validationSchema = Yup.object().shape({
 
 const BusinessPlanPartnerScreen = (props) => {
 
-    
+
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
@@ -72,9 +72,9 @@ const BusinessPlanPartnerScreen = (props) => {
 
     //const { capacity, nameCP, partIcNum, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
 
-   
 
-   
+
+
 
 
 
@@ -90,6 +90,7 @@ const BusinessPlanPartnerScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
                     props.navigation.navigate('BusinessPlanSectionB')
+                    dispatch(actionCreator.saveBussPlanData())
                     actions.resetForm({})
                     actions.setSubmitting(false)
                 }
@@ -101,7 +102,7 @@ const BusinessPlanPartnerScreen = (props) => {
 
 
 
-                    const { partJawatan, partName, partIcNum, saham,  } = FormikProps.values
+                    const { partJawatan, partName, partIcNum, saham, } = FormikProps.values
 
                     const partJawatanError = FormikProps.errors.partJawatan
                     const partJawatanTouched = FormikProps.touched.partJawatan
@@ -115,15 +116,15 @@ const BusinessPlanPartnerScreen = (props) => {
                     const sahamError = FormikProps.errors.saham
                     const sahamTouched = FormikProps.touched.saham
 
-               
+
 
 
 
 
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
-                         
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+
                             <Text style={[styles.formTitle]}>Section A</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Latar Belakang Pemohon</Text>
@@ -150,7 +151,7 @@ const BusinessPlanPartnerScreen = (props) => {
                                 keyboardType={'phone-pad'}
                             />
                             <CustomTextInput
-                                imageUri={require('../assets/images/user.png')}
+                                imageUri={require('../assets/images/position.png')}
                                 value={partJawatan}
                                 handleChange={FormikProps.handleChange(`partJawatan`)}
                                 handleBlur={FormikProps.handleBlur(`partJawatan`)}
@@ -172,6 +173,7 @@ const BusinessPlanPartnerScreen = (props) => {
 
 
                             <CustomFormAction
+                                label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}

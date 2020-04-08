@@ -104,6 +104,7 @@ const BusinessPlanProposalScreen = (props) => {
                     setLatarBelakang(values)
                     props.navigation.navigate('BusinessPlanSectionE')
                     actions.resetForm({})
+                    dispatch(actionCreator.saveBussPlanData())
                     actions.setSubmitting(false)
                 }
                 }
@@ -152,7 +153,7 @@ const BusinessPlanProposalScreen = (props) => {
                             <Text style={[styles.formSubtitle]}>Cadangan Keperluan Penggunaan Pembiayaan</Text>
                             <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start', paddingLeft: 10 }}>
                                 <CustomTextInput
-                                    imageUri={require('../assets/images/estimateTime.png')}
+                                    imageUri={require('../assets/images/company.png')}
                                     value={ruangNiaga}
                                     handleChange={FormikProps.handleChange(`ruangNiaga`)}
                                     handleBlur={FormikProps.handleBlur(`ruangNiaga`)}
@@ -228,7 +229,7 @@ const BusinessPlanProposalScreen = (props) => {
 
                                 />
                                 <CustomTextInput
-                                    imageUri={require('../assets/images/user.png')}
+                                    imageUri={require('../assets/images/payment.png')}
                                     value={jumlah}
                                     handleChange={FormikProps.handleChange(`jumlah`)}
                                     handleBlur={FormikProps.handleBlur(`jumlah`)}
@@ -240,6 +241,7 @@ const BusinessPlanProposalScreen = (props) => {
                                 />
                             </ScrollView>
                             <CustomFormAction
+                                label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}

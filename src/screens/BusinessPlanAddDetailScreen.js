@@ -38,7 +38,7 @@ const validationSchema = Yup.object().shape({
         .min(3)
         .label('Kursus'),
 
-    
+
 
 
 });
@@ -47,7 +47,7 @@ const BusinessPlanAddDetailScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { kursus, experience,} = useSelector(state => state.businessPlanningReducer, shallowEqual)
+    const { kursus, experience, } = useSelector(state => state.businessPlanningReducer, shallowEqual)
 
 
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
@@ -62,12 +62,13 @@ const BusinessPlanAddDetailScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ kursus, experience,}}
+                initialValues={{ kursus, experience, }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
                     props.navigation.navigate('BusinessPlanCert')
+                    dispatch(actionCreator.saveBussPlanData())
                     actions.resetForm({})
                     actions.setSubmitting(false)
                 }
@@ -87,7 +88,7 @@ const BusinessPlanAddDetailScreen = (props) => {
                     const kursusError = FormikProps.errors.kursus
                     const kursusTouched = FormikProps.touched.kursus
 
-                   
+
 
 
 
@@ -118,12 +119,13 @@ const BusinessPlanAddDetailScreen = (props) => {
                                 touched={kursusTouched}
                                 error={kursusError}
                                 placeholder={'Kursus Yang Dihadiri'}
-                               
+
                             />
 
-                       
+
 
                             <CustomFormAction
+                                label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}

@@ -209,9 +209,9 @@ export const applyfinancingApi = (page) => {
 export const applyBusinessPlanApi = (page) => {
   return async (dispatch, getState) => {
 
-    const { } = getState().businessPlanningReducer
+    const {compName, name, regNum, compAlamat, compAlamat_2,paidCap, authCap, pemilikan, compEstab, compOperation, businessType,bankName, pemegang, akaun, noAkaun,partName, partIcNum, partJawatan, saham,bilCawangan, lokasi, bilPekerja, compPhone, compFax, compStatus,Teknologi, waktu, sourceCap, totalCap, sokongan, pengiktirafan,pembelian, income, kosOperasi, totalExpenditure, untungKasar, perbelanjaanLain, untungBersih, totalIncome,pembelianStok, ruangNiaga, membeli, kenderaan, modalPusingan, belanjaanLain, jumlah, perkakas,belian, tahun, grossProfit, belanjaLain, netProfit, jualan,belian2, tahun2, grossProfit2, belanjaLain2, netProfit2, jualan2, belian3, tahun3, grossProfit3, belanjaLain3, netProfit3, jualan3,perancangan, pasaran,kursus, experience, namaPemohon, cerTarikh, } = getState().businessPlanningReducer
 
-    const responseJson = await apiPostCall(`api/loan/addBusinessPlanInformation`, null,  getState().apiReducer)
+    const responseJson = await apiPostCall(`api/loan/addBusinessPlanInformation`, null,compName, name, regNum, compAlamat, compAlamat_2,paidCap, authCap, pemilikan, compEstab, compOperation, businessType,bankName, pemegang, akaun, noAkaun,partName, partIcNum, partJawatan, saham,bilCawangan, lokasi, bilPekerja, compPhone, compFax, compStatus,Teknologi, waktu, sourceCap, totalCap, sokongan, pengiktirafan,pembelian, income, kosOperasi, totalExpenditure, untungKasar, perbelanjaanLain, untungBersih, totalIncome,pembelianStok, ruangNiaga, membeli, kenderaan, modalPusingan, belanjaanLain, jumlah, perkakas,belian, tahun, grossProfit, belanjaLain, netProfit, jualan,belian2, tahun2, grossProfit2, belanjaLain2, netProfit2, jualan2, belian3, tahun3, grossProfit3, belanjaLain3, netProfit3, jualan3,perancangan, pasaran,kursus, experience, namaPemohon, cerTarikh,  getState().apiReducer)
 
     console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const einfosArray = await responseJson.data
@@ -554,6 +554,33 @@ export const resetFormApi = () => {
   }
 }
 
+export const saveBussPlanDataApi = () => {
+  return async (dispatch, getState) => {
+    const bussPlanDataReducer = getState().businessPlanningReducer
+
+    const bussPlanData = JSON.parse(await SecureStore.getItemAsync('bussPlanData'))
+    console.log(`bakal di save : ${JSON.stringify(bussPlanDataReducer)}`)
+    console.log(`dalam storage: ${JSON.stringify(bussPlanData)}`)
+
+    if (bussPlanData) {
+      console.log(`something in memory`)
+      console.log(JSON.stringify(bussPlanData))
+      const newBussPlanData = { ...bussPlanData, ...bussPlanDataReducer }
+      await SecureStore.setItemAsync('bussPlanData', JSON.stringify(newBussPlanData))
+    } else {
+      await SecureStore.setItemAsync('bussPlanData', JSON.stringify(bussPlanDataReducer))
+
+    }
+
+
+    // const responseJson = await apiGetCall(`api/Notification`, getState().apiReducer)
+    // const notificationByDate = [...responseJson.data.promotion, ...responseJson.data.annoucement, ...responseJson.data.advertisement]
+
+    // dispatch({ type: 'SET_NOTIFICATION', payload: { notificationList: notificationByDate } })
+
+
+  }
+}
 
 export const saveLocationApi = (x) => {
   return async (dispatch, getState) => {

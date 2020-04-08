@@ -38,7 +38,7 @@ const validationSchema = Yup.object().shape({
         .min(3)
         .label('Perancangan'),
 
-    
+
 
 
 });
@@ -47,7 +47,7 @@ const BusinessPlanMarketingScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { perancangan, pasaran,} = useSelector(state => state.businessPlanningReducer, shallowEqual)
+    const { perancangan, pasaran, } = useSelector(state => state.businessPlanningReducer, shallowEqual)
 
 
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
@@ -62,12 +62,13 @@ const BusinessPlanMarketingScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ perancangan, pasaran,}}
+                initialValues={{ perancangan, pasaran, }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
                     props.navigation.navigate('BusinessPlanAddDetail')
+                    dispatch(actionCreator.saveBussPlanData())
                     actions.resetForm({})
                     actions.setSubmitting(false)
                 }
@@ -87,7 +88,7 @@ const BusinessPlanMarketingScreen = (props) => {
                     const perancanganError = FormikProps.errors.perancangan
                     const perancanganTouched = FormikProps.touched.perancangan
 
-                   
+
 
 
 
@@ -121,9 +122,10 @@ const BusinessPlanMarketingScreen = (props) => {
                                 keyboardType={'default'}
                             />
 
-                       
+
 
                             <CustomFormAction
+                                label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}

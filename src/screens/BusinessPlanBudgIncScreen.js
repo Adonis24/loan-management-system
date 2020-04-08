@@ -103,6 +103,7 @@ const BusinessPlanBudgIncScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
                     props.navigation.navigate('BusinessPlanProposal')
+                    dispatch(actionCreator.saveBussPlanData())
                     actions.resetForm({})
                     actions.setSubmitting(false)
                 }
@@ -152,7 +153,7 @@ const BusinessPlanBudgIncScreen = (props) => {
                             <Text style={[styles.formSubtitle]}>Anggaran Pendapatan</Text>
                             <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start', paddingLeft: 10 }}>
                                 <CustomTextInput
-                                    imageUri={require('../assets/images/estimateTime.png')}
+                                    imageUri={require('../assets/images/payment.png')}
                                     value={income}
                                     handleChange={FormikProps.handleChange(`income`)}
                                     handleBlur={FormikProps.handleBlur(`income`)}
@@ -162,7 +163,7 @@ const BusinessPlanBudgIncScreen = (props) => {
                                     keyboardType={'phone-pad'}
                                 />
                                 <CustomTextInput
-                                    imageUri={require('../assets/images/company.png')}
+                                    imageUri={require('../assets/images/payment.png')}
                                     value={totalIncome}
                                     handleChange={FormikProps.handleChange(`totalIncome`)}
                                     handleBlur={FormikProps.handleBlur(`totalIncome`)}
@@ -240,6 +241,7 @@ const BusinessPlanBudgIncScreen = (props) => {
                                 />
                             </ScrollView>
                             <CustomFormAction
+                                label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}

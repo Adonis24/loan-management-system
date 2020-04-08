@@ -89,6 +89,7 @@ const BusinessPlanBussModalScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
                     props.navigation.navigate('BusinessPlanBudgInc')
+                    dispatch(actionCreator.saveBussPlanData())
                     actions.resetForm({})
                     actions.setSubmitting(false)
                 }
@@ -172,7 +173,7 @@ const BusinessPlanBussModalScreen = (props) => {
                                 touched={sourceCapTouched}
                                 error={sourceCapError}
                                 placeholder={'Sumber Modal Memulakan Perniagaan'}
-                               
+
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/payment.png')}
@@ -192,11 +193,12 @@ const BusinessPlanBussModalScreen = (props) => {
                                 touched={sokonganTouched}
                                 error={sokonganError}
                                 placeholder={'Sokongan/Bantuan Agensi Lain'}
-                                
+
 
                             />
 
                             <CustomFormAction
+                                label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}
