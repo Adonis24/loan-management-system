@@ -56,7 +56,7 @@ const LoanBusinessInfoContScreen = (props) => {
     const { noAhli, compStat, pemilikan, keahlian, noAhli2 } = useSelector(state => state.financingReducer, shallowEqual)
 
 
-    const setMaklumatPerniagaan = (value) => dispatch({ type: 'SET_MAKLUMAT_PERNIAGAAN', payload: { ...value } })
+    const setMaklumatPerniagaan = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
     return (
         <LayoutLoan navigation={props.navigation}>
@@ -67,6 +67,7 @@ const LoanBusinessInfoContScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatPerniagaan(values)
+                    dispatch(actionCreator.saveLoanData())
                     props.navigation.navigate('LoanSectionF')
                     actions.resetForm({})
                     actions.setSubmitting(false)

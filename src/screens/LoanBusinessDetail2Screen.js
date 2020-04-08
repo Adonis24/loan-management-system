@@ -67,7 +67,7 @@ const LoanBusinessDetail2Screen = (props) => {
 
 
 
-    const setPembiayaan = (value) => dispatch({ type: 'SET_PEMBIAYAAN', payload: { ...value } })
+    const setPembiayaan = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
   
 
@@ -87,6 +87,7 @@ const LoanBusinessDetail2Screen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setPembiayaan(values)
+                    dispatch(actionCreator.saveLoanData())
                     actions.setSubmitting(false)
                     actions.resetForm({})
                     props.navigation.navigate('LoanDetail')

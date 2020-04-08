@@ -63,7 +63,7 @@ const LoanValidationScreen = (props) => {
     const { valAlamat, valAlamat_2, valName, valPhoneNum, jawatan, } = useSelector(state => state.financingReducer, shallowEqual)
 
 
-    const setValidation = (value) => dispatch({ type: 'SET_VALIDATION', payload: { ...value } })
+    const setValidation = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
 
 
@@ -81,7 +81,7 @@ const LoanValidationScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setValidation(values)
-
+                    dispatch(actionCreator.saveLoanData())
                     props.navigation.navigate('LoanDeclaration')
                     actions.resetForm({})
                     actions.setSubmitting(false)

@@ -71,7 +71,7 @@ const LoanPendapatanScreen = (props) => {
 
 
 
-    const setMaklumatPeribadi = (value) => dispatch({ type: 'SET_MAKLUMAT_PERIBADI', payload: { ...value } })
+    const setMaklumatPeribadi = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
     // useEffect(() => {
     //     const open = () => setshowLogo(false)
@@ -99,6 +99,7 @@ const LoanPendapatanScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatPeribadi(values)
+                    dispatch(actionCreator.saveLoanData())
                     actions.setSubmitting(false)
                     actions.resetForm({})
                     props.navigation.navigate('LoanSectionC')

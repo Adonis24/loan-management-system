@@ -43,7 +43,7 @@ const LoanDeclarationScreen = (props) => {
 
 
 
-    const setDeclaration = (value) => dispatch({ type: 'SET_DECLARATUON', payload: { ...value } })
+    const setDeclaration = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
     // useEffect(() => {
     //     const open = () => setshowLogo(false)
@@ -66,6 +66,7 @@ const LoanDeclarationScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setDeclaration(values)
+                    dispatch(actionCreator.saveLoanData())
                     actions.setSubmitting(false)
                     actions.resetForm({})
                     props.navigation.navigate('Dashboard')

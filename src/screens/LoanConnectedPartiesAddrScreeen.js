@@ -56,7 +56,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
     const { cpPhoneNum, cpAlamat, cpAlamat_2, cpPoskod } = useSelector(state => state.financingReducer, shallowEqual)
 
 
-    const setConnectParties = (value) => dispatch({ type: 'SET_CONNECT_PARTIES', payload: { ...value } })
+    const setConnectParties = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
 
     //const { capacity, nameCP, cpPhoneNum, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
@@ -75,6 +75,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setConnectParties(values)
+                    dispatch(actionCreator.saveLoanData())
                     props.navigation.navigate('LoanSectionD')
                     actions.setSubmitting(false)
                 }

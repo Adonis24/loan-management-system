@@ -143,8 +143,18 @@ const LoanCheckListScreen = (props) => {
         await dispatch(actionCreator.getAllAttachment())
     }
 
+    const getAllBusinessPlan = async () => {
+        await dispatch(actionCreator.getAllBusinessPlan())
+    }
+
+    const getLoanData = async () => {
+        await dispatch(actionCreator.getLoanData())
+    }
+
     useEffect(() => {
         getAllAttachment()
+        getAllBusinessPlan()
+        getLoanData()
 
     }, []); // empty-array means don't watch for any updates
 

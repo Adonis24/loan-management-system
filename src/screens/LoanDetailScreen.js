@@ -65,7 +65,7 @@ const LoanDetailScreen = (props) => {
     const { loanNeed, caraBayaran, payBack, kekerapan } = useSelector(state => state.financingReducer, shallowEqual)
 
 
-    const setMaklumatPembiayaan = (value) => dispatch({ type: 'SET_MAKLUMAT_PEMBIAYAAN', payload: { ...value } })
+    const setMaklumatPembiayaan = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
 
     //const { capacity, nameCP, icNumber, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
@@ -98,6 +98,7 @@ const LoanDetailScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatPembiayaan(values)
+                    dispatch(actionCreator.saveLoanData())
                     props.navigation.navigate('LoanSectionH')
                     actions.resetForm({})
                     actions.setSubmitting(false)

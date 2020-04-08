@@ -56,7 +56,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
     const { compPhoneNum, compAlamat, compAlamat_2, compPoskod } = useSelector(state => state.financingReducer, shallowEqual)
 
 
-    const setBusinessInfo = (value) => dispatch({ type: 'SET_BUSINESS_INFO', payload: { ...value } })
+    const setBusinessInfo = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
 
 
@@ -72,6 +72,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setBusinessInfo(values)
+                    dispatch(actionCreator.saveLoanData())
                     props.navigation.navigate('LoanSectionF')
                     actions.resetForm({})
                     actions.setSubmitting(false)

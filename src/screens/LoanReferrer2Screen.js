@@ -61,7 +61,7 @@ const LoanReferrer2Screen = (props) => {
     const { refAlamat, refAlamat_2, refName, refPhoneNum, relationship, } = useSelector(state => state.financingReducer, shallowEqual)
 
 
-    const setReferrer = (value) => dispatch({ type: 'SET_REFERRER', payload: { ...value } })
+    const setReferrer = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
 
    
@@ -79,6 +79,7 @@ const LoanReferrer2Screen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setReferrer(values)
+                    dispatch(actionCreator.saveLoanData())
                     props.navigation.navigate('LoanValidation') 
                     actions.resetForm({})
                     actions.setSubmitting(false)

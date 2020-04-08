@@ -9,7 +9,7 @@ import s3 from '../../do/DigitalOcean'
 import config from '../../do/config'
 
 import { requestToken, requestPersonalToken, urlToBlob, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI, requestTokenLMS, registerLMSApi, requestPersonalTokenLMS } from './apiRegistration'
-import { newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi, acceptApi, saveLoanDataApi,saveBussPlanDataApi, resetFormApi, saveLocationApi,getLocationApi,savePictureApi, getAllAttachmentApi, resetAllAttachmentApi,getAttachmentApi } from './apiDashboard'
+import { newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi, acceptApi, saveLoanDataApi,saveBussPlanDataApi, resetFormApi, saveLocationApi,getLocationApi,savePictureApi, getAllAttachmentApi, resetAllAttachmentApi,getAttachmentApi,getAllBusinessPlanApi,getLoanDataApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -503,4 +503,16 @@ export const resetAllAttachment = () => {
     }
 }
 
+export const getAllBusinessPlan = () => {
+    return async (dispatch, getState) => {
+        dispatch(getAllBusinessPlanApi())
+    }
 
+}
+
+export const getLoanData = () => {
+    return async (dispatch, getState) => {
+        dispatch(getLoanDataApi())
+    }
+
+}

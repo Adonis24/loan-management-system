@@ -713,3 +713,34 @@ export const resetAllAttachmentApi = () => {
     console.log(`delete attachment dalam storage`)
   }
 }
+
+
+export const getAllBusinessPlanApi = () => {
+  return async (dispatch, getState) => {
+
+    const bussPlanData = JSON.parse(await SecureStore.getItemAsync('bussPlanData'))
+
+    if (bussPlanData) {
+      console.log(`business plan ialah ${JSON.stringify(bussPlanData)}`)
+      //dispatch({ type: 'SET_ATTACHMENT', payload: { attachment } })
+    } else {
+
+    }
+
+  }
+}
+
+export const getLoanDataApi = () => {
+  return async (dispatch, getState) => {
+
+    const loanData = JSON.parse(await SecureStore.getItemAsync('loanData'))
+
+    if (loanData) {
+      console.log(`loan data ialah ${JSON.stringify(loanData)}`)
+      //dispatch({ type: 'SET_ATTACHMENT', payload: { attachment } })
+    } else {
+
+    }
+
+  }
+}
