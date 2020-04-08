@@ -93,6 +93,7 @@ const BusinessPlanGoals2Screen = (props) => {
                     setLatarBelakang(values)
                     props.navigation.navigate('BusinessPlanGoals3')
                     actions.resetForm({})
+                    dispatch(actionCreator.saveBussPlanData())
                     actions.setSubmitting(false)
                 }
                 }

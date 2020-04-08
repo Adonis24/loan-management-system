@@ -79,6 +79,7 @@ const BusinessPlanBackgroudScreen = (props) => {
                     setLatarBelakang(values)
                     props.navigation.navigate('BusinessPlanEstablishComp')
                     actions.resetForm({})
+                    dispatch(actionCreator.saveBussPlanData())
                     actions.setSubmitting(false)
                 }
                 }

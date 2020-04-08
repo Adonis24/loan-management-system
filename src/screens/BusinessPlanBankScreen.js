@@ -82,6 +82,7 @@ const BusinessPlanBankScreen = (props) => {
                     setLatarBelakang(values)
                     props.navigation.navigate('BusinessPlanPartner')
                     actions.resetForm({})
+                    dispatch(actionCreator.saveBussPlanData())
                     actions.setSubmitting(false)
 
                 }

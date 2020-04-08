@@ -92,6 +92,7 @@ const BusinessPlanGoalsScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
                     props.navigation.navigate('BusinessPlanGoals2')
+                    dispatch(actionCreator.saveBussPlanData())
                     actions.resetForm({})
                     actions.setSubmitting(false)
                 }

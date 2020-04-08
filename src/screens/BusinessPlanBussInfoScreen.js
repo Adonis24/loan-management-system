@@ -86,6 +86,7 @@ const BusinessPlanBussInfoScreen = (props) => {
                     setLatarBelakang(values)
                     props.navigation.navigate('BusinessPlanBussModal')
                     actions.resetForm({})
+                    dispatch(actionCreator.saveBussPlanData())
                     actions.setSubmitting(false)
                 }
                 }

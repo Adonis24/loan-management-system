@@ -125,6 +125,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
+                    dispatch(actionCreator.saveBussPlanData())
                     props.navigation.navigate('BusinessPlanBank')
                     actions.resetForm({})
                     actions.setSubmitting(false)
