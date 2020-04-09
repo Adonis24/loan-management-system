@@ -6,24 +6,23 @@ import {
     Picker,
     TouchableOpacity,
     View,
-    TextInput,
-    KeyboardAvoidingView
+ 
 
 } from 'react-native';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import Constants from 'expo-constants'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
+
 import { Ionicons } from '@expo/vector-icons';
 
 import LayoutLoan from '../Layout/LayoutLoan';
-import Layout from '../constants/Layout'
+
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import styles from '../styles/styles'
-import { LinearGradient } from 'expo-linear-gradient'
+
 import * as actionCreator from '../store/actions/action'
 
+import malaysiaData from 'malaysia-state-city-postcode'
 
 const validationSchema = Yup.object().shape({
 
@@ -33,7 +32,7 @@ const validationSchema = Yup.object().shape({
         .min(3)
         .label('Alamat'),
 
-    phoneNum: Yup
+    phoneNumComp: Yup
         .string()
         .required()
         .min(3)
@@ -50,51 +49,43 @@ const validationSchema = Yup.object().shape({
         .required()
         .min(3)
         .label('Pekerjaan'),
-    status: Yup
+
+
+    pendidikan: Yup
         .string()
         .required(),
+    poskodComp: Yup
+        .string()
+        .required()
+        .min(5)
+        .max(5)
+        .label('Postcode'),
 
 
 });
 
 const LoanPendapatanScreen = (props) => {
 
-    const [iosPickerVisible, setIosPickerVisible] = useState(false)
-    const [modalContent, setModalContent] = useState(null)
-    const ios = Platform.OS === "ios" ? true : false
 
+    const ios = Platform.OS === "ios" ? true : false
+    const [addressVisible, setAddressVisible] = useState(false)
     const dispatch = useDispatch()
 
-    //const { comp_phone, comp_email, comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, proceedContact, error, errorColor } = useSelector(state => state.companyInformationReducer, shallowEqual)
-    const { alamatComp,phoneNum, pendapatan, pekerjaan, status } = useSelector(state => state.financingReducer, shallowEqual)
+    const { alamatComp, alamat_2Comp, poskodComp, cityComp, stateComp, phoneNumComp, pendapatan, pekerjaan, pendidikan } = useSelector(state => state.financingReducer, shallowEqual)
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
 
 
 
     const setMaklumatPeribadi = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
-    // useEffect(() => {
-    //     const open = () => setshowLogo(false)
-    //     const off = () => setshowLogo(true)
 
-    //     keyboardBeingDisplay(open)
-    //     keyboardBeingClose(off)
-    // }, []); // empty-array means don't watch for any updates
 
-    const handleIosPicker = (modalContent) => {
-        setModalContent(modalContent)
-        setIosPickerVisible(!iosPickerVisible)
-    }
-
-    // const [showLogo, setshowLogo] = useState(true)
-
-    //proceedContact && props.navigation.goBack()
 
 
     return (
         <LayoutLoan navigation={props.navigation}>
             <Formik
-                initialValues={{ alamatComp, pendapatan, pekerjaan, status }}
+                initialValues={{ alamatComp, alamat_2Comp, poskodComp, cityComp, stateComp, pendapatan, pekerjaan, pendidikan, phoneNumComp, }}
                 validateOnMount
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -107,82 +98,138 @@ const LoanPendapatanScreen = (props) => {
                 validationSchema={validationSchema}
             >
                 {FormikProps => {
-                    const { alamatComp,pendapatan, phoneNum, pekerjaan, status } = FormikProps.values
+                    const { alamatComp, alamat_2Comp, poskodComp, cityComp, stateComp, pendapatan, phoneNumComp, pekerjaan, pendidikan } = FormikProps.values
 
                     const alamatCompError = FormikProps.errors.alamatComp
                     const alamatCompTouched = FormikProps.touched.alamatComp
 
-                    const statusError = FormikProps.errors.status
-                    const statusTouched = FormikProps.touched.status
+                    const poskodCompError = FormikProps.errors.poskodComp
+                    const poskodCompTouched = FormikProps.touched.poskodComp
+
 
                     const pendapatanError = FormikProps.errors.pendapatan
                     const pendapatanTouched = FormikProps.touched.pendapatan
 
-                    const phoneNumError = FormikProps.errors.phoneNum
-                    const phoneNumTouched = FormikProps.touched.phoneNum
+                    const phoneNumCompError = FormikProps.errors.phoneNumComp
+                    const phoneNumCompTouched = FormikProps.touched.phoneNumComp
 
                     const pekerjaanError = FormikProps.errors.pekerjaan
                     const pekerjaanTouched = FormikProps.touched.pekerjaan
 
 
+                    const pendidikanError = FormikProps.errors.pendidikan
+                    const pendidikanTouched = FormikProps.touched.pendidikan
+
+                    const getCoordinate = (poskod) => {
+                        console.log(poskod)
+                        if (poskod.length === 5) {
+                            const coordinate = malaysiaData.find(x => x.Postcode == poskod)
+
+                            if (coordinate) {
+                                console.log(`result coor : ${JSON.stringify(coordinate)}`)
+                                FormikProps.setFieldValue('poskodComp', poskod)
+                                FormikProps.setFieldValue(`cityComp`, coordinate.City)
+                                FormikProps.setFieldValue(`stateComp`, coordinate.State)
+                            } else {
+                                console.log(`no result found`)
+                                FormikProps.setFieldValue('poskodComp', poskod)
+                            }
+
+                        } else {
+                            console.log(`do nothing`)
+                            FormikProps.setFieldValue('poskodComp', poskod)
+                        }
+                    }
+
+
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                             <Modal animationType={'slide'}
-                                visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
+                                visible={addressVisible} onRequestClose={() => setAddressVisible(!addressVisible)}
                             >
-                                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                                    <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
-                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
-                                            <TouchableOpacity onPress={() => setIosPickerVisible(!iosPickerVisible)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                                <Ionicons name="ios-arrow-back" color={'#5a83c2'} style={{ fontSize: 30 }} />
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
-                                            <Text style={{ fontSize: 12 }}>Select</Text>
-                                        </View>
-                                        <View style={{ flex: 1 }} />
+                                <LayoutLoan title={'Address'} nopaddingTop={true} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
+                                    <View style={{ margin: 10 }} />
+                                    <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+                                        <CustomTextInput
+                                            imageUri={require('../assets/images/address.png')}
+                                            value={alamatComp}
+                                            handleChange={FormikProps.handleChange(`alamatComp`)}
+                                            handleBlur={FormikProps.handleBlur(`alamatComp`)}
+                                            touched={alamatCompTouched}
+                                            error={alamatCompError}
+                                            placeholder={'Alamat Line 1'}
+
+                                        />
+
+                                        <CustomTextInput
+                                            imageUri={require('../assets/images/address.png')}
+                                            value={alamat_2Comp}
+                                            handleChange={FormikProps.handleChange(`alamat_2Comp`)}
+                                            handleBlur={FormikProps.handleBlur(`alamat_2Comp`)}
+
+                                            placeholder={'Alamat Line 2'}
+
+                                        />
+                                        <CustomTextInput
+                                            imageUri={require('../assets/images/compRegNum.png')}
+                                            value={poskodComp}
+                                            handleChange={value => getCoordinate(value)}
+                                            handleBlur={FormikProps.handleBlur(`poskodComp`)}
+                                            touched={poskodCompTouched}
+                                            error={poskodCompError}
+                                            placeholder={'Poskod'}
+                                            keyboardType={'decimal-pad'}
+                                        />
+
+                                        {cityComp && <CustomTextInput
+                                            imageUri={require('../assets/images/address.png')}
+                                            value={cityComp}
+
+                                            placeholder={'City'}
+
+                                        />}
+
+                                        {stateComp && <CustomTextInput
+                                            imageUri={require('../assets/images/address.png')}
+                                            value={stateComp}
+
+                                            placeholder={'State'}
+
+                                        />}
                                     </View>
-                                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
 
-                                        <Picker style={{ flex: 1, height: 35 }} selectedValue={status} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('status', itemValue)}>
-                                            <Picker.Item label={'Status Kediaman'} value={undefined} />
-                                            <Picker.Item label="Sendiri" value="sendiri" />
-                                            <Picker.Item label="Sewa" value="sewa" />
-                                            <Picker.Item label="Keluarga" value="keluarga" />
-
-                                        </Picker>
-
-                                    </View>
-                                </View>
+                                </LayoutLoan>
                             </Modal>
-                            {/* {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />} */}
                             <Text style={[styles.formTitle]}>Section B</Text>
-                            {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Maklumat Peribadi</Text>
-
-                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Status Kediaman :</Text>
-
-<View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
+                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Taraf Pendidikan :</Text>
+                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{alignSelf: 'center', margin: 5, flex:1 }}>
+                                <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('status')}>
-                                                <Text style={{ fontSize: 12 }}>{status ? status : `Status Kediaman`}</Text>
+                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('pendidikan')}>
+                                                <Text style={{ fontSize: 12 }}>{pendidikan ? pendidikan : `Taraf Pendidikan`}</Text>
                                             </TouchableOpacity>
-                                            {statusTouched && statusError && <Text style={styles.error}>{statusError}</Text>}
+                                            {pendidikanTouched && pendidikanError && <Text style={styles.error}>{pendidikanError}</Text>}
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
-                                            <Picker style={{ height: 35 }} selectedValue={status} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('status', itemValue)}>
-                                                <Picker.Item label={'Status Kediaman'} value={undefined} />
-                                                <Picker.Item label="Sendiri" value="sendiri" />
-                                                <Picker.Item label="Sewa" value="sewa" />
-                                                <Picker.Item label="Keluarga" value="keluarga" />
+                                            <Picker style={{ height: 35 }} selectedValue={pendidikan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pendidikan', itemValue)}>
+                                                <Picker.Item label={'Taraf Pendidikan'} value={undefined} />
+                                                <Picker.Item label={'Taraf Pendidikan'} value={undefined} />
+                                                <Picker.Item label="Ijazah" value="ijazah" />
+                                                <Picker.Item label="Diploma" value="diploma" />
+                                                <Picker.Item label="Sijil" value="sijil" />
+                                                <Picker.Item label="STPM/setaraf" value="stpm/setaraf" />
+                                                <Picker.Item label="SPM/setaraf" value="spm/setaraf" />
+                                                <Picker.Item label="PMR/setaraf" value="pmr/setaraf" />
                                             </Picker>
-                                            {statusTouched && statusError && <Text style={styles.error}>{statusError}</Text>}
+                                            {pendidikanTouched && pendidikanError && <Text style={styles.error}>{pendidikanError}</Text>}
                                         </View>}
                                 </View>
                             </View>
+
+
                             <CustomTextInput
                                 imageUri={require('../assets/images/user.png')}
                                 value={pekerjaan}
@@ -204,25 +251,34 @@ const LoanPendapatanScreen = (props) => {
                                 keyboardType={'decimal-pad'}
                             />
 
+                            
+
                             <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}
-                                value={alamatComp}
-                                handleChange={FormikProps.handleChange(`alamatComp`)}
-                                handleBlur={FormikProps.handleBlur(`alamatComp`)}
+
+                                handleClick={() => setAddressVisible(!addressVisible)}
+                                multiLine={true}
+
                                 touched={alamatCompTouched}
                                 error={alamatCompError}
-                                placeholder={'Alamat Syarikat'}
+                                placeholder={'Alamat'}
 
-                            />
+
+                            ><Text style={styles.textDefault}>{alamatComp}</Text>
+                                {alamat_2Comp && <Text style={styles.textDefault}>{alamat_2Comp}</Text>}
+                                <Text style={styles.textDefault}>{poskodComp}</Text>
+                                <Text style={styles.textDefault}>{cityComp},{stateComp}</Text>
+
+                            </CustomTextInput>
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/phoneNum.png')}
-                                value={phoneNum}
-                                handleChange={FormikProps.handleChange(`phoneNum`)}
-                                handleBlur={FormikProps.handleBlur(`phoneNum`)}
-                                touched={phoneNumTouched}
-                                error={phoneNumError}
-                                placeholder={'No Tel'}
+                                value={phoneNumComp}
+                                handleChange={FormikProps.handleChange(`phoneNumComp`)}
+                                handleBlur={FormikProps.handleBlur(`phoneNumComp`)}
+                                touched={phoneNumCompTouched}
+                                error={phoneNumCompError}
+                                placeholder={'No Tel Syarikat'}
                                 keyboardType={'decimal-pad'}
                             />
 

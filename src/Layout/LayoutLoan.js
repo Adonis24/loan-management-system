@@ -20,15 +20,18 @@ import styles from '../styles/styles'
 const LayoutLoan = (props) => {
     return (
 
-        <KeyboardAvoidingView  enabled style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', marginTop: Constants.statusBarHeight }}>
+        <KeyboardAvoidingView enabled style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', marginTop: !props.nopaddingTop ? Constants.statusBarHeight : 0 }}>
             <View style={{ backgroundColor: '#192f6a', alignSelf: 'stretch', flexDirection: 'row', padding: 10 }}>
                 <View style={{ flex: 1 }}>
-                    <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
+                    {!props.back ? <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
                         <Ionicons name={'md-menu'} size={24} color={'#fff'} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> :
+                        <TouchableOpacity onPress={() => props.back()}>
+                            <Ionicons name={'ios-arrow-back'} size={24} color={'#fff'} />
+                        </TouchableOpacity>}
                 </View>
                 <View style={{ flex: 3, alignItems: 'center' }}>
-                    <Text style={[styles.textDefault, { color: '#fff', textTransform: 'uppercase' }]}>Pembiayaan Tekun</Text>
+                    <Text style={[styles.textDefault, { color: '#fff', textTransform: 'uppercase' }]}>{!props.title?`Pembiayaan Tekun`:props.title}</Text>
                 </View>
                 <View style={{ flex: 1 }}></View>
 

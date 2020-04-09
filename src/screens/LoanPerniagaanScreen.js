@@ -55,10 +55,13 @@ const LoanPerniagaanScreen = (props) => {
 
     const dispatch = useDispatch()
 
-    //const { comp_phone, comp_email, comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, proceedContact, error, errorColor } = useSelector(state => state.companyInformationReducer, shallowEqual)
-    const { bank, noAkaun, typeBusiness } = useSelector(state => state.financingReducer, shallowEqual)
-    const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
+  
 
+    //const { comp_phone, comp_email, comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, proceedContact, error, errorColor } = useSelector(state => state.companyInformationReducer, shallowEqual)
+    const { bank, noAkaun, typeBusiness,statusPerniagaan } = useSelector(state => state.financingReducer, shallowEqual)
+    const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
+    const [sedangBerniaga, setSedangBerniaga] = useState(statusPerniagaan === 'Sedang Berniaga' ? true : false)
+    const [mulaBerniaga, setMulaBerniaga] = useState(statusPerniagaan === 'Memulakan Perniagaan' ? true : false)
     const setMaklumatAsas = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
     const handleIosPicker = (modalContent) => {
@@ -67,113 +70,81 @@ const LoanPerniagaanScreen = (props) => {
     }
 
 
+
+
     return (
         <LayoutLoan navigation={props.navigation}>
             <Formik
-                initialValues={{ bank, noAkaun, typeBusiness }}
+                initialValues={{ bank, noAkaun, typeBusiness,statusPerniagaan }}
                 validateOnMount
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatAsas(values)
-                    dispatch(actionCreator.saveLoanData())
+                    //dispatch(actionCreator.saveLoanData())
 
                     actions.setSubmitting(false)
                     actions.resetForm({})
-                    props.navigation.navigate('LoanSectionB')
+                    props.navigation.navigate('LoanBank')
                 }}
                 validationSchema={validationSchema}
             >
                 {FormikProps => {
-                    const { bank, noAkaun, typeBusiness } = FormikProps.values
+                    const {  typeBusiness } = FormikProps.values
 
 
-                    const bankError = FormikProps.errors.bank
-                    const bankTouched = FormikProps.touched.bank
-                    const noAkaunError = FormikProps.errors.noAkaun
-                    const noAkaunTouched = FormikProps.touched.noAkaun
+                
                     const typeBusinessError = FormikProps.errors.typeBusiness
                     const typeBusinessTouched = FormikProps.touched.typeBusiness
+
+                    const sedangBerniagaCB = () => {
+                        setSedangBerniaga(!sedangBerniaga)
+                        setMulaBerniaga(sedangBerniaga)
+                        FormikProps.setFieldValue('statusPerniagaan', !sedangBerniaga ? 'Sedang Berniaga' : 'Memulakan Perniagaan')
+                    }
+                    const mulaBerniagaCB = () => {
+                        setMulaBerniaga(!mulaBerniaga)
+                        setSedangBerniaga(mulaBerniaga)
+                        FormikProps.setFieldValue('statusPerniagaan', !sedangBerniaga ? 'Sedang Berniaga' : 'Memulakan Perniagaan')
+                
+                    }
 
 
 
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
-                            <Modal animationType={'slide'}
-                                visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
-                            >
-                                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                                    <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
-                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
-                                            <TouchableOpacity onPress={() => setIosPickerVisible(!iosPickerVisible)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                                <Ionicons name="ios-arrow-back" color={'#5a83c2'} style={{ fontSize: 30 }} />
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
-                                            <Text style={{ fontSize: 12 }}>Select</Text>
-                                        </View>
-                                        <View style={{ flex: 1 }} />
-                                    </View>
-                                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
-                                        {(modalContent === "typeBusiness") ?
-                                            <Picker style={{ flex: 1, height: 35 }} selectedValue={typeBusiness} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('typeBusiness', itemValue)}>
-                                                <Picker.Item label={'Please Select'} value={undefined} />
-                                                <Picker.Item label="Pertanian Dan Perusahaan Asas Tani" value="pertanian" />
-                                                <Picker.Item label="Peruncitan" value="peruncitan" />
-                                                <Picker.Item label="Perkhidmatan" value="perkhidmatan" />
-                                                <Picker.Item label="Pembuatan" value="pembuatan" />
-                                                <Picker.Item label="Kontraktor Kecil" value="kontraktorKecil" />
-                                            </Picker> : <Picker style={{ flex: 1, height: 35 }} selectedValue={bank} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('bank', itemValue)}>
-                                                <Picker.Item label={'Please Select'} value={undefined} />
-                                                <Picker.Item label="Bank Islam" value="bankIslam" />
-                                                <Picker.Item label="Maybank" value="maybank" />
-                                                <Picker.Item label="Bank Rakyat" value="bankRakyat" />
-                                                <Picker.Item label="BSN" value="bsn" />
-                                                <Picker.Item label="Agrobank" value="agrobank" />
-                                            </Picker>}
-                                    </View>
-                                </View>
-                            </Modal>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10,alignSelf:'stretch' }}>
+                           
 
                             <Text style={[styles.formTitle]}>Section A</Text>
                             <Text style={[styles.formSubtitle]}>Maklumat Asas</Text>
+                            {/* <CustomTextInput /> */}
                             
+                            <View style={{ marginBottom: 10, justifyContent: 'center',alignSelf:'stretch' }}>
+                                    <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Status perniagaan</Text>
+                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        {(Platform.OS == 'ios') ?
 
-                                <CustomTextInput
-                                    imageUri={require('../assets/images/compRegNum.png')}
-                                    value={noAkaun}
-                                    handleChange={FormikProps.handleChange(`noAkaun`)}
-                                    handleBlur={FormikProps.handleBlur(`noAkaun`)}
-                                    touched={noAkaunTouched}
-                                    error={noAkaunError}
-                                    placeholder={'No.Akaun'}
-                                    keyboardType={'decimal-pad'}
-                                />
-                                <Text style={[styles.label, { margin: 5,alignSelf:'flex-start' }]}>Bank :</Text>
+                                            <CheckBox2 onClick={() => sedangBerniagaCB()} isChecked={sedangBerniaga} />
+                                            :
+                                            <CheckBox onValueChange={(val) => sedangBerniagaCB()} value={sedangBerniaga} />
+                                        }
+                                        <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
+                                            Sedang Berniaga
+                                </Text>
 
-                                <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center',marginBottom:10 }}>
-                                    <Image source={require('../assets/images/city.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                    <View style={{ alignSelf: 'center', margin: 5, flex:1 }}>
-                                        {ios ?
-                                            <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                                <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('bank')}>
-                                                    <Text style={{ fontSize: 12 }}>{bank ? bank : `Bank`}</Text>
-                                                </TouchableOpacity>
-                                                {bankTouched && bankError && <Text style={styles.error}>{bankError}</Text>}
-                                            </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
-                                                <Picker style={{ height: 35 }} selectedValue={bank} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('bank', itemValue)}>
-                                                    <Picker.Item label={'Bank'} value={undefined} />
-                                                    <Picker.Item label="Bank Islam" value="bankIslam" />
-                                                    <Picker.Item label="Maybank" value="maybank" />
-                                                    <Picker.Item label="Bank Rakyat" value="bankRakyat" />
-                                                    <Picker.Item label="BSN" value="bsn" />
-                                                    <Picker.Item label="Agrobank" value="agrobank" />
+                                    </View>
+                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        {(Platform.OS == 'ios') ?
 
-                                                </Picker>
-                                                {bankTouched && bankError && <Text style={styles.error}>{bankError}</Text>}
-                                            </View>}
+                                            <CheckBox2 onClick={() => mulaBerniagaCB()} isChecked={mulaBerniaga} />
+                                            :
+                                            <CheckBox onValueChange={() => mulaBerniagaCB()} value={mulaBerniaga} />
+                                        }
+                                        <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>Memulakan Perniagaan</Text>
                                     </View>
                                 </View>
+
+                                
                                 <Text style={[styles.label, { margin: 5,alignSelf:'flex-start' }]}>Sektor Perniagaan :</Text>
 
                                 <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center',marginBottom:10 }}>
@@ -201,7 +172,7 @@ const LoanPerniagaanScreen = (props) => {
                           
 
                             <CustomFormAction
-                            label={'Save'}
+                            label={'Next'}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}

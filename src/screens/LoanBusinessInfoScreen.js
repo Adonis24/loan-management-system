@@ -88,9 +88,6 @@ const LoanConnectedPartiesScreen = (props) => {
             >
                 {FormikProps => {
 
-
-
-
                     const { compAct, compName, pengalaman, compPendapatan, poskod } = FormikProps.values
 
                     const compActError = FormikProps.errors.compAct
@@ -133,7 +130,7 @@ const LoanConnectedPartiesScreen = (props) => {
                                 handleBlur={FormikProps.handleBlur(`compAct`)}
                                 touched={compActTouched}
                                 error={compActError}
-                                placeholder={'Aktivi Perniagaan'}
+                                placeholder={'Aktiviti Perniagaan'}
 
                             />
                             <CustomTextInput

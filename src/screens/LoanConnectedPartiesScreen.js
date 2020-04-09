@@ -6,25 +6,20 @@ import {
     View,
     Modal,
     Picker,
-    TextInput,
-    KeyboardAvoidingView
+  
 
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
+
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
 
 import LayoutLoan from '../Layout/LayoutLoan';
-
-import * as actionCreator from '../store/actions/action'
 
 const validationSchema = Yup.object().shape({
 
@@ -167,9 +162,9 @@ const LoanConnectedPartiesScreen = (props) => {
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={cpRelation} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('cpRelation', itemValue)}>
                                                 <Picker.Item label={'Hubungan'} value={undefined} />
-                                                <Picker.Item label="Suami" value="suami" />
-                                                <Picker.Item label="Isteri" value="isteri" />
-                                                <Picker.Item label="Waris" value="waris" />
+                                                <Picker.Item label="Suami" value="Suami" />
+                                                <Picker.Item label="Isteri" value="Isteri" />
+                                                <Picker.Item label="Waris" value="Waris" />
                                             </Picker>
                                             {cpRelationTouched && cpRelationError && <Text style={styles.error}>{cpRelationError}</Text>}
                                         </View>}
@@ -182,7 +177,7 @@ const LoanConnectedPartiesScreen = (props) => {
                                 handleBlur={FormikProps.handleBlur(`cpName`)}
                                 touched={cpNameTouched}
                                 error={cpNameError}
-                                placeholder={'Nama Suami/Isteri/Waris'}
+                                placeholder={`Nama ${cpRelation ? cpRelation : 'Suami/Isteri/Waris'}`}
                                 keyboardType={'default'}
                             />
 

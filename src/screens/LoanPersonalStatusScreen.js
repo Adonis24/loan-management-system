@@ -14,17 +14,12 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
 
 import LayoutLoan from '../Layout/LayoutLoan';
-
-import * as actionCreator from '../store/actions/action'
 
 const validationSchema = Yup.object().shape({
 
@@ -32,21 +27,10 @@ const validationSchema = Yup.object().shape({
         .string()
         .required(),
 
-    pendidikan: Yup
-        .string()
-        .required(),
+    
 
-    bangsa: Yup
-        .string()
-        .required()
-        .min(3)
-        .label('Bangsa'),
 
-    umur: Yup
-        .string()
-        .required()
-        .min(2)
-        .label('Umur'),
+
 
     tanggungan: Yup
         .string()
@@ -68,30 +52,16 @@ const LoanPersonalStatusScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { bangsa, umur, taraf, tanggungan, pendidikan } = useSelector(state => state.financingReducer, shallowEqual)
+    const { taraf, tanggungan } = useSelector(state => state.financingReducer, shallowEqual)
 
 
     const setMaklumatPeribadi = (value) => dispatch({ type: 'SET_MAKLUMAT_PERIBADI', payload: { ...value } })
 
 
-    //const { capacity, nameCP, icNumber, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
-
-    // useEffect(() => {
-    //     const open = () => setshowLogo(false)
-    //     const off = () => setshowLogo(true)
-
-    //     keyboardBeingDisplay(open)
-    //     keyboardBeingClose(off)
-    // }, []); // empty-array means don't watch for any updates
-
     const handleIosPicker = (modalContent) => {
         setModalContent(modalContent)
         setIosPickerVisible(!iosPickerVisible)
     }
-
-    // const [showLogo, setshowLogo] = useState(true)
-
-
 
     return (
         <LayoutLoan navigation={props.navigation}>
@@ -99,7 +69,7 @@ const LoanPersonalStatusScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ bangsa, umur, taraf, tanggungan, pendidikan }}
+                initialValues={{ taraf, tanggungan }}
 
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -116,19 +86,13 @@ const LoanPersonalStatusScreen = (props) => {
 
 
 
-                    const { bangsa, umur, pendidikan, taraf, tanggungan } = FormikProps.values
+                    const {  taraf, tanggungan } = FormikProps.values
 
                     const tanggunganError = FormikProps.errors.tanggungan
                     const tanggunganTouched = FormikProps.touched.tanggungan
 
-                    const bangsaError = FormikProps.errors.bangsa
-                    const bangsaTouched = FormikProps.touched.bangsa
 
-                    const umurError = FormikProps.errors.umur
-                    const umurTouched = FormikProps.touched.umur
 
-                    const pendidikanError = FormikProps.errors.pendidikan
-                    const pendidikanTouched = FormikProps.touched.pendidikan
 
                     const tarafError = FormikProps.errors.taraf
                     const tarafTouched = FormikProps.touched.taraf
@@ -154,15 +118,7 @@ const LoanPersonalStatusScreen = (props) => {
                                     </View>
                                     <View style={{ flex: 9, justifyContent: 'flex-start' }}>
                                         {(modalContent === "pendidikan") ?
-                                            <Picker style={{ flex: 1, height: 35 }} selectedValue={pendidikan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pendidikan', itemValue)}>
-                                                <Picker.Item label={'Taraf Pendidikan'} value={undefined} />
-                                                <Picker.Item label="Ijazah" value="ijazah" />
-                                                <Picker.Item label="Diploma" value="diploma" />
-                                                <Picker.Item label="Sijil" value="sijil" />
-                                                <Picker.Item label="STPM/setaraf" value="stpm/setaraf" />
-                                                <Picker.Item label="SPM/setaraf" value="spm/setaraf" />
-                                                <Picker.Item label="PMR/setaraf" value="pmr/setaraf" />
-                                            </Picker> : <Picker style={{ flex: 1, height: 35 }} selectedValue={taraf} onValueChange={(itemValue, itemIndex) =>
+                                           <View /> : <Picker style={{ flex: 1, height: 35 }} selectedValue={taraf} onValueChange={(itemValue, itemIndex) =>
                                                 FormikProps.setFieldValue('taraf', itemValue)}>
                                                 <Picker.Item label={'Taraf Perkahwinan'} value={undefined} />
                                                 <Picker.Item label="Bujang" value="bujang" />
@@ -182,58 +138,15 @@ const LoanPersonalStatusScreen = (props) => {
                             <Text style={[styles.formSubtitle]}>Maklumat Peribadi</Text>
 
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/user.png')}
-                                value={bangsa}
-                                handleChange={FormikProps.handleChange(`bangsa`)}
-                                handleBlur={FormikProps.handleBlur(`bangsa`)}
-                                touched={bangsaTouched}
-                                error={bangsaError}
-                                placeholder={'Bangsa/Kaum'}
 
-                            />
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/mykad.png')}
-                                value={umur}
-                                handleChange={FormikProps.handleChange(`umur`)}
-                                handleBlur={FormikProps.handleBlur(`umur`)}
-                                touched={umurTouched}
-                                error={umurError}
-                                placeholder={'Umur'}
-                                keyboardType={'decimal-pad'}
-                            />
-                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Taraf Pendidikan :</Text>
 
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
-                                <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
-                                    {ios ?
-                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('pendidikan')}>
-                                                <Text style={{ fontSize: 12 }}>{pendidikan ? pendidikan : `Taraf Pendidikan`}</Text>
-                                            </TouchableOpacity>
-                                            {pendidikanTouched && pendidikanError && <Text style={styles.error}>{pendidikanError}</Text>}
-                                        </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
-                                            <Picker style={{ height: 35 }} selectedValue={pendidikan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pendidikan', itemValue)}>
-                                                <Picker.Item label={'Taraf Pendidikan'} value={undefined} />
-                                                <Picker.Item label={'Taraf Pendidikan'} value={undefined} />
-                                                <Picker.Item label="Ijazah" value="ijazah" />
-                                                <Picker.Item label="Diploma" value="diploma" />
-                                                <Picker.Item label="Sijil" value="sijil" />
-                                                <Picker.Item label="STPM/setaraf" value="stpm/setaraf" />
-                                                <Picker.Item label="SPM/setaraf" value="spm/setaraf" />
-                                                <Picker.Item label="PMR/setaraf" value="pmr/setaraf" />
-                                            </Picker>
-                                            {pendidikanTouched && pendidikanError && <Text style={styles.error}>{pendidikanError}</Text>}
-                                        </View>}
-                                </View>
-                            </View>
+                           
                             <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Taraf Perkahwinan :</Text>
 
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, flex: 1  }}>
+                                <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('taraf')}>

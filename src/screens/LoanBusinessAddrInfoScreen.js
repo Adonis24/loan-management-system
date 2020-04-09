@@ -4,8 +4,7 @@ import {
     Text,
     TouchableOpacity,
     View,
-    TextInput,
-    KeyboardAvoidingView
+    Modal
 
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,8 +15,7 @@ import Constants from 'expo-constants'
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
-
+import malaysiaData from 'malaysia-state-city-postcode'
 import styles from '../styles/styles'
 
 import LayoutLoan from '../Layout/LayoutLoan';
@@ -27,19 +25,19 @@ import * as actionCreator from '../store/actions/action'
 const validationSchema = Yup.object().shape({
 
 
-    compPhoneNum: Yup
+    compPhoneSendiriNum: Yup
         .string()
         .required()
         .min(3)
         .label('No Tel'),
 
-    compAlamat: Yup
+    compSendiriAlamat: Yup
         .string()
         .required()
         .min(3)
         .label('Alamat'),
 
-    compPoskod: Yup
+    compSendiriPoskod: Yup
         .string()
         .required()
         .min(5)
@@ -53,8 +51,8 @@ const LoanBusinessAddrInfoScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { compPhoneNum, compAlamat, compAlamat_2, compPoskod } = useSelector(state => state.financingReducer, shallowEqual)
-
+    const { compPhoneSendiriNum, compSendiriAlamat, compSendiriAlamat_2, compSendiriPoskod, compSendiriCity, compSendiriState } = useSelector(state => state.financingReducer, shallowEqual)
+    const [addressVisible, setAddressVisible] = useState(false)
 
     const setBusinessInfo = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
@@ -67,7 +65,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ compPhoneNum, compAlamat_2, compAlamat, compPoskod }}
+                initialValues={{ compPhoneSendiriNum, compSendiriAlamat_2, compSendiriAlamat, compSendiriPoskod, compSendiriCity, compSendiriState }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -85,27 +83,103 @@ const LoanBusinessAddrInfoScreen = (props) => {
 
 
 
-                    const { compPhoneNum, compAlamat, compAlamat_2, compPoskod } = FormikProps.values
+                    const { compPhoneSendiriNum, compSendiriAlamat, compSendiriAlamat_2, compSendiriPoskod, compSendiriCity, compSendiriState } = FormikProps.values
 
 
 
-                    const compPhoneNumError = FormikProps.errors.compPhoneNum
-                    const compPhoneNumTouched = FormikProps.touched.compPhoneNum
+                    const compPhoneSendiriNumError = FormikProps.errors.compPhoneSendiriNum
+                    const compPhoneSendiriNumTouched = FormikProps.touched.compPhoneSendiriNum
 
-                    const compAlamatError = FormikProps.errors.compAlamat
-                    const compAlamatTouched = FormikProps.touched.compAlamat
+                    const compSendiriAlamatError = FormikProps.errors.compSendiriAlamat
+                    const compSendiriAlamatTouched = FormikProps.touched.compSendiriAlamat
 
-                    const compAlamat_2Error = FormikProps.errors.compAlamat_2
-                    const compAlamat_2Touched = FormikProps.touched.compAlamat_2
+                    const compSendiriAlamat_2Error = FormikProps.errors.compSendiriAlamat_2
+                    const compSendiriAlamat_2Touched = FormikProps.touched.compSendiriAlamat_2
 
-                    const compPoskodError = FormikProps.errors.compPoskod
-                    const compPoskodTouched = FormikProps.touched.compPoskod
+                    const compSendiriPoskodError = FormikProps.errors.compSendiriPoskod
+                    const compSendiriPoskodTouched = FormikProps.touched.compSendiriPoskod
+
+                    const getCoordinate = (poskod) => {
+                        console.log(poskod)
+                        if (poskod.length === 5) {
+                            const coordinate = malaysiaData.find(x => x.Postcode == poskod)
+
+                            if (coordinate) {
+                                console.log(`result coor : ${JSON.stringify(coordinate)}`)
+                                FormikProps.setFieldValue('compSendiriPoskod', poskod)
+                                FormikProps.setFieldValue(`compSendiriCity`, coordinate.City)
+                                FormikProps.setFieldValue(`compSendiriState`, coordinate.State)
+                            } else {
+                                console.log(`no result found`)
+                                FormikProps.setFieldValue('compSendiriPoskod', poskod)
+                            }
+
+                        } else {
+                            console.log(`do nothing`)
+                            FormikProps.setFieldValue('compSendiriPoskod', poskod)
+                        }
+                    }
 
 
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
-                            
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+                            <Modal animationType={'slide'}
+                                visible={addressVisible} onRequestClose={() => setAddressVisible(!addressVisible)}
+                            >
+                                <LayoutLoan title={'Address'} nopaddingTop={true} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
+                                    <View style={{ margin: 10 }} />
+                                    <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+                                        <CustomTextInput
+                                            imageUri={require('../assets/images/address.png')}
+                                            value={compSendiriAlamat}
+                                            handleChange={FormikProps.handleChange(`compSendiriAlamat`)}
+                                            handleBlur={FormikProps.handleBlur(`compSendiriAlamat`)}
+                                            touched={compSendiriAlamatTouched}
+                                            error={compSendiriAlamatError}
+                                            placeholder={'Alamat Syarikat Line 1'}
+                                            keyboardType={'default'}
+                                        />
+                                        <CustomTextInput
+                                            imageUri={require('../assets/images/address.png')}
+                                            value={compSendiriAlamat_2}
+                                            handleChange={FormikProps.handleChange(`compSendiriAlamat_2`)}
+                                            handleBlur={FormikProps.handleBlur(`compSendiriAlamat_2`)}
+                                            touched={compSendiriAlamat_2Touched}
+                                            error={compSendiriAlamat_2Error}
+                                            placeholder={'Alamat Syarikat Line 2'}
+
+                                        />
+                                        <CustomTextInput
+                                            imageUri={require('../assets/images/compRegNum.png')}
+                                            value={compSendiriPoskod}
+                                            handleChange={(value)=>getCoordinate(value)}
+                                            handleBlur={FormikProps.handleBlur(`compSendiriPoskod`)}
+                                            touched={compSendiriPoskodTouched}
+                                            error={compSendiriPoskodError}
+                                            placeholder={'Poskod'}
+                                            keyboardType={'decimal-pad'}
+                                        />
+
+                                        {compSendiriCity && <CustomTextInput
+                                            imageUri={require('../assets/images/address.png')}
+                                            value={compSendiriCity}
+
+                                            placeholder={'City'}
+
+                                        />}
+
+                                        {compSendiriState && <CustomTextInput
+                                            imageUri={require('../assets/images/address.png')}
+                                            value={compSendiriState}
+
+                                            placeholder={'State'}
+
+                                        />}
+                                    </View>
+
+                                </LayoutLoan>
+                            </Modal>
                             <Text style={[styles.formTitle]}>Section D</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Maklumat Perniagaan</Text>
@@ -113,48 +187,30 @@ const LoanBusinessAddrInfoScreen = (props) => {
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/phoneNum.png')}
-                                value={compPhoneNum}
-                                handleChange={FormikProps.handleChange(`compPhoneNum`)}
-                                handleBlur={FormikProps.handleBlur(`compPhoneNum`)}
-                                touched={compPhoneNumTouched}
-                                error={compPhoneNumError}
+                                value={compPhoneSendiriNum}
+                                handleChange={FormikProps.handleChange(`compPhoneSendiriNum`)}
+                                handleBlur={FormikProps.handleBlur(`compPhoneSendiriNum`)}
+                                touched={compPhoneSendiriNumTouched}
+                                error={compPhoneSendiriNumError}
                                 placeholder={'No Telefon'}
                                 keyboardType={'phone-pad'}
                             />
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}
-                                value={compAlamat}
-                                handleChange={FormikProps.handleChange(`compAlamat`)}
-                                handleBlur={FormikProps.handleBlur(`compAlamat`)}
-                                touched={compAlamatTouched}
-                                error={compAlamatError}
-                                placeholder={'Alamat Syarikat Line 1'}
-                                keyboardType={'default'}
-                            />
-                            <CustomTextInput
-                                imageUri={require('../assets/images/address.png')}
-                                value={compAlamat_2}
-                                handleChange={FormikProps.handleChange(`compAlamat_2`)}
-                                handleBlur={FormikProps.handleBlur(`compAlamat_2`)}
-                                touched={compAlamat_2Touched}
-                                error={compAlamat_2Error}
-                                placeholder={'Alamat Syarikat Line 2'}
 
-                            />
-                            <CustomTextInput
-                                imageUri={require('../assets/images/compRegNum.png')}
-                                value={compPoskod}
-                                handleChange={FormikProps.handleChange(`compPoskod`)}
-                                handleBlur={FormikProps.handleBlur(`compPoskod`)}
-                                touched={compPoskodTouched}
-                                error={compPoskodError}
-                                placeholder={'Poskod'}
-                                keyboardType={'decimal-pad'}
-                            />
+                                handleClick={() => setAddressVisible(!addressVisible)}
+                                multiLine={true}
 
+                                touched={compSendiriAlamatTouched}
+                                error={compSendiriAlamatError}
+                                placeholder={'Alamat'}
 
-
+                            ><Text style={styles.textDefault}>{compSendiriAlamat}</Text>
+                                {compSendiriAlamat_2 && <Text style={styles.textDefault}>{compSendiriAlamat_2}</Text>}
+                                <Text style={styles.textDefault}>{compSendiriPoskod}</Text>
+                                <Text style={styles.textDefault}>{compSendiriCity},{compSendiriState}</Text>
+                            </CustomTextInput>
                             <CustomFormAction
                                 label={`Save`}
                                 navigation={props.navigation}

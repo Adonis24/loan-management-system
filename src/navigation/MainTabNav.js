@@ -124,6 +124,7 @@ import BusinessPlanGoals3Screen from '../screens/BusinessPlanGoals3Screen'
 import BusinessPlanMarketingScreen from '../screens/BusinessPlanMarketingScreen'
 import BusinessPlanAddDetailScreen from '../screens/BusinessPlanAddDetailScreen'
 import BusinessPlanCertScreen from '../screens/BusinessPlanCertScreen'
+import LoanBankScreen from '../screens/LoanBankScreen';
 
 const DashboardStack = () => {
     return (
@@ -270,6 +271,7 @@ const LoanSectionAStack = () => {
         <Stack.Navigator initialRouteName="LoanMaklumatAsas" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="LoanMaklumatAsas" component={LoanMaklumatAsasScreen} />
             <Stack.Screen name="LoanSektorPerniagaan" component={LoanPerniagaanScreen} />
+            <Stack.Screen name="LoanBank" component={LoanBankScreen} />
         </Stack.Navigator>)
 }
 

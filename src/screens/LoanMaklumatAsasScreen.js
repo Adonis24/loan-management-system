@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
     Text,
-    Platform, 
-    View, 
+    Platform,
+    View,
     CheckBox
 } from 'react-native';
 
@@ -39,8 +39,8 @@ const LoanMaklumatAsasScreen = (props) => {
 
     const dispatch = useDispatch()
 
-    //const { comp_phone, comp_email, comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, proceedContact, error, errorColor } = useSelector(state => state.companyInformationReducer, shallowEqual)
-    const { negeri, cawanganParlimen, pengundiBerdaftar, statusPerniagaan } = useSelector(state => state.financingReducer, shallowEqual)
+   
+    const { negeri, cawanganParlimen, pengundiBerdaftar } = useSelector(state => state.financingReducer, shallowEqual)
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
 
     const setMaklumatAsas = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
@@ -48,7 +48,7 @@ const LoanMaklumatAsasScreen = (props) => {
     return (
         <LayoutLoan navigation={props.navigation}>
             <Formik
-                initialValues={{ negeri, cawanganParlimen, pengundiBerdaftar, statusPerniagaan }}
+                initialValues={{ negeri, cawanganParlimen, pengundiBerdaftar }}
                 validateOnMount
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -66,8 +66,10 @@ const LoanMaklumatAsasScreen = (props) => {
                     const cawanganParlimenError = FormikProps.errors.cawanganParlimen
                     const cawanganParlimenTouched = FormikProps.touched.cawanganParlimen
 
-                    const handleCheckBox = () => { console.log(`apa ni ${pengundiBerdaftar}`); FormikProps.setFieldValue('pengundiBerdaftar', !pengundiBerdaftar) }
-                    const handleCheckBox1 = () => { console.log(`apa ni ${statusPerniagaan}`); FormikProps.setFieldValue('statusPerniagaan', !statusPerniagaan) }
+                    const handleCheckBox = () => { FormikProps.setFieldValue('pengundiBerdaftar', !pengundiBerdaftar) }
+
+
+               
 
                     return (
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
@@ -102,7 +104,7 @@ const LoanMaklumatAsasScreen = (props) => {
 
                                             <CheckBox2 onClick={() => handleCheckBox()} isChecked={pengundiBerdaftar} />
                                             :
-                                            <CheckBox onValueChange={handleCheckBox} value={pengundiBerdaftar} />
+                                            <CheckBox onValueChange={() => handleCheckBox()} value={pengundiBerdaftar} />
                                         }
                                         <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
                                             Ya
@@ -114,7 +116,7 @@ const LoanMaklumatAsasScreen = (props) => {
 
                                             <CheckBox2 onClick={() => handleCheckBox()} isChecked={!pengundiBerdaftar} />
                                             :
-                                            <CheckBox onValueChange={handleCheckBox} value={!pengundiBerdaftar} />
+                                            <CheckBox onValueChange={() => handleCheckBox()} value={!pengundiBerdaftar} />
                                         }
                                         <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
                                             Tidak
@@ -122,30 +124,7 @@ const LoanMaklumatAsasScreen = (props) => {
                                     </View>
                                 </View>
 
-                                <View style={{ marginBottom: 10, justifyContent: 'center' }}>
-                                    <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Status perniagaan</Text>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        {(Platform.OS == 'ios') ?
-
-                                            <CheckBox2 onClick={() => handleCheckBox1()} isChecked={statusPerniagaan} />
-                                            :
-                                            <CheckBox onValueChange={handleCheckBox1} value={statusPerniagaan} />
-                                        }
-                                        <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
-                                            Sedang berniaga
-                                </Text>
-
-                                    </View>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        {(Platform.OS == 'ios') ?
-
-                                            <CheckBox2 onClick={() => handleCheckBox1()} isChecked={!statusPerniagaan} />
-                                            :
-                                            <CheckBox onValueChange={handleCheckBox1} value={!statusPerniagaan} />
-                                        }
-                                        <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>Memulakan Perniagaan</Text>
-                                    </View>
-                                </View>
+                                
 
                                 <CustomFormAction
                                     navigation={props.navigation}

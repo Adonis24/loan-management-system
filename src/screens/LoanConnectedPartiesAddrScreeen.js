@@ -4,18 +4,15 @@ import {
     Text,
     TouchableOpacity,
     View,
-    TextInput,
-    KeyboardAvoidingView
+    Modal
 
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
+
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
+
 import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
@@ -23,7 +20,7 @@ import styles from '../styles/styles'
 import LayoutLoan from '../Layout/LayoutLoan';
 
 import * as actionCreator from '../store/actions/action'
-
+import malaysiaData from 'malaysia-state-city-postcode'
 const validationSchema = Yup.object().shape({
 
 
@@ -46,31 +43,21 @@ const validationSchema = Yup.object().shape({
         .max(5)
         .label('Postcode'),
 
-
 });
 
 const LoanConnectedPartiesAddrScreeen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { cpPhoneNum, cpAlamat, cpAlamat_2, cpPoskod } = useSelector(state => state.financingReducer, shallowEqual)
-
-
+    const { cpPhoneNum, cpAlamat, cpAlamat_2, cpCity, cpState, cpPoskod } = useSelector(state => state.financingReducer, shallowEqual)
+    const [addressVisible, setAddressVisible] = useState(false)
     const setConnectParties = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
-
-
-    //const { capacity, nameCP, cpPhoneNum, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
-
-
-
 
     return (
         <LayoutLoan navigation={props.navigation}>
-
-
             <Formik
                 validateOnMount
-                initialValues={{ cpPhoneNum, cpAlamat_2, cpAlamat, cpPoskod }}
+                initialValues={{ cpPhoneNum, cpAlamat_2, cpAlamat, cpPoskod, cpCity, cpState, }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -87,7 +74,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
 
 
 
-                    const { cpPhoneNum, cpAlamat, cpAlamat_2, cpPoskod } = FormikProps.values
+                    const { cpPhoneNum, cpAlamat, cpAlamat_2, cpPoskod, cpCity, cpState, } = FormikProps.values
 
 
 
@@ -103,12 +90,88 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                     const cpPoskodError = FormikProps.errors.cpPoskod
                     const cpPoskodTouched = FormikProps.touched.cpPoskod
 
+                    const getCoordinate = (poskod) => {
+                        console.log(poskod)
+                        if (poskod.length === 5) {
+                            const coordinate = malaysiaData.find(x => x.Postcode == poskod)
+
+                            if (coordinate) {
+                                console.log(`result coor : ${JSON.stringify(coordinate)}`)
+                                FormikProps.setFieldValue('cpPoskod', poskod)
+                                FormikProps.setFieldValue(`cpCity`, coordinate.City)
+                                FormikProps.setFieldValue(`cpState`, coordinate.State)
+                            } else {
+                                console.log(`no result found`)
+                                FormikProps.setFieldValue('cpPoskod', poskod)
+                            }
+
+                        } else {
+                            console.log(`do nothing`)
+                            FormikProps.setFieldValue('cpPoskod', poskod)
+                        }
+                    }
+
 
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+                            <Modal animationType={'slide'}
+                                visible={addressVisible} onRequestClose={() => setAddressVisible(!addressVisible)}
+                            >
+                                <LayoutLoan title={'Address'} nopaddingTop={true} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
+                                    <View style={{ margin: 10 }} />
+                                    <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+                                        <CustomTextInput
+                                            imageUri={require('../assets/images/address.png')}
+                                            value={cpAlamat}
+                                            handleChange={FormikProps.handleChange(`cpAlamat`)}
+                                            handleBlur={FormikProps.handleBlur(`cpAlamat`)}
+                                            touched={cpAlamatTouched}
+                                            error={cpAlamatError}
+                                            placeholder={'Alamat Line 1'}
+
+                                        />
+
+                                        <CustomTextInput
+                                            imageUri={require('../assets/images/address.png')}
+                                            value={cpAlamat_2}
+                                            handleChange={FormikProps.handleChange(`cpAlamat_2`)}
+                                            handleBlur={FormikProps.handleBlur(`cpAlamat_2`)}
+
+                                            placeholder={'Alamat Line 2'}
+
+                                        />
+                                        <CustomTextInput
+                                            imageUri={require('../assets/images/compRegNum.png')}
+                                            value={cpPoskod}
+                                            handleChange={value => getCoordinate(value)}
+                                            handleBlur={FormikProps.handleBlur(`cpPoskod`)}
+                                            touched={cpPoskodTouched}
+                                            error={cpPoskodError}
+                                            placeholder={'Poskod'}
+                                            keyboardType={'decimal-pad'}
+                                        />
+
+                                        {cpCity && <CustomTextInput
+                                            imageUri={require('../assets/images/address.png')}
+                                            value={cpCity}
+
+                                            placeholder={'City'}
+
+                                        />}
+
+                                        {cpState && <CustomTextInput
+                                            imageUri={require('../assets/images/address.png')}
+                                            value={cpState}
+
+                                            placeholder={'State'}
+
+                                        />}
+                                    </View>
+
+                                </LayoutLoan>
+                            </Modal>
                             <Text style={[styles.formTitle]}>Section C</Text>
-                            {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Maklumat Pasangan</Text>
 
 
@@ -126,24 +189,21 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}
-                                value={cpAlamat}
-                                handleChange={FormikProps.handleChange(`cpAlamat`)}
-                                handleBlur={FormikProps.handleBlur(`cpAlamat`)}
+
+                                handleClick={() => setAddressVisible(!addressVisible)}
+                                multiLine={true}
+
                                 touched={cpAlamatTouched}
                                 error={cpAlamatError}
-                                placeholder={'Alamat Majikan Line 1'}
-                                keyboardType={'default'}
-                            />
-                            <CustomTextInput
-                                imageUri={require('../assets/images/address.png')}
-                                value={cpAlamat_2}
-                                handleChange={FormikProps.handleChange(`cpAlamat_2`)}
-                                handleBlur={FormikProps.handleBlur(`cpAlamat_2`)}
-                                touched={cpAlamat_2Touched}
-                                error={cpAlamat_2Error}
-                                placeholder={'Alamat Majikan Line 2'}
+                                placeholder={'Alamat'}
 
-                            />
+
+                            ><Text style={styles.textDefault}>{cpAlamat}</Text>
+                                {cpAlamat_2 && <Text style={styles.textDefault}>{cpAlamat_2}</Text>}
+                                <Text style={styles.textDefault}>{cpPoskod}</Text>
+                                <Text style={styles.textDefault}>{cpCity},{cpState}</Text>
+
+                            </CustomTextInput>
                             <CustomTextInput
                                 imageUri={require('../assets/images/compRegNum.png')}
                                 value={cpPoskod}

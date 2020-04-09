@@ -53,6 +53,7 @@ const LoanBusinessDetailScreen = (props) => {
 
 
 
+
     const setPembiayaan = (value) => dispatch({ type: 'SET_PEMBIAYAAN', payload: { ...value } })
 
 
@@ -66,7 +67,7 @@ const LoanBusinessDetailScreen = (props) => {
 
     const changeLoan = (pembiayaan) => {
         console.log(`pembiayaan : ${pembiayaan}`)
-        if (pembiayaan == 1) {
+        if (pembiayaan) {
             props.navigation.navigate('LoanBusinessDetail2')
         } else {
             props.navigation.navigate('LoanDetail')
@@ -97,12 +98,12 @@ const LoanBusinessDetailScreen = (props) => {
                     const pembiayaanError = FormikProps.errors.pembiayaan
                     const pembiayaanTouched = FormikProps.touched.pembiayaan
 
-
+                    const handleCheckBox = () => { FormikProps.setFieldValue('pembiayaan', !pembiayaan) }
 
 
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                             <Modal animationType={'slide'}
                                 visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
                             >
@@ -130,32 +131,41 @@ const LoanBusinessDetailScreen = (props) => {
 
                             <Text style={[styles.formTitle]}>Section F</Text>
                             <Text style={[styles.formSubtitle]}>Pembiayaan Perniagaan Sedia Ada</Text>
+
+
+
+                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Pembiayaan :</Text>
+
+
                            
+                                <View style={{ alignSelf: 'flex-start', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
 
+                                    {(Platform.OS == 'ios') ?
 
-                                <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Pembiayaan :</Text>
+                                        <CheckBox2 onClick={() => handleCheckBox()} isChecked={pembiayaan} />
+                                        :
+                                        <CheckBox onValueChange={() => handleCheckBox()} value={pembiayaan} />
+                                    }
+                                    <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
+                                        Ya
+                                </Text>
 
-                                <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
-                                    <Image source={require('../assets/images/loanAmount.png')} style={{ height: 35, width: 35, margin: 5 }} resizeMode={'contain'} />
-                                    <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
-                                        {ios ?
-                                            <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                                <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('pembiayaan')}>
-                                                    <Text style={{ fontSize: 12 }}>{pembiayaan == 1 ? 'Ada' : pembiayaan == 2 ? 'Tiada' : 'Pembiayaan'}</Text>
-                                                </TouchableOpacity>
-                                                {pembiayaanTouched && pembiayaanError && <Text style={styles.error}>{pembiayaanError}</Text>}
-                                            </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
-                                                <Picker style={{  height: 35 }} selectedValue={pembiayaan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pembiayaan', itemValue)}>
-                                                    <Picker.Item label={'Pembiayaan'} value={undefined} />
-                                                    <Picker.Item label="Ada" value={1} />
-                                                    <Picker.Item label="Tiada" value={2} />
-                                                </Picker>
-                                                {pembiayaanTouched && pembiayaanError && <Text style={styles.error}>{pembiayaanError}</Text>}
-                                            </View>}
-                                    </View>
                                 </View>
+                                <View style={{ alignSelf: 'flex-start', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
 
-                            
+                                    {(Platform.OS == 'ios') ?
+
+                                        <CheckBox2 onClick={() => handleCheckBox()} isChecked={!pembiayaan} />
+                                        :
+                                        <CheckBox onValueChange={() => handleCheckBox()} value={!pembiayaan} />
+                                    }
+                                    <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
+                                        Tidak
+                                </Text>
+                                </View>
+                         
+
+
 
                             <CustomFormAction
                                 navigation={props.navigation}
