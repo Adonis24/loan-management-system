@@ -86,35 +86,7 @@ const LoanMaklumatPeribadiScreen = (props) => {
     }
 
 
-    const getUmur = (icNumber) => {
-        if (icNumber) {
-            console.log(icNumber)
 
-            const tl19 = `19${icNumber.slice(0, 2)}-${icNumber.slice(2, 4)}-${icNumber.slice(4, 6)}`
-            const tl20 = `20${icNumber.slice(0, 2)}-${icNumber.slice(2, 4)}-${icNumber.slice(4, 6)}`
-
-
-            let dob, umur
-
-            if (moment().diff(moment(tl19), 'years') < 70) {
-                umur = moment().diff(moment(tl19), 'years')
-                dob = moment(tl19).format('D MMMM, YYYY')
-            } else {
-                umur = moment().diff(moment(tl20), 'years')
-                dob = moment(tl20).format('D MMMM, YYYY')
-            }
-            console.log(`umur sebenar ialah ${umur}`)
-            console.log(`dob sebenar ialah ${dob}`)
-
-            return { tarikhLahir: dob, umur }
-            //const u
-
-            //FormikProps.setFieldValue('umur',umur)
-
-
-        }
-
-    }
 
 
 
@@ -165,9 +137,9 @@ const LoanMaklumatPeribadiScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     const { icNumber } = values
-                    const dobInfo = getUmur(icNumber)
-                    console.log(`dob info ${JSON.stringify(dobInfo)}`)
-                    setMaklumatPeribadi({ ...values, ...dobInfo })
+                    //const dobInfo = getUmur(icNumber)
+                    //console.log(`dob info ${JSON.stringify(dobInfo)}`)
+                    setMaklumatPeribadi({ ...values })
                     props.navigation.navigate('LoanPersonalStatus')
                     actions.resetForm({})
                     actions.setSubmitting(false)
@@ -199,7 +171,42 @@ const LoanMaklumatPeribadiScreen = (props) => {
 
 
 
-                    //getUmur()
+                    const getUmur = (icNumber) => {
+                        FormikProps.setFieldValue('icNumber', icNumber.toString())
+                        if (icNumber) {
+                            if (icNumber.length > 5) {
+                                console.log(icNumber)
+
+                                const tl19 = `19${icNumber.slice(0, 2)}-${icNumber.slice(2, 4)}-${icNumber.slice(4, 6)}`
+                                const tl20 = `20${icNumber.slice(0, 2)}-${icNumber.slice(2, 4)}-${icNumber.slice(4, 6)}`
+
+
+                                let dob, umur
+
+                                if (moment().diff(moment(tl19), 'years') < 70) {
+                                    umur = moment().diff(moment(tl19), 'years')
+                                    dob = moment(tl19).format('D MMMM, YYYY')
+                                } else {
+                                    umur = moment().diff(moment(tl20), 'years')
+                                    dob = moment(tl20).format('D MMMM, YYYY')
+                                }
+                                console.log(`umur sebenar ialah ${umur}`)
+                                console.log(`dob sebenar ialah ${dob}`)
+                                FormikProps.setFieldValue('icNumber', icNumber.toString())
+                                FormikProps.setFieldValue('umur', umur.toString())
+                                FormikProps.setFieldValue('tarikhLahir', dob.toString())
+
+                                //return { tarikhLahir: dob, umur }
+                                //const u
+
+                                //FormikProps.setFieldValue('umur',umur)
+
+
+                            }
+                        }
+
+
+                    }
 
 
                     return (
@@ -221,19 +228,26 @@ const LoanMaklumatPeribadiScreen = (props) => {
                                 touched={nameTouched}
                                 error={nameError}
                                 placeholder={'Nama'}
-
                             />
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/mykad.png')}
                                 value={icNumber}
-                                handleChange={FormikProps.handleChange(`icNumber`)}
+                                handleChange={(icNumber) => getUmur(icNumber)}
                                 handleBlur={FormikProps.handleBlur(`icNumber`)}
                                 touched={icNumberTouched}
                                 error={icNumberError}
                                 placeholder={'MyKad No'}
                                 keyboardType={'phone-pad'}
                             />
+
+                            {umur && <CustomTextInput
+                                imageUri={require('../assets/images/mykad.png')}
+                                value={`${tarikhLahir} (${umur} tahun)`}
+                                placeholder={'Tarikh Lahir'}
+                                editable={false}
+
+                            />}
                             <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Jantina :</Text>
 
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>

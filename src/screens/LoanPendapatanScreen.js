@@ -6,7 +6,7 @@ import {
     Picker,
     TouchableOpacity,
     View,
- 
+
 
 } from 'react-native';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
@@ -121,26 +121,29 @@ const LoanPendapatanScreen = (props) => {
                     const pendidikanTouched = FormikProps.touched.pendidikan
 
                     const getCoordinate = (poskod) => {
-                        console.log(poskod)
-                        if (poskod.length === 5) {
-                            const coordinate = malaysiaData.find(x => x.Postcode == poskod)
-
-                            if (coordinate) {
-                                console.log(`result coor : ${JSON.stringify(coordinate)}`)
-                                FormikProps.setFieldValue('poskodComp', poskod)
-                                FormikProps.setFieldValue(`cityComp`, coordinate.City)
-                                FormikProps.setFieldValue(`stateComp`, coordinate.State)
+                        
+                        if(poskod){
+                            if (poskod.length === 5) {
+                                const coordinate = malaysiaData.find(x => x.Postcode == poskod)
+    
+                                if (coordinate) {
+                                    console.log(`result coor : ${JSON.stringify(coordinate)}`)
+                                    FormikProps.setFieldValue('poskodComp', poskod)
+                                    FormikProps.setFieldValue(`cityComp`, coordinate.City)
+                                    FormikProps.setFieldValue(`stateComp`, coordinate.State)
+                                } else {
+                                    console.log(`no result found`)
+                                    FormikProps.setFieldValue('poskodComp', poskod)
+                                }
+    
                             } else {
-                                console.log(`no result found`)
+                                console.log(`do nothing`)
                                 FormikProps.setFieldValue('poskodComp', poskod)
                             }
 
-                        } else {
-                            console.log(`do nothing`)
-                            FormikProps.setFieldValue('poskodComp', poskod)
                         }
+                        
                     }
-
 
                     return (
 
@@ -251,7 +254,7 @@ const LoanPendapatanScreen = (props) => {
                                 keyboardType={'decimal-pad'}
                             />
 
-                            
+
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}
@@ -261,14 +264,16 @@ const LoanPendapatanScreen = (props) => {
 
                                 touched={alamatCompTouched}
                                 error={alamatCompError}
-                                placeholder={'Alamat'}
+                                placeholder={'Alamat Tempat Bekerja'}
 
 
-                            ><Text style={styles.textDefault}>{alamatComp}</Text>
-                                {alamat_2Comp && <Text style={styles.textDefault}>{alamat_2Comp}</Text>}
-                                <Text style={styles.textDefault}>{poskodComp}</Text>
-                                <Text style={styles.textDefault}>{cityComp},{stateComp}</Text>
-
+                            >
+                                <View style={{ paddingLeft: 5, paddingTop: 5 }}>
+                                    <Text style={[styles.textDefault, { color: '#000' }]}>{alamatComp}</Text>
+                                    {alamat_2Comp && <Text style={[styles.textDefault, { color: '#000' }]}>{alamat_2Comp}</Text>}
+                                    {poskodComp && <Text style={[styles.textDefault, { color: '#000' }]}>{poskodComp}</Text>}
+                                    {cityComp && <Text style={[styles.textDefault, { color: '#000' }]}>{cityComp},{stateComp}</Text>}
+                                </View>
                             </CustomTextInput>
 
                             <CustomTextInput
@@ -278,7 +283,7 @@ const LoanPendapatanScreen = (props) => {
                                 handleBlur={FormikProps.handleBlur(`phoneNumComp`)}
                                 touched={phoneNumCompTouched}
                                 error={phoneNumCompError}
-                                placeholder={'No Tel Syarikat'}
+                                placeholder={'No Tel Tempat Bekerja'}
                                 keyboardType={'decimal-pad'}
                             />
 

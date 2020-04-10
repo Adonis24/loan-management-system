@@ -81,13 +81,13 @@ const LoanCustomDrawer = (props) => {
                     activeScreen={activeScreen}
                     description={'Pengesahan & Perakuan Perniagaan'}
                     nav={nav} />
-
+{/* 
                 <NavButton
                     name={'Section J'}
                     link={'LoanDeclaration'}
                     activeScreen={activeScreen}
                     description={'Akuan Pemohon'}
-                    nav={nav} />
+                    nav={nav} /> */}
 
                 <View style={{ alignItems: 'stretch', flexDirection: 'row',  }}>
                     <TouchableOpacity onPress={() => props.navigation.navigate('LoanCheckList')} style={{ flex:1,borderColor: 'grey', borderWidth: 1, alignSelf: 'flex-start', padding: 10, borderRadius: 10 ,margin:10,alignItems:'center'}}>

@@ -31,7 +31,7 @@ import CheckBox2 from 'react-native-check-box'
 const validationSchema = Yup.object().shape({
 
     pembiayaan: Yup
-        .string()
+        .boolean()
         .required(),
 
 
@@ -65,14 +65,7 @@ const LoanBusinessDetailScreen = (props) => {
         setIosPickerVisible(!iosPickerVisible)
     }
 
-    const changeLoan = (pembiayaan) => {
-        console.log(`pembiayaan : ${pembiayaan}`)
-        if (pembiayaan) {
-            props.navigation.navigate('LoanBusinessDetail2')
-        } else {
-            props.navigation.navigate('LoanDetail')
-        }
-    }
+
 
 
     return (
@@ -84,9 +77,10 @@ const LoanBusinessDetailScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     const { pembiayaan } = values
                     setPembiayaan(values)
-                    changeLoan(pembiayaan)
+                    dispatch(actionCreator.saveLoanData())
                     actions.setSubmitting(false)
                     actions.resetForm({})
+                    props.navigation.navigate('LoanDetail')
 
                 }}
                 validationSchema={validationSchema}
@@ -97,6 +91,13 @@ const LoanBusinessDetailScreen = (props) => {
 
                     const pembiayaanError = FormikProps.errors.pembiayaan
                     const pembiayaanTouched = FormikProps.touched.pembiayaan
+
+                    const institusiError = FormikProps.errors.institusi
+                    const institusiTouched = FormikProps.touched.institusi
+                    const totalLoanError = FormikProps.errors.totalLoan
+                    const totalLoanTouched = FormikProps.touched.totalLoan
+                    const loanBalError = FormikProps.errors.loanBal
+                    const loanBalTouched = FormikProps.touched.loanBal
 
                     const handleCheckBox = () => { FormikProps.setFieldValue('pembiayaan', !pembiayaan) }
 
@@ -131,43 +132,67 @@ const LoanBusinessDetailScreen = (props) => {
 
                             <Text style={[styles.formTitle]}>Section F</Text>
                             <Text style={[styles.formSubtitle]}>Pembiayaan Perniagaan Sedia Ada</Text>
-
-
-
-                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Pembiayaan :</Text>
-
-
-                           
-                                <View style={{ alignSelf: 'flex-start', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
-
-                                    {(Platform.OS == 'ios') ?
-
-                                        <CheckBox2 onClick={() => handleCheckBox()} isChecked={pembiayaan} />
-                                        :
-                                        <CheckBox onValueChange={() => handleCheckBox()} value={pembiayaan} />
-                                    }
-                                    <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
-                                        Ya
-                                </Text>
-
+                            <View style={{ margin: 10 }} />
+                            <View style={{ flexDirection: 'row' }}>
+                                <View style={{ flexDirection: 'row', flex: 1 }}>
+                                    <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Pembiayaan Sedia Ada :</Text>
                                 </View>
-                                <View style={{ alignSelf: 'flex-start', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
+                            </View>
 
-                                    {(Platform.OS == 'ios') ?
-
-                                        <CheckBox2 onClick={() => handleCheckBox()} isChecked={!pembiayaan} />
-                                        :
-                                        <CheckBox onValueChange={() => handleCheckBox()} value={!pembiayaan} />
-                                    }
-                                    <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
-                                        Tidak
+                            <View style={{ alignSelf: 'flex-start', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
+                                {(Platform.OS == 'ios') ?
+                                    <CheckBox2 onClick={() => handleCheckBox()} isChecked={pembiayaan} />
+                                    :
+                                    <CheckBox onValueChange={() => handleCheckBox()} value={pembiayaan} />}
+                                <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
+                                    Ya
                                 </Text>
-                                </View>
-                         
-
-
+                            </View>
+                            <View style={{ alignSelf: 'flex-start', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
+                                {(Platform.OS == 'ios') ?
+                                    <CheckBox2 onClick={() => handleCheckBox()} isChecked={!pembiayaan} />
+                                    :
+                                    <CheckBox onValueChange={() => handleCheckBox()} value={!pembiayaan} />
+                                }
+                                <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
+                                    Tidak
+                                </Text>
+                            </View>
+                            {pembiayaan && <>
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/city.png')}
+                                    value={institusi}
+                                    handleChange={FormikProps.handleChange(`institusi`)}
+                                    handleBlur={FormikProps.handleBlur(`institusi`)}
+                                    touched={institusiTouched}
+                                    error={institusiError}
+                                    placeholder={'Institusi Pembiayaan'}
+                                    keyboardType={'default'}
+                                />
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/loanAmount.png')}
+                                    value={totalLoan}
+                                    handleChange={FormikProps.handleChange(`totalLoan`)}
+                                    handleBlur={FormikProps.handleBlur(`totalLoan`)}
+                                    touched={totalLoanTouched}
+                                    error={totalLoanError}
+                                    placeholder={'Jumlah Pembiayaan'}
+                                    keyboardType={'decimal-pad'}
+                                />
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/compRegNum.png')}
+                                    value={loanBal}
+                                    handleChange={FormikProps.handleChange(`loanBal`)}
+                                    handleBlur={FormikProps.handleBlur(`loanBal`)}
+                                    touched={loanBalTouched}
+                                    error={loanBalError}
+                                    placeholder={'Baki Pembiayaan'}
+                                    keyboardType={'decimal-pad'}
+                                />
+                            </>}
 
                             <CustomFormAction
+                                label={'Submit'}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}

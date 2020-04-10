@@ -125,6 +125,7 @@ import BusinessPlanMarketingScreen from '../screens/BusinessPlanMarketingScreen'
 import BusinessPlanAddDetailScreen from '../screens/BusinessPlanAddDetailScreen'
 import BusinessPlanCertScreen from '../screens/BusinessPlanCertScreen'
 import LoanBankScreen from '../screens/LoanBankScreen';
+import LoanReferrerListScreen from '../screens/LoanReferrerListScreen';
 
 const DashboardStack = () => {
     return (
@@ -233,7 +234,7 @@ const SettingsStack = () => {
 
 const SettingStackWithModal = () => {
     return (
-        <Stack.Navigator initialRouteName="Settings" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="Settings" screenOptions={{ headerShown: false }} mode={'modal'}>
             <Stack.Screen name="Settings" component={SettingsStack} />
             <Stack.Screen name="CameraSelfie" component={CameraSelfieScreen} />
         </Stack.Navigator>
@@ -258,9 +259,9 @@ const LoanDrawer = () => {
             <Drawer.Screen name="LoanBusinessInfoCont" component={LoanBusinessInfoContScreen} />
             <Drawer.Screen name="LoanSectionF" component={LoanSectionFStack} />
             <Drawer.Screen name="LoanDetail" component={LoanDetailScreen} />
-            <Drawer.Screen name="LoanSectionH" component={LoanSectionHStack} />
+            <Drawer.Screen name="LoanSectionH" component={LoanSectionHReffererWithModal} />
             <Drawer.Screen name="LoanValidation" component={LoanValidationScreen} />
-            <Drawer.Screen name="LoanDeclaration" component={LoanDeclarationScreen} />
+            {/* <Drawer.Screen name="LoanDeclaration" component={LoanDeclarationScreen} /> */}
 
 
         </Drawer.Navigator>
@@ -312,10 +313,20 @@ const LoanSectionFStack = () => {
 const LoanSectionHStack = () => {
     return (
         <Stack.Navigator initialRouteName="LoanReferrer" screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="LoanReferrer" component={LoanReferrerScreen} />
+            <Stack.Screen name="LoanReferrer" component={LoanReferrerListScreen} />
+
+        </Stack.Navigator>)
+}
+
+const LoanSectionHReffererWithModal = () => {
+    return (
+        <Stack.Navigator initialRouteName="LoanReferrer" screenOptions={{ headerShown: false }} mode={'modal'}>
+            <Stack.Screen name="LoanReferrer" component={LoanSectionHStack} />
+            <Stack.Screen name="LoanReferrer1" component={LoanReferrerScreen} />
             <Stack.Screen name="LoanReferrer2" component={LoanReferrer2Screen} />
         </Stack.Navigator>)
 }
+
 
 const BusinessPlanDrawer = () => {
     return (
@@ -415,7 +426,7 @@ const MainTabNav = () => {
                             console.log(`route ialah :${JSON.stringify(routeName)}`)
                             //console.log(`history ialah :${JSON.stringify(history)}`)
                             //if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan' || routeName === 'LoanConnectedParties' || routeName === 'LoanConnectedPartiesAddr' || routeName === 'LoanBusinessInfo' || routeName === 'LoanBusinessAddrInfo' || routeName === 'LoanBusinessInfoCont' || routeName === 'LoanBusinessDetail' || routeName === 'LoanDetail')
-                            if (routeName === 'LoanDrawer'||routeName === 'Camera')
+                            if (routeName === 'LoanDrawer' || routeName === 'Camera')
                                 tabBarVisible = false
                             if (routeName === 'BusinessPlanDrawer')
                                 tabBarVisible = false

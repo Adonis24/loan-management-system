@@ -25,7 +25,7 @@ import * as actionCreator from '../store/actions/action'
 const validationSchema = Yup.object().shape({
 
 
-    compPhoneSendiriNum: Yup
+    compSendiriPhoneNum: Yup
         .string()
         .required()
         .min(3)
@@ -51,21 +51,17 @@ const LoanBusinessAddrInfoScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { compPhoneSendiriNum, compSendiriAlamat, compSendiriAlamat_2, compSendiriPoskod, compSendiriCity, compSendiriState } = useSelector(state => state.financingReducer, shallowEqual)
+    const { compSendiriPhoneNum, compSendiriAlamat, compSendiriAlamat_2, compSendiriPoskod, compSendiriCity, compSendiriState } = useSelector(state => state.financingReducer, shallowEqual)
     const [addressVisible, setAddressVisible] = useState(false)
 
     const setBusinessInfo = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
-
-
-
-
 
     return (
         <LayoutLoan navigation={props.navigation}>
 
             <Formik
                 validateOnMount
-                initialValues={{ compPhoneSendiriNum, compSendiriAlamat_2, compSendiriAlamat, compSendiriPoskod, compSendiriCity, compSendiriState }}
+                initialValues={{ compSendiriPhoneNum, compSendiriAlamat_2, compSendiriAlamat, compSendiriPoskod, compSendiriCity, compSendiriState }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -83,12 +79,12 @@ const LoanBusinessAddrInfoScreen = (props) => {
 
 
 
-                    const { compPhoneSendiriNum, compSendiriAlamat, compSendiriAlamat_2, compSendiriPoskod, compSendiriCity, compSendiriState } = FormikProps.values
+                    const { compSendiriPhoneNum, compSendiriAlamat, compSendiriAlamat_2, compSendiriPoskod, compSendiriCity, compSendiriState } = FormikProps.values
 
 
 
-                    const compPhoneSendiriNumError = FormikProps.errors.compPhoneSendiriNum
-                    const compPhoneSendiriNumTouched = FormikProps.touched.compPhoneSendiriNum
+                    const compSendiriPhoneNumError = FormikProps.errors.compSendiriPhoneNum
+                    const compSendiriPhoneNumTouched = FormikProps.touched.compSendiriPhoneNum
 
                     const compSendiriAlamatError = FormikProps.errors.compSendiriAlamat
                     const compSendiriAlamatTouched = FormikProps.touched.compSendiriAlamat
@@ -100,24 +96,28 @@ const LoanBusinessAddrInfoScreen = (props) => {
                     const compSendiriPoskodTouched = FormikProps.touched.compSendiriPoskod
 
                     const getCoordinate = (poskod) => {
-                        console.log(poskod)
-                        if (poskod.length === 5) {
-                            const coordinate = malaysiaData.find(x => x.Postcode == poskod)
-
-                            if (coordinate) {
-                                console.log(`result coor : ${JSON.stringify(coordinate)}`)
-                                FormikProps.setFieldValue('compSendiriPoskod', poskod)
-                                FormikProps.setFieldValue(`compSendiriCity`, coordinate.City)
-                                FormikProps.setFieldValue(`compSendiriState`, coordinate.State)
+                        
+                        if(poskod){
+                            if (poskod.length === 5) {
+                                const coordinate = malaysiaData.find(x => x.Postcode == poskod)
+    
+                                if (coordinate) {
+                                    console.log(`result coor : ${JSON.stringify(coordinate)}`)
+                                    FormikProps.setFieldValue('compSendiriPoskod', poskod)
+                                    FormikProps.setFieldValue(`compSendiriCity`, coordinate.City)
+                                    FormikProps.setFieldValue(`compSendiriState`, coordinate.State)
+                                } else {
+                                    console.log(`no result found`)
+                                    FormikProps.setFieldValue('compSendiriPoskod', poskod)
+                                }
+    
                             } else {
-                                console.log(`no result found`)
-                                FormikProps.setFieldValue('compSendiriPoskod', poskod)
+                                console.log(`do nothing`)
+                                FormikProps.setFieldValue('poskod', poskod)
                             }
 
-                        } else {
-                            console.log(`do nothing`)
-                            FormikProps.setFieldValue('compSendiriPoskod', poskod)
                         }
+                        
                     }
 
 
@@ -153,7 +153,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
                                         <CustomTextInput
                                             imageUri={require('../assets/images/compRegNum.png')}
                                             value={compSendiriPoskod}
-                                            handleChange={(value)=>getCoordinate(value)}
+                                            handleChange={(value) => getCoordinate(value)}
                                             handleBlur={FormikProps.handleBlur(`compSendiriPoskod`)}
                                             touched={compSendiriPoskodTouched}
                                             error={compSendiriPoskodError}
@@ -187,11 +187,11 @@ const LoanBusinessAddrInfoScreen = (props) => {
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/phoneNum.png')}
-                                value={compPhoneSendiriNum}
-                                handleChange={FormikProps.handleChange(`compPhoneSendiriNum`)}
-                                handleBlur={FormikProps.handleBlur(`compPhoneSendiriNum`)}
-                                touched={compPhoneSendiriNumTouched}
-                                error={compPhoneSendiriNumError}
+                                value={compSendiriPhoneNum}
+                                handleChange={FormikProps.handleChange(`compSendiriPhoneNum`)}
+                                handleBlur={FormikProps.handleBlur(`compSendiriPhoneNum`)}
+                                touched={compSendiriPhoneNumTouched}
+                                error={compSendiriPhoneNumError}
                                 placeholder={'No Telefon'}
                                 keyboardType={'phone-pad'}
                             />
@@ -206,10 +206,13 @@ const LoanBusinessAddrInfoScreen = (props) => {
                                 error={compSendiriAlamatError}
                                 placeholder={'Alamat'}
 
-                            ><Text style={styles.textDefault}>{compSendiriAlamat}</Text>
-                                {compSendiriAlamat_2 && <Text style={styles.textDefault}>{compSendiriAlamat_2}</Text>}
-                                <Text style={styles.textDefault}>{compSendiriPoskod}</Text>
-                                <Text style={styles.textDefault}>{compSendiriCity},{compSendiriState}</Text>
+                            >
+                                <View style={{ paddingLeft: 5, paddingTop: 5 }}>
+                                    <Text style={[styles.textDefault, { color: '#000' }]}>{compSendiriAlamat}</Text>
+                                    {compSendiriAlamat_2 && <Text style={[styles.textDefault, { color: '#000' }]}>{compSendiriAlamat_2}</Text>}
+                                    {compSendiriPoskod && <Text style={[styles.textDefault, { color: '#000' }]}>{compSendiriPoskod}</Text>}
+                                    {compSendiriCity && <Text style={[styles.textDefault, { color: '#000' }]}>{compSendiriCity},{compSendiriState}</Text>}
+                                </View>
                             </CustomTextInput>
                             <CustomFormAction
                                 label={`Save`}

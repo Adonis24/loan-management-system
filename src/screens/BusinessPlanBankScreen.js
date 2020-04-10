@@ -67,6 +67,8 @@ const BusinessPlanBankScreen = (props) => {
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { bankName, pemegang, akaun, noAkaun } = useSelector(state => state.businessPlanningReducer, shallowEqual)
+    const { bank, } = useSelector(state => state.financingReducer, shallowEqual)
+    const noAkaunLama= useSelector(state => state.financingReducer.noAkaun, shallowEqual)
 
 
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
@@ -75,7 +77,7 @@ const BusinessPlanBankScreen = (props) => {
         <LayoutLoan navigation={props.navigation}>
             <Formik
                 validateOnMount
-                initialValues={{ pemegang, akaun, bankName, noAkaun }}
+                initialValues={{ pemegang, akaun, bankName:bankName?bankName:bank, noAkaun:noAkaun?noAkaun:noAkaunLama }}
 
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -91,11 +93,7 @@ const BusinessPlanBankScreen = (props) => {
             >
                 {FormikProps => {
 
-
-
-
                     const { akaun, pemegang, bankName, noAkaun } = FormikProps.values
-
 
 
                     const akaunError = FormikProps.errors.akaun
@@ -155,27 +153,6 @@ const BusinessPlanBankScreen = (props) => {
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Latar Belakang Pemohon</Text>
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/compRegNum.png')}
-                                value={bankName}
-                                handleChange={FormikProps.handleChange(`bankName`)}
-                                handleBlur={FormikProps.handleBlur(`bankName`)}
-                                touched={bankNameTouched}
-                                error={bankNameError}
-                                placeholder={'Nama Bank'}
-
-                            />
-                            <CustomTextInput
-                                imageUri={require('../assets/images/compRegNum.png')}
-                                value={noAkaun}
-                                handleChange={FormikProps.handleChange(`noAkaun`)}
-                                handleBlur={FormikProps.handleBlur(`noAkaun`)}
-                                touched={noAkaunTouched}
-                                error={noAkaunError}
-                                placeholder={'No Akaun'}
-                                keyboardType={'phone-pad'}
-                            />
-
                             <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Jenis Akaun :</Text>
 
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
@@ -220,6 +197,29 @@ const BusinessPlanBankScreen = (props) => {
                                         </View>}
                                 </View>
                             </View>
+
+                            <CustomTextInput
+                                imageUri={require('../assets/images/compRegNum.png')}
+                                value={bankName}
+                                handleChange={FormikProps.handleChange(`bankName`)}
+                                handleBlur={FormikProps.handleBlur(`bankName`)}
+                                touched={bankNameTouched}
+                                error={bankNameError}
+                                placeholder={'Nama Bank'}
+
+                            />
+                            <CustomTextInput
+                                imageUri={require('../assets/images/compRegNum.png')}
+                                value={noAkaun}
+                                handleChange={FormikProps.handleChange(`noAkaun`)}
+                                handleBlur={FormikProps.handleBlur(`noAkaun`)}
+                                touched={noAkaunTouched}
+                                error={noAkaunError}
+                                placeholder={'No Akaun'}
+                                keyboardType={'phone-pad'}
+                            />
+
+
 
 
 

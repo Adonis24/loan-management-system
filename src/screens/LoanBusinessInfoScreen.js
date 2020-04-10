@@ -26,25 +26,25 @@ import * as actionCreator from '../store/actions/action'
 
 const validationSchema = Yup.object().shape({
 
-    compAct: Yup
+    compSendiriAct: Yup
         .string()
         .required()
         .min(3)
         .label('Aktiviti'),
 
-    compName: Yup
+    compSendiriName: Yup
         .string()
         .required()
         .min(3)
         .label('Nama Syarikat'),
 
-    pengalaman: Yup
+    compSendiriPengalaman: Yup
         .string()
         .required()
         .min(3)
         .label('Pengalaman'),
 
-    compPendapatan: Yup
+    compSendiriPendapatan: Yup
         .string()
         .required()
         .min(3)
@@ -59,7 +59,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { compName, pengalaman, compAct, compPendapatan, } = useSelector(state => state.financingReducer, shallowEqual)
+    const { compSendiriName, compSendiriPengalaman, compSendiriAct, compSendiriPendapatan, } = useSelector(state => state.financingReducer, shallowEqual)
 
 
     const setBusinessInfo = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
@@ -74,7 +74,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ compName, pengalaman, compAct, compPendapatan, }}
+                initialValues={{ compSendiriName, compSendiriPengalaman, compSendiriAct, compSendiriPendapatan, }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -88,19 +88,19 @@ const LoanConnectedPartiesScreen = (props) => {
             >
                 {FormikProps => {
 
-                    const { compAct, compName, pengalaman, compPendapatan, poskod } = FormikProps.values
+                    const { compSendiriAct, compSendiriName, compSendiriPengalaman, compSendiriPendapatan, poskod } = FormikProps.values
 
-                    const compActError = FormikProps.errors.compAct
-                    const compActTouched = FormikProps.touched.compAct
+                    const compSendiriActError = FormikProps.errors.compSendiriAct
+                    const compSendiriActTouched = FormikProps.touched.compSendiriAct
 
-                    const compNameError = FormikProps.errors.compName
-                    const compNameTouched = FormikProps.touched.compName
+                    const compSendiriNameError = FormikProps.errors.compSendiriName
+                    const compSendiriNameTouched = FormikProps.touched.compSendiriName
 
-                    const pengalamanError = FormikProps.errors.pengalaman
-                    const pengalamanTouched = FormikProps.touched.pengalaman
+                    const compSendiriPengalamanError = FormikProps.errors.compSendiriPengalaman
+                    const compSendiriPengalamanTouched = FormikProps.touched.compSendiriPengalaman
 
-                    const compPendapatanError = FormikProps.errors.compPendapatan
-                    const compPendapatanTouched = FormikProps.touched.compPendapatan
+                    const compSendiriPendapatanError = FormikProps.errors.compSendiriPendapatan
+                    const compSendiriPendapatanTouched = FormikProps.touched.compSendiriPendapatan
 
 
 
@@ -115,42 +115,42 @@ const LoanConnectedPartiesScreen = (props) => {
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/company.png')}
-                                value={compName}
-                                handleChange={FormikProps.handleChange(`compName`)}
-                                handleBlur={FormikProps.handleBlur(`compName`)}
-                                touched={compNameTouched}
-                                error={compNameError}
+                                value={compSendiriName}
+                                handleChange={FormikProps.handleChange(`compSendiriName`)}
+                                handleBlur={FormikProps.handleBlur(`compSendiriName`)}
+                                touched={compSendiriNameTouched}
+                                error={compSendiriNameError}
                                 placeholder={'Nama Syarikat'}
                                 keyboardType={'default'}
                             /> 
                             <CustomTextInput
                                 imageUri={require('../assets/images/bizAct.png')}
-                                value={compAct}
-                                handleChange={FormikProps.handleChange(`compAct`)}
-                                handleBlur={FormikProps.handleBlur(`compAct`)}
-                                touched={compActTouched}
-                                error={compActError}
+                                value={compSendiriAct}
+                                handleChange={FormikProps.handleChange(`compSendiriAct`)}
+                                handleBlur={FormikProps.handleBlur(`compSendiriAct`)}
+                                touched={compSendiriActTouched}
+                                error={compSendiriActError}
                                 placeholder={'Aktiviti Perniagaan'}
 
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/mykad.png')}
-                                value={pengalaman}
-                                handleChange={FormikProps.handleChange(`pengalaman`)}
-                                handleBlur={FormikProps.handleBlur(`pengalaman`)}
-                                touched={pengalamanTouched}
-                                error={pengalamanError}
+                                value={compSendiriPengalaman}
+                                handleChange={FormikProps.handleChange(`compSendiriPengalaman`)}
+                                handleBlur={FormikProps.handleBlur(`compSendiriPengalaman`)}
+                                touched={compSendiriPengalamanTouched}
+                                error={compSendiriPengalamanError}
                                 placeholder={'Tempoh/Pengalaman Berniaga'}
-                                keyboardType={'phone-pad'}
+                                //keyboardType={''}
                             />
                            
                             <CustomTextInput
                                 imageUri={require('../assets/images/compRegNum.png')}
-                                value={compPendapatan}
-                                handleChange={FormikProps.handleChange(`compPendapatan`)}
-                                handleBlur={FormikProps.handleBlur(`compPendapatan`)}
-                                touched={compPendapatanTouched}
-                                error={compPendapatanError}
+                                value={compSendiriPendapatan}
+                                handleChange={FormikProps.handleChange(`compSendiriPendapatan`)}
+                                handleBlur={FormikProps.handleBlur(`compSendiriPendapatan`)}
+                                touched={compSendiriPendapatanTouched}
+                                error={compSendiriPendapatanError}
                                 placeholder={'Anggaran Pendapatan'}
                                 keyboardType={'decimal-pad'}
                             />

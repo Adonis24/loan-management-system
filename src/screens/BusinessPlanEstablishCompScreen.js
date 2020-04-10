@@ -87,15 +87,6 @@ const BusinessPlanEstablishCompScreen = (props) => {
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
 
 
-    //const { capacity, paidCapCP, authCap, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
-
-    // useEffect(() => {
-    //     const open = () => setshowLogo(false)
-    //     const off = () => setshowLogo(true)
-
-    //     keyboardBeingDisplay(open)
-    //     keyboardBeingClose(off)
-    // }, []); // empty-array means don't watch for any updates
 
     const handleIosPicker = (modalContent) => {
         setModalContent(modalContent)
@@ -161,7 +152,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
 
                         setShow2(ios2);
                         setDate2(currentDate2);
-                        FormikProps.setFieldValue('compEstab', currentDate2)
+                        FormikProps.setFieldValue('compOperation', currentDate2)
                     };
 
                     const showMode2 = currentMode2 => {

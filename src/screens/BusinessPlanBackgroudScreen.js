@@ -58,13 +58,25 @@ const BusinessPlanBackgroudScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { compName, name, regNum, compAlamat, compAlamat_2 } = useSelector(state => state.businessPlanningReducer, shallowEqual)
+    const { compName, name, regNum, compAlamat, compAlamat_2, compCity, compState, compPoskod } = useSelector(state => state.businessPlanningReducer, shallowEqual)
+    const { compSendiriName, compSendiriAlamat_2, compSendiriAlamat, compSendiriPoskod, compSendiriCity, compSendiriState } = useSelector(state => state.financingReducer, shallowEqual)
+    const sendiriName = useSelector(state => state.financingReducer.name, shallowEqual)
 
 
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
 
+    useEffect(() => {
+        setLatarBelakang({
+            compName: compSendiriName,
+            name: sendiriName,
+            compAlamat: compSendiriAlamat,
+            compAlamat_2: compSendiriAlamat_2,
+            compCity: compSendiriCity,
+            compPoskod: compSendiriPoskod,
+            compState: compSendiriState
+        })
 
-
+    }, []); // empty-array means don't watch for any updates
 
 
     return (
@@ -119,58 +131,56 @@ const BusinessPlanBackgroudScreen = (props) => {
                             <Text style={[styles.formSubtitle]}>Latar Belakang Pemohon</Text>
                             <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start', paddingLeft: 10 }}>
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/user.png')}
-                                value={name}
-                                handleChange={FormikProps.handleChange(`name`)}
-                                handleBlur={FormikProps.handleBlur(`name`)}
-                                touched={nameTouched}
-                                error={nameError}
-                                placeholder={'Nama'}
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/user.png')}
+                                    value={name}
+                                    handleChange={FormikProps.handleChange(`name`)}
+                                    handleBlur={FormikProps.handleBlur(`name`)}
+                                    touched={nameTouched}
+                                    error={nameError}
+                                    placeholder={'Nama'}
+                                    editable={false}
 
-                            />
+                                />
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/company.png')}
-                                value={compName}
-                                handleChange={FormikProps.handleChange(`compName`)}
-                                handleBlur={FormikProps.handleBlur(`compName`)}
-                                touched={compNameTouched}
-                                error={compNameError}
-                                placeholder={'Nama Syarikat'}
-                                keyboardType={'default'}
-                            />
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/company.png')}
+                                    value={compName}
+                                    handleChange={FormikProps.handleChange(`compName`)}
+                                    handleBlur={FormikProps.handleBlur(`compName`)}
+                                    touched={compNameTouched}
+                                    error={compNameError}
+                                    placeholder={'Nama Syarikat'}
+                                    keyboardType={'default'}
+                                    editable={false}
+                                />
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/compRegNum.png')}
-                                value={regNum}
-                                handleChange={FormikProps.handleChange(`regNum`)}
-                                handleBlur={FormikProps.handleBlur(`regNum`)}
-                                touched={regNumTouched}
-                                error={regNumError}
-                                placeholder={'No Pendaftaran Perniagaan'}
-                                keyboardType={'decimal-pad'}
-                            />
-                            <CustomTextInput
-                                imageUri={require('../assets/images/address.png')}
-                                value={compAlamat}
-                                handleChange={FormikProps.handleChange(`compAlamat`)}
-                                handleBlur={FormikProps.handleBlur(`compAlamat`)}
-                                touched={compAlamatTouched}
-                                error={compAlamatError}
-                                placeholder={'Alamat Syarikat Line 1'}
-                                keyboardType={'default'}
-                            />
-                            <CustomTextInput
-                                imageUri={require('../assets/images/address.png')}
-                                value={compAlamat_2}
-                                handleChange={FormikProps.handleChange(`compAlamat_2`)}
-                                handleBlur={FormikProps.handleBlur(`compAlamat_2`)}
-                                touched={compAlamat_2Touched}
-                                error={compAlamat_2Error}
-                                placeholder={'Alamat Syarikat Line 2'}
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/compRegNum.png')}
+                                    value={regNum}
+                                    handleChange={FormikProps.handleChange(`regNum`)}
+                                    handleBlur={FormikProps.handleBlur(`regNum`)}
+                                    touched={regNumTouched}
+                                    error={regNumError}
+                                    placeholder={'No Pendaftaran Perniagaan'}
+                                    keyboardType={'decimal-pad'}
+                                />
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/address.png')}
 
-                            />
+                                    handleClick={() => setAddressVisible(!addressVisible)}
+                                    multiLine={true}
+
+                                    placeholder={'Alamat'}
+
+                                >
+                                    <View style={{ paddingLeft: 5, paddingTop: 5 }}>
+                                        <Text style={[styles.textDefault, { color: '#000' }]}>{compAlamat}</Text>
+                                        {compAlamat_2 && <Text style={[styles.textDefault, { color: '#000' }]}>{compAlamat_2}</Text>}
+                                        {compPoskod && <Text style={[styles.textDefault, { color: '#000' }]}>{compPoskod}</Text>}
+                                        {compCity && <Text style={[styles.textDefault, { color: '#000' }]}>{compCity},{compState}</Text>}
+                                    </View>
+                                </CustomTextInput>
                             </ScrollView>
 
                             <CustomFormAction

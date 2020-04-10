@@ -91,24 +91,28 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                     const cpPoskodTouched = FormikProps.touched.cpPoskod
 
                     const getCoordinate = (poskod) => {
-                        console.log(poskod)
-                        if (poskod.length === 5) {
-                            const coordinate = malaysiaData.find(x => x.Postcode == poskod)
-
-                            if (coordinate) {
-                                console.log(`result coor : ${JSON.stringify(coordinate)}`)
-                                FormikProps.setFieldValue('cpPoskod', poskod)
-                                FormikProps.setFieldValue(`cpCity`, coordinate.City)
-                                FormikProps.setFieldValue(`cpState`, coordinate.State)
+                        
+                        if(poskod){
+                            if (poskod.length === 5) {
+                                const coordinate = malaysiaData.find(x => x.Postcode == poskod)
+    
+                                if (coordinate) {
+                                    console.log(`result coor : ${JSON.stringify(coordinate)}`)
+                                    FormikProps.setFieldValue('cpPoskod', poskod)
+                                    FormikProps.setFieldValue(`cpCity`, coordinate.City)
+                                    FormikProps.setFieldValue(`cpState`, coordinate.State)
+                                } else {
+                                    console.log(`no result found`)
+                                    FormikProps.setFieldValue('cpPoskod', poskod)
+                                }
+    
                             } else {
-                                console.log(`no result found`)
+                                console.log(`do nothing`)
                                 FormikProps.setFieldValue('cpPoskod', poskod)
                             }
 
-                        } else {
-                            console.log(`do nothing`)
-                            FormikProps.setFieldValue('cpPoskod', poskod)
                         }
+                        
                     }
 
 
@@ -198,22 +202,15 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                                 placeholder={'Alamat'}
 
 
-                            ><Text style={styles.textDefault}>{cpAlamat}</Text>
-                                {cpAlamat_2 && <Text style={styles.textDefault}>{cpAlamat_2}</Text>}
-                                <Text style={styles.textDefault}>{cpPoskod}</Text>
-                                <Text style={styles.textDefault}>{cpCity},{cpState}</Text>
-
+                            >
+                                <View style={{ paddingLeft: 5, paddingTop: 5 }}>
+                                    <Text style={[styles.textDefault, { color: '#000' }]}>{cpAlamat}</Text>
+                                    {cpAlamat_2 && <Text style={[styles.textDefault, { color: '#000' }]}>{cpAlamat_2}</Text>}
+                                    {cpPoskod && <Text style={[styles.textDefault, { color: '#000' }]}>{cpPoskod}</Text>}
+                                    {cpCity && <Text style={[styles.textDefault, { color: '#000' }]}>{cpCity},{cpState}</Text>}
+                                </View>
                             </CustomTextInput>
-                            <CustomTextInput
-                                imageUri={require('../assets/images/compRegNum.png')}
-                                value={cpPoskod}
-                                handleChange={FormikProps.handleChange(`cpPoskod`)}
-                                handleBlur={FormikProps.handleBlur(`cpPoskod`)}
-                                touched={cpPoskodTouched}
-                                error={cpPoskodError}
-                                placeholder={'Poskod'}
-                                keyboardType={'decimal-pad'}
-                            />
+
 
 
 

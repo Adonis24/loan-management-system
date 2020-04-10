@@ -39,7 +39,7 @@ const LoanMaklumatAsasScreen = (props) => {
 
     const dispatch = useDispatch()
 
-   
+
     const { negeri, cawanganParlimen, pengundiBerdaftar } = useSelector(state => state.financingReducer, shallowEqual)
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
 
@@ -69,7 +69,7 @@ const LoanMaklumatAsasScreen = (props) => {
                     const handleCheckBox = () => { FormikProps.setFieldValue('pengundiBerdaftar', !pengundiBerdaftar) }
 
 
-               
+
 
                     return (
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
@@ -114,18 +114,15 @@ const LoanMaklumatAsasScreen = (props) => {
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         {(Platform.OS == 'ios') ?
 
-                                            <CheckBox2 onClick={() => handleCheckBox()} isChecked={!pengundiBerdaftar} />
+                                            <CheckBox2 onClick={() => handleCheckBox()} isChecked={!pengundiBerdaftar } />
                                             :
-                                            <CheckBox onValueChange={() => handleCheckBox()} value={!pengundiBerdaftar} />
+                                            <CheckBox onValueChange={() => handleCheckBox()} value={!pengundiBerdaftar } />
                                         }
                                         <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
                                             Tidak
                                 </Text>
                                     </View>
                                 </View>
-
-                                
-
                                 <CustomFormAction
                                     navigation={props.navigation}
                                     isValid={FormikProps.isValid}

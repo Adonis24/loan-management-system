@@ -45,7 +45,7 @@ const validationSchema = Yup.object().shape({
     payBack: Yup
         .string()
         .required()
-        .min(3)
+        
         .label('Tempoh Bayaran'),
 
 
@@ -67,29 +67,14 @@ const LoanDetailScreen = (props) => {
 
     const setMaklumatPembiayaan = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
-
-    //const { capacity, nameCP, icNumber, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
-
-    useEffect(() => {
-        const open = () => setshowLogo(false)
-        const off = () => setshowLogo(true)
-
-        keyboardBeingDisplay(open)
-        keyboardBeingClose(off)
-    }, []); // empty-array means don't watch for any updates
-
     const handleIosPicker = (modalContent) => {
         setModalContent(modalContent)
         setIosPickerVisible(!iosPickerVisible)
     }
 
-    const [showLogo, setshowLogo] = useState(true)
-
-
 
     return (
         <LayoutLoan navigation={props.navigation}>
-
 
             <Formik
                 validateOnMount
