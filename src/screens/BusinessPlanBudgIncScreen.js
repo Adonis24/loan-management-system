@@ -28,51 +28,30 @@ import * as actionCreator from '../store/actions/action'
 const validationSchema = Yup.object().shape({
 
     income: Yup
-        .string()
+        .number()
         .required()
-        .min(1)
+        .min(0)
         .label('Pendapatan'),
 
     kosOperasi: Yup
-        .string()
+        .number()
         .required()
-        .min(1)
+        .min(0)
         .label('Kos Operasi'),
 
-    totalExpenditure: Yup
-        .string()
-        .required()
-        .min(1)
-        .label('Jumlah Perbelanjaan'),
-    untungKasar: Yup
-        .string()
-        .required()
-        .min(1)
-        .label('Untung Kasar'),
-
     perbelanjaanLain: Yup
-        .string()
+        .number()
         .required()
-        .min(1)
+        .min(0)
         .label('Perbelanjaan Lain'),
 
-    untungBersih: Yup
-        .string()
-        .required()
-        .min(1)
-        .label('Untung Bersih'),
-
-    totalIncome: Yup
-        .string()
-        .required()
-        .min(1)
-        .label('Jumlah Pendapatan'),
-
     pembelian: Yup
-        .string()
+        .number()
         .required()
-        .min(1)
-        .label('Pembelian'),
+        .min(0)
+        .label('Perbelanjaan Lain'),
+
+
 
 
 });
@@ -97,7 +76,16 @@ const BusinessPlanBudgIncScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ pembelian, income, kosOperasi, totalExpenditure, untungKasar, perbelanjaanLain, untungBersih, totalIncome }}
+                initialValues={{
+                    pembelian: '0',
+                    income: income || '0',
+                    kosOperasi: kosOperasi || '0',
+                    totalExpenditure: totalExpenditure || '0',
+                    untungKasar: untungKasar || '0',
+                    perbelanjaanLain: perbelanjaanLain || '0',
+                    untungBersih: untungBersih || '0',
+                    totalIncome: totalIncome || '0'
+                }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -123,23 +111,74 @@ const BusinessPlanBudgIncScreen = (props) => {
                     const pembelianError = FormikProps.errors.pembelian
                     const pembelianTouched = FormikProps.touched.pembelian
 
-                    const totalExpenditureError = FormikProps.errors.totalExpenditure
-                    const totalExpenditureTouched = FormikProps.touched.totalExpenditure
 
-                    const untungKasarError = FormikProps.errors.untungKasar
-                    const untungKasarTouched = FormikProps.touched.untungKasar
 
                     const perbelanjaanLainError = FormikProps.errors.perbelanjaanLain
                     const perbelanjaanLainTouched = FormikProps.touched.perbelanjaanLain
 
-                    const untungBersihError = FormikProps.errors.untungBersih
-                    const untungBersihTouched = FormikProps.touched.untungBersih
-
                     const kosOperasiError = FormikProps.errors.kosOperasi
                     const kosOperasiTouched = FormikProps.touched.kosOperasi
 
-                    const totalIncomeError = FormikProps.errors.totalIncome
-                    const totalIncomeTouched = FormikProps.touched.totalIncome
+
+                    const autoCalculateIncome = (val) => {
+
+                        //console.log(`all values ialah ${JSON.stringify(FormikProps.values)}`)
+
+                        const { income, pembelian, kosOperasi, perbelanjaanLain, } = FormikProps.values
+                        const untungKasar1 = parseFloat(val) - (parseFloat(pembelian) + parseFloat(kosOperasi))
+                        const untungBersih1 = untungKasar1 - parseFloat(perbelanjaanLain)
+
+                        FormikProps.setFieldValue('income', val)
+                        FormikProps.setFieldValue('totalIncome', val)
+                        FormikProps.setFieldValue('untungKasar', untungKasar1.toString())
+                        FormikProps.setFieldValue('untungBersih', untungBersih1.toString())
+
+
+
+                    }
+
+                    const autoCalculatePembelian = (val) => {
+                        const { income, pembelian, kosOperasi, perbelanjaanLain, } = FormikProps.values
+
+                        const untungKasar1 = parseFloat(income) - (parseFloat(val) + parseFloat(kosOperasi))
+                        const untungBersih1 = untungKasar1 - parseFloat(perbelanjaanLain)
+
+                        const totalExpenditure1 = parseFloat(val) + parseFloat(kosOperasi)
+
+
+                        FormikProps.setFieldValue('pembelian', parseFloat(val))
+                        FormikProps.setFieldValue('untungKasar', untungKasar1.toString())
+                        FormikProps.setFieldValue('untungBersih', untungBersih1.toString())
+                        FormikProps.setFieldValue('totalExpenditure', totalExpenditure1.toString())
+                    }
+
+                    const autoCalculateKosOperasi = (val) => {
+                        const { income, pembelian, kosOperasi, perbelanjaanLain, } = FormikProps.values
+
+                        const untungKasar1 = parseFloat(income) - (parseFloat(pembelian) + parseFloat(val))
+                        const untungBersih1 = untungKasar1 - parseFloat(perbelanjaanLain)
+
+                        const totalExpenditure1 = parseFloat(pembelian) + parseFloat(val)
+
+                        FormikProps.setFieldValue('kosOperasi', val)
+                        FormikProps.setFieldValue('untungKasar', untungKasar1.toString())
+                        FormikProps.setFieldValue('untungBersih', untungBersih1.toString())
+                        FormikProps.setFieldValue('totalExpenditure', totalExpenditure1.toString())
+
+                    }
+
+                    const autoCalculatePerbelanjaanLain = (val) => {
+
+                        const { income, pembelian, kosOperasi, perbelanjaanLain, } = FormikProps.values
+
+                        const untungKasar1 = parseFloat(income) - (parseFloat(pembelian) + parseFloat(kosOperasi))
+                        const untungBersih1 = untungKasar1 - parseFloat(val)
+
+                        FormikProps.setFieldValue('perbelanjaanLain', untungBersih1)
+                        
+
+
+                    }
 
 
 
@@ -150,12 +189,14 @@ const BusinessPlanBudgIncScreen = (props) => {
 
                             <Text style={[styles.formTitle]}>Section C</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.formSubtitle]}>Anggaran Pendapatan</Text>
-                            <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start',paddingLeft:10,paddingRight:10 }}>
+                            <Text style={[styles.formSubtitle]}>Anggaran Pendapatan Bulanan</Text>
+                            <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start', paddingLeft: 10, paddingRight: 10 }}>
+
+                                <TouchableOpacity onPress={() => FormikProps.resetForm({})}><Text>Reset</Text></TouchableOpacity>
                                 <CustomTextInput
                                     imageUri={require('../assets/images/payment.png')}
                                     value={income}
-                                    handleChange={FormikProps.handleChange(`income`)}
+                                    handleChange={(val) => autoCalculateIncome(val)}
                                     handleBlur={FormikProps.handleBlur(`income`)}
                                     touched={incomeTouched}
                                     error={incomeError}
@@ -164,13 +205,9 @@ const BusinessPlanBudgIncScreen = (props) => {
                                 />
                                 <CustomTextInput
                                     imageUri={require('../assets/images/payment.png')}
-                                    value={totalIncome}
-                                    handleChange={FormikProps.handleChange(`totalIncome`)}
-                                    handleBlur={FormikProps.handleBlur(`totalIncome`)}
-                                    touched={totalIncomeTouched}
-                                    error={totalIncomeError}
+                                    value={income}
                                     placeholder={'Jumlah Pendapatan'}
-                                    keyboardType={'phone-pad'}
+                                    editable={false}
 
                                 />
 
@@ -178,7 +215,7 @@ const BusinessPlanBudgIncScreen = (props) => {
                                 <CustomTextInput
                                     imageUri={require('../assets/images/bizAct.png')}
                                     value={pembelian}
-                                    handleChange={FormikProps.handleChange(`pembelian`)}
+                                    handleChange={(val) => autoCalculatePembelian(val)}
                                     handleBlur={FormikProps.handleBlur(`pembelian`)}
                                     touched={pembelianTouched}
                                     error={pembelianError}
@@ -189,7 +226,7 @@ const BusinessPlanBudgIncScreen = (props) => {
                                 <CustomTextInput
                                     imageUri={require('../assets/images/compRegNum.png')}
                                     value={kosOperasi}
-                                    handleChange={FormikProps.handleChange(`kosOperasi`)}
+                                    handleChange={(val) => autoCalculateKosOperasi(val)}
                                     handleBlur={FormikProps.handleBlur(`kosOperasi`)}
                                     touched={kosOperasiTouched}
                                     error={kosOperasiError}
@@ -199,44 +236,33 @@ const BusinessPlanBudgIncScreen = (props) => {
                                 <CustomTextInput
                                     imageUri={require('../assets/images/payment.png')}
                                     value={totalExpenditure}
-                                    handleChange={FormikProps.handleChange(`totalExpenditure`)}
-                                    handleBlur={FormikProps.handleBlur(`totalExpenditure`)}
-                                    touched={totalExpenditureTouched}
-                                    error={totalExpenditureError}
                                     placeholder={'Jumlah Pebelanjaan'}
-                                    keyboardType={'phone-pad'}
+                                    editable={false}
                                 />
                                 <CustomTextInput
                                     imageUri={require('../assets/images/user.png')}
                                     value={untungKasar}
-                                    handleChange={FormikProps.handleChange(`untungKasar`)}
-                                    handleBlur={FormikProps.handleBlur(`untungKasar`)}
-                                    touched={untungKasarTouched}
-                                    error={untungKasarError}
                                     placeholder={'Untung Kasar'}
-                                    keyboardType={'phone-pad'}
+                                    editable={false}
 
                                 />
                                 <CustomTextInput
                                     imageUri={require('../assets/images/user.png')}
                                     value={perbelanjaanLain}
-                                    handleChange={FormikProps.handleChange(`perbelanjaanLain`)}
+                                    handleChange={(val) => autoCalculatePerbelanjaanLain(val)}
                                     handleBlur={FormikProps.handleBlur(`perbelanjaanLain`)}
                                     touched={perbelanjaanLainTouched}
                                     error={perbelanjaanLainError}
                                     placeholder={'Perbelanjaan Lain'}
                                     keyboardType={'phone-pad'}
 
+
                                 />
                                 <CustomTextInput
                                     imageUri={require('../assets/images/user.png')}
                                     value={untungBersih}
-                                    handleChange={FormikProps.handleChange(`untungBersih`)}
-                                    handleBlur={FormikProps.handleBlur(`untungBersih`)}
-                                    touched={untungBersihTouched}
-                                    error={untungBersihError}
                                     placeholder={'Untung Bersih'}
-                                    keyboardType={'phone-pad'}
+                                    editable={false}
 
                                 />
                             </ScrollView>
@@ -257,7 +283,7 @@ const BusinessPlanBudgIncScreen = (props) => {
                     <Ionicons name={'md-menu'} size={24} color={'#fff'} />
                 </TouchableOpacity>
             </View>
-        </LayoutLoan>
+        </LayoutLoan >
     );
 }
 

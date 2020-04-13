@@ -346,7 +346,7 @@ const BusinessPlanDrawer = () => {
             <Drawer.Screen name="BusinessPlanSectionE" component={BusinessPlanSectionEStack} />
             <Drawer.Screen name="BusinessPlanMarketing" component={BusinessPlanMarketingScreen} />
             <Drawer.Screen name="BusinessPlanAddDetail" component={BusinessPlanAddDetailScreen} />
-            <Drawer.Screen name="BusinessPlanCert" component={BusinessPlanCertScreen} />
+            {/* <Drawer.Screen name="BusinessPlanCert" component={BusinessPlanCertScreen} /> */}
         </Drawer.Navigator>
     )
 }

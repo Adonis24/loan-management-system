@@ -69,12 +69,12 @@ const BusinessPlanCustomDrawer = (props) => {
                     description={'Maklumat Tambahan'}
                     nav={nav} />
 
-                <NavButton
+                {/* <NavButton
                     name={'Section H'}
                     link={'BusinessPlanCert'}
                     activeScreen={activeScreen}
                     description={'Akuan Pemohon'}
-                    nav={nav} />
+                    nav={nav} /> */}
 
 
                 <View style={{ alignItems: 'stretch', flexDirection: 'row', }}>

@@ -42,7 +42,6 @@ const validationSchema = Yup.object().shape({
         .min(16)
         .label('No Akaun'),
 
-
 });
 
 const LoanBankScreen = (props) => {
@@ -115,18 +114,18 @@ const LoanBankScreen = (props) => {
                                         {(modalContent === "typeBusiness") ?
                                             <Picker style={{ flex: 1, height: 35 }} selectedValue={typeBusiness} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('typeBusiness', itemValue)}>
                                                 <Picker.Item label={'Please Select'} value={undefined} />
-                                                <Picker.Item label="Pertanian Dan Perusahaan Asas Tani" value="pertanian" />
-                                                <Picker.Item label="Peruncitan" value="peruncitan" />
-                                                <Picker.Item label="Perkhidmatan" value="perkhidmatan" />
-                                                <Picker.Item label="Pembuatan" value="pembuatan" />
-                                                <Picker.Item label="Kontraktor Kecil" value="kontraktorKecil" />
+                                                <Picker.Item label="Pertanian Dan Perusahaan Asas Tani" value="Pertanian" />
+                                                <Picker.Item label="Peruncitan" value="Peruncitan" />
+                                                <Picker.Item label="Perkhidmatan" value="Perkhidmatan" />
+                                                <Picker.Item label="Pembuatan" value="Pembuatan" />
+                                                <Picker.Item label="Kontraktor Kecil" value="Kontraktor Kecil" />
                                             </Picker> : <Picker style={{ flex: 1, height: 35 }} selectedValue={bank} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('bank', itemValue)}>
                                                 <Picker.Item label={'Please Select'} value={undefined} />
-                                                <Picker.Item label="Bank Islam" value="bankIslam" />
-                                                <Picker.Item label="Maybank" value="maybank" />
-                                                <Picker.Item label="Bank Rakyat" value="bankRakyat" />
+                                                <Picker.Item label="Bank Islam" value="Bank Islam" />
+                                                <Picker.Item label="Maybank" value="Maybank" />
+                                                <Picker.Item label="Bank Rakyat" value="Bank Rakyat" />
                                                 <Picker.Item label="BSN" value="bsn" />
-                                                <Picker.Item label="Agrobank" value="agrobank" />
+                                                <Picker.Item label="Agrobank" value="Agrobank" />
                                             </Picker>}
                                     </View>
                                 </View>
@@ -160,11 +159,11 @@ const LoanBankScreen = (props) => {
                                             </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                                 <Picker style={{ height: 35 }} selectedValue={bank} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('bank', itemValue)}>
                                                     <Picker.Item label={'Bank'} value={undefined} />
-                                                    <Picker.Item label="Bank Islam" value="bankIslam" />
-                                                    <Picker.Item label="Maybank" value="maybank" />
-                                                    <Picker.Item label="Bank Rakyat" value="bankRakyat" />
+                                                    <Picker.Item label="Bank Islam" value="Bank Islam" />
+                                                    <Picker.Item label="Maybank" value="Maybank" />
+                                                    <Picker.Item label="Bank Rakyat" value="Bank Rakyat" />
                                                     <Picker.Item label="BSN" value="bsn" />
-                                                    <Picker.Item label="Agrobank" value="agrobank" />
+                                                    <Picker.Item label="Agrobank" value="Agrobank" />
 
                                                 </Picker>
                                                 {bankTouched && bankError && <Text style={styles.error}>{bankError}</Text>}

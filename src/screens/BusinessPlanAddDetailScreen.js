@@ -67,7 +67,7 @@ const BusinessPlanAddDetailScreen = (props) => {
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
-                    props.navigation.navigate('BusinessPlanCert')
+                    props.navigation.navigate('LoanCheckList')
                     dispatch(actionCreator.saveBussPlanData())
                     actions.resetForm({})
                     actions.setSubmitting(false)

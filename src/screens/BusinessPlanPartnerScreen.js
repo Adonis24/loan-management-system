@@ -7,7 +7,7 @@ import {
     Modal,
     Picker,
     TextInput,
-    KeyboardAvoidingView
+    KeyboardAvoidingView, FlatList
 
 } from 'react-native';
 import { Formik } from 'formik';
@@ -25,175 +25,180 @@ import styles from '../styles/styles'
 import LayoutLoan from '../Layout/LayoutLoan';
 
 import * as actionCreator from '../store/actions/action'
+//import { FlatList } from 'react-native-gesture-handler';
 
 const validationSchema = Yup.object().shape({
 
-    // partJawatan: Yup
-    //     .string()
-    //     .required()
-    //     .min(3)
-    //     .label('Jawatan'),
+    partJawatan: Yup
+        .string()
+        .required()
+        .min(3)
+        .label('Jawatan'),
 
-    // partName: Yup
-    //     .string()
-    //     .required()
-    //     .min(3)
-    //     .label('Nama Rakan Kongsi'),
+    partName: Yup
+        .string()
+        .required()
+        .min(3)
+        .label('Nama Rakan Kongsi'),
 
-    // partIcNum: Yup
-    //     .string()
-    //     .required()
-    //     .min(12)
-    //     .max(12)
-    //     .label('MyKad No'),
+    partIcNum: Yup
+        .string()
+        .required()
+        .min(12)
+        .max(12)
+        .label('MyKad No'),
 
-    // saham: Yup
-    //     .string()
-    //     .required()
-    //     .min(3)
-    //     .label('Jumlah Saham'),
+    saham: Yup
+        .string()
+        .required()
+        .max(2)
+        .label('Jumlah Saham'),
 
 
 
 
 });
 
-const BusinessPlanPartnerScreen = (props) => {
 
+
+const BusinessPlanPartnerScreen = (props) => {
 
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { partName, partIcNum, partJawatan, saham, } = useSelector(state => state.businessPlanningReducer, shallowEqual)
+    //const { partName, partIcNum, partJawatan, saham, } = useSelector(state => state.businessPlanningReducer, shallowEqual)
+    const { partners } = useSelector(state => state.businessPlanningReducer)
+    console.log(`partners ialah ${JSON.stringify(partners)}`)
+    //const { partName, partIcNum, partJawatan, saham, } = partners || { partName: null, partIcNum: null, partJawatan: null, saham: null, }
+
     const [addPartnerVisible, setAddPartnerVisible] = useState(false)
 
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
 
-
-    //const { capacity, nameCP, partIcNum, relationship, emailSME, } = useSelector(state => state.companyInformationReducer, shallowEqual)
-
-
-
-
-
-
+    const goToNext = () => {
+        dispatch(actionCreator.saveBussPlanData())
+        props.navigation.navigate('BusinessPlanSectionB')
+    }
 
     return (
         <LayoutLoan navigation={props.navigation}>
+            <Modal visible={addPartnerVisible} onRequestClose={() => setAddPartnerVisible(!addPartnerVisible)}>
+                <Formik
+                    validateOnMount
+                    initialValues={{ partName: undefined, partIcNum: undefined, partJawatan: undefined, saham: undefined, }}
+
+                    onSubmit={async (values, actions) => {
+                        const newPartners = partners || []
+                        newPartners.push(values)
+                        console.log(`values formik ialah ${JSON.stringify(values)}`)
+                        setLatarBelakang({ partners: newPartners })
+
+                        setAddPartnerVisible(!addPartnerVisible)
+                        //dispatch(actionCreator.saveBussPlanData())
+                        actions.resetForm({})
+                        actions.setSubmitting(false)
+                    }
+                    }
+                    validationSchema={validationSchema}
+                >
+                    {FormikProps => {
 
 
-            <Formik
-                validateOnMount
-                initialValues={{ partName, partIcNum, partJawatan, saham, }}
-
-                onSubmit={async (values, actions) => {
-                    console.log(`values formik ialah ${JSON.stringify(values)}`)
-                    setLatarBelakang(values)
-                    props.navigation.navigate('BusinessPlanSectionB')
-                    dispatch(actionCreator.saveBussPlanData())
-                    actions.resetForm({})
-                    actions.setSubmitting(false)
-                }
-                }
-                validationSchema={validationSchema}
-            >
-                {FormikProps => {
 
 
+                        const { partJawatan, partName, partIcNum, saham, } = FormikProps.values
 
+                        const partJawatanError = FormikProps.errors.partJawatan
+                        const partJawatanTouched = FormikProps.touched.partJawatan
 
-                    const { partJawatan, partName, partIcNum, saham, } = FormikProps.values
+                        const partNameError = FormikProps.errors.partName
+                        const partNameTouched = FormikProps.touched.partName
 
-                    const partJawatanError = FormikProps.errors.partJawatan
-                    const partJawatanTouched = FormikProps.touched.partJawatan
+                        const partIcNumError = FormikProps.errors.partIcNum
+                        const partIcNumTouched = FormikProps.touched.partIcNum
 
-                    const partNameError = FormikProps.errors.partName
-                    const partNameTouched = FormikProps.touched.partName
+                        const sahamError = FormikProps.errors.saham
+                        const sahamTouched = FormikProps.touched.saham
 
-                    const partIcNumError = FormikProps.errors.partIcNum
-                    const partIcNumTouched = FormikProps.touched.partIcNum
+                        return (
+                        <LayoutLoan title={'Add Partner'} nopaddingTop={true} back={() => setAddPartnerVisible(!addPartnerVisible)} navigation={props.navigation}>
 
-                    const sahamError = FormikProps.errors.saham
-                    const sahamTouched = FormikProps.touched.saham
+                            <CustomTextInput
+                                imageUri={require('../assets/images/user.png')}
+                                value={partName}
+                                handleChange={FormikProps.handleChange(`partName`)}
+                                handleBlur={FormikProps.handleBlur(`partName`)}
+                                touched={partNameTouched}
+                                error={partNameError}
+                                placeholder={'Nama Rakan Kongsi'}
+                                keyboardType={'default'}
+                            />
 
-                    return (
+                            <CustomTextInput
+                                imageUri={require('../assets/images/mykad.png')}
+                                value={partIcNum}
+                                handleChange={FormikProps.handleChange(`partIcNum`)}
+                                handleBlur={FormikProps.handleBlur(`partIcNum`)}
+                                touched={partIcNumTouched}
+                                error={partIcNumError}
+                                placeholder={'No Kad Pengenalan'}
+                                keyboardType={'phone-pad'}
+                            />
+                            <CustomTextInput
+                                imageUri={require('../assets/images/position.png')}
+                                value={partJawatan}
+                                handleChange={FormikProps.handleChange(`partJawatan`)}
+                                handleBlur={FormikProps.handleBlur(`partJawatan`)}
+                                touched={partJawatanTouched}
+                                error={partJawatanError}
+                                placeholder={'Jawatan'}
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
-                            <Modal visible={addPartnerVisible} onRequestClose={() => setAddPartnerVisible(!addPartnerVisible)}>
-                                <LayoutLoan title={'Add Partner'} nopaddingTop={true} back={() => setAddPartnerVisible(!addPartnerVisible)} navigation={props.navigation}>
+                            />
+                            <CustomTextInput
+                                imageUri={require('../assets/images/compRegNum.png')}
+                                value={saham}
+                                handleChange={FormikProps.handleChange(`saham`)}
+                                handleBlur={FormikProps.handleBlur(`saham`)}
+                                touched={sahamTouched}
+                                error={sahamError}
+                                placeholder={'Jumlah Pegangan Saham (%)'}
+                                keyboardType={'phone-pad'}
+                            />
 
-                                    <CustomTextInput
-                                        imageUri={require('../assets/images/user.png')}
-                                        value={partName}
-                                        handleChange={FormikProps.handleChange(`partName`)}
-                                        handleBlur={FormikProps.handleBlur(`partName`)}
-                                        touched={partNameTouched}
-                                        error={partNameError}
-                                        placeholder={'Nama Rakan Kongsi'}
-                                        keyboardType={'default'}
-                                    />
-
-                                    <CustomTextInput
-                                        imageUri={require('../assets/images/mykad.png')}
-                                        value={partIcNum}
-                                        handleChange={FormikProps.handleChange(`partIcNum`)}
-                                        handleBlur={FormikProps.handleBlur(`partIcNum`)}
-                                        touched={partIcNumTouched}
-                                        error={partIcNumError}
-                                        placeholder={'No Kad Pengenalan'}
-                                        keyboardType={'phone-pad'}
-                                    />
-                                    <CustomTextInput
-                                        imageUri={require('../assets/images/position.png')}
-                                        value={partJawatan}
-                                        handleChange={FormikProps.handleChange(`partJawatan`)}
-                                        handleBlur={FormikProps.handleBlur(`partJawatan`)}
-                                        touched={partJawatanTouched}
-                                        error={partJawatanError}
-                                        placeholder={'Jawatan'}
-
-                                    />
-                                    <CustomTextInput
-                                        imageUri={require('../assets/images/compRegNum.png')}
-                                        value={saham}
-                                        handleChange={FormikProps.handleChange(`saham`)}
-                                        handleBlur={FormikProps.handleBlur(`saham`)}
-                                        touched={sahamTouched}
-                                        error={sahamError}
-                                        placeholder={'Jumlah Pegangan Saham (%)'}
-                                        keyboardType={'phone-pad'}
-                                    />
-
-
-                                </LayoutLoan>
-                            </Modal>
-                            <Text style={[styles.formTitle]}>Section A</Text>
-                            {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.formSubtitle]}>Latar Belakang Pemohon</Text>
-
-                            <TouchableOpacity onPress={() => setAddPartnerVisible(!addPartnerVisible)}><Text>Add Partner</Text></TouchableOpacity>
-                        
                             <CustomFormAction
-                                        label={`Save`}
-                                        // navigation={props.navigation}
-                                        // isValid={FormikProps.isValid}
-                                        // handleSubmit={FormikProps.handleSubmit}
-                                    />
-                        </View>
+                                label={`Save`}
+                                navigation={props.navigation}
+                                isValid={FormikProps.isValid}
+                                handleSubmit={FormikProps.handleSubmit}
+                            />
 
-                    )
-                }}
-            </Formik >
-            <View style={{ position: 'absolute', top: 10, left: 10 }}>
-                <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
-                    <Ionicons name={'md-menu'} size={24} color={'#fff'} />
-                </TouchableOpacity>
-            </View>
-        </LayoutLoan>
-    );
+
+                        </LayoutLoan>)
+                    }}
+                </Formik>
+            </Modal>
+            <Text style={[styles.formTitle]}>Section A</Text>
+            {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
+            <Text style={[styles.formSubtitle]}>Latar Belakang Pemohon</Text>
+
+            <TouchableOpacity onPress={() => setAddPartnerVisible(!addPartnerVisible)}><Text>Add Partner</Text></TouchableOpacity>
+
+            {partners && <FlatList
+                data={partners}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => <View style={{ padding: 5, flexDirection: 'row' }}>
+                    <Text>{item.partName}</Text>
+                    <Text>{item.partIcNum}</Text>
+                    <Text>{item.saham}</Text>
+                </View>} />}
+
+            <CustomFormAction
+                label={`Save`}
+                 navigation={props.navigation}
+                isValid={true}
+                handleSubmit={() => goToNext()}
+            />
+        </LayoutLoan>)
 }
-
-
-
 
 export default BusinessPlanPartnerScreen
