@@ -1,6 +1,6 @@
 import { Notifications } from 'expo'
 import * as SecureStore from 'expo-secure-store'
-
+import { AsyncStorage } from 'react-native';
 import moment from 'moment'
 
 const apiUrl = 'https://staging.bxcess.my/'
@@ -523,7 +523,7 @@ export const saveLoanDataApi = () => {
   return async (dispatch, getState) => {
     const loanDataReducer = getState().financingReducer
 
-    const loanData = JSON.parse(await SecureStore.getItemAsync('loanData'))
+    const loanData = JSON.parse(await AsyncStorage.getItem('loanData'))
     console.log(`bakal di save : ${JSON.stringify(loanDataReducer)}`)
     console.log(`dalam storage: ${JSON.stringify(loanData)}`)
 
@@ -531,9 +531,9 @@ export const saveLoanDataApi = () => {
       console.log(`something in memory`)
       console.log(JSON.stringify(loanData))
       const newLoanData = { ...loanData, ...loanDataReducer }
-      await SecureStore.setItemAsync('loanData', JSON.stringify(newLoanData))
+      await AsyncStorage.setItem('loanData', JSON.stringify(newLoanData))
     } else {
-      await SecureStore.setItemAsync('loanData', JSON.stringify(loanDataReducer))
+      await AsyncStorage.setItem('loanData', JSON.stringify(loanDataReducer))
 
     }
 
@@ -547,9 +547,9 @@ export const saveLoanDataApi = () => {
   }
 }
 
-export const resetFormApi = () => {
+export const resetFormApi = (data) => {
   return async (dispatch, getState) => {
-    await SecureStore.deleteItemAsync('loanData')
+    await SecureStore.deleteItemAsync(data)
     console.log(`delete form dalam storage`)
   }
 }
@@ -558,7 +558,7 @@ export const saveBussPlanDataApi = () => {
   return async (dispatch, getState) => {
     const bussPlanDataReducer = getState().businessPlanningReducer
 
-    const bussPlanData = JSON.parse(await SecureStore.getItemAsync('bussPlanData'))
+    const bussPlanData = JSON.parse(await AsyncStorage.getItem('bussPlanData'))
     console.log(`bakal di save : ${JSON.stringify(bussPlanDataReducer)}`)
     console.log(`dalam storage: ${JSON.stringify(bussPlanData)}`)
 
@@ -566,9 +566,9 @@ export const saveBussPlanDataApi = () => {
       console.log(`something in memory`)
       console.log(JSON.stringify(bussPlanData))
       const newBussPlanData = { ...bussPlanData, ...bussPlanDataReducer }
-      await SecureStore.setItemAsync('bussPlanData', JSON.stringify(newBussPlanData))
+      await AsyncStorage.setItem('bussPlanData', JSON.stringify(newBussPlanData))
     } else {
-      await SecureStore.setItemAsync('bussPlanData', JSON.stringify(bussPlanDataReducer))
+      await AsyncStorage.setItem('bussPlanData', JSON.stringify(bussPlanDataReducer))
 
     }
 
@@ -585,7 +585,7 @@ export const saveBussPlanDataApi = () => {
 export const saveLocationApi = (x) => {
   return async (dispatch, getState) => {
 
-    const location = JSON.parse(await SecureStore.getItemAsync('location'))
+    const location = JSON.parse(await AsyncStorage.getItem('location'))
 
     console.log(`bakal di save : ${JSON.stringify(x)}`)
     console.log(`dalam storage: ${JSON.stringify(location)}`)
@@ -594,9 +594,9 @@ export const saveLocationApi = (x) => {
       console.log(`something in memory`)
       console.log(JSON.stringify(location))
       //const newLocation = { ...loanData, ...loanDataReducer }
-      await SecureStore.setItemAsync('location', JSON.stringify(x))
+      await AsyncStorage.setItem('location', JSON.stringify(x))
     } else {
-      await SecureStore.setItemAsync('location', JSON.stringify(x))
+      await AsyncStorage.setItem('location', JSON.stringify(x))
     }
 
 
@@ -607,7 +607,7 @@ export const saveLocationApi = (x) => {
 export const getLocationApi = (x) => {
   return async (dispatch, getState) => {
 
-    const location = JSON.parse(await SecureStore.getItemAsync('location'))
+    const location = JSON.parse(await AsyncStorage.getItem('location'))
 
     if (location) {
       dispatch({ type: 'SET_LOCATION', payload: { ...location } })
@@ -623,7 +623,7 @@ export const getLocationApi = (x) => {
 export const savePictureApi = (photo, attachment, file) => {
   return async (dispatch, getState) => {
 
-    const a = JSON.parse(await SecureStore.getItemAsync(`attachment`))
+    const a = JSON.parse(await AsyncStorage.getItem(`attachment`))
 
 
     if (a) {
@@ -645,20 +645,20 @@ export const savePictureApi = (photo, attachment, file) => {
           const aFilter = a.filter(b => b.attachmentName !== attachment)
           aFilter.push(newA)
 
-          await SecureStore.setItemAsync('attachment', JSON.stringify(aFilter))
+          await AsyncStorage.setItem('attachment', JSON.stringify(aFilter))
           await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: aFilter } })
 
         }
       } else {
 
         a.push({ attachmentName: attachment, files: [{ fileName: file, fileDetail: photo }] })
-        await SecureStore.setItemAsync('attachment', JSON.stringify(a))
+        await AsyncStorage.setItem('attachment', JSON.stringify(a))
         await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: a } })
 
       }
     } else {
       const newA = [{ attachmentName: attachment, files: [{ fileName: file, fileDetail: photo }] }]
-      await SecureStore.setItemAsync('attachment', JSON.stringify(newA))
+      await AsyncStorage.setItem('attachment', JSON.stringify(newA))
       await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: newA } })
     }
 
@@ -668,7 +668,7 @@ export const savePictureApi = (photo, attachment, file) => {
 export const getAllAttachmentApi = () => {
   return async (dispatch, getState) => {
 
-    const attachment = JSON.parse(await SecureStore.getItemAsync('attachment'))
+    const attachment = JSON.parse(await AsyncStorage.getItem('attachment'))
 
     if (attachment) {
       console.log(`attachment ialah ${JSON.stringify(attachment)}`)
@@ -718,7 +718,7 @@ export const resetAllAttachmentApi = () => {
 export const getAllBusinessPlanApi = () => {
   return async (dispatch, getState) => {
 
-    const bussPlanData = JSON.parse(await SecureStore.getItemAsync('bussPlanData'))
+    const bussPlanData = JSON.parse(await AsyncStorage.getItem('bussPlanData'))
 
     if (bussPlanData) {
       console.log(`business plan ialah ${JSON.stringify(bussPlanData)}`)
@@ -733,7 +733,7 @@ export const getAllBusinessPlanApi = () => {
 export const getLoanDataApi = () => {
   return async (dispatch, getState) => {
 
-    const loanData = JSON.parse(await SecureStore.getItemAsync('loanData'))
+    const loanData = JSON.parse(await AsyncStorage.getItem('loanData'))
 
     if (loanData) {
       console.log(`loan data ialah ${JSON.stringify(loanData)}`)

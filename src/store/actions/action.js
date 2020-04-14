@@ -9,7 +9,7 @@ import s3 from '../../do/DigitalOcean'
 import config from '../../do/config'
 
 import { requestToken, requestPersonalToken, urlToBlob, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI, requestTokenLMS, registerLMSApi, requestPersonalTokenLMS } from './apiRegistration'
-import { newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi, acceptApi, saveLoanDataApi,saveBussPlanDataApi, resetFormApi, saveLocationApi,getLocationApi,savePictureApi, getAllAttachmentApi, resetAllAttachmentApi,getAttachmentApi,getAllBusinessPlanApi,getLoanDataApi } from './apiDashboard'
+import { newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi, acceptApi, saveLoanDataApi, saveBussPlanDataApi, resetFormApi, saveLocationApi, getLocationApi, savePictureApi, getAllAttachmentApi, resetAllAttachmentApi, getAttachmentApi, getAllBusinessPlanApi, getLoanDataApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -446,10 +446,15 @@ export const saveLoanData = () => {
 
 }
 
-export const resetForm = () => {
+export const resetForm = (data) => {
     return async (dispatch, getState) => {
-        dispatch({ type: 'DELETE_FORM_DATA' })
-        dispatch(resetFormApi())
+        if (data === 'loanData') {
+            dispatch({ type: 'DELETE_FORM_DATA' })
+        } else if (data === 'bussPlanData') {
+            dispatch({ type: 'DELETE_FORM_DATA_PLAN' })
+        }
+
+        dispatch(resetFormApi(data))
     }
 }
 
