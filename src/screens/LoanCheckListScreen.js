@@ -1,22 +1,16 @@
 //console.ignoredYellowBox = ['Setting a timer']
 import React, { useEffect, useState } from 'react';
 import {
-    Image,
+   
     Text,
     TouchableOpacity,
     View,
     FlatList,
-    ActivityIndicator,
-    Modal
+  
 
 } from 'react-native';
 
-import moment from 'moment'
 
-import Constants from 'expo-constants'
-//import { Constants, LinearGradient, FileSystem } from 'expo'
-
-import Layout from '../constants/Layout'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
@@ -24,7 +18,6 @@ import styles from '../styles/styles'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as actionCreator from '../store/actions/action'
 import LayoutB from '../Layout/LayoutB';
-import { ScrollView } from 'react-native-gesture-handler';
 
 
 const gambarPassportContent = {
@@ -95,12 +88,8 @@ const checklist = [
 
 const LoanCheckListScreen = (props) => {
 
-
     const dispatch = useDispatch()
-
     const { attachment } = useSelector(state => state.attachmentReducer, shallowEqual)
-
-
     const checkDone = (content) => {
         if (content) {
             const { atList, store } = content
@@ -138,6 +127,7 @@ const LoanCheckListScreen = (props) => {
 
 
     }
+
 
     const getAllAttachment = async () => {
         await dispatch(actionCreator.getAllAttachment())

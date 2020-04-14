@@ -33,14 +33,13 @@ const DashboardScreen = (props) => {
     const companyName = useSelector(state => state.bizInfoReducer.name, shallowEqual)
     const { logo } = useSelector(state => state.bizInfoReducer, shallowEqual)
 
-    const toggleShow = () => {
-        setPopUp(!popUp)
-    }
+    // const toggleShow = () => {
+    //     setPopUp(!popUp)
+    // }
     const hafiz = (item) => {
-        console.log(`item ialah : ${JSON.stringify(item)}`)
+        //console.log(`item ialah : ${JSON.stringify(item)}`)
         props.navigation.navigate('InfoNews', { item: JSON.stringify(item) })
     }
-
 
     useEffect(() => {
         dispatch(actionCreator.initiateNews())
@@ -54,28 +53,24 @@ const DashboardScreen = (props) => {
     const [profilePic, setProfilePic] = useState(new Animated.Value(0))
     const [topBar, setTopBar] = useState(new Animated.Value(0))
     const [scrollBar, setScrollBar] = useState(new Animated.Value(0))
-    const [logos, setLogo] = useState(new Animated.Value(0))
+   
 
     const animate = () => {
         Animated.stagger(1000, [
-            Animated.timing(logos, {
-                toValue: 1,
-                duration: 2000,
-                easing: Easing.linear
-            }),
+          
             Animated.timing(profilePic, {
                 toValue: 1,
-                duration: 2000,
+                duration: 1000,
                 easing: Easing.linear
             }),
             Animated.timing(topBar, {
                 toValue: 1,
-                duration: 2000,
+                duration: 1000,
                 easing: Easing.linear
             }),
             Animated.timing(scrollBar, {
                 toValue: 1,
-                duration: 2000,
+                duration: 1000,
                 easing: Easing.linear
             }),
 
@@ -113,15 +108,12 @@ const DashboardScreen = (props) => {
         outputRange: [0, 1,]
     })
 
-    const logoOpac = logos.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 1,]
-    })
+  
 
-    const ratio = Layout.window.width / (Layout.window.height / 3.5)
-    console.log(`width : ${Layout.window.width}`)
-    console.log(`height : ${Layout.window.height}`)
-    console.log(`ratio : ${ratio}`)
+    //const ratio = Layout.window.width / (Layout.window.height / 3.5)
+    // console.log(`width : ${Layout.window.width}`)
+    // console.log(`height : ${Layout.window.height}`)
+    // console.log(`ratio : ${ratio}`)
 
 
     return (

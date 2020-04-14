@@ -297,9 +297,9 @@ const BusinessPlanGoalsScreen = (props) => {
                         data={projection}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item, index }) =>
-                            <TouchableOpacity onPress={() => editProjection(index)} style={[styles.shadowNew,{ padding: 5, marginBottom: 5,marginRight:10,alignItems:'center' }]}>
-                                <Text style={styles.textDefault}>{item.tahun}</Text>
-                                <Text style={styles.answer}>{item.totalIncome}</Text>
+                            <TouchableOpacity onPress={() => editProjection(index)} style={[styles.shadowNew,{ padding: 5, marginBottom: 5,marginRight:10,alignItems:'flex-end' }]}>
+                                <Text style={[styles.textDefault,{alignSelf:'center'}]}>{item.tahun}</Text>
+                                <Text style={[styles.answer,]}>{item.totalIncome}</Text>
                                 <Text style={styles.answer}>{item.totalExpenditure}</Text>
                                 <Text style={styles.answer}>{item.untungKasar}</Text>
                                 <Text style={styles.answer}>{item.perbelanjaanLain}</Text>
