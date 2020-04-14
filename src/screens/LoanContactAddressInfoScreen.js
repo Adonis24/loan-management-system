@@ -125,11 +125,11 @@ const LoanContactAddressInfoScreen = (props) => {
                     // }
 
                     const getCoordinate = (poskod) => {
-                        
-                        if(poskod){
+
+                        if (poskod) {
                             if (poskod.length === 5) {
                                 const coordinate = malaysiaData.find(x => x.Postcode == poskod)
-    
+
                                 if (coordinate) {
                                     console.log(`result coor : ${JSON.stringify(coordinate)}`)
                                     FormikProps.setFieldValue('poskod', poskod)
@@ -139,14 +139,14 @@ const LoanContactAddressInfoScreen = (props) => {
                                     console.log(`no result found`)
                                     FormikProps.setFieldValue('poskod', poskod)
                                 }
-    
+
                             } else {
                                 console.log(`do nothing`)
                                 FormikProps.setFieldValue('poskod', poskod)
                             }
 
                         }
-                        
+
                     }
 
                     //console.log(`value poskod ialah :${poskod}`)
@@ -272,13 +272,16 @@ const LoanContactAddressInfoScreen = (props) => {
                                 error={alamatError}
                                 placeholder={'Alamat'}
                             >
-                                <View style={{paddingLeft:5,paddingTop:5}}>
-                                <Text style={[styles.textDefault, { color: '#000' }]}>{alamat}</Text>
-                                {alamat_2 && <Text style={[styles.textDefault, { color: '#000' }]}>{alamat_2}</Text>}
-                                {poskod && <Text style={[styles.textDefault, { color: '#000' }]}>{poskod}</Text>}
-                                {city && <Text style={[styles.textDefault, { color: '#000' }]}>{city},{state}</Text>}
-                                </View>
-                              
+                               {alamat?<View style={{ paddingLeft: 5, paddingTop: 5 }}>
+                                    <Text style={[styles.textDefault, { color: '#000' }]}>{alamat}</Text>
+                                    {alamat_2 && <Text style={[styles.textDefault, { color: '#000' }]}>{alamat_2}</Text>}
+                                    {poskod && <Text style={[styles.textDefault, { color: '#000' }]}>{poskod}</Text>}
+                                    {city && <Text style={[styles.textDefault, { color: '#000' }]}>{city},{state}</Text>}
+                                </View>:<View style={{ paddingLeft: 5, paddingTop: 15 }}>
+                                    <Text style={[styles.textDefault, { color: 'lightgrey' }]}>Alamat</Text>
+                                 
+                                </View>} 
+
 
                             </CustomTextInput>
 

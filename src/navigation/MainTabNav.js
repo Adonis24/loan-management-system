@@ -126,6 +126,7 @@ import BusinessPlanAddDetailScreen from '../screens/BusinessPlanAddDetailScreen'
 import BusinessPlanCertScreen from '../screens/BusinessPlanCertScreen'
 import LoanBankScreen from '../screens/LoanBankScreen';
 import LoanReferrerListScreen from '../screens/LoanReferrerListScreen';
+import LoanMaklumatPeribadiBScreen from '../screens/LoanMaklumatPeribadiBScreen';
 
 const DashboardStack = () => {
     return (
@@ -280,6 +281,7 @@ const LoanSectionBStack = () => {
     return (
         <Stack.Navigator initialRouteName="LoanMaklumatPeribadi" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="LoanMaklumatPeribadi" component={LoanMaklumatPeribadiScreen} />
+            <Stack.Screen name="LoanMaklumatPeribadiB" component={LoanMaklumatPeribadiBScreen} />
             <Stack.Screen name="LoanPersonalStatus" component={LoanPersonalStatusScreen} />
             <Stack.Screen name="LoanContactAddressInfo" component={LoanContactAddressInfoScreen} />
             <Stack.Screen name="LoanPendapatan" component={LoanPendapatanScreen} />
@@ -373,8 +375,8 @@ const BusinessPlanSectionEStack = () => {
     return (
         <Stack.Navigator initialRouteName="BusinessPlanGoals" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="BusinessPlanGoals" component={BusinessPlanGoalsScreen} />
-            <Stack.Screen name="BusinessPlanGoals2" component={BusinessPlanGoals2Screen} />
-            <Stack.Screen name="BusinessPlanGoals3" component={BusinessPlanGoals3Screen} />
+            {/* <Stack.Screen name="BusinessPlanGoals2" component={BusinessPlanGoals2Screen} />
+            <Stack.Screen name="BusinessPlanGoals3" component={BusinessPlanGoals3Screen} /> */}
         </Stack.Navigator>)
 }
 const InfoNewsDrawer = () => {

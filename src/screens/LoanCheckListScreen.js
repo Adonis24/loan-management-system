@@ -121,7 +121,7 @@ const LoanCheckListScreen = (props) => {
                         const newNewFiles = newFiles.filter(n => n.uri)
                         console.log(`yg ada isi ${newNewFiles.length}`)
 
-                        if(newNewFiles.length==atList.length){
+                        if (newNewFiles.length == atList.length) {
                             return true
                         }
 
@@ -166,14 +166,13 @@ const LoanCheckListScreen = (props) => {
             navigation={props.navigation}
             imageUri={require('../assets/images/e-scoring.png')}
         >
-
-
             <View style={{ flex: 1 }}>
-                <View style={{ flex: 4 }}>
+                <View style={{ flex: 8 }}>
                     <View style={{ margin: 7 }} />
-                    <Text style={[styles.textDefault, { paddingLeft: 10 }]}>Dokumen-dokument Diperlukan:</Text>
-
-                    <FlatList data={checklist}
+                    <View style={{ marginLeft: 10, marginRight:10, paddingBottom: 10, borderBottomWidth: 1,borderColor:'lightgrey' }}>
+                        <Text style={[styles.textDefault]}>Dokumen-dokumen Diperlukan:</Text>
+                    </View>
+                    <FlatList contentContainerStyle={{ padding: 10 }} data={checklist}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item, index }) => (<CustomRow
                             navigation={props.navigation}
@@ -186,13 +185,13 @@ const LoanCheckListScreen = (props) => {
                         />)} />
                 </View>
 
-                <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                    <Text style={[styles.textDefault, { paddingLeft: 10 }]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
+                <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start',borderTopWidth:1,marginLeft:10,marginRight:10,borderColor:'lightgrey',paddingTop:10 }}>
+                    {/* <Text style={[styles.textDefault, { paddingLeft: 10 }]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text> */}
                     <TouchableOpacity
-                        style={{ alignSelf: 'center' }}
+                        style={{ alignSelf: 'stretch'}}
                         onPress={() => console.log(`hantar`)}>
-                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'flex-start', margin: 10, padding: 5, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}>
-                            <Text style={[styles.textSmall, { color: '#fff' }]}>Hantar</Text>
+                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'stretch',  padding: 10, borderRadius: 5, justifyContent:'center',alignItems:'center' }}>
+                            <Text style={[styles.textDefault, { color: '#fff' }]}>HANTAR</Text>
                         </LinearGradient>
                     </TouchableOpacity>
                 </View>
@@ -203,23 +202,23 @@ const LoanCheckListScreen = (props) => {
 
 const CustomRow = (props) => {
     return (
-        <View style={{ alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch', borderBottomWidth: 1, borderColor: 'lightgrey' }}>
+        <TouchableOpacity onPress={() => props.navigation.navigate(props.button, { content: JSON.stringify(props.content) })}  style={[styles.shadowNew, { alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch', marginBottom: 10 }]}>
             <View style={{ padding: 5, flex: 1, }}>
                 <Text style={[styles.textDefault, { marginBottom: 5, textAlign: 'left' }]}>{props.no} </Text>
             </View>
             <View style={{ flex: 8, padding: 5, alignItems: 'flex-start' }} >
-                <Text style={[styles.textSmall, { marginBottom: 5, textAlign: 'left' }]}>{props.item}</Text>
+    <Text style={[styles.textSmall, { marginBottom: 5, textAlign: 'left' }]}>{props.item}</Text>
             </View>
-            <View style={{ flex: 2, padding: 5, alignItems: 'flex-start' }} >
+            {/* <View style={{ flex: 2, padding: 5, alignItems: 'flex-start' }} >
                 <TouchableOpacity onPress={() => props.navigation.navigate(props.button, { content: JSON.stringify(props.content) })} style={{ padding: 3, paddingRight: 6, paddingLeft: 6, borderWidth: 1, borderColor: 'lightgrey', borderRadius: 6, justifyContent: 'center', borderColor: 'lightblue' }}>
                     <Text style={[styles.textSmall, { textAlign: 'left', color: 'lightblue' }]}>Isi!</Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
             <View style={{ flex: 1, padding: 5, alignItems: 'flex-start' }} >
-                <Text style={[styles.textDefault, { marginBottom: 5, textAlign: 'left' }]}>{props.check && <Ionicons name='md-checkmark' color={'green'} style={{ fontSize: 27 }} />
-                }</Text>
+                   {props.check&& <Ionicons name='md-checkmark' color={'green'} style={{ fontSize: 27 }} />}
+       
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

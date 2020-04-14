@@ -8,40 +8,40 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Layout from '../constants/Layout'
 
 export const CustomTextInput = (props) => {
-    const { multiLine,value, editable, handleChange, handleBlur, touched, error, label, keyboardType, placeholder, handleClick, message, secureText, } = props
-    return (
-        !handleClick ?
-            <View style={{ marginBottom: 10 }} >
+    const { multiLine, value, editable, handleChange, handleBlur, touched, error, label, keyboardType, placeholder, handleClick, message, secureText, } = props
+    if(!handleClick){return(
+        <View style={{ marginBottom: 10 }} >
                 <View style={{}}>
                     <Text style={styles.label}>{placeholder} :</Text>
                 </View>
                 <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', marginBottom: 5, borderColor: touched && error ? '#d94498' : '#5a83c2' }}>
                     <Image source={props.imageUri} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                     <TextInput editable={editable} secureTextEntry={secureText} keyboardType={keyboardType} value={value} onChangeText={handleChange} onBlur={handleBlur} style={{ marginLeft: 5, flex: 1 }} placeholder={touched && error ? '' : placeholder} placeholderTextColor={touched && error ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-
                 </View>
                 <View style={{}}>
                     {touched && error && <Text style={styles.error}>{error}</Text>}
                 </View>
-            </View> :
-            <View style={{ marginBottom: 10 }} >
+            </View>
+    )}else{return(
+        <View style={{ marginBottom: 10 }} >
                 <View style={{}}>
                     <Text style={styles.label}>{placeholder} :</Text>
                 </View>
-                <TouchableOpacity onPress={()=>handleClick()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', marginBottom: 5, borderColor: touched && error ? '#d94498' : '#5a83c2' }}>
+                <TouchableOpacity onPress={() => handleClick()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', marginBottom: 5, borderColor: touched && error ? '#d94498' : '#5a83c2' }}>
 
                     <Image source={props.imageUri} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                     {!multiLine ? <TextInput editable={false} secureTextEntry={secureText} keyboardType={keyboardType} value={value} onChangeText={handleChange} onBlur={handleBlur} style={{ marginLeft: 5, flex: 1 }} placeholder={touched && error ? '' : placeholder} placeholderTextColor={touched && error ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
-                        : <View style={{flex:1}}>
-                             {props.children}
-                             </View>
-                        }
+                        : <View style={{ flex: 1 }}>
+                            {props.children}
+                        </View>
+                    }
                 </TouchableOpacity>
                 <View style={{}}>
                     {touched && error && <Text style={styles.error}>{error}</Text>}
                 </View>
             </View>
-    )
+    )}
+
 }
 
 export const CustomFormAction = (props) => {

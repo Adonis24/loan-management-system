@@ -121,11 +121,11 @@ const LoanPendapatanScreen = (props) => {
                     const pendidikanTouched = FormikProps.touched.pendidikan
 
                     const getCoordinate = (poskod) => {
-                        
-                        if(poskod){
+
+                        if (poskod) {
                             if (poskod.length === 5) {
                                 const coordinate = malaysiaData.find(x => x.Postcode == poskod)
-    
+
                                 if (coordinate) {
                                     console.log(`result coor : ${JSON.stringify(coordinate)}`)
                                     FormikProps.setFieldValue('poskodComp', poskod)
@@ -135,14 +135,14 @@ const LoanPendapatanScreen = (props) => {
                                     console.log(`no result found`)
                                     FormikProps.setFieldValue('poskodComp', poskod)
                                 }
-    
+
                             } else {
                                 console.log(`do nothing`)
                                 FormikProps.setFieldValue('poskodComp', poskod)
                             }
 
                         }
-                        
+
                     }
 
                     return (
@@ -268,12 +268,15 @@ const LoanPendapatanScreen = (props) => {
 
 
                             >
-                                <View style={{ paddingLeft: 5, paddingTop: 5 }}>
+                                {alamatComp ? <View style={{ paddingLeft: 5, paddingTop: 5 }}>
                                     <Text style={[styles.textDefault, { color: '#000' }]}>{alamatComp}</Text>
                                     {alamat_2Comp && <Text style={[styles.textDefault, { color: '#000' }]}>{alamat_2Comp}</Text>}
                                     {poskodComp && <Text style={[styles.textDefault, { color: '#000' }]}>{poskodComp}</Text>}
                                     {cityComp && <Text style={[styles.textDefault, { color: '#000' }]}>{cityComp},{stateComp}</Text>}
-                                </View>
+                                </View> : <View style={{ paddingLeft: 5, paddingTop: 15 }}>
+                                    <Text style={[styles.textDefault, { color: 'lightgrey' }]}>Alamat</Text>
+
+                                </View>}
                             </CustomTextInput>
 
                             <CustomTextInput
@@ -286,12 +289,8 @@ const LoanPendapatanScreen = (props) => {
                                 placeholder={'No Tel Tempat Bekerja'}
                                 keyboardType={'decimal-pad'}
                             />
-
-
-
-
                             <CustomFormAction
-                                label={`Next`}
+                                label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}

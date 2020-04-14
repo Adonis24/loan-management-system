@@ -81,7 +81,7 @@ const BusinessPlanCustomDrawer = (props) => {
                     <TouchableOpacity onPress={() => props.navigation.navigate('LoanCheckList')} style={{ flex: 1, borderColor: 'grey', borderWidth: 1, alignSelf: 'flex-start', padding: 10, borderRadius: 10, margin: 10, alignItems: 'center' }}>
                         <Text style={[styles.textSmall, { color: 'grey' }]}>Checklist</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => dispatch(actionCreator.resetForm())} style={{ flex: 1, borderColor: 'red', borderWidth: 1, alignSelf: 'flex-start', padding: 10, borderRadius: 10, margin: 10, alignItems: 'center' }}>
+                    <TouchableOpacity onPress={() => dispatch(actionCreator.resetForm('bussPlanData'))} style={{ flex: 1, borderColor: 'red', borderWidth: 1, alignSelf: 'flex-start', padding: 10, borderRadius: 10, margin: 10, alignItems: 'center' }}>
                         <Text style={[styles.textSmall, { color: 'red' }]}>Reset </Text>
                     </TouchableOpacity>
                 </View>

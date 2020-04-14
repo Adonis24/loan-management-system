@@ -30,13 +30,7 @@ import * as actionCreator from '../store/actions/action'
 
 const validationSchema = Yup.object().shape({
 
-    agama: Yup
-        .string()
-        .required(),
-
-    jantina: Yup
-        .string()
-        .required(),
+  
 
     name: Yup
         .string()
@@ -51,15 +45,6 @@ const validationSchema = Yup.object().shape({
         .max(12)
         .label('MyKad No'),
 
-    bangsa: Yup
-        .string()
-        .required()
-        .min(3)
-        .label('Bangsa'),
-
-
-
-
 });
 
 const LoanMaklumatPeribadiScreen = (props) => {
@@ -72,7 +57,7 @@ const LoanMaklumatPeribadiScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { name, icNumber, agama, bangsa, jantina, umur, tarikhLahir } = useSelector(state => state.financingReducer, shallowEqual)
+    const { name, icNumber, umur, tarikhLahir } = useSelector(state => state.financingReducer, shallowEqual)
 
 
     const setMaklumatPeribadi = (value) => dispatch({ type: 'SET_MAKLUMAT_PERIBADI', payload: { ...value } })
@@ -92,47 +77,11 @@ const LoanMaklumatPeribadiScreen = (props) => {
 
     return (
         <LayoutLoan navigation={props.navigation}>
-            <Modal animationType={'slide'}
-                visible={iosPickerVisible} onRequestClose={() => {
-                    console.log(`test`)
-                    setIosPickerVisible(!iosPickerVisible)
-                }}>
-
-                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                    <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
-                            <TouchableOpacity onPress={() => setIosPickerVisible(!iosPickerVisible)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                <Ionicons name="ios-arrow-back" color={'#5a83c2'} style={{ fontSize: 30 }} />
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 12 }}>Select</Text>
-                        </View>
-                        <View style={{ flex: 1 }} />
-                    </View>
-                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
-                        {(modalContent === "jantina") ?
-                            <Picker style={{ flex: 1, height: 35 }} selectedValue={jantina} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('jantina', itemValue)}>
-                                <Picker.Item label={'Jantina'} value={undefined} />
-                                <Picker.Item label="Lelaki" value="lelaki" />
-                                <Picker.Item label="Wanita" value="wanita" />
-
-                            </Picker> : <Picker style={{ flex: 1, height: 35 }} selectedValue={agama} onValueChange={(itemValue, itemIndex) =>
-                                FormikProps.setFieldValue('agama', itemValue)}>
-                                <Picker.Item label={'Agama'} value={undefined} />
-                                <Picker.Item label="Islam" value="islam" />
-                                <Picker.Item label="Bukan Islam" value="bukanIslam" />
-
-                            </Picker>
-                        }
-                    </View>
-                </View>
-
-            </Modal>
+            
 
             <Formik
                 validateOnMount
-                initialValues={{ name, icNumber, agama, bangsa, jantina, tarikhLahir }}
+                initialValues={{ name, icNumber,  tarikhLahir }}
 
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -140,7 +89,7 @@ const LoanMaklumatPeribadiScreen = (props) => {
                     //const dobInfo = getUmur(icNumber)
                     //console.log(`dob info ${JSON.stringify(dobInfo)}`)
                     setMaklumatPeribadi({ ...values })
-                    props.navigation.navigate('LoanPersonalStatus')
+                    props.navigation.navigate('LoanMaklumatPeribadiB')
                     actions.resetForm({})
                     actions.setSubmitting(false)
 
@@ -152,22 +101,15 @@ const LoanMaklumatPeribadiScreen = (props) => {
 
 
 
-                    const { name, icNumber, jantina, agama, bangsa, umur, tarikhLahir } = FormikProps.values
+                    const { name, icNumber, umur, tarikhLahir } = FormikProps.values
 
-                    const bangsaError = FormikProps.errors.bangsa
-                    const bangsaTouched = FormikProps.touched.bangsa
-
+    
                     const nameError = FormikProps.errors.name
                     const nameTouched = FormikProps.touched.name
 
                     const icNumberError = FormikProps.errors.icNumber
                     const icNumberTouched = FormikProps.touched.icNumber
-
-                    const jantinaError = FormikProps.errors.jantina
-                    const jantinaTouched = FormikProps.touched.jantina
-
-                    const agamaError = FormikProps.errors.agama
-                    const agamaTouched = FormikProps.touched.agama
+                    
 
 
 
@@ -248,64 +190,7 @@ const LoanMaklumatPeribadiScreen = (props) => {
                                 editable={false}
 
                             />}
-                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Jantina :</Text>
-
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
-                                <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
-                                    {ios ?
-                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('jantina')}>
-                                                <Text style={{ fontSize: 12 }}>{jantina ? jantina : `Jantina`}</Text>
-                                            </TouchableOpacity>
-                                            {jantinaTouched && jantinaError && <Text style={styles.error}>{jantinaError}</Text>}
-                                        </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
-                                            <Picker style={{ height: 35 }} selectedValue={jantina} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('jantina', itemValue)}>
-                                                <Picker.Item label={'Jantina'} value={undefined} />
-                                                <Picker.Item label="Lelaki" value="lelaki" />
-                                                <Picker.Item label="Wanita" value="wanita" />
-
-                                            </Picker>
-                                            {jantinaTouched && jantinaError && <Text style={styles.error}>{jantinaError}</Text>}
-                                        </View>}
-                                </View>
-                            </View>
-                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Agama :</Text>
-
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
-                                <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
-                                    {ios ?
-                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('agama')}>
-                                                <Text style={{ fontSize: 12 }}>{agama ? agama : `Agama`}</Text>
-                                            </TouchableOpacity>
-                                            {agamaTouched && agamaError && <Text style={styles.error}>{agamaError}</Text>}
-                                        </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
-                                            <Picker style={{ height: 35 }} selectedValue={agama} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('agama', itemValue)}>
-                                                <Picker.Item label={'Agama'} value={undefined} />
-                                                <Picker.Item label="Islam" value="islam" />
-                                                <Picker.Item label="Bukan Islam" value="bukanIslam" />
-
-                                            </Picker>
-                                            {agamaTouched && agamaError && <Text style={styles.error}>{agamaError}</Text>}
-                                        </View>}
-                                </View>
-                            </View>
-
-                            <CustomTextInput
-                                imageUri={require('../assets/images/user.png')}
-                                value={bangsa}
-                                handleChange={FormikProps.handleChange(`bangsa`)}
-                                handleBlur={FormikProps.handleBlur(`bangsa`)}
-                                touched={bangsaTouched}
-                                error={bangsaError}
-                                placeholder={'Bangsa/Kaum'}
-
-                            />
-
-
-                            {/* <Text>Umur:{umur}</Text> */}
+                           
 
 
                             <CustomFormAction

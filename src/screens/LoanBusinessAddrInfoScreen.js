@@ -96,11 +96,11 @@ const LoanBusinessAddrInfoScreen = (props) => {
                     const compSendiriPoskodTouched = FormikProps.touched.compSendiriPoskod
 
                     const getCoordinate = (poskod) => {
-                        
-                        if(poskod){
+
+                        if (poskod) {
                             if (poskod.length === 5) {
                                 const coordinate = malaysiaData.find(x => x.Postcode == poskod)
-    
+
                                 if (coordinate) {
                                     console.log(`result coor : ${JSON.stringify(coordinate)}`)
                                     FormikProps.setFieldValue('compSendiriPoskod', poskod)
@@ -110,14 +110,14 @@ const LoanBusinessAddrInfoScreen = (props) => {
                                     console.log(`no result found`)
                                     FormikProps.setFieldValue('compSendiriPoskod', poskod)
                                 }
-    
+
                             } else {
                                 console.log(`do nothing`)
                                 FormikProps.setFieldValue('poskod', poskod)
                             }
 
                         }
-                        
+
                     }
 
 
@@ -207,12 +207,15 @@ const LoanBusinessAddrInfoScreen = (props) => {
                                 placeholder={'Alamat'}
 
                             >
-                                <View style={{ paddingLeft: 5, paddingTop: 5 }}>
+                                {compSendiriAlamat ? <View style={{ paddingLeft: 5, paddingTop: 5 }}>
                                     <Text style={[styles.textDefault, { color: '#000' }]}>{compSendiriAlamat}</Text>
                                     {compSendiriAlamat_2 && <Text style={[styles.textDefault, { color: '#000' }]}>{compSendiriAlamat_2}</Text>}
                                     {compSendiriPoskod && <Text style={[styles.textDefault, { color: '#000' }]}>{compSendiriPoskod}</Text>}
                                     {compSendiriCity && <Text style={[styles.textDefault, { color: '#000' }]}>{compSendiriCity},{compSendiriState}</Text>}
-                                </View>
+                                </View> : <View style={{ paddingLeft: 5, paddingTop: 15 }}>
+                                        <Text style={[styles.textDefault, { color: 'lightgrey' }]}>Alamat</Text>
+
+                                    </View>}
                             </CustomTextInput>
                             <CustomFormAction
                                 label={`Save`}

@@ -203,12 +203,15 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
 
 
                             >
-                                <View style={{ paddingLeft: 5, paddingTop: 5 }}>
+                                {cpAlamat?<View style={{ paddingLeft: 5, paddingTop: 5 }}>
                                     <Text style={[styles.textDefault, { color: '#000' }]}>{cpAlamat}</Text>
                                     {cpAlamat_2 && <Text style={[styles.textDefault, { color: '#000' }]}>{cpAlamat_2}</Text>}
                                     {cpPoskod && <Text style={[styles.textDefault, { color: '#000' }]}>{cpPoskod}</Text>}
                                     {cpCity && <Text style={[styles.textDefault, { color: '#000' }]}>{cpCity},{cpState}</Text>}
-                                </View>
+                                </View>:<View style={{ paddingLeft: 5, paddingTop: 15 }}>
+                                    <Text style={[styles.textDefault, { color: 'lightgrey' }]}>Alamat</Text>
+                                 
+                                </View>} 
                             </CustomTextInput>
 
 

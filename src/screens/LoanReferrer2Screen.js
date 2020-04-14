@@ -237,12 +237,15 @@ const LoanReferrer2Screen = (props) => {
                                 error={ref2AlamatError}
                                 placeholder={'Alamat'}
                             >
-                                <View style={{ paddingLeft: 5, paddingTop: 5 }}>
+                                {ref2Alamat?<View style={{ paddingLeft: 5, paddingTop: 5 }}>
                                     <Text style={[styles.textDefault, { color: '#000' }]}>{ref2Alamat}</Text>
                                     {ref2Alamat_2 && <Text style={[styles.textDefault, { color: '#000' }]}>{ref2Alamat_2}</Text>}
                                     {ref2Poskod && <Text style={[styles.textDefault, { color: '#000' }]}>{ref2Poskod}</Text>}
                                     {ref2City && <Text style={[styles.textDefault, { color: '#000' }]}>{ref2City},{ref2State}</Text>}
-                                </View>
+                                </View>:<View style={{ paddingLeft: 5, paddingTop: 15 }}>
+                                    <Text style={[styles.textDefault, { color: 'lightgrey' }]}>Alamat</Text>
+                                 
+                                </View>} 
                             </CustomTextInput>
 
                             <CustomFormAction

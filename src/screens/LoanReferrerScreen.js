@@ -124,6 +124,7 @@ const LoanReferrerScreen = (props) => {
                             }
 
                         }
+                        FormikProps.setFieldValue('refPoskod', poskod)
 
                     }
 
@@ -234,12 +235,15 @@ const LoanReferrerScreen = (props) => {
                                 placeholder={'Alamat'}
 
                             > 
-                                <View style={{ paddingLeft: 5, paddingTop: 5 }}>
+                               {refAlamat? <View style={{ paddingLeft: 5, paddingTop: 5 }}>
                                     <Text style={styles.textDefault}>{refAlamat}</Text>
                                     {refAlamat_2 && <Text style={[styles.textDefault, { color: '#000' }]}>{refAlamat_2}</Text>}
                                     {refPoskod && <Text style={[styles.textDefault, { color: '#000' }]}>{refPoskod}</Text>}
                                     {refCity && <Text style={[styles.textDefault, { color: '#000' }]}>{refCity},{refState}</Text>}
-                                </View>
+                                </View>:<View style={{ paddingLeft: 5, paddingTop: 15 }}>
+                                    <Text style={[styles.textDefault, { color: 'lightgrey' }]}>Alamat</Text>
+                                 
+                                </View>} 
                             </CustomTextInput>
 
                             <CustomFormAction

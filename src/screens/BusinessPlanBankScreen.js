@@ -66,11 +66,14 @@ const BusinessPlanBankScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { bankName, pemegang, akaun, noAkaun } = useSelector(state => state.businessPlanningReducer, shallowEqual)
+    const { bankName, pemegang, akaun, noAkaun,pemilikan } = useSelector(state => state.businessPlanningReducer, shallowEqual)
     const { bank, } = useSelector(state => state.financingReducer, shallowEqual)
     const noAkaunLama= useSelector(state => state.financingReducer.noAkaun, shallowEqual)
 
-
+const goNext=()=>{
+    (pemilikan!='Tunggal')?props.navigation.navigate('BusinessPlanPartner'):props.navigation.navigate('BusinessPlanSectionB')
+    
+}
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
 
     return (
@@ -82,7 +85,8 @@ const BusinessPlanBankScreen = (props) => {
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
-                    props.navigation.navigate('BusinessPlanPartner')
+                    goNext()
+                    
                     actions.resetForm({})
                     dispatch(actionCreator.saveBussPlanData())
                     actions.setSubmitting(false)

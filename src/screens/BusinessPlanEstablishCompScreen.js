@@ -213,9 +213,9 @@ const BusinessPlanEstablishCompScreen = (props) => {
                                     <View style={{ flex: 9, justifyContent: 'flex-start' }}>
                                         <Picker style={{ flex: 1, height: 35 }} selectedValue={pemilikan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pemilikan', itemValue)}>
                                             <Picker.Item label={'Jenis Pemilikan'} value={undefined} />
-                                            <Picker.Item label="Tunggal" value="tunggal" />
-                                            <Picker.Item label="Perkongsian" value="perkongsian" />
-                                            <Picker.Item label="Sdn Bhd" value="sdnbhd" />
+                                            <Picker.Item label="Tunggal" value="Tunggal" />
+                                            <Picker.Item label="Perkongsian" value="Perkongsian" />
+                                            <Picker.Item label="Sdn Bhd" value="Sdn Bhd" />
 
 
                                         </Picker>
@@ -343,9 +343,9 @@ const BusinessPlanEstablishCompScreen = (props) => {
                                             </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                                 <Picker style={{ height: 35 }} selectedValue={pemilikan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pemilikan', itemValue)}>
                                                     <Picker.Item label={'Jenis Pemilikan'} value={undefined} />
-                                                    <Picker.Item label="Tunggal" value="tunggal" />
-                                                    <Picker.Item label="Perkongsian" value="perkongsian" />
-                                                    <Picker.Item label="Sdn Bhd" value="sdnbhd" />
+                                                    <Picker.Item label="Tunggal" value="Tunggal" />
+                                                    <Picker.Item label="Perkongsian" value="Perkongsian" />
+                                                    <Picker.Item label="Sdn Bhd" value="Sdn Bhd" />
 
                                                 </Picker>
                                                 {pemilikanTouched && pemilikanError && <Text style={styles.error}>{pemilikanError}</Text>}

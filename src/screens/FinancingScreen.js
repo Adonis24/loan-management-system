@@ -75,7 +75,7 @@ const FinancingScreen = (props) => {
                         </TouchableOpacity>
                         <TouchableOpacity
                             onPress={() => props.navigation.navigate(`LoanCheckList`)}>
-                            <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'flex-start', margin: 3, padding: 5, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}>
+                            <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'flex-start', margin: 3, padding: 5, borderRadius: 5, }}>
                                 <Text style={[styles.textSmall, { color: '#fff' }]}>Borang Permohonan</Text>
                             </LinearGradient>
                         </TouchableOpacity>

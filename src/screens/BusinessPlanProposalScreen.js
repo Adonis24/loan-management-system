@@ -48,13 +48,13 @@ const BusinessPlanProposalScreen = (props) => {
     }
 
     const initialCadanganPenggunaan = [
-        { desc: 'Ruang Niaga / Premis / Tapak Projek(RM)', amount: 0, button: 'add' },
-        { desc: 'Perkakas, Mesin Dan Peralatan(RM)', amount: 0, button: 'add' },
-        { desc: 'Pembelian Stok / Bahan Mentah(RM)', amount: 0, button: 'add' },
-        { desc: 'Membeli / Mengambil Alih Perniagaan(RM)', amount: 0, button: 'add' },
-        { desc: 'Pembelian Kenderaan(RM)', amount: 0, button: 'add' },
-        { desc: 'Modal Pusingan(RM)', amount: 0, button: 'add' },
-        { desc: 'Perbelanjaan Lain(RM)', amount: 0, button: 'add' },
+        { desc: 'Ruang Niaga / Premis / Tapak Projek', amount: 0, button: 'add' },
+        { desc: 'Perkakas, Mesin Dan Peralatan', amount: 0, button: 'add' },
+        { desc: 'Pembelian Stok / Bahan Mentah', amount: 0, button: 'add' },
+        { desc: 'Membeli / Mengambil Alih Perniagaan', amount: 0, button: 'add' },
+        { desc: 'Pembelian Kenderaan', amount: 0, button: 'add' },
+        { desc: 'Modal Pusingan', amount: 0, button: 'add' },
+        { desc: 'Perbelanjaan Lain', amount: 0, button: 'add' },
         { desc: 'Total', amount: 0, button: 'total' }
     ]
     const [addAmountView, setAddAmountView] = useState(false)
@@ -81,7 +81,7 @@ const BusinessPlanProposalScreen = (props) => {
 
                     <Formik
                         validateOnMount
-                        initialValues={{ amount: selectedItem.amount || 0 }}
+                        initialValues={{ amount: selectedItem ? selectedItem.amount : 0 }}
 
                         onSubmit={async (values, actions) => {
                             console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -93,9 +93,9 @@ const BusinessPlanProposalScreen = (props) => {
                             console.log(test)
                             newCadanganPenggunaan[newCadanganPenggunaan.length - 1].amount = test
                             setCadanganPenggunaan([...newCadanganPenggunaan])
-                           
+
                             actions.resetForm({})
-                   
+
                             actions.setSubmitting(false)
                             setAddAmountView(!addAmountView)
                         }
@@ -110,10 +110,10 @@ const BusinessPlanProposalScreen = (props) => {
 
 
                             return (
-                                <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', }}>
+                                <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft:10,paddingRight:10 }}>
 
                                     <Text style={[styles.formTitle]}>Section D</Text>
-                                    <Text style={[styles.formSubtitle]}>Cadangan Keperluan Penggunaan Pembiayaan</Text>
+                                    {/* <Text style={[styles.formSubtitle]}>Cadangan Keperluan Penggunaan Pembiayaan</Text> */}
                                     <CustomTextInput
                                         imageUri={require('../assets/images/company.png')}
                                         value={amount}
@@ -139,10 +139,10 @@ const BusinessPlanProposalScreen = (props) => {
 
             <Text style={[styles.formTitle]}>Section D</Text>
             <Text style={[styles.formSubtitle]}>Cadangan Keperluan Penggunaan Pembiayaan</Text>
-            <View style={{ alignSelf: 'stretch' }}><FlatList contentContainerStyle={{}} data={cadanganPenggunaan}
+            <View style={{ alignSelf: 'stretch' }}><FlatList contentContainerStyle={{paddingTop:10}} data={cadanganPenggunaan}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) =>
-                    <TouchableOpacity onPress={() => addAmount(index)} style={{ padding: 5, flexDirection: 'row', marginBottom: 5 }}>
+                    <TouchableOpacity onPress={() => addAmount(index)} style={[styles.shadowNew,{ padding: 5,paddingBottom:10, flexDirection: 'row', marginBottom: 10, marginRight:10,marginLeft:10 }]}>
                         <View style={{ flex: 1, alignItems: 'flex-start' }}>
                             <Text style={styles.textDefault}>{index + 1}</Text>
                         </View>

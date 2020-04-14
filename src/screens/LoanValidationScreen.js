@@ -107,11 +107,11 @@ const LoanValidationScreen = (props) => {
 
 
                     const getCoordinate = (poskod) => {
-                        
-                        if(poskod){
+
+                        if (poskod) {
                             if (poskod.length === 5) {
                                 const coordinate = malaysiaData.find(x => x.Postcode == poskod)
-    
+
                                 if (coordinate) {
                                     console.log(`result coor : ${JSON.stringify(coordinate)}`)
                                     FormikProps.setFieldValue('valPoskod', poskod)
@@ -121,14 +121,14 @@ const LoanValidationScreen = (props) => {
                                     console.log(`no result found`)
                                     FormikProps.setFieldValue('valPoskod', poskod)
                                 }
-    
+
                             } else {
                                 console.log(`do nothing`)
                                 FormikProps.setFieldValue('poskod', poskod)
                             }
 
                         }
-                        
+
                     }
                     return (
 
@@ -233,14 +233,15 @@ const LoanValidationScreen = (props) => {
                                 touched={valAlamatTouched}
                                 error={valAlamatError}
                                 placeholder={'Alamat'}
-
-
                             >
-                                <View style={{ paddingLeft: 5, paddingTop: 5 }}><Text style={styles.textDefault}>{valAlamat}</Text>
+                                {valAlamat ? <View style={{ paddingLeft: 5, paddingTop: 5 }}><Text style={styles.textDefault}>{valAlamat}</Text>
                                     {valAlamat_2 && <Text style={[styles.textDefault, { color: '#000' }]}>{valAlamat_2}</Text>}
-                                    {valPoskod&&<Text style={[styles.textDefault, { color: '#000' }]}>{valPoskod}</Text>}
-                                   {valCity&& <Text style={[styles.textDefault, { color: '#000' }]}>{valCity},{valState}</Text>}
-                                </View>
+                                    {valPoskod && <Text style={[styles.textDefault, { color: '#000' }]}>{valPoskod}</Text>}
+                                    {valCity && <Text style={[styles.textDefault, { color: '#000' }]}>{valCity},{valState}</Text>}
+                                </View> : <View style={{ paddingLeft: 5, paddingTop: 15 }}>
+                                        <Text style={[styles.textDefault, { color: 'lightgrey' }]}>Alamat</Text>
+
+                                    </View>}
                             </CustomTextInput>
 
                             <CustomFormAction

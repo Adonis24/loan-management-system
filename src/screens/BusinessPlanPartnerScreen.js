@@ -67,7 +67,7 @@ const BusinessPlanPartnerScreen = (props) => {
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     //const { partName, partIcNum, partJawatan, saham, } = useSelector(state => state.businessPlanningReducer, shallowEqual)
-    const { partners } = useSelector(state => state.businessPlanningReducer)
+    const { partners, pemilikan } = useSelector(state => state.businessPlanningReducer)
     console.log(`partners ialah ${JSON.stringify(partners)}`)
     //const { partName, partIcNum, partJawatan, saham, } = partners || { partName: null, partIcNum: null, partJawatan: null, saham: null, }
 
@@ -121,80 +121,101 @@ const BusinessPlanPartnerScreen = (props) => {
                         const sahamTouched = FormikProps.touched.saham
 
                         return (
-                        <LayoutLoan title={'Add Partner'} nopaddingTop={true} back={() => setAddPartnerVisible(!addPartnerVisible)} navigation={props.navigation}>
+                            <LayoutLoan title={'Add Partner'} nopaddingTop={true} back={() => setAddPartnerVisible(!addPartnerVisible)} navigation={props.navigation}>
+                                <View style={{ alignSelf: 'stretch', padding: 10 }}>
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/user.png')}
+                                        value={partName}
+                                        handleChange={FormikProps.handleChange(`partName`)}
+                                        handleBlur={FormikProps.handleBlur(`partName`)}
+                                        touched={partNameTouched}
+                                        error={partNameError}
+                                        placeholder={'Nama Rakan Kongsi'}
+                                        keyboardType={'default'}
+                                    />
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/user.png')}
-                                value={partName}
-                                handleChange={FormikProps.handleChange(`partName`)}
-                                handleBlur={FormikProps.handleBlur(`partName`)}
-                                touched={partNameTouched}
-                                error={partNameError}
-                                placeholder={'Nama Rakan Kongsi'}
-                                keyboardType={'default'}
-                            />
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/mykad.png')}
+                                        value={partIcNum}
+                                        handleChange={FormikProps.handleChange(`partIcNum`)}
+                                        handleBlur={FormikProps.handleBlur(`partIcNum`)}
+                                        touched={partIcNumTouched}
+                                        error={partIcNumError}
+                                        placeholder={'No Kad Pengenalan'}
+                                        keyboardType={'phone-pad'}
+                                    />
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/position.png')}
+                                        value={partJawatan}
+                                        handleChange={FormikProps.handleChange(`partJawatan`)}
+                                        handleBlur={FormikProps.handleBlur(`partJawatan`)}
+                                        touched={partJawatanTouched}
+                                        error={partJawatanError}
+                                        placeholder={'Jawatan'}
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/mykad.png')}
-                                value={partIcNum}
-                                handleChange={FormikProps.handleChange(`partIcNum`)}
-                                handleBlur={FormikProps.handleBlur(`partIcNum`)}
-                                touched={partIcNumTouched}
-                                error={partIcNumError}
-                                placeholder={'No Kad Pengenalan'}
-                                keyboardType={'phone-pad'}
-                            />
-                            <CustomTextInput
-                                imageUri={require('../assets/images/position.png')}
-                                value={partJawatan}
-                                handleChange={FormikProps.handleChange(`partJawatan`)}
-                                handleBlur={FormikProps.handleBlur(`partJawatan`)}
-                                touched={partJawatanTouched}
-                                error={partJawatanError}
-                                placeholder={'Jawatan'}
+                                    />
+                                    <CustomTextInput
+                                        imageUri={require('../assets/images/compRegNum.png')}
+                                        value={saham}
+                                        handleChange={FormikProps.handleChange(`saham`)}
+                                        handleBlur={FormikProps.handleBlur(`saham`)}
+                                        touched={sahamTouched}
+                                        error={sahamError}
+                                        placeholder={'Jumlah Pegangan Saham (%)'}
+                                        keyboardType={'phone-pad'}
+                                    />
 
-                            />
-                            <CustomTextInput
-                                imageUri={require('../assets/images/compRegNum.png')}
-                                value={saham}
-                                handleChange={FormikProps.handleChange(`saham`)}
-                                handleBlur={FormikProps.handleBlur(`saham`)}
-                                touched={sahamTouched}
-                                error={sahamError}
-                                placeholder={'Jumlah Pegangan Saham (%)'}
-                                keyboardType={'phone-pad'}
-                            />
-
-                            <CustomFormAction
-                                label={`Save`}
-                                navigation={props.navigation}
-                                isValid={FormikProps.isValid}
-                                handleSubmit={FormikProps.handleSubmit}
-                            />
+                                    <CustomFormAction
+                                        label={`Save`}
+                                        navigation={props.navigation}
+                                        isValid={FormikProps.isValid}
+                                        handleSubmit={FormikProps.handleSubmit}
+                                    />
+                                </View>
 
 
-                        </LayoutLoan>)
+
+
+                            </LayoutLoan>)
                     }}
                 </Formik>
             </Modal>
             <Text style={[styles.formTitle]}>Section A</Text>
-            {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
             <Text style={[styles.formSubtitle]}>Latar Belakang Pemohon</Text>
 
-            <TouchableOpacity onPress={() => setAddPartnerVisible(!addPartnerVisible)}><Text>Add Partner</Text></TouchableOpacity>
+            <View style={{ borderBottomWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch', margin: 10, }}>
+                <View style={{ flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Text style={[styles.textDefault]}>Rakan Kongsi</Text>
+                    <TouchableOpacity onPress={() => setAddPartnerVisible(!addPartnerVisible)}>
+                        <Ionicons name='ios-add' color={'blue'} style={{ fontSize: 30 }} />
+                    </TouchableOpacity>
 
-            {partners && <FlatList
-                data={partners}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => <View style={{ padding: 5, flexDirection: 'row' }}>
-                    <Text>{item.partName}</Text>
-                    <Text>{item.partIcNum}</Text>
-                    <Text>{item.saham}</Text>
-                </View>} />}
+                </View>
+
+            </View>
+
+            <View style={{ borderColor: 'lightgrey', alignSelf: 'stretch', margin: 10, }}>
+                {partners && <FlatList
+                    data={partners}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item }) =>
+                        <View style={{  flexDirection: 'row', alignSelf: 'stretch', borderColor: 'lightgrey', borderWidth: 1,marginBottom:5 }}>
+                            <View style={{ flex: 3, padding: 5, borderRightWidth: 1, borderColor: 'lightgrey',alignItems:'center' }}>
+                                <Text style={styles.formTitle,{fontSize:40}}>{item.saham}%</Text></View>
+                            <View style={{ flex: 7, padding: 5 }}>
+                                <Text style={styles.answer}>{item.partName}</Text>
+                                <Text style={styles.answer}>{item.partIcNum}</Text>
+                                <Text style={styles.answer}>{item.partJawatan}</Text>
+                                </View>
+
+
+                        </View>} />}
+            </View>
+
 
             <CustomFormAction
                 label={`Save`}
-                 navigation={props.navigation}
+                navigation={props.navigation}
                 isValid={true}
                 handleSubmit={() => goToNext()}
             />

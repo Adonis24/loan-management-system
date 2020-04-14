@@ -111,8 +111,6 @@ const BusinessPlanBudgIncScreen = (props) => {
                     const pembelianError = FormikProps.errors.pembelian
                     const pembelianTouched = FormikProps.touched.pembelian
 
-
-
                     const perbelanjaanLainError = FormikProps.errors.perbelanjaanLain
                     const perbelanjaanLainTouched = FormikProps.touched.perbelanjaanLain
 
@@ -146,7 +144,7 @@ const BusinessPlanBudgIncScreen = (props) => {
                         const totalExpenditure1 = parseFloat(val) + parseFloat(kosOperasi)
 
 
-                        FormikProps.setFieldValue('pembelian', parseFloat(val))
+                        FormikProps.setFieldValue('pembelian', val)
                         FormikProps.setFieldValue('untungKasar', untungKasar1.toString())
                         FormikProps.setFieldValue('untungBersih', untungBersih1.toString())
                         FormikProps.setFieldValue('totalExpenditure', totalExpenditure1.toString())
@@ -174,7 +172,8 @@ const BusinessPlanBudgIncScreen = (props) => {
                         const untungKasar1 = parseFloat(income) - (parseFloat(pembelian) + parseFloat(kosOperasi))
                         const untungBersih1 = untungKasar1 - parseFloat(val)
 
-                        FormikProps.setFieldValue('perbelanjaanLain', untungBersih1)
+                        FormikProps.setFieldValue('perbelanjaanLain', val)
+                        FormikProps.setFieldValue('untungBersih',  untungBersih1.toString())
                         
 
 
@@ -192,7 +191,7 @@ const BusinessPlanBudgIncScreen = (props) => {
                             <Text style={[styles.formSubtitle]}>Anggaran Pendapatan Bulanan</Text>
                             <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start', paddingLeft: 10, paddingRight: 10 }}>
 
-                                <TouchableOpacity onPress={() => FormikProps.resetForm({})}><Text>Reset</Text></TouchableOpacity>
+                                {/* <TouchableOpacity onPress={() => FormikProps.resetForm({})}><Text>Reset</Text></TouchableOpacity> */}
                                 <CustomTextInput
                                     imageUri={require('../assets/images/payment.png')}
                                     value={income}

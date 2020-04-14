@@ -185,7 +185,7 @@ const BusinessPlanGoalsScreen = (props) => {
                                     <Text style={[styles.formTitle]}>Sasaran Pencapaian {selectedItem.tahun}</Text>
                                     <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start', paddingLeft: 10, paddingRight: 10 }}>
 
-                                        <TouchableOpacity onPress={() => FormikProps.resetForm({})}><Text>Reset</Text></TouchableOpacity>
+                                        {/* <TouchableOpacity onPress={() => FormikProps.resetForm({})}><Text>Reset</Text></TouchableOpacity> */}
                                         <CustomTextInput
                                             imageUri={require('../assets/images/payment.png')}
                                             value={income}
@@ -275,23 +275,60 @@ const BusinessPlanGoalsScreen = (props) => {
             </Modal>
             <Text style={[styles.formTitle]}>Section E</Text>
             <Text style={[styles.formSubtitle]}>Sasaran Pencapaian Perniagaan Tahunan</Text>
-            <Text style={[styles.formSubtitle]}>(3 tahun ke hadapan)</Text>
-
-            <View style={{ alignSelf: 'stretch' }}><FlatList contentContainerStyle={{}} data={projection}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item, index }) =>
-                    <TouchableOpacity onPress={() => editProjection(index)} style={{ padding: 5, flexDirection: 'row', marginBottom: 5 }}>
-                        <View style={{ flex: 1, alignItems: 'flex-start' }}>
-                            <Text style={styles.textDefault}>{index + 1}</Text>
-                        </View>
-                        <View style={{ flex: 6, alignItems: 'flex-start' }}>
-                            <Text style={styles.textDefault}>{item.tahun}</Text>
-                        </View>
-                        <View style={{ flex: 2, alignItems: 'flex-start' }}>
-                            <Text style={[styles.textDefault, { color: 'darkblue' }]}>RM {item.income}</Text>
-                        </View>
-                    </TouchableOpacity>} />
+           
+<View style={{margin:10}} />
+            <View style={{ alignSelf: 'stretch', flexDirection: 'row',paddingLeft:10,paddingRight:10 }}>
+                <View style={{ flex: 2 }}>
+                    {/* {projection.map((p, index) => <Text key={index.toString()}>Test</Text>)} */}
+                    <View style={{ padding: 5, marginBottom: 5 }}>
+                        <View style={{margin:10}} />
+                        <Text style={styles.label}>Pendapatan</Text>
+                        <Text style={styles.label}>Perbelanjaan</Text>
+                        <Text style={styles.label}>Untung Kasar</Text>
+                        <Text style={styles.label}>Perbelanjaan Lain</Text>
+                        <Text style={styles.label}>Untung Bersih</Text>
+                    </View>
+                    {/* income, pembelian, kosOperasi, totalExpenditure, untungKasar, perbelanjaanLain, untungBersih, totalIncome */}
+                </View>
+                <View style={{ flex: 3 }}>
+                    <FlatList
+                        horizontal={true}
+                        contentContainerStyle={{}}
+                        data={projection}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={({ item, index }) =>
+                            <TouchableOpacity onPress={() => editProjection(index)} style={[styles.shadowNew,{ padding: 5, marginBottom: 5,marginRight:10,alignItems:'center' }]}>
+                                <Text style={styles.textDefault}>{item.tahun}</Text>
+                                <Text style={styles.answer}>{item.totalIncome}</Text>
+                                <Text style={styles.answer}>{item.totalExpenditure}</Text>
+                                <Text style={styles.answer}>{item.untungKasar}</Text>
+                                <Text style={styles.answer}>{item.perbelanjaanLain}</Text>
+                                <Text style={styles.answer}>{item.untungBersih}</Text>
+                            </TouchableOpacity>} />
+                </View>
             </View>
+
+            {/* <View style={{ alignSelf: 'stretch' }}>
+
+                <FlatList
+                    horizontal={true}
+                    contentContainerStyle={{}}
+                    data={projection}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item, index }) =>
+                        <TouchableOpacity onPress={() => editProjection(index)} style={{ padding: 5, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1, alignItems: 'flex-start' }}>
+                                <Text style={styles.textDefault}>{index + 1}</Text>
+                            </View>
+                            <View style={{ flex: 6, alignItems: 'flex-start' }}>
+                                <Text style={styles.textDefault}>{item.tahun}</Text>
+                            </View>
+                            <View style={{ flex: 2, alignItems: 'flex-start' }}>
+                                <Text style={[styles.textDefault, { color: 'darkblue' }]}>RM {item.income}</Text>
+                            </View>
+                        </TouchableOpacity>} />
+            </View> */}
+            <View style={{margin:10}} />
             <CustomFormAction
                 label={`Save`}
                 navigation={props.navigation}
