@@ -722,7 +722,7 @@ export const getAllBusinessPlanApi = () => {
 
     if (bussPlanData) {
       console.log(`business plan ialah ${JSON.stringify(bussPlanData)}`)
-      //dispatch({ type: 'SET_ATTACHMENT', payload: { attachment } })
+      dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...bussPlanData } })
     } else {
 
     }
