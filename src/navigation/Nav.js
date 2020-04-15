@@ -5,12 +5,10 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 //import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import WelcomeScreen from '../screens/WelcomeScreen'
 
 import AuthenticationStack from './AuthenticationNavigator'
 import RegistrationStack from './RegistrationNavigator'
 import MainTabNav from './MainTabNav';
-import MapTestScreen from '../screens/MapTestScreen';
 
 const Stack = createStackNavigator();
 
@@ -27,7 +25,7 @@ const Nav = (props) => {
         const { token_type, access_token, error } = JSON.parse(personalToken)
 
         //const parsedPer
-        console.log(`personal token ialah : ${personalToken}`)
+        //console.log(`personal token ialah : ${personalToken}`)
         //this.setState({ tokenExists: true })
         setTokenExists(true)
 
@@ -39,7 +37,7 @@ const Nav = (props) => {
     }
   }
 
-  console.log(`token kat Nav ialah : ${JSON.stringify(token)}`)
+  //console.log(`token kat Nav ialah : ${JSON.stringify(token)}`)
 
   useEffect(() => {
     checkLogin()

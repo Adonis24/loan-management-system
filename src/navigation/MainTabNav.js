@@ -425,7 +425,7 @@ const MainTabNav = () => {
                         if (route.state.routes) {
                             const routeName = route.state.routes[route.state.index].name
                             //const history = route.state.routes[route.state.index].state.history[route.state.routes[route.state.index].state.history.length - 1]
-                            console.log(`route ialah :${JSON.stringify(routeName)}`)
+                            //console.log(`route ialah :${JSON.stringify(routeName)}`)
                             //console.log(`history ialah :${JSON.stringify(history)}`)
                             //if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan' || routeName === 'LoanConnectedParties' || routeName === 'LoanConnectedPartiesAddr' || routeName === 'LoanBusinessInfo' || routeName === 'LoanBusinessAddrInfo' || routeName === 'LoanBusinessInfoCont' || routeName === 'LoanBusinessDetail' || routeName === 'LoanDetail')
                             if (routeName === 'LoanDrawer' || routeName === 'Camera')
