@@ -26,7 +26,7 @@ const LayoutLoan = (props) => {
                     {!props.back ? <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
                         <Ionicons name={'md-menu'} size={24} color={'#fff'} />
                     </TouchableOpacity> :
-                        <TouchableOpacity onPress={() => props.back()}>
+                        <TouchableOpacity onPress={() => props.back()}   style={{paddingRight:10}} >
                             <Ionicons name={'ios-arrow-back'} size={24} color={'#fff'} />
                         </TouchableOpacity>}
                 </View>

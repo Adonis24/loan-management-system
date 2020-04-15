@@ -5,19 +5,15 @@ import {
     Modal,
     TouchableOpacity,
     Picker,
-    View,
-    TextInput,
-    KeyboardAvoidingView
+    View, Platform
+
 
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
@@ -45,7 +41,7 @@ const validationSchema = Yup.object().shape({
     payBack: Yup
         .string()
         .required()
-        
+
         .label('Tempoh Bayaran'),
 
 
@@ -115,44 +111,30 @@ const LoanDetailScreen = (props) => {
 
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
-                            <Modal animationType={'slide'}
-                                visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
-                            >
-                                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                                    <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
-                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
-                                            <TouchableOpacity onPress={() => setIosPickerVisible(!iosPickerVisible)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                                <Ionicons name="ios-arrow-back" color={'#5a83c2'} style={{ fontSize: 30 }} />
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
-                                            <Text style={{ fontSize: 12 }}>Select</Text>
-                                        </View>
-                                        <View style={{ flex: 1 }} />
-                                    </View>
-                                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+                            <Modal animationType={'slide'} visible={iosPickerVisible}  onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
+                                <LayoutLoan title={'Bayaran'} nopaddingTop={false} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
+                                    <View style={{ alignSelf: 'stretch', margin: 10 }}>
                                         {(modalContent === "kekerapan") ?
                                             <Picker style={{ flex: 1, height: 35 }} selectedValue={kekerapan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('kekerapan', itemValue)}>
                                                 <Picker.Item label={'Kekerapan Bayaran'} value={undefined} />
-                                                <Picker.Item label="Mingguan" value="mingguan" />
-                                                <Picker.Item label="Bulanan" value="bulanan" />
-                                                <Picker.Item label="Mengikut Tempoh Projek" value="projek" />
+                                                <Picker.Item label="Mingguan" value="Mingguan" />
+                                                <Picker.Item label="Bulanan" value="Bulanan" />
+                                                <Picker.Item label="Mengikut Tempoh Projek" value="Mengikut Tempoh Projek" />
 
                                             </Picker> : <Picker style={{ flex: 1, height: 35 }} selectedValue={caraBayaran} onValueChange={(itemValue, itemIndex) =>
                                                 FormikProps.setFieldValue('caraBayaran', itemValue)}>
                                                 <Picker.Item label={'Cara Bayaran'} value={undefined} />
-                                                <Picker.Item label="Online" value="online" />
-                                                <Picker.Item label="Cek Tarikh Tertunda" value="cekTarikh" />
-                                                <Picker.Item label="Kaunter (Pos Malaysia,Bank,Pejabat Tekun)" value="kaunter" />
+                                                <Picker.Item label="Online" value="Online" />
+                                                <Picker.Item label="Cek Tarikh Tertunda" value="Cek Tarikh Tertunda" />
+                                                <Picker.Item label="Kaunter (Pos Malaysia,Bank,Pejabat Tekun)" value="Kaunter (Pos Malaysia,Bank,Pejabat Tekun)" />
 
                                             </Picker>
                                         }
                                     </View>
-                                </View>
+                                </LayoutLoan>
                             </Modal>
 
-                            
                             <Text style={[styles.formTitle]}>Section G</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Maklumat Pembiayaan</Text>
@@ -206,7 +188,7 @@ const LoanDetailScreen = (props) => {
 
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, flex: 1}}>
+                                <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('caraBayaran')}>
@@ -216,18 +198,18 @@ const LoanDetailScreen = (props) => {
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={caraBayaran} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('caraBayaran', itemValue)}>
                                                 <Picker.Item label={'Cara Bayaran'} value={undefined} />
-                                                <Picker.Item label="Online" value="online" />
-                                                <Picker.Item label="Cek Tarikh Tertunda" value="cekTarikh" />
-                                                <Picker.Item label="Kaunter (Pos Malaysia,Bank,Pejabat Tekun)" value="kaunter" />
+                                                <Picker.Item label="Online" value="Online" />
+                                                <Picker.Item label="Cek Tarikh Tertunda" value="Cek Tarikh Tertunda" />
+                                                <Picker.Item label="Kaunter (Pos Malaysia,Bank,Pejabat Tekun)" value="Kaunter (Pos Malaysia,Bank,Pejabat Tekun)" />
                                             </Picker>
                                             {caraBayaranTouched && caraBayaranError && <Text style={styles.error}>{caraBayaranError}</Text>}
                                         </View>}
                                 </View>
                             </View>
-                            <View style={{  marginTop: 10 }}>
+                            {/* <View style={{ marginTop: 10 }}>
                                 <Text style={[styles.caption, { alignSelf: 'flex-start', textAlign: 'left', fontSize: 9, marginBottom: 5 }]}>*Pembiayaan RM 15,000 dan ke atas wajib membuat bayaran balik pembiayaan dengan Cek Tarikh Tertunda (Post-Dated-Cheque) sepanjang tempoh pembiayaan </Text>
                                 <Text style={[styles.caption, { alignSelf: 'flex-start', textAlign: 'left', fontSize: 9 }]}>*Sila rujuk kaedah bayaran balik pembiayaan TEKUN secara terus oleh penerima biaya melalui Portal TEKUN (www.tekun.gov.my) </Text>
-                            </View>
+                            </View> */}
                             <CustomFormAction
                                 label={`Save`}
                                 navigation={props.navigation}

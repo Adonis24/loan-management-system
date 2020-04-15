@@ -155,35 +155,22 @@ const LoanContactAddressInfoScreen = (props) => {
                     return (
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
-                            <Modal animationType={'slide'}
-                                visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
-                            >
-                                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                                    <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
-                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
-                                            <TouchableOpacity onPress={() => setIosPickerVisible(!iosPickerVisible)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                                <Ionicons name="ios-arrow-back" color={'#5a83c2'} style={{ fontSize: 30 }} />
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
-                                            <Text style={{ fontSize: 12 }}>Select</Text>
-                                        </View>
-                                        <View style={{ flex: 1 }} />
-                                    </View>
-                                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
+                           <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
+                                <LayoutLoan title={'Status Kediaman'} nopaddingTop={false} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
+                                    <View style={{ alignSelf: 'stretch', margin: 10 }}>
                                         <Picker style={{ flex: 1, height: 35 }} selectedValue={status} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('status', itemValue)}>
                                             <Picker.Item label={'Status Kediaman'} value={undefined} />
-                                            <Picker.Item label="Sendiri" value="sendiri" />
-                                            <Picker.Item label="Sewa" value="sewa" />
-                                            <Picker.Item label="Keluarga" value="keluarga" />
+                                            <Picker.Item label="Sendiri" value="Sendiri" />
+                                            <Picker.Item label="Sewa" value="Sewa" />
+                                            <Picker.Item label="Keluarga" value="Keluarga" />
                                         </Picker>
-                                    </View>
-                                </View>
+                                        </View>
+                                </LayoutLoan>
                             </Modal>
                             <Modal animationType={'slide'}
-                                visible={addressVisible} onRequestClose={() => setAddressVisible(!addressVisible)}
+                                visible={addressVisible} onRequestClose={() => setAddressVisible(!addressVisible)} 
                             >
-                                <LayoutLoan title={'Address'} nopaddingTop={true} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
+                                <LayoutLoan title={'Address'}  nopaddingTop={!ios?true:false} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
                                     <View style={{ margin: 10 }} />
                                     <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                                         <CustomTextInput
@@ -254,9 +241,9 @@ const LoanContactAddressInfoScreen = (props) => {
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={status} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('status', itemValue)}>
                                                 <Picker.Item label={'Status Kediaman'} value={undefined} />
-                                                <Picker.Item label="Sendiri" value="sendiri" />
-                                                <Picker.Item label="Sewa" value="sewa" />
-                                                <Picker.Item label="Keluarga" value="keluarga" />
+                                                <Picker.Item label="Sendiri" value="Sendiri" />
+                                                <Picker.Item label="Sewa" value="Sewa" />
+                                                <Picker.Item label="Keluarga" value="Keluarga" />
                                             </Picker>
                                             {statusTouched && statusError && <Text style={styles.error}>{statusError}</Text>}
                                         </View>}

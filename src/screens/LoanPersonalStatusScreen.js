@@ -6,14 +6,13 @@ import {
     TouchableOpacity,
     Picker,
     View,
-    TextInput,
-    KeyboardAvoidingView
+
 
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
+
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import { Ionicons } from '@expo/vector-icons';
 
@@ -27,19 +26,11 @@ const validationSchema = Yup.object().shape({
         .string()
         .required(),
 
-    
-
-
-
-
     tanggungan: Yup
         .string()
         .required()
         .min(1)
-        .label('BilTanggungan'),
-
-
-
+        .label('Bilangan Tanggungan'),
 
 });
 
@@ -83,16 +74,10 @@ const LoanPersonalStatusScreen = (props) => {
             >
                 {FormikProps => {
 
-
-
-
-                    const {  taraf, tanggungan } = FormikProps.values
+                    const { taraf, tanggungan } = FormikProps.values
 
                     const tanggunganError = FormikProps.errors.tanggungan
                     const tanggunganTouched = FormikProps.touched.tanggungan
-
-
-
 
                     const tarafError = FormikProps.errors.taraf
                     const tarafTouched = FormikProps.touched.taraf
@@ -101,47 +86,27 @@ const LoanPersonalStatusScreen = (props) => {
                     return (
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
-                            <Modal animationType={'slide'}
-                                visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
-                            >
-                                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                                    <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
-                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
-                                            <TouchableOpacity onPress={() => setIosPickerVisible(!iosPickerVisible)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                                <Ionicons name="ios-arrow-back" color={'#5a83c2'} style={{ fontSize: 30 }} />
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
-                                            <Text style={{ fontSize: 12 }}>Select</Text>
-                                        </View>
-                                        <View style={{ flex: 1 }} />
-                                    </View>
-                                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
-                                        {(modalContent === "pendidikan") ?
-                                           <View /> : <Picker style={{ flex: 1, height: 35 }} selectedValue={taraf} onValueChange={(itemValue, itemIndex) =>
+                            <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
+                                <LayoutLoan title={'Taraf Perkahwinan'} nopaddingTop={true} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
+                                    <View style={{ alignSelf: 'stretch', margin: 10 }}>
+                                        {(modalContent !== "taraf") ?
+                                            <View /> : <Picker style={{ flex: 1, height: 35 }} selectedValue={taraf} onValueChange={(itemValue, itemIndex) =>
                                                 FormikProps.setFieldValue('taraf', itemValue)}>
                                                 <Picker.Item label={'Taraf Perkahwinan'} value={undefined} />
-                                                <Picker.Item label="Bujang" value="bujang" />
-                                                <Picker.Item label="Berkahwin" value="berkahwin" />
-                                                <Picker.Item label="Duda" value="duda" />
-                                                <Picker.Item label="Ibu Tunggal" value="ibuTunggal" />
-
+                                                <Picker.Item label="Bujang" value="Bujang" />
+                                                <Picker.Item label="Berkahwin" value="Berkahwin" />
+                                                <Picker.Item label="Duda" value="Duda" />
+                                                <Picker.Item label="Ibu Tunggal" value="Ibu Tunggal" />
                                             </Picker>
                                         }
                                     </View>
-                                </View>
+                                </LayoutLoan>
                             </Modal>
 
                             {/* {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />} */}
                             <Text style={[styles.formTitle]}>Section B</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Maklumat Peribadi</Text>
-
-
-
-
-
-                           
                             <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Taraf Perkahwinan :</Text>
 
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
@@ -156,10 +121,10 @@ const LoanPersonalStatusScreen = (props) => {
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={taraf} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('taraf', itemValue)}>
                                                 <Picker.Item label={'Taraf Perkahwinan'} value={undefined} />
-                                                <Picker.Item label="Bujang" value="bujang" />
-                                                <Picker.Item label="Berkahwin" value="berkahwin" />
-                                                <Picker.Item label="Duda" value="duda" />
-                                                <Picker.Item label="Ibu Tunggal" value="ibuTunggal" />
+                                                <Picker.Item label="Bujang" value="Bujang" />
+                                                <Picker.Item label="Berkahwin" value="Berkahwin" />
+                                                <Picker.Item label="Duda" value="Duda" />
+                                                <Picker.Item label="Ibu Tunggal" value="Ibu Tunggal" />
                                             </Picker>
                                             {tarafTouched && tarafError && <Text style={styles.error}>{tarafError}</Text>}
                                         </View>}

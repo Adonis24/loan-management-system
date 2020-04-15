@@ -74,12 +74,17 @@ const LoanPendapatanScreen = (props) => {
     const { alamatComp, alamat_2Comp, poskodComp, cityComp, stateComp, phoneNumComp, pendapatan, pekerjaan, pendidikan } = useSelector(state => state.financingReducer, shallowEqual)
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
 
+    const [iosPickerVisible, setIosPickerVisible] = useState(false)
+    const [modalContent, setModalContent] = useState(null)
 
 
     const setMaklumatPeribadi = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
 
-
+    const handleIosPicker = (modalContent) => {
+        setModalContent(modalContent)
+        setIosPickerVisible(!iosPickerVisible)
+    }
 
 
     return (
@@ -148,10 +153,26 @@ const LoanPendapatanScreen = (props) => {
                     return (
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+                            <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
+                                <LayoutLoan title={'Taraf Pendidikan'} nopaddingTop={false} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
+                                    <View style={{ alignSelf: 'stretch', margin: 10 }}>
+                                    <Picker style={{ height: 35 }} selectedValue={pendidikan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pendidikan', itemValue)}>
+                                                <Picker.Item label={'Taraf Pendidikan'} value={undefined} />
+                                           
+                                                <Picker.Item label="Ijazah" value="Ijazah" />
+                                                <Picker.Item label="Diploma" value="Diploma" />
+                                                <Picker.Item label="Sijil" value="Sijil" />
+                                                <Picker.Item label="STPM/setaraf" value="STPM/setaraf" />
+                                                <Picker.Item label="SPM/setaraf" value="SPM/setaraf" />
+                                                <Picker.Item label="PMR/setaraf" value="PMR/setaraf" />
+                                            </Picker>
+                                    </View>
+                                </LayoutLoan>
+                            </Modal>
                             <Modal animationType={'slide'}
                                 visible={addressVisible} onRequestClose={() => setAddressVisible(!addressVisible)}
                             >
-                                <LayoutLoan title={'Address'} nopaddingTop={true} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
+                                <LayoutLoan title={'Address'} nopaddingTop={!ios?true:false} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
                                     <View style={{ margin: 10 }} />
                                     <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                                         <CustomTextInput
@@ -201,7 +222,6 @@ const LoanPendapatanScreen = (props) => {
 
                                         />}
                                     </View>
-
                                 </LayoutLoan>
                             </Modal>
                             <Text style={[styles.formTitle]}>Section B</Text>
@@ -220,12 +240,12 @@ const LoanPendapatanScreen = (props) => {
                                             <Picker style={{ height: 35 }} selectedValue={pendidikan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pendidikan', itemValue)}>
                                                 <Picker.Item label={'Taraf Pendidikan'} value={undefined} />
                                                 <Picker.Item label={'Taraf Pendidikan'} value={undefined} />
-                                                <Picker.Item label="Ijazah" value="ijazah" />
-                                                <Picker.Item label="Diploma" value="diploma" />
-                                                <Picker.Item label="Sijil" value="sijil" />
-                                                <Picker.Item label="STPM/setaraf" value="stpm/setaraf" />
-                                                <Picker.Item label="SPM/setaraf" value="spm/setaraf" />
-                                                <Picker.Item label="PMR/setaraf" value="pmr/setaraf" />
+                                                <Picker.Item label="Ijazah" value="Ijazah" />
+                                                <Picker.Item label="Diploma" value="Diploma" />
+                                                <Picker.Item label="Sijil" value="Sijil" />
+                                                <Picker.Item label="STPM/setaraf" value="STPM/setaraf" />
+                                                <Picker.Item label="SPM/setaraf" value="SPM/setaraf" />
+                                                <Picker.Item label="PMR/setaraf" value="PMR/setaraf" />
                                             </Picker>
                                             {pendidikanTouched && pendidikanError && <Text style={styles.error}>{pendidikanError}</Text>}
                                         </View>}
@@ -274,9 +294,9 @@ const LoanPendapatanScreen = (props) => {
                                     {poskodComp && <Text style={[styles.textDefault, { color: '#000' }]}>{poskodComp}</Text>}
                                     {cityComp && <Text style={[styles.textDefault, { color: '#000' }]}>{cityComp},{stateComp}</Text>}
                                 </View> : <View style={{ paddingLeft: 5, paddingTop: 15 }}>
-                                    <Text style={[styles.textDefault, { color: 'lightgrey' }]}>Alamat</Text>
+                                        <Text style={[styles.textDefault, { color: 'lightgrey' }]}>Alamat</Text>
 
-                                </View>}
+                                    </View>}
                             </CustomTextInput>
 
                             <CustomTextInput

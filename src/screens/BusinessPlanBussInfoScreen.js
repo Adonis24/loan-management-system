@@ -6,19 +6,15 @@ import {
     View,
     Modal,
     Picker,
-    TextInput,
-    KeyboardAvoidingView,
+
     ScrollView
 
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
+
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
@@ -96,8 +92,6 @@ const BusinessPlanBussInfoScreen = (props) => {
                 {FormikProps => {
 
 
-
-
                     const { lokasi, bilCawangan, bilPekerja, compPhone, compFax, compStatus } = FormikProps.values
 
                     const lokasiError = FormikProps.errors.lokasi
@@ -124,70 +118,57 @@ const BusinessPlanBussInfoScreen = (props) => {
                     return (
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
-                            <Modal animationType={'slide'}
-                                visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
-                            >
-                                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                                    <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
-                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
-                                            <TouchableOpacity onPress={() => setIosPickerVisible(!iosPickerVisible)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                                <Ionicons name="ios-arrow-back" color={'#5a83c2'} style={{ fontSize: 30 }} />
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
-                                            <Text style={{ fontSize: 12 }}>Select</Text>
-                                        </View>
-                                        <View style={{ flex: 1 }} />
-                                    </View>
-                                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
+                            <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
+                                <LayoutLoan title={'Maklumat Akaun'} nopaddingTop={true} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
+                                    <View style={{ alignSelf: 'stretch', margin: 10 }}>
 
                                         <Picker style={{ flex: 1, height: 35 }} selectedValue={compStatus} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('compStatus', itemValue)}>
                                             <Picker.Item label={'Status Premis'} value={undefined} />
-                                            <Picker.Item label="Sendiri" value="sendiri" />
-                                            <Picker.Item label="Sewa" value="sewa" />
+                                            <Picker.Item label="Sendiri" value="Sendiri" />
+                                            <Picker.Item label="Sewa" value="Sewa" />
 
 
                                         </Picker>
 
                                     </View>
-                                </View>
+                                </LayoutLoan>
                             </Modal>
                             <Text style={[styles.formTitle]}>Section B</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Butir-Butir Perniagaan</Text>
                             <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start' }}>
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/address.png')}
-                                value={lokasi}
-                                handleChange={FormikProps.handleChange(`lokasi`)}
-                                handleBlur={FormikProps.handleBlur(`lokasi`)}
-                                touched={lokasiTouched}
-                                error={lokasiError}
-                                placeholder={'Lokasi Premis'}
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/address.png')}
+                                    value={lokasi}
+                                    handleChange={FormikProps.handleChange(`lokasi`)}
+                                    handleBlur={FormikProps.handleBlur(`lokasi`)}
+                                    touched={lokasiTouched}
+                                    error={lokasiError}
+                                    placeholder={'Lokasi Premis'}
 
-                            />
-                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Status Premis :</Text>
+                                />
+                                <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Status Premis :</Text>
 
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
-                                <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
-                                    {ios ?
-                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('compStatus')}>
-                                                <Text style={{ fontSize: 12 }}>{compStatus ? compStatus : `Status Premis`}</Text>
-                                            </TouchableOpacity>
-                                            {compStatusTouched && compStatusError && <Text style={styles.error}>{compStatusError}</Text>}
-                                        </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
-                                            <Picker style={{ height: 35 }} selectedValue={compStatus} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('compStatus', itemValue)}>
-                                                <Picker.Item label={'Status Premis'} value={undefined} />
-                                                <Picker.Item label="Sendiri" value="sendiri" />
-                                                <Picker.Item label="Sewa" value="sewa" />
-                                               
-                                            </Picker>
-                                            {compStatusTouched && compStatusError && <Text style={styles.error}>{compStatusError}</Text>}
-                                        </View>}
-                                </View>
+                                <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
+                                    <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                    <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
+                                        {ios ?
+                                            <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
+                                                <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('compStatus')}>
+                                                    <Text style={{ fontSize: 12 }}>{compStatus ? compStatus : `Status Premis`}</Text>
+                                                </TouchableOpacity>
+                                                {compStatusTouched && compStatusError && <Text style={styles.error}>{compStatusError}</Text>}
+                                            </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
+                                                <Picker style={{ height: 35 }} selectedValue={compStatus} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('compStatus', itemValue)}>
+                                                    <Picker.Item label={'Status Premis'} value={undefined} />
+                                                    <Picker.Item label="Sendiri" value="Sendiri" />
+                                                    <Picker.Item label="Sewa" value="Sewa" />
+
+                                                </Picker>
+                                                {compStatusTouched && compStatusError && <Text style={styles.error}>{compStatusError}</Text>}
+                                            </View>}
+                                    </View>
                                 </View>
 
                                 <CustomTextInput
@@ -232,23 +213,23 @@ const BusinessPlanBussInfoScreen = (props) => {
                                     keyboardType={'phone-pad'}
 
                                 />
-                                </ScrollView>
+                            </ScrollView>
 
-                                <CustomFormAction
-                                    navigation={props.navigation}
-                                    isValid={FormikProps.isValid}
-                                    handleSubmit={FormikProps.handleSubmit}
-                                />
-                            </View>
+                            <CustomFormAction
+                                navigation={props.navigation}
+                                isValid={FormikProps.isValid}
+                                handleSubmit={FormikProps.handleSubmit}
+                            />
+                        </View>
 
                     )
                 }}
             </Formik >
-                        <View style={{ position: 'absolute', top: 10, left: 10 }}>
-                            <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
-                                <Ionicons name={'md-menu'} size={24} color={'#fff'} />
-                            </TouchableOpacity>
-                        </View>
+            <View style={{ position: 'absolute', top: 10, left: 10 }}>
+                <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
+                    <Ionicons name={'md-menu'} size={24} color={'#fff'} />
+                </TouchableOpacity>
+            </View>
         </LayoutLoan>
     );
 }

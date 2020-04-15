@@ -1,26 +1,19 @@
 //console.ignoredYellowBox = ['Setting a timer']
 import React, { useState, useEffect, createRef, useRef } from 'react';
 import {
-    Image,
-    Platform,
-    ScrollView,
+    
     StyleSheet,
     Text,
     TouchableOpacity,
     View,
-    Dimensions,
-    TextInput,
-    AsyncStorage,
-    ImageBackground,
+  
     ActivityIndicator
 
 
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
-import * as Permissions from 'expo-permissions'
 import Constants from 'expo-constants'
 import styles from '../styles/styles'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'

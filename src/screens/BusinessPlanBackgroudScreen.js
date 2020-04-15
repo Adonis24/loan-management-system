@@ -168,7 +168,7 @@ const BusinessPlanBackgroudScreen = (props) => {
                                 <CustomTextInput
                                     imageUri={require('../assets/images/address.png')}
 
-                                    handleClick={() => setAddressVisible(!addressVisible)}
+                                    handleClick={() => console.log('do nothing')}
                                     multiLine={true}
 
                                     placeholder={'Alamat'}

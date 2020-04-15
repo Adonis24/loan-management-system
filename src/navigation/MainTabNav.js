@@ -127,6 +127,7 @@ import BusinessPlanCertScreen from '../screens/BusinessPlanCertScreen'
 import LoanBankScreen from '../screens/LoanBankScreen';
 import LoanReferrerListScreen from '../screens/LoanReferrerListScreen';
 import LoanMaklumatPeribadiBScreen from '../screens/LoanMaklumatPeribadiBScreen';
+import BusinessPlanEstablishCompBScreen from '../screens/BusinessPlanEstablishCompBScreen';
 
 const DashboardStack = () => {
     return (
@@ -358,6 +359,7 @@ const BusinessPlanSectionAStack = () => {
         <Stack.Navigator initialRouteName="BusinessPlanBackgroud" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="BusinessPlanBackgroud" component={BusinessPlanBackgroudScreen} />
             <Stack.Screen name="BusinessPlanEstablishComp" component={BusinessPlanEstablishCompScreen} />
+            <Stack.Screen name="BusinessPlanEstablishCompB" component={BusinessPlanEstablishCompBScreen} />
             <Stack.Screen name="BusinessPlanBank" component={BusinessPlanBankScreen} />
             <Stack.Screen name="BusinessPlanPartner" component={BusinessPlanPartnerScreen} />
         </Stack.Navigator>)

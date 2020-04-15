@@ -4,16 +4,14 @@ import {
     Text,
     TouchableOpacity,
     View,
-    Modal
+    Modal,Platform
 
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
+
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import malaysiaData from 'malaysia-state-city-postcode'
 import styles from '../styles/styles'
@@ -53,6 +51,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { compSendiriPhoneNum, compSendiriAlamat, compSendiriAlamat_2, compSendiriPoskod, compSendiriCity, compSendiriState } = useSelector(state => state.financingReducer, shallowEqual)
     const [addressVisible, setAddressVisible] = useState(false)
+    const ios = Platform.OS === "ios" ? true : false
 
     const setBusinessInfo = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
@@ -127,7 +126,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
                             <Modal animationType={'slide'}
                                 visible={addressVisible} onRequestClose={() => setAddressVisible(!addressVisible)}
                             >
-                                <LayoutLoan title={'Address'} nopaddingTop={true} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
+                                <LayoutLoan title={'Address'} nopaddingTop={!ios?true:false} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
                                     <View style={{ margin: 10 }} />
                                     <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                                         <CustomTextInput

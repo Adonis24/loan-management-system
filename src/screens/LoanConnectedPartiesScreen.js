@@ -66,6 +66,10 @@ const LoanConnectedPartiesScreen = (props) => {
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { cpName, cpIcNumber, cpPekerjaan, cpPendapatan, cpRelation } = useSelector(state => state.financingReducer, shallowEqual)
 
+    const handleIosPicker = (modalContent) => {
+        setModalContent(modalContent)
+        setIosPickerVisible(!iosPickerVisible)
+    }
 
     const setConnectParties = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
@@ -116,33 +120,18 @@ const LoanConnectedPartiesScreen = (props) => {
                     return (
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
-                            <Modal animationType={'slide'}
-                                visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
-                            >
-                                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                                    <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
-                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
-                                            <TouchableOpacity onPress={() => setIosPickerVisible(!iosPickerVisible)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                                <Ionicons name="ios-arrow-back" color={'#5a83c2'} style={{ fontSize: 30 }} />
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
-                                            <Text style={{ fontSize: 12 }}>Select</Text>
-                                        </View>
-                                        <View style={{ flex: 1 }} />
-                                    </View>
-                                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
-
+                            <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
+                                <LayoutLoan title={'Hubungan'} nopaddingTop={false} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
+                                    <View style={{ alignSelf: 'stretch', margin: 10 }}>
                                         <Picker style={{ flex: 1, height: 35 }} selectedValue={cpRelation} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('cpRelation', itemValue)}>
                                             <Picker.Item label={'Hubungan'} value={undefined} />
-                                            <Picker.Item label="Suami" value="suami" />
-                                            <Picker.Item label="Isteri" value="isteri" />
-                                            <Picker.Item label="Waris" value="waris" />
+                                            <Picker.Item label="Suami" value="Suami" />
+                                            <Picker.Item label="Isteri" value="Isteri" />
+                                            <Picker.Item label="Waris" value="Waris" />
 
                                         </Picker>
-
-                                    </View>
-                                </View>
+                                        </View>
+                                </LayoutLoan>
                             </Modal>
                             <Text style={[styles.formTitle]}>Section C</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
@@ -156,7 +145,7 @@ const LoanConnectedPartiesScreen = (props) => {
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('cpRelation')}>
-                                                <Text style={{ fontSize: 12 }}>{cpRelation ? cpRelation : `Status Kediaman`}</Text>
+                                                <Text style={{ fontSize: 12 }}>{cpRelation ? cpRelation : `Hubungan`}</Text>
                                             </TouchableOpacity>
                                             {cpRelationTouched && cpRelationError && <Text style={styles.error}>{cpRelationError}</Text>}
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>

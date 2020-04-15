@@ -17,8 +17,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import Constants from 'expo-constants'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
+
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment'
 
@@ -26,7 +25,6 @@ import LayoutLoan from '../Layout/LayoutLoan';
 import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import styles from '../styles/styles'
-import { LinearGradient } from 'expo-linear-gradient'
 import * as actionCreator from '../store/actions/action'
 import CheckBox2 from 'react-native-check-box'
 
@@ -49,7 +47,6 @@ const validationSchema = Yup.object().shape({
         .required()
         .min(3)
         .label('Tarikh'),
-
 
 
 

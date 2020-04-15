@@ -6,8 +6,7 @@ import {
     TouchableOpacity,
     Picker,
     View,
-    TextInput,
-    KeyboardAvoidingView
+    Platform
 
 } from 'react-native';
 import { Formik } from 'formik';
@@ -51,10 +50,6 @@ const validationSchema = Yup.object().shape({
 
 
 
-
-
-
-
 });
 
 const BusinessPlanBankScreen = (props) => {
@@ -63,30 +58,34 @@ const BusinessPlanBankScreen = (props) => {
     const [modalContent, setModalContent] = useState(null)
     const ios = Platform.OS === "ios" ? true : false
 
+    const handleIosPicker = (modalContent) => {
+        setModalContent(modalContent)
+        setIosPickerVisible(!iosPickerVisible)
+    }
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { bankName, pemegang, akaun, noAkaun,pemilikan } = useSelector(state => state.businessPlanningReducer, shallowEqual)
+    const { bankName, pemegang, akaun, noAkaun, pemilikan } = useSelector(state => state.businessPlanningReducer, shallowEqual)
     const { bank, } = useSelector(state => state.financingReducer, shallowEqual)
-    const noAkaunLama= useSelector(state => state.financingReducer.noAkaun, shallowEqual)
+    const noAkaunLama = useSelector(state => state.financingReducer.noAkaun, shallowEqual)
 
-const goNext=()=>{
-    (pemilikan!='Tunggal')?props.navigation.navigate('BusinessPlanPartner'):props.navigation.navigate('BusinessPlanSectionB')
-    
-}
+    const goNext = () => {
+        (pemilikan != 'Tunggal') ? props.navigation.navigate('BusinessPlanPartner') : props.navigation.navigate('BusinessPlanSectionB')
+
+    }
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
 
     return (
         <LayoutLoan navigation={props.navigation}>
             <Formik
                 validateOnMount
-                initialValues={{ pemegang, akaun, bankName:bankName?bankName:bank, noAkaun:noAkaun?noAkaun:noAkaunLama }}
+                initialValues={{ pemegang, akaun, bankName: bankName ? bankName : bank, noAkaun: noAkaun ? noAkaun : noAkaunLama }}
 
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
                     goNext()
-                    
+
                     actions.resetForm({})
                     dispatch(actionCreator.saveBussPlanData())
                     actions.setSubmitting(false)
@@ -116,50 +115,48 @@ const goNext=()=>{
                     return (
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
-                            <Modal animationType={'slide'}
-                                visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
-                            >
-                                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                                    <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
-                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
-                                            <TouchableOpacity onPress={() => setIosPickerVisible(!iosPickerVisible)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                                <Ionicons name="ios-arrow-back" color={'#5a83c2'} style={{ fontSize: 30 }} />
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
-                                            <Text style={{ fontSize: 12 }}>Select</Text>
-                                        </View>
-                                        <View style={{ flex: 1 }} />
-                                    </View>
-                                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
+                            <Modal animationType={'slide'} visible={iosPickerVisible}  onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
+                                <LayoutLoan title={'Maklumat Akaun'} nopaddingTop={false} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
+                                    <View style={{ alignSelf: 'stretch', margin: 10 }}>
                                         {(modalContent === "akaun") ?
                                             <Picker style={{ flex: 1, height: 35 }} selectedValue={akaun} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('akaun', itemValue)}>
                                                 <Picker.Item label={'Jenis Akaun'} value={undefined} />
-                                                <Picker.Item label="Semasa" value="semasa" />
-                                                <Picker.Item label="Simpanan" value="simpanan" />
+                                                <Picker.Item label="Semasa" value="Semasa" />
+                                                <Picker.Item label="Simpanan" value="Simpanan" />
 
 
                                             </Picker> : <Picker style={{ flex: 1, height: 35 }} selectedValue={pemegang} onValueChange={(itemValue, itemIndex) =>
                                                 FormikProps.setFieldValue('pemegang', itemValue)}>
                                                 <Picker.Item label={'Pemegang Akaun'} value={undefined} />
-                                                <Picker.Item label="Individu" value="individu" />
-                                                <Picker.Item label="Syarikat" value="syarikat" />
+                                                <Picker.Item label="Individu" value="Individu" />
+                                                <Picker.Item label="Syarikat" value="Syarikat" />
                                                 <Picker.Item label="Perkongsian" value="perkongsian" />
 
                                             </Picker>
                                         }
                                     </View>
-                                </View>
+                                </LayoutLoan>
                             </Modal>
 
 
                             <Text style={[styles.formTitle]}>Section A</Text>
-                            {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Latar Belakang Pemohon</Text>
 
+                            <CustomTextInput
+                                imageUri={require('../assets/images/compRegNum.png')}
+                                value={bankName}
+                                handleChange={FormikProps.handleChange(`bankName`)}
+                                handleBlur={FormikProps.handleBlur(`bankName`)}
+                                touched={bankNameTouched}
+                                error={bankNameError}
+                                placeholder={'Nama Bank'}
+
+                            />
                             <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Jenis Akaun :</Text>
 
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
+
+
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
@@ -171,8 +168,8 @@ const goNext=()=>{
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={akaun} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('akaun', itemValue)}>
                                                 <Picker.Item label={'Jenis Akaun'} value={undefined} />
-                                                <Picker.Item label="Semasa" value="semasa" />
-                                                <Picker.Item label="Simpanan" value="simpanan" />
+                                                <Picker.Item label="Semasa" value="Semasa" />
+                                                <Picker.Item label="Simpanan" value="Simpanan" />
 
                                             </Picker>
                                             {akaunTouched && akaunError && <Text style={styles.error}>{akaunError}</Text>}
@@ -187,31 +184,22 @@ const goNext=()=>{
                                     {ios ?
                                         <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('pemegang')}>
-                                                <Text style={{ fontSize: 12 }}>{pemegang ? pemegang : `Status Premis`}</Text>
+                                                <Text style={{ fontSize: 12 }}>{pemegang ? pemegang : `Pemegang Akaun`}</Text>
                                             </TouchableOpacity>
                                             {pemegangTouched && pemegangError && <Text style={styles.error}>{pemegangError}</Text>}
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={pemegang} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pemegang', itemValue)}>
                                                 <Picker.Item label={'Pemegang Akaun'} value={undefined} />
-                                                <Picker.Item label="Individu" value="individu" />
-                                                <Picker.Item label="Syarikat" value="syarikat" />
-                                                <Picker.Item label="Perkongsian" value="perkongsian" />
+                                                <Picker.Item label="Individu" value="Individu" />
+                                                <Picker.Item label="Syarikat" value="Syarikat" />
+                                                <Picker.Item label="Perkongsian" value="Perkongsian" />
                                             </Picker>
                                             {pemegangTouched && pemegangError && <Text style={styles.error}>{pemegangError}</Text>}
                                         </View>}
                                 </View>
                             </View>
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/compRegNum.png')}
-                                value={bankName}
-                                handleChange={FormikProps.handleChange(`bankName`)}
-                                handleBlur={FormikProps.handleBlur(`bankName`)}
-                                touched={bankNameTouched}
-                                error={bankNameError}
-                                placeholder={'Nama Bank'}
 
-                            />
                             <CustomTextInput
                                 imageUri={require('../assets/images/compRegNum.png')}
                                 value={noAkaun}
@@ -222,9 +210,6 @@ const goNext=()=>{
                                 placeholder={'No Akaun'}
                                 keyboardType={'phone-pad'}
                             />
-
-
-
 
 
 

@@ -80,51 +80,15 @@ const LoanMaklumatPeribadiBScreen = (props) => {
 
     return (
         <LayoutLoan navigation={props.navigation}>
-            <Modal animationType={'slide'}
-                visible={iosPickerVisible} onRequestClose={() => {
-                    console.log(`test`)
-                    setIosPickerVisible(!iosPickerVisible)
-                }}>
 
-                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                    <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
-                            <TouchableOpacity onPress={() => setIosPickerVisible(!iosPickerVisible)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                <Ionicons name="ios-arrow-back" color={'#5a83c2'} style={{ fontSize: 30 }} />
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 12 }}>Select</Text>
-                        </View>
-                        <View style={{ flex: 1 }} />
-                    </View>
-                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
-                        {(modalContent === "jantina") ?
-                            <Picker style={{ flex: 1, height: 35 }} selectedValue={jantina} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('jantina', itemValue)}>
-                                <Picker.Item label={'Jantina'} value={undefined} />
-                                <Picker.Item label="Lelaki" value="lelaki" />
-                                <Picker.Item label="Wanita" value="wanita" />
-
-                            </Picker> : <Picker style={{ flex: 1, height: 35 }} selectedValue={agama} onValueChange={(itemValue, itemIndex) =>
-                                FormikProps.setFieldValue('agama', itemValue)}>
-                                <Picker.Item label={'Agama'} value={undefined} />
-                                <Picker.Item label="Islam" value="islam" />
-                                <Picker.Item label="Bukan Islam" value="bukanIslam" />
-
-                            </Picker>
-                        }
-                    </View>
-                </View>
-
-            </Modal>
 
             <Formik
                 validateOnMount
-                initialValues={{  agama, bangsa, jantina,  }}
+                initialValues={{ agama, bangsa, jantina, }}
 
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
-              
+
                     //const dobInfo = getUmur(icNumber)
                     //console.log(`dob info ${JSON.stringify(dobInfo)}`)
                     setMaklumatPeribadi({ ...values })
@@ -140,12 +104,12 @@ const LoanMaklumatPeribadiBScreen = (props) => {
 
 
 
-                    const {  jantina, agama, bangsa} = FormikProps.values
+                    const { jantina, agama, bangsa } = FormikProps.values
 
                     const bangsaError = FormikProps.errors.bangsa
                     const bangsaTouched = FormikProps.touched.bangsa
 
-          
+
 
                     const jantinaError = FormikProps.errors.jantina
                     const jantinaTouched = FormikProps.touched.jantina
@@ -159,13 +123,32 @@ const LoanMaklumatPeribadiBScreen = (props) => {
                     return (
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+                           <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
+                                <LayoutLoan title={'Please Select'} nopaddingTop={true} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
+                                    <View style={{ alignSelf: 'stretch', margin: 10 }}>
+                                        {(modalContent === "jantina") ?
+                                            <Picker style={{ flex: 1, height: 35 }} selectedValue={jantina} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('jantina', itemValue)}>
+                                                <Picker.Item label={'Jantina'} value={undefined} />
+                                                <Picker.Item label="Lelaki" value="Lelaki" />
+                                                <Picker.Item label="Wanita" value="Wanita" />
 
+                                            </Picker> : <Picker style={{ flex: 1, height: 35 }} selectedValue={agama} onValueChange={(itemValue, itemIndex) =>
+                                                FormikProps.setFieldValue('agama', itemValue)}>
+                                                <Picker.Item label={'Agama'} value={undefined} />
+                                                <Picker.Item label="Islam" value="Islam" />
+                                                <Picker.Item label="Bukan Islam" value="Bukan Islam" />
+
+                                            </Picker>
+                                        }
+                                     </View>
+                                </LayoutLoan>
+                            </Modal>
 
                             <Text style={[styles.formTitle]}>Section B</Text>
                             <Text style={[styles.formSubtitle]}>Maklumat Peribadi</Text>
 
 
-                            
+
                             <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Jantina :</Text>
 
                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
@@ -180,8 +163,8 @@ const LoanMaklumatPeribadiBScreen = (props) => {
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={jantina} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('jantina', itemValue)}>
                                                 <Picker.Item label={'Jantina'} value={undefined} />
-                                                <Picker.Item label="Lelaki" value="lelaki" />
-                                                <Picker.Item label="Wanita" value="wanita" />
+                                                <Picker.Item label="Lelaki" value="Lelaki" />
+                                                <Picker.Item label="Wanita" value="Wanita" />
 
                                             </Picker>
                                             {jantinaTouched && jantinaError && <Text style={styles.error}>{jantinaError}</Text>}
@@ -202,8 +185,8 @@ const LoanMaklumatPeribadiBScreen = (props) => {
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={agama} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('agama', itemValue)}>
                                                 <Picker.Item label={'Agama'} value={undefined} />
-                                                <Picker.Item label="Islam" value="islam" />
-                                                <Picker.Item label="Bukan Islam" value="bukanIslam" />
+                                                <Picker.Item label="Islam" value="Islam" />
+                                                <Picker.Item label="Bukan Islam" value="Bukan Islam" />
 
                                             </Picker>
                                             {agamaTouched && agamaError && <Text style={styles.error}>{agamaError}</Text>}

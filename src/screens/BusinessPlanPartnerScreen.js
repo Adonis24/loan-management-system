@@ -5,19 +5,15 @@ import {
     TouchableOpacity,
     View,
     Modal,
-    Picker,
-    TextInput,
-    KeyboardAvoidingView, FlatList
+    FlatList,
+    Platform
 
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
+
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
@@ -63,6 +59,7 @@ const validationSchema = Yup.object().shape({
 
 const BusinessPlanPartnerScreen = (props) => {
 
+    const ios = Platform.OS === "ios" ? true : false
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
@@ -121,7 +118,7 @@ const BusinessPlanPartnerScreen = (props) => {
                         const sahamTouched = FormikProps.touched.saham
 
                         return (
-                            <LayoutLoan title={'Add Partner'} nopaddingTop={true} back={() => setAddPartnerVisible(!addPartnerVisible)} navigation={props.navigation}>
+                            <LayoutLoan title={'Add Partner'} nopaddingTop={!ios ? true : false} back={() => setAddPartnerVisible(!addPartnerVisible)} navigation={props.navigation}>
                                 <View style={{ alignSelf: 'stretch', padding: 10 }}>
                                     <CustomTextInput
                                         imageUri={require('../assets/images/user.png')}
@@ -199,14 +196,14 @@ const BusinessPlanPartnerScreen = (props) => {
                     data={partners}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item }) =>
-                        <View style={{  flexDirection: 'row', alignSelf: 'stretch', borderColor: 'lightgrey', borderWidth: 1,marginBottom:5 }}>
-                            <View style={{ flex: 3, padding: 5, borderRightWidth: 1, borderColor: 'lightgrey',alignItems:'center' }}>
-                                <Text style={styles.formTitle,{fontSize:40}}>{item.saham}%</Text></View>
+                        <View style={{ flexDirection: 'row', alignSelf: 'stretch', borderColor: 'lightgrey', borderWidth: 1, marginBottom: 5 }}>
+                            <View style={{ flex: 3, padding: 5, borderRightWidth: 1, borderColor: 'lightgrey', alignItems: 'center' }}>
+                                <Text style={styles.formTitle, { fontSize: 40 }}>{item.saham}%</Text></View>
                             <View style={{ flex: 7, padding: 5 }}>
                                 <Text style={styles.answer}>{item.partName}</Text>
                                 <Text style={styles.answer}>{item.partIcNum}</Text>
                                 <Text style={styles.answer}>{item.partJawatan}</Text>
-                                </View>
+                            </View>
 
 
                         </View>} />}

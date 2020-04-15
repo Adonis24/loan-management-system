@@ -16,16 +16,13 @@ import {
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import Constants from 'expo-constants'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
+
 import { Ionicons } from '@expo/vector-icons';
 
-import LayoutA from '../Layout/LayoutA';
-import Layout from '../constants/Layout'
+
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import styles from '../styles/styles'
-import { LinearGradient } from 'expo-linear-gradient'
-import * as actionCreator from '../store/actions/action'
+
 import CheckBox2 from 'react-native-check-box'
 import LayoutLoan from '../Layout/LayoutLoan';
 
@@ -62,6 +59,7 @@ const LoanPerniagaanScreen = (props) => {
     const setMaklumatAsas = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
     const handleIosPicker = (modalContent) => {
+        console.log(`visible ke tak : ${JSON.stringify(iosPickerVisible)}`)
         setModalContent(modalContent)
         setIosPickerVisible(!iosPickerVisible)
     }
@@ -71,6 +69,7 @@ const LoanPerniagaanScreen = (props) => {
 
     return (
         <LayoutLoan navigation={props.navigation}>
+
             <Formik
                 initialValues={{ typeBusiness, statusPerniagaan }}
                 validateOnMount
@@ -110,7 +109,20 @@ const LoanPerniagaanScreen = (props) => {
                     return (
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10, alignSelf: 'stretch' }}>
-
+                            <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
+                                <LayoutLoan title={'Sektor Perniagaan'} nopaddingTop={true} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
+                                    <View style={{ alignSelf: 'stretch', margin: 10 }}>
+                                        {modalContent === 'typeBusiness' ? <Picker style={{}} selectedValue={typeBusiness} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('typeBusiness', itemValue)}>
+                                            <Picker.Item label={'Sektor Perniagaan'} value={undefined} />
+                                            <Picker.Item label="Pertanian Dan Perusahaan Asas Tani" value="Pertanian" />
+                                            <Picker.Item label="Peruncitan" value="Peruncitan" />
+                                            <Picker.Item label="Perkhidmatan" value="Perkhidmatan" />
+                                            <Picker.Item label="Pembuatan" value="Pembuatan" />
+                                            <Picker.Item label="Kontraktor Kecil" value="Kontraktor Kecil" />
+                                        </Picker> : <View />}
+                                    </View>
+                                </LayoutLoan>
+                            </Modal>
 
                             <Text style={[styles.formTitle]}>Section A</Text>
                             <Text style={[styles.formSubtitle]}>Maklumat Asas</Text>
@@ -148,19 +160,19 @@ const LoanPerniagaanScreen = (props) => {
                                 <Image source={require('../assets/images/bizAct.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
-                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('typeBusiness')}>
+                                        <TouchableOpacity onPress={() => handleIosPicker('typeBusiness')} style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
+                                            <View style={{ justifyContent: 'center', margin: 5 }} >
                                                 <Text style={{ fontSize: 12 }}>{typeBusiness ? typeBusiness : `Sektor Perniagaan`}</Text>
-                                            </TouchableOpacity>
+                                            </View>
                                             {typeBusinessTouched && typeBusinessError && <Text style={styles.error}>{typeBusinessError}</Text>}
-                                        </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
+                                        </TouchableOpacity> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={typeBusiness} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('typeBusiness', itemValue)}>
                                                 <Picker.Item label={'Sektor Perniagaan'} value={undefined} />
-                                                <Picker.Item label="Pertanian Dan Perusahaan Asas Tani" value="pertanian" />
-                                                <Picker.Item label="Peruncitan" value="peruncitan" />
-                                                <Picker.Item label="Perkhidmatan" value="perkhidmatan" />
-                                                <Picker.Item label="Pembuatan" value="pembuatan" />
-                                                <Picker.Item label="Kontraktor Kecil" value="kontraktorKecil" />
+                                                <Picker.Item label="Pertanian Dan Perusahaan Asas Tani" value="Pertanian" />
+                                                <Picker.Item label="Peruncitan" value="Peruncitan" />
+                                                <Picker.Item label="Perkhidmatan" value="Perkhidmatan" />
+                                                <Picker.Item label="Pembuatan" value="Pembuatan" />
+                                                <Picker.Item label="Kontraktor Kecil" value="Kontraktor Kecil" />
                                             </Picker>
                                             {typeBusinessTouched && typeBusinessError && <Text style={styles.error}>{typeBusinessError}</Text>}
                                         </View>}

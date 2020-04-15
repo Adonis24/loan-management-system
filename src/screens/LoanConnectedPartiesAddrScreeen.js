@@ -4,7 +4,7 @@ import {
     Text,
     TouchableOpacity,
     View,
-    Modal
+    Modal,Platform
 
 } from 'react-native';
 import { Formik } from 'formik';
@@ -52,7 +52,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
     const { cpPhoneNum, cpAlamat, cpAlamat_2, cpCity, cpState, cpPoskod } = useSelector(state => state.financingReducer, shallowEqual)
     const [addressVisible, setAddressVisible] = useState(false)
     const setConnectParties = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
-
+    const ios = Platform.OS === "ios" ? true : false
     return (
         <LayoutLoan navigation={props.navigation}>
             <Formik
@@ -122,7 +122,7 @@ const LoanConnectedPartiesAddrScreeen = (props) => {
                             <Modal animationType={'slide'}
                                 visible={addressVisible} onRequestClose={() => setAddressVisible(!addressVisible)}
                             >
-                                <LayoutLoan title={'Address'} nopaddingTop={true} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
+                                <LayoutLoan title={'Address'} nopaddingTop={!ios?true:false} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
                                     <View style={{ margin: 10 }} />
                                     <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                                         <CustomTextInput

@@ -4,7 +4,7 @@ import {
     Text,
     TouchableOpacity,
     View,
-    Modal,
+    Modal,Platform
 
 } from 'react-native';
 import { Formik } from 'formik';
@@ -60,7 +60,7 @@ const LoanReferrerScreen = (props) => {
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { refAlamat, refAlamat_2, refName, refPhoneNum, refRelationship, refCity, refState, refPoskod } = useSelector(state => state.financingReducer, shallowEqual)
     const [addressVisible, setAddressVisible] = useState(false)
-
+    const ios = Platform.OS === "ios" ? true : false
     const setReferrer = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
     return (
@@ -132,10 +132,10 @@ const LoanReferrerScreen = (props) => {
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
 
-                            <Modal animationType={'slide'}
+                            <Modal animationType={'slide'} 
                                 visible={addressVisible} onRequestClose={() => setAddressVisible(!addressVisible)}
                             >
-                                <LayoutLoan title={'Address'} nopaddingTop={true} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
+                                <LayoutLoan title={'Address'} nopaddingTop={!ios?true:false} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
                                     <View style={{ margin: 10 }} />
                                     <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                                         <CustomTextInput
