@@ -39,7 +39,7 @@ export const register = (values) => {
         dispatch({ type: 'SET_REGISTER', payload: { indicator: true } })
         const { token_type, access_token, expo_token } = await getState().registrationReducer
         const { name, email, password, password_confirmation } = values
-        console.log(`ada ke tak register info : ${JSON.stringify(getState().registrationReducer)}`)
+        //console.log(`ada ke tak register info : ${JSON.stringify(getState().registrationReducer)}`)
 
         await dispatch(registerApi(token_type, access_token, name, email, password, password_confirmation, expo_token))
         //await dispatch(getPersonalToken())
@@ -53,7 +53,7 @@ export const registerLMS = (values) => {
         const { lms } = await getState().registrationReducer
         const { name, email, password, password_confirmation } = await values
         const { token_type, access_token } = lms
-        console.log(`token lms :${JSON.stringify(lms)}`)
+        //console.log(`token lms :${JSON.stringify(lms)}`)
         await dispatch(registerLMSApi(token_type, access_token, name, email, password, password_confirmation))
     }
 }
@@ -79,7 +79,7 @@ export const getPersonalToken = () => {
     return async (dispatch, getState) => {
         const username = getState().registrationReducer.email
         const password = getState().registrationReducer.password
-        console.log(`action : ${username} dan ${password}`)
+        //console.log(`action : ${username} dan ${password}`)
         await dispatch(requestPersonalToken('register', username, password))
     }
 }
@@ -88,7 +88,7 @@ export const getPersonalTokenLMS = () => {
     return async (dispatch, getState) => {
         const username = getState().registrationReducer.email
         const password = getState().registrationReducer.password
-        console.log(`action : ${username} dan ${password}`)
+        //console.log(`action : ${username} dan ${password}`)
         await dispatch(requestPersonalTokenLMS('register', username, password))
     }
 }
@@ -128,7 +128,7 @@ export const contactPersonUploadFirst = () => {
         const blob = await urlToBlob(uri)
         const { data } = blob
 
-        console.log(`blob ialah ${JSON.stringify(blob)}`)
+        //console.log(`blob ialah ${JSON.stringify(blob)}`)
         const fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 
         const params = {
@@ -149,7 +149,7 @@ export const contactPersonUploadFirst = () => {
                 else {
                     // If there is no error updating the editor with the imageUrl
                     const imageUrl = `${config.digitalOceanSpaces}/` + fileName
-                    console.log(imageUrl, name);
+                    //console.log(imageUrl, name);
                     dispatch(companyInfoAPI())
                     dispatch({ type: 'SET_CONTACT_PERSON', payload: { ic_image: imageUrl, fileName: name } })
                 }
@@ -213,14 +213,14 @@ export const intitiateEinfo = () => {
 
 export const applyLoan = () => {
     return (dispatch, getState) => {
-        console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
+        //console.log(`kat action : ${JSON.stringify(getState().loanApplicationReducer)}`)
         dispatch(applyLoanApi())
     }
 }
 
 export const applyGrant = () => {
     return (dispatch, getState) => {
-        console.log(`kat action : ${JSON.stringify(getState().grantApplicationReducer)}`)
+       // console.log(`kat action : ${JSON.stringify(getState().grantApplicationReducer)}`)
         dispatch(applyGrantApi())
     }
 }
@@ -346,7 +346,7 @@ export const logout = () => {
         //await dispatch({type:'SET_PERSONAL_INFO',payload:{status:'none'}})
         //await AsyncStorage.removeItem('status')
         //await AsyncStorage.removeItem('personalToken')
-        console.log(`nak delete`)
+        //console.log(`nak delete`)
         await SecureStore.deleteItemAsync('personalToken').then(console.log(`delete berjaya`)).catch(error => console.log(`tak berjaya : ${error}`))
         await SecureStore.deleteItemAsync('lmsPersonalToken').then(console.log(`delete berjaya`)).catch(error => console.log(`tak berjaya : ${error}`))
 
@@ -372,7 +372,7 @@ export const saveDocumentDO = (result) => {
         const blob = await urlToBlob(uri)
         const { data } = blob
 
-        console.log(`blob ialah ${JSON.stringify(blob)}`)
+        //console.log(`blob ialah ${JSON.stringify(blob)}`)
         const fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 
         const params = {
@@ -393,7 +393,7 @@ export const saveDocumentDO = (result) => {
                 else {
                     // If there is no error updating the editor with the imageUrl
                     const imageUrl = `${config.digitalOceanSpaces}/` + fileName
-                    console.log(imageUrl, name);
+                    //console.log(imageUrl, name);
                     dispatch({ type: 'SET_CONTACT_PERSON', payload: { ic_image: imageUrl, fileName: name } })
                 }
             });
@@ -427,7 +427,7 @@ export const saveSelfie = (result) => {
                 else {
                     // If there is no error updating the editor with the imageUrl
                     const imageUrl = `${config.digitalOceanSpaces}/` + fileName
-                    console.log(imageUrl);
+                    //console.log(imageUrl);
                     dispatch({ type: 'SET_USER_PROFILE', payload: { profile_pic: imageUrl } })
                     dispatch(editUserApi())
                 }

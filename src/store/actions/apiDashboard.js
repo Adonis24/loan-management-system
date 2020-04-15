@@ -86,7 +86,7 @@ export const handbooksApi = () => {
   return async (dispatch, getState) => {
     const responseJson = await apiPostCall(`api/handbooks/view`, null, getState().apiReducer)
     const handbooksArray = await responseJson.data
-    await console.log(`HANDBOOKS API  ${JSON.stringify(handbooksArray)}`)
+    //await console.log(`HANDBOOKS API  ${JSON.stringify(handbooksArray)}`)
     await dispatch({ type: 'SET_HANDBOOKS', payload: { handbooksArray } })
   }
 }
@@ -96,9 +96,9 @@ export const handbooksApi = () => {
 export const einfoApi = () => {
   return async (dispatch, getState) => {
     const responseJson = await apiPostCall(`api/einfos/view`, null, getState().apiReducer)
-    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const einfosArray = await responseJson.data
-    await console.log(`EINFO API  ${JSON.stringify(einfosArray)}`)
+    //await console.log(`EINFO API  ${JSON.stringify(einfosArray)}`)
     await dispatch({ type: 'SET_EINFO', payload: { einfosArray } })
 
 
@@ -135,9 +135,9 @@ export const getPendingApi = () => {
   return async (dispatch, getState) => {
     const responseJson = await apiPostCall(`api/business_directory/listRequestDirectory`, null, getState().apiReducer)
 
-    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const pendingDirArray = await responseJson.data
-    await console.log(`assoc API  ${JSON.stringify(pendingDirArray)}`)
+    //await console.log(`assoc API  ${JSON.stringify(pendingDirArray)}`)
 
     await dispatch({ type: 'SET_PENDING_DIR', payload: { pendingDirArray } })
 
@@ -150,9 +150,9 @@ export const listAgencyApi = () => {
 
     const responseJson = await apiPostCall(`api/agency/listAgencies`, null, getState().apiReducer)
 
-    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const agencyArray = await responseJson.data
-    await console.log(`agency list API  ${JSON.stringify(agencyArray)}`)
+    //await console.log(`agency list API  ${JSON.stringify(agencyArray)}`)
 
     await dispatch({ type: 'SET_AGENCY_LIST', payload: { agencyArray } })
 
@@ -165,9 +165,9 @@ export const loanInfoApi = (page) => {
 
     const responseJson = await apiPostCall(`api/loan/viewLoanInformation?page=${page}`, null, getState().apiReducer)
 
-    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const loanInfo = await responseJson.data
-    await console.log(`loan info API  ${JSON.stringify(loanInfo)}`)
+    //await console.log(`loan info API  ${JSON.stringify(loanInfo)}`)
 
     await dispatch({ type: 'SET_LOAN_INFO', payload: { ...loanInfo } })
 
@@ -180,9 +180,9 @@ export const grantInfoApi = (page) => {
 
     const responseJson = await apiPostCall(`api/grant/listGrantInformation?page=${page}`, null, getState().apiReducer)
 
-    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const grantInfo = await responseJson.data
-    await console.log(`grant info list API  ${JSON.stringify(grantInfo)}`)
+    //await console.log(`grant info list API  ${JSON.stringify(grantInfo)}`)
 
     await dispatch({ type: 'SET_GRANT_INFO', payload: { ...grantInfo } })
 
@@ -198,9 +198,9 @@ export const applyfinancingApi = (page) => {
 
     const responseJson = await apiPostCall(`api/loan/addFinancingInformation`, null, negeri, cawanganParlimen, pengundiBerdaftar, statusPerniagaan, bank, noAkaun, typeBusiness, name, icNumber, agama, tarikhLahir, jantina, alamat, alamat_2, phoneNum, email, poskod, alamatComp, phoneNum, pendapatan, pekerjaan, status, pembiayaan, relationship, cpName, cpIcNumber, cpPekerjaan, cpPendapatan, cpPhoneNum, cpAlamat, cpAlamat_2, cpPoskod, compPendapatan, compPhoneNum, compAlamat, compAlamat_2, compPoskod, refAlamat, refAlamat_2, refName, refPhoneNum, valAlamat, valAlamat_2, valName, valPhoneNum, jawatan, getState().apiReducer)
 
-    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const einfosArray = await responseJson.data
-    await console.log(`Financing  ${JSON.stringify(einfosArray)}`)
+    //await console.log(`Financing  ${JSON.stringify(einfosArray)}`)
 
 
   }
@@ -213,9 +213,9 @@ export const applyBusinessPlanApi = (page) => {
 
     const responseJson = await apiPostCall(`api/loan/addBusinessPlanInformation`, null, compName, name, regNum, compAlamat, compAlamat_2, paidCap, authCap, pemilikan, compEstab, compOperation, businessType, bankName, pemegang, akaun, noAkaun, partName, partIcNum, partJawatan, saham, bilCawangan, lokasi, bilPekerja, compPhone, compFax, compStatus, Teknologi, waktu, sourceCap, totalCap, sokongan, pengiktirafan, pembelian, income, kosOperasi, totalExpenditure, untungKasar, perbelanjaanLain, untungBersih, totalIncome, pembelianStok, ruangNiaga, membeli, kenderaan, modalPusingan, belanjaanLain, jumlah, perkakas, belian, tahun, grossProfit, belanjaLain, netProfit, jualan, belian2, tahun2, grossProfit2, belanjaLain2, netProfit2, jualan2, belian3, tahun3, grossProfit3, belanjaLain3, netProfit3, jualan3, perancangan, pasaran, kursus, experience, namaPemohon, cerTarikh, getState().apiReducer)
 
-    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const einfosArray = await responseJson.data
-    await console.log(`Business Plan  ${JSON.stringify(einfosArray)}`)
+    //await console.log(`Business Plan  ${JSON.stringify(einfosArray)}`)
 
 
   }
@@ -229,10 +229,10 @@ export const addExpoTokenApi = () => {
 
     const { expo_token } = getState().registrationReducer
 
-    console.log(`expo registrationReducer ${expo_token}`)
+    //console.log(`expo registrationReducer ${expo_token}`)
     const responseJson = await apiPostCall(`api/user/expo_token`, null, getState().apiReducer)
 
-    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const agencyArray = await responseJson.data
     await console.log(`expo token API  ${JSON.stringify(agencyArray)}`)
 
@@ -248,10 +248,10 @@ export const addExpoTokenApi = () => {
 export const requestConnectApi = (connect_id) => {
   return async (dispatch, getState) => {
 
-    console.log(`connect id ialah : ${connect_id}`)
+    //console.log(`connect id ialah : ${connect_id}`)
     const responseJson = await apiPostCall(`api/business_directory/request_connection`, null, connect_id, getState().apiReducer)
 
-    console.log(`inilah request connect : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah request connect : ${JSON.stringify(responseJson)}`)
 
 
   }
@@ -266,7 +266,7 @@ export const acceptApi = (connect_id) => {
     console.log(`connect id ialah : ${connect_id}`)
     const responseJson = await apiPostCall(`api/business_directory/acceptConnection`, null, connect_id, getState().apiReducer)
 
-    console.log(`inilah request connect : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah request connect : ${JSON.stringify(responseJson)}`)
     //const agencyArray = await responseJson.data
     //await console.log(`expo token API  ${JSON.stringify(agencyArray)}`)
 
@@ -286,9 +286,9 @@ export const connectionStatusApi = () => {
 
     const responseJson = await apiPostCall(`api/business_directory/analyticBusinessDirectory`, null, getState().apiReducer)
 
-    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const connectionStatus = await responseJson.data
-    await console.log(`connectionstatus API  ${JSON.stringify(connectionStatus)}`)
+    //await console.log(`connectionstatus API  ${JSON.stringify(connectionStatus)}`)
 
     await dispatch({ type: 'SET_USER_PROFILE', payload: { ...connectionStatus } })
 
@@ -306,9 +306,9 @@ export const applyLoanApi = () => {
 
     const responseJson = await apiPostCall(`api/loan/addInformation`, null, proposal, income_tax, loan_amount, estimate_time, payment_method, getState().apiReducer)
 
-    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const einfosArray = await responseJson.data
-    await console.log(`Loan Application  ${JSON.stringify(einfosArray)}`)
+    //await console.log(`Loan Application  ${JSON.stringify(einfosArray)}`)
 
 
 
@@ -321,10 +321,10 @@ export const applyGrantApi = () => {
 
     const { proposal, income_tax, agency_id } = getState().grantApplicationReducer
 
-    console.log(`inilah apply grant : ${JSON.stringify(getState().grantApplicationReducer)}`)
+    //console.log(`inilah apply grant : ${JSON.stringify(getState().grantApplicationReducer)}`)
     const responseJson = await apiPostCall(`api/grant/addGrantInformation`, null, proposal, income_tax, agency_id, getState().apiReducer)
 
-    console.log(`inilah grant: ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah grant: ${JSON.stringify(responseJson)}`)
     const einfosArray = await responseJson.data
     await console.log(`Loan Application  ${JSON.stringify(einfosArray)}`)
 
@@ -341,9 +341,9 @@ export const getUserInfoApi = () => {
 
     const responseJson = await apiPostCall(`api/user/information`, null, getState().apiReducer)
 
-    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const userProfile = await responseJson.data
-    await console.log(`USER  ${JSON.stringify(userProfile)}`)
+    //await console.log(`USER  ${JSON.stringify(userProfile)}`)
 
     await dispatch({ type: 'SET_USER_PROFILE', payload: { ...userProfile } })
 
@@ -360,9 +360,9 @@ export const editUserApi = () => {
 
     const responseJson = await apiPostCall(`api/user/edit`, null, name, full_name, profile_pic, getState().apiReducer)
 
-    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const userProfile = await responseJson.data
-    await console.log(`USER  ${JSON.stringify(userProfile)}`)
+    //await console.log(`USER  ${JSON.stringify(userProfile)}`)
 
     //await dispatch({ type: 'SET_USER_PROFILE', payload: { ...userProfile } })
 
@@ -393,7 +393,7 @@ export const getCompanyInfoApi = () => {
 
     const responseJson = await apiGetCall(`api/companyInfo`, getState().apiReducer)
     const bizInfo = await responseJson.data
-    await console.log(`Company Info  ${JSON.stringify(bizInfo)}`)
+    //await console.log(`Company Info  ${JSON.stringify(bizInfo)}`)
 
     await dispatch({ type: 'GET_BIZ_INFO', payload: { ...bizInfo } })
 
@@ -408,7 +408,7 @@ export const getListWorkersApi = () => {
 
     const responseJson = await apiPostCall(`api/company/listWorkers`, null, getState().apiReducer)
 
-    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const listWorkers = await responseJson.data
     // await console.log(`Company Info  ${JSON.stringify(eventArray)}`)
 
@@ -528,8 +528,8 @@ export const saveLoanDataApi = () => {
     console.log(`dalam storage: ${JSON.stringify(loanData)}`)
 
     if (loanData) {
-      console.log(`something in memory`)
-      console.log(JSON.stringify(loanData))
+      //console.log(`something in memory`)
+      //console.log(JSON.stringify(loanData))
       const newLoanData = { ...loanData, ...loanDataReducer }
       await AsyncStorage.setItem('loanData', JSON.stringify(newLoanData))
     } else {
@@ -550,7 +550,7 @@ export const saveLoanDataApi = () => {
 export const resetFormApi = (data) => {
   return async (dispatch, getState) => {
     await SecureStore.deleteItemAsync(data)
-    console.log(`delete form dalam storage`)
+    //console.log(`delete form dalam storage`)
   }
 }
 
@@ -559,12 +559,12 @@ export const saveBussPlanDataApi = () => {
     const bussPlanDataReducer = getState().businessPlanningReducer
 
     const bussPlanData = JSON.parse(await AsyncStorage.getItem('bussPlanData'))
-    console.log(`bakal di save : ${JSON.stringify(bussPlanDataReducer)}`)
-    console.log(`dalam storage: ${JSON.stringify(bussPlanData)}`)
+    //console.log(`bakal di save : ${JSON.stringify(bussPlanDataReducer)}`)
+    //console.log(`dalam storage: ${JSON.stringify(bussPlanData)}`)
 
     if (bussPlanData) {
-      console.log(`something in memory`)
-      console.log(JSON.stringify(bussPlanData))
+     // console.log(`something in memory`)
+      //console.log(JSON.stringify(bussPlanData))
       const newBussPlanData = { ...bussPlanData, ...bussPlanDataReducer }
       await AsyncStorage.setItem('bussPlanData', JSON.stringify(newBussPlanData))
     } else {
@@ -587,12 +587,12 @@ export const saveLocationApi = (x) => {
 
     const location = JSON.parse(await AsyncStorage.getItem('location'))
 
-    console.log(`bakal di save : ${JSON.stringify(x)}`)
-    console.log(`dalam storage: ${JSON.stringify(location)}`)
+   // console.log(`bakal di save : ${JSON.stringify(x)}`)
+   // console.log(`dalam storage: ${JSON.stringify(location)}`)
 
     if (location) {
-      console.log(`something in memory`)
-      console.log(JSON.stringify(location))
+      //console.log(`something in memory`)
+     // console.log(JSON.stringify(location))
       //const newLocation = { ...loanData, ...loanDataReducer }
       await AsyncStorage.setItem('location', JSON.stringify(x))
     } else {
@@ -634,7 +634,7 @@ export const savePictureApi = (photo, attachment, file) => {
       if (aToModify) {
         //const aToModifyFiles = aToModify.files.find(c => c.fileName == file)
         const { files } = aToModify
-        console.log(`files ialah ${JSON.stringify(files)}`)
+        //console.log(`files ialah ${JSON.stringify(files)}`)
         if (files) {
 
           const newFiles = files.filter(f => f.fileName !== file)
@@ -671,7 +671,7 @@ export const getAllAttachmentApi = () => {
     const attachment = JSON.parse(await AsyncStorage.getItem('attachment'))
 
     if (attachment) {
-      console.log(`attachment ialah ${JSON.stringify(attachment)}`)
+      //console.log(`attachment ialah ${JSON.stringify(attachment)}`)
       dispatch({ type: 'SET_ATTACHMENT', payload: { attachment } })
     } else {
 
@@ -684,8 +684,8 @@ export const getAttachmentApi = (title) => {
   return async (dispatch, getState) => {
 
     const { attachment } = getState().attachmentReducer
-    console.log(`title is ${JSON.stringify(title)}`)
-    console.log(`attachmentReducer is ${JSON.stringify(attachment)}`)
+    //console.log(`title is ${JSON.stringify(title)}`)
+   //console.log(`attachmentReducer is ${JSON.stringify(attachment)}`)
     if (attachment) {
       const jumpa = attachment.find(a => a.attachmentName == title)
       if (jumpa) {
@@ -695,7 +695,7 @@ export const getAttachmentApi = (title) => {
           files.map(a => {
             atNew.push({ fileName: a.fileName, fileUri: a.fileDetail.uri })
           })
-          console.log(`atnew ialah ${JSON.stringify(atNew)}`)
+          //console.log(`atnew ialah ${JSON.stringify(atNew)}`)
           dispatch({ type: 'SET_ATTACHMENT', payload: { fileList: atNew } })
         }
       }
@@ -710,7 +710,7 @@ export const getAttachmentApi = (title) => {
 export const resetAllAttachmentApi = () => {
   return async (dispatch, getState) => {
     await SecureStore.deleteItemAsync('attachment')
-    console.log(`delete attachment dalam storage`)
+    //console.log(`delete attachment dalam storage`)
   }
 }
 
@@ -721,7 +721,7 @@ export const getAllBusinessPlanApi = () => {
     const bussPlanData = JSON.parse(await AsyncStorage.getItem('bussPlanData'))
 
     if (bussPlanData) {
-      console.log(`business plan ialah ${JSON.stringify(bussPlanData)}`)
+      //console.log(`business plan ialah ${JSON.stringify(bussPlanData)}`)
       dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...bussPlanData } })
     } else {
 
@@ -736,7 +736,7 @@ export const getLoanDataApi = () => {
     const loanData = JSON.parse(await AsyncStorage.getItem('loanData'))
 
     if (loanData) {
-      console.log(`loan data ialah ${JSON.stringify(loanData)}`)
+      //console.log(`loan data ialah ${JSON.stringify(loanData)}`)
       dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...loanData } })
     } else {
 
