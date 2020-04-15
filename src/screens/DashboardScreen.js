@@ -22,7 +22,7 @@ import Layout from '../constants/Layout'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 import moment from 'moment'
-import striptags from 'striptags'
+//import striptags from 'striptags'
 
 // import PopupScoreScreen from './PopupScoreScreen';
 
@@ -48,7 +48,7 @@ const DashboardScreen = (props) => {
 
     const { newsArray } = useSelector(state => state.newsScreenReducer, shallowEqual)
 
-    const [popUp, setPopUp] = useState(false)
+    //const [popUp, setPopUp] = useState(false)
 
     const [profilePic, setProfilePic] = useState(new Animated.Value(0))
     const [topBar, setTopBar] = useState(new Animated.Value(0))
@@ -135,13 +135,19 @@ const DashboardScreen = (props) => {
                                 </View>
                             </TouchableOpacity>
                         </Animated.View>
-                        {!(phone_no == null) && <Animated.View style={[{ opacity: topBarOpac, backgroundColor: '#fff', flex: 4, flexDirection: 'row', borderBottomLeftRadius: 20, borderTopLeftRadius: 20, }, styles.shadowNew]}>
-                            <TouchableOpacity onPress={() => companyName ? props.navigation.navigate('Profile') : props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row' }} >
-                                <View style={{ height: Layout.window.width / 8, width: Layout.window.width / 8, borderRadius: Layout.window.width / 16, borderWidth: 1, borderColor: 'lightgrey', padding: 3 }}>
+                        {!(phone_no == null) && <Animated.View style={[{ opacity: topBarOpac,  flex: 4}]}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                                <View style={{  flexDirection: 'row', backgroundColor: '#fff', borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderRightWidth: 0, }}>
+                                    <Image source={!logo ? require('../assets/images/profile.png') : { uri: logo }} style={{ width: 30, height: 30, margin: 5,}} resizeMode={'contain'} />
+                                    <Text style={[styles.headText, { paddingRight: 10 }]} numberOfLines={1} ellipsizeMode={'tail'}>{companyName} </Text>
+                                </View>
+                            </View>
+                            {/* <TouchableOpacity onPress={() => companyName ? props.navigation.navigate('Profile') : props.navigation.navigate('NoCompany')} style={{ flex: 1, padding: 5, justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'row' }} >
+                                <View style={{ height: Layout.window.width / 10, width: Layout.window.width / 10, borderRadius: Layout.window.width / 20, borderWidth: 1, borderColor: 'lightgrey', padding: 3 }}>
                                     <Image source={!logo ? require('../assets/images/profile.png') : { uri: logo }} style={{ flex: 1, width: undefined, height: undefined, }} resizeMode={'contain'} />
                                 </View>
                                 <Text style={[styles.textDefault, { color: '#000', marginLeft: 5 }]} numberOfLines={1} ellipsizeMode={'tail'}>{companyName}</Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                         </Animated.View>}
                     </View>
                 </View>

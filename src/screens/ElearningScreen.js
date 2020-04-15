@@ -19,7 +19,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 const ElearningScreen = (props) => {
 
     const { jwt } = useSelector(state => state.myAccountReducer, shallowEqual)
-    console.log(`jwt ialah ${jwt}`)
+    //console.log(`jwt ialah ${jwt}`)
     const uri = `https://lms.bxcess.my/?bx-token=${jwt}`
 
     const _handlePressButtonAsync = async () => {
@@ -55,10 +55,10 @@ const ElearningScreen = (props) => {
                 injectedJavaScript={modifiedStyle} />
             <View style={{  borderColor: 'lightyellow', padding: 10, margin: 0, alignSelf: 'stretch', backgroundColor: 'lightyellow',borderTopWidth:1, borderColor:'lightgrey' }}>
                 <Text style={styles.textSmall}>For better learning experience, please go to the website by clicking the button below :</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <TouchableOpacity onPress={() => _handlePressButtonAsync()} style={{ marginTop: 5 }} >
-                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ backgroundColor: '#4DCB3E', padding: 5, borderRadius: 10, }}>
-                            <Text style={[styles.textSmall, { color: '#fff' }]}>TEKUN Academy</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'center',alignSelf:'stretch' }}>
+                    <TouchableOpacity onPress={() => _handlePressButtonAsync()} style={{ marginTop: 5,flex:1 }} >
+                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ backgroundColor: '#4DCB3E', padding: 5, borderRadius: 5,alignItems:'center' }}>
+                            <Text style={[styles.textSmall, { color: '#fff' }]}>TEKUN ACADEMY</Text>
                         </LinearGradient>
                     </TouchableOpacity>
                 </View>

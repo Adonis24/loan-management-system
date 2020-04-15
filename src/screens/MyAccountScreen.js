@@ -40,6 +40,12 @@ const MyAccountScreen = (props) => {
         outputRange: [1, 1, 0],
         extrapolate: 'clamp',
     });
+
+    const imageOpacityTerbalik = scrollY.interpolate({
+        inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+        outputRange: [0, 1, 1],
+        extrapolate: 'clamp',
+    });
     const imageTranslate = scrollY.interpolate({
         inputRange: [0, HEADER_SCROLL_DISTANCE],
         outputRange: [0, -50],
@@ -207,14 +213,24 @@ const MyAccountScreen = (props) => {
                     ]}
                     source={{ uri: profile_pic }}
                 />
-                <View style={styleParalax.bar}>
-                    {/* <Text style={styleParalax.title}>Title</Text> */}
-                </View>
+                {/* <View style={styleParalax.bar}>
+                    <Animated.Text style={[styleParalax.title, { color: 'white', opacity: imageOpacityTerbalik }]}>Title</Animated.Text>
+                </View> */}
+                <Animated.View style={[{ backgroundColor: '#192f6a', flexDirection: 'row', }, styleParalax.bar, { paddingLeft: 10, paddingRight: 10,paddingBottom:10, opacity: imageOpacityTerbalik }]}>
+                    <View style={{ flex: 1 }}>
+                        <TouchableOpacity onPress={() => props.navigation.goBack()}>
+                            <Ionicons name={'ios-arrow-back'} size={24} color={'#fff'} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flex: 3, alignItems: 'center' }}>
+                        <Text style={[styles.textDefault, { color: '#fff', textTransform: 'uppercase' }]}>{name}</Text>
+                    </View>
+                    <View style={{ flex: 1 }}></View>
+
+                </Animated.View>
             </Animated.View>
         </View>
-
     );
-
 }
 
 
@@ -235,7 +251,7 @@ const styleParalax = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: '#fff',
+        backgroundColor: '#192f6a',
         overflow: 'hidden',
     },
     bar: {

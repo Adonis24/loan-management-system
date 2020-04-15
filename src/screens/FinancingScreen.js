@@ -52,11 +52,11 @@ const FinancingScreen = (props) => {
             title={'Financing'}
             screenType='form'
             navigation={props.navigation}
-            imageUri={require('../assets/images/e-scoring.png')}
+            imageUri={require('../assets/images/loan.png')}
         ><Modal visible={showLayak} onRequestClose={() => setShowLayak(false)}>
-                <View style={{ flex: 1,justifyContent:'center',alignItems:'center' }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text>TEST</Text>
-                    </View>
+                </View>
             </Modal>
             <View style={{ margin: 10 }} />
             <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'lightgrey', margin: 10, borderRadius: 10 }}>
@@ -69,8 +69,8 @@ const FinancingScreen = (props) => {
                         <Text numberOfLines={3} ellipsizeMode='tail' style={[styles.textSmall, { marginBottom: 5 }]}>Skim Pembiayaan Sederhana</Text>
                         <TouchableOpacity
                             style={{ alignSelf: 'flex-start', margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
-                            // onPress={() => setShowLayak(true)}
-                            >
+                        // onPress={() => setShowLayak(true)}
+                        >
                             <Text style={[styles.textSmall, {}]}>Semak Kelayakan</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -82,7 +82,7 @@ const FinancingScreen = (props) => {
 
                     </View>
                 </View>
-            </View>   
+            </View>
         </LayoutB>
 
     );
