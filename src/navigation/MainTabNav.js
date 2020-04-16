@@ -128,6 +128,8 @@ import LoanBankScreen from '../screens/LoanBankScreen';
 import LoanReferrerListScreen from '../screens/LoanReferrerListScreen';
 import LoanMaklumatPeribadiBScreen from '../screens/LoanMaklumatPeribadiBScreen';
 import BusinessPlanEstablishCompBScreen from '../screens/BusinessPlanEstablishCompBScreen';
+import BusinessPlanBussInfoBScreen from '../screens/BusinessPlanBussInfoBScreen';
+import BusinessPlanBussModalBScreen from '../screens/BusinessPlanBussModalBScreen';
 
 const DashboardStack = () => {
     return (
@@ -145,6 +147,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="PopupScore" component={PopupScoreScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="Settings" component={SettingsScreen} />
+            
             <Stack.Screen name="Info" component={InfoScreen} />
             <Stack.Screen name="InfoEvent" component={InfoEventScreen} />
             <Stack.Screen name="InfoEventList" component={InfoEventListScreen} />
@@ -153,20 +156,14 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="BizHub" component={BusinessHubScreen} />
             <Stack.Screen name="PromotionList" component={PromotionListScreen} />
             <Stack.Screen name="Promotion" component={PromotionScreen} />
-            <Stack.Screen name="HandbookList" component={HandbookListScreen} />
+            {/* <Stack.Screen name="HandbookList" component={HandbookListScreen} />
             <Stack.Screen name="Handbook" component={HandbookScreen} />
-            <Stack.Screen name="MyScore" component={MyScoreScreen} />
-            <Stack.Screen name="LoanApplication" component={LoanApplicationScreen} />
-            <Stack.Screen name="Financing" component={FinancingScreen} />
-            <Stack.Screen name="LoanCheckList" component={LoanCheckListScreen} />
-            <Stack.Screen name="SitePic" component={SitePicScreen} />
-            <Stack.Screen name="Attachment" component={AttachmentScreen} />
-            <Stack.Screen name="Camera" component={CameraScreen} />
-            <Stack.Screen name="DocumentPicker" component={DocumentPickerScreen} />
-            <Stack.Screen name="Map" component={MapScreen} />
-            <Stack.Screen name="Grant" component={GrantScreen} />
+            <Stack.Screen name="MyScore" component={MyScoreScreen} /> */}
+            {/* <Stack.Screen name="LoanApplication" component={LoanApplicationScreen} /> */}
+            <Stack.Screen name="Financing" component={FinancingStack} />
+            {/* <Stack.Screen name="Grant" component={GrantScreen} />
             <Stack.Screen name="Quiz" component={QuizScreen} />
-            <Stack.Screen name="QuizAnswer" component={QuizAnswerScreen} />
+            <Stack.Screen name="QuizAnswer" component={QuizAnswerScreen} /> */}
             <Stack.Screen name="MyAccount" component={MyAccountScreen} />
             <Stack.Screen name="BizApp" component={BizAppScreen} />
             <Stack.Screen name="BizAppDetail" component={BizAppDetailScreen} />
@@ -178,7 +175,6 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="Elearning" component={ElearningScreen} />
             <Stack.Screen name="EcommerceDetail" component={EcommerceDetailScreen} />
             <Stack.Screen name="EAdvertisement" component={EAdvertisementScreen} />
-
             <Stack.Screen name="Ecommerce" component={EcommerceScreen} />
             <Stack.Screen name="Edonation" component={EdonationScreen} />
             <Stack.Screen name="Loan" component={LoanCalculatorScreen} />
@@ -186,6 +182,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="AddCompany" component={CompanyInformationScreen} />
             <Stack.Screen name="CompanyContactInformation" component={CompanyContactInformationScreen} />
             <Stack.Screen name="CompanyContactAddressInformation" component={CompanyContactAddressInformationScreen} />
+            <Stack.Screen name="ContactPerson" component={ContactPersonScreen} />
             <Stack.Screen name="CompanyInfoSuccess" component={CompanyInfoSuccessScreen} />
             <Stack.Screen name="SignUpOtp" component={SignupOtpScreen} />
             <Stack.Screen name="SignUpOtpEnter" component={SignupOtpEnterScreen} />
@@ -204,11 +201,27 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="Wallet" component={WalletScreen} />
             <Stack.Screen name="Bill" component={BillScreen} />
             <Stack.Screen name="Delivery" component={DeliveryScreen} />
-            <Stack.Screen name="LoanDrawer" component={LoanDrawer} />
-            <Stack.Screen name="BusinessPlanDrawer" component={BusinessPlanDrawer} />
+            
         </Stack.Navigator>
     )
 }
+
+const FinancingStack = () => {
+    return (
+        <Stack.Navigator initialRouteName="Financing" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Financing" component={FinancingScreen} />
+            <Stack.Screen name="LoanCheckList" component={LoanCheckListScreen} />
+            <Stack.Screen name="LoanDrawer" component={LoanDrawer} />
+            <Stack.Screen name="BusinessPlanDrawer" component={BusinessPlanDrawer} />
+            {/* <Stack.Screen name="SitePic" component={SitePicScreen} /> */}
+            <Stack.Screen name="Attachment" component={AttachmentScreen} />
+            <Stack.Screen name="Camera" component={CameraScreen} />
+            {/* <Stack.Screen name="DocumentPicker" component={DocumentPickerScreen} /> */}
+            <Stack.Screen name="Map" component={MapScreen} />
+        </Stack.Navigator>
+    )
+}
+
 
 const InsightStack = () => {
     return (
@@ -369,7 +382,9 @@ const BusinessPlanSectionBStack = () => {
     return (
         <Stack.Navigator initialRouteName="BusinessPlanBussInfo" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="BusinessPlanBussInfo" component={BusinessPlanBussInfoScreen} />
+            <Stack.Screen name="BusinessPlanBussInfoB" component={BusinessPlanBussInfoBScreen} />
             <Stack.Screen name="BusinessPlanBussModal" component={BusinessPlanBussModalScreen} />
+            <Stack.Screen name="BusinessPlanBussModalB" component={BusinessPlanBussModalBScreen} />
         </Stack.Navigator>)
 }
 
@@ -430,10 +445,9 @@ const MainTabNav = () => {
                             //console.log(`route ialah :${JSON.stringify(routeName)}`)
                             //console.log(`history ialah :${JSON.stringify(history)}`)
                             //if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan' || routeName === 'LoanConnectedParties' || routeName === 'LoanConnectedPartiesAddr' || routeName === 'LoanBusinessInfo' || routeName === 'LoanBusinessAddrInfo' || routeName === 'LoanBusinessInfoCont' || routeName === 'LoanBusinessDetail' || routeName === 'LoanDetail')
-                            if (routeName === 'LoanDrawer' || routeName === 'Camera')
+                            if (routeName === 'LoanDrawer' || routeName === 'Camera' || routeName === 'BusinessPlanDrawer' || routeName === 'Map')
                                 tabBarVisible = false
-                            if (routeName === 'BusinessPlanDrawer')
-                                tabBarVisible = false
+
                         }
                     }
 

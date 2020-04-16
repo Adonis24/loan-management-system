@@ -1,23 +1,26 @@
 //console.ignoredYellowBox = ['Setting a timer']
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Dimensions, TextInput, Image, TouchableOpacity } from 'react-native';
-import Layout from '../constants/Layout'
+import { StyleSheet, Text, View, Dimensions, TextInput, Image, TouchableOpacity, Platform } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient'
+
 import MapView, { Marker, Callout } from 'react-native-maps';
 import * as Permissions from 'expo-permissions'
 import malaysiaData from 'malaysia-state-city-postcode'
 import LayoutB from '../Layout/LayoutB'
 import styles from '../styles/styles'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-
+import { Ionicons } from '@expo/vector-icons';
 import * as actionCreator from '../store/actions/action'
+import LayoutMap from '../Layout/LayoutMap';
+const ios = Platform.OS === "ios" ? true : false
 
 const MapScreen = (props) => {
     const dispatch = useDispatch()
     const { logo } = useSelector(state => state.bizInfoReducer, shallowEqual)
     const { location, initialRegion } = useSelector(state => state.locationReducer, shallowEqual)
+    const { compSendiriPoskod } = useSelector(state => state.financingReducer, shallowEqual)
 
-    console.log(`location ialah ${JSON.stringify(location)}`)
-    console.log(`region ialah ${JSON.stringify(initialRegion)}`)
+
 
     const getCoordinate = (val) => {
         console.log(val)
@@ -40,8 +43,10 @@ const MapScreen = (props) => {
         }
     }
 
+    //useEffect()
+
     const changeRegion = region => {
-        console.log(JSON.stringify(region))
+        console.log(`x sekarang ialah ${JSON.stringify(region)}`)
         setRegion({ ...region })
     }
 
@@ -65,6 +70,11 @@ const MapScreen = (props) => {
             return;
         }
     }
+    useEffect(() => {
+
+        getCoordinate(compSendiriPoskod)
+
+    }, [compSendiriPoskod])
 
     useEffect(() => {
         getLocationPermission()
@@ -102,25 +112,27 @@ const MapScreen = (props) => {
     }
     const [x, setX] = useState({ ...initX })
 
+    const getLocation = (e) => {
+        const coor = e.nativeEvent.coordinate
+        console.log(`coordinate mantap ${JSON.stringify(coor)}`)
+        setX({ ...coor })
+    }
+
 
     //console.log(`width ialah : ${JSON.stringify(Layout.window.width)}`)
+    console.log(`location ialah ${JSON.stringify(location)}`)
+    console.log(`region ialah ${JSON.stringify(initialRegion)}`)
+    console.log(`x ialah ${JSON.stringify(x)}`)
 
     return (
-        < LayoutB
+        <LayoutMap
             title={'Map'}
             screenType='form'
             navigation={props.navigation}
             imageUri={require('../assets/images/news.png')}
         >
 
-            <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'stretch' }}>
 
-                <TextInput onChangeText={val => getCoordinate(val)} keyboardType={'number-pad'} placeholder='Enter Postcode' style={{ borderWidth: 1, borderColor: 'lightgrey', margin: 5, borderRadius: 5, paddingLeft: 5, flex: 1 }} />
-                <TouchableOpacity onPress={() => dispatch(actionCreator.saveLocation({ location: x, initialRegion: region }))} style={{ padding: 5, borderWidth: 1, borderRadius: 5, borderColor: 'lightgrey' }}>
-                    <Text style={styles.caption}>Save Location</Text>
-                </TouchableOpacity>
-                <View style={{ flex: 2, flexDirection: 'row' }} />
-            </View>
 
             <MapView
                 mapType={'standard'}
@@ -139,7 +151,7 @@ const MapScreen = (props) => {
 
                 <Marker draggable
                     coordinate={x}
-                    onDragEnd={(e) => setX({ ...e.nativeEvent.coordinate })}
+                    onDragEnd={(e) => getLocation(e)}
                 >
                     {/* <Callout tooltip/> */}
                     {/* <View style={{ width: 50, height: 50, backgroundColor: '#fff', borderRadius: 25, borderWidth: 1, borderColor: 'grey', padding: 5 }} >
@@ -148,7 +160,39 @@ const MapScreen = (props) => {
                 </Marker>
 
             </MapView>
-        </ LayoutB>
+            <View style={{ position: 'absolute', top: 0, left: 0, right: 0 }}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between',marginTop:10 }}>
+                    <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
+                        <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
+                            <View style={{height:40,width:40,justifyContent:'center',alignItems:'center',borderRadius:20,backgroundColor:'#fff'}}>
+                            <Ionicons name='ios-arrow-back' size={32} />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flex: 4, justifyContent: 'center', }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                            <View style={{ borderWidth: 1, flexDirection: 'row', backgroundColor: '#fff', borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderWidth: 1, borderRightWidth: 0, borderColor: 'lightgrey' }}>
+                                <Image source={props.imageUri} style={{ width: 30, height: 30, margin: 5, marginLeft: 10 }} resizeMode={'contain'} />
+
+                                <Text style={[styles.headText, { paddingRight: 10 }]} numberOfLines={1} ellipsizeMode={'tail'}>Lokasi Premis</Text>
+
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            </View>
+            <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0,padding:10 }}>
+
+            <TouchableOpacity
+                        style={{ alignSelf: 'stretch' }}
+                        onPress={() => dispatch(actionCreator.saveLocation({ location: x, initialRegion: region }))}>
+                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'stretch', padding: 10, borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={[styles.textDefault, { color: '#fff' }]}>SIMPAN LOKASI</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+            </View>
+
+        </ LayoutMap>
     );
 }
 

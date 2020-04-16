@@ -108,10 +108,13 @@ const DashboardScreen = (props) => {
         outputRange: [0, 1,]
     })
 
+  
+
     //const ratio = Layout.window.width / (Layout.window.height / 3.5)
     // console.log(`width : ${Layout.window.width}`)
     // console.log(`height : ${Layout.window.height}`)
     // console.log(`ratio : ${ratio}`)
+
 
     return (
         <View style={styles.container}>
@@ -146,7 +149,8 @@ const DashboardScreen = (props) => {
                 {/* CONTENT AREA */}
                 <View style={{ flex: 8, backgroundColor: 'transparent' }}>
                     <Animated.View style={{ opacity: scrollBarOpac, flex: 1 }} >
-                    <View style={{ flex: 2, margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
+                        {companyName ?
+                            <View style={{ flex: 2, margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
                                 <View style={{ margin: 5, paddingBottom: 5, borderStyle: 'solid' }}>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignSelf: 'stretch' }}>
                                         <FeatureIcon link={'Elearning'} caption={'E-Learning'} navigation={props.navigation}>
@@ -176,6 +180,22 @@ const DashboardScreen = (props) => {
                                     <View style={{ margin: 5 }} />
                                 </View>
                             </View>
+                            : phone_no == null ? <View style={{ flex: 1, margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
+                                <View style={{ marginBottom: 10 }}>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                        <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Highlight</Text>
+                                        <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
+                                    </View>
+                                </View>
+                                <View style={{ flex: 1, borderRadius: 10, borderWidth: 1, borderColor: 'lightgrey', padding: 10, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(128, 128, 128, 0.2)' }}>
+                                    <Text>Thank you for registering with us. To ensure that you get the best of what Tent offers, please have your phone number and your email address verified !</Text>
+                                    <TouchableOpacity onPress={() => props.navigation.navigate('Settings')} style={{ width: Layout.window.width * 0.3, padding: 5, borderRadius: 5, justifyContent: 'center', alignItems: 'center', margin: 10, backgroundColor: '#5A647F' }} >
+                                        <Text style={[styles.caption, { color: '#fff' }]}>Go To Settings</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View> :
+                                <View />
+                        }
 
                         {/**Latest Info */}
                         <View style={{ flex: 3, margin: 0, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid',backgroundColor:'transparent' }}>
@@ -237,10 +257,8 @@ const DashboardScreen = (props) => {
 const FeatureIcon = (props) => {
     if (props.link)
         return (<TouchableOpacity onPress={() => props.navigation.navigate(props.link)} style={[{ width: Layout.window.height / 10, height: Layout.window.height / 10, padding: 5, justifyContent: 'flex-start', borderRadius: 10, alignSelf: 'stretch' }, styles.shadowNew]}>
-           <View style={{flex:1,opacity:1}}>
             {props.children}
             <Text style={[styles.caption, { flex: 1 }]} numberOfLines={1} ellipsizeMode={'tail'}>{props.caption}</Text>
-            </View>
         </TouchableOpacity>)
     else
         return (<View style={[{ width: Layout.window.height / 10, height: Layout.window.height / 10, padding: 5, justifyContent: 'flex-start', borderRadius: 10, alignSelf: 'stretch' }, styles.shadowNew]} />

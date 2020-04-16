@@ -30,6 +30,7 @@ const validationSchema = Yup.object().shape({
         .required()
         .min(3)
         .label('Alamat'),
+
     status: Yup
         .string()
         .required(),
@@ -155,7 +156,7 @@ const LoanContactAddressInfoScreen = (props) => {
                     return (
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
-                           <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
+                            <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
                                 <LayoutLoan title={'Status Kediaman'} nopaddingTop={false} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
                                     <View style={{ alignSelf: 'stretch', margin: 10 }}>
                                         <Picker style={{ flex: 1, height: 35 }} selectedValue={status} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('status', itemValue)}>
@@ -164,13 +165,13 @@ const LoanContactAddressInfoScreen = (props) => {
                                             <Picker.Item label="Sewa" value="Sewa" />
                                             <Picker.Item label="Keluarga" value="Keluarga" />
                                         </Picker>
-                                        </View>
+                                    </View>
                                 </LayoutLoan>
                             </Modal>
                             <Modal animationType={'slide'}
-                                visible={addressVisible} onRequestClose={() => setAddressVisible(!addressVisible)} 
+                                visible={addressVisible} onRequestClose={() => setAddressVisible(!addressVisible)}
                             >
-                                <LayoutLoan title={'Address'}  nopaddingTop={!ios?true:false} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
+                                <LayoutLoan title={'Address'} nopaddingTop={!ios ? true : false} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
                                     <View style={{ margin: 10 }} />
                                     <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                                         <CustomTextInput
@@ -259,15 +260,15 @@ const LoanContactAddressInfoScreen = (props) => {
                                 error={alamatError}
                                 placeholder={'Alamat'}
                             >
-                               {alamat?<View style={{ paddingLeft: 5, paddingTop: 5 }}>
+                                {alamat ? <View style={{ paddingLeft: 5, paddingTop: 5 }}>
                                     <Text style={[styles.textDefault, { color: '#000' }]}>{alamat}</Text>
                                     {alamat_2 && <Text style={[styles.textDefault, { color: '#000' }]}>{alamat_2}</Text>}
                                     {poskod && <Text style={[styles.textDefault, { color: '#000' }]}>{poskod}</Text>}
                                     {city && <Text style={[styles.textDefault, { color: '#000' }]}>{city},{state}</Text>}
-                                </View>:<View style={{ paddingLeft: 5, paddingTop: 15 }}>
-                                    <Text style={[styles.textDefault, { color: 'lightgrey' }]}>Alamat</Text>
-                                 
-                                </View>} 
+                                </View> : <View style={{ paddingLeft: 5, paddingTop: 15 }}>
+                                        <Text style={[styles.textDefault, { color: 'lightgrey' }]}>Alamat</Text>
+
+                                    </View>}
 
 
                             </CustomTextInput>

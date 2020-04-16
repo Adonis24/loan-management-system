@@ -234,7 +234,7 @@ export const addExpoTokenApi = () => {
 
     //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const agencyArray = await responseJson.data
-    await console.log(`expo token API  ${JSON.stringify(agencyArray)}`)
+    //await console.log(`expo token API  ${JSON.stringify(agencyArray)}`)
 
     //await dispatch({ type: 'SET_AGENCY_LIST', payload: { agencyArray } })
 
@@ -679,6 +679,7 @@ export const getAllAttachmentApi = () => {
 
   }
 }
+
 
 export const getAttachmentApi = (title) => {
   return async (dispatch, getState) => {

@@ -20,7 +20,7 @@ import styles from '../styles/styles'
 const LayoutLoan = (props) => {
     return (
 
-        <KeyboardAvoidingView enabled style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', marginTop: !props.nopaddingTop ? Constants.statusBarHeight : 0,backgroundColor:'#fff' }}>
+        <KeyboardAvoidingView behavior={'padding'} enabled style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', marginTop: !props.nopaddingTop ? Constants.statusBarHeight : 0,backgroundColor:'#fff' }}>
             <View style={{ backgroundColor: '#192f6a', alignSelf: 'stretch', flexDirection: 'row', padding: 10 }}>
                 <View style={{ flex: 1 }}>
                     {!props.back ? <TouchableOpacity onPress={() => props.navigation.openDrawer()}>

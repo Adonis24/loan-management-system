@@ -31,11 +31,7 @@ const validationSchema = Yup.object().shape({
         .min(3)
         .label('Lokasi'),
 
-    bilPekerja: Yup
-        .string()
-        .required()
-        .min(1)
-        .label('Pekerja'),
+  
 
     compPhone: Yup
         .string()
@@ -61,13 +57,14 @@ const BusinessPlanBussInfoScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const { bilCawangan, lokasi, bilPekerja, compPhone, compFax, compStatus } = useSelector(state => state.businessPlanningReducer, shallowEqual)
+    const {  lokasi,  compPhone, compFax, compStatus } = useSelector(state => state.businessPlanningReducer, shallowEqual)
 
 
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
-
-
-
+    const handleIosPicker = (modalContent) => {
+        setModalContent(modalContent)
+        setIosPickerVisible(!iosPickerVisible)
+    }
 
 
     return (
@@ -76,12 +73,12 @@ const BusinessPlanBussInfoScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ bilCawangan, lokasi, bilPekerja, compPhone, compFax, compStatus }}
+                initialValues={{  lokasi, compPhone, compFax, compStatus }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
-                    props.navigation.navigate('BusinessPlanBussModal')
+                    props.navigation.navigate('BusinessPlanBussInfoB')
                     actions.resetForm({})
                     dispatch(actionCreator.saveBussPlanData())
                     actions.setSubmitting(false)
@@ -92,13 +89,11 @@ const BusinessPlanBussInfoScreen = (props) => {
                 {FormikProps => {
 
 
-                    const { lokasi, bilCawangan, bilPekerja, compPhone, compFax, compStatus } = FormikProps.values
+                    const { lokasi,   compPhone, compFax, compStatus } = FormikProps.values
 
                     const lokasiError = FormikProps.errors.lokasi
                     const lokasiTouched = FormikProps.touched.lokasi
 
-                    const bilCawanganError = FormikProps.errors.bilCawangan
-                    const bilCawanganTouched = FormikProps.touched.bilCawangan
 
                     const compPhoneError = FormikProps.errors.compPhone
                     const compPhoneTouched = FormikProps.touched.compPhone
@@ -106,8 +101,6 @@ const BusinessPlanBussInfoScreen = (props) => {
                     const compFaxError = FormikProps.errors.compFax
                     const compFaxTouched = FormikProps.touched.compFax
 
-                    const bilPekerjaError = FormikProps.errors.bilPekerja
-                    const bilPekerjaTouched = FormikProps.touched.bilPekerja
 
                     const compStatusError = FormikProps.errors.compStatus
                     const compStatusTouched = FormikProps.touched.compStatus
@@ -117,9 +110,9 @@ const BusinessPlanBussInfoScreen = (props) => {
 
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
-                            <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
-                                <LayoutLoan title={'Maklumat Akaun'} nopaddingTop={true} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', }}>
+                            <Modal animationType={'slide'} visible={iosPickerVisible}  onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
+                                <LayoutLoan title={'Maklumat Akaun'} nopaddingTop={false} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
                                     <View style={{ alignSelf: 'stretch', margin: 10 }}>
 
                                         <Picker style={{ flex: 1, height: 35 }} selectedValue={compStatus} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('compStatus', itemValue)}>
@@ -136,7 +129,7 @@ const BusinessPlanBussInfoScreen = (props) => {
                             <Text style={[styles.formTitle]}>Section B</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Butir-Butir Perniagaan</Text>
-                            <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start' }}>
+                            <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'center', alignSelf: 'flex-start', paddingLeft: 10, paddingRight: 10 }}>
 
                                 <CustomTextInput
                                     imageUri={require('../assets/images/address.png')}
@@ -171,27 +164,7 @@ const BusinessPlanBussInfoScreen = (props) => {
                                     </View>
                                 </View>
 
-                                <CustomTextInput
-                                    imageUri={require('../assets/images/company.png')}
-                                    value={bilCawangan}
-                                    handleChange={FormikProps.handleChange(`bilCawangan`)}
-                                    handleBlur={FormikProps.handleBlur(`bilCawangan`)}
-                                    touched={bilCawanganTouched}
-                                    error={bilCawanganError}
-                                    placeholder={'Bilangan Cawangan (Jika Ada)'}
-                                    keyboardType={'phone-pad'}
-                                />
-
-                                <CustomTextInput
-                                    imageUri={require('../assets/images/compRegNum.png')}
-                                    value={bilPekerja}
-                                    handleChange={FormikProps.handleChange(`bilPekerja`)}
-                                    handleBlur={FormikProps.handleBlur(`bilPekerja`)}
-                                    touched={bilPekerjaTouched}
-                                    error={bilPekerjaError}
-                                    placeholder={'Bilangan Pekerja'}
-                                    keyboardType={'phone-pad'}
-                                />
+                                
                                 <CustomTextInput
                                     imageUri={require('../assets/images/phoneNum.png')}
                                     value={compPhone}
@@ -213,13 +186,14 @@ const BusinessPlanBussInfoScreen = (props) => {
                                     keyboardType={'phone-pad'}
 
                                 />
-                            </ScrollView>
-
-                            <CustomFormAction
+                                 <CustomFormAction
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}
                             />
+                            </ScrollView>
+
+                           
                         </View>
 
                     )

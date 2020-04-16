@@ -6,7 +6,8 @@ import {
     Text,
     TouchableOpacity,
     View, 
-    CheckBox
+    CheckBox,
+    ScrollView
 
 } from 'react-native';
 import { shallowEqual, useSelector} from 'react-redux'
@@ -15,6 +16,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 import styles from '../styles/styles'
 import CheckBox2 from 'react-native-check-box'
+import LayoutA from '../Layout/LayoutA';
 
 
 const AgreementScreen = (props) => {
@@ -24,13 +26,9 @@ const AgreementScreen = (props) => {
 
 
     return (
-        <View style={styles.container}>
-            <View style={{ flex: 1, justifyContent: 'flex-start' }}>
-                <Image source={require('../assets/images/tekunA.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
-            </View>
-            <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+        <LayoutA>
+                <ScrollView style={{ flex: 1,  }} contentContainerStyle={{justifyContent: 'center', alignItems: 'center',paddingLeft:10,paddingRight:10}}>
+                    <View style={{  justifyContent: 'center', alignItems: 'center' }}>
                         <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
                         <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 12 }]}>Terms and Conditions</Text>
 
@@ -68,9 +66,8 @@ FCGB is referred to as “we”, “us”, “our” or “ours”. Any person u
                             </TouchableOpacity>
                         </View>
                     </View>
-                </View>
-            </View>
-        </View >
+                </ScrollView>
+         </LayoutA>
     );
 }
 

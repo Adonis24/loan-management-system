@@ -47,7 +47,7 @@ const SignupOtpScreen = (props) => {
 
     const registerOTP = async () => {
         await dispatch(actionCreator.registerOTP())
-        await proceed && props.navigation.navigate('SignUpOtpEnter')
+        await  props.navigation.navigate('SignUpOtpEnter')
     }
     useEffect(() => {
         const open = () => setshowLogo(false)

@@ -189,7 +189,7 @@ const BusinessPlanBudgIncScreen = (props) => {
                             <Text style={[styles.formTitle]}>Section C</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Anggaran Pendapatan Bulanan</Text>
-                            <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start', paddingLeft: 10, paddingRight: 10 }}>
+                            <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'center', alignSelf: 'flex-start', paddingLeft: 10, paddingRight: 10 }}>
 
                                 {/* <TouchableOpacity onPress={() => FormikProps.resetForm({})}><Text>Reset</Text></TouchableOpacity> */}
                                 <CustomTextInput
@@ -264,13 +264,14 @@ const BusinessPlanBudgIncScreen = (props) => {
                                     editable={false}
 
                                 />
-                            </ScrollView>
-                            <CustomFormAction
+                                 <CustomFormAction
                                 label={`Save`}
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}
                             />
+                            </ScrollView>
+                           
 
                         </View>
 

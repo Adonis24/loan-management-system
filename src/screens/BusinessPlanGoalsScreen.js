@@ -8,17 +8,14 @@ import {
     ScrollView,
     KeyboardAvoidingView,
     FlatList,
-    Modal
+    Modal,Platform
 
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
+
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
@@ -26,6 +23,7 @@ import styles from '../styles/styles'
 import LayoutLoan from '../Layout/LayoutLoan';
 import moment from 'moment'
 import * as actionCreator from '../store/actions/action'
+const ios = Platform.OS === "ios" ? true : false
 
 const validationSchema = Yup.object().shape({
 
@@ -70,7 +68,7 @@ const BusinessPlanGoalsScreen = (props) => {
     return (
         <LayoutLoan navigation={props.navigation}>
             <Modal visible={projectionView} onRequestClose={() => setProjectionView(!projectionView)}>
-                <LayoutLoan title={'Add Amount'} nopaddingTop={true} back={() => setProjectionView(!projectionView)} navigation={props.navigation}>
+                <LayoutLoan title={'Add Amount'} nopaddingTop={!ios?true:false} back={() => setProjectionView(!projectionView)} navigation={props.navigation}>
 
                     <Formik
                         validateOnMount

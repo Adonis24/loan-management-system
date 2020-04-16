@@ -1,29 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ActivityIndicator, Image } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator, Image, Platform } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
-import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import { boolean } from 'yup';
+
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Layout from '../constants/Layout'
+
+const ios = Platform.OS === "ios" ? true : false
 
 export const CustomTextInput = (props) => {
     const { multiLine, value, editable, handleChange, handleBlur, touched, error, label, keyboardType, placeholder, handleClick, message, secureText, } = props
-    if(!handleClick){return(
-        <View style={{ marginBottom: 10 }} >
+    if (!handleClick) {
+        return (
+            <View style={{ marginBottom: 10 }} >
                 <View style={{}}>
                     <Text style={styles.label}>{placeholder} :</Text>
                 </View>
                 <View style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', marginBottom: 5, borderColor: touched && error ? '#d94498' : '#5a83c2' }}>
                     <Image source={props.imageUri} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                    <TextInput editable={editable} secureTextEntry={secureText} keyboardType={keyboardType} value={value} onChangeText={handleChange} onBlur={handleBlur} style={{ marginLeft: 5, flex: 1 }} placeholder={touched && error ? '' : placeholder} placeholderTextColor={touched && error ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
+                    <TextInput editable={editable} secureTextEntry={secureText} keyboardType={keyboardType === 'phone-pad' ? ios ? 'numbers-and-punctuation' : keyboardType : keyboardType} value={value} onChangeText={handleChange} onBlur={handleBlur} style={{ marginLeft: 5, flex: 1 }} placeholder={touched && error ? '' : placeholder} placeholderTextColor={touched && error ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                 </View>
                 <View style={{}}>
                     {touched && error && <Text style={styles.error}>{error}</Text>}
                 </View>
             </View>
-    )}else{return(
-        <View style={{ marginBottom: 10 }} >
+        )
+    } else {
+        return (
+            <View style={{ marginBottom: 10 }} >
                 <View style={{}}>
                     <Text style={styles.label}>{placeholder} :</Text>
                 </View>
@@ -40,7 +43,8 @@ export const CustomTextInput = (props) => {
                     {touched && error && <Text style={styles.error}>{error}</Text>}
                 </View>
             </View>
-    )}
+        )
+    }
 
 }
 

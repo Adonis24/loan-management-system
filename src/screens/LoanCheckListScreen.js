@@ -1,12 +1,12 @@
 //console.ignoredYellowBox = ['Setting a timer']
 import React, { useEffect, useState } from 'react';
 import {
-   
+
     Text,
     TouchableOpacity,
     View,
     FlatList,
-  
+
 
 } from 'react-native';
 
@@ -85,11 +85,11 @@ const checklist = [
 
 ]
 
-
 const LoanCheckListScreen = (props) => {
 
     const dispatch = useDispatch()
     const { attachment } = useSelector(state => state.attachmentReducer, shallowEqual)
+    attachment && console.log(`semua attachment ialah ${JSON.stringify(attachment)}`)
     const checkDone = (content) => {
         if (content) {
             const { atList, store } = content
@@ -159,7 +159,7 @@ const LoanCheckListScreen = (props) => {
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 8 }}>
                     <View style={{ margin: 7 }} />
-                    <View style={{ marginLeft: 10, marginRight:10, paddingBottom: 10, borderBottomWidth: 1,borderColor:'lightgrey' }}>
+                    <View style={{ marginLeft: 10, marginRight: 10, paddingBottom: 10, borderBottomWidth: 1, borderColor: 'lightgrey' }}>
                         <Text style={[styles.textDefault]}>Dokumen-dokumen Diperlukan:</Text>
                     </View>
                     <FlatList contentContainerStyle={{ padding: 10 }} data={checklist}
@@ -175,12 +175,12 @@ const LoanCheckListScreen = (props) => {
                         />)} />
                 </View>
 
-                <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start',borderTopWidth:1,marginLeft:10,marginRight:10,borderColor:'lightgrey',paddingTop:10 }}>
+                <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'flex-start', borderTopWidth: 1, marginLeft: 10, marginRight: 10, borderColor: 'lightgrey', paddingTop: 10 }}>
                     {/* <Text style={[styles.textDefault, { paddingLeft: 10 }]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text> */}
                     <TouchableOpacity
-                        style={{ alignSelf: 'stretch'}}
+                        style={{ alignSelf: 'stretch' }}
                         onPress={() => console.log(`hantar`)}>
-                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'stretch',  padding: 10, borderRadius: 5, justifyContent:'center',alignItems:'center' }}>
+                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'stretch', padding: 10, borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={[styles.textDefault, { color: '#fff' }]}>HANTAR</Text>
                         </LinearGradient>
                     </TouchableOpacity>
@@ -192,12 +192,12 @@ const LoanCheckListScreen = (props) => {
 
 const CustomRow = (props) => {
     return (
-        <TouchableOpacity onPress={() => props.navigation.navigate(props.button, { content: JSON.stringify(props.content) })}  style={[styles.shadowNew, { alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch', marginBottom: 10 }]}>
+        <TouchableOpacity onPress={() => props.navigation.navigate(props.button, { content: JSON.stringify(props.content) })} style={[styles.shadowNew, { alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch', marginBottom: 10 }]}>
             <View style={{ padding: 5, flex: 1, }}>
                 <Text style={[styles.textDefault, { marginBottom: 5, textAlign: 'left' }]}>{props.no} </Text>
             </View>
             <View style={{ flex: 8, padding: 5, alignItems: 'flex-start' }} >
-    <Text style={[styles.textSmall, { marginBottom: 5, textAlign: 'left' }]}>{props.item}</Text>
+                <Text style={[styles.textSmall, { marginBottom: 5, textAlign: 'left' }]}>{props.item}</Text>
             </View>
             {/* <View style={{ flex: 2, padding: 5, alignItems: 'flex-start' }} >
                 <TouchableOpacity onPress={() => props.navigation.navigate(props.button, { content: JSON.stringify(props.content) })} style={{ padding: 3, paddingRight: 6, paddingLeft: 6, borderWidth: 1, borderColor: 'lightgrey', borderRadius: 6, justifyContent: 'center', borderColor: 'lightblue' }}>
@@ -205,8 +205,8 @@ const CustomRow = (props) => {
                 </TouchableOpacity>
             </View> */}
             <View style={{ flex: 1, padding: 5, alignItems: 'flex-start' }} >
-                   {props.check&& <Ionicons name='md-checkmark' color={'green'} style={{ fontSize: 27 }} />}
-       
+                {props.check && <Ionicons name='md-checkmark' color={'green'} style={{ fontSize: 27 }} />}
+
             </View>
         </TouchableOpacity>
     )

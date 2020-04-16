@@ -6,17 +6,14 @@ import {
     TouchableOpacity,
     Picker,
     View,
-    Platform
+    Platform,
+    ScrollView
 
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
@@ -114,8 +111,8 @@ const BusinessPlanBankScreen = (props) => {
 
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
-                            <Modal animationType={'slide'} visible={iosPickerVisible}  onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
+                        <View style={{ flex: 1, alignSelf: 'stretch', alignItems: 'center', }} >
+                            <Modal animationType={'slide'} visible={iosPickerVisible} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
                                 <LayoutLoan title={'Maklumat Akaun'} nopaddingTop={false} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
                                     <View style={{ alignSelf: 'stretch', margin: 10 }}>
                                         {(modalContent === "akaun") ?
@@ -141,83 +138,86 @@ const BusinessPlanBankScreen = (props) => {
 
                             <Text style={[styles.formTitle]}>Section A</Text>
                             <Text style={[styles.formSubtitle]}>Latar Belakang Pemohon</Text>
+                            <ScrollView contentContainerStyle={{ alignItems: 'center', alignSelf: 'flex-start', paddingLeft: 10, paddingRight: 10 }}>
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/compRegNum.png')}
-                                value={bankName}
-                                handleChange={FormikProps.handleChange(`bankName`)}
-                                handleBlur={FormikProps.handleBlur(`bankName`)}
-                                touched={bankNameTouched}
-                                error={bankNameError}
-                                placeholder={'Nama Bank'}
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/compRegNum.png')}
+                                    value={bankName}
+                                    handleChange={FormikProps.handleChange(`bankName`)}
+                                    handleBlur={FormikProps.handleBlur(`bankName`)}
+                                    touched={bankNameTouched}
+                                    error={bankNameError}
+                                    placeholder={'Nama Bank'}
 
-                            />
-                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Jenis Akaun :</Text>
+                                />
+                                <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Jenis Akaun :</Text>
 
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
+                                <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
 
 
-                                <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
-                                    {ios ?
-                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('akaun')}>
-                                                <Text style={{ fontSize: 12 }}>{akaun ? akaun : `Jenis Akaun`}</Text>
-                                            </TouchableOpacity>
-                                            {akaunTouched && akaunError && <Text style={styles.error}>{akaunError}</Text>}
-                                        </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
-                                            <Picker style={{ height: 35 }} selectedValue={akaun} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('akaun', itemValue)}>
-                                                <Picker.Item label={'Jenis Akaun'} value={undefined} />
-                                                <Picker.Item label="Semasa" value="Semasa" />
-                                                <Picker.Item label="Simpanan" value="Simpanan" />
+                                    <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                    <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
+                                        {ios ?
+                                            <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
+                                                <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('akaun')}>
+                                                    <Text style={{ fontSize: 12 }}>{akaun ? akaun : `Jenis Akaun`}</Text>
+                                                </TouchableOpacity>
+                                                {akaunTouched && akaunError && <Text style={styles.error}>{akaunError}</Text>}
+                                            </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
+                                                <Picker style={{ height: 35 }} selectedValue={akaun} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('akaun', itemValue)}>
+                                                    <Picker.Item label={'Jenis Akaun'} value={undefined} />
+                                                    <Picker.Item label="Semasa" value="Semasa" />
+                                                    <Picker.Item label="Simpanan" value="Simpanan" />
 
-                                            </Picker>
-                                            {akaunTouched && akaunError && <Text style={styles.error}>{akaunError}</Text>}
-                                        </View>}
+                                                </Picker>
+                                                {akaunTouched && akaunError && <Text style={styles.error}>{akaunError}</Text>}
+                                            </View>}
+                                    </View>
                                 </View>
-                            </View>
-                            <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Pemegang Akaun :</Text>
+                                <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Pemegang Akaun :</Text>
 
-                            <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
-                                <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
-                                <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
-                                    {ios ?
-                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
-                                            <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('pemegang')}>
-                                                <Text style={{ fontSize: 12 }}>{pemegang ? pemegang : `Pemegang Akaun`}</Text>
-                                            </TouchableOpacity>
-                                            {pemegangTouched && pemegangError && <Text style={styles.error}>{pemegangError}</Text>}
-                                        </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
-                                            <Picker style={{ height: 35 }} selectedValue={pemegang} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pemegang', itemValue)}>
-                                                <Picker.Item label={'Pemegang Akaun'} value={undefined} />
-                                                <Picker.Item label="Individu" value="Individu" />
-                                                <Picker.Item label="Syarikat" value="Syarikat" />
-                                                <Picker.Item label="Perkongsian" value="Perkongsian" />
-                                            </Picker>
-                                            {pemegangTouched && pemegangError && <Text style={styles.error}>{pemegangError}</Text>}
-                                        </View>}
+                                <View style={{ alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
+                                    <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                    <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
+                                        {ios ?
+                                            <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
+                                                <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('pemegang')}>
+                                                    <Text style={{ fontSize: 12 }}>{pemegang ? pemegang : `Pemegang Akaun`}</Text>
+                                                </TouchableOpacity>
+                                                {pemegangTouched && pemegangError && <Text style={styles.error}>{pemegangError}</Text>}
+                                            </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
+                                                <Picker style={{ height: 35 }} selectedValue={pemegang} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pemegang', itemValue)}>
+                                                    <Picker.Item label={'Pemegang Akaun'} value={undefined} />
+                                                    <Picker.Item label="Individu" value="Individu" />
+                                                    <Picker.Item label="Syarikat" value="Syarikat" />
+                                                    <Picker.Item label="Perkongsian" value="Perkongsian" />
+                                                </Picker>
+                                                {pemegangTouched && pemegangError && <Text style={styles.error}>{pemegangError}</Text>}
+                                            </View>}
+                                    </View>
                                 </View>
-                            </View>
 
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/compRegNum.png')}
-                                value={noAkaun}
-                                handleChange={FormikProps.handleChange(`noAkaun`)}
-                                handleBlur={FormikProps.handleBlur(`noAkaun`)}
-                                touched={noAkaunTouched}
-                                error={noAkaunError}
-                                placeholder={'No Akaun'}
-                                keyboardType={'phone-pad'}
-                            />
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/compRegNum.png')}
+                                    value={noAkaun}
+                                    handleChange={FormikProps.handleChange(`noAkaun`)}
+                                    handleBlur={FormikProps.handleBlur(`noAkaun`)}
+                                    touched={noAkaunTouched}
+                                    error={noAkaunError}
+                                    placeholder={'No Akaun'}
+                                    keyboardType={'phone-pad'}
+                                />
+                                <CustomFormAction
+                                    navigation={props.navigation}
+                                    isValid={FormikProps.isValid}
+                                    handleSubmit={FormikProps.handleSubmit}
+                                />
+
+                            </ScrollView>
 
 
 
-                            <CustomFormAction
-                                navigation={props.navigation}
-                                isValid={FormikProps.isValid}
-                                handleSubmit={FormikProps.handleSubmit}
-                            />
                         </View>
 
                     )

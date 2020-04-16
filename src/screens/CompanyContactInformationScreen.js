@@ -105,7 +105,7 @@ const CompanyContactInformationScreen = (props) => {
 
                     return (
 
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={{  justifyContent: 'center', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
                          {showLogo &&   <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} /> }
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY CONTACT INFORMATION</Text>
                             <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
@@ -133,7 +133,7 @@ const CompanyContactInformationScreen = (props) => {
                             />
 
 
-                            <TouchableOpacity onPress={() => props.navigation.navigate('CompanyContactAddressInformation')} style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65 }}>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('CompanyContactAddressInformation')} style={{ alignSelf: 'center', borderBottomWidth: 1, borderBottomColor: '#4A90E2', flexDirection: 'row', margin: 5,alignSelf:'stretch' }}>
                                 <Image source={require('../assets/images/company.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 {!comp_state ? <TextInput editable={false} value={comp_addr} onChangeText={(comp_addr) => setCompanyInfo({ comp_addr })} style={{ marginLeft: 5 }} placeholder={'Company Address'} placeholderTextColor={(false) ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                                     : <View style={{ marginRight: 3, paddingBottom: 5 }}>

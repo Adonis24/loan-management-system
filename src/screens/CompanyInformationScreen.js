@@ -171,7 +171,7 @@ const CompanyInformationScreen = (props) => {
                                 </View>
                             </View>
                         </Modal>
-                            <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
+                            <View style={{ justifyContent: 'center', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                                 {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
                                 <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY INFORMATION</Text>
                                 <Text style={[styles.textDefault, { margin: 5, marginBottom: 10, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
@@ -197,11 +197,12 @@ const CompanyInformationScreen = (props) => {
                                     keyboardType={'default'}
                                 />
 
-                                <TouchableOpacity onPress={() => showDatepicker()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, width: Layout.window.width * 0.65, borderColor: comp_regdateTouched && comp_regdateError ? '#d94498' : '#5a83c2' }}>
+                                <TouchableOpacity onPress={() => showDatepicker()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5,  borderColor: comp_regdateTouched && comp_regdateError ? '#d94498' : '#5a83c2' }}>
                                     <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
 
-                                    <TextInput editable={false} value={moment(comp_regdate).format("MMMM Do YYYY")} onChangeText={FormikProps.handleChange(`comp_regdate`)} onBlur={FormikProps.handleBlur(`comp_regdate`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Date'} placeholderTextColor={comp_regdateTouched && comp_regdateError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
+                                    <TextInput editable={false} value={comp_regdate?moment(comp_regdate).format("MMMM Do YYYY"):null} onChangeText={FormikProps.handleChange(`comp_regdate`)} onBlur={FormikProps.handleBlur(`comp_regdate`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Date'} placeholderTextColor={comp_regdateTouched && comp_regdateError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
                                 </TouchableOpacity>
+
                                 <View style={{ width: Layout.window.width * 0.65 }}>
                                     {comp_regdateTouched && comp_regdateError && <Text style={styles.error}>{comp_regdateError}</Text>}
                                 </View>

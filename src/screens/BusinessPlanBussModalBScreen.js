@@ -28,36 +28,27 @@ import * as actionCreator from '../store/actions/action'
 const validationSchema = Yup.object().shape({
 
 
-
-    sourceCap: Yup
-        .string()
-        .required()
-        .min(1)
-        .label('Sumber'),
-
-    totalCap: Yup
+    pengiktirafan: Yup
         .string()
         .required()
         .min(3)
-        .label('Jumlah Modal'),
-    sokongan: Yup
+        .label('Pengiktirafan'),
+
+    Teknologi: Yup
         .string()
         .required()
         .min(3)
-        .label('Sokongan'),
-   
-
-  
+        .label('Teknologi'),
 
 
 });
 
-const BusinessPlanBussModalScreen = (props) => {
+const BusinessPlanBussModalBScreen = (props) => {
 
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    const {  sourceCap, totalCap, sokongan } = useSelector(state => state.businessPlanningReducer, shallowEqual)
+    const { Teknologi, pengiktirafan } = useSelector(state => state.businessPlanningReducer, shallowEqual)
 
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
 
@@ -66,12 +57,12 @@ const BusinessPlanBussModalScreen = (props) => {
         <LayoutLoan navigation={props.navigation}>
             <Formik
                 validateOnMount
-                initialValues={{  sourceCap, totalCap, sokongan }}
+                initialValues={{ Teknologi, pengiktirafan }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
-                    props.navigation.navigate('BusinessPlanBussModalB')
+                    props.navigation.navigate('BusinessPlanBudgInc')
                     dispatch(actionCreator.saveBussPlanData())
                     actions.resetForm({})
                     actions.setSubmitting(false)
@@ -84,22 +75,17 @@ const BusinessPlanBussModalScreen = (props) => {
 
 
 
-                    const { sourceCap, totalCap, sokongan, } = FormikProps.values
+                    const { Teknologi, pengiktirafan } = FormikProps.values
 
 
 
-               
+                    const TeknologiError = FormikProps.errors.Teknologi
+                    const TeknologiTouched = FormikProps.touched.Teknologi
 
-                    const totalCapError = FormikProps.errors.totalCap
-                    const totalCapTouched = FormikProps.touched.totalCap
 
-                    const sokonganError = FormikProps.errors.sokongan
-                    const sokonganTouched = FormikProps.touched.sokongan
 
-                    const sourceCapError = FormikProps.errors.sourceCap
-                    const sourceCapTouched = FormikProps.touched.sourceCap
-
-               
+                    const pengiktirafanError = FormikProps.errors.pengiktirafan
+                    const pengiktirafanTouched = FormikProps.touched.pengiktirafan
 
 
 
@@ -113,39 +99,30 @@ const BusinessPlanBussModalScreen = (props) => {
                             <Text style={[styles.formSubtitle]}>Butir Butir Perniagaan</Text>
                             <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'center', alignSelf: 'flex-start', paddingLeft: 10, paddingRight: 10 }}>
 
-                               
-
                                 <CustomTextInput
-                                    imageUri={require('../assets/images/compRegNum.png')}
-                                    value={sourceCap}
-                                    handleChange={FormikProps.handleChange(`sourceCap`)}
-                                    handleBlur={FormikProps.handleBlur(`sourceCap`)}
-                                    touched={sourceCapTouched}
-                                    error={sourceCapError}
-                                    placeholder={'Sumber Modal Memulakan Perniagaan'}
+                                    imageUri={require('../assets/images/company.png')}
+                                    value={pengiktirafan}
+                                    handleChange={FormikProps.handleChange(`pengiktirafan`)}
+                                    handleBlur={FormikProps.handleBlur(`pengiktirafan`)}
+                                    touched={pengiktirafanTouched}
+                                    error={pengiktirafanError}
+                                    placeholder={'Pengiktirafan (sijil Halal,GMP,ISO dll)'}
 
                                 />
-                                <CustomTextInput
-                                    imageUri={require('../assets/images/payment.png')}
-                                    value={totalCap}
-                                    handleChange={FormikProps.handleChange(`totalCap`)}
-                                    handleBlur={FormikProps.handleBlur(`totalCap`)}
-                                    touched={totalCapTouched}
-                                    error={totalCapError}
-                                    placeholder={'Jumlah Modal Permulaan Perniagaan'}
-                                    keyboardType={'phone-pad'}
-                                />
-                                <CustomTextInput
-                                    imageUri={require('../assets/images/user.png')}
-                                    value={sokongan}
-                                    handleChange={FormikProps.handleChange(`sokongan`)}
-                                    handleBlur={FormikProps.handleBlur(`sokongan`)}
-                                    touched={sokonganTouched}
-                                    error={sokonganError}
-                                    placeholder={'Sokongan/Bantuan Agensi Lain'}
 
 
+                                <CustomTextInput
+                                    imageUri={require('../assets/images/bizAct.png')}
+                                    value={Teknologi}
+                                    handleChange={FormikProps.handleChange(`Teknologi`)}
+                                    handleBlur={FormikProps.handleBlur(`Teknologi`)}
+                                    touched={TeknologiTouched}
+                                    error={TeknologiError}
+                                    placeholder={'Tahap teknologi/Mesin/Peralatan dimiliki'}
+                                    keyboardType={'default'}
                                 />
+
+
                                 <CustomFormAction
                                     label={`Save`}
                                     navigation={props.navigation}
@@ -172,4 +149,4 @@ const BusinessPlanBussModalScreen = (props) => {
 
 
 
-export default BusinessPlanBussModalScreen
+export default BusinessPlanBussModalBScreen

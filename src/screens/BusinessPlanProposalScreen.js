@@ -5,7 +5,7 @@ import {
     View,
     ScrollView,
     FlatList,
-    Modal
+    Modal, Platform
 
 } from 'react-native';
 import { Formik } from 'formik';
@@ -16,6 +16,8 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 import LayoutLoan from '../Layout/LayoutLoan';
 import * as actionCreator from '../store/actions/action'
+
+const ios = Platform.OS === "ios" ? true : false
 
 const validationSchema = Yup.object().shape({
 
@@ -77,7 +79,7 @@ const BusinessPlanProposalScreen = (props) => {
     return (
         <LayoutLoan navigation={props.navigation}>
             <Modal visible={addAmountView} onRequestClose={() => setAddAmountView(!addAmountView)}>
-                <LayoutLoan title={'Add Amount'} nopaddingTop={true} back={() => setAddAmountView(!addAmountView)} navigation={props.navigation}>
+                <LayoutLoan title={'Add Amount'} nopaddingTop={!ios ? true : false} back={() => setAddAmountView(!addAmountView)} navigation={props.navigation}>
 
                     <Formik
                         validateOnMount
@@ -110,7 +112,7 @@ const BusinessPlanProposalScreen = (props) => {
 
 
                             return (
-                                <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft:10,paddingRight:10 }}>
+                                <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
 
                                     <Text style={[styles.formTitle]}>Section D</Text>
                                     {/* <Text style={[styles.formSubtitle]}>Cadangan Keperluan Penggunaan Pembiayaan</Text> */}
@@ -139,10 +141,11 @@ const BusinessPlanProposalScreen = (props) => {
 
             <Text style={[styles.formTitle]}>Section D</Text>
             <Text style={[styles.formSubtitle]}>Cadangan Keperluan Penggunaan Pembiayaan</Text>
-            <View style={{ alignSelf: 'stretch' }}><FlatList contentContainerStyle={{paddingTop:10}} data={cadanganPenggunaan}
+
+            <FlatList style={{ alignSelf: 'stretch' }} contentContainerStyle={{ paddingTop: 10 }} data={cadanganPenggunaan}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) =>
-                    <TouchableOpacity onPress={() => addAmount(index)} style={[styles.shadowNew,{ padding: 5,paddingBottom:10, flexDirection: 'row', marginBottom: 10, marginRight:10,marginLeft:10 }]}>
+                    <TouchableOpacity onPress={() => addAmount(index)} style={[styles.shadowNew, { padding: 5, paddingBottom: 10, flexDirection: 'row', marginBottom: 10, marginRight: 10, marginLeft: 10 }]}>
                         <View style={{ flex: 1, alignItems: 'flex-start' }}>
                             <Text style={styles.textDefault}>{index + 1}</Text>
                         </View>
@@ -153,7 +156,7 @@ const BusinessPlanProposalScreen = (props) => {
                             <Text style={[styles.textDefault, { color: 'darkblue' }]}>RM {item.amount}</Text>
                         </View>
                     </TouchableOpacity>} />
-            </View>
+
 
             <CustomFormAction
                 label={`Save`}
