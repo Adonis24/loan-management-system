@@ -11,78 +11,31 @@ import TabBarIcon from '../components/TabBarIcon';
 
 import SettingsScreen from '../screens/SettingsScreen';
 
-import WelcomeScreen from '../screens/WelcomeScreen';
-import SignupPersonalScreen from '../screens/SignupPersonalScreen';
-import SignupOtpScreen from '../screens/SignupOtpScreen';
-import SignupOtpEnterScreen from '../screens/SignupOtpEnterScreen';
-import SignupSuccessScreen from '../screens/SignupSuccessScreen';
-import LoginScreen from '../screens/LoginScreen';
-import IntroScreen from '../screens/IntroScreen';
-import CompanyInformationScreen from '../screens/CompanyInformationScreen';
-import ContactPersonScreen from '../screens/ContactPersonScreen';
-import DetailsOfConnectedPartiesScreen from '../screens/DetailsOfConnectedPartiesScreen';
-import DeclarationDigitalSignScreen from '../screens/DeclarationDigitalSignScreen';
-import ProfileScreen from '../screens/ProfileScreen';
 
+import CompanyInformationScreen from '../screens/CompanyInformationScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import DashboardScreen from '../screens/DashboardScreen'
-import InfoEventScreen from '../screens/InfoEventScreen';
 import InfoNewsScreen from '../screens/InfoNewsScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import InsightScreen from '../screens/InsightScreen';
-import BusinessHubScreen from '../screens/BusinessHubScreen';
 import InfoNewsListScreen from '../screens/InfoNewsListScreen';
-import InfoEventListScreen from '../screens/InfoEventListScreen';
-import PromotionListScreen from '../screens/PromotionListScreen';
-import PopupScoreScreen from '../screens/PopupScoreScreen';
-import InfoScreen from '../screens/InfoScreen';
-import HandbookListScreen from '../screens/HandbookListScreen';
-import HandbookScreen from '../screens/HandbookScreen';
-import MyScoreScreen from '../screens/MyScoreScreen';
-
-import PromotionScreen from '../screens/PromotionScreen';
-import LoanApplicationScreen from '../screens/LoanApplicationScreen';
 import FinancingScreen from '../screens/FinancingScreen';
 import LoanCheckListScreen from '../screens/LoanCheckListScreen';
-import SitePicScreen from '../screens/SitePicScreen';
 import AttachmentScreen from '../screens/AttachmentScreen';
 import MapScreen from '../screens/MapScreen';
-import GrantScreen from '../screens/GrantScreen';
-import QuizScreen from '../screens/QuizScreen';
-import QuizAnswerScreen from '../screens/QuizAnswerScreen';
 import MyAccountScreen from '../screens/MyAccountScreen';
-import EcommerceScreen from '../screens/EcommerceScreen';
 import BizAppScreen from '../screens/BizAppScreen';
 import MyAccountEditScreen from '../screens/MyAccountEditScreen';
-import BizDirectoryScreen from '../screens/BizDirectoryScreen';
-import BizLicensingScreen from '../screens/BizLicensingScreen';
-import CertificationScreen from '../screens/CertificationScreen';
 import ElearningScreen from '../screens/ElearningScreen';
-
-import ContactPersonSuccessScreen from '../screens/ContactPersonSuccessScreen';
 import ScanQRScreen from '../screens/ScanQRScreen';
-import CompanyContactInformationScreen from '../screens/CompanyContactInformationScreen';
-import CompanyContactAddressInformationScreen from '../screens/CompanyContactAddressInformationScreen';
 import CompanyInfoSuccessScreen from '../screens/CompanyInfoSuccessScreen';
-import TrainingScreen from '../screens/TrainingScreen';
-import CertificationViewScreen from '../screens/CertificationViewScreen';
-import EdonationScreen from '../screens/EdonationScreen';
-import LoanCalculatorScreen from '../screens/LoanCalculatorScreen';
-import ElearningPlayScreen from '../screens/ElearningPlayScreen';
 import UserAccountScreen from '../screens/UserAccountScreen';
-import ContactPersonMainScreen from '../screens/ContactPersonMainScreen160320';
-import EcommerceDetailScreen from '../screens/EcommerceDetailScreen';
 import InfoEventEdtScreen from '../screens/InfoEventEdtScreen';
-import PendingDirScreen from '../screens/PendingDirScreen';
-
-import AssociateDirScreen from '../screens/AssociateDirScreen';
 import BizAppDetailScreen from '../screens/BizAppDetailScreen';
 import NoCompanyScreen from '../screens/NoCompanyScreen';
 import CameraSelfieScreen from '../screens/CameraSelfieScreen';
-import GrantApplicationScreen from '../screens/GrantApplicationScreen';
 import QRScreen from '../screens/QRScreen';
-import WalletScreen from '../screens/WalletScreen';
 import BillScreen from '../screens/BillScreen';
-import DeliveryScreen from '../screens/DeliveryScreen';
 import UnderConstructionScreen from '../screens/UnderConstructionScreen';
 import EAdvertisementScreen from '../screens/EAdvertisementScreen';
 import FilterBarInfoNews from './FilterBarInfoNews';
@@ -103,11 +56,7 @@ import LoanDetailScreen from '../screens/LoanDetailScreen'
 import LoanReferrerScreen from '../screens/LoanReferrerScreen'
 import LoanReferrer2Screen from '../screens/LoanReferrer2Screen'
 import LoanValidationScreen from '../screens/LoanValidationScreen'
-import LoanDeclarationScreen from '../screens/LoanDeclarationScreen'
-
-import DocumentPickerScreen from '../screens/DocumentPickerScreen'
 import CameraScreen from '../screens/CameraScreen'
-
 import LoanCustomDrawer from './LoanCustomDrawer';
 import BusinessPlanCustomDrawer from './BusinessPlanCustomDrawer';
 import BusinessPlanBackgroudScreen from '../screens/BusinessPlanBackgroudScreen'
@@ -119,11 +68,8 @@ import BusinessPlanBussModalScreen from '../screens/BusinessPlanBussModalScreen'
 import BusinessPlanBudgIncScreen from '../screens/BusinessPlanBudgIncScreen'
 import BusinessPlanProposalScreen from '../screens/BusinessPlanProposalScreen'
 import BusinessPlanGoalsScreen from '../screens/BusinessPlanGoalsScreen'
-import BusinessPlanGoals2Screen from '../screens/BusinessPlanGoals2Screen'
-import BusinessPlanGoals3Screen from '../screens/BusinessPlanGoals3Screen'
 import BusinessPlanMarketingScreen from '../screens/BusinessPlanMarketingScreen'
 import BusinessPlanAddDetailScreen from '../screens/BusinessPlanAddDetailScreen'
-import BusinessPlanCertScreen from '../screens/BusinessPlanCertScreen'
 import LoanBankScreen from '../screens/LoanBankScreen';
 import LoanReferrerListScreen from '../screens/LoanReferrerListScreen';
 import LoanMaklumatPeribadiBScreen from '../screens/LoanMaklumatPeribadiBScreen';
@@ -144,64 +90,26 @@ const DashboardStackWithModal = () => {
         <Stack.Navigator initialRouteName="Main" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Main" component={DashboardStack} />
             <Stack.Screen name="UnderConstruction" component={UnderConstructionScreen} />
-            <Stack.Screen name="PopupScore" component={PopupScoreScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
-            <Stack.Screen name="Settings" component={SettingsScreen} />
-            
-            <Stack.Screen name="Info" component={InfoScreen} />
-            <Stack.Screen name="InfoEvent" component={InfoEventScreen} />
-            <Stack.Screen name="InfoEventList" component={InfoEventListScreen} />
             <Stack.Screen name="InfoNews" component={InfoNewsScreen} />
             <Stack.Screen name="InfoNewsList" component={InfoNewsDrawer} />
-            <Stack.Screen name="BizHub" component={BusinessHubScreen} />
-            <Stack.Screen name="PromotionList" component={PromotionListScreen} />
-            <Stack.Screen name="Promotion" component={PromotionScreen} />
-            {/* <Stack.Screen name="HandbookList" component={HandbookListScreen} />
-            <Stack.Screen name="Handbook" component={HandbookScreen} />
-            <Stack.Screen name="MyScore" component={MyScoreScreen} /> */}
-            {/* <Stack.Screen name="LoanApplication" component={LoanApplicationScreen} /> */}
             <Stack.Screen name="Financing" component={FinancingStack} />
-            {/* <Stack.Screen name="Grant" component={GrantScreen} />
-            <Stack.Screen name="Quiz" component={QuizScreen} />
-            <Stack.Screen name="QuizAnswer" component={QuizAnswerScreen} /> */}
             <Stack.Screen name="MyAccount" component={MyAccountScreen} />
             <Stack.Screen name="BizApp" component={BizAppScreen} />
             <Stack.Screen name="BizAppDetail" component={BizAppDetailScreen} />
             <Stack.Screen name="MyAccountEdit" component={MyAccountEditScreen} />
-            <Stack.Screen name="BizDirectory" component={BizDirectoryScreen} />
-            <Stack.Screen name="BizLicensing" component={BizLicensingScreen} />
-            <Stack.Screen name="Certification" component={CertificationScreen} />
-            <Stack.Screen name="CertificationView" component={CertificationViewScreen} />
             <Stack.Screen name="Elearning" component={ElearningScreen} />
-            <Stack.Screen name="EcommerceDetail" component={EcommerceDetailScreen} />
+            {/* <Stack.Screen name="EcommerceDetail" component={EcommerceDetailScreen} /> */}
             <Stack.Screen name="EAdvertisement" component={EAdvertisementScreen} />
-            <Stack.Screen name="Ecommerce" component={EcommerceScreen} />
-            <Stack.Screen name="Edonation" component={EdonationScreen} />
-            <Stack.Screen name="Loan" component={LoanCalculatorScreen} />
-            <Stack.Screen name="ElearningPlay" component={ElearningPlayScreen} />
+            {/* <Stack.Screen name="ElearningPlay" component={ElearningPlayScreen} /> */}
             <Stack.Screen name="AddCompany" component={CompanyInformationScreen} />
-            <Stack.Screen name="CompanyContactInformation" component={CompanyContactInformationScreen} />
-            <Stack.Screen name="CompanyContactAddressInformation" component={CompanyContactAddressInformationScreen} />
-            <Stack.Screen name="ContactPerson" component={ContactPersonScreen} />
             <Stack.Screen name="CompanyInfoSuccess" component={CompanyInfoSuccessScreen} />
-            <Stack.Screen name="SignUpOtp" component={SignupOtpScreen} />
-            <Stack.Screen name="SignUpOtpEnter" component={SignupOtpEnterScreen} />
-            <Stack.Screen name="SignUpSuccess" component={SignupSuccessScreen} />
-            <Stack.Screen name="PendingDir" component={PendingDirScreen} />
-            <Stack.Screen name="AssociateDir" component={AssociateDirScreen} />
-            <Stack.Screen name="ContactPersonMain" component={ContactPersonMainScreen} />
-            <Stack.Screen name="ContactPersonSuccess" component={ContactPersonSuccessScreen} />
             <Stack.Screen name="ScanQR" component={ScanQRScreen} />
             <Stack.Screen name="QR" component={QRScreen} />
             <Stack.Screen name="UserAccount" component={UserAccountScreen} />
-            <Stack.Screen name="Training" component={TrainingScreen} />
             <Stack.Screen name="InfoEventEdt" component={InfoEventEdtScreen} />
             <Stack.Screen name="NoCompany" component={NoCompanyScreen} />
-            <Stack.Screen name="GrantApplication" component={GrantApplicationScreen} />
-            <Stack.Screen name="Wallet" component={WalletScreen} />
             <Stack.Screen name="Bill" component={BillScreen} />
-            <Stack.Screen name="Delivery" component={DeliveryScreen} />
-            
         </Stack.Navigator>
     )
 }
@@ -212,11 +120,9 @@ const FinancingStack = () => {
             <Stack.Screen name="Financing" component={FinancingScreen} />
             <Stack.Screen name="LoanCheckList" component={LoanCheckListScreen} />
             <Stack.Screen name="LoanDrawer" component={LoanDrawer} />
-            <Stack.Screen name="BusinessPlanDrawer" component={BusinessPlanDrawer} />
-            {/* <Stack.Screen name="SitePic" component={SitePicScreen} /> */}
+            <Stack.Screen name="BusinessPlanDrawer" component={BusinessPlanDrawer} />     
             <Stack.Screen name="Attachment" component={AttachmentScreen} />
-            <Stack.Screen name="Camera" component={CameraScreen} />
-            {/* <Stack.Screen name="DocumentPicker" component={DocumentPickerScreen} /> */}
+            <Stack.Screen name="Camera" component={CameraScreen} />         
             <Stack.Screen name="Map" component={MapScreen} />
         </Stack.Navigator>
     )
@@ -445,8 +351,9 @@ const MainTabNav = () => {
                             //console.log(`route ialah :${JSON.stringify(routeName)}`)
                             //console.log(`history ialah :${JSON.stringify(history)}`)
                             //if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan' || routeName === 'LoanConnectedParties' || routeName === 'LoanConnectedPartiesAddr' || routeName === 'LoanBusinessInfo' || routeName === 'LoanBusinessAddrInfo' || routeName === 'LoanBusinessInfoCont' || routeName === 'LoanBusinessDetail' || routeName === 'LoanDetail')
-                            if (routeName === 'LoanDrawer' || routeName === 'Camera' || routeName === 'BusinessPlanDrawer' || routeName === 'Map')
+                            if (routeName === 'Financing' || routeName === 'LoanDrawer' || routeName === 'Camera' || routeName === 'BusinessPlanDrawer' || routeName === 'Map') {
                                 tabBarVisible = false
+                            }
 
                         }
                     }

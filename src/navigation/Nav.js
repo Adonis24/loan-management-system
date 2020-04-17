@@ -14,34 +14,24 @@ const Stack = createStackNavigator();
 
 const Nav = (props) => {
   const dispatch = useDispatch()
-  //const { token } = useSelector(state => state.apiReducer, shallowEqual)
-  const [tokenExists, setTokenExists] = useState(false)
   const { token } = useSelector(state => state.apiReducer, shallowEqual)
   const checkLogin = async () => {
     try {
-      //const personalToken = await AsyncStorage.getItem('personalToken');
+
       const personalToken = await SecureStore.getItemAsync('personalToken')
       if (personalToken !== null && !personalToken.includes('error')) {
         const { token_type, access_token, error } = JSON.parse(personalToken)
-
-        //const parsedPer
-        //console.log(`personal token ialah : ${personalToken}`)
-        //this.setState({ tokenExists: true })
-        setTokenExists(true)
-
         dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
       }
     } catch (error) {
       console.log(`personalToken error ${error}`)
-      return 'takde'
+      //return 'takde'
     }
   }
 
-  //console.log(`token kat Nav ialah : ${JSON.stringify(token)}`)
-
   useEffect(() => {
     checkLogin()
-  }, [])
+  }, [token])
 
   return (
     <NavigationContainer>
@@ -54,8 +44,6 @@ const Nav = (props) => {
     </NavigationContainer>
   )
 }
-
-
 
 
 export default Nav;
