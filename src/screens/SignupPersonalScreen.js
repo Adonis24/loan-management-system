@@ -5,7 +5,7 @@ import {
     Text,
     TouchableOpacity,
     View,
-    TextInput,
+    TextInput,ScrollView
 
 
 } from 'react-native';
@@ -20,7 +20,8 @@ import { CustomTextInput,CustomFormAction } from '../components/Custom'
 import styles from '../styles/styles'
 
 import * as actionCreator from '../store/actions/action'
-import LayoutA from '../Layout/LayoutA';
+import LayoutRegister from '../Layout/LayoutRegister';
+//import { ScrollView } from 'react-native-gesture-handler';
 
 const validationSchema = Yup.object().shape({
 
@@ -55,23 +56,14 @@ const SignupPersonalScreen = (props) => {
     const dispatch = useDispatch()
     const publicToken = useSelector(state => state.registrationReducer, shallowEqual)
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
-    publicToken && console.log(`registration token ialah :${JSON.stringify(publicToken)} `)
+    //publicToken && console.log(`registration token ialah :${JSON.stringify(publicToken)} `)
 
-    useEffect(() => {
-        const open = () => setshowLogo(false)
-        const off = () => setshowLogo(true)
-
-        keyboardBeingDisplay(open)
-        keyboardBeingClose(off)
-    }, []); // empty-array means don't watch for any updates
-
-    useEffect(() => {
+       useEffect(() => {
         dispatch(actionCreator.getToken())
         dispatch(actionCreator.getTokenLMS())
     }, []);
 
-    const [showLogo, setshowLogo] = useState(true)
-
+  
     const register = async (values) => {
 
         await dispatch(actionCreator.register(values))
@@ -81,7 +73,7 @@ const SignupPersonalScreen = (props) => {
     }
 
     return (
-        <LayoutA>
+        <LayoutRegister title={'personal info'}>
             <Formik
                 validateOnMount
                 initialValues={{}} onSubmit={(values, actions) => {
@@ -110,11 +102,9 @@ const SignupPersonalScreen = (props) => {
                     const password_confirmationTouched = FormikProps.touched.password_confirmation
 
                     return (
-                        <View style={{  justifyContent: 'center', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
-                            {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
+                        <ScrollView style={{ alignSelf:'stretch' , }} contentContainerStyle={{justifyContent: 'flex-start', alignItems: 'center',paddingRight:10,paddingLeft:10,}}>
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>REGISTRATION</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Personal Info</Text>
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/user.png')}
@@ -165,12 +155,12 @@ const SignupPersonalScreen = (props) => {
                                 handleSubmit={FormikProps.handleSubmit}
                             />
                             {/* {indicator && <ActivityIndicator color={'#34c6f4'} style={{ marginLeft: 5 }} />} */}
-                        </View>
+                        </ScrollView>
 
                     )
                 }}
             </Formik >
-        </LayoutA>
+        </LayoutRegister>
     );
 }
 

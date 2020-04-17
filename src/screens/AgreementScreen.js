@@ -11,12 +11,11 @@ import {
 
 } from 'react-native';
 import { shallowEqual, useSelector} from 'react-redux'
-import Constants from 'expo-constants'
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
 import styles from '../styles/styles'
 import CheckBox2 from 'react-native-check-box'
-import LayoutA from '../Layout/LayoutA';
+import LayoutRegister from '../Layout/LayoutRegister';
 
 
 const AgreementScreen = (props) => {
@@ -26,7 +25,7 @@ const AgreementScreen = (props) => {
 
 
     return (
-        <LayoutA>
+        <LayoutRegister title={'registration'}>
                 <ScrollView style={{ flex: 1,  }} contentContainerStyle={{justifyContent: 'center', alignItems: 'center',paddingLeft:10,paddingRight:10}}>
                     <View style={{  justifyContent: 'center', alignItems: 'center' }}>
                         <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />
@@ -67,7 +66,7 @@ FCGB is referred to as “we”, “us”, “our” or “ours”. Any person u
                         </View>
                     </View>
                 </ScrollView>
-         </LayoutA>
+         </LayoutRegister>
     );
 }
 

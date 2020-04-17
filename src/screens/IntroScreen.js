@@ -39,7 +39,7 @@ const IntroScreen = (props) => {
                                 width: undefined,
                                 flex: 1,
                             }} />
-                            <Text style={{ fontSize: 17, color: 'black', alignSelf: 'center', textAlign: 'center', marginLeft: 15, marginRight: 15, marginBottom: 10, marginTop: 10 }}>
+                            <Text style={[styles.textDefault,{  alignSelf: 'center', textAlign: 'center', marginLeft: 15, marginRight: 15, marginBottom: 10, marginTop: 10 }]}>
                                 {item.title}
                             </Text>
                         </View>

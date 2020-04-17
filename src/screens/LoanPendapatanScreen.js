@@ -146,7 +146,7 @@ const LoanPendapatanScreen = (props) => {
                                 FormikProps.setFieldValue('poskodComp', poskod)
                             }
 
-                        }
+                        }else{ FormikProps.setFieldValue('poskodComp', null)}
 
                     }
 
@@ -156,23 +156,22 @@ const LoanPendapatanScreen = (props) => {
                             <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
                                 <LayoutLoan title={'Taraf Pendidikan'} nopaddingTop={false} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
                                     <View style={{ alignSelf: 'stretch', margin: 10 }}>
-                                    <Picker style={{ height: 35 }} selectedValue={pendidikan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pendidikan', itemValue)}>
-                                                <Picker.Item label={'Taraf Pendidikan'} value={undefined} />
-                                           
-                                                <Picker.Item label="Ijazah" value="Ijazah" />
-                                                <Picker.Item label="Diploma" value="Diploma" />
-                                                <Picker.Item label="Sijil" value="Sijil" />
-                                                <Picker.Item label="STPM/setaraf" value="STPM/setaraf" />
-                                                <Picker.Item label="SPM/setaraf" value="SPM/setaraf" />
-                                                <Picker.Item label="PMR/setaraf" value="PMR/setaraf" />
-                                            </Picker>
+                                        <Picker style={{ height: 35 }} selectedValue={pendidikan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pendidikan', itemValue)}>
+                                            <Picker.Item label={'Taraf Pendidikan'} value={undefined} />
+                                            <Picker.Item label="Ijazah" value="Ijazah" />
+                                            <Picker.Item label="Diploma" value="Diploma" />
+                                            <Picker.Item label="Sijil" value="Sijil" />
+                                            <Picker.Item label="STPM/setaraf" value="STPM/setaraf" />
+                                            <Picker.Item label="SPM/setaraf" value="SPM/setaraf" />
+                                            <Picker.Item label="PMR/setaraf" value="PMR/setaraf" />
+                                        </Picker>
                                     </View>
                                 </LayoutLoan>
                             </Modal>
                             <Modal animationType={'slide'}
                                 visible={addressVisible} onRequestClose={() => setAddressVisible(!addressVisible)}
                             >
-                                <LayoutLoan title={'Address'} nopaddingTop={!ios?true:false} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
+                                <LayoutLoan title={'Address'} nopaddingTop={!ios ? true : false} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
                                     <View style={{ margin: 10 }} />
                                     <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                                         <CustomTextInput
@@ -191,7 +190,6 @@ const LoanPendapatanScreen = (props) => {
                                             value={alamat_2Comp}
                                             handleChange={FormikProps.handleChange(`alamat_2Comp`)}
                                             handleBlur={FormikProps.handleBlur(`alamat_2Comp`)}
-
                                             placeholder={'Alamat Line 2'}
 
                                         />
@@ -239,7 +237,6 @@ const LoanPendapatanScreen = (props) => {
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={pendidikan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pendidikan', itemValue)}>
                                                 <Picker.Item label={'Taraf Pendidikan'} value={undefined} />
-                                                <Picker.Item label={'Taraf Pendidikan'} value={undefined} />
                                                 <Picker.Item label="Ijazah" value="Ijazah" />
                                                 <Picker.Item label="Diploma" value="Diploma" />
                                                 <Picker.Item label="Sijil" value="Sijil" />
@@ -281,7 +278,6 @@ const LoanPendapatanScreen = (props) => {
 
                                 handleClick={() => setAddressVisible(!addressVisible)}
                                 multiLine={true}
-
                                 touched={alamatCompTouched}
                                 error={alamatCompError}
                                 placeholder={'Alamat Tempat Bekerja'}

@@ -60,7 +60,7 @@ const LoanMaklumatAsasScreen = (props) => {
                 validationSchema={validationSchema}
             >
                 {FormikProps => {
-                    const { negeri, cawanganParlimen, pengundiBerdaftar, statusPerniagaan } = FormikProps.values
+                    const { negeri, cawanganParlimen, pengundiBerdaftar } = FormikProps.values
                     const negeriError = FormikProps.errors.negeri
                     const negeriTouched = FormikProps.touched.negeri
                     const cawanganParlimenError = FormikProps.errors.cawanganParlimen
@@ -75,7 +75,7 @@ const LoanMaklumatAsasScreen = (props) => {
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                             <Text style={[styles.formTitle]}>Section A</Text>
                             <Text style={[styles.formSubtitle]}>Maklumat Asas</Text>
-                            <View style={{ justifyContent: 'center', alignItems: 'flex-start', }}>
+                            <View style={{ justifyContent: 'flex-start', alignItems: 'center', }}>
 
                                 <CustomTextInput
                                     imageUri={require('../assets/images/city.png')}
@@ -97,7 +97,7 @@ const LoanMaklumatAsasScreen = (props) => {
                                     placeholder={'Cawangan Parlimen'}
                                     keyboardType={'default'}
                                 />
-                                <View style={{ marginBottom: 10, justifyContent: 'center', }}>
+                                <View style={{ marginBottom: 10, justifyContent: 'center',alignSelf:'stretch' }}>
                                     <Text style={[styles.textDefault, { marginBottom: 5, color: 'darkblue' }]}>Pengundi berdaftar cawangan parlimen</Text>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                         {(Platform.OS == 'ios') ?

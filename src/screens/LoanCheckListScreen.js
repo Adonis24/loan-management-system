@@ -148,7 +148,8 @@ const LoanCheckListScreen = (props) => {
 
     }, []); // empty-array means don't watch for any updates
 
-
+//     const { email } = useSelector(state => state.myAccountReducer, shallowEqual)
+// console.log(`email is ${email}`)
     return (
         < LayoutB
             title={'Checklist'}
