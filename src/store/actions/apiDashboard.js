@@ -519,37 +519,31 @@ export const urlToBlob = (url) => {
 }
 ////////////////////////////////////
 
+
+
+
+
 export const saveLoanDataApi = () => {
   return async (dispatch, getState) => {
     const loanDataReducer = getState().financingReducer
-
-    const loanData = JSON.parse(await AsyncStorage.getItem('loanData'))
-    console.log(`bakal di save : ${JSON.stringify(loanDataReducer)}`)
-    console.log(`dalam storage: ${JSON.stringify(loanData)}`)
-
-    if (loanData) {
-      //console.log(`something in memory`)
-      //console.log(JSON.stringify(loanData))
-      const newLoanData = { ...loanData, ...loanDataReducer }
-      await AsyncStorage.setItem('loanData', JSON.stringify(newLoanData))
+    const { email } = getState().myAccountReducer
+    const data = JSON.parse(await AsyncStorage.getItem('data'))
+    if (data) {
+      const dataFiltered = data.filter(l => l.email !== email)
+      const userData = data.find(l => l.email === email)
+      const newUserData = { ...userData, loanData: { ...userData.loanData, ...loanDataReducer } }
+      dataFiltered.push(newUserData)
+      await AsyncStorage.setItem('data', JSON.stringify(dataFiltered))
     } else {
-      await AsyncStorage.setItem('loanData', JSON.stringify(loanDataReducer))
-
+      const newData = [{ email, loanData: loanDataReducer }]
+      await AsyncStorage.setItem('data', JSON.stringify(newData))
     }
-
-
-    // const responseJson = await apiGetCall(`api/Notification`, getState().apiReducer)
-    // const notificationByDate = [...responseJson.data.promotion, ...responseJson.data.annoucement, ...responseJson.data.advertisement]
-
-    // dispatch({ type: 'SET_NOTIFICATION', payload: { notificationList: notificationByDate } })
-
-
   }
 }
 
 export const resetFormApi = (data) => {
   return async (dispatch, getState) => {
-    await SecureStore.deleteItemAsync(data)
+    await AsyncStorage.removeItem(data)
     //console.log(`delete form dalam storage`)
   }
 }
@@ -557,109 +551,116 @@ export const resetFormApi = (data) => {
 export const saveBussPlanDataApi = () => {
   return async (dispatch, getState) => {
     const bussPlanDataReducer = getState().businessPlanningReducer
-
-    const bussPlanData = JSON.parse(await AsyncStorage.getItem('bussPlanData'))
-    //console.log(`bakal di save : ${JSON.stringify(bussPlanDataReducer)}`)
-    //console.log(`dalam storage: ${JSON.stringify(bussPlanData)}`)
-
-    if (bussPlanData) {
-     // console.log(`something in memory`)
-      //console.log(JSON.stringify(bussPlanData))
-      const newBussPlanData = { ...bussPlanData, ...bussPlanDataReducer }
-      await AsyncStorage.setItem('bussPlanData', JSON.stringify(newBussPlanData))
+    const { email } = getState().myAccountReducer
+    const data = JSON.parse(await AsyncStorage.getItem('data'))
+    if (data) {
+      const dataFiltered = data.filter(l => l.email !== email)
+      const userData = data.find(l => l.email === email)
+      const newUserData = { ...userData, bussPlanData: { ...userData.bussPlanData, ...bussPlanDataReducer } }
+      dataFiltered.push(newUserData)
+      await AsyncStorage.setItem('data', JSON.stringify(dataFiltered))
     } else {
-      await AsyncStorage.setItem('bussPlanData', JSON.stringify(bussPlanDataReducer))
-
+      const newData = [{ email, bussPlanData: bussPlanDataReducer }]
+      await AsyncStorage.setItem('data', JSON.stringify(newData))
     }
-
-
-    // const responseJson = await apiGetCall(`api/Notification`, getState().apiReducer)
-    // const notificationByDate = [...responseJson.data.promotion, ...responseJson.data.annoucement, ...responseJson.data.advertisement]
-
-    // dispatch({ type: 'SET_NOTIFICATION', payload: { notificationList: notificationByDate } })
-
-
   }
 }
 
 export const saveLocationApi = (x) => {
   return async (dispatch, getState) => {
-
-    const location = JSON.parse(await AsyncStorage.getItem('location'))
-
-   // console.log(`bakal di save : ${JSON.stringify(x)}`)
-   // console.log(`dalam storage: ${JSON.stringify(location)}`)
-
-    if (location) {
-      //console.log(`something in memory`)
-     // console.log(JSON.stringify(location))
-      //const newLocation = { ...loanData, ...loanDataReducer }
-      await AsyncStorage.setItem('location', JSON.stringify(x))
+    const { email } = getState().myAccountReducer
+    const data = JSON.parse(await AsyncStorage.getItem('data'))
+    if (data) {
+      const dataFiltered = data.filter(l => l.email !== email)
+      const userData = data.find(l => l.email === email)
+      const newUserData = { ...userData, location: x }
+      dataFiltered.push(newUserData)
+      await AsyncStorage.setItem('data', JSON.stringify(dataFiltered))
     } else {
-      await AsyncStorage.setItem('location', JSON.stringify(x))
+      const newData = [{ email, location: x }]
+      await AsyncStorage.setItem('data', JSON.stringify(newData))
     }
-
-
   }
 }
 
 
-export const getLocationApi = (x) => {
+export const getLocationApi = () => {
   return async (dispatch, getState) => {
+    const { email } = getState().myAccountReducer
+    const data = JSON.parse(await AsyncStorage.getItem('data'))
 
-    const location = JSON.parse(await AsyncStorage.getItem('location'))
+    if (data) {
+      const dataFiltered = data.filter(l => l.email !== email)
+      const userData = data.find(l => l.email === email)
+      const { location } = userData
+      if (location) {
+        dispatch({ type: 'SET_LOCATION', payload: { location } })
+      } else {
 
-    if (location) {
-      dispatch({ type: 'SET_LOCATION', payload: { ...location } })
+      }
+
     } else {
-
+      // const newData = [{ email, location: x }]
     }
-
   }
 }
-
 
 
 export const savePictureApi = (photo, attachment, file) => {
   return async (dispatch, getState) => {
+    const { email } = getState().myAccountReducer
+    const data = JSON.parse(await AsyncStorage.getItem('data'))
 
-    const a = JSON.parse(await AsyncStorage.getItem(`attachment`))
+    if (data) {
+      const dataFiltered = data.filter(l => l.email !== email)
+      const userData = data.find(l => l.email === email)
+      const a = userData.attachment
 
+      if (a) {
 
-    if (a) {
+        const aToModify = a.find(b => b.attachmentName == attachment)
 
+        if (aToModify) {
+          //const aToModifyFiles = aToModify.files.find(c => c.fileName == file)
+          const { files } = aToModify
+          //console.log(`files ialah ${JSON.stringify(files)}`)
+          if (files) {
 
-      const aToModify = a.find(b => b.attachmentName == attachment)
+            const newFiles = files.filter(f => f.fileName !== file)
+            newFiles.push({ fileName: file, fileDetail: photo })
 
-      if (aToModify) {
-        //const aToModifyFiles = aToModify.files.find(c => c.fileName == file)
-        const { files } = aToModify
-        //console.log(`files ialah ${JSON.stringify(files)}`)
-        if (files) {
+            const newA = { ...aToModify, files: newFiles }
 
-          const newFiles = files.filter(f => f.fileName !== file)
-          newFiles.push({ fileName: file, fileDetail: photo })
+            const aFilter = a.filter(b => b.attachmentName !== attachment)
+            aFilter.push(newA)
 
-          const newA = { ...aToModify, files: newFiles }
+            const newUserData = { ...userData, attachment: aFilter }
+            dataFiltered.push(newUserData)
+            await AsyncStorage.setItem('data', JSON.stringify(dataFiltered))
+            await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: aFilter } })
 
-          const aFilter = a.filter(b => b.attachmentName !== attachment)
-          aFilter.push(newA)
+          }
+        } else {
 
-          await AsyncStorage.setItem('attachment', JSON.stringify(aFilter))
-          await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: aFilter } })
+          a.push({ attachmentName: attachment, files: [{ fileName: file, fileDetail: photo }] })
+          const newUserData = { ...userData, attachment: a }
+          dataFiltered.push(newUserData)
+          await AsyncStorage.setItem('data', JSON.stringify(dataFiltered))
+          await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: a } })
 
         }
       } else {
+        const newA = [{ attachmentName: attachment, files: [{ fileName: file, fileDetail: photo }] }]
 
-        a.push({ attachmentName: attachment, files: [{ fileName: file, fileDetail: photo }] })
-        await AsyncStorage.setItem('attachment', JSON.stringify(a))
-        await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: a } })
-
+        const newUserData = { ...userData, attachment: newA }
+        dataFiltered.push(newUserData)
+        await AsyncStorage.setItem('data', JSON.stringify(dataFiltered))
+        await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: newA } })
       }
+
     } else {
-      const newA = [{ attachmentName: attachment, files: [{ fileName: file, fileDetail: photo }] }]
-      await AsyncStorage.setItem('attachment', JSON.stringify(newA))
-      await dispatch({ type: 'SET_ATTACHMENT', payload: { attachment: newA } })
+      const newData = [{ email, attachment }]
+      await AsyncStorage.setItem('data', JSON.stringify(newData))
     }
 
   }
@@ -667,15 +668,24 @@ export const savePictureApi = (photo, attachment, file) => {
 
 export const getAllAttachmentApi = () => {
   return async (dispatch, getState) => {
+    const { email } = getState().myAccountReducer
+    const data = JSON.parse(await AsyncStorage.getItem('data'))
 
-    const attachment = JSON.parse(await AsyncStorage.getItem('attachment'))
+    if (data) {
+      //const dataFiltered = data.filter(l => l.email !== email)
+      const userData = data.find(l => l.email === email)
+      const { attachment } = userData
+      if (attachment) {
+        dispatch({ type: 'SET_ATTACHMENT', payload: { attachment } })
+      } else {
 
-    if (attachment) {
-      //console.log(`attachment ialah ${JSON.stringify(attachment)}`)
-      dispatch({ type: 'SET_ATTACHMENT', payload: { attachment } })
+      }
+
     } else {
-
+      // const newData = [{ email, location: x }]
     }
+
+
 
   }
 }
@@ -686,7 +696,7 @@ export const getAttachmentApi = (title) => {
 
     const { attachment } = getState().attachmentReducer
     //console.log(`title is ${JSON.stringify(title)}`)
-   //console.log(`attachmentReducer is ${JSON.stringify(attachment)}`)
+    //console.log(`attachmentReducer is ${JSON.stringify(attachment)}`)
     if (attachment) {
       const jumpa = attachment.find(a => a.attachmentName == title)
       if (jumpa) {
@@ -710,22 +720,29 @@ export const getAttachmentApi = (title) => {
 
 export const resetAllAttachmentApi = () => {
   return async (dispatch, getState) => {
-    await SecureStore.deleteItemAsync('attachment')
-    //console.log(`delete attachment dalam storage`)
+    //await SecureStore.deleteItemAsync('attachment')
+    await AsyncStorage.removeItem(data)
   }
 }
 
 
 export const getAllBusinessPlanApi = () => {
   return async (dispatch, getState) => {
+    const { email } = getState().myAccountReducer
+    const data = JSON.parse(await AsyncStorage.getItem('data'))
 
-    const bussPlanData = JSON.parse(await AsyncStorage.getItem('bussPlanData'))
+    if (data) {
+      const dataFiltered = data.filter(l => l.email !== email)
+      const userData = data.find(l => l.email === email)
+      const { bussPlanData } = userData
+      if (bussPlanData) {
+        dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...bussPlanData } })
+      } else {
 
-    if (bussPlanData) {
-      //console.log(`business plan ialah ${JSON.stringify(bussPlanData)}`)
-      dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...bussPlanData } })
+      }
+
     } else {
-
+      // const newData = [{ email, location: x }]
     }
 
   }
@@ -734,14 +751,24 @@ export const getAllBusinessPlanApi = () => {
 export const getLoanDataApi = () => {
   return async (dispatch, getState) => {
 
-    const loanData = JSON.parse(await AsyncStorage.getItem('loanData'))
+    const { email } = getState().myAccountReducer
+    const data = JSON.parse(await AsyncStorage.getItem('data'))
 
-    if (loanData) {
-      //console.log(`loan data ialah ${JSON.stringify(loanData)}`)
-      dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...loanData } })
+    if (data) {
+      const dataFiltered = data.filter(l => l.email !== email)
+      const userData = data.find(l => l.email === email)
+      const { loanData } = userData
+      if (loanData) {
+        dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...loanData } })
+      } else {
+
+      }
+
     } else {
-
+      // const newData = [{ email, location: x }]
     }
+
+
 
   }
 }

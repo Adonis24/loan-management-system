@@ -38,7 +38,7 @@ const apiPostCall = async (uri, values, apiAccess, lms = false, isPublicToken = 
 
   const headers = { 'Content-Type': 'application/json', Accept, Authorization: !isPublicToken && Authorization }
 
-  console.log(`body ialah : ${JSON.stringify({ ...values, access_credential: !isPublicToken && 'api' })}`)
+  //console.log(`body ialah : ${JSON.stringify({ ...values, access_credential: !isPublicToken && 'api' })}`)
   let response = await fetch(`${!lms ? apiUrl : lmsApiUrl}${uri}`, { method, headers, body })
 
   let responseJson = await response.json()
@@ -69,7 +69,7 @@ export const registerApi = (token_type, access_token, name, email, password, pas
 
     const reg = getState().registrationReducer
 
-    console.log(` ada api reducer ke kat sini : ${JSON.stringify(getState().registrationReducer)}`)
+    //console.log(` ada api reducer ke kat sini : ${JSON.stringify(getState().registrationReducer)}`)
     const value = { name, email, password, password_confirmation, expo_token }
     const responseJson = await apiPostCall(`api/register`, value, reg)
     const { status, errors, message } = await responseJson
@@ -102,14 +102,14 @@ export const requestPersonalToken = (screen, username, password) => {
 
     const value = { client_id: '2', client_secret: 'dFX2OFK95Va8PfvyzT6ZnbLJxCXDAfvBCC1fdX4k', grant_type: 'password', username, password }
     const responseJson = await apiPostCall(`oauth/token`, value, getState().apiReducer)
-    console.log(`personal token ialah : ${JSON.stringify(responseJson)}`)
+    //console.log(`personal token ialah : ${JSON.stringify(responseJson)}`)
     const { token_type, access_token, error, message } = responseJson
 
     if (!error) {
 
       //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
       const stringifyJson = JSON.stringify(responseJson)
-      console.log(`ada apa ni : ${JSON.stringify(responseJson)}`)
+      //console.log(`ada apa ni : ${JSON.stringify(responseJson)}`)
 
       SecureStore.setItemAsync('personalToken', stringifyJson);
 
@@ -142,7 +142,7 @@ export const requestPersonalTokenLMS = (screen, username, password) => {
     const value = { client_id: '2', client_secret: 'b21IuZWBmOiyKjLNgFA4jvgGHDM5HSFKXx5A5ZB0', grant_type: 'password', username, password }
     const responseJson = await apiPostCall(`api/register`, value, getState().apiReducer, true)
 
-    console.log(`personal token lms ialah : ${JSON.stringify(responseJson)}`)
+    //console.log(`personal token lms ialah : ${JSON.stringify(responseJson)}`)
 
     const { token_type, access_token } = responseJson
 
