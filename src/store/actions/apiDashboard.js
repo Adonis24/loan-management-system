@@ -360,11 +360,11 @@ export const editUserApi = () => {
 
     const responseJson = await apiPostCall(`api/user/edit`, null, name, full_name, profile_pic, getState().apiReducer)
 
-    //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
+    console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const userProfile = await responseJson.data
-    //await console.log(`USER  ${JSON.stringify(userProfile)}`)
+    await console.log(`USER  ${JSON.stringify(userProfile)}`)
 
-    //await dispatch({ type: 'SET_USER_PROFILE', payload: { ...userProfile } })
+    await dispatch({ type: 'SET_USER_PROFILE', payload: { ...userProfile } })
 
 
 

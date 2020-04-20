@@ -121,6 +121,7 @@ const MyAccountStack = () => {
     return (
         <Stack.Navigator initialRouteName="MyAccount" mode={'modal'} screenOptions={{ headerShown: false }}>
             <Stack.Screen name="MyAccount" component={MyAccountScreen} />
+            <Stack.Screen name="CameraSelfie" component={CameraSelfieScreen} />
             <Stack.Screen name="AddCompany" component={CompanyInformationScreen} />
             <Stack.Screen name="AddCompanyContact" component={CompanyContactInformationScreen} />
             <Stack.Screen name="AddPhone" component={SignupOtpScreen} />
@@ -363,10 +364,10 @@ const MainTabNav = () => {
                         if (route.state.routes) {
                             const routeName = route.state.routes[route.state.index].name
                             //const history = route.state.routes[route.state.index].state.history[route.state.routes[route.state.index].state.history.length - 1]
-                            //console.log(`route ialah :${JSON.stringify(routeName)}`)
+                            console.log(`route ialah :${JSON.stringify(routeName)}`)
                             //console.log(`history ialah :${JSON.stringify(history)}`)
                             //if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan' || routeName === 'LoanConnectedParties' || routeName === 'LoanConnectedPartiesAddr' || routeName === 'LoanBusinessInfo' || routeName === 'LoanBusinessAddrInfo' || routeName === 'LoanBusinessInfoCont' || routeName === 'LoanBusinessDetail' || routeName === 'LoanDetail')
-                            if (routeName === 'AddCompanyContact' || routeName === 'AddCompany' || routeName === 'Financing' || routeName === 'LoanDrawer' || routeName === 'Camera' || routeName === 'BusinessPlanDrawer' || routeName === 'Map') {
+                            if (routeName === 'MyAccount' ||routeName === 'AddCompanyContact' || routeName === 'AddCompany' || routeName === 'Financing' || routeName === 'LoanDrawer' || routeName === 'Camera' || routeName === 'BusinessPlanDrawer' || routeName === 'Map') {
                                 tabBarVisible = false
                             }
 
