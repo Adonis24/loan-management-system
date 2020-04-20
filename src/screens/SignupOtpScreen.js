@@ -11,17 +11,14 @@ import {
 
 } from 'react-native';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
-import * as SecureStore from 'expo-secure-store'
-import { LinearGradient } from 'expo-linear-gradient'
+
 import Layout from '../constants/Layout'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styles from '../styles/styles'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import * as actionCreator from '../store/actions/action'
-import LayoutA from '../Layout/LayoutA';
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
+import LayoutLoan from '../Layout/LayoutLoan';
 
 const validationSchema = Yup.object().shape({
 
@@ -47,22 +44,13 @@ const SignupOtpScreen = (props) => {
 
     const registerOTP = async () => {
         await dispatch(actionCreator.registerOTP())
-        await  props.navigation.navigate('SignUpOtpEnter')
+        await props.navigation.navigate('VerifyPhone')
     }
-    useEffect(() => {
-        const open = () => setshowLogo(false)
-        const off = () => setshowLogo(true)
-
-        keyboardBeingDisplay(open)
-        keyboardBeingClose(off)
-    }, []); // empty-array means don't watch for any updates
-
-    const [showLogo, setshowLogo] = useState(true)
 
 
     return (
 
-        <LayoutA>
+        <LayoutLoan>
             <Formik
                 validateOnMount
                 initialValues={{}} onSubmit={(values, actions) => {
@@ -88,22 +76,20 @@ const SignupOtpScreen = (props) => {
                     return (
 
 
-                        <View style={{ width: Layout.window.width * 0.8, justifyContent: 'center', alignItems: 'center' }}>
-                            {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />}
+                        <View style={{ justifyContent: 'center', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
 
 
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>PHONE VERIFICATION</Text>
-                            <Image source={require('../assets/images/2.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} />
-                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>OTP Verification</Text>
+                            <Text style={[styles.textDefault, { margin: 5, color: 'darkblue',marginBottom:20 }]}>OTP Verification</Text>
 
                             <CustomTextInput
                                 imageUri={require('../assets/images/cc.png')}
-                                value={countryCode}
+                                value={'+6'}
                                 handleChange={FormikProps.handleChange(`countryCode`)}
                                 handleBlur={FormikProps.handleBlur(`countryCode`)}
                                 touched={countryCodeTouched}
                                 error={countryCodeError}
-                                placeholder={'+6'}
+                                placeholder={'Country Code'}
                                 editable={false}
 
                             />
@@ -114,7 +100,7 @@ const SignupOtpScreen = (props) => {
                                 handleBlur={FormikProps.handleBlur(`phone`)}
                                 touched={phoneTouched}
                                 error={phoneError}
-                                placeholder={'019 123456789'}
+                                placeholder={'Enter Phone No'}
                                 keyboardType={'phone-pad'}
 
                             />
@@ -131,7 +117,7 @@ const SignupOtpScreen = (props) => {
                     )
                 }}
             </Formik >
-        </LayoutA>
+        </LayoutLoan>
     );
 }
 
