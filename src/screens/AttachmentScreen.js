@@ -36,9 +36,10 @@ const AttachmentScreen = (props) => {
         } else { return `NA` }
     }
 
-    const getAllAttachment =  () => {
-         dispatch(actionCreator.getAllAttachment())
+    const getAllAttachment = () => {
+        dispatch(actionCreator.getAllAttachment())
     }
+
 
 
     useEffect(() => {
@@ -47,7 +48,7 @@ const AttachmentScreen = (props) => {
     }, []); // empty-array means don't watch for any updates
 
     const content = props.route.params?.content ?? 'NA'
-   
+
     const { header, atList, store } = JSON.parse(content)
 
     return (
@@ -76,7 +77,7 @@ const AttachmentScreen = (props) => {
                         )}
 
                     />
-                  
+
                 </View>
             </View>
         </LayoutB >
@@ -92,18 +93,20 @@ const Placeholder = (props) => {
         const { cancelled } = result
         if (!cancelled) {
             await dispatch(actionCreator.savePicture(result, attachment, file))
+            await dispatch(actionCreator.getAttachment(attachment))
+            dispatch(actionCreator.getAllAttachment())
         }
     }
     return (
         <>
             <Text style={[styles.textDefault, { paddingLeft: 10 }]}>{props.label}</Text>
             {props.type === 'doc' ?
-                <TouchableOpacity onPress={() => docPicker()} 
-                style={[{ margin: 10,marginTop:20,borderWidth:1,padding:20,borderColor:'lightgrey',flexDirection:'row',justifyContent:'space-between',alignItems:'center' },styles.shadowNew]}>
+                <TouchableOpacity onPress={() => docPicker()}
+                    style={[{ margin: 10, marginTop: 20, borderWidth: 1, padding: 20, borderColor: 'lightgrey', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }, styles.shadowNew]}>
                     {props.uri !== 'NA' ?
-                        <Text style={[styles.textDefault,{color:'darkblue'}]}>Tukar Dokumen</Text>
-                        :<Text style={styles.textDefault}>Pilih Dokumen</Text>}
-                         <Ionicons name='ios-folder' size={37} color={props.uri !== 'NA' ?"darkblue":"grey"} />
+                        <Text style={[styles.textDefault, { color: 'darkblue' }]}>Tukar Dokumen</Text>
+                        : <Text style={styles.textDefault}>Pilih Dokumen</Text>}
+                    <Ionicons name='ios-folder' size={37} color={props.uri !== 'NA' ? "darkblue" : "grey"} />
                 </TouchableOpacity> :
                 <TouchableOpacity onPress={() => props.navigation.navigate('Camera', { ...props.param, label: props.label })} style={{ width: Layout.window.width / 2, height: Layout.window.width / 3, borderWidth: 1, borderColor: 'lightgrey', backgroundColor: 'lightgrey', justifyContent: 'center', alignItems: 'stretch', borderRadius: 10, margin: 10 }}>
                     {props.uri !== 'NA' ?
