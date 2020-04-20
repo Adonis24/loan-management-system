@@ -123,6 +123,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         margin: 10
     }, featureIconStyle: { flex: 3, width: undefined, justifyContent: 'flex-start' },
+    pinBox: { flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 10, borderWidth: 1, borderRadius: 5, margin: 5,borderColor:'lightgrey' }
     //untuk kegunaan paralax
 
 

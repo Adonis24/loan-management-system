@@ -65,8 +65,9 @@ const CameraScreen = (props) => {
             let photo = await cameraRef.current.takePictureAsync();
 
             await dispatch(actionCreator.savePicture(photo, attachment, file))
-            // await dispatch(actionCreator.getAllAttachment())
-            // await dispatch(actionCreator.getAttachment(attachment))
+            await dispatch(actionCreator.getAllAttachment())
+            await dispatch(actionCreator.getAttachment(attachment))
+            
             setActive(false)
             props.navigation.goBack()
         }

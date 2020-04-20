@@ -121,6 +121,14 @@ export const contactPerson = () => {
     }
 }
 
+export const companyInfo = () => {
+    return (dispatch, getState) => {
+        //const all = getState().companyInformationReducer
+        //console.log(`company info ialah : ${JSON.stringify(all)}`)
+        dispatch(companyInfoAPI())
+    }
+}
+
 export const contactPersonUploadFirst = () => {
     return async (dispatch, getState) => {
 

@@ -7,6 +7,7 @@ import {
     View,
     TextInput,
     KeyboardAvoidingView,
+    Platform
 
 
 } from 'react-native';
@@ -16,11 +17,12 @@ import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
 
+const ios=Platform.OS==='ios'?true:false
 
 const LayoutLoan = (props) => {
     return (
 
-        <KeyboardAvoidingView behavior={'padding'} enabled style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', marginTop: !props.nopaddingTop ? Constants.statusBarHeight : 0,backgroundColor:'#fff' }}>
+        <KeyboardAvoidingView behavior={ios?'padding':null} enabled style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', marginTop: !props.nopaddingTop ? Constants.statusBarHeight : 0,backgroundColor:'#fff' }}>
             <View style={{ backgroundColor: '#192f6a', alignSelf: 'stretch', flexDirection: 'row', padding: 10 }}>
                 <View style={{ flex: 1 }}>
                     {!props.back ? <TouchableOpacity onPress={() => props.navigation.openDrawer()}>

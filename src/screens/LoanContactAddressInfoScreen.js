@@ -217,12 +217,10 @@ const LoanContactAddressInfoScreen = (props) => {
                                         {state && <CustomTextInput
                                             imageUri={require('../assets/images/address.png')}
                                             value={state}
-
                                             placeholder={'State'}
 
                                         />}
                                     </View>
-
                                 </LayoutLoan>
                             </Modal>
                             <Text style={[styles.formTitle]}>Section B</Text>
@@ -294,16 +292,12 @@ const LoanContactAddressInfoScreen = (props) => {
                                 keyboardType={'default'}
                             />
 
-
-
-
                             <CustomFormAction
                                 navigation={props.navigation}
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}
                             />
                         </View>
-
                     )
                 }}
             </Formik >

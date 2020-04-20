@@ -76,6 +76,9 @@ import LoanMaklumatPeribadiBScreen from '../screens/LoanMaklumatPeribadiBScreen'
 import BusinessPlanEstablishCompBScreen from '../screens/BusinessPlanEstablishCompBScreen';
 import BusinessPlanBussInfoBScreen from '../screens/BusinessPlanBussInfoBScreen';
 import BusinessPlanBussModalBScreen from '../screens/BusinessPlanBussModalBScreen';
+import CompanyContactInformationScreen from '../screens/CompanyContactInformationScreen';
+import SignupOtpScreen from '../screens/SignupOtpScreen';
+import SignupOtpEnterScreen from '../screens/SignupOtpEnterScreen';
 
 const DashboardStack = () => {
     return (
@@ -94,7 +97,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="InfoNews" component={InfoNewsScreen} />
             <Stack.Screen name="InfoNewsList" component={InfoNewsDrawer} />
             <Stack.Screen name="Financing" component={FinancingStack} />
-            <Stack.Screen name="MyAccount" component={MyAccountScreen} />
+            <Stack.Screen name="MyAccount" component={MyAccountStack} />
             <Stack.Screen name="BizApp" component={BizAppScreen} />
             <Stack.Screen name="BizAppDetail" component={BizAppDetailScreen} />
             <Stack.Screen name="MyAccountEdit" component={MyAccountEditScreen} />
@@ -102,8 +105,8 @@ const DashboardStackWithModal = () => {
             {/* <Stack.Screen name="EcommerceDetail" component={EcommerceDetailScreen} /> */}
             <Stack.Screen name="EAdvertisement" component={EAdvertisementScreen} />
             {/* <Stack.Screen name="ElearningPlay" component={ElearningPlayScreen} /> */}
-            <Stack.Screen name="AddCompany" component={CompanyInformationScreen} />
-            <Stack.Screen name="CompanyInfoSuccess" component={CompanyInfoSuccessScreen} />
+
+
             <Stack.Screen name="ScanQR" component={ScanQRScreen} />
             <Stack.Screen name="QR" component={QRScreen} />
             <Stack.Screen name="UserAccount" component={UserAccountScreen} />
@@ -114,15 +117,27 @@ const DashboardStackWithModal = () => {
     )
 }
 
+const MyAccountStack = () => {
+    return (
+        <Stack.Navigator initialRouteName="MyAccount" mode={'modal'} screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="MyAccount" component={MyAccountScreen} />
+            <Stack.Screen name="AddCompany" component={CompanyInformationScreen} />
+            <Stack.Screen name="AddCompanyContact" component={CompanyContactInformationScreen} />
+            <Stack.Screen name="AddPhone" component={SignupOtpScreen} />
+            <Stack.Screen name="VerifyPhone" component={SignupOtpEnterScreen} />
+        </Stack.Navigator>
+    )
+}
+
 const FinancingStack = () => {
     return (
         <Stack.Navigator initialRouteName="Financing" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Financing" component={FinancingScreen} />
             <Stack.Screen name="LoanCheckList" component={LoanCheckListScreen} />
             <Stack.Screen name="LoanDrawer" component={LoanDrawer} />
-            <Stack.Screen name="BusinessPlanDrawer" component={BusinessPlanDrawer} />     
+            <Stack.Screen name="BusinessPlanDrawer" component={BusinessPlanDrawer} />
             <Stack.Screen name="Attachment" component={AttachmentScreen} />
-            <Stack.Screen name="Camera" component={CameraScreen} />         
+            <Stack.Screen name="Camera" component={CameraScreen} />
             <Stack.Screen name="Map" component={MapScreen} />
         </Stack.Navigator>
     )
@@ -351,7 +366,7 @@ const MainTabNav = () => {
                             //console.log(`route ialah :${JSON.stringify(routeName)}`)
                             //console.log(`history ialah :${JSON.stringify(history)}`)
                             //if (routeName === 'LoanMaklumatAsas' || routeName === 'LoanSektorPerniagaan' || routeName === 'LoanMaklumatPeribadi' || routeName === 'LoanPersonalStatus' || routeName === 'LoanContactAddressInfo' || routeName === 'LoanPendapatan' || routeName === 'LoanConnectedParties' || routeName === 'LoanConnectedPartiesAddr' || routeName === 'LoanBusinessInfo' || routeName === 'LoanBusinessAddrInfo' || routeName === 'LoanBusinessInfoCont' || routeName === 'LoanBusinessDetail' || routeName === 'LoanDetail')
-                            if (routeName === 'Financing' || routeName === 'LoanDrawer' || routeName === 'Camera' || routeName === 'BusinessPlanDrawer' || routeName === 'Map') {
+                            if (routeName === 'AddCompanyContact' || routeName === 'AddCompany' || routeName === 'Financing' || routeName === 'LoanDrawer' || routeName === 'Camera' || routeName === 'BusinessPlanDrawer' || routeName === 'Map') {
                                 tabBarVisible = false
                             }
 

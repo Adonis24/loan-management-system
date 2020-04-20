@@ -11,7 +11,7 @@ export const CustomTextInput = (props) => {
     const { multiLine, value, editable, handleChange, handleBlur, touched, error, label, keyboardType, placeholder, handleClick, message, secureText, } = props
     if (!handleClick) {
         return (
-            <View style={{ marginBottom: 10 }} >
+            <View style={{ marginBottom: 20 }} >
                 <View style={{}}>
                     <Text style={styles.label}>{placeholder} :</Text>
                 </View>
@@ -26,7 +26,7 @@ export const CustomTextInput = (props) => {
         )
     } else {
         return (
-            <View style={{ marginBottom: 10 }} >
+            <View style={{ marginBottom: 20 }} >
                 <View style={{}}>
                     <Text style={styles.label}>{placeholder} :</Text>
                 </View>
