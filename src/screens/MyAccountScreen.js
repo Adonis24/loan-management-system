@@ -9,12 +9,9 @@ import {
     View, Animated, StyleSheet
 } from 'react-native';
 import moment from 'moment'
-import QRCode from 'react-native-qrcode-svg'
+
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
-//import { Constants, LinearGradient, FileSystem } from 'expo'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
+
 
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
@@ -120,11 +117,20 @@ const MyAccountScreen = (props) => {
                             <View style={{ flex: 2 }}><Text style={[styles.answer]}>{name}</Text></View>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label]}>IC :</Text></View>
+                            <View style={{ flex: 2 }}><Text style={[styles.answer]}>{ic_no}</Text></View>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+                            <View style={{ flex: 1 }}><Text style={[styles.label]}>Membership:</Text></View>
+                            <View style={{ flex: 2 }}><Text style={[styles.answer]}>{member_id}</Text></View>
+                        </View>
+                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
                             <View style={{ flex: 1 }}><Text style={[styles.label, { alignSelf: 'flex-start', textAlign: 'left' }]}>Email :</Text></View>
                             <View style={{ flex: 2, flexDirection: 'row' }}>
-                                <Text style={[styles.answer]}>{email}</Text><TouchableOpacity >
+                                <Text style={[styles.answer,{color:email_verified_at?null:'lightgrey'}]}>{email}</Text>
+                                {/* <TouchableOpacity >
                                     {email_verified_at ? <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} /> : <Text style={[styles.caption, { padding: 3, margin: 3, }]}>Verify</Text>}
-                                </TouchableOpacity>
+                                </TouchableOpacity> */}
                             </View>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
@@ -134,19 +140,12 @@ const MyAccountScreen = (props) => {
                                     <Text style={[styles.answer]}>{phone_no}</Text>
                                     <Ionicons name={'md-checkmark-circle'} color={'green'} size={20} style={{ marginLeft: 3 }} />
                                 </View> :
-                                    <TouchableOpacity onPress={() => props.navigation.navigate('SignUpOtp', { screen: 'setting' })} style={{ borderRadius: 5 }}>
-                                        <Text style={[styles.caption, { padding: 5 }]}>Add Phone</Text>
+                                    <TouchableOpacity onPress={() => props.navigation.navigate('AddPhone', { screen: 'setting' })} style={{alignSelf:'flex-end',paddingRight:10 }}>
+                                       <Ionicons name={'md-add'} size={24} color={'#2C4690'} />
                                     </TouchableOpacity>}
                             </View>
                         </View>
-                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                            <View style={{ flex: 1 }}><Text style={[styles.label]}>IC :</Text></View>
-                            <View style={{ flex: 2 }}><Text style={[styles.answer]}>{ic_no}</Text></View>
-                        </View>
-                        <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-                            <View style={{ flex: 1 }}><Text style={[styles.label]}>Membership:</Text></View>
-                            <View style={{ flex: 2 }}><Text style={[styles.answer]}>{member_id}</Text></View>
-                        </View>
+                        
                     </View>
                 </View>
                 {/* END PERSONAL PROFILE --- START COMPANY */}
@@ -154,9 +153,13 @@ const MyAccountScreen = (props) => {
                     <View style={{ marginBottom: 10 }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Company</Text>
-                            <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
+                            {companyName?<Ionicons name={'md-more'} size={24} color={'#2C4690'} />:
+                            <TouchableOpacity onPress={()=>props.navigation.navigate('AddCompany')} style={{paddingRight:10}}>
+                                <Ionicons name={'md-add'} size={24} color={'#2C4690'} />
+                                </TouchableOpacity>}
                         </View>
                     </View>
+                    {companyName?
                     <View style={[{ backgroundColor: '#fff', flex: 1, alignSelf: 'stretch', justifyContent: 'space-between', }]}>
                         <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
                             <View style={{ flex: 1 }}><Text style={[styles.label]}>Name :</Text></View>
@@ -196,10 +199,10 @@ const MyAccountScreen = (props) => {
                                 <Text style={[styles.answer]}>{state}</Text>
                             </View>
                         </View>
+                  
 
 
-
-                    </View>
+                    </View>  :<View />}
                 </View>
                 {/* {_renderScrollViewContent()} */}
                 {/* <View  style={{marginBottom:400}} /> */}
