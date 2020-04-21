@@ -360,7 +360,7 @@ export const editUserApi = () => {
 
     console.log(name, full_name, profile_pic)
 
-    const responseJson = await apiPostCall(`api/user/edit`,  { name, full_name, profile_pic }, getState().apiReducer)
+    const responseJson = await apiPostCall(`api/user/edit`, { name, full_name, profile_pic }, getState().apiReducer)
 
     console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const userProfile = await responseJson.data
@@ -533,9 +533,16 @@ export const saveLoanDataApi = () => {
     if (data) {
       const dataFiltered = data.filter(l => l.email !== email)
       const userData = data.find(l => l.email === email)
-      const newUserData = { ...userData, loanData: { ...userData.loanData, ...loanDataReducer } }
-      dataFiltered.push(newUserData)
-      await AsyncStorage.setItem('data', JSON.stringify(dataFiltered))
+      if (userData) {
+        const newUserData = { ...userData, loanData: { ...userData.loanData, ...loanDataReducer } }
+        dataFiltered.push(newUserData)
+        await AsyncStorage.setItem('data', JSON.stringify(dataFiltered))
+      } else {
+        const newData = [{ email, loanData: loanDataReducer }]
+        await AsyncStorage.setItem('data', JSON.stringify(newData))
+
+      }
+
     } else {
       const newData = [{ email, loanData: loanDataReducer }]
       await AsyncStorage.setItem('data', JSON.stringify(newData))
@@ -676,12 +683,15 @@ export const getAllAttachmentApi = () => {
     if (data) {
       //const dataFiltered = data.filter(l => l.email !== email)
       const userData = data.find(l => l.email === email)
-      const { attachment } = userData
-      if (attachment) {
-        dispatch({ type: 'SET_ATTACHMENT', payload: { attachment } })
-      } else {
+      if (userData) {
+        const { attachment } = userData
+        if (attachment) {
+          dispatch({ type: 'SET_ATTACHMENT', payload: { attachment } })
+        } else {
 
+        }
       }
+
 
     } else {
       // const newData = [{ email, location: x }]
@@ -736,10 +746,13 @@ export const getAllBusinessPlanApi = () => {
     if (data) {
       const dataFiltered = data.filter(l => l.email !== email)
       const userData = data.find(l => l.email === email)
-      const { bussPlanData } = userData
-      if (bussPlanData) {
-        dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...bussPlanData } })
-      } else {
+      if (userData) {
+        const { bussPlanData } = userData
+        if (bussPlanData) {
+          dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...bussPlanData } })
+        } else {
+
+        }
 
       }
 
@@ -759,17 +772,43 @@ export const getLoanDataApi = () => {
     if (data) {
       const dataFiltered = data.filter(l => l.email !== email)
       const userData = data.find(l => l.email === email)
-      const { loanData } = userData
-      if (loanData) {
-        dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...loanData } })
-      } else {
+      if (userData) {
+        const { loanData } = userData
+        if (loanData) {
+          dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...loanData } })
+        } else {
 
+        }
       }
+
 
     } else {
       // const newData = [{ email, location: x }]
     }
+  }
+}
 
+export const getFileListApi = () => {
+  return async (dispatch, getState) => {
+
+    const responseJson = await apiPostCall(`api/listDocuments`, null, getState().apiReducer)
+    //const newsArray = await responseJson.data
+    await console.log(`List of uploaded files :  ${JSON.stringify(responseJson)}`)
+
+    //await dispatch({ type: 'SET_NEWS', payload: { newsArray } })
+
+
+  }
+}
+
+export const uploadDocumentApi = (values) => {
+  return async (dispatch, getState) => {
+
+    const responseJson = await apiPostCall(`api/uploadDocument`, values, getState().apiReducer)
+    //const newsArray = await responseJson.data
+    //await console.log(`List of uploaded files :  ${JSON.stringify(responseJson)}`)
+
+    //await dispatch({ type: 'SET_NEWS', payload: { newsArray } })
 
 
   }

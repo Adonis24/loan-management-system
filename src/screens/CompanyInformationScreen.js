@@ -7,7 +7,7 @@ import {
     View,
     TextInput,
     KeyboardAvoidingView,
-    Modal,ScrollView
+    Modal, ScrollView
 
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -147,18 +147,8 @@ const CompanyInformationScreen = (props) => {
                                 setIosDatePickerShow(!iosDatePickerShow)
                             }}>
 
-                            <View style={styles.container}>
-                                <View style={[styles.titleMargin, { flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4', marginBottom: 25 }]}>
-                                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', marginLeft: 0 }}>
-                                        <TouchableOpacity onPress={() => setShow(!ios)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                            <Ionicons name="ios-arrow-back" color={'#3EC2D9'} style={{ fontSize: 30, paddingLeft: 20 }} />
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                                        <Text style={[styles.title, { color: '#055E7C' }]}>Select Date</Text>
-                                    </View>
-                                </View>
-                                <View style={{ flex: 9, justifyContent: 'flex-start' }}>
+                            <LayoutLoan title={'Enter Date'} nopaddingTop={false} back={() => setIosDatePickerShow(!iosDatePickerShow)} navigation={props.navigation}>
+                                <View style={{ alignSelf: 'stretch', margin: 10 }}>
 
                                     <DateTimePicker
                                         testID="dateTimePicker"
@@ -170,12 +160,12 @@ const CompanyInformationScreen = (props) => {
                                         onChange={onChange}
                                     />
                                 </View>
-                            </View>
+                            </LayoutLoan>
                         </Modal>
                             <ScrollView contentContainerStyle={{ justifyContent: 'center', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                                 {/* {showLogo && <Image source={require('../assets/images/logo.png')} style={{ height: Layout.window.height * 0.2, width: Layout.window.width * 0.7 }} resizeMode={'contain'} />} */}
                                 <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY INFORMATION</Text>
-                                <Text style={[styles.textDefault, {  marginBottom: 20, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
+                                <Text style={[styles.textDefault, { marginBottom: 20, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
 
                                 <CustomTextInput
                                     imageUri={require('../assets/images/company.png')}
@@ -198,10 +188,10 @@ const CompanyInformationScreen = (props) => {
                                     keyboardType={'default'}
                                 />
 
-                                <TouchableOpacity onPress={() => showDatepicker()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5,  borderColor: comp_regdateTouched && comp_regdateError ? '#d94498' : '#5a83c2',marginBottom:20 }}>
+                                <TouchableOpacity onPress={() => showDatepicker()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, borderColor: comp_regdateTouched && comp_regdateError ? '#d94498' : '#5a83c2', marginBottom: 20 }}>
                                     <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
 
-                                    <TextInput editable={false} value={comp_regdate?moment(comp_regdate).format("MMMM Do YYYY"):null} onChangeText={FormikProps.handleChange(`comp_regdate`)} onBlur={FormikProps.handleBlur(`comp_regdate`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Date'} placeholderTextColor={comp_regdateTouched && comp_regdateError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
+                                    <TextInput editable={false} value={comp_regdate ? moment(comp_regdate).format("MMMM Do YYYY") : null} onChangeText={FormikProps.handleChange(`comp_regdate`)} onBlur={FormikProps.handleBlur(`comp_regdate`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Date'} placeholderTextColor={comp_regdateTouched && comp_regdateError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
                                 </TouchableOpacity>
 
                                 <View style={{ width: Layout.window.width * 0.65 }}>

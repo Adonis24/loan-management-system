@@ -53,7 +53,7 @@ const LoanBankScreen = (props) => {
     const dispatch = useDispatch()
 
     //const { comp_phone, comp_email, comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, proceedContact, error, errorColor } = useSelector(state => state.companyInformationReducer, shallowEqual)
-    const { bank, noAkaun, typeBusiness } = useSelector(state => state.financingReducer, shallowEqual)
+    const { bank, noAkaun, } = useSelector(state => state.financingReducer, shallowEqual)
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
 
     const setMaklumatAsas = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
@@ -81,7 +81,7 @@ const LoanBankScreen = (props) => {
                 validationSchema={validationSchema}
             >
                 {FormikProps => {
-                    const { bank, noAkaun, typeBusiness } = FormikProps.values
+                    const { bank, noAkaun,  } = FormikProps.values
 
 
                     const bankError = FormikProps.errors.bank
@@ -113,8 +113,8 @@ const LoanBankScreen = (props) => {
 
                             <Text style={[styles.formTitle]}>Section A</Text>
                             <Text style={[styles.formSubtitle]}>Maklumat Asas</Text>
-
-
+                            
+                          
                             <CustomTextInput
                                 imageUri={require('../assets/images/compRegNum.png')}
                                 value={noAkaun}

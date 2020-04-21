@@ -96,7 +96,9 @@ const LoanBusinessAddrInfoScreen = (props) => {
 
                     const getCoordinate = (poskod) => {
 
+                        
                         if (poskod) {
+                            
                             if (poskod.length === 5) {
                                 const coordinate = malaysiaData.find(x => x.Postcode == poskod)
 
@@ -112,9 +114,11 @@ const LoanBusinessAddrInfoScreen = (props) => {
 
                             } else {
                                 console.log(`do nothing`)
-                                FormikProps.setFieldValue('poskod', poskod)
+                                FormikProps.setFieldValue('compSendiriPoskod', poskod)
                             }
 
+                        }else{
+                            FormikProps.setFieldValue('compSendiriPoskod', poskod)
                         }
 
                     }

@@ -123,33 +123,25 @@ const LoanCheckListScreen = (props) => {
                 return false
             }
         }
-
-
-
     }
 
 
-    const getAllAttachment = async () => {
-        await dispatch(actionCreator.getAllAttachment())
-    }
-
-    const getAllBusinessPlan = async () => {
-        await dispatch(actionCreator.getAllBusinessPlan())
-    }
-
-    const getLoanData = async () => {
+    const getData = async () => {
         await dispatch(actionCreator.getLoanData())
+        await dispatch(actionCreator.getAllBusinessPlan())
+        await dispatch(actionCreator.getAllAttachment())
+        await dispatch(actionCreator.getFileList())
+
+
     }
+
 
     useEffect(() => {
-        getAllAttachment()
-        getAllBusinessPlan()
-        getLoanData()
-
+        getData()
     }, []); // empty-array means don't watch for any updates
 
-//     const { email } = useSelector(state => state.myAccountReducer, shallowEqual)
-// console.log(`email is ${email}`)
+    //     const { email } = useSelector(state => state.myAccountReducer, shallowEqual)
+    // console.log(`email is ${email}`)
     return (
         < LayoutB
             title={'Checklist'}
@@ -194,7 +186,7 @@ const LoanCheckListScreen = (props) => {
 const CustomRow = (props) => {
     return (
         <TouchableOpacity onPress={() => props.navigation.navigate(props.button, { content: JSON.stringify(props.content) })} style={[styles.shadowNew, { alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch', marginBottom: 10 }]}>
-            <View style={{ padding: 5, flex: 1, }}>
+            <View style={{ padding: 10, flex: 1, }}>
                 <Text style={[styles.textDefault, { marginBottom: 5, textAlign: 'left' }]}>{props.no} </Text>
             </View>
             <View style={{ flex: 8, padding: 5, alignItems: 'flex-start' }} >

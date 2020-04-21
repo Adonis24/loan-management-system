@@ -9,7 +9,7 @@ import s3 from '../../do/DigitalOcean'
 import config from '../../do/config'
 
 import { requestToken, requestPersonalToken, urlToBlob, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI, requestTokenLMS, registerLMSApi, requestPersonalTokenLMS } from './apiRegistration'
-import { newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi, acceptApi, saveLoanDataApi, saveBussPlanDataApi, resetFormApi, saveLocationApi, getLocationApi, savePictureApi, getAllAttachmentApi, resetAllAttachmentApi, getAttachmentApi, getAllBusinessPlanApi, getLoanDataApi } from './apiDashboard'
+import { newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi, acceptApi, saveLoanDataApi, saveBussPlanDataApi, resetFormApi, saveLocationApi, getLocationApi, savePictureApi, getAllAttachmentApi, resetAllAttachmentApi, getAttachmentApi, getAllBusinessPlanApi, getLoanDataApi, getFileListApi, uploadDocumentApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -228,7 +228,7 @@ export const applyLoan = () => {
 
 export const applyGrant = () => {
     return (dispatch, getState) => {
-       // console.log(`kat action : ${JSON.stringify(getState().grantApplicationReducer)}`)
+        // console.log(`kat action : ${JSON.stringify(getState().grantApplicationReducer)}`)
         dispatch(applyGrantApi())
     }
 }
@@ -410,8 +410,9 @@ export const saveDocumentDO = (result) => {
 }
 
 export const saveSelfie = (result) => {
-    const { uri } = result
+
     return async (dispatch, getState) => {
+        const { uri } = result
         const blob = await urlToBlob(uri)
         const { data } = blob
 
@@ -481,6 +482,7 @@ export const getLocation = () => {
 
 export const saveLocation = (x) => {
     return async (dispatch, getState) => {
+        console.log(`x kat action ialah : ${JSON.stringify(x)}`)
         dispatch(saveLocationApi(x))
     }
 
@@ -526,6 +528,51 @@ export const getAllBusinessPlan = () => {
 export const getLoanData = () => {
     return async (dispatch, getState) => {
         dispatch(getLoanDataApi())
+    }
+
+}
+
+
+export const getFileList = () => {
+    return async (dispatch, getState) => {
+        dispatch(getFileListApi())
+    }
+
+}
+
+export const uploadDocument = (result) => {
+    return async (dispatch, getState) => {
+        console.log(`ditekan`)
+        const { uri } = result
+        const blob = await urlToBlob(uri)
+        const { data } = blob
+
+        const fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+
+        const params = {
+            Body: blob,
+            Bucket: `${config.bucketName}`,
+            Key: fileName
+        };
+        // Sending the file to the Spaces
+        s3.putObject(params)
+            .on('build', request => {
+                request.httpRequest.headers.Host = `${config.digitalOceanSpaces}`;
+                request.httpRequest.headers['Content-Length'] = data.size;
+                request.httpRequest.headers['Content-Type'] = data.type;
+                request.httpRequest.headers['x-amz-acl'] = 'public-read';
+            })
+            .send((err) => {
+                if (err) console.log(err);
+                else {
+                    // If there is no error updating the editor with the imageUrl
+                    const imageUrl = `${config.digitalOceanSpaces}/` + fileName
+                    console.log(imageUrl);
+                    //dispatch({ type: 'SET_USER_PROFILE', payload: { profile_pic: imageUrl } })
+                    dispatch(uploadDocumentApi({ url: imageUrl, document_name: fileName }))
+                }
+            });
+
     }
 
 }
