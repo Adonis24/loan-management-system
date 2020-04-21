@@ -1,12 +1,13 @@
 //console.ignoredYellowBox = ['Setting a timer']
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, Dimensions, TextInput, Image, TouchableOpacity, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient'
+import { takeSnapshotAsync } from 'expo'
 
 import MapView, { Marker, Callout } from 'react-native-maps';
 import * as Permissions from 'expo-permissions'
 import malaysiaData from 'malaysia-state-city-postcode'
-import LayoutB from '../Layout/LayoutB'
+
 import styles from '../styles/styles'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons';
@@ -20,6 +21,24 @@ const MapScreen = (props) => {
     const { location, initialRegion } = useSelector(state => state.locationReducer, shallowEqual)
     const { compSendiriPoskod } = useSelector(state => state.financingReducer, shallowEqual)
 
+    const mapRef = useRef()
+
+    const takeSnapshot = () => {
+        // 'takeSnapshot' takes a config object with the
+        // following options
+        const snapshot = mapRef.current.takeSnapshot({
+            //width: 300,      // optional, when omitted the view-width is used
+            //height: 300,     // optional, when omitted the view-height is used
+            //region: {..},    // iOS only, optional region to render
+            format: 'png',   // image formats: 'png', 'jpg' (default: 'png')
+            quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
+            result: 'file'   // result types: 'file', 'base64' (default: 'file')
+        });
+        snapshot.then((uri) => {
+            //this.setState({ mapSnapshot: uri });
+            console.log(`snapshot ialah : ${JSON.stringify(uri)}`)
+        });
+    }
 
 
     const getCoordinate = (val) => {
@@ -72,7 +91,7 @@ const MapScreen = (props) => {
     }
     useEffect(() => {
 
-        getCoordinate(compSendiriPoskod)
+        compSendiriPoskod && getCoordinate(compSendiriPoskod)
 
     }, [compSendiriPoskod])
 
@@ -140,7 +159,8 @@ const MapScreen = (props) => {
                 region={region}
                 //region={null}
                 onRegionChangeComplete={region => changeRegion(region)}
-                style={mapStyles.mapStyle} >
+                style={mapStyles.mapStyle}
+                ref={mapRef}>
                 {/* {markers.map(marker => (
                     <Marker
                         coordinate={marker.latlng}
@@ -161,11 +181,11 @@ const MapScreen = (props) => {
 
             </MapView>
             <View style={{ position: 'absolute', top: 0, left: 0, right: 0 }}>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between',marginTop:10 }}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
                     <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>
                         <TouchableOpacity onPress={() => props.navigation.goBack()} hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
-                            <View style={{height:40,width:40,justifyContent:'center',alignItems:'center',borderRadius:20,backgroundColor:'#fff'}}>
-                            <Ionicons name='ios-arrow-back' size={32} />
+                            <View style={{ height: 40, width: 40, justifyContent: 'center', alignItems: 'center', borderRadius: 20, backgroundColor: '#fff' }}>
+                                <Ionicons name='ios-arrow-back' size={32} />
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -181,15 +201,22 @@ const MapScreen = (props) => {
                     </View>
                 </View>
             </View>
-            <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0,padding:10 }}>
-
-            <TouchableOpacity
-                        style={{ alignSelf: 'stretch' }}
-                        onPress={() => dispatch(actionCreator.saveLocation({ location: x, initialRegion: region }))}>
-                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'stretch', padding: 10, borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={[styles.textDefault, { color: '#fff' }]}>SIMPAN LOKASI</Text>
-                        </LinearGradient>
-                    </TouchableOpacity>
+            <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: 10 }}>
+                <TouchableOpacity
+                    style={{ alignSelf: 'stretch' }}
+                    onPress={() => takeSnapshot()}>
+                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'stretch', padding: 10, borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={[styles.textDefault, { color: '#fff' }]}>Snapshot</Text>
+                    </LinearGradient>
+                </TouchableOpacity>
+                <View style={{ margin: 20 }} />
+                <TouchableOpacity
+                    style={{ alignSelf: 'stretch' }}
+                    onPress={() => dispatch(actionCreator.saveLocation({ location: x, initialRegion: region }))}>
+                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'stretch', padding: 10, borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={[styles.textDefault, { color: '#fff' }]}>SIMPAN LOKASI</Text>
+                    </LinearGradient>
+                </TouchableOpacity>
             </View>
 
         </ LayoutMap>
