@@ -358,7 +358,9 @@ export const editUserApi = () => {
 
     const { name, full_name, profile_pic } = getState().myAccountReducer
 
-    const responseJson = await apiPostCall(`api/user/edit`, null, name, full_name, profile_pic, getState().apiReducer)
+    console.log(name, full_name, profile_pic)
+
+    const responseJson = await apiPostCall(`api/user/edit`,  { name, full_name, profile_pic }, getState().apiReducer)
 
     console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const userProfile = await responseJson.data
