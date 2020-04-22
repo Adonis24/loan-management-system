@@ -23,10 +23,10 @@ const MapScreen = (props) => {
 
     const mapRef = useRef()
 
-    const takeSnapshot = () => {
+    const takeSnapshot = async () => {
         // 'takeSnapshot' takes a config object with the
         // following options
-        const snapshot = mapRef.current.takeSnapshot({
+        const snapshot = await mapRef.current.takeSnapshot({
             //width: 300,      // optional, when omitted the view-width is used
             //height: 300,     // optional, when omitted the view-height is used
             //region: {..},    // iOS only, optional region to render
@@ -34,12 +34,19 @@ const MapScreen = (props) => {
             quality: 0.8,    // image quality: 0..1 (only relevant for jpg, default: 1)
             result: 'file'   // result types: 'file', 'base64' (default: 'file')
         });
-        snapshot.then((uri) => {
-            //this.setState({ mapSnapshot: uri });
-            console.log(`snapshot ialah : ${JSON.stringify(uri)}`)
-        });
+        // snapshot.then((uri) => {
+        //     //this.setState({ mapSnapshot: uri });
+        //     console.log(`snapshot ialah : ${JSON.stringify(uri)}`)
+        // });
+        console.log(`snapshot cara baru : ${JSON.stringify(snapshot)}`)
+        return snapshot
     }
 
+
+    const simpanLokasi = async () => {
+        const snapshot = await takeSnapshot()
+        dispatch(actionCreator.saveLocation({ location: x, initialRegion: region, snapshot }))
+    }
 
     const getCoordinate = (val) => {
         console.log(val)
@@ -142,6 +149,7 @@ const MapScreen = (props) => {
     console.log(`location ialah ${JSON.stringify(location)}`)
     console.log(`region ialah ${JSON.stringify(initialRegion)}`)
     console.log(`x ialah ${JSON.stringify(x)}`)
+    
 
     return (
         <LayoutMap
@@ -150,9 +158,6 @@ const MapScreen = (props) => {
             navigation={props.navigation}
             imageUri={require('../assets/images/news.png')}
         >
-
-
-
             <MapView
                 mapType={'standard'}
                 showsUserLocation={true}
@@ -202,17 +207,10 @@ const MapScreen = (props) => {
                 </View>
             </View>
             <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: 10 }}>
+
                 <TouchableOpacity
                     style={{ alignSelf: 'stretch' }}
-                    onPress={() => takeSnapshot()}>
-                    <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'stretch', padding: 10, borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={[styles.textDefault, { color: '#fff' }]}>Snapshot</Text>
-                    </LinearGradient>
-                </TouchableOpacity>
-                <View style={{ margin: 20 }} />
-                <TouchableOpacity
-                    style={{ alignSelf: 'stretch' }}
-                    onPress={() => dispatch(actionCreator.saveLocation({ location: x, initialRegion: region }))}>
+                    onPress={() => simpanLokasi()}>
                     <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'stretch', padding: 10, borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={[styles.textDefault, { color: '#fff' }]}>SIMPAN LOKASI</Text>
                     </LinearGradient>

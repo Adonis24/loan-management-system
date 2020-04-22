@@ -9,7 +9,7 @@ import s3 from '../../do/DigitalOcean'
 import config from '../../do/config'
 
 import { requestToken, requestPersonalToken, urlToBlob, registerApi, registerOTPApi, verifyPhoneApi, companyInfoAPI, contactPersonAPI, detailConnectAPI, declarationSignAPI, requestTokenLMS, registerLMSApi, requestPersonalTokenLMS } from './apiRegistration'
-import { newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi, acceptApi, saveLoanDataApi, saveBussPlanDataApi, resetFormApi, saveLocationApi, getLocationApi, savePictureApi, getAllAttachmentApi, resetAllAttachmentApi, getAttachmentApi, getAllBusinessPlanApi, getLoanDataApi, getFileListApi, uploadDocumentApi } from './apiDashboard'
+import { newsApi, eventApi, promotionApi, handbooksApi, einfoApi, applyLoanApi, getUserInfoApi, getCompanyInfoApi, getListWorkersApi, doneForNowApi, sendNotificationApi, bizDirApi, listAgencyApi, addExpoTokenApi, connectionStatusApi, getAssociateApi, getPendingApi, loanInfoApi, getCoursesApi, editUserApi, generateJWTApi, requestConnectApi, applyGrantApi, grantInfoApi, acceptApi, saveLoanDataApi, saveBussPlanDataApi, resetFormApi, saveLocationApi, getLocationApi, savePictureApi, getAllAttachmentApi, resetAllAttachmentApi, getAttachmentApi, getAllBusinessPlanApi, getLoanDataApi, getFileListApi, uploadDocumentApi, uploadAllAttachmentApi } from './apiDashboard'
 //import {pusherListen} from './pusher'
 import moment from 'moment'
 
@@ -543,16 +543,16 @@ export const getFileList = () => {
 export const uploadDocument = (result) => {
     return async (dispatch, getState) => {
         console.log(`ditekan`)
-        const { uri } = result
+        const { uri, fileName, fileType } = result
         const blob = await urlToBlob(uri)
         const { data } = blob
 
-        const fileName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+        const fileNameRandom = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) + `.${fileType}`
 
         const params = {
             Body: blob,
             Bucket: `${config.bucketName}`,
-            Key: fileName
+            Key: fileNameRandom
         };
         // Sending the file to the Spaces
         s3.putObject(params)
@@ -566,13 +566,47 @@ export const uploadDocument = (result) => {
                 if (err) console.log(err);
                 else {
                     // If there is no error updating the editor with the imageUrl
-                    const imageUrl = `${config.digitalOceanSpaces}/` + fileName
+                    const imageUrl = `${config.digitalOceanSpaces}/` + fileNameRandom
                     console.log(imageUrl);
                     //dispatch({ type: 'SET_USER_PROFILE', payload: { profile_pic: imageUrl } })
                     dispatch(uploadDocumentApi({ url: imageUrl, document_name: fileName }))
                 }
             });
 
+    }
+
+}
+
+export const uploadAllAttachment = () => {
+    return async (dispatch, getState) => {
+
+        const { attachment } = getState().attachmentReducer
+
+        if (attachment) {
+            attachment.map(async at => {
+                const { attachmentName, files } = at
+
+                if (files) {
+                    if (files.length > 1) {
+                        files.map(async (fi, index) => {
+                            const fileType = fi.fileDetail.uri.substr(fi.fileDetail.uri.length - 3)
+                            console.log(`To upload ${attachmentName}_${index + 1} : ${fi.fileName} : ${fileType} : ${fi.fileDetail.uri}`)
+                            const fileName = attachmentName + '-' + fi.fileName
+                            const uri = fi.fileDetail.uri
+                            await dispatch(uploadDocument({ uri, fileName, fileType }))
+                        })
+                    } else {
+                        const fileType = files[0].fileDetail.uri.substr(files[0].fileDetail.uri.length - 3)
+                        console.log(`To upload ${attachmentName} : ${files[0].fileName}: ${fileType} :${files[0].fileDetail.uri}`)
+                        const fileName = attachmentName
+                        const uri = files[0].fileDetail.uri
+                        await dispatch(uploadDocument({ uri, fileName, fileType }))
+                    }
+                }
+
+
+            })
+        }
     }
 
 }

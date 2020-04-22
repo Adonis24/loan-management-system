@@ -813,3 +813,43 @@ export const uploadDocumentApi = (values) => {
 
   }
 }
+
+
+export const uploadAllAttachmentApi = () => {
+  return async (dispatch, getState) => {
+
+    const { attachment } = getState().attachmentReducer
+
+    if (attachment) {
+      attachment.map(at => {
+        const { attachmentName, files } = at
+
+        if (files) {
+          if (files.length > 1) {
+            files.map((fi, index) => {
+              const fileType = fi.fileDetail.uri.substr( fi.fileDetail.uri.length - 3)
+              console.log(`To upload ${attachmentName}_${index + 1} : ${fi.fileName} : ${fileType} : ${fi.fileDetail.uri}`)
+              const documentName=attachmentName +'-'+fi.fileName
+            })
+          } else {
+            const fileType = files[0].fileDetail.uri.substr( files[0].fileDetail.uri.length - 3)
+            console.log(`To upload ${attachmentName} : ${files[0].fileName}: ${fileType} :${files[0].fileDetail.uri}`)
+            const documentName=attachmentName
+          }
+        }
+
+
+      })
+    }
+
+
+
+    //const responseJson = await apiPostCall(`api/uploadDocument`, values, getState().apiReducer)
+    //const newsArray = await responseJson.data
+    //await console.log(`List of uploaded files :  ${JSON.stringify(responseJson)}`)
+
+    //await dispatch({ type: 'SET_NEWS', payload: { newsArray } })
+
+
+  }
+}

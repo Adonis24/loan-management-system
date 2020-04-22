@@ -172,7 +172,7 @@ const LoanCheckListScreen = (props) => {
                     {/* <Text style={[styles.textDefault, { paddingLeft: 10 }]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text> */}
                     <TouchableOpacity
                         style={{ alignSelf: 'stretch' }}
-                        onPress={() => console.log(`hantar`)}>
+                        onPress={() => dispatch(actionCreator.uploadAllAttachment())}>
                         <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ alignSelf: 'stretch', padding: 10, borderRadius: 5, justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={[styles.textDefault, { color: '#fff' }]}>HANTAR</Text>
                         </LinearGradient>
