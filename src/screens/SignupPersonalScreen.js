@@ -5,7 +5,7 @@ import {
     Text,
     TouchableOpacity,
     View,
-    TextInput,ScrollView
+    TextInput, ScrollView
 
 
 } from 'react-native';
@@ -16,7 +16,7 @@ import * as Yup from 'yup';
 
 import { LinearGradient } from 'expo-linear-gradient'
 import Layout from '../constants/Layout'
-import { CustomTextInput,CustomFormAction } from '../components/Custom'
+import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import styles from '../styles/styles'
 
 import * as actionCreator from '../store/actions/action'
@@ -54,16 +54,16 @@ const validationSchema = Yup.object().shape({
 const SignupPersonalScreen = (props) => {
 
     const dispatch = useDispatch()
-    const publicToken = useSelector(state => state.registrationReducer, shallowEqual)
+    const { expo_token } = useSelector(state => state.registrationReducer, shallowEqual)
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     //publicToken && console.log(`registration token ialah :${JSON.stringify(publicToken)} `)
 
-       useEffect(() => {
+    useEffect(() => {
         dispatch(actionCreator.getToken())
         dispatch(actionCreator.getTokenLMS())
     }, []);
 
-  
+
     const register = async (values) => {
 
         await dispatch(actionCreator.register(values))
@@ -78,7 +78,7 @@ const SignupPersonalScreen = (props) => {
                 validateOnMount
                 initialValues={{}} onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
-                    dispatch({ type: 'SET_REGISTER', payload: { ...values } })
+                    dispatch({ type: 'SET_REGISTER', payload: { ...values, expo_token } })
                     register(values)
                     actions.setSubmitting(false)
                 }
@@ -102,7 +102,7 @@ const SignupPersonalScreen = (props) => {
                     const password_confirmationTouched = FormikProps.touched.password_confirmation
 
                     return (
-                        <ScrollView style={{ alignSelf:'stretch' , }} contentContainerStyle={{justifyContent: 'flex-start', alignItems: 'center',paddingRight:10,paddingLeft:10,}}>
+                        <ScrollView style={{ alignSelf: 'stretch', }} contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'center', paddingRight: 10, paddingLeft: 10, }}>
                             <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>REGISTRATION</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
 
