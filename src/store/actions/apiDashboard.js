@@ -223,14 +223,14 @@ export const applyBusinessPlanApi = (page) => {
 
 
 
-export const addExpoTokenApi = () => {
+export const addExpoTokenApi = (value) => {
   return async (dispatch, getState) => {
 
 
     const { expo_token } = getState().registrationReducer
 
     //console.log(`expo registrationReducer ${expo_token}`)
-    const responseJson = await apiPostCall(`api/user/expo_token`, null, getState().apiReducer)
+    const responseJson = await apiPostCall(`api/user/expo_token`, value, getState().apiReducer)
 
     //console.log(`inilah response JSON : ${JSON.stringify(responseJson)}`)
     const agencyArray = await responseJson.data

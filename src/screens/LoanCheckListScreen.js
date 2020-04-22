@@ -70,6 +70,15 @@ const billContent = {
     ]
 }
 
+const petaLokasi = {
+    header: 'Lokasi Premis',
+    store: 'lokasiPremis',
+    atList: [
+        { label: 'Lokasi Premis', param: { attachment: 'lokasiPremis', file: 'lokasiPremis' } }
+
+    ]
+}
+
 
 
 const checklist = [
@@ -81,7 +90,7 @@ const checklist = [
     { item: 'Salinan buku simpanan/penyata bank ( 3 bulan terakhir)', button: 'Attachment', content: simpananContent, check: true },
     { item: 'Salinan bil utiliti rumah atau premis perniagaan', button: 'Attachment', content: billContent, check: true },
     { item: 'Borang kebenaran penzahiran maklumat kredit individu', button: 'LoanDrawer', check: true },
-    { item: 'Peta ringkas lokasi tempat perniagaan ke pejabat cawangan tekun', button: 'Map', check: true },
+    { item: 'Peta ringkas lokasi tempat perniagaan ke pejabat cawangan tekun', button: 'Attachment',content: petaLokasi, check: true },
 
 ]
 

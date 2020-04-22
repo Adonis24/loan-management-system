@@ -1,6 +1,6 @@
 //console.ignoredYellowBox = ['Setting a timer']
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, Dimensions, TextInput, Image, TouchableOpacity, Platform } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, TextInput, Image, TouchableOpacity, Platform,ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient'
 import { takeSnapshotAsync } from 'expo'
 
@@ -42,10 +42,18 @@ const MapScreen = (props) => {
         return snapshot
     }
 
-
+    const attachment = props.route.params?.attachment ?? 'NA'
+    const file = props.route.params?.file ?? 'NA'
+    const [active, setActive] = useState(false)
     const simpanLokasi = async () => {
+        setActive(true)
         const snapshot = await takeSnapshot()
-        dispatch(actionCreator.saveLocation({ location: x, initialRegion: region, snapshot }))
+        await dispatch(actionCreator.saveLocation({ location: x, initialRegion: region, snapshot }))
+        await dispatch(actionCreator.savePicture({ uri: snapshot }, attachment, file))
+        await dispatch(actionCreator.getAllAttachment())
+        await dispatch(actionCreator.getAttachment(attachment))
+        setActive(false)
+        props.navigation.goBack()
     }
 
     const getCoordinate = (val) => {
@@ -149,7 +157,7 @@ const MapScreen = (props) => {
     console.log(`location ialah ${JSON.stringify(location)}`)
     console.log(`region ialah ${JSON.stringify(initialRegion)}`)
     console.log(`x ialah ${JSON.stringify(x)}`)
-    
+
 
     return (
         <LayoutMap
@@ -216,6 +224,7 @@ const MapScreen = (props) => {
                     </LinearGradient>
                 </TouchableOpacity>
             </View>
+            {active && <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(1,1,1,0.5)' }}><ActivityIndicator size={'large'} color={'#fff'} /></View>}
 
         </ LayoutMap>
     );

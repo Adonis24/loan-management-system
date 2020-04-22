@@ -27,14 +27,14 @@ import MyAccountScreen from '../screens/MyAccountScreen';
 import BizAppScreen from '../screens/BizAppScreen';
 import MyAccountEditScreen from '../screens/MyAccountEditScreen';
 import ElearningScreen from '../screens/ElearningScreen';
-import ScanQRScreen from '../screens/ScanQRScreen';
-import CompanyInfoSuccessScreen from '../screens/CompanyInfoSuccessScreen';
-import UserAccountScreen from '../screens/UserAccountScreen';
-import InfoEventEdtScreen from '../screens/InfoEventEdtScreen';
+//import ScanQRScreen from '../screens/ScanQRScreen';
+//import CompanyInfoSuccessScreen from '../screens/CompanyInfoSuccessScreen';
+//import UserAccountScreen from '../screens/UserAccountScreen';
+//import InfoEventEdtScreen from '../screens/InfoEventEdtScreen';
 import BizAppDetailScreen from '../screens/BizAppDetailScreen';
 import NoCompanyScreen from '../screens/NoCompanyScreen';
 import CameraSelfieScreen from '../screens/CameraSelfieScreen';
-import QRScreen from '../screens/QRScreen';
+//import QRScreen from '../screens/QRScreen';
 import BillScreen from '../screens/BillScreen';
 import UnderConstructionScreen from '../screens/UnderConstructionScreen';
 import EAdvertisementScreen from '../screens/EAdvertisementScreen';
@@ -106,11 +106,11 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="EAdvertisement" component={EAdvertisementScreen} />
             {/* <Stack.Screen name="ElearningPlay" component={ElearningPlayScreen} /> */}
 
-
+{/* 
             <Stack.Screen name="ScanQR" component={ScanQRScreen} />
             <Stack.Screen name="QR" component={QRScreen} />
             <Stack.Screen name="UserAccount" component={UserAccountScreen} />
-            <Stack.Screen name="InfoEventEdt" component={InfoEventEdtScreen} />
+            <Stack.Screen name="InfoEventEdt" component={InfoEventEdtScreen} /> */}
             <Stack.Screen name="NoCompany" component={NoCompanyScreen} />
             <Stack.Screen name="Bill" component={BillScreen} />
         </Stack.Navigator>

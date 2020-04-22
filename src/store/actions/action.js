@@ -313,9 +313,9 @@ export const enableNotification = () => {
     }
 }
 
-export const addExpoToken = () => {
+export const addExpoToken = (value) => {
     return (dispatch, getState) => {
-        dispatch(addExpoTokenApi())
+        dispatch(addExpoTokenApi(value))
     }
 }
 

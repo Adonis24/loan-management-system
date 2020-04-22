@@ -45,7 +45,7 @@ const App = (props) => {
 
     // Get the token that uniquely identifies this device
     let token = await Notifications.getExpoPushTokenAsync();
-    // console.log(`expo token ialah ${token}`)
+     console.log(`expo token ialah ${token}`)
     store.dispatch({ type: 'SET_REGISTER', payload: { expo_token: token } })
   
   }

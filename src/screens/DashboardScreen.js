@@ -7,7 +7,7 @@ import {
     View,
     Animated,
     Easing,
-    Modal,
+    
     FlatList,
     ActivityIndicator
 
@@ -30,9 +30,12 @@ const DashboardScreen = (props) => {
 
     const dispatch = useDispatch()
     const { member_id, name, email, phone_no, profile_pic, email_verified_at } = useSelector(state => state.myAccountReducer, shallowEqual)
+    //const all = useSelector(state => state.myAccountReducer, shallowEqual)
+
     const companyName = useSelector(state => state.bizInfoReducer.name, shallowEqual)
     const { logo } = useSelector(state => state.bizInfoReducer, shallowEqual)
 
+    //console.log(`expo token ${JSON.stringify(all)}`)
     // const toggleShow = () => {
     //     setPopUp(!popUp)
     // }
@@ -83,7 +86,7 @@ const DashboardScreen = (props) => {
 
 
     useEffect(() => {
-        dispatch(actionCreator.addExpoToken())
+        //dispatch(actionCreator.addExpoToken())
         //dispatch(actionCreator.initiateDashboardScreen())
         dispatch(actionCreator.initiateMyAccount())
         dispatch(actionCreator.initiateCompanyInfo())
@@ -121,7 +124,6 @@ const DashboardScreen = (props) => {
             <View style={{ position: 'absolute', top: Constants.statusBarHeight, left: 0, bottom: 0, right: 0, }}>
                 {/* HEADER */}
                 <View style={{ flex: 1 }}>
-
                     <View style={{ flex: 1, marginTop: 5, marginBottom: 5, paddingTop: 5, paddingBottom: 5, flexDirection: 'row' }}>
                         <Animated.View style={{ opacity: profilePicOpac, flex: 5, flexDirection: 'row' }}>
                             <TouchableOpacity onPress={() => props.navigation.navigate('MyAccount')} style={[{ marginLeft: 10, flexDirection: 'row' }]}>

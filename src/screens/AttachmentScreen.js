@@ -73,6 +73,7 @@ const AttachmentScreen = (props) => {
                                 param={item.param}
                                 uri={getUri(item.param.file)}
                                 type={item.param.type}
+                                store={store}
                             />
                         )}
 
@@ -97,6 +98,12 @@ const Placeholder = (props) => {
             dispatch(actionCreator.getAllAttachment())
         }
     }
+
+    const goNavigate=()=>{
+        (props.store!=='lokasiPremis')?props.navigation.navigate('Camera', { ...props.param, label: props.label }):
+        props.navigation.navigate('Map', { ...props.param, label: props.label })
+    }
+
     return (
         <>
             <Text style={[styles.textDefault, { paddingLeft: 10 }]}>{props.label}</Text>
@@ -108,16 +115,14 @@ const Placeholder = (props) => {
                         : <Text style={styles.textDefault}>Pilih Dokumen</Text>}
                     <Ionicons name='ios-folder' size={37} color={props.uri !== 'NA' ? "darkblue" : "grey"} />
                 </TouchableOpacity> :<>
-                <TouchableOpacity onPress={() => props.navigation.navigate('Camera', { ...props.param, label: props.label })} style={{ width: Layout.window.width / 2, height: Layout.window.width / 3, borderWidth: 1, borderColor: 'lightgrey', backgroundColor: 'lightgrey', justifyContent: 'center', alignItems: 'stretch', borderRadius: 10, margin: 10 }}>
+                <TouchableOpacity onPress={() => goNavigate()} style={{ width: Layout.window.width / 2, height: Layout.window.width / 3, borderWidth: 1, borderColor: 'lightgrey', backgroundColor: 'lightgrey', justifyContent: 'center', alignItems: 'stretch', borderRadius: 10, margin: 10 }}>
                     {props.uri !== 'NA' ?
                         <Image source={{ uri: props.uri }} style={{ flex: 1, width: undefined, height: undefined }} resizeMode={'cover'} />
                         : <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                             <Ionicons name='ios-folder' size={60} color="grey" />
                         </View>}
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>dispatch(actionCreator.uploadDocument({ uri: props.uri,fileName:'props.fileName' }))} style={{margin:20,padding:10, borderWidth:1}}>
-                    <Text>upload</Text>
-                    </TouchableOpacity></>}
+              </>}
 
         </>)
 }
