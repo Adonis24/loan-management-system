@@ -4,25 +4,21 @@ import {
     Text,
     TouchableOpacity,
     View,
-    TextInput,
-    KeyboardAvoidingView
+
 
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
+
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 import { Ionicons } from '@expo/vector-icons';
 
 import styles from '../styles/styles'
 
 import LayoutLoan from '../Layout/LayoutLoan';
 
-import * as actionCreator from '../store/actions/action'
+import moment from 'moment'
 
 const validationSchema = Yup.object().shape({
 
@@ -61,6 +57,10 @@ const LoanConnectedPartiesScreen = (props) => {
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { compSendiriName, compSendiriPengalaman, compSendiriAct, compSendiriPendapatan, } = useSelector(state => state.financingReducer, shallowEqual)
 
+    const { companyRegNo, reg_date, addr, addr_2, city, state, postcode, main_biz_act, basic_status, additional_status, logo } = useSelector(state => state.bizInfoReducer, shallowEqual)
+    const companyEmail = useSelector(state => state.bizInfoReducer.email, shallowEqual)
+    const companyPhone = useSelector(state => state.bizInfoReducer.phone, shallowEqual)
+    const companyName = useSelector(state => state.bizInfoReducer.name, shallowEqual)
 
     const setBusinessInfo = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
@@ -74,7 +74,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
             <Formik
                 validateOnMount
-                initialValues={{ compSendiriName, compSendiriPengalaman, compSendiriAct, compSendiriPendapatan, }}
+                initialValues={{ compSendiriName:companyName, compSendiriPengalaman:moment(reg_date).fromNow(), compSendiriAct:main_biz_act, compSendiriPendapatan, }}
 
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -107,7 +107,7 @@ const LoanConnectedPartiesScreen = (props) => {
 
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center',paddingLeft:10,paddingRight:10 }}>
+                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                             <Text style={[styles.formTitle]}>Section D</Text>
                             {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Maklumat Perniagaan</Text>
@@ -122,7 +122,7 @@ const LoanConnectedPartiesScreen = (props) => {
                                 error={compSendiriNameError}
                                 placeholder={'Nama Syarikat'}
                                 keyboardType={'default'}
-                            /> 
+                            />
                             <CustomTextInput
                                 imageUri={require('../assets/images/bizAct.png')}
                                 value={compSendiriAct}
@@ -141,9 +141,9 @@ const LoanConnectedPartiesScreen = (props) => {
                                 touched={compSendiriPengalamanTouched}
                                 error={compSendiriPengalamanError}
                                 placeholder={'Tempoh/Pengalaman Berniaga'}
-                                //keyboardType={''}
+                            //keyboardType={''}
                             />
-                           
+
                             <CustomTextInput
                                 imageUri={require('../assets/images/compRegNum.png')}
                                 value={compSendiriPendapatan}

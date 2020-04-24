@@ -66,6 +66,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { pemilikan, compEstab, compOperation, businessType } = useSelector(state => state.businessPlanningReducer, shallowEqual)
+    const {  reg_date,  } = useSelector(state => state.bizInfoReducer, shallowEqual)
 
 
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
@@ -89,7 +90,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
         <LayoutLoan navigation={props.navigation}>
             <Formik
                 validateOnMount
-                initialValues={{ pemilikan, compEstab, compOperation, businessType }}
+                initialValues={{ pemilikan, compEstab:compEstab?compEstab:reg_date, compOperation, businessType }}
 
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)

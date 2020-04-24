@@ -59,6 +59,8 @@ const BusinessPlanBackgroudScreen = (props) => {
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { compName, name, regNum, compAlamat, compAlamat_2, compCity, compState, compPoskod } = useSelector(state => state.businessPlanningReducer, shallowEqual)
+    const { reg_no} = useSelector(state => state.bizInfoReducer, shallowEqual)
+
     const { compSendiriName, compSendiriAlamat_2, compSendiriAlamat, compSendiriPoskod, compSendiriCity, compSendiriState } = useSelector(state => state.financingReducer, shallowEqual)
     const sendiriName = useSelector(state => state.financingReducer.name, shallowEqual)
 
@@ -73,7 +75,8 @@ const BusinessPlanBackgroudScreen = (props) => {
             compAlamat_2: compSendiriAlamat_2,
             compCity: compSendiriCity,
             compPoskod: compSendiriPoskod,
-            compState: compSendiriState
+            compState: compSendiriState,
+            regNum:reg_no
         })
 
     }, []); // empty-array means don't watch for any updates

@@ -127,7 +127,9 @@ const LoanReferrer2Screen = (props) => {
                                 FormikProps.setFieldValue('ref2Poskod', poskod)
                             }
 
+
                         }
+                        FormikProps.setFieldValue('ref2Poskod', '')
 
                     }
 

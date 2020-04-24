@@ -3,7 +3,7 @@ import {
     Text,
     Platform,
     View,
-    CheckBox
+
 } from 'react-native';
 
 
@@ -66,7 +66,9 @@ const LoanMaklumatAsasScreen = (props) => {
                     const cawanganParlimenError = FormikProps.errors.cawanganParlimen
                     const cawanganParlimenTouched = FormikProps.touched.cawanganParlimen
 
-                    const handleCheckBox = () => { FormikProps.setFieldValue('pengundiBerdaftar', !pengundiBerdaftar) }
+                    const handleCheckBoxVoter = () => { FormikProps.setFieldValue('pengundiBerdaftar', 'Berdaftar') }
+                    const handleCheckBoxNonVoter = () => { FormikProps.setFieldValue('pengundiBerdaftar', 'Tidak Berdaftar') }
+
 
 
 
@@ -97,27 +99,23 @@ const LoanMaklumatAsasScreen = (props) => {
                                     placeholder={'Cawangan Parlimen'}
                                     keyboardType={'default'}
                                 />
-                                <View style={{ marginBottom: 10, justifyContent: 'center',alignSelf:'stretch' }}>
+                                <View style={{ marginBottom: 10, justifyContent: 'center', alignSelf: 'stretch' }}>
                                     <Text style={[styles.textDefault, { marginBottom: 5, color: 'darkblue' }]}>Pengundi berdaftar cawangan parlimen</Text>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        {(Platform.OS == 'ios') ?
 
-                                            <CheckBox2 onClick={() => handleCheckBox()} isChecked={pengundiBerdaftar} />
-                                            :
-                                            <CheckBox onValueChange={() => handleCheckBox()} value={pengundiBerdaftar} />
-                                        }
+
+                                        <CheckBox2 onClick={() => handleCheckBoxVoter()} isChecked={pengundiBerdaftar==='Berdaftar'} checkBoxColor={'#5a83c2'} />
+
                                         <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
                                             Ya
                                 </Text>
 
                                     </View>
                                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        {(Platform.OS == 'ios') ?
 
-                                            <CheckBox2 onClick={() => handleCheckBox()} isChecked={!pengundiBerdaftar } />
-                                            :
-                                            <CheckBox onValueChange={() => handleCheckBox()} value={!pengundiBerdaftar } />
-                                        }
+
+                                        <CheckBox2 onClick={() => handleCheckBoxNonVoter()} isChecked={pengundiBerdaftar==='Tidak Berdaftar'} checkBoxColor={'#5a83c2'} />
+
                                         <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
                                             Tidak
                                 </Text>

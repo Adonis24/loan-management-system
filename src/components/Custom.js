@@ -20,7 +20,7 @@ export const CustomTextInput = (props) => {
                     <TextInput editable={editable} secureTextEntry={secureText} keyboardType={keyboardType === 'phone-pad' ? ios ? 'numbers-and-punctuation' : keyboardType : keyboardType} value={value} onChangeText={handleChange} onBlur={handleBlur} style={{ marginLeft: 5, flex: 1 }} placeholder={touched && error ? '' : placeholder} placeholderTextColor={touched && error ? 'rgba(255,0,0,0.3)' : 'lightgrey'} />
                 </View>
                 <View style={{}}>
-                    {touched && error && <Text style={styles.error}>{error}</Text>}
+                    {touched && error &&<Text style={styles.error}>{error}</Text>}
                 </View>
             </View>
         )

@@ -7,26 +7,25 @@ import {
     Picker,
     View,
     TextInput,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    CheckBox
 
 } from 'react-native';
+import CheckBox2 from 'react-native-check-box'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
-import { LinearGradient } from 'expo-linear-gradient'
-import moment from 'moment'
-import Layout from '../constants/Layout'
+
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
+
 import { Ionicons } from '@expo/vector-icons';
-import DateTimePicker from '@react-native-community/datetimepicker';
+
 
 import styles from '../styles/styles'
 
 import LayoutLoan from '../Layout/LayoutLoan';
 
-import * as actionCreator from '../store/actions/action'
+
 
 const validationSchema = Yup.object().shape({
 
@@ -73,9 +72,7 @@ const LoanMaklumatPeribadiBScreen = (props) => {
         setIosPickerVisible(!iosPickerVisible)
     }
 
-
-
-
+ 
 
 
     return (
@@ -118,12 +115,19 @@ const LoanMaklumatPeribadiBScreen = (props) => {
                     const agamaTouched = FormikProps.touched.agama
 
 
-
+                    const handleCheckBoxMelayu = () => { 
+                     
+                        FormikProps.setFieldValue('bangsa', 'Melayu') 
+                    }
+                    const handleCheckBoxLain = () => { 
+                        
+                        FormikProps.setFieldValue('bangsa', 'Lain-lain') 
+                    }
 
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
-                           <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
+                        <View style={{ flex: 1,  alignSelf:'stretch', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+                            <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
                                 <LayoutLoan title={'Please Select'} nopaddingTop={true} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
                                     <View style={{ alignSelf: 'stretch', margin: 10 }}>
                                         {(modalContent === "jantina") ?
@@ -140,7 +144,7 @@ const LoanMaklumatPeribadiBScreen = (props) => {
 
                                             </Picker>
                                         }
-                                     </View>
+                                    </View>
                                 </LayoutLoan>
                             </Modal>
 
@@ -194,20 +198,24 @@ const LoanMaklumatPeribadiBScreen = (props) => {
                                 </View>
                             </View>
 
-                            <CustomTextInput
-                                imageUri={require('../assets/images/user.png')}
-                                value={bangsa}
-                                handleChange={FormikProps.handleChange(`bangsa`)}
-                                handleBlur={FormikProps.handleBlur(`bangsa`)}
-                                touched={bangsaTouched}
-                                error={bangsaError}
-                                placeholder={'Bangsa/Kaum'}
+               
 
-                            />
+                            <View style={{ marginBottom: 10, justifyContent: 'center', alignSelf: 'stretch' }}>
+                                <Text style={[styles.textDefault, { marginBottom: 5, color: 'darkblue' }]}>Bangsa :</Text>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <CheckBox2 onClick={() => handleCheckBoxMelayu()} isChecked={bangsa=='Melayu'?true:false} checkBoxColor={'#5a83c2'}  />
+                                    <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
+                                        Melayu/Bumiputra</Text>
 
+                                </View>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
-                            {/* <Text>Umur:{umur}</Text> */}
-
+                                    <CheckBox2 onClick={() => handleCheckBoxLain()} isChecked={bangsa=='Lain-lain'?true:false} checkBoxColor={'#5a83c2'}  />
+                                    <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
+                                        Lain-lain
+                                </Text>
+                                </View>
+                            </View>
 
                             <CustomFormAction
                                 navigation={props.navigation}

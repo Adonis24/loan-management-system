@@ -11,7 +11,6 @@ import { WebView } from 'react-native-webview';
 import * as WebBrowser from 'expo-web-browser';
 import styles from '../styles/styles'
 
-import Constants from 'expo-constants'
 import { shallowEqual, useSelector } from 'react-redux'
 import LayoutB from '../Layout/LayoutB'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -42,7 +41,7 @@ const ElearningScreen = (props) => {
             navigation={props.navigation}
             imageUri={require('../assets/images/news.png')}
         >
-           
+
 
             <WebView
                 source={{ uri }}
@@ -53,11 +52,11 @@ const ElearningScreen = (props) => {
                 javaScriptEnabled={true}
                 domStorageEnabled={true}
                 injectedJavaScript={modifiedStyle} />
-            <View style={{  borderColor: 'lightyellow', padding: 10, margin: 0, alignSelf: 'stretch', backgroundColor: 'lightyellow',borderTopWidth:1, borderColor:'lightgrey' }}>
+            <View style={{ borderColor: 'lightyellow', padding: 10, margin: 0, alignSelf: 'stretch', backgroundColor: 'lightyellow', borderTopWidth: 1, borderColor: 'lightgrey' }}>
                 <Text style={styles.textSmall}>For better learning experience, please go to the website by clicking the button below :</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'center',alignSelf:'stretch' }}>
-                    <TouchableOpacity onPress={() => _handlePressButtonAsync()} style={{ marginTop: 5,flex:1 }} >
-                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ backgroundColor: '#4DCB3E', padding: 5, borderRadius: 5,alignItems:'center' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignSelf: 'stretch' }}>
+                    <TouchableOpacity onPress={() => _handlePressButtonAsync()} style={{ marginTop: 5, flex: 1 }} >
+                        <LinearGradient colors={['#4DCB3E', '#269B1D',]} style={{ backgroundColor: '#4DCB3E', padding: 5, borderRadius: 5, alignItems: 'center' }}>
                             <Text style={[styles.textSmall, { color: '#fff' }]}>TEKUN ACADEMY</Text>
                         </LinearGradient>
                     </TouchableOpacity>

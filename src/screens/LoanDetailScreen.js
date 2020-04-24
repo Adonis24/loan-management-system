@@ -80,12 +80,12 @@ const LoanDetailScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setMaklumatPembiayaan(values)
                     dispatch(actionCreator.saveLoanData())
-                    props.navigation.navigate('LoanSectionH')
+
                     actions.resetForm({})
                     actions.setSubmitting(false)
+                    props.navigation.navigate('LoanSectionH')
 
-                }
-                }
+                }}
                 validationSchema={validationSchema}
             >
                 {FormikProps => {
@@ -112,7 +112,7 @@ const LoanDetailScreen = (props) => {
                     return (
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
-                            <Modal animationType={'slide'} visible={iosPickerVisible}  onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
+                            <Modal animationType={'slide'} visible={iosPickerVisible} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
                                 <LayoutLoan title={'Bayaran'} nopaddingTop={false} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
                                     <View style={{ alignSelf: 'stretch', margin: 10 }}>
                                         {(modalContent === "kekerapan") ?

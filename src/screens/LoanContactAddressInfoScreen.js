@@ -70,6 +70,8 @@ const LoanContactAddressInfoScreen = (props) => {
     const [addressVisible, setAddressVisible] = useState(false)
 
     const dispatch = useDispatch()
+    const accountEmail = useSelector(state => state.myAccountReducer.email, shallowEqual)
+    const accountPhoneNo = useSelector(state => state.myAccountReducer.phone_no, shallowEqual)
 
     const { alamat, alamat_2, phoneNum, email, poskod, status, city, state } = useSelector(state => state.financingReducer, shallowEqual)
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
@@ -89,7 +91,7 @@ const LoanContactAddressInfoScreen = (props) => {
     return (
         <LayoutLoan navigation={props.navigation}>
             <Formik
-                initialValues={{ alamat, alamat_2, phoneNum, email, poskod, status, city, state }}
+                initialValues={{ alamat, alamat_2, phoneNum:phoneNum?phoneNum:accountPhoneNo, email:email?email:accountEmail, poskod, status, city, state }}
                 validateOnMount
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
@@ -146,6 +148,8 @@ const LoanContactAddressInfoScreen = (props) => {
                                 FormikProps.setFieldValue('poskod', poskod)
                             }
 
+                        } else {
+                            FormikProps.setFieldValue('poskod', '')
                         }
 
                     }

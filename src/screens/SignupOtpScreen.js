@@ -50,7 +50,7 @@ const SignupOtpScreen = (props) => {
 
     return (
 
-        <LayoutLoan>
+        <LayoutLoan title={'Mobile Phone Number'} back={()=>props.navigation.goBack()}>
             <Formik
                 validateOnMount
                 initialValues={{}} onSubmit={(values, actions) => {
@@ -104,7 +104,9 @@ const SignupOtpScreen = (props) => {
                                 keyboardType={'phone-pad'}
 
                             />
-
+ <View style={{ borderColor: 'lightyellow', padding: 10, margin: 0, alignSelf: 'stretch', backgroundColor: 'lightyellow', borderWidth: 1, borderColor: 'lightgrey',marginBottom:20 }}>
+                                <Text style={[styles.textSmall,{textAlign:'center'}]}>An SMS containing Verification Code will be sent to the number entered above</Text>
+                           </View>
 
                             <CustomFormAction
                                 navigation={props.navigation}

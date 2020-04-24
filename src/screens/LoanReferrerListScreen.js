@@ -62,6 +62,11 @@ const LoanReferrerListScreen = (props) => {
 
 
     const setReferrer = (value) => dispatch({ type: 'SET_REFERRER', payload: { ...value } })
+    props.navigation.navigate('LoanValidation')
+    const nextScreen=()=>{
+        dispatch(actionCreator.saveLoanData())
+        props.navigation.navigate('LoanValidation')
+    }
 
     return (
         <LayoutLoan navigation={props.navigation}>
@@ -149,9 +154,10 @@ const LoanReferrerListScreen = (props) => {
                     </TouchableOpacity>}
 
                 <CustomFormAction
+                label={'Save'}
                     navigation={props.navigation}
                     isValid={true}
-                    handleSubmit={() => props.navigation.navigate('LoanValidation')}
+                    handleSubmit={() => nextScreen()}
                 />
 
             </View>

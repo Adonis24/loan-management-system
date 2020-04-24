@@ -62,7 +62,7 @@ const LoanBusinessDetail2Screen = (props) => {
     const dispatch = useDispatch()
 
     //const { comp_phone, comp_email, comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, proceedContact, error, errorColor } = useSelector(state => state.companyInformationReducer, shallowEqual)
-    const { institusi, totalLoan, pembiayaan,loanBal } = useSelector(state => state.financingReducer, shallowEqual)
+    const { institusi, totalLoan,loanBal } = useSelector(state => state.financingReducer, shallowEqual)
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
 
 

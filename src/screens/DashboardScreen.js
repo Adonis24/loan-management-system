@@ -7,7 +7,7 @@ import {
     View,
     Animated,
     Easing,
-    
+
     FlatList,
     ActivityIndicator
 
@@ -56,11 +56,11 @@ const DashboardScreen = (props) => {
     const [profilePic, setProfilePic] = useState(new Animated.Value(0))
     const [topBar, setTopBar] = useState(new Animated.Value(0))
     const [scrollBar, setScrollBar] = useState(new Animated.Value(0))
-   
+
 
     const animate = () => {
         Animated.stagger(1000, [
-          
+
             Animated.timing(profilePic, {
                 toValue: 1,
                 duration: 1000,
@@ -83,7 +83,6 @@ const DashboardScreen = (props) => {
     const advert = [require('../assets/images/banner1.png'), require('../assets/images/banner2.png')]
 
     const capitalizeString = (text = 'NA') => text.length > 0 && `${text[0].toUpperCase()}${text.slice(1)}`
-
 
     useEffect(() => {
         //dispatch(actionCreator.addExpoToken())
@@ -134,55 +133,56 @@ const DashboardScreen = (props) => {
                                 </View>
                             </TouchableOpacity>
                         </Animated.View>
-                        {!(phone_no == null) && <Animated.View style={[{ opacity: topBarOpac,  flex: 4}]}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                                <View style={{  flexDirection: 'row', backgroundColor: '#fff', borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderRightWidth: 0, }}>
-                                    <Image source={!logo ? require('../assets/images/profile.png') : { uri: logo }} style={{ width: 30, height: 30, margin: 5,}} resizeMode={'contain'} />
-                                    <Text style={[styles.headText, { paddingRight: 10 }]} numberOfLines={1} ellipsizeMode={'tail'}>{companyName} </Text>
+                        {companyName && <Animated.View style={[{ opacity: topBarOpac, flex: 4 }]}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                                <View style={{ flex:1,flexDirection: 'row', backgroundColor: '#fff', borderBottomLeftRadius: 20, borderTopLeftRadius: 20, borderRightWidth: 0, }}>
+                                    <View style={{flex:1}}>
+                                        <Image source={!logo ? require('../assets/images/profile.png') : { uri: logo }} style={{ width: 30, height: 30, margin: 5, }} resizeMode={'contain'} />
+                                    </View>
+                                    <Text style={[styles.headText, { paddingRight: 10,paddingLeft: 10,flex:5}]} numberOfLines={1} ellipsizeMode={'tail'}>{companyName} </Text>
                                 </View>
                             </View>
-                           
                         </Animated.View>}
                     </View>
                 </View>
                 {/* CONTENT AREA */}
                 <View style={{ flex: 8, backgroundColor: 'transparent' }}>
                     <Animated.View style={{ opacity: scrollBarOpac, flex: 1 }} >
-                    <View style={{ flex: 2, margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
-                                <View style={{ margin: 5, paddingBottom: 5, borderStyle: 'solid' }}>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignSelf: 'stretch' }}>
-                                        <FeatureIcon link={'Elearning'} caption={'E-Learning'} navigation={props.navigation}>
-                                            <Image source={require('../assets/icon/e-learning.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
-                                        </FeatureIcon>
-                                        <FeatureIcon link={'InfoNewsList'} caption={'E-News'} navigation={props.navigation}>
-                                            <Image source={require('../assets/icon/news.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
-                                        </FeatureIcon>
-                                        <FeatureIcon link={'EAdvertisement'} caption={'E-Advertisement'} navigation={props.navigation}>
-                                            <Image source={require('../assets/images/ecommerce.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
-                                        </FeatureIcon>
-                                        <FeatureIcon link={'Financing'} caption={'E-Financing'} navigation={props.navigation}>
-                                            <Image source={require('../assets/images/loan.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
-                                        </FeatureIcon>
-                                    </View>
-                                    <View style={{ margin: 5 }} />
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignSelf: 'stretch' }}>
-                                        <FeatureIcon link={'Bill'} caption={'Bill'} navigation={props.navigation}>
-                                            <Image source={require('../assets/icon/bill.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
-                                        </FeatureIcon>
-                                        <FeatureIcon link={'BizApp'} caption={'BizApp'} navigation={props.navigation}>
-                                            <Image source={require('../assets/icon/marketplace.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
-                                        </FeatureIcon>
-                                        <FeatureIcon />
-                                        <FeatureIcon />
-                                    </View>
-                                    <View style={{ margin: 5 }} />
+                        <View style={{ flex: 2, margin: 5, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid' }}>
+                            <View style={{ margin: 5, paddingBottom: 5, borderStyle: 'solid' }}>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignSelf: 'stretch' }}>
+                                    <FeatureIcon link={'Elearning'} caption={'E-Learning'} navigation={props.navigation}>
+                                        <Image source={require('../assets/icon/e-learning.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
+                                    </FeatureIcon>
+                                    <FeatureIcon link={'InfoNewsList'} caption={'E-News'} navigation={props.navigation}>
+                                        <Image source={require('../assets/icon/news.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
+                                    </FeatureIcon>
+                                    <FeatureIcon link={'EAdvertisement'} caption={'E-Advertisement'} navigation={props.navigation}>
+                                        <Image source={require('../assets/images/ecommerce.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
+                                    </FeatureIcon>
+                                    <FeatureIcon link={'Financing'} caption={'E-Financing'} navigation={props.navigation}>
+                                        <Image source={require('../assets/images/loan.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
+                                    </FeatureIcon>
                                 </View>
+                                <View style={{ margin: 5 }} />
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignSelf: 'stretch' }}>
+                                    <FeatureIcon link={'Bill'} caption={'Bill'} navigation={props.navigation}>
+                                        <Image source={require('../assets/icon/bill.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
+                                    </FeatureIcon>
+                                    <FeatureIcon link={'BizApp'} caption={'BizApp'} navigation={props.navigation}>
+                                        <Image source={require('../assets/icon/marketplace.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
+                                    </FeatureIcon>
+                                    <FeatureIcon />
+                                    <FeatureIcon />
+                                </View>
+                                <View style={{ margin: 5 }} />
                             </View>
+                        </View>
 
                         {/**Latest Info */}
-                        <View style={{ flex: 3, margin: 0, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid',backgroundColor:'transparent' }}>
-                            <View style={{ marginBottom: 10, marginLeft: 5, marginRight: 5,backgroundColor:'transparent' }}>
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between',backgroundColor:'transparent' }}>
+                        <View style={{ flex: 3, margin: 0, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid', backgroundColor: 'transparent' }}>
+                            <View style={{ marginBottom: 10, marginLeft: 5, marginRight: 5, backgroundColor: 'transparent' }}>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent' }}>
                                     <Text style={styles.subTitle} numberOfLines={1} ellipsizeMode={'tail'}>Latest Info</Text>
                                     <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
                                 </View>
@@ -221,11 +221,11 @@ const DashboardScreen = (props) => {
                         </View>
                         {/**Advertisement */}
                         <View style={{ flex: 1, }}>
-                            {advert ? <SliderBox 
-                            images={advert} 
-                            autoplay
-                            circleLoop  
-                              /> : <Text>No Advert</Text>}
+                            {advert ? <SliderBox
+                                images={advert}
+                                autoplay
+                                circleLoop
+                            /> : <Text>No Advert</Text>}
                         </View>
                     </Animated.View>
                 </View>
@@ -239,15 +239,15 @@ const DashboardScreen = (props) => {
 const FeatureIcon = (props) => {
     if (props.link)
         return (<TouchableOpacity onPress={() => props.navigation.navigate(props.link)} style={[{ width: Layout.window.height / 10, height: Layout.window.height / 10, padding: 5, justifyContent: 'flex-start', borderRadius: 10, alignSelf: 'stretch' }, styles.shadowNew]}>
-           <View style={{flex:1,opacity:1}}>
-            {props.children}
-            <Text style={[styles.caption, { flex: 1 }]} numberOfLines={1} ellipsizeMode={'tail'}>{props.caption}</Text>
+            <View style={{ flex: 1, opacity: 1 }}>
+                {props.children}
+                <Text style={[styles.caption, { flex: 1 }]} numberOfLines={1} ellipsizeMode={'tail'}>{props.caption}</Text>
             </View>
         </TouchableOpacity>)
     else
         return (<View style={[{ width: Layout.window.height / 10, height: Layout.window.height / 10, padding: 5, justifyContent: 'flex-start', borderRadius: 10, alignSelf: 'stretch' }, styles.shadowNew]} />
 
-      )
+        )
 
 }
 

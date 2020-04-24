@@ -31,10 +31,26 @@ import CheckBox2 from 'react-native-check-box'
 const validationSchema = Yup.object().shape({
 
     pembiayaan: Yup
-        .boolean()
+        .string()
         .required(),
-
-
+    totalLoan: Yup
+        .number()
+        .when("pembiayaan", {
+            is: "Ada",
+            then: Yup.number().required("Must enter total loan")
+        }),
+    loanBal: Yup
+        .number()
+        .when("pembiayaan", {
+            is: "Ada",
+            then: Yup.number().required("Must enter balance")
+        }),
+    institusi: Yup
+        .string()
+        .when("pembiayaan", {
+            is: "Ada",
+            then: Yup.string().required("Must enter institusi pembiayaan")
+        }),
 
 });
 
@@ -52,9 +68,7 @@ const LoanBusinessDetailScreen = (props) => {
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
 
 
-
-
-    const setPembiayaan = (value) => dispatch({ type: 'SET_PEMBIAYAAN', payload: { ...value } })
+    const setPembiayaan = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
 
 
@@ -66,16 +80,14 @@ const LoanBusinessDetailScreen = (props) => {
     }
 
 
-
-
     return (
         <LayoutLoan navigation={props.navigation}>
             <Formik
                 initialValues={{ pembiayaan }}
                 validateOnMount
                 onSubmit={(values, actions) => {
-                    console.log(`values formik ialah ${JSON.stringify(values)}`)
-                    const { pembiayaan } = values
+                    console.log(`values formik pembiaayaan ialah ${JSON.stringify(values)}`)
+
                     setPembiayaan(values)
                     dispatch(actionCreator.saveLoanData())
                     actions.setSubmitting(false)
@@ -99,36 +111,14 @@ const LoanBusinessDetailScreen = (props) => {
                     const loanBalError = FormikProps.errors.loanBal
                     const loanBalTouched = FormikProps.touched.loanBal
 
-                    const handleCheckBox = () => { FormikProps.setFieldValue('pembiayaan', !pembiayaan) }
+                    const handleCheckBoxAda = () => { FormikProps.setFieldValue('pembiayaan', 'Ada') }
+                    const handleCheckBoxTiada = () => { FormikProps.setFieldValue('pembiayaan', 'Tiada') }
 
 
                     return (
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
-                            <Modal animationType={'slide'}
-                                visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
-                            >
-                                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                                    <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
-                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
-                                            <TouchableOpacity onPress={() => setIosPickerVisible(!iosPickerVisible)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                                <Ionicons name="ios-arrow-back" color={'#5a83c2'} style={{ fontSize: 30 }} />
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
-                                            <Text style={{ fontSize: 12 }}>Select</Text>
-                                        </View>
-                                        <View style={{ flex: 1 }} />
-                                    </View>
-                                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
-                                        <Picker style={{ flex: 1, height: 35 }} selectedValue={pembiayaan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pembiayaan', itemValue)}>
-                                            <Picker.Item label={'Pembiayaan'} value={undefined} />
-                                            <Picker.Item label="Ada" value={1} />
-                                            <Picker.Item label="Tiada" value={2} />
-                                        </Picker>
-                                    </View>
-                                </View>
-                            </Modal>
+
 
                             <Text style={[styles.formTitle]}>Section F</Text>
                             <Text style={[styles.formSubtitle]}>Pembiayaan Perniagaan Sedia Ada</Text>
@@ -140,25 +130,22 @@ const LoanBusinessDetailScreen = (props) => {
                             </View>
 
                             <View style={{ alignSelf: 'flex-start', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
-                                {(Platform.OS == 'ios') ?
-                                    <CheckBox2 onClick={() => handleCheckBox()} isChecked={pembiayaan} />
-                                    :
-                                    <CheckBox onValueChange={() => handleCheckBox()} value={pembiayaan} />}
+
+                                <CheckBox2 onClick={() => handleCheckBoxAda()} isChecked={pembiayaan === 'Ada' ? true : false} />
+
                                 <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
                                     Ya
                                 </Text>
                             </View>
                             <View style={{ alignSelf: 'flex-start', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
-                                {(Platform.OS == 'ios') ?
-                                    <CheckBox2 onClick={() => handleCheckBox()} isChecked={!pembiayaan} />
-                                    :
-                                    <CheckBox onValueChange={() => handleCheckBox()} value={!pembiayaan} />
-                                }
+
+                                <CheckBox2 onClick={() => handleCheckBoxTiada()} isChecked={pembiayaan === 'Tiada' ? true : false} />
+
                                 <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
                                     Tidak
                                 </Text>
                             </View>
-                            {pembiayaan && <>
+                            {pembiayaan === 'Ada' && <>
                                 <CustomTextInput
                                     imageUri={require('../assets/images/city.png')}
                                     value={institusi}

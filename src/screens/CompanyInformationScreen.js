@@ -66,15 +66,6 @@ const CompanyInformationScreen = (props) => {
 
         props.navigation.navigate('AddCompanyContact')
     }
-    // useEffect(() => {
-    //     const open = () => setshowLogo(false)
-    //     const off = () => setshowLogo(true)
-
-    //     keyboardBeingDisplay(open)
-    //     keyboardBeingClose(off)
-    // }, []); // empty-array means don't watch for any updates
-
-    //const [showLogo, setshowLogo] = useState(true)
 
 
     const [iosDatePickerShow, setIosDatePickerShow] = useState(false)
@@ -88,7 +79,7 @@ const CompanyInformationScreen = (props) => {
     const [show, setShow] = useState(false);
 
     return (
-        <LayoutLoan title='Company Info'>
+        <LayoutLoan title='Company Info' back={() => props.navigation.goBack()}>
             <Formik
                 validateOnMount
                 initialValues={{ comp_name: undefined, comp_regno: undefined, comp_main_biz_act: undefined, }}
@@ -134,8 +125,6 @@ const CompanyInformationScreen = (props) => {
 
                     const comp_main_biz_actError = FormikProps.errors.comp_main_biz_act
                     const comp_main_biz_actTouched = FormikProps.touched.comp_main_biz_act
-
-
 
                     return (
                         <><Modal
@@ -187,15 +176,17 @@ const CompanyInformationScreen = (props) => {
                                     placeholder={'Company Registration Number'}
                                     keyboardType={'default'}
                                 />
+                                <View>
+                                    <Text style={[styles.label]}>Company Registration Date :</Text>
+                                    <TouchableOpacity onPress={() => showDatepicker()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, borderColor: comp_regdateTouched && comp_regdateError ? '#d94498' : '#5a83c2', marginBottom: 20 }}>
+                                        <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
 
-                                <TouchableOpacity onPress={() => showDatepicker()} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', margin: 5, borderColor: comp_regdateTouched && comp_regdateError ? '#d94498' : '#5a83c2', marginBottom: 20 }}>
-                                    <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
+                                        <TextInput editable={false} value={comp_regdate ? moment(comp_regdate).format("MMMM Do YYYY") : null} onChangeText={FormikProps.handleChange(`comp_regdate`)} onBlur={FormikProps.handleBlur(`comp_regdate`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Date'} placeholderTextColor={comp_regdateTouched && comp_regdateError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
+                                    </TouchableOpacity>
 
-                                    <TextInput editable={false} value={comp_regdate ? moment(comp_regdate).format("MMMM Do YYYY") : null} onChangeText={FormikProps.handleChange(`comp_regdate`)} onBlur={FormikProps.handleBlur(`comp_regdate`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Date'} placeholderTextColor={comp_regdateTouched && comp_regdateError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
-                                </TouchableOpacity>
-
-                                <View style={{ width: Layout.window.width * 0.65 }}>
-                                    {comp_regdateTouched && comp_regdateError && <Text style={styles.error}>{comp_regdateError}</Text>}
+                                    <View style={{ width: Layout.window.width * 0.65 }}>
+                                        {comp_regdateTouched && comp_regdateError && <Text style={styles.error}>{comp_regdateError}</Text>}
+                                    </View>
                                 </View>
                                 <CustomTextInput
                                     imageUri={require('../assets/images/password.png')}

@@ -42,9 +42,9 @@ const validationSchema = Yup.object().shape({
         .min(3)
         .label('Company Email'),
 
-        ic_no: Yup
+    ic_no: Yup
         .string()
-    
+
         .required()
         .min(12)
         .label('MyKad No'),
@@ -79,12 +79,14 @@ const CompanyContactInformationScreen = (props) => {
             <Formik validateOnMount
                 initialValues={{ comp_phone: undefined, comp_email: undefined, comp_address: undefined, full_name: name, ic_no }}
 
-                onSubmit={(values, actions) => {
+                onSubmit={async(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setCompanyInfo(values)
-                    dispatch(actionCreator.companyInfo())
-                     props.navigation.navigate('MyAccount')
-                     actions.setSubmitting(false)
+                    await dispatch(actionCreator.companyInfo())
+                    await dispatch(actionCreator.initiateMyAccount())
+                    await dispatch(actionCreator.initiateCompanyInfo())
+                    props.navigation.navigate('MyAccount')
+                    actions.setSubmitting(false)
                 }
                 }
                 validationSchema={validationSchema}
@@ -202,7 +204,7 @@ const CompanyContactInformationScreen = (props) => {
 
                                 </LayoutLoan>
                             </Modal>
-                            <ScrollView  contentContainerStyle={{ paddingLeft: 10, paddingRight: 10,alignItems:'center' }}>
+                            <ScrollView contentContainerStyle={{ paddingLeft: 10, paddingRight: 10, alignItems: 'center' }}>
                                 <Text style={[styles.textDefault, { margin: 5, fontWeight: 'bold' }]}>COMPANY CONTACT INFORMATION</Text>
                                 <Text style={[styles.textDefault, { margin: 5, marginBottom: 20, color: 'darkblue', fontSize: 14 }]}>Please fill up this form to continue the process for your company.</Text>
                                 <CustomTextInput

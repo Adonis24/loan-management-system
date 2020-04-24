@@ -126,6 +126,7 @@ const SignupPersonalScreen = (props) => {
                                 placeholder={'email@address.com'}
 
                             />
+                            
                             <CustomTextInput
                                 imageUri={require('../assets/images/password.png')}
                                 value={password}
@@ -148,6 +149,9 @@ const SignupPersonalScreen = (props) => {
                                 placeholder={'Confirm Password'}
 
                             />
+                            <View style={{ borderColor: 'lightyellow', padding: 10, margin: 0, alignSelf: 'stretch', backgroundColor: 'lightyellow', borderWidth: 1, borderColor: 'lightgrey',marginBottom:20 }}>
+                                <Text style={[styles.textSmall,{textAlign:'center'}]}>Please check your e-mail inbox for verification instruction</Text>
+                           </View>
 
                             <CustomFormAction
                                 navigation={props.navigation}

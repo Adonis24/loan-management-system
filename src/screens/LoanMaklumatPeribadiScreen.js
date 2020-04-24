@@ -24,7 +24,7 @@ import LayoutLoan from '../Layout/LayoutLoan';
 
 const validationSchema = Yup.object().shape({
 
-  
+
 
     name: Yup
         .string()
@@ -51,6 +51,9 @@ const LoanMaklumatPeribadiScreen = (props) => {
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
+    const accountName = useSelector(state => state.myAccountReducer.name, shallowEqual)
+    const accountIcNo = useSelector(state => state.myAccountReducer.ic_no, shallowEqual)
+
     const { name, icNumber, umur, tarikhLahir } = useSelector(state => state.financingReducer, shallowEqual)
 
 
@@ -58,37 +61,21 @@ const LoanMaklumatPeribadiScreen = (props) => {
 
 
 
-
-    const handleIosPicker = (modalContent) => {
-        setModalContent(modalContent)
-        setIosPickerVisible(!iosPickerVisible)
-    }
-
-
-
-
-
-
     return (
         <LayoutLoan navigation={props.navigation}>
-            
 
             <Formik
                 validateOnMount
-                initialValues={{ name, icNumber,  tarikhLahir }}
+                initialValues={{ name: name ? name : accountName, icNumber: icNumber ? icNumber : accountIcNo, tarikhLahir }}
 
                 onSubmit={(values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
-                    const { icNumber } = values
-                    //const dobInfo = getUmur(icNumber)
-                    //console.log(`dob info ${JSON.stringify(dobInfo)}`)
                     setMaklumatPeribadi({ ...values })
                     props.navigation.navigate('LoanMaklumatPeribadiB')
                     actions.resetForm({})
                     actions.setSubmitting(false)
+                }}
 
-                }
-                }
                 validationSchema={validationSchema}
             >
                 {FormikProps => {
@@ -97,13 +84,13 @@ const LoanMaklumatPeribadiScreen = (props) => {
 
                     const { name, icNumber, umur, tarikhLahir } = FormikProps.values
 
-    
+
                     const nameError = FormikProps.errors.name
                     const nameTouched = FormikProps.touched.name
 
                     const icNumberError = FormikProps.errors.icNumber
                     const icNumberTouched = FormikProps.touched.icNumber
-                    
+
 
 
 
@@ -140,10 +127,14 @@ const LoanMaklumatPeribadiScreen = (props) => {
 
                             }
                         }
-
-
                     }
 
+                    useEffect(() => {
+                        icNumber && getUmur(icNumber)
+                
+                    }, []); // empty-array means don't watch for any updates
+                
+                  
 
                     return (
 
@@ -184,7 +175,7 @@ const LoanMaklumatPeribadiScreen = (props) => {
                                 editable={false}
 
                             />}
-                           
+
 
 
                             <CustomFormAction

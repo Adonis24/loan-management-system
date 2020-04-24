@@ -36,20 +36,14 @@ const validationSchema = Yup.object().shape({
     statusPerniagaan: Yup
         .string()
         .required(),
-
-
-
 });
 
 const LoanPerniagaanScreen = (props) => {
-
     const [iosPickerVisible, setIosPickerVisible] = useState(false)
     const [modalContent, setModalContent] = useState(null)
     const ios = Platform.OS === "ios" ? true : false
 
     const dispatch = useDispatch()
-
-
 
     //const { comp_phone, comp_email, comp_addr, comp_addr_2, comp_state, comp_city, comp_postcode, proceedContact, error, errorColor } = useSelector(state => state.companyInformationReducer, shallowEqual)
     const { typeBusiness, statusPerniagaan } = useSelector(state => state.financingReducer, shallowEqual)
@@ -101,13 +95,8 @@ const LoanPerniagaanScreen = (props) => {
                         setMulaBerniaga(!mulaBerniaga)
                         setSedangBerniaga(mulaBerniaga)
                         FormikProps.setFieldValue('statusPerniagaan', !sedangBerniaga ? 'Sedang Berniaga' : 'Memulakan Perniagaan')
-
                     }
-
-
-
                     return (
-
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10, alignSelf: 'stretch' }}>
                             <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
                                 <LayoutLoan title={'Sektor Perniagaan'} nopaddingTop={true} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
@@ -131,24 +120,16 @@ const LoanPerniagaanScreen = (props) => {
                             <View style={{ marginBottom: 10, justifyContent: 'center', alignSelf: 'stretch' }}>
                                 <Text style={[styles.textDefault, { margin: 5, color: 'darkblue' }]}>Status perniagaan</Text>
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                    {(Platform.OS == 'ios') ?
-
-                                        <CheckBox2 onClick={() => sedangBerniagaCB()} isChecked={sedangBerniaga} />
-                                        :
-                                        <CheckBox onValueChange={(val) => sedangBerniagaCB()} value={sedangBerniaga} />
-                                    }
+                                    <CheckBox2 onClick={() => sedangBerniagaCB()} isChecked={sedangBerniaga} checkBoxColor={'#5a83c2'} />
                                     <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
                                         Sedang Berniaga
                                 </Text>
-
                                 </View>
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                    {(Platform.OS == 'ios') ?
 
-                                        <CheckBox2 onClick={() => mulaBerniagaCB()} isChecked={mulaBerniaga} />
-                                        :
-                                        <CheckBox onValueChange={() => mulaBerniagaCB()} value={mulaBerniaga} />
-                                    }
+
+                                    <CheckBox2 onClick={() => mulaBerniagaCB()} isChecked={mulaBerniaga} checkBoxColor={'#5a83c2'} />
+
                                     <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>Memulakan Perniagaan</Text>
                                 </View>
                             </View>

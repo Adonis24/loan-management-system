@@ -40,7 +40,12 @@ const SignupOtpEnterScreen = (props) => {
 
     const verifyPhone = async () => {
         await dispatch(actionCreator.verifyPhone())
-        await phoneVerified == true ? props.navigation.navigate('MyAccount') : null
+        //await phoneVerified == true ? props.navigation.navigate('MyAccount') : null
+        if (phoneVerified == true) {
+            await dispatch(actionCreator.initiateMyAccount())
+            await dispatch(actionCreator.initiateCompanyInfo())
+            await props.navigation.navigate('MyAccount')
+        }
     }
 
     const verifyOTPSubmit = async (c) => {
@@ -140,7 +145,7 @@ const SignupOtpEnterScreen = (props) => {
 
 
     return (
-        <LayoutLoan>
+        <LayoutLoan title={'Enter OTP'} back={() => props.navigation.goBack()}>
 
             <Text style={[styles.textDefault, { margin: 5, color: 'darkblue', fontWeight: 'bold' }]}>Enter OTP code</Text>
             <Text style={[styles.textDefault, { margin: 5 }]}>We have sent an OTP code to your number</Text>
