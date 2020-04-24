@@ -265,7 +265,6 @@ const LoanSectionHStack = () => {
     return (
         <Stack.Navigator initialRouteName="LoanReferrer" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="LoanReferrer" component={LoanReferrerListScreen} />
-
         </Stack.Navigator>)
 }
 
@@ -326,9 +325,7 @@ const BusinessPlanSectionBStack = () => {
 const BusinessPlanSectionEStack = () => {
     return (
         <Stack.Navigator initialRouteName="BusinessPlanGoals" screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="BusinessPlanGoals" component={BusinessPlanGoalsScreen} />
-            {/* <Stack.Screen name="BusinessPlanGoals2" component={BusinessPlanGoals2Screen} />
-            <Stack.Screen name="BusinessPlanGoals3" component={BusinessPlanGoals3Screen} /> */}
+            <Stack.Screen name="BusinessPlanGoals" component={BusinessPlanGoalsScreen} />          
         </Stack.Navigator>)
 }
 const InfoNewsDrawer = () => {

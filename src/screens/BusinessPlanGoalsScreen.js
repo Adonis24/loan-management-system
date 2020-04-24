@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import {
-    Image,
+
     Text,
     TouchableOpacity,
     View,
-    TextInput,
+
     ScrollView,
-    KeyboardAvoidingView,
     FlatList,
-    Modal,Platform
+    Modal, Platform
 
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import { Ionicons } from '@expo/vector-icons';
-
 import styles from '../styles/styles'
-
 import LayoutLoan from '../Layout/LayoutLoan';
 import moment from 'moment'
 import * as actionCreator from '../store/actions/action'
@@ -35,7 +31,6 @@ const BusinessPlanGoalsScreen = (props) => {
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { projectionPlan } = useSelector(state => state.businessPlanningReducer, shallowEqual)
 
-
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
 
     //const nextYear= moment().add(1, 'Y').format('Y')
@@ -44,9 +39,6 @@ const BusinessPlanGoalsScreen = (props) => {
         { tahun: moment().add(1, 'Y').format('Y'), pembelian: '0', income: '0', kosOperasi: '0', totalExpenditure: '0', untungKasar: '0', perbelanjaanLain: '0', untungBersih: '0', totalIncome: '0' },
         { tahun: moment().add(2, 'Y').format('Y'), pembelian: '0', income: '0', kosOperasi: '0', totalExpenditure: '0', untungKasar: '0', perbelanjaanLain: '0', untungBersih: '0', totalIncome: '0' },
         { tahun: moment().add(3, 'Y').format('Y'), pembelian: '0', income: '0', kosOperasi: '0', totalExpenditure: '0', untungKasar: '0', perbelanjaanLain: '0', untungBersih: '0', totalIncome: '0' }]
-
-
-
 
     const editProjection = (val) => {
         setProjectionView(!projectionView)
@@ -68,7 +60,7 @@ const BusinessPlanGoalsScreen = (props) => {
     return (
         <LayoutLoan navigation={props.navigation}>
             <Modal visible={projectionView} onRequestClose={() => setProjectionView(!projectionView)}>
-                <LayoutLoan title={'Add Amount'} nopaddingTop={!ios?true:false} back={() => setProjectionView(!projectionView)} navigation={props.navigation}>
+                <LayoutLoan title={'Add Amount'} nopaddingTop={!ios ? true : false} back={() => setProjectionView(!projectionView)} navigation={props.navigation}>
 
                     <Formik
                         validateOnMount
@@ -82,9 +74,6 @@ const BusinessPlanGoalsScreen = (props) => {
                             const newProjection = projection
                             newProjection[selectedIndex] = newValue
 
-                            // const test = newCadanganPenggunaan.slice(0, -1).reduce((total, it) => total + parseFloat(it.amount), 0)
-                            // console.log(test)
-                            // newCadanganPenggunaan[newCadanganPenggunaan.length - 1].amount = test
                             setProjection([...newProjection])
 
                             actions.resetForm({})
@@ -104,8 +93,6 @@ const BusinessPlanGoalsScreen = (props) => {
                             const pembelianError = FormikProps.errors.pembelian
                             const pembelianTouched = FormikProps.touched.pembelian
 
-
-
                             const perbelanjaanLainError = FormikProps.errors.perbelanjaanLain
                             const perbelanjaanLainTouched = FormikProps.touched.perbelanjaanLain
 
@@ -114,8 +101,6 @@ const BusinessPlanGoalsScreen = (props) => {
 
 
                             const autoCalculateIncome = (val) => {
-
-                                //console.log(`all values ialah ${JSON.stringify(FormikProps.values)}`)
 
                                 const { income, pembelian, kosOperasi, perbelanjaanLain, } = FormikProps.values
                                 const untungKasar1 = parseFloat(val) - (parseFloat(pembelian) + parseFloat(kosOperasi))
@@ -126,18 +111,13 @@ const BusinessPlanGoalsScreen = (props) => {
                                 FormikProps.setFieldValue('untungKasar', untungKasar1.toString())
                                 FormikProps.setFieldValue('untungBersih', untungBersih1.toString())
 
-
-
                             }
 
                             const autoCalculatePembelian = (val) => {
                                 const { income, pembelian, kosOperasi, perbelanjaanLain, } = FormikProps.values
-
                                 const untungKasar1 = parseFloat(income) - (parseFloat(val) + parseFloat(kosOperasi))
                                 const untungBersih1 = untungKasar1 - parseFloat(perbelanjaanLain)
-
                                 const totalExpenditure1 = parseFloat(val) + parseFloat(kosOperasi)
-
 
                                 FormikProps.setFieldValue('pembelian', parseFloat(val))
                                 FormikProps.setFieldValue('untungKasar', untungKasar1.toString())
@@ -169,21 +149,13 @@ const BusinessPlanGoalsScreen = (props) => {
 
                                 FormikProps.setFieldValue('perbelanjaanLain', val)
                                 FormikProps.setFieldValue('untungBersih', untungBersih1.toString())
-
-
                             }
 
-
-
-
                             return (
-
                                 <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', }}>
-
                                     <Text style={[styles.formTitle]}>Sasaran Pencapaian {selectedItem.tahun}</Text>
                                     <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'flex-start', alignSelf: 'flex-start', paddingLeft: 10, paddingRight: 10 }}>
 
-                                        {/* <TouchableOpacity onPress={() => FormikProps.resetForm({})}><Text>Reset</Text></TouchableOpacity> */}
                                         <CustomTextInput
                                             imageUri={require('../assets/images/payment.png')}
                                             value={income}
@@ -201,8 +173,6 @@ const BusinessPlanGoalsScreen = (props) => {
                                             editable={false}
 
                                         />
-
-
                                         <CustomTextInput
                                             imageUri={require('../assets/images/bizAct.png')}
                                             value={pembelian}
@@ -213,7 +183,6 @@ const BusinessPlanGoalsScreen = (props) => {
                                             placeholder={'Pembelian'}
                                             keyboardType={'phone-pad'}
                                         />
-
                                         <CustomTextInput
                                             imageUri={require('../assets/images/compRegNum.png')}
                                             value={kosOperasi}
@@ -265,7 +234,6 @@ const BusinessPlanGoalsScreen = (props) => {
                                     />
 
                                 </View>
-
                             )
                         }}
                     </Formik >
@@ -273,13 +241,13 @@ const BusinessPlanGoalsScreen = (props) => {
             </Modal>
             <Text style={[styles.formTitle]}>Section E</Text>
             <Text style={[styles.formSubtitle]}>Sasaran Pencapaian Perniagaan Tahunan</Text>
-           
-<View style={{margin:10}} />
-            <View style={{ alignSelf: 'stretch', flexDirection: 'row',paddingLeft:10,paddingRight:10 }}>
+
+            <View style={{ margin: 10 }} />
+            <View style={{ alignSelf: 'stretch', flexDirection: 'row', paddingLeft: 10, paddingRight: 10 }}>
                 <View style={{ flex: 2 }}>
                     {/* {projection.map((p, index) => <Text key={index.toString()}>Test</Text>)} */}
                     <View style={{ padding: 5, marginBottom: 5 }}>
-                        <View style={{margin:10}} />
+                        <View style={{ margin: 10 }} />
                         <Text style={styles.label}>Pendapatan</Text>
                         <Text style={styles.label}>Perbelanjaan</Text>
                         <Text style={styles.label}>Untung Kasar</Text>
@@ -295,8 +263,8 @@ const BusinessPlanGoalsScreen = (props) => {
                         data={projection}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item, index }) =>
-                            <TouchableOpacity onPress={() => editProjection(index)} style={[styles.shadowNew,{ padding: 5, marginBottom: 5,marginRight:10,alignItems:'flex-end' }]}>
-                                <Text style={[styles.textDefault,{alignSelf:'center'}]}>{item.tahun}</Text>
+                            <TouchableOpacity onPress={() => editProjection(index)} style={[styles.shadowNew, { padding: 5, marginBottom: 5, marginRight: 10, alignItems: 'flex-end' }]}>
+                                <Text style={[styles.textDefault, { alignSelf: 'center' }]}>{item.tahun}</Text>
                                 <Text style={[styles.answer,]}>{item.totalIncome}</Text>
                                 <Text style={styles.answer}>{item.totalExpenditure}</Text>
                                 <Text style={styles.answer}>{item.untungKasar}</Text>
@@ -305,28 +273,7 @@ const BusinessPlanGoalsScreen = (props) => {
                             </TouchableOpacity>} />
                 </View>
             </View>
-
-            {/* <View style={{ alignSelf: 'stretch' }}>
-
-                <FlatList
-                    horizontal={true}
-                    contentContainerStyle={{}}
-                    data={projection}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item, index }) =>
-                        <TouchableOpacity onPress={() => editProjection(index)} style={{ padding: 5, flexDirection: 'row', marginBottom: 5 }}>
-                            <View style={{ flex: 1, alignItems: 'flex-start' }}>
-                                <Text style={styles.textDefault}>{index + 1}</Text>
-                            </View>
-                            <View style={{ flex: 6, alignItems: 'flex-start' }}>
-                                <Text style={styles.textDefault}>{item.tahun}</Text>
-                            </View>
-                            <View style={{ flex: 2, alignItems: 'flex-start' }}>
-                                <Text style={[styles.textDefault, { color: 'darkblue' }]}>RM {item.income}</Text>
-                            </View>
-                        </TouchableOpacity>} />
-            </View> */}
-            <View style={{margin:10}} />
+            <View style={{ margin: 10 }} />
             <CustomFormAction
                 label={`Save`}
                 navigation={props.navigation}
@@ -342,8 +289,6 @@ const BusinessPlanGoalsScreen = (props) => {
         </LayoutLoan>
     );
 }
-
-
 
 
 export default BusinessPlanGoalsScreen

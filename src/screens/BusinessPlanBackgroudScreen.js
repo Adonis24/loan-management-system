@@ -1,28 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import {
-    Image,
     Text,
     TouchableOpacity,
     View,
-    TextInput,
-    KeyboardAvoidingView,
     ScrollView
 
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 import { Ionicons } from '@expo/vector-icons';
-
 import styles from '../styles/styles'
-
 import LayoutLoan from '../Layout/LayoutLoan';
-
 import * as actionCreator from '../store/actions/action'
 
 const validationSchema = Yup.object().shape({
@@ -32,38 +22,31 @@ const validationSchema = Yup.object().shape({
         .required()
         .min(3)
         .label('Nama'),
-
     compName: Yup
         .string()
         .required()
         .min(3)
         .label('Nama Syarikat'),
-
     regNum: Yup
         .string()
         .required()
         .min(3)
         .label('No Pendaftaran'),
-
     compAlamat: Yup
         .string()
         .required()
         .min(3)
         .label('Alamat'),
-
-
 });
 
 const BusinessPlanBackgroudScreen = (props) => {
-
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { compName, name, regNum, compAlamat, compAlamat_2, compCity, compState, compPoskod } = useSelector(state => state.businessPlanningReducer, shallowEqual)
-    const { reg_no} = useSelector(state => state.bizInfoReducer, shallowEqual)
+    const { reg_no } = useSelector(state => state.bizInfoReducer, shallowEqual)
 
     const { compSendiriName, compSendiriAlamat_2, compSendiriAlamat, compSendiriPoskod, compSendiriCity, compSendiriState } = useSelector(state => state.financingReducer, shallowEqual)
     const sendiriName = useSelector(state => state.financingReducer.name, shallowEqual)
-
 
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
 
@@ -76,7 +59,7 @@ const BusinessPlanBackgroudScreen = (props) => {
             compCity: compSendiriCity,
             compPoskod: compSendiriPoskod,
             compState: compSendiriState,
-            regNum:reg_no
+            regNum: reg_no
         })
 
     }, []); // empty-array means don't watch for any updates
@@ -84,12 +67,9 @@ const BusinessPlanBackgroudScreen = (props) => {
 
     return (
         <LayoutLoan navigation={props.navigation}>
-
-
             <Formik
                 validateOnMount
                 initialValues={{ compName, name, regNum, compAlamat, compAlamat_2 }}
-
                 onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setLatarBelakang(values)
@@ -97,14 +77,10 @@ const BusinessPlanBackgroudScreen = (props) => {
                     actions.resetForm({})
                     dispatch(actionCreator.saveBussPlanData())
                     actions.setSubmitting(false)
-                }
-                }
+                }}
                 validationSchema={validationSchema}
             >
                 {FormikProps => {
-
-
-
 
                     const { name, compName, regNum, compAlamat, compAlamat_2 } = FormikProps.values
 
@@ -157,7 +133,6 @@ const BusinessPlanBackgroudScreen = (props) => {
                                     keyboardType={'default'}
                                     editable={false}
                                 />
-
                                 <CustomTextInput
                                     imageUri={require('../assets/images/compRegNum.png')}
                                     value={regNum}
@@ -170,7 +145,6 @@ const BusinessPlanBackgroudScreen = (props) => {
                                 />
                                 <CustomTextInput
                                     imageUri={require('../assets/images/address.png')}
-
                                     handleClick={() => console.log('do nothing')}
                                     multiLine={true}
 

@@ -50,7 +50,6 @@ const LoanBusinessInfoContScreen = (props) => {
     const [modalContent, setModalContent] = useState(null)
     const ios = Platform.OS === "ios" ? true : false
 
-
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { noAhli, compStat, pemilikan, keahlian, noAhli2 } = useSelector(state => state.financingReducer, shallowEqual)

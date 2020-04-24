@@ -5,24 +5,17 @@ import {
     Picker,
     Modal,
     Platform,
-    ScrollView,
     TouchableOpacity,
     View,
-    TextInput,
-    KeyboardAvoidingView,
-    CheckBox
+   
 
 } from 'react-native';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-
 import { Ionicons } from '@expo/vector-icons';
-
-
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import styles from '../styles/styles'
-
 import CheckBox2 from 'react-native-check-box'
 import LayoutLoan from '../Layout/LayoutLoan';
 
@@ -57,9 +50,6 @@ const LoanPerniagaanScreen = (props) => {
         setModalContent(modalContent)
         setIosPickerVisible(!iosPickerVisible)
     }
-
-
-
 
     return (
         <LayoutLoan navigation={props.navigation}>

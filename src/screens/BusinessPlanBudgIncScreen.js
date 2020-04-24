@@ -1,28 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import {
-    Image,
+
     Text,
     TouchableOpacity,
     View,
-    TextInput,
     ScrollView,
-    KeyboardAvoidingView
+
 
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
-import { LinearGradient } from 'expo-linear-gradient'
-import Layout from '../constants/Layout'
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
-import { keyboardBeingDisplay, keyboardBeingClose } from '../components/handleKeyboard'
 import { Ionicons } from '@expo/vector-icons';
-
 import styles from '../styles/styles'
-
 import LayoutLoan from '../Layout/LayoutLoan';
-
 import * as actionCreator from '../store/actions/action'
 
 const validationSchema = Yup.object().shape({
@@ -32,48 +24,33 @@ const validationSchema = Yup.object().shape({
         .required()
         .min(0)
         .label('Pendapatan'),
-
     kosOperasi: Yup
         .number()
         .required()
         .min(0)
         .label('Kos Operasi'),
-
     perbelanjaanLain: Yup
         .number()
         .required()
         .min(0)
         .label('Perbelanjaan Lain'),
-
     pembelian: Yup
         .number()
         .required()
         .min(0)
         .label('Perbelanjaan Lain'),
-
-
-
-
 });
 
 const BusinessPlanBudgIncScreen = (props) => {
-
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { pembelian, income, kosOperasi, totalExpenditure, untungKasar, perbelanjaanLain, untungBersih, totalIncome } = useSelector(state => state.businessPlanningReducer, shallowEqual)
 
-
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })
-
-
-
-
 
     return (
         <LayoutLoan navigation={props.navigation}>
-
-
             <Formik
                 validateOnMount
                 initialValues={{
@@ -100,9 +77,6 @@ const BusinessPlanBudgIncScreen = (props) => {
             >
                 {FormikProps => {
 
-
-
-
                     const { income, pembelian, kosOperasi, totalExpenditure, untungKasar, perbelanjaanLain, untungBersih, totalIncome } = FormikProps.values
 
                     const incomeError = FormikProps.errors.income
@@ -119,9 +93,6 @@ const BusinessPlanBudgIncScreen = (props) => {
 
 
                     const autoCalculateIncome = (val) => {
-
-                        //console.log(`all values ialah ${JSON.stringify(FormikProps.values)}`)
-
                         const { income, pembelian, kosOperasi, perbelanjaanLain, } = FormikProps.values
                         const untungKasar1 = parseFloat(val) - (parseFloat(pembelian) + parseFloat(kosOperasi))
                         const untungBersih1 = untungKasar1 - parseFloat(perbelanjaanLain)
@@ -130,17 +101,12 @@ const BusinessPlanBudgIncScreen = (props) => {
                         FormikProps.setFieldValue('totalIncome', val)
                         FormikProps.setFieldValue('untungKasar', untungKasar1.toString())
                         FormikProps.setFieldValue('untungBersih', untungBersih1.toString())
-
-
-
                     }
 
                     const autoCalculatePembelian = (val) => {
                         const { income, pembelian, kosOperasi, perbelanjaanLain, } = FormikProps.values
-
                         const untungKasar1 = parseFloat(income) - (parseFloat(val) + parseFloat(kosOperasi))
                         const untungBersih1 = untungKasar1 - parseFloat(perbelanjaanLain)
-
                         const totalExpenditure1 = parseFloat(val) + parseFloat(kosOperasi)
 
 
@@ -173,25 +139,17 @@ const BusinessPlanBudgIncScreen = (props) => {
                         const untungBersih1 = untungKasar1 - parseFloat(val)
 
                         FormikProps.setFieldValue('perbelanjaanLain', val)
-                        FormikProps.setFieldValue('untungBersih',  untungBersih1.toString())
-                        
-
-
+                        FormikProps.setFieldValue('untungBersih', untungBersih1.toString())
                     }
-
-
 
 
                     return (
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', }}>
-
                             <Text style={[styles.formTitle]}>Section C</Text>
-                            {/* <Image source={require('../assets/images/1.png')} style={{ height: 50, width: 200, margin: 5 }} resizeMode={'stretch'} /> */}
                             <Text style={[styles.formSubtitle]}>Anggaran Pendapatan Bulanan</Text>
                             <ScrollView contentContainerStyle={{ justifyContent: 'flex-start', alignItems: 'center', alignSelf: 'flex-start', paddingLeft: 10, paddingRight: 10 }}>
 
-                                {/* <TouchableOpacity onPress={() => FormikProps.resetForm({})}><Text>Reset</Text></TouchableOpacity> */}
                                 <CustomTextInput
                                     imageUri={require('../assets/images/payment.png')}
                                     value={income}
@@ -264,14 +222,14 @@ const BusinessPlanBudgIncScreen = (props) => {
                                     editable={false}
 
                                 />
-                                 <CustomFormAction
-                                label={`Save`}
-                                navigation={props.navigation}
-                                isValid={FormikProps.isValid}
-                                handleSubmit={FormikProps.handleSubmit}
-                            />
+                                <CustomFormAction
+                                    label={`Save`}
+                                    navigation={props.navigation}
+                                    isValid={FormikProps.isValid}
+                                    handleSubmit={FormikProps.handleSubmit}
+                                />
                             </ScrollView>
-                           
+
 
                         </View>
 
@@ -286,8 +244,5 @@ const BusinessPlanBudgIncScreen = (props) => {
         </LayoutLoan >
     );
 }
-
-
-
 
 export default BusinessPlanBudgIncScreen

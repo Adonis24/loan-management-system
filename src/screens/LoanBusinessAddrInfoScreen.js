@@ -66,7 +66,7 @@ const LoanBusinessAddrInfoScreen = (props) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setBusinessInfo(values)
                     dispatch(actionCreator.saveLoanData())
-                    props.navigation.navigate('LoanSectionF')
+                    props.navigation.navigate('LoanBusinessInfoCont')
                     actions.resetForm({})
                     actions.setSubmitting(false)
                 }

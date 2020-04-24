@@ -21,36 +21,6 @@ import * as actionCreator from '../store/actions/action'
 const validationSchema = Yup.object().shape({
 
 
-    // refName: Yup
-    //     .string()
-    //     .required()
-    //     .min(3)
-    //     .label('Nama'),
-
-    // refPhoneNum: Yup
-    //     .string()
-    //     .required()
-    //     .min(3)
-    //     .label('No Tel'),
-
-    // refRelationship: Yup
-    //     .string()
-    //     .required()
-    //     .min(3)
-    //     .label('Hubungan'),
-
-    // refAlamat: Yup
-    //     .string()
-    //     .required()
-    //     .min(3)
-    //     .label('Alamat'),
-    // refPoskod: Yup
-    //     .string()
-    //     .required()
-    //     .min(5)
-    //     .max(5)
-    //     .label('Postcode'),
-
 
 });
 
@@ -62,8 +32,9 @@ const LoanReferrerListScreen = (props) => {
 
 
     const setReferrer = (value) => dispatch({ type: 'SET_REFERRER', payload: { ...value } })
-    props.navigation.navigate('LoanValidation')
-    const nextScreen=()=>{
+    
+
+    const nextScreen = () => {
         dispatch(actionCreator.saveLoanData())
         props.navigation.navigate('LoanValidation')
     }
@@ -71,10 +42,8 @@ const LoanReferrerListScreen = (props) => {
     return (
         <LayoutLoan navigation={props.navigation}>
             <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
-
                 <Text style={[styles.formTitle]}>Section H</Text>
                 <Text style={[styles.formSubtitle]}>Maklumat Perujuk</Text>
-
                 {refName ?
                     <TouchableOpacity onPress={() => props.navigation.navigate('LoanReferrer1')} style={{ flexDirection: 'row' }}>
                         <View style={{ flexDirection: 'row', flex: 1 }}>
@@ -111,10 +80,8 @@ const LoanReferrerListScreen = (props) => {
                             </View>
                         </View>
                     </TouchableOpacity>}
-
                 {ref2Name ? <TouchableOpacity onPress={() => props.navigation.navigate('LoanReferrer2')} style={{ flexDirection: 'row' }}>
                     <View style={{ flexDirection: 'row', flex: 1 }}>
-
                         <View style={{ borderWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch', flex: 1, padding: 10, marginBottom: 10 }}>
                             <View style={{ flexDirection: 'row', }}>
                                 <Text style={[styles.label, { flex: 1 }]}>Nama</Text>
@@ -136,7 +103,6 @@ const LoanReferrerListScreen = (props) => {
                                     <Text style={[styles.answer]}>{ref2Poskod}</Text>
                                     <Text style={[styles.answer]}>{ref2City},{ref2State}</Text>
                                 </View>
-
                             </View>
                         </View>
                     </View>
@@ -154,9 +120,9 @@ const LoanReferrerListScreen = (props) => {
                     </TouchableOpacity>}
 
                 <CustomFormAction
-                label={'Save'}
+                    label={'Save'}
                     navigation={props.navigation}
-                    isValid={true}
+                    isValid={refName&&ref2Name}
                     handleSubmit={() => nextScreen()}
                 />
 

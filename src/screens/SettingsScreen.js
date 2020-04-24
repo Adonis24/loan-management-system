@@ -32,8 +32,11 @@ const SettingScreen = (props) => {
     //const { expo_token } = useSelector(state => state.myAccountReducer, shallowEqual)
     const local_expo_token = useSelector(state => state.registrationReducer.expo_token, shallowEqual)
 
+    
+    ///LATER PLEASE DELAY INITIATEMYACCOUNT SO IT HAS TIME TO UPDATE ITS VALUE
     const toggleNotification = () => {
-        expo_token ? dispatch(actionCreator.addExpoToken({ expo_token: null })) : dispatch(actionCreator.addExpoToken({ expo_token: local_expo_token }))
+        expo_token ? dispatch(actionCreator.addExpoToken({ expo_token: null })) : dispatch(actionCreator.addExpoToken({ expo_token: local_expo_token }));
+        console.log('something done')
         dispatch(actionCreator.initiateMyAccount())
     }
 
@@ -42,7 +45,6 @@ const SettingScreen = (props) => {
     }, []); // empty-array means don't watch for any updates
 
     return (
-
         < LayoutB
             title={'Settings'}
             screenType='logo'
@@ -51,8 +53,6 @@ const SettingScreen = (props) => {
         >
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 20 }} />
             <ScrollView contentStyle={{ padding: 10 }} >
-
-
                 <View style={{ width: Layout.window.width, flexDirection: 'row', justifyContent: 'space-between', padding: 5 }}>
                     <Text style={[styles.subTitle, { margin: 5 }]}>Tools</Text>
                     <Ionicons name={'md-more'} size={24} color={'#2C4690'} />
@@ -70,16 +70,15 @@ const SettingScreen = (props) => {
                                 <Text style={[styles.textSmall, { color: expo_token ? 'red' : 'black' }]}>{expo_token ? `Disable!` : 'Enable!'}</Text>
                             </TouchableOpacity>
                         </View>
-
                     </View>
                     <TouchableOpacity onPress={() => logout()} style={{ flex: 1, flexDirection: 'row', marginBottom: 5, marginTop: 5, alignSelf: 'stretch', justifyContent: 'space-between', borderBottomWidth: 1, borderColor: 'lightgrey', paddingBottom: 10, paddingRight: 10 }}>
                         <Text>Logout</Text>
-
                         <Ionicons name='ios-log-out' size={25} color='black' />
 
                     </TouchableOpacity>
 
                 </View>
+                {/* <Text>Expo Token : {expo_token}</Text> */}
 
             </ScrollView>
 

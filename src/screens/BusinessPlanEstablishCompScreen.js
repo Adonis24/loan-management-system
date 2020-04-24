@@ -172,7 +172,6 @@ const BusinessPlanEstablishCompScreen = (props) => {
                                             <Picker.Item label="Tunggal" value="Tunggal" />
                                             <Picker.Item label="Perkongsian" value="Perkongsian" />
                                             <Picker.Item label="Sdn Bhd" value="Sdn Bhd" />
-
                                         </Picker>
                                     </View>
                                 </LayoutLoan>
@@ -214,7 +213,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
                                 </View>
                             </View>
                             <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Tarikh Penubuhan Syarikat :</Text>
-                            <TouchableOpacity onPress={() => showDatepicker('compEstab')} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', marginBottom: 5, borderColor: compEstabTouched && compEstabError ? '#d94498' : '#5a83c2' }}>
+                            <TouchableOpacity onPress={() => showDatepicker('compEstab')} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', marginBottom: 20, borderColor: compEstabTouched && compEstabError ? '#d94498' : '#5a83c2' }}>
                                 <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <TextInput editable={false} value={compEstab ? moment(compEstab).format("MMMM Do YYYY") : null} onChangeText={FormikProps.handleChange(`compEstab`)} onBlur={FormikProps.handleBlur(`compEstab`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Registration Date'} placeholderTextColor={compEstabTouched && compEstabError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
                             </TouchableOpacity>
@@ -223,7 +222,7 @@ const BusinessPlanEstablishCompScreen = (props) => {
                             </View>
 
                             <Text style={[styles.label, { margin: 5, alignSelf: 'flex-start' }]}>Tarikh Mula Operasi :</Text>
-                            <TouchableOpacity onPress={() => showDatepicker('compOperation')} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', marginBottom: 5, borderColor: compOperationTouched && compOperationError ? '#d94498' : '#5a83c2' }}>
+                            <TouchableOpacity onPress={() => showDatepicker('compOperation')} style={{ alignSelf: 'center', borderBottomWidth: 1, flexDirection: 'row', marginBottom: 20, borderColor: compOperationTouched && compOperationError ? '#d94498' : '#5a83c2' }}>
                                 <Image source={require('../assets/images/regDate.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <TextInput editable={false} value={compOperation ? moment(compOperation).format("MMMM Do YYYY") : null} onChangeText={FormikProps.handleChange(`compOperation`)} onBlur={FormikProps.handleBlur(`compOperation`)} style={{ marginLeft: 5, flex: 1 }} placeholder={'Company Operation'} placeholderTextColor={compOperationTouched && compOperationError ? 'rgba(255,0,0,0.3)' : 'lightgrey'} keyboardType={'default'} />
                             </TouchableOpacity>

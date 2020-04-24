@@ -3,7 +3,6 @@ import {
     Text,
     TouchableOpacity,
     View,
-    ScrollView,
     FlatList,
     Modal, Platform
 
@@ -31,14 +30,12 @@ const validationSchema = Yup.object().shape({
 });
 
 
-
 const BusinessPlanProposalScreen = (props) => {
 
 
     const dispatch = useDispatch()
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { cadanganPenggunaanPlan } = useSelector(state => state.businessPlanningReducer)
-
 
 
     const setLatarBelakang = (value) => dispatch({ type: 'SET_LATAR_BELAKANG', payload: { ...value } })

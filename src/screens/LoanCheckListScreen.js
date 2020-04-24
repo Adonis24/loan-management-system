@@ -72,8 +72,12 @@ const LoanCheckListScreen = (props) => {
 
     const dispatch = useDispatch()
     const { attachment } = useSelector(state => state.attachmentReducer, shallowEqual)
-    const { cawanganParlimen, name, cpName, compSendiriName, pemilikan, pembiayaan, totalLoan, loanNeed, refName, ref2Name } = useSelector(state => state.financingReducer, shallowEqual)
+    const { cawanganParlimen, name, cpName, compSendiriName, pemilikan, pembiayaan, loanNeed, refName, ref2Name } = useSelector(state => state.financingReducer, shallowEqual)
+
+    const { compName, compStatus, untungBersih, cadanganPenggunaanPlan, projectionPlan, pasaran, experience } = useSelector(state => state.businessPlanningReducer, shallowEqual)
+
     const [borangSetel, setBorangSetel] = useState(false)
+    const [planSetel, setPlanSetel] = useState(false)
 
     useEffect(() => {
         getData()
@@ -81,6 +85,7 @@ const LoanCheckListScreen = (props) => {
 
     useEffect(() => {
         checkBorangSetel()
+        checkPlanSetel()
     }, []); // 
 
     //attachment && console.log(`semua attachment ialah ${JSON.stringify(attachment)}`)
@@ -138,7 +143,19 @@ const LoanCheckListScreen = (props) => {
         }
     }
 
-    console.log('ape cite ni', pembiayaan, loanNeed, refName, ref2Name)
+
+    const checkPlanSetel = () => {
+        if (compName && compStatus && untungBersih && cadanganPenggunaanPlan && projectionPlan && pasaran && experience) {
+            console.log(`plam setel`)
+            setPlanSetel(true)
+        } else {
+            console.log(`plan tak setel`)
+            setPlanSetel(false)
+        }
+    }
+
+    console.log('ape cite ni', cawanganParlimen, name, cpName, compSendiriName, pemilikan, pembiayaan, loanNeed, refName, ref2Name)
+    console.log('cite plan pula : ', compName, compStatus, untungBersih, JSON.stringify(cadanganPenggunaanPlan), JSON.stringify(projectionPlan), pasaran, experience)
 
 
     // if (!cawanganParlimen) {
@@ -150,7 +167,7 @@ const LoanCheckListScreen = (props) => {
 
     const checklist = [
         { item: 'Borang permohonan pembiayaan TEKUN', button: 'LoanDrawer', check: borangSetel },
-        { item: 'Kertas rancangan perniagaan', button: 'BusinessPlanDrawer', disabled: !borangSetel },
+        { item: 'Kertas rancangan perniagaan', button: 'BusinessPlanDrawer', check: planSetel, disabled: !borangSetel },
         { item: 'Gambar berukuran passport', button: 'Attachment', content: listItem.gambarPassportContent, disabled: !borangSetel },
         { item: 'Salinan kad pengenalan pemohon dan pasangan', button: 'Attachment', content: listItem.icCopyContent, disabled: !borangSetel },
         { item: '3 keping gambar premis/tapak perniagaan', button: 'Attachment', content: listItem.sitePicContent, disabled: !borangSetel },
@@ -206,7 +223,7 @@ const LoanCheckListScreen = (props) => {
 const CustomRow = (props) => {
     if (!props.disabled)
         return (
-            <TouchableOpacity onPress={() => !props.disabled ? props.navigation.navigate(props.button, { content: JSON.stringify(props.content) }) : console.log('nothing')} style={[{ alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch', marginBottom: 10 },  styles.shadowNew ,]}>
+            <TouchableOpacity onPress={() => !props.disabled ? props.navigation.navigate(props.button, { content: JSON.stringify(props.content) }) : console.log('nothing')} style={[{ alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch', marginBottom: 10 }, styles.shadowNew,]}>
                 <View style={{ padding: 10, flex: 1, }}>
                     <Text style={[styles.textDefault, { marginBottom: 5, textAlign: 'left' }]}>{props.no} </Text>
                 </View>
@@ -218,9 +235,9 @@ const CustomRow = (props) => {
                 </View>
             </TouchableOpacity>
         )
-        else
+    else
         return (
-            <View  style={[{ alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch', marginBottom: 10 }, { borderWidth: 1, borderColor: 'lightgrey' },]}>
+            <View style={[{ alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch', marginBottom: 10 }, { borderWidth: 1, borderColor: 'lightgrey' },]}>
                 <View style={{ padding: 10, flex: 1, }}>
                     <Text style={[styles.textDefault, { marginBottom: 5, textAlign: 'left' }]}>{props.no} </Text>
                 </View>

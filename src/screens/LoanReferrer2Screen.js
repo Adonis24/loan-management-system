@@ -107,7 +107,7 @@ const LoanReferrer2Screen = (props) => {
 
 
                     const getCoordinate = (poskod) => {
-
+                        FormikProps.setFieldValue('ref2Poskod', poskod)
                         if (poskod) {
                             if (poskod.length === 5) {
                                 const coordinate = malaysiaData.find(x => x.Postcode == poskod)
@@ -129,7 +129,7 @@ const LoanReferrer2Screen = (props) => {
 
 
                         }
-                        FormikProps.setFieldValue('ref2Poskod', '')
+                       
 
                     }
 
