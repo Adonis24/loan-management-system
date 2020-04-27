@@ -4,7 +4,7 @@ import {
     Text,
     TouchableOpacity,
     View,
-    Modal,Platform
+    Modal, Platform
 
 } from 'react-native';
 import { Formik } from 'formik';
@@ -69,10 +69,11 @@ const LoanValidationScreen = (props) => {
                 validateOnMount
                 initialValues={{ valAlamat, valAlamat_2, valName, valPhoneNum, jawatan, valCity, valState, valPoskod }}
 
-                onSubmit={(values, actions) => {
+                onSubmit={async (values, actions) => {
                     console.log(`values formik ialah ${JSON.stringify(values)}`)
                     setValidation(values)
-                    dispatch(actionCreator.saveLoanData())
+                    await dispatch(actionCreator.saveLoanData())
+                    await dispatch(actionCreator.getLoanData())
                     props.navigation.navigate('LoanCheckList')
                     actions.resetForm({})
                     actions.setSubmitting(false)
@@ -136,7 +137,7 @@ const LoanValidationScreen = (props) => {
                             <Modal animationType={'slide'}
                                 visible={addressVisible} onRequestClose={() => setAddressVisible(!addressVisible)}
                             >
-                                <LayoutLoan title={'Address'} nopaddingTop={!ios?true:false} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
+                                <LayoutLoan title={'Address'} nopaddingTop={!ios ? true : false} back={() => setAddressVisible(!addressVisible)} navigation={props.navigation}>
                                     <View style={{ margin: 10 }} />
                                     <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                                         <CustomTextInput
@@ -167,7 +168,7 @@ const LoanValidationScreen = (props) => {
                                             touched={valPoskodTouched}
                                             error={valPoskodError}
                                             placeholder={'Poskod'}
-                                            keyboardType={'decimal-pad'}
+                                            keyboardType={'phone-pad'}
                                         />
 
                                         {valCity && <CustomTextInput
@@ -222,7 +223,7 @@ const LoanValidationScreen = (props) => {
                                 touched={valPhoneNumTouched}
                                 error={valPhoneNumError}
                                 placeholder={'No Telefon'}
-                                keyboardType={'decimal-pad'}
+                                keyboardType={'phone-pad'}
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}

@@ -19,11 +19,11 @@ import * as actionCreator from '../store/actions/action'
 
 const validationSchema = Yup.object().shape({
 
-    lokasi: Yup
-        .string()
-        .required()
-        .min(3)
-        .label('Lokasi'),
+    // lokasi: Yup
+    //     .string()
+    //     .required()
+    //     .min(3)
+    //     .label('Lokasi'),
     compPhone: Yup
         .string()
         .required()

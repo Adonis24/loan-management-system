@@ -54,7 +54,10 @@ const LoanBusinessInfoContScreen = (props) => {
     const { isConnected, isInternetReachable, type } = useSelector(state => state.netInfoReducer, shallowEqual)
     const { noAhli, compStat, pemilikan, keahlian, noAhli2 } = useSelector(state => state.financingReducer, shallowEqual)
 
-
+    const handleIosPicker = (modalContent) => {
+        setModalContent(modalContent)
+        setIosPickerVisible(!iosPickerVisible)
+    }
     const setMaklumatPerniagaan = (value) => dispatch({ type: 'SET_MAKLUMAT_ASAS', payload: { ...value } })
 
     return (
@@ -100,41 +103,31 @@ const LoanBusinessInfoContScreen = (props) => {
                     return (
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
-                            <Modal animationType={'slide'}
+                            <Modal animationType={'slide'} 
                                 visible={iosPickerVisible} onRequestClose={() => console.log(`onRequestClose`)}
                             >
-                                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                                    <View style={{ paddingLeft: 20, paddingRight: 20, flex: 1, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#9ADAF4' }}>
-                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start' }}>
-                                            <TouchableOpacity onPress={() => setIosPickerVisible(!iosPickerVisible)} hitslop={{ top: 20, left: 20, bottom: 20, right: 20 }}>
-                                                <Ionicons name="ios-arrow-back" color={'#5a83c2'} style={{ fontSize: 30 }} />
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={{ flex: 5, justifyContent: 'center', alignItems: 'center' }}>
-                                            <Text style={{ fontSize: 12 }}>Select</Text>
-                                        </View>
-                                        <View style={{ flex: 1 }} />
-                                    </View>
-                                    <View style={{ flex: 9, justifyContent: 'flex-start' }}>
-                                        {(modalContent === "pemilikan") ?
+                                <LayoutLoan title={'Select'} nopaddingTop={false} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
+                                    <View style={{ alignSelf: 'stretch', margin: 10 }}>
+                                    {(modalContent === "pemilikan") ?
                                             <Picker style={{ flex: 1, height: 35 }} selectedValue={pemilikan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pemilikan', itemValue)}>
                                                 <Picker.Item label={'Pemilikan Perniagaan'} value={undefined} />
-                                                <Picker.Item label="Individu" value="individu" />
-                                                <Picker.Item label="Pemilik Tunggal" value="pemilikTunggal" />
-                                                <Picker.Item label="Perkongsian" value="perkongsian" />
-                                                <Picker.Item label="Sendirian Berhad" value="sendirianBerhad" />
+                                                <Picker.Item label="Individu" value="Individu" />
+                                                <Picker.Item label="Pemilik Tunggal" value="Pemilik Tunggal" />
+                                                <Picker.Item label="Perkongsian" value="Perkongsian" />
+                                                <Picker.Item label="Sendirian Berhad" value="Sendirian Berhad" />
 
                                             </Picker> : <Picker style={{ flex: 1, height: 35 }} selectedValue={compStat} onValueChange={(itemValue, itemIndex) =>
                                                 FormikProps.setFieldValue('compStat', itemValue)}>
                                                 <Picker.Item label={'Status Premis'} value={undefined} />
-                                                <Picker.Item label="Sendiri" value="sendiri" />
-                                                <Picker.Item label="Sewa" value="sewa" />
-                                                <Picker.Item label="Keluarga" value="keluarga" />
+                                                <Picker.Item label="Sendiri" value="Sendiri" />
+                                                <Picker.Item label="Sewa" value="Sewa" />
+                                                <Picker.Item label="Keluarga" value="Keluarga" />
 
                                             </Picker>
                                         }
-                                    </View>
-                                </View>
+                                        </View>
+                                </LayoutLoan>
+                               
                             </Modal>
 
 
@@ -150,7 +143,7 @@ const LoanBusinessInfoContScreen = (props) => {
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
-                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
+                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('pemilikan')}>
                                                 <Text style={{ fontSize: 12 }}>{pemilikan ? pemilikan : `Pemilikan Perniagaan`}</Text>
                                             </TouchableOpacity>
@@ -159,9 +152,9 @@ const LoanBusinessInfoContScreen = (props) => {
                                             <Picker style={{ height: 35 }} selectedValue={pemilikan} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('pemilikan', itemValue)}>
                                                 <Picker.Item label={'Pemilikan Perniagaan'} value={undefined} />
                                                 <Picker.Item label="Individu" value="individu" />
-                                                <Picker.Item label="Pemilik Tunggal" value="pemilikTunggal" />
-                                                <Picker.Item label="Perkongsian" value="perkongsian" />
-                                                <Picker.Item label="Sendirian Berhad" value="sendirianBerhad" />
+                                                <Picker.Item label="Pemilik Tunggal" value="Pemilik Tunggal" />
+                                                <Picker.Item label="Perkongsian" value="Perkongsian" />
+                                                <Picker.Item label="Sendirian Berhad" value="Sendirian Berhad" />
 
                                             </Picker>
                                             {pemilikanTouched && pemilikanError && <Text style={styles.error}>{pemilikanError}</Text>}
@@ -174,7 +167,7 @@ const LoanBusinessInfoContScreen = (props) => {
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <View style={{ alignSelf: 'center', margin: 5, flex:1  }}>
                                     {ios ?
-                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
+                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('compStat')}>
                                                 <Text style={{ fontSize: 12 }}>{compStat ? compStat : `Status Premis`}</Text>
                                             </TouchableOpacity>
@@ -182,9 +175,9 @@ const LoanBusinessInfoContScreen = (props) => {
                                         </View> : <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <Picker style={{ height: 35 }} selectedValue={compStat} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('compStat', itemValue)}>
                                                 <Picker.Item label={'Status Premis'} value={undefined} />
-                                                <Picker.Item label="Sendiri" value="sendiri" />
-                                                <Picker.Item label="Sewa" value="sewa" />
-                                                <Picker.Item label="Keluarga" value="keluarga" />
+                                                <Picker.Item label="Sendiri" value="Sendiri" />
+                                                <Picker.Item label="Sewa" value="Sewa" />
+                                                <Picker.Item label="Keluarga" value="Keluarga" />
                                             </Picker>
                                             {compStatTouched && compStatError && <Text style={styles.error}>{compStatError}</Text>}
                                         </View>}
@@ -208,7 +201,7 @@ const LoanBusinessInfoContScreen = (props) => {
                                 touched={noAhli2Touched}
                                 error={noAhli2Error}
                                 placeholder={'No Keahlian Persatuan Penjaja'}
-                                keyboardType={'decimal-pad'}
+                                keyboardType={'phone-pad'}
                             />
 
 

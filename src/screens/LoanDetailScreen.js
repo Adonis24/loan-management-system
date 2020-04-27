@@ -149,7 +149,7 @@ const LoanDetailScreen = (props) => {
                                 touched={loanNeedTouched}
                                 error={loanNeedError}
                                 placeholder={'Jumlah Pembiayaan Diperlukan'}
-                                keyboardType={'decimal-pad'}
+                                keyboardType={'phone-pad'}
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/estimateTime.png')}
@@ -168,7 +168,7 @@ const LoanDetailScreen = (props) => {
                                 <Image source={require('../assets/images/payment.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
-                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
+                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('kekerapan')}>
                                                 <Text style={{ fontSize: 12 }}>{kekerapan ? kekerapan : `Kekerapan Bayaran`}</Text>
                                             </TouchableOpacity>
@@ -190,7 +190,7 @@ const LoanDetailScreen = (props) => {
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
-                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
+                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('caraBayaran')}>
                                                 <Text style={{ fontSize: 12 }}>{caraBayaran ? caraBayaran : `Cara Bayaran`}</Text>
                                             </TouchableOpacity>

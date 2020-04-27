@@ -87,7 +87,7 @@ const LoanPersonalStatusScreen = (props) => {
 
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                             <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
-                                <LayoutLoan title={'Taraf Perkahwinan'} nopaddingTop={true} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
+                                <LayoutLoan title={'Taraf Perkahwinan'} nopaddingTop={!ios?true:false} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
                                     <View style={{ alignSelf: 'stretch', margin: 10 }}>
                                         {(modalContent !== "taraf") ?
                                             <View /> : <Picker style={{ flex: 1, height: 35 }} selectedValue={taraf} onValueChange={(itemValue, itemIndex) =>
@@ -113,7 +113,7 @@ const LoanPersonalStatusScreen = (props) => {
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
-                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
+                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('taraf')}>
                                                 <Text style={{ fontSize: 12 }}>{taraf ? taraf : `Taraf Perkahwinan`}</Text>
                                             </TouchableOpacity>
@@ -129,6 +129,7 @@ const LoanPersonalStatusScreen = (props) => {
                                             {tarafTouched && tarafError && <Text style={styles.error}>{tarafError}</Text>}
                                         </View>}
                                 </View>
+
                             </View>
                             <CustomTextInput
                                 imageUri={require('../assets/images/mykad.png')}

@@ -6,23 +6,19 @@ import {
     View,
     Modal,
     Picker,
+    ScrollView
   
 
 } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import Constants from 'expo-constants'
-
 import { CustomTextInput, CustomFormAction } from '../components/Custom'
 import { Ionicons } from '@expo/vector-icons';
-
 import styles from '../styles/styles'
-
 import LayoutLoan from '../Layout/LayoutLoan';
 
 const validationSchema = Yup.object().shape({
-
     cpPekerjaan: Yup
         .string()
         .required()
@@ -114,12 +110,9 @@ const LoanConnectedPartiesScreen = (props) => {
                     const cpRelationTouched = FormikProps.touched.cpRelation
 
 
-
-
-
                     return (
 
-                        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
+                        <ScrollView style={{ flex: 1, alignSelf:'stretch'  }} contentContainerStyle={{justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10}}>
                             <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
                                 <LayoutLoan title={'Hubungan'} nopaddingTop={false} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
                                     <View style={{ alignSelf: 'stretch', margin: 10 }}>
@@ -143,7 +136,7 @@ const LoanConnectedPartiesScreen = (props) => {
                                 <Image source={require('../assets/images/mykad.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
-                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
+                                        <View style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <TouchableOpacity style={{ justifyContent: 'center', margin: 5 }} onPress={() => handleIosPicker('cpRelation')}>
                                                 <Text style={{ fontSize: 12 }}>{cpRelation ? cpRelation : `Hubungan`}</Text>
                                             </TouchableOpacity>
@@ -198,7 +191,7 @@ const LoanConnectedPartiesScreen = (props) => {
                                 touched={cpPendapatanTouched}
                                 error={cpPendapatanError}
                                 placeholder={'Pendapatan'}
-                                keyboardType={'decimal-pad'}
+                                keyboardType={'phone-pad'}
                             />
 
 
@@ -207,7 +200,7 @@ const LoanConnectedPartiesScreen = (props) => {
                                 isValid={FormikProps.isValid}
                                 handleSubmit={FormikProps.handleSubmit}
                             />
-                        </View>
+                        </ScrollView>
 
                     )
                 }}

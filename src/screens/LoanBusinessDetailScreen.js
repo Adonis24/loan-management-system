@@ -131,7 +131,7 @@ const LoanBusinessDetailScreen = (props) => {
 
                             <View style={{ alignSelf: 'flex-start', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
 
-                                <CheckBox2 onClick={() => handleCheckBoxAda()} isChecked={pembiayaan === 'Ada' ? true : false} />
+                                <CheckBox2 onClick={() => handleCheckBoxAda()} isChecked={pembiayaan === 'Ada' ? true : false} checkBoxColor={'#5a83c2'} />
 
                                 <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
                                     Ya
@@ -139,7 +139,7 @@ const LoanBusinessDetailScreen = (props) => {
                             </View>
                             <View style={{ alignSelf: 'flex-start', flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
 
-                                <CheckBox2 onClick={() => handleCheckBoxTiada()} isChecked={pembiayaan === 'Tiada' ? true : false} />
+                                <CheckBox2 onClick={() => handleCheckBoxTiada()} isChecked={pembiayaan === 'Tiada' ? true : false} checkBoxColor={'#5a83c2'} />
 
                                 <Text style={[styles.answer, { margin: 5, marginBottom: 10 }]}>
                                     Tidak

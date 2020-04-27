@@ -86,10 +86,11 @@ const LoanPerniagaanScreen = (props) => {
                         setSedangBerniaga(mulaBerniaga)
                         FormikProps.setFieldValue('statusPerniagaan', !sedangBerniaga ? 'Sedang Berniaga' : 'Memulakan Perniagaan')
                     }
+
                     return (
                         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, paddingRight: 10, alignSelf: 'stretch' }}>
                             <Modal animationType={'slide'} visible={iosPickerVisible} presentationStyle={'pageSheet'} onRequestClose={() => setIosPickerVisible(!iosPickerVisible)}                   >
-                                <LayoutLoan title={'Sektor Perniagaan'} nopaddingTop={true} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
+                                <LayoutLoan title={'Sektor Perniagaan'} nopaddingTop={!ios?true:false} back={() => setIosPickerVisible(!iosPickerVisible)} navigation={props.navigation}>
                                     <View style={{ alignSelf: 'stretch', margin: 10 }}>
                                         {modalContent === 'typeBusiness' ? <Picker style={{}} selectedValue={typeBusiness} onValueChange={(itemValue, itemIndex) => FormikProps.setFieldValue('typeBusiness', itemValue)}>
                                             <Picker.Item label={'Sektor Perniagaan'} value={undefined} />
@@ -131,7 +132,7 @@ const LoanPerniagaanScreen = (props) => {
                                 <Image source={require('../assets/images/bizAct.png')} style={{ height: 30, width: 30, margin: 5 }} resizeMode={'contain'} />
                                 <View style={{ alignSelf: 'center', margin: 5, flex: 1 }}>
                                     {ios ?
-                                        <TouchableOpacity onPress={() => handleIosPicker('typeBusiness')} style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: 'rgba(0,0,0,0.3)' }}>
+                                        <TouchableOpacity onPress={() => handleIosPicker('typeBusiness')} style={{ alignSelf: 'stretch', borderWidth: 1, borderColor: '#5a83c2' }}>
                                             <View style={{ justifyContent: 'center', margin: 5 }} >
                                                 <Text style={{ fontSize: 12 }}>{typeBusiness ? typeBusiness : `Sektor Perniagaan`}</Text>
                                             </View>

@@ -166,7 +166,7 @@ const LoanReferrerScreen = (props) => {
                                             touched={refPoskodTouched}
                                             error={refPoskodError}
                                             placeholder={'Poskod'}
-                                            keyboardType={'decimal-pad'}
+                                            keyboardType={'phone-pad'}
                                         />
 
                                         {refCity && <CustomTextInput
@@ -224,7 +224,7 @@ const LoanReferrerScreen = (props) => {
                                 touched={refPhoneNumTouched}
                                 error={refPhoneNumError}
                                 placeholder={'No Telefon'}
-                                keyboardType={'decimal-pad'}
+                                keyboardType={'phone-pad'}
                             />
                             <CustomTextInput
                                 imageUri={require('../assets/images/address.png')}
