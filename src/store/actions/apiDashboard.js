@@ -552,8 +552,34 @@ export const saveLoanDataApi = () => {
 
 export const resetFormApi = (data) => {
   return async (dispatch, getState) => {
-    await AsyncStorage.removeItem(data)
-    //console.log(`delete form dalam storage`)
+    console.log(`akan buang dr asyncstorage iaitu ${JSON.stringify(data)}`)
+    const { email } = getState().myAccountReducer
+    const localData = JSON.parse(await AsyncStorage.getItem('data'))
+
+    if (localData) {
+      const dataFiltered = localData.filter(l => l.email !== email)
+      const userData = localData.find(l => l.email === email)
+      const newUserData = data === 'bussPlanData' ? { ...userData, bussPlanData: {} } : { ...userData, loanData: {} }
+      dataFiltered.push(newUserData)
+      await AsyncStorage.setItem('data', JSON.stringify(dataFiltered))
+    } else {
+      const newData = [{ email, bussPlanData: {} }]
+      await AsyncStorage.setItem('data', JSON.stringify(newData))
+    }
+
+
+
+    console.log(`existing local data ialah ${JSON.stringify(localData)}`)
+
+    // newLocalData = { ...localData, }
+
+    // await AsyncStorage.removeItem(data)
+
+    // await AsyncStorage.getAllKeys((err, keys) => {
+    //   console.log(`keys yang ada ialah : ${JSON.stringify(keys)}`)
+    // });
+
+
   }
 }
 
@@ -827,14 +853,14 @@ export const uploadAllAttachmentApi = () => {
         if (files) {
           if (files.length > 1) {
             files.map((fi, index) => {
-              const fileType = fi.fileDetail.uri.substr( fi.fileDetail.uri.length - 3)
+              const fileType = fi.fileDetail.uri.substr(fi.fileDetail.uri.length - 3)
               console.log(`To upload ${attachmentName}_${index + 1} : ${fi.fileName} : ${fileType} : ${fi.fileDetail.uri}`)
-              const documentName=attachmentName +'-'+fi.fileName
+              const documentName = attachmentName + '-' + fi.fileName
             })
           } else {
-            const fileType = files[0].fileDetail.uri.substr( files[0].fileDetail.uri.length - 3)
+            const fileType = files[0].fileDetail.uri.substr(files[0].fileDetail.uri.length - 3)
             console.log(`To upload ${attachmentName} : ${files[0].fileName}: ${fileType} :${files[0].fileDetail.uri}`)
-            const documentName=attachmentName
+            const documentName = attachmentName
           }
         }
 

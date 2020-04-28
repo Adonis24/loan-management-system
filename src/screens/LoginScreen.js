@@ -10,7 +10,7 @@ import {
     View,
     Dimensions,
     TextInput,
-    AsyncStorage,
+ 
     ImageBackground,
     ActivityIndicator,
     KeyboardAvoidingView

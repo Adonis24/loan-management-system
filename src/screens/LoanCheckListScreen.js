@@ -86,7 +86,7 @@ const LoanCheckListScreen = (props) => {
     useEffect(() => {
         checkBorangSetel()
         checkPlanSetel()
-    }, []); // 
+    }, [refName,experience]); // 
 
     //attachment && console.log(`semua attachment ialah ${JSON.stringify(attachment)}`)
 
@@ -126,11 +126,11 @@ const LoanCheckListScreen = (props) => {
     }
 
 
-    const getData = async () => {
-        await dispatch(actionCreator.getLoanData())
-        await dispatch(actionCreator.getAllBusinessPlan())
-        await dispatch(actionCreator.getAllAttachment())
-        await dispatch(actionCreator.getFileList())
+    const getData =  () => {
+         dispatch(actionCreator.getLoanData())
+         dispatch(actionCreator.getAllBusinessPlan())
+         dispatch(actionCreator.getAllAttachment())
+         dispatch(actionCreator.getFileList())
     }
 
     const checkBorangSetel = () => {

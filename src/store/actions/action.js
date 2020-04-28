@@ -1,4 +1,3 @@
-import { AsyncStorage } from 'react-native'
 import * as SecureStore from 'expo-secure-store'
 
 import Amplify, { Auth, Storage } from 'aws-amplify';
@@ -460,6 +459,7 @@ export const resetForm = (data) => {
         if (data === 'loanData') {
             dispatch({ type: 'DELETE_FORM_DATA' })
         } else if (data === 'bussPlanData') {
+            console.log(`delete reducer bussPlan`)
             dispatch({ type: 'DELETE_FORM_DATA_PLAN' })
         }
 

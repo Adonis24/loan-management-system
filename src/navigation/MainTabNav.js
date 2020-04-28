@@ -3,15 +3,13 @@ import { Platform, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
 import TabBarIcon from '../components/TabBarIcon';
-
 import SettingsScreen from '../screens/SettingsScreen';
-
-
 import CompanyInformationScreen from '../screens/CompanyInformationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import DashboardScreen from '../screens/DashboardScreen'
@@ -27,14 +25,9 @@ import MyAccountScreen from '../screens/MyAccountScreen';
 import BizAppScreen from '../screens/BizAppScreen';
 import MyAccountEditScreen from '../screens/MyAccountEditScreen';
 import ElearningScreen from '../screens/ElearningScreen';
-//import ScanQRScreen from '../screens/ScanQRScreen';
-//import CompanyInfoSuccessScreen from '../screens/CompanyInfoSuccessScreen';
-//import UserAccountScreen from '../screens/UserAccountScreen';
-//import InfoEventEdtScreen from '../screens/InfoEventEdtScreen';
 import BizAppDetailScreen from '../screens/BizAppDetailScreen';
 import NoCompanyScreen from '../screens/NoCompanyScreen';
 import CameraSelfieScreen from '../screens/CameraSelfieScreen';
-//import QRScreen from '../screens/QRScreen';
 import BillScreen from '../screens/BillScreen';
 import UnderConstructionScreen from '../screens/UnderConstructionScreen';
 import EAdvertisementScreen from '../screens/EAdvertisementScreen';

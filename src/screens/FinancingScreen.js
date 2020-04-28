@@ -13,47 +13,30 @@ import {
 } from 'react-native';
 
 import moment from 'moment'
-
 import Constants from 'expo-constants'
 //import { Constants, LinearGradient, FileSystem } from 'expo'
-
 import Layout from '../constants/Layout'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
-import ScrollableTabView from 'react-native-scrollable-tab-view'
-
-
 import { LinearGradient } from 'expo-linear-gradient'
 import * as actionCreator from '../store/actions/action'
 import LayoutB from '../Layout/LayoutB';
 
-
 const FinancingScreen = (props) => {
-
-    const { current_page, last_page } = useSelector(state => state.grantApplicationReducer, shallowEqual)
-    const grantStatusArray = useSelector(state => state.grantApplicationReducer.data, shallowEqual)
-    const { agencyArray } = useSelector(state => state.agencyListReducer, shallowEqual)
-    const all = useSelector(state => state.loanApplicationReducer, shallowEqual)
 
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(actionCreator.initiateListAgency())
-        dispatch(actionCreator.initiateGrantInfo())
-
-    }, []); // empty-array means don't watch for any updates
-
     const [showLayak, setShowLayak] = useState(false)
 
-    all && console.log(`inilah loan info : ${JSON.stringify(all)}`)
     return (
         < LayoutB
             title={'Financing'}
             screenType='form'
             navigation={props.navigation}
             imageUri={require('../assets/images/loan.png')}
-        ><Modal visible={showLayak} onRequestClose={() => setShowLayak(false)}>
+        >
+            <Modal visible={showLayak} onRequestClose={() => setShowLayak(false)}>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text>TEST</Text>
                 </View>
@@ -69,7 +52,6 @@ const FinancingScreen = (props) => {
                         <Text numberOfLines={3} ellipsizeMode='tail' style={[styles.textSmall, { marginBottom: 5 }]}>Skim Pembiayaan Sederhana</Text>
                         <TouchableOpacity
                             style={{ alignSelf: 'flex-start', margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
-                        // onPress={() => setShowLayak(true)}
                         >
                             <Text style={[styles.textSmall, {}]}>Semak Kelayakan</Text>
                         </TouchableOpacity>
@@ -79,7 +61,6 @@ const FinancingScreen = (props) => {
                                 <Text style={[styles.textSmall, { color: '#fff' }]}>Borang Permohonan</Text>
                             </LinearGradient>
                         </TouchableOpacity>
-
                     </View>
                 </View>
             </View>
@@ -87,8 +68,5 @@ const FinancingScreen = (props) => {
 
     );
 }
-
-
-
 
 export default FinancingScreen

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, StatusBar } from 'react-native';
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
 import * as Permissions from 'expo-permissions'
@@ -106,6 +106,7 @@ const App = (props) => {
     return (
       <Provider store={store}>
         <View style={styles.container}>
+          {/* <StatusBar backgroundColor={`#0a2c52`} /> */}
           <Nav />
           {!isInternetReachable && <View style={{ justifyContent: 'center', alignItems: 'center', padding: 5, backgroundColor: 'orange' }}>
             <Text style={styles.small}>No internet connection</Text>
