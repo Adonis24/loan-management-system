@@ -1,4 +1,3 @@
-//console.ignoredYellowBox = ['Setting a timer']
 import React, { useState, useEffect } from 'react';
 import {
     Image,
@@ -7,14 +6,10 @@ import {
     View,
     Animated,
     Easing,
-
     FlatList,
     ActivityIndicator
-
-
 } from 'react-native';
 import { SliderBox } from "react-native-image-slider-box";
-
 import * as actionCreator from '../store/actions/action'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import Constants from 'expo-constants'
@@ -22,37 +17,26 @@ import Layout from '../constants/Layout'
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles/styles'
 import moment from 'moment'
-//import striptags from 'striptags'
 
-// import PopupScoreScreen from './PopupScoreScreen';
 
 const DashboardScreen = (props) => {
 
     const dispatch = useDispatch()
     const { member_id, name, email, phone_no, profile_pic, email_verified_at } = useSelector(state => state.myAccountReducer, shallowEqual)
-    //const all = useSelector(state => state.myAccountReducer, shallowEqual)
 
     const companyName = useSelector(state => state.bizInfoReducer.name, shallowEqual)
     const { logo } = useSelector(state => state.bizInfoReducer, shallowEqual)
 
-    //console.log(`expo token ${JSON.stringify(all)}`)
-    // const toggleShow = () => {
-    //     setPopUp(!popUp)
-    // }
-    const hafiz = (item) => {
-        //console.log(`item ialah : ${JSON.stringify(item)}`)
+ 
+    const goInfoNews = (item) => {  
         props.navigation.navigate('InfoNews', { item: JSON.stringify(item) })
     }
 
     useEffect(() => {
         dispatch(actionCreator.initiateNews())
-
     }, []); // empty-array means don't watch for any updates
 
     const { newsArray } = useSelector(state => state.newsScreenReducer, shallowEqual)
-
-    //const [popUp, setPopUp] = useState(false)
-
     const [profilePic, setProfilePic] = useState(new Animated.Value(0))
     const [topBar, setTopBar] = useState(new Animated.Value(0))
     const [scrollBar, setScrollBar] = useState(new Animated.Value(0))
@@ -60,7 +44,6 @@ const DashboardScreen = (props) => {
 
     const animate = () => {
         Animated.stagger(1000, [
-
             Animated.timing(profilePic, {
                 toValue: 1,
                 duration: 1000,
@@ -76,7 +59,6 @@ const DashboardScreen = (props) => {
                 duration: 1000,
                 easing: Easing.linear
             }),
-
         ]).start();
     }
 
@@ -85,14 +67,12 @@ const DashboardScreen = (props) => {
     const capitalizeString = (text = 'NA') => text.length > 0 && `${text[0].toUpperCase()}${text.slice(1)}`
 
     useEffect(() => {
-        //dispatch(actionCreator.addExpoToken())
-        //dispatch(actionCreator.initiateDashboardScreen())
         dispatch(actionCreator.initiateMyAccount())
         dispatch(actionCreator.initiateCompanyInfo())
         dispatch(actionCreator.generateJWT())
         animate()
 
-    }, []); // empty-array means don't watch for any updates
+    }, []); 
 
 
     const profilePicOpac = profilePic.interpolate({
@@ -109,11 +89,6 @@ const DashboardScreen = (props) => {
         inputRange: [0, 1],
         outputRange: [0, 1,]
     })
-
-    //const ratio = Layout.window.width / (Layout.window.height / 3.5)
-    // console.log(`width : ${Layout.window.width}`)
-    // console.log(`height : ${Layout.window.height}`)
-    // console.log(`ratio : ${ratio}`)
 
     return (
         <View style={styles.container}>
@@ -178,7 +153,6 @@ const DashboardScreen = (props) => {
                                 <View style={{ margin: 5 }} />
                             </View>
                         </View>
-
                         {/**Latest Info */}
                         <View style={{ flex: 3, margin: 0, paddingBottom: 5, borderBottomWidth: 1, borderColor: 'rgba(0,51,102,0.3)', borderStyle: 'solid', backgroundColor: 'transparent' }}>
                             <View style={{ marginBottom: 10, marginLeft: 5, marginRight: 5, backgroundColor: 'transparent' }}>
@@ -194,7 +168,7 @@ const DashboardScreen = (props) => {
                                     keyExtractor={(item, index) => index.toString()}
                                     renderItem={({ item }) =>
                                         <TouchableOpacity
-                                            onPress={() => hafiz(item)}
+                                            onPress={() => goInfoNews(item)}
                                             style={{ width: Layout.window.width - 20, marginBottom: 5, borderBottomWidth: 1, borderColor: 'lightgrey', alignSelf: 'stretch' }}>
                                             <View style={{ alignSelf: 'stretch', flexDirection: 'row', alignSelf: 'stretch' }}>
                                                 <View style={{ padding: 5, flex: 2, }}>
@@ -250,6 +224,5 @@ const FeatureIcon = (props) => {
         )
 
 }
-
 
 export default DashboardScreen

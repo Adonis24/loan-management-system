@@ -14,24 +14,24 @@ const Stack = createStackNavigator();
 
 const Nav = (props) => {
   const dispatch = useDispatch()
-  const { token } = useSelector(state => state.apiReducer, shallowEqual)
-  const checkLogin = async () => {
-    try {
+  const { token,checkLogin } = useSelector(state => state.apiReducer, shallowEqual)
+  // const checkLogin = async () => {
+  //   try {
 
-      const personalToken = await SecureStore.getItemAsync('personalToken')
-      if (personalToken !== null && !personalToken.includes('error')) {
-        const { token_type, access_token, error } = JSON.parse(personalToken)
-        dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
-      }
-    } catch (error) {
-      console.log(`personalToken error ${error}`)
-      //return 'takde'
-    }
-  }
+  //     const personalToken = await SecureStore.getItemAsync('personalToken')
+  //     if (personalToken !== null && !personalToken.includes('error')) {
+  //       const { token_type, access_token, error } = JSON.parse(personalToken)
+  //       dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
+  //     }
+  //   } catch (error) {
+  //     console.log(`personalToken error ${error}`)
+  //     //return 'takde'
+  //   }
+  // }
 
-  useEffect(() => {
-    checkLogin()
-  }, [token])
+  // useEffect(() => {
+  //   checkLogin()
+  // }, [token])
 
   return (
     <NavigationContainer>

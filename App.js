@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as SecureStore from 'expo-secure-store'
 import { StyleSheet, View, Text, StatusBar } from 'react-native';
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
@@ -55,6 +56,19 @@ const App = (props) => {
     store.dispatch({ type: 'SET_NOTIFICATION', payload: { ...data } })
   };
 
+  const checkLogin = async () => {
+    try {
+      const personalToken = await SecureStore.getItemAsync('personalToken')
+      if (personalToken !== null && !personalToken.includes('error')) {
+        const { token_type, access_token, error } = JSON.parse(personalToken)
+        store.dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true, checkLogin: true } })
+      }
+    } catch (error) {
+      store.dispatch({ type: 'SET_API_AUTH', payload: { token: false, checkLogin: true } })
+      //return 'takde'
+    }
+  }
+
   const checkUpdate = async () => {
     try {
       const update = await Expo.Updates.checkForUpdateAsync();
@@ -70,6 +84,8 @@ const App = (props) => {
   const loadResourcesAndDataAsync = async () => {
     try {
       SplashScreen.preventAutoHideAsync();
+      await _loadResourcesAsync()
+      await checkLogin()
       checkUpdate();
       registerForPushNotificationsAsync();
       const _notificationSubscription = Notifications.addListener(_handleNotification);
@@ -80,7 +96,7 @@ const App = (props) => {
       console.warn(e)
     }
     finally {
-      setIsLoadingComplete(true)
+      //setIsLoadingComplete(true)
       SplashScreen.hideAsync()
     }
   }
@@ -97,7 +113,7 @@ const App = (props) => {
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
       <AppLoading
-        startAsync={_loadResourcesAsync}
+        startAsync={loadResourcesAndDataAsync}
         onError={_handleLoadingError}
         onFinish={_handleFinishLoading}
       />
@@ -108,9 +124,10 @@ const App = (props) => {
         <View style={styles.container}>
           {/* <StatusBar backgroundColor={`#0a2c52`} /> */}
           <Nav />
-          {!isInternetReachable && <View style={{ justifyContent: 'center', alignItems: 'center', padding: 5, backgroundColor: 'orange' }}>
-            <Text style={styles.small}>No internet connection</Text>
-          </View>
+          {!isInternetReachable &&
+            <View style={{ justifyContent: 'center', alignItems: 'center', padding: 5, backgroundColor: 'orange' }}>
+              <Text style={styles.small}>No internet connection</Text>
+            </View>
           }
         </View>
       </Provider>
