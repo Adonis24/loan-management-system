@@ -73,6 +73,7 @@ import BusinessPlanBussModalBScreen from '../screens/BusinessPlanBussModalBScree
 import CompanyContactInformationScreen from '../screens/CompanyContactInformationScreen';
 import SignupOtpScreen from '../screens/SignupOtpScreen';
 import SignupOtpEnterScreen from '../screens/SignupOtpEnterScreen';
+import EcommerceScreen from '../screens/EcommerceScreen';
 
 const DashboardStack = () => {
     return (
@@ -93,6 +94,7 @@ const DashboardStackWithModal = () => {
             <Stack.Screen name="Financing" component={FinancingStack} />
             <Stack.Screen name="MyAccount" component={MyAccountStack} />
             <Stack.Screen name="BizApp" component={BizAppScreen} />
+            <Stack.Screen name="Ecommerce" component={EcommerceScreen} />
             <Stack.Screen name="BizAppDetail" component={BizAppDetailScreen} />
             <Stack.Screen name="MyAccountEdit" component={MyAccountEditScreen} />
             <Stack.Screen name="Elearning" component={ElearningScreen} />

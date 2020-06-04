@@ -147,7 +147,9 @@ const DashboardScreen = (props) => {
                                     <FeatureIcon link={'BizApp'} caption={'BizApp'} navigation={props.navigation}>
                                         <Image source={require('../assets/icon/marketplace.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
                                     </FeatureIcon>
-                                    <FeatureIcon />
+                                    <FeatureIcon link={'Ecommerce'} caption={'E-Commerce'} navigation={props.navigation}>
+                                        <Image source={require('../assets/icon/ecommerce.png')} style={styles.featureIconStyle} resizeMode={'contain'} />
+                                    </FeatureIcon>
                                     <FeatureIcon />
                                 </View>
                                 <View style={{ margin: 5 }} />
