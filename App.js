@@ -4,14 +4,14 @@ import { StyleSheet, View, Text, StatusBar } from 'react-native';
 import { Asset } from 'expo-asset'
 import * as Font from 'expo-font'
 import * as Permissions from 'expo-permissions'
-import { AppLoading, Notifications } from 'expo';
+import { AppLoading } from 'expo';
 import * as SplashScreen from 'expo-splash-screen';
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import rootReducer from './src/store/reducers/Reducer';
 
-import NetInfo from '@react-native-community/netinfo';
+//import NetInfo from '@react-native-community/netinfo';
 
 ///// All Below for Navigation
 //import { enableScreens } from 'react-native-screens';
@@ -87,9 +87,9 @@ const App = (props) => {
       await _loadResourcesAsync()
       await checkLogin()
       checkUpdate();
-      registerForPushNotificationsAsync();
-      const _notificationSubscription = Notifications.addListener(_handleNotification);
-      const netInfoUnsubscribe = NetInfo.addEventListener(_handleNetInfo);
+      // registerForPushNotificationsAsync();
+      // const _notificationSubscription = Notifications.addListener(_handleNotification);
+      // const netInfoUnsubscribe = NetInfo.addEventListener(_handleNetInfo);
 
     }
     catch (e) {
@@ -124,11 +124,11 @@ const App = (props) => {
         <View style={styles.container}>
           {/* <StatusBar backgroundColor={`#0a2c52`} /> */}
           <Nav />
-          {!isInternetReachable &&
+          {/* {!isInternetReachable &&
             <View style={{ justifyContent: 'center', alignItems: 'center', padding: 5, backgroundColor: 'orange' }}>
               <Text style={styles.small}>No internet connection</Text>
             </View>
-          }
+          } */}
         </View>
       </Provider>
     );

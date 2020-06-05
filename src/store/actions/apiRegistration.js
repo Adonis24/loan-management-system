@@ -3,6 +3,7 @@ import { FileSystem, Notifications } from 'expo'
 import * as SecureStore from 'expo-secure-store'
 import moment from 'moment'
 
+const web = Platform.OS === 'web' ? true : false
 
 const apiUrl = 'https://staging.bxcess.my/'
 const lmsApiUrl = 'https://lms.bxcess.my/'
@@ -110,8 +111,8 @@ export const requestPersonalToken = (screen, username, password) => {
       //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
       const stringifyJson = JSON.stringify(responseJson)
       //console.log(`ada apa ni : ${JSON.stringify(responseJson)}`)
-
-      SecureStore.setItemAsync('personalToken', stringifyJson);
+      web ? localStorage.setItem('personalToken', stringifyJson) : SecureStore.setItemAsync('personalToken', stringifyJson)
+      
 
       dispatch({ type: 'SET_REGISTER', payload: { access_token } });
       dispatch({ type: 'SET_API_AUTH', payload: { token_type, access_token, token: true } })
@@ -148,8 +149,8 @@ export const requestPersonalTokenLMS = (screen, username, password) => {
 
     //await AsyncStorage.setItem('personalToken',JSON.stringify(responseJson))  
     const stringifyJson = JSON.stringify(responseJson)
+    web ? localStorage.setItem('lmsPersonalToken', stringifyJson) : SecureStore.setItemAsync('lmsPersonalToken', stringifyJson)
 
-    SecureStore.setItemAsync('lmsPersonalToken', stringifyJson);
 
     dispatch({ type: 'SET_REGISTER', payload: { access_token } });
 
@@ -194,7 +195,8 @@ export const verifyPhoneApi = (token_type, access_token, country_code, mobile_no
 
 export const companyInfoAPI = () => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
+
+    const personalToken = web ? await localStorage.getItem('personalToken') : await SecureStore.getItemAsync('personalToken')
     const { token_type, access_token } = JSON.parse(personalToken)
     const access_credential = 'api'
     console.log(`Company Registration : ${JSON.stringify(getState().companyInformationReducer)}`)
@@ -215,7 +217,8 @@ export const companyInfoAPI = () => {
 
 export const contactPersonAPI = () => {
   return async (dispatch, getState) => {
-    const personalToken = await SecureStore.getItemAsync('personalToken')
+    const personalToken = web ? await localStorage.getItem('personalToken') : await SecureStore.getItemAsync('personalToken')
+    
     const { token_type, access_token } = JSON.parse(personalToken)
     const access_credential = 'api'
     console.log(`Company Registration : ${JSON.stringify(getState().companyInformationReducer)}`)

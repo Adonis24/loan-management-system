@@ -4,9 +4,10 @@ import { StyleSheet, Text, View, Dimensions, TextInput, Image, TouchableOpacity,
 import { LinearGradient } from 'expo-linear-gradient'
 import { takeSnapshotAsync } from 'expo'
 
-import MapView, { Marker, Callout } from 'react-native-maps';
+//import MapView, { Marker, Callout } from 'react-native-maps';
 import * as Permissions from 'expo-permissions'
 import malaysiaData from 'malaysia-state-city-postcode'
+
 
 import styles from '../styles/styles'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
@@ -166,33 +167,7 @@ const MapScreen = (props) => {
             navigation={props.navigation}
             imageUri={require('../assets/images/news.png')}
         >
-            <MapView
-                mapType={'standard'}
-                showsUserLocation={true}
-                region={region}
-                //region={null}
-                onRegionChangeComplete={region => changeRegion(region)}
-                style={mapStyles.mapStyle}
-                ref={mapRef}>
-                {/* {markers.map(marker => (
-                    <Marker
-                        coordinate={marker.latlng}
-                        title={marker.title}
-                        description={marker.description}
-                    />
-                ))} */}
-
-                <Marker draggable
-                    coordinate={x}
-                    onDragEnd={(e) => getLocation(e)}
-                >
-                    {/* <Callout tooltip/> */}
-                    {/* <View style={{ width: 50, height: 50, backgroundColor: '#fff', borderRadius: 25, borderWidth: 1, borderColor: 'grey', padding: 5 }} >
-                        <Image source={{ uri: logo }} style={{ flex: 1, width: undefined, height: undefined }} resizeMode={'cover'} />
-                    </View> */}
-                </Marker>
-
-            </MapView>
+            
             <View style={{ position: 'absolute', top: 0, left: 0, right: 0 }}>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
                     <View style={{ flex: 1, marginLeft: 10, justifyContent: 'center', border: 1, borderColor: '#000' }}>

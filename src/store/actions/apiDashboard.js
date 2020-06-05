@@ -1,15 +1,20 @@
 import { Notifications } from 'expo'
 import * as SecureStore from 'expo-secure-store'
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Platform } from 'react-native';
 import moment from 'moment'
+
+const web = Platform.OS === 'web' ? true : false
 
 const apiUrl = 'https://staging.bxcess.my/'
 const lmsApiUrl = 'https://lms.bxcess.my/'
 
 const apiGetCall = async (uri, apiAccess, lms = false) => {
+  const getPersonalToken = async (type) => {
+    const token = web ? await localStorage.getItem(type) : await SecureStore.getItemAsync(type)
+    return token
 
-
-  const access = !lms ? apiAccess ? apiAccess : JSON.parse(await SecureStore.getItemAsync('personalToken')) : JSON.parse(await SecureStore.getItemAsync('lmsPersonalToken'))
+  }
+  const access = !lms ? apiAccess ? apiAccess : JSON.parse(getPersonalToken('personalToken')) : JSON.parse(getPersonalToken('lmsPersonalToken'))
 
   const { token_type, access_token } = access
   const method = 'GET'
@@ -758,7 +763,7 @@ export const getAttachmentApi = (title) => {
 
 export const resetAllAttachmentApi = () => {
   return async (dispatch, getState) => {
-    //await SecureStore.deleteItemAsync('attachment')
+
     await AsyncStorage.removeItem(data)
   }
 }
