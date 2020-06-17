@@ -255,7 +255,7 @@ const CompanyContactInformationScreen = (props) => {
                                     multiLine={true}
                                     touched={comp_addrTouched}
                                     error={comp_addrError}
-                                    placeholder={'Alamat'}
+                                    placeholder={'Address'}
                                 >
                                     {comp_addr ? <View style={{ paddingLeft: 5, paddingTop: 5 }}>
                                         <Text style={[styles.textDefault, { color: '#000' }]}>{comp_addr}</Text>
