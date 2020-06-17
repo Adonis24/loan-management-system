@@ -43,9 +43,8 @@ const validationSchema = Yup.object().shape({
         .label('Company Email'),
 
     ic_no: Yup
-        .string()
-
-        .required()
+    .string('Please enter')
+    .required('Please enter')
         .min(12)
         .label('MyKad No'),
 
@@ -101,8 +100,8 @@ const CompanyContactInformationScreen = (props) => {
                     const comp_phoneError = FormikProps.errors.comp_phone
                     const comp_phoneTouched = FormikProps.touched.comp_phone
 
-                    const ic_noError = FormikProps.errors.comp_phone
-                    const ic_noTouched = FormikProps.touched.comp_phone
+                    const ic_noError = FormikProps.errors.ic_no
+                    const ic_noTouched = FormikProps.touched.ic_no
 
                     const comp_emailError = FormikProps.errors.comp_email
                     const comp_emailTouched = FormikProps.touched.comp_email
