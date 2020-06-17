@@ -78,6 +78,11 @@ const CompanyInformationScreen = (props) => {
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
+    const iosGoBack=()=>{
+        //console.log(`ios go back la`)
+        setShow(!show)
+    }
+
     return (
         <LayoutLoan title='Company Info' back={() => props.navigation.goBack()}>
             <Formik
@@ -133,10 +138,10 @@ const CompanyInformationScreen = (props) => {
                             visible={ios && show}
                             onRequestClose={() => {
                                 console.log(`test`)
-                                setIosDatePickerShow(!iosDatePickerShow)
+                                setShow(!show)
                             }}>
 
-                            <LayoutLoan title={'Enter Date'} nopaddingTop={false} back={() => setIosDatePickerShow(!iosDatePickerShow)} navigation={props.navigation}>
+                            <LayoutLoan title={'Enter Date'} nopaddingTop={false} back={iosGoBack} navigation={props.navigation}>
                                 <View style={{ alignSelf: 'stretch', margin: 10 }}>
 
                                     <DateTimePicker
