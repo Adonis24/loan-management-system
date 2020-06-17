@@ -38,7 +38,7 @@ const EcommerceScreen = (props) => {
 
     return (
         < LayoutB
-            title={'Ecommerce'}
+            title={'E-commerce'}
             screenType='form'
             elearning={true}
             navigation={props.navigation}
