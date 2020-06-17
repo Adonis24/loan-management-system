@@ -24,7 +24,7 @@ const NotificationsScreen = (props) => {
 
     return (
         < LayoutB
-            title={'Notifications '}
+            title={'Notifications'}
             screenType='logo'
             navigation={props.navigation}
             imageUri={require('../assets/images/profile.png')}
