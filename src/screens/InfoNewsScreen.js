@@ -96,7 +96,7 @@ const InfoNewsScreen = (props) => {
                                     <TouchableOpacity
                                         style={{ margin: 3, padding: 3, borderRadius: 5, borderColor: 'lightgrey', borderWidth: 1 }}
                                         onPress={() => console.log('tag pressed')}>
-                                        <Text style={[styles.textSmall, {}]}>MALAS</Text>
+                                        <Text style={[styles.textSmall, {}]}>LIFESTYLE</Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View style={{ flexDirection: 'row' }}>

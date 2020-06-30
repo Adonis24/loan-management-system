@@ -114,7 +114,7 @@ const DashboardScreen = (props) => {
                                     <View style={{flex:1}}>
                                         <Image source={!logo ? require('../assets/images/profile.png') : { uri: logo }} style={{ width: 30, height: 30, margin: 5, }} resizeMode={'contain'} />
                                     </View>
-                                    <Text style={[styles.headText, { paddingRight: 10,paddingLeft: 10,flex:5}]} numberOfLines={1} ellipsizeMode={'tail'}>{companyName} </Text>
+                                    <Text style={[styles.headText, { paddingRight: 10,paddingLeft: 15,flex:5}]} numberOfLines={1} ellipsizeMode={'tail'}> {companyName} </Text>
                                 </View>
                             </View>
                         </Animated.View>}

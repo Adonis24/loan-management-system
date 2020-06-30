@@ -3,7 +3,7 @@ import * as SecureStore from 'expo-secure-store'
 import { AsyncStorage } from 'react-native';
 import moment from 'moment'
 
-const apiUrl = 'https://staging.bxcess.my/'
+const apiUrl = 'https://staging.tekun.app/'
 const lmsApiUrl = 'https://lms.bxcess.my/'
 
 const apiGetCall = async (uri, apiAccess, lms = false) => {
@@ -49,7 +49,7 @@ export const newsApi = () => {
 
     const responseJson = await apiPostCall(`api/news/view`, null, getState().apiReducer)
     const newsArray = await responseJson.data
-    // await console.log(`NEWS API  ${JSON.stringify(newsArray)}`)
+     await console.log(`NEWS API  ${JSON.stringify(newsArray)}`)
 
     await dispatch({ type: 'SET_NEWS', payload: { newsArray } })
 

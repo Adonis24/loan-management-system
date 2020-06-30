@@ -4,7 +4,7 @@ import * as SecureStore from 'expo-secure-store'
 import moment from 'moment'
 
 
-const apiUrl = 'https://staging.bxcess.my/'
+const apiUrl = 'https://staging.tekun.app/'
 const lmsApiUrl = 'https://lms.bxcess.my/'
 
 
@@ -100,7 +100,7 @@ export const registerLMSApi = (token_type, access_token, name, email, password, 
 export const requestPersonalToken = (screen, username, password) => {
   return async (dispatch, getState) => {
 
-    const value = { client_id: '2', client_secret: 'dFX2OFK95Va8PfvyzT6ZnbLJxCXDAfvBCC1fdX4k', grant_type: 'password', username, password }
+    const value = { client_id: '2', client_secret: 'HqNXI85t0OiN5etJEpnLc95C8hDviAait9XKi9Km', grant_type: 'password', username, password }
     const responseJson = await apiPostCall(`oauth/token`, value, getState().apiReducer)
     //console.log(`personal token ialah : ${JSON.stringify(responseJson)}`)
     const { token_type, access_token, error, message } = responseJson
