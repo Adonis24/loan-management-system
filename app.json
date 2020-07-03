@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "tekun",
-    "slug": "tekun",
+    "name": "Tekun (UAT)",
+    "slug": "tekun-uat",
     "privacy": "public",
     "android": {
-      "package": "com.fcgb.tekun",
+      "package": "com.fcgb.tekun.uat",
       "versionCode": 2,
       "permissions": [
         "CAMERA",
