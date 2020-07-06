@@ -18,12 +18,12 @@ import styles from '../styles/styles'
 const IntroScreen = (props) => {
 
     const images = [
-        { id: 1, title: 'Welcome to   Tent! Sign up now to join us or login to your account', screenshotUri: require('../assets/images/intro2.png') },
+        { id: 1, title: 'Welcome to Tent! Sign up now to join us or login to your account', screenshotUri: require('../assets/images/intro2.png') },
     ]
     return (
         <View style={styles.container}>
             <View style={{ flex: 1, justifyContent: 'flex-start' }}>
-                <Image source={require('../assets/images/tekunA.png')} style={{ width: Layout.window.width, }} resizeMode={'contain'} />
+                <Image source={require('../assets/images/tekunE.png')} style={{ width: Layout.window.width,height:Layout.window.height/3.2 }} resizeMode={'contain'} />
             </View>
             <View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, }}>
                 <ImageSlider

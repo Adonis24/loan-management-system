@@ -48,7 +48,7 @@ const apiPostCall = async (uri, values, apiAccess, lms = false, isPublicToken = 
 export const requestToken = () => {
   return async (dispatch, getState) => {
 
-    const value = { client_id: '2', client_secret: 'dFX2OFK95Va8PfvyzT6ZnbLJxCXDAfvBCC1fdX4k', grant_type: 'client_credentials' }
+    const value = { client_id: '2', client_secret: 'HqNXI85t0OiN5etJEpnLc95C8hDviAait9XKi9Km', grant_type: 'client_credentials' }
     const responseJson = await apiPostCall(`oauth/token`, value, getState().apiReducer, false, true)
     dispatch({ type: 'GET_TOKEN', payload: { ...responseJson } })
   }

@@ -31,7 +31,7 @@ const FinancingScreen = (props) => {
 
     return (
         < LayoutB
-            title={'Financing'}
+            title={'E-Financing'}
             screenType='form'
             navigation={props.navigation}
             imageUri={require('../assets/images/loan.png')}

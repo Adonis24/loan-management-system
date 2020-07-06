@@ -47,7 +47,7 @@ const InfoNewsListScreen = (props) => {
     return (
 
         < LayoutB
-            title={'News'}
+            title={'E-News'}
             screenType='form'
             navigation={props.navigation}
             imageUri={require('../assets/images/news.png')}

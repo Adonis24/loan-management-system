@@ -17,6 +17,7 @@ import { shallowEqual, useSelector } from 'react-redux'
 
 
 
+
 const NotificationsScreen = (props) => {
 
     const notificationList = useSelector(state => [], shallowEqual)

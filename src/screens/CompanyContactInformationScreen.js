@@ -160,7 +160,7 @@ const CompanyContactInformationScreen = (props) => {
                                             handleBlur={FormikProps.handleBlur(`comp_addr`)}
                                             touched={comp_addrTouched}
                                             error={comp_addrError}
-                                            placeholder={'Alamat Line 1'}
+                                            placeholder={'Address Line 1'}
 
                                         />
 
@@ -171,7 +171,7 @@ const CompanyContactInformationScreen = (props) => {
                                             handleBlur={FormikProps.handleBlur(`comp_addr_2`)}
                                             touched={comp_addr_2Touched}
                                             error={comp_addr_2Error}
-                                            placeholder={'Alamat Line 2'}
+                                            placeholder={'Address Line 2'}
 
                                         />
                                         <CustomTextInput
@@ -181,7 +181,7 @@ const CompanyContactInformationScreen = (props) => {
                                             handleBlur={FormikProps.handleBlur(`comp_postcode`)}
                                             touched={comp_postcodeTouched}
                                             error={comp_postcodeError}
-                                            placeholder={'Poskod'}
+                                            placeholder={'Postcode'}
                                             keyboardType={'decimal-pad'}
                                         />
 
@@ -255,7 +255,7 @@ const CompanyContactInformationScreen = (props) => {
                                     multiLine={true}
                                     touched={comp_addrTouched}
                                     error={comp_addrError}
-                                    placeholder={'Alamat'}
+                                    placeholder={'Address'}
                                 >
                                     {comp_addr ? <View style={{ paddingLeft: 5, paddingTop: 5 }}>
                                         <Text style={[styles.textDefault, { color: '#000' }]}>{comp_addr}</Text>

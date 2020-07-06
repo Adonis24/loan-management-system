@@ -46,18 +46,21 @@ const DashboardScreen = (props) => {
         Animated.stagger(1000, [
             Animated.timing(profilePic, {
                 toValue: 1,
-                duration: 1000,
-                easing: Easing.linear
+                duration: 1000,               
+                easing: Easing.linear,
+                useNativeDriver:true,
             }),
             Animated.timing(topBar, {
                 toValue: 1,
                 duration: 1000,
-                easing: Easing.linear
+                easing: Easing.linear,
+                useNativeDriver:true,
             }),
             Animated.timing(scrollBar, {
                 toValue: 1,
                 duration: 1000,
-                easing: Easing.linear
+                easing: Easing.linear,
+                useNativeDriver:true,
             }),
         ]).start();
     }
@@ -196,13 +199,13 @@ const DashboardScreen = (props) => {
                             }
                         </View>
                         {/**Advertisement */}
-                        <View style={{ flex: 1, }}>
+                        {/* <View style={{ flex: 1, }}>
                             {advert ? <SliderBox
                                 images={advert}
                                 autoplay
                                 circleLoop
                             /> : <Text>No Advert</Text>}
-                        </View>
+                        </View> */}
                     </Animated.View>
                 </View>
             </View>

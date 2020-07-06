@@ -31,17 +31,20 @@ const WelcomeScreen = (props) => {
             Animated.timing(logo, {
                 toValue: 1,
                 duration: 2000,
-                easing: Easing.linear
+                easing: Easing.linear,
+                useNativeDriver:true,
             }),
             Animated.timing(intro, {
                 toValue: 1,
                 duration: 2000,
-                easing: Easing.linear
+                easing: Easing.linear,
+                useNativeDriver:true,
             }),
             Animated.timing(buttons, {
                 toValue: 1,
                 duration: 2000,
-                easing: Easing.linear
+                easing: Easing.linear,
+                useNativeDriver:true,
             }),
 
 

@@ -24,6 +24,7 @@ const EcommerceScreen = (props) => {
     const dispatch = useDispatch()
 
 
+    
    
 
     const { jwt } = useSelector(state => state.myAccountReducer, shallowEqual)
@@ -38,7 +39,7 @@ const EcommerceScreen = (props) => {
 
     return (
         < LayoutB
-            title={'Ecommerce'}
+            title={'E-commerce'}
             screenType='form'
             elearning={true}
             navigation={props.navigation}
