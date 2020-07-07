@@ -30,8 +30,8 @@ const ios = Platform.OS === 'ios' ? true : false
 const validationSchema = Yup.object().shape({
 
     comp_phone: Yup
-        .string('Please enter')
-        .required('Please enter')
+        .string()
+        .required('Please enter phone number')
         .min(3)
         .label('Company Phone'),
 
@@ -45,7 +45,7 @@ const validationSchema = Yup.object().shape({
     ic_no: Yup
         .string()
 
-        .required()
+        .required('Please enter ic number')
         .min(12)
         .label('MyKad No'),
 
@@ -101,8 +101,8 @@ const CompanyContactInformationScreen = (props) => {
                     const comp_phoneError = FormikProps.errors.comp_phone
                     const comp_phoneTouched = FormikProps.touched.comp_phone
 
-                    const ic_noError = FormikProps.errors.comp_phone
-                    const ic_noTouched = FormikProps.touched.comp_phone
+                    const ic_noError = FormikProps.errors.ic_no
+                    const ic_noTouched = FormikProps.touched.ic_no
 
                     const comp_emailError = FormikProps.errors.comp_email
                     const comp_emailTouched = FormikProps.touched.comp_email
@@ -263,7 +263,7 @@ const CompanyContactInformationScreen = (props) => {
                                         {comp_postcode && <Text style={[styles.textDefault, { color: '#000' }]}>{comp_postcode}</Text>}
                                         {comp_city && <Text style={[styles.textDefault, { color: '#000' }]}>{comp_city},{comp_state}</Text>}
                                     </View> : <View style={{ paddingLeft: 5, paddingTop: 15 }}>
-                                            <Text style={[styles.textDefault, { color: 'lightgrey' }]}>Alamat</Text>
+                                            <Text style={[styles.textDefault, { color: 'lightgrey' }]}>Address</Text>
 
                                         </View>}
 
