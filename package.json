@@ -40,7 +40,7 @@
     "expo-web-browser": "~8.3.1",
     "formik": "^2.1.4",
     "install": "^0.13.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "malaysia-state-city-postcode": "^1.0.0",
     "moment": "^2.24.0",
     "react": "16.11.0",
